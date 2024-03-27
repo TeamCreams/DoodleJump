@@ -1,17 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class PlayerCtrl : MonoBehaviour
 {
-    private float _movePower = 1f;
-    private float _jumpPower = 3f;
+    private float _movePower = 1.2f;
+    public float _jumpPower = 1f; // 실제로 게임할 때는 4f가 좋은 듯 // 발판 있는 플랫폼에서 참조할 수 있게 public
 
     private Rigidbody2D _rigid;
 
     private Animator _ani;
+
+    private static PlayerCtrl _instance = null;
+    public static PlayerCtrl Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType(typeof(PlayerCtrl)) as PlayerCtrl;
+                //MonoBehaviour 일땐 new 사용 못함.
+                }
+            return _instance;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +36,6 @@ public class PlayerCtrl : MonoBehaviour
         _rigid = GetComponent<Rigidbody2D>();
         _rigid.freezeRotation = true;
         _ani = GetComponent<Animator>();
-        //StartCoroutine(Jump());
     }
 
     // Update is called once per frame
@@ -28,40 +44,26 @@ public class PlayerCtrl : MonoBehaviour
         CtrlMove();
     }
 
-    IEnumerator Jump()
-    {
-        _rigid.velocity = Vector2.zero;
-
-        Vector2 jumpVelocity = new Vector2(0, _jumpPower);
-        _rigid.AddForce(jumpVelocity, ForceMode2D.Impulse);
-        _ani.SetTrigger("isJump");
-        _ani.SetBool("isIdle", false);
-        yield return new WaitForSeconds(1f);
-    }
-
     //platform 상호작용
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("platform_wood"))
+        if(collision.gameObject.CompareTag("platform_bush") || collision.gameObject.CompareTag("platform_wood"))
         {
-            _ani.SetBool("isIdle", true); // 발판에 닿으면 isIdle.
+            _ani.SetBool("isIdle", true); 
             StartCoroutine(Jump());
         }
-        else if(collision.gameObject.CompareTag("platform_bush"))
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("platform_wood"))
         {
             _ani.SetBool("isIdle", true);
             StartCoroutine(Jump());
-            StartCoroutine(BrokenPlatform(collision.gameObject));
         }
     }
 
-    IEnumerator BrokenPlatform(GameObject gameObject)
-    {
-        Animator platAni = gameObject.GetComponent<Animator>();
-        yield return new WaitForSeconds(0.7f);
-        platAni.SetTrigger("isCollision");
-    }
-
+    // 이동
     public void CtrlMove()
     {
         Vector3 moveVelocity = Vector3.zero;
@@ -84,9 +86,21 @@ public class PlayerCtrl : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
         {
-            _ani.SetBool("isIdle", true);
             _ani.SetBool("isRun", false);
+            _ani.SetBool("isIdle", true);
         }
-            transform.position += moveVelocity * _movePower * Time.deltaTime;
+        transform.position += moveVelocity * _movePower * Time.deltaTime;
+    }
+
+    // 점프
+    IEnumerator Jump()
+    {
+        yield return new WaitForSeconds(0.2f);
+        _rigid.velocity = Vector2.zero;
+
+        Vector2 jumpVelocity = new Vector2(0, _jumpPower);
+        _rigid.AddForce(jumpVelocity, ForceMode2D.Impulse);
+        _ani.SetTrigger("isJump");
+        _ani.SetBool("isIdle", false);
     }
 }

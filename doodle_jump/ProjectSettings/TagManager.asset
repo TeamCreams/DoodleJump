@@ -6,6 +6,7 @@ TagManager:
   tags:
   - platform_wood
   - platform_bush
+  - platform
   layers:
   - Default
   - TransparentFX
