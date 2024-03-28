@@ -27,10 +27,8 @@ public class Platform_Bush : MonoBehaviour
 
     IEnumerator BrokenPlatform(GameObject gameObject)
     {
-        this.GetComponent<BoxCollider2D>().isTrigger = true;
-
-        yield return new WaitForSeconds(0.7f);
-        Map.Instance._platformCount--;
+        yield return new WaitForSeconds(0.5f);
+        this.GetComponent<BoxCollider2D>().enabled = false;
         _platformAni.SetTrigger("isCollision");
     }
 }

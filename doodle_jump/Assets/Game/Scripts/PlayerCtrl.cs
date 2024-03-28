@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 public class PlayerCtrl : MonoBehaviour
 {
     private float _movePower = 1.2f;
-    public float _jumpPower = 1f; // 실제로 게임할 때는 4f가 좋은 듯 // 발판 있는 플랫폼에서 참조할 수 있게 public
+    public float _jumpPower = 5f; // 점프 가속 발판 있는 플랫폼에서 참조할 수 있게 public
 
     private Rigidbody2D _rigid;
 
@@ -47,7 +47,9 @@ public class PlayerCtrl : MonoBehaviour
     //platform 상호작용
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("platform_bush") || collision.gameObject.CompareTag("platform_wood"))
+        if(collision.gameObject.CompareTag("platform_bush") 
+            || collision.gameObject.CompareTag("platform_wood") 
+            || collision.gameObject.CompareTag("platform_rock"))
         {
             _ani.SetBool("isIdle", true); 
             StartCoroutine(Jump());
@@ -56,7 +58,8 @@ public class PlayerCtrl : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("platform_wood"))
+        if (collision.gameObject.CompareTag("platform_wood")
+            || collision.gameObject.CompareTag("platform_rock"))
         {
             _ani.SetBool("isIdle", true);
             StartCoroutine(Jump());
