@@ -11,11 +11,9 @@ public class Map : MonoBehaviour
     private float _PrevY = 0.5f;
     public int _platformCount = 0;
     private int _DefplatformCount = 16;
-    private int _DefplatformDistance = 5;
+    private int _DefplatformDistance = 3;
 
-    //[SerializeField]
     private GameObject _platformWood;
-    //[SerializeField]
     private GameObject _platformBush;
     private GameObject _platformRock;
 
@@ -78,8 +76,8 @@ public class Map : MonoBehaviour
         //Debug.Log("CameraMoving " + CameraMoving.Instance.transform.position.y);
         if (_destoryObject.transform.position.y + _DefplatformDistance < CameraMoving.Instance.transform.position.y)
         {
-            //_destoryObject = null; // error
             Destroy(_destoryObject);
+            _destoryObject = null;
             Resources.UnloadUnusedAssets();
             _platformCount--;
             _generateObjects.Dequeue();
@@ -88,9 +86,10 @@ public class Map : MonoBehaviour
 
     Vector3 GeneratePosition()
     {
-        Vector3 pos = new Vector3(Random.Range(-1.5f, 1.5f), _PrevY, 0);
         float _Random = Random.Range(1, 1.6f); // 1 ~ 1.6f
-        _PrevY += 0.5f * _Random;
+        _PrevY += 0.3f * _Random;
+        Vector3 pos = new Vector3(Random.Range(-1.5f, 1.5f), _PrevY, 0);
+        //이전 발판과 일정 차이 이상 나지 않도록 수정 필요
         return pos;
     }
 }

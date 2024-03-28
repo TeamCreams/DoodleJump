@@ -9,6 +9,7 @@ using UnityEngine.UIElements;
 
 public class PlayerCtrl : MonoBehaviour
 {
+    //[SerializeField]
     private float _movePower = 1.2f;
     public float _jumpPower = 5f; // 점프 가속 발판 있는 플랫폼에서 참조할 수 있게 public
 
