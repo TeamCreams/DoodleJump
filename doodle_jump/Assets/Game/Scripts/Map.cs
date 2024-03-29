@@ -37,6 +37,7 @@ public class Map : MonoBehaviour
         _platformWood = Resources.Load<GameObject>("Prefabs/platform_wood");
         _platformBush = Resources.Load<GameObject>("Prefabs/platform_bush");
         _platformRock = Resources.Load<GameObject>("Prefabs/platform_rock");
+        StartCoroutine(UnusedAssets());
     }
 
     // Update is called once per frame
@@ -78,7 +79,6 @@ public class Map : MonoBehaviour
         {
             Destroy(_destoryObject);
             _destoryObject = null;
-            Resources.UnloadUnusedAssets();
             _platformCount--;
             _generateObjects.Dequeue();
         }
@@ -91,5 +91,12 @@ public class Map : MonoBehaviour
         Vector3 pos = new Vector3(Random.Range(-1.5f, 1.5f), _PrevY, 0);
         //이전 발판과 일정 차이 이상 나지 않도록 수정 필요
         return pos;
+    }
+
+    IEnumerator UnusedAssets()
+    {
+        Resources.UnloadUnusedAssets();
+        yield return new WaitForSeconds(3);
+        StartCoroutine(UnusedAssets());
     }
 }

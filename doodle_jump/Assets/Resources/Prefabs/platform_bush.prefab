@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3285547458719259044}
   - component: {fileID: 5218540904951294712}
   - component: {fileID: -2494620997411063033}
-  - component: {fileID: -8574374233997158927}
+  - component: {fileID: 5881578206621818216}
   m_Layer: 0
   m_Name: platform_bush
   m_TagString: platform_bush
@@ -153,7 +153,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-8574374233997158927
+--- !u!114 &5881578206621818216
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,6 +162,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4611283409077562700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f37c9543e76aa5f42823d696c564733c, type: 3}
+  m_Script: {fileID: 11500000, guid: 86b8b7a1e21e9a745bbd06f5a13da559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _platformState: 2

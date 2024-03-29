@@ -7,15 +7,17 @@ public class Entity : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Managers.Instance.UIManager.SettingUI();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        Managers.Instance.UIManager.Score();
+        if (AttachGameOver.Instance._playerDrop)
         {
-            Managers.Instance.GameManager.Run();
+            StartCoroutine(Managers.Instance.UIManager.UpUI());
         }
+        
     }
 }

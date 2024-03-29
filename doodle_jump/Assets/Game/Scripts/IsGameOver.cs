@@ -24,7 +24,7 @@ public class IsGameOver : MonoBehaviour
 
     IEnumerator UpdateGameOverSpot()
     {
-        _isGameOver.transform.position = _player.transform.position - new Vector3(0, 5, 0);
+        _isGameOver.transform.position = _player.transform.position - new Vector3(0, 2, 0);
         yield return new WaitForSeconds(3);
         StartCoroutine(UpdateGameOverSpot());
     }
