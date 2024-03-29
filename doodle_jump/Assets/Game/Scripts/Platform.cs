@@ -76,22 +76,21 @@ public class Platform : MonoBehaviour
 
     IEnumerator PlatformMoving()
     {
-        Vector3 _startPos = transform.position;
-        Vector3 _endPos = _startPos + new Vector3(_direction, 0, 0);
-        float _time = 0;
-
-        while (_time < 0.5f)
+        while(true)
         {
-            _time += Time.deltaTime;
-            float t = Mathf.Clamp01(_time / 0.8f);
-            transform.position = Vector3.Lerp(_startPos, _endPos, t);
-            yield return null;
+            Vector3 _startPos = transform.position;
+            Vector3 _endPos = _startPos + new Vector3(_direction, 0, 0);
+            float _time = 0;
+
+            while (_time < 0.5f)
+            {
+                _time += Time.deltaTime;
+                float t = Mathf.Clamp01(_time / 0.8f);
+                transform.position = Vector3.Lerp(_startPos, _endPos, t);
+                yield return null;
+            }
+            _direction *= -1;
         }
-
-        _direction *= -1;
-
-        yield return new WaitForFixedUpdate();
-        StartCoroutine(PlatformMoving());
     }
 
     IEnumerator BrokenPlatform(GameObject gameObject)

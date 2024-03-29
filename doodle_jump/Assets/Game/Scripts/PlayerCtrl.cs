@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 public class PlayerCtrl : MonoBehaviour
 {
     //[SerializeField]
-    private float _movePower = 1.2f;
+    private float _movePower = 7f;
     public float _jumpPower = 5f; // 점프 가속 발판 있는 플랫폼에서 참조할 수 있게 public
 
     private Rigidbody2D _rigid;
@@ -70,8 +70,27 @@ public class PlayerCtrl : MonoBehaviour
     // 이동
     public void CtrlMove()
     {
+        float _horizontal = Input.GetAxis("Horizontal");
+        Vector2 _direction = new Vector2(_horizontal, 0);
+        _rigid.AddForce(_direction * _movePower * Time.deltaTime, ForceMode2D.Impulse);
+        if (_horizontal < 0)
+        {
+            this.transform.rotation = new Quaternion(0, 180, 0, 0);
+            _ani.SetBool("isRun", true);
+            _ani.SetBool("isIdle", false);
+        }
+        else if(0 < _horizontal)
+        {
+            this.transform.rotation = new Quaternion(0, 0, 0, 0);
+            _ani.SetBool("isRun", true);
+            _ani.SetBool("isIdle", false);
+        }
+        else
+        {
+            _ani.SetBool("isRun", false);
+        }
+        /*
         Vector3 moveVelocity = Vector3.zero;
-
         if (Input.GetKey(KeyCode.A))
         {
             moveVelocity = Vector2.left;
@@ -94,6 +113,7 @@ public class PlayerCtrl : MonoBehaviour
             _ani.SetBool("isIdle", true);
         }
         transform.position += moveVelocity * _movePower * Time.deltaTime;
+        */
     }
 
     // 점프

@@ -48,6 +48,7 @@ public class Map : MonoBehaviour
             GeneratePlatform();
         }
         DestoryPlatform();
+
     }
 
     private void GeneratePlatform()
@@ -95,8 +96,13 @@ public class Map : MonoBehaviour
 
     IEnumerator UnusedAssets()
     {
-        Resources.UnloadUnusedAssets();
-        yield return new WaitForSeconds(3);
-        StartCoroutine(UnusedAssets());
+        yield return null;
+        while (true)
+        {
+            if (Time.frameCount % 200 == 0)
+            {
+                Resources.UnloadUnusedAssets();
+            }
+        }
     }
 }
