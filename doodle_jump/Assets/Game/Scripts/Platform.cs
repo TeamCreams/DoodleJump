@@ -50,6 +50,11 @@ public class Platform : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        var component = collision.GetComponent<Player>();
+        if (component != null)
+        {
+
+        }
         if (collision.CompareTag("Player"))
         {
             if (this.transform.position.y < collision.transform.position.y)
@@ -91,7 +96,7 @@ public class Platform : MonoBehaviour
         _direction *= -1;
 
         yield return new WaitForFixedUpdate();
-        StartCoroutine(PlatformMoving());
+        StartCoroutine(PlatformMoving());//-> while
     }
 
     IEnumerator BrokenPlatform(GameObject gameObject)
