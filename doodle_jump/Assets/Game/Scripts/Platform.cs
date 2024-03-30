@@ -90,6 +90,7 @@ public class Platform : MonoBehaviour
                 yield return null;
             }
             _direction *= -1;
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
