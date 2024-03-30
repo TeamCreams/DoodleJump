@@ -15,7 +15,7 @@ public class PlayerCtrl : MonoBehaviour
 
     private Rigidbody2D _rigid;
 
-    private Animator _ani;
+    private Animator _animation;
 
     private static PlayerCtrl _instance = null;
     public static PlayerCtrl Instance
@@ -36,7 +36,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         _rigid = GetComponent<Rigidbody2D>();
         _rigid.freezeRotation = true;
-        _ani = GetComponent<Animator>();
+        _animation = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -52,7 +52,7 @@ public class PlayerCtrl : MonoBehaviour
             || collision.gameObject.CompareTag("platform_wood") 
             || collision.gameObject.CompareTag("platform_rock"))
         {
-            _ani.SetBool("isIdle", true); 
+            _animation.SetBool("isIdle", true); 
             StartCoroutine(Jump());
         }
     }
@@ -62,7 +62,7 @@ public class PlayerCtrl : MonoBehaviour
         if (collision.gameObject.CompareTag("platform_wood")
             || collision.gameObject.CompareTag("platform_rock"))
         {
-            _ani.SetBool("isIdle", true);
+            _animation.SetBool("isIdle", true);
             StartCoroutine(Jump());
         }
     }
@@ -76,18 +76,18 @@ public class PlayerCtrl : MonoBehaviour
         if (_horizontal < 0)
         {
             this.transform.rotation = new Quaternion(0, 180, 0, 0);
-            _ani.SetBool("isRun", true);
-            _ani.SetBool("isIdle", false);
+            _animation.SetBool("isRun", true);
+            _animation.SetBool("isIdle", false);
         }
         else if(0 < _horizontal)
         {
             this.transform.rotation = new Quaternion(0, 0, 0, 0);
-            _ani.SetBool("isRun", true);
-            _ani.SetBool("isIdle", false);
+            _animation.SetBool("isRun", true);
+            _animation.SetBool("isIdle", false);
         }
         else
         {
-            _ani.SetBool("isRun", false);
+            _animation.SetBool("isRun", false);
         }
         /*
         Vector3 moveVelocity = Vector3.zero;
@@ -124,7 +124,7 @@ public class PlayerCtrl : MonoBehaviour
 
         Vector2 jumpVelocity = new Vector2(0, _jumpPower);
         _rigid.AddForce(jumpVelocity, ForceMode2D.Impulse);
-        _ani.SetTrigger("isJump");
-        _ani.SetBool("isIdle", false);
+        _animation.SetTrigger("isJump");
+        _animation.SetBool("isIdle", false);
     }
 }

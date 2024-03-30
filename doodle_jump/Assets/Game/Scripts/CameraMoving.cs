@@ -10,6 +10,10 @@ public class CameraMoving : MonoBehaviour
     private float _smoothSpeed = 0;
     private Vector3 _offset = new Vector3(0, 0, -2); // 플레이어와 카메라 사이의 거리
 
+    [SerializeField]
+    private PlayerCtrl _playerController;
+
+
     private static CameraMoving _instance = null;
     public static CameraMoving Instance
     {
@@ -26,7 +30,9 @@ public class CameraMoving : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); 
+        _playerController = Managers.Instance.GameManager.CurrentScene.PlayerController;
+
+        _target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -37,7 +43,7 @@ public class CameraMoving : MonoBehaviour
 
     void Moving()
     {
-        _smoothSpeed = PlayerCtrl.Instance._jumpPower * 0.05f; // 캐릭터가 빨리 움직이면 같이 빨라지도록
+        _smoothSpeed = _playerController._jumpPower * 0.05f; // 캐릭터가 빨리 움직이면 같이 빨라지도록
         Vector3 _CameraPosition = _target.position + _offset;
         Vector3 _smoothedPosition = Vector3.Lerp(transform.position, _CameraPosition, _smoothSpeed);
         transform.position = _smoothedPosition;
