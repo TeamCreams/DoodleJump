@@ -38,10 +38,19 @@ public class PlayerController : MonoBehaviour
     //platform 상호작용
     private void CollisionPlatform()
     {
-        _hitPlatform = Physics2D.Raycast(_rigid.position, new Vector2(0, -1), 0.2f, LayerMask.GetMask("Platform"));
        if (_rigid.velocity.y < 0 && _hitPlatform.collider != null)
-        {
-            StartCoroutine(Jump());
+       {
+            _hitPlatform = Physics2D.Raycast(_rigid.position, new Vector2(0, -1), 0.2f, LayerMask.GetMask("Platform"));
+            
+            if(_hitPlatform.collider.name == "platform_bush")
+            {
+                StartCoroutine(Jump());
+                //platform_bush로 변수 보내기.
+            }
+            else if (_hitPlatform.collider != null)
+            {
+                StartCoroutine(Jump());
+            }
         }
     }
 
@@ -79,6 +88,6 @@ public class PlayerController : MonoBehaviour
         _rigid.AddForce(jumpVelocity, ForceMode2D.Impulse);
         _animation.SetTrigger("isJump");
         _animation.SetBool("isIdle", false);
-        _isCollision = false;
+        //_isCollision = false;
     }
 }

@@ -23,12 +23,4 @@ public class PlatformController : MonoBehaviour
             }
         }
     }
-
-    protected virtual void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.transform.position.y < this.transform.position.y)
-        {
-            this.GetComponent<BoxCollider2D>().isTrigger = true;
-        }
-    }
 }

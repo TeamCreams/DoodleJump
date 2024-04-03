@@ -43,13 +43,4 @@ public class Platform_Wood : PlatformController
             yield return new WaitForSeconds(0.1f);
         }
     }
-
-    protected override void OnTriggerEnter2D(Collider2D collision)
-    {
-        base.OnTriggerEnter2D(collision);
-    }
-    protected override void OnCollisionEnter2D(Collision2D collision)
-    {
-        base.OnCollisionEnter2D(collision);
-    }
 }

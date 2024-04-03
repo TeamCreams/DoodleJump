@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class Platform_Rock : PlatformController
 {
-    protected override void OnTriggerEnter2D(Collider2D collision)
+    void Start()
     {
-        base.OnTriggerEnter2D(collision);
-    }
-    protected override void OnCollisionEnter2D(Collision2D collision)
-    {
-        base.OnCollisionEnter2D(collision);
+        this.GetComponent<BoxCollider2D>().isTrigger = true;
     }
 }
