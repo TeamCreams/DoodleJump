@@ -8,19 +8,30 @@ public class PlatformController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        this.GetComponent<BoxCollider2D>().isTrigger = true;
+        //this.GetComponent<BoxCollider2D>().isTrigger = true;
         //_gameScene = Util.FindChildWithPath<InGameScene>("@InGameScene");
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void Start()
     {
-        var _isPlayer = collision.GetComponent<PlayerController>();
-        if (_isPlayer != null)
-        {
-            if (this.transform.position.y < collision.transform.position.y)
-            {
-                this.GetComponent<BoxCollider2D>().isTrigger = false;
-            }
-        }
+        this.Init();
     }
+
+    protected virtual void Init()
+    {
+        this.GetComponent<BoxCollider2D>().isTrigger = true;
+    }
+
+
+    //protected virtual void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    var _isPlayer = collision.GetComponent<PlayerController>();
+    //    if (_isPlayer != null)
+    //    {
+    //        if (this.transform.position.y < collision.transform.position.y)
+    //        {
+    //            this.GetComponent<BoxCollider2D>().isTrigger = false;
+    //        }
+    //    }
+    //}
 }
