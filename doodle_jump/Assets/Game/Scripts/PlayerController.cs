@@ -38,40 +38,38 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CtrlMove();
+        PlayerMovement();
         
-        CollisionPlatform();
+        PlatformCollisionCheck();
     }
 
     //platform 상호작용
-    private void CollisionPlatform()
+    private void PlatformCollisionCheck()
     {
        if (_rigid.velocity.y < 0)
        {
-            _hitPlatform = Physics2D.Raycast(_rigid.position, new Vector2(0, -1), 0.2f, LayerMask.GetMask("Platform"));
+            _animation.SetBool("isFall", true);
+
+            _hitPlatform = Physics2D.Raycast(_rigid.position, new Vector2(0, -1), 0.3f, LayerMask.GetMask("Platform"));
 
             if (_hitPlatform.collider != null)
             {
                 var component = _hitPlatform.collider.GetComponent<Platform_Bush>();
-
                 if (component != null)
                 {
-                    //StartCoroutine(Jump());
                     this.StartJumpTrigger();
-                    component.StartBroken();
-                    //platform_bush로 변수 보내기.
+                    component.StartDestoryPlatform();
                 }
-                else if (_hitPlatform.collider != null)
+                else if(_hitPlatform.collider != null)
                 {
-                    StartJumpTrigger();
-                    //StartCoroutine(Jump());
+                    this.StartJumpTrigger();
                 }
             }
         }
     }
 
     // 이동
-    public void CtrlMove()
+    public void PlayerMovement()
     {
         float _horizontal = Input.GetAxis("Horizontal");
         Vector2 _direction = new Vector2(_horizontal, 0);
@@ -79,31 +77,22 @@ public class PlayerController : MonoBehaviour
         if (_horizontal < 0)
         {
             this.transform.rotation = new Quaternion(0, 180, 0, 0);
-            _animation.SetBool("isRun", true);
-            _animation.SetBool("isIdle", false);
         }
         else if (0 < _horizontal)
         {
             this.transform.rotation = new Quaternion(0, 0, 0, 0);
-            _animation.SetBool("isRun", true);
-            _animation.SetBool("isIdle", false);
-        }
-        else
-        {
-            _animation.SetBool("isRun", false);
         }
     }
 
-
     public void StartJumpTrigger()
     {
-
         _animation.SetTrigger("isJump");
-        _animation.SetBool("isIdle", false);
+        _animation.SetBool("isFall", false);
+
         _rigid.velocity = Vector2.zero;
         _rigid.simulated = false;
 
-        Debug.Log(nameof(StartJumpTrigger));
+        //Debug.Log(nameof(StartJumpTrigger));
     }
 
     public void AnimEvent_JumpStart()
@@ -112,6 +101,5 @@ public class PlayerController : MonoBehaviour
         _rigid.velocity = Vector2.zero;
         Vector2 jumpVelocity = new Vector2(0, _jumpPower);
         _rigid.AddForce(jumpVelocity, ForceMode2D.Impulse);
-        Debug.Log(nameof(AnimEvent_JumpStart));
     }
 }

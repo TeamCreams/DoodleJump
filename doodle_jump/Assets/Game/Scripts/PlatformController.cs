@@ -21,17 +21,4 @@ public class PlatformController : MonoBehaviour
     {
         this.GetComponent<BoxCollider2D>().isTrigger = true;
     }
-
-
-    //protected virtual void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    var _isPlayer = collision.GetComponent<PlayerController>();
-    //    if (_isPlayer != null)
-    //    {
-    //        if (this.transform.position.y < collision.transform.position.y)
-    //        {
-    //            this.GetComponent<BoxCollider2D>().isTrigger = false;
-    //        }
-    //    }
-    //}
 }

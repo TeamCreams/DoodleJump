@@ -7,12 +7,12 @@ public class Platform_Wood : PlatformController
 {
     private int _direction = 1;
     // Start is called before the first frame update
-    void Start()
-    {
-        this.GetComponent<BoxCollider2D>().isTrigger = true;
 
+    protected override void Start()
+    {
+        base.Start();
         int _random = Random.Range(0, 2);
-        switch(_random)
+        switch (_random)
         {
             case 0:
                 _direction = 1;
@@ -21,10 +21,10 @@ public class Platform_Wood : PlatformController
                 _direction = -1;
                 break;
         }
-        StartCoroutine(PlatformMoving());
+        StartCoroutine(BushMovement());
     }
 
-    IEnumerator PlatformMoving()
+    IEnumerator BushMovement()
     {
         while (true)
         {
@@ -32,7 +32,7 @@ public class Platform_Wood : PlatformController
             Vector3 _endPos = _startPos + new Vector3(_direction, 0, 0);
             float _time = 0;
 
-            while (_time < 0.5f)
+            while (_time < 0.8f)
             {
                 _time += Time.deltaTime;
                 float t = Mathf.Clamp01(_time / 0.8f);
@@ -40,7 +40,7 @@ public class Platform_Wood : PlatformController
                 yield return null;
             }
             _direction *= -1;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }

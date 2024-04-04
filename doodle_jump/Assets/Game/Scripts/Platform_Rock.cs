@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Platform_Rock : PlatformController
 {
-    void Start()
+    protected override void Start()
     {
-        this.GetComponent<BoxCollider2D>().isTrigger = true;
+        base.Start();
     }
 }

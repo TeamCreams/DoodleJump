@@ -22,28 +22,15 @@ public class Platform_Bush : PlatformController
     protected override void Start()
     {
         base.Start();
-
     }
 
 
-    //protected override void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    var _isPlayer = collision.GetComponent<PlayerController>();
-    //    if (_isPlayer != null)
-    //    { 
-    //        if (this.transform.position.y < collision.transform.position.y)
-    //        {
-    //            this.GetComponent<BoxCollider2D>().isTrigger = false;
-    //            StartCoroutine(BrokenPlatform());
-    //        }
-    //    }
-    //}
-
-    public void StartBroken()
+    public void StartDestoryPlatform()
     {
-        StartCoroutine(BrokenPlatform());
+        StartCoroutine(DestroyPlatform());
     }
-    IEnumerator BrokenPlatform()
+
+    IEnumerator DestroyPlatform()
     {
         yield return new WaitForSeconds(0.4f);
         _collider.enabled = false;
