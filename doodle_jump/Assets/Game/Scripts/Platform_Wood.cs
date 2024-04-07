@@ -24,6 +24,7 @@ public class Platform_Wood : PlatformController
         StartCoroutine(BushMovement());
     }
 
+
     IEnumerator BushMovement()
     {
         while (true)

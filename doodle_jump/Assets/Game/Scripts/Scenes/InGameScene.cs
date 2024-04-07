@@ -19,5 +19,6 @@ public class InGameScene : MonoBehaviour
         _scoreText.text = $"{100} Á¡";
 
         PlayerController = Util.FindChildWithPath<PlayerController>("@playerChracter");
+
     }
 }

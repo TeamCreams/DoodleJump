@@ -76,11 +76,11 @@ public class PlayerController : MonoBehaviour
         _rigid.AddForce(_direction * _movePower * Time.deltaTime, ForceMode2D.Impulse);
         if (_horizontal < 0)
         {
-            this.transform.rotation = new Quaternion(0, 180, 0, 0);
+            GetComponent<SpriteRenderer>().flipX = true;
         }
         else if (0 < _horizontal)
         {
-            this.transform.rotation = new Quaternion(0, 0, 0, 0);
+            GetComponent<SpriteRenderer>().flipX = false;
         }
     }
 
