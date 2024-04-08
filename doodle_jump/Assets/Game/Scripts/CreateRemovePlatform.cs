@@ -16,8 +16,9 @@ public class CreateRemovePlatform : MonoBehaviour
 
     private float _platformSpawnPosY = 0;
 
-    private float _activeTime = 1.5f;
-    private float _time = 0;
+    private int _activeMaxCount = 30;
+    private int _activeCount = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,11 +47,11 @@ public class CreateRemovePlatform : MonoBehaviour
             {
                 _template = Instantiate(_platformRock);
             }
-            _template.SetActive(false);
             _pool.Add(_template);
+            _template.SetActive(false);
         }
 
-        for(int i = 0; i < 20; i++)
+        for (int i = 0; i < 20; i++)
         {
             SpawnPlatforms();
         }
@@ -59,11 +60,9 @@ public class CreateRemovePlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        _time += Time.deltaTime;
-        if(_time > _activeTime)
+        if(_activeCount < _activeMaxCount)
         {
             SpawnPlatforms();
-            _time = 0;
         }
         ReturnObjectToPool();
     }
@@ -90,6 +89,7 @@ public class CreateRemovePlatform : MonoBehaviour
                 if(_platformObject.transform.position.y + 3 < _gameScene.PlayerController.transform.position.y)
                 {
                     _platformObject.SetActive(false);
+                    _activeCount--;
                 }
             }
         }
@@ -101,6 +101,7 @@ public class CreateRemovePlatform : MonoBehaviour
         if(_platform != null)
         {
             _platform.transform.position = SpawnPosition();
+            _activeCount++;
         }
     }
 
