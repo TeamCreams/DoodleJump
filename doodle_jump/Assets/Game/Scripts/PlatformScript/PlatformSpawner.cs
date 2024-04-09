@@ -11,24 +11,21 @@ public class PlatformSpawner : MonoBehaviour
     private PlatformController _platformWood;
     private PlatformController _platformBush;
 
-    private int _maxPoolSize = 50;
+    [SerializeField] private int _defaultCapacity = 20;
+    [SerializeField] private int _maxSize = 100;
 
     private float _platformSpawnPosY = 0;
 
     private int _spawnCount = 0;
     public int _SpawnCount { get { return _spawnCount; } }
 
-    public ObjectPool<PlatformController> Pool
+    private void Awake()
     {
-        get
-        {
-            if (_pool == null)
-            {
-                _pool = new ObjectPool<PlatformController>(CreatePlatform, OnTakePlatformFromPool, 
-                    OnReturnedPlatformToPool, OnDestroyPlatform, true, 50, _maxPoolSize);
-            }
-            return _pool;
-        }
+        _platformRock = Resources.Load<PlatformController>("Prefabs/platform_rock");
+        _platformWood = Resources.Load<PlatformController>("Prefabs/platform_wood");
+        _platformBush = Resources.Load<PlatformController>("Prefabs/platform_bush");
+        _pool = new ObjectPool<PlatformController>(CreatePlatform, OnTakePlatformFromPool,
+            OnReturnedPlatformToPool, OnDestroyPlatform, true, _defaultCapacity, _maxSize);
     }
 
     private PlatformController CreatePlatform()
@@ -56,14 +53,6 @@ public class PlatformSpawner : MonoBehaviour
     private void OnDestroyPlatform(PlatformController platform)
     {
         Destroy(platform.gameObject);
-    }
-
-    private void Awake()
-    {
-        _platformRock = Resources.Load<PlatformController>("Prefabs/platform_rock");
-        _platformWood = Resources.Load<PlatformController>("Prefabs/platform_wood");
-        _platformBush = Resources.Load<PlatformController>("Prefabs/platform_bush");
-        //_pool = new ObjectPool<PlatformController>(CreatePlatform, OnTakePlatformFromPool, OnReturnedToPool, OnDestroyPlatform, true, 20, _maxPoolSize);
     }
 
     private PlatformController RandomPlatform()

@@ -14,21 +14,6 @@ public class PlatformController : MonoBehaviour
         _pool = pool;
     }
 
-    protected virtual IEnumerator BecameInvisible()
-    {
-        while(true)
-        {
-            yield return null;
-            if (this.transform.position.y + 2 < _gameScene.PlayerController.transform.position.y)
-            {
-                if(_pool != null)
-                {
-                    _pool.Release(this); // 반환이 제대로 안되나..
-                }
-            }
-        }
-    }
-
     private Vector3 _startPos;
     private Vector3 _endPos;
     private float _time = 2f;
@@ -43,9 +28,26 @@ public class PlatformController : MonoBehaviour
     protected virtual void Init()
     {
         this.GetComponent<BoxCollider2D>().isTrigger = true;
-        this.StartCoroutine(BecameInvisible());
     }
 
+    protected virtual void OnEnable()
+    {
+        this.StartCoroutine(BecomeInvisible());
+    }
+    protected virtual IEnumerator BecomeInvisible()
+    {
+        while (true)
+        {
+            yield return null;
+            if (this.transform.position.y + 2 < _gameScene.PlayerController.transform.position.y)
+            {//Release 코루틴이 첫 start 시에만 호출되지 않도록 주의.
+                if (_pool != null)
+                {
+                    _pool.Release(this);
+                }
+            }
+        }
+    }
 
     protected virtual void GoDownPlatform()//아래로 내려가는 Platform
     {

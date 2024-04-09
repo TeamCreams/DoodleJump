@@ -5,13 +5,17 @@ using UnityEngine;
 public class Map : MonoBehaviour
 {
     private PlatformSpawner _platformSpawner;
+    private InGameScene _gameScene;
+
     // Start is called before the first frame update
     void Start()
     {
         _platformSpawner = GetComponent<PlatformSpawner>();
-        for (int i = 0; i < 30; i++)
+        _gameScene = Util.FindChildWithPath<InGameScene>("@InGameScene");
+        
+          for (int i = 0; i < 20; i++)
         {
-            _platformSpawner.Pool.Get();
+            _platformSpawner._pool.Get();
         }
     }
 
@@ -23,11 +27,10 @@ public class Map : MonoBehaviour
 
     private void PlatformSpawnInGame()
     {
-        if(_platformSpawner._SpawnCount < 20)
+        if(_platformSpawner._SpawnCount < 15) // Input.GetKeyDown(KeyCode.P)
         {
-            _platformSpawner.Pool.Get(); 
-            // 30개를 처음에 만들고 그 뒤로 20개 제한을 두면 꺼지고난 다음엔 재활용이 안 됨.
-            // 그게 아니더라도 몇번만 반복됨.
+            _platformSpawner._pool.Get();
+            //계속 만들어지 않음. 몇번만 반복됨.->Release 코루틴이 첫 start 시에만 호출됨. 수정
         }
     }
 }

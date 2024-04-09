@@ -17,8 +17,9 @@ public class Platform_Wood : PlatformController
     {
         _isSecond = true;
     }
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         int _random = Random.Range(0, 2);
         switch (_random)
         {

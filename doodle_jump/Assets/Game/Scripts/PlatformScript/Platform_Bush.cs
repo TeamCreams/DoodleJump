@@ -19,8 +19,9 @@ public class Platform_Bush : PlatformController
         }
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         _renderer.enabled = true;
         _collider.enabled = true;
         _platformBushAnimator.SetTrigger("ResetAnim");

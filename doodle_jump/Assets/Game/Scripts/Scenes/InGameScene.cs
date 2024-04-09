@@ -20,4 +20,6 @@ public class InGameScene : MonoBehaviour
 
         PlayerController = Util.FindChildWithPath<PlayerController>("@playerChracter");
     }
+
+
 }

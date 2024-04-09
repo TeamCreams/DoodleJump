@@ -5,17 +5,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float _movePower = 7f;
+    private float _movePower = 6f;
     public float _jumpPower = 5f; // 점프 가속 발판 있는 플랫폼에서 참조할 수 있게 public
 
     private Rigidbody2D _rigid;
-    /*
-     public Rigidbody2D Rigidbody
-    {
-        get { return _rigid; }
-        set { _rigid = value; }
-    }
-     */
+
     private Animator _animation;
     public GameObject _platformRock;
     private RaycastHit2D _hitPlatform;
