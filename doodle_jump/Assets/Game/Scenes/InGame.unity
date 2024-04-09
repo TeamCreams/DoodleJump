@@ -377,10 +377,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -3.4510565, y: 16.559017}
+    - - {x: -2.7010565, y: 23.559017}
       - {x: -3.3377852, y: -3.3090172}
       - {x: 3.5877852, y: -3.309017}
-      - {x: 3.2524896, y: 17.076855}
+      - {x: 3.2524896, y: 23.576855}
   m_UseDelaunayMesh: 0
 --- !u!4 &1037179807
 Transform:
@@ -623,8 +623,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1667008635}
   - component: {fileID: 1667008634}
-  - component: {fileID: 1667008636}
   - component: {fileID: 1667008637}
+  - component: {fileID: 1667008638}
   m_Layer: 0
   m_Name: '@InGameScene'
   m_TagString: Untagged
@@ -660,18 +660,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1667008636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1667008633}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a7c8e1ab87eccb4dad681bd27fbdfbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1667008637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -682,6 +670,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b061b75af51b316499d01928ef3788e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1667008638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667008633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c73c221d18040224fb4d19a0677a7b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1674480097
