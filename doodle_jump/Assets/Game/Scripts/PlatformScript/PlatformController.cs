@@ -51,13 +51,6 @@ public class PlatformController : MonoBehaviour
 
     protected virtual void GoDownPlatform()//아래로 내려가는 Platform
     {
-        _startPos = this.transform.position;
-        _endPos = new Vector2(this.transform.position.x, this.transform.position.y - 6);        
-
-        if (t > _time)
-        {
-            t += 0.5f * Time.deltaTime;
-            transform.position = Vector3.Lerp(_startPos, _endPos, t);
-        }
+        
     }
 }

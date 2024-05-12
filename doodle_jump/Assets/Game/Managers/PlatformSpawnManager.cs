@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class PlatformSpawner : MonoBehaviour
+public class PlatformSpawnManager : MonoBehaviour
 {
     public ObjectPool<PlatformController> _pool;//->map에서 private으로 생성하고 map에서 manager을 불러오게
+    // pool을 받아오는 함수를 만들면 될 듯
     private PlatformController _platformRock;
     private PlatformController _platformWood;
     private PlatformController _platformBush;

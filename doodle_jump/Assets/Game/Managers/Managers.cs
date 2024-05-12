@@ -21,11 +21,15 @@ public class Managers : MonoBehaviour
     public GameManager GameManager { get; private set; }
     public UIManager UIManager { get; private set; }
     public ObjectManager ObjectManager { get; private set; }
+    public PlatformSpawnManager PlatformSpawnManager { get; private set; }
+
+
 
     private void Awake()
     {
         GameManager = (new GameObject($"@{nameof(GameManager)}")).GetOrAddComponent<GameManager>();
         UIManager = (new GameObject($"@{nameof(UIManager)}")).GetOrAddComponent<UIManager>();
         ObjectManager = (new GameObject($"@{nameof(ObjectManager)}")).GetOrAddComponent<ObjectManager>();
+        PlatformSpawnManager = (new GameObject($"@{nameof(PlatformSpawnManager)}")).GetOrAddComponent<PlatformSpawnManager>();
     }
 }
