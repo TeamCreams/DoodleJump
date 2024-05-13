@@ -6,7 +6,7 @@ using UnityEngine.Pool;
 
 public class PlatformController : MonoBehaviour
 {
-    public ObjectPool<PlatformController> _pool;
+    protected ObjectPool<PlatformController> _pool;
     private InGameScene _gameScene;
 
     public virtual void SetPool(ObjectPool<PlatformController> pool)
@@ -14,11 +14,7 @@ public class PlatformController : MonoBehaviour
         _pool = pool;
     }
 
-    private Vector3 _startPos;
-    private Vector3 _endPos;
-    private float _time = 2f;
-    private float t = 0.0f;
-   
+
     protected virtual void Start()
     {
         this.Init();

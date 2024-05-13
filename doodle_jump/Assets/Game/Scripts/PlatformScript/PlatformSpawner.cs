@@ -6,7 +6,9 @@ using UnityEngine.Pool;
 
 public class PlatformSpawner : MonoBehaviour
 {
-    public ObjectPool<PlatformController> _pool;//->map에서 private으로 생성하고 map에서 manager을 불러오게
+    private ObjectPoolingManager ObjPool;
+    
+    private ObjectPool<PlatformController> _pool;//->map에서 private으로 생성하고 map에서 manager을 불러오게
     private PlatformController _platformRock;
     private PlatformController _platformWood;
     private PlatformController _platformBush;
@@ -18,14 +20,25 @@ public class PlatformSpawner : MonoBehaviour
 
     private int _spawnCount = 0;
     public int _SpawnCount { get { return _spawnCount; } }
+  
+    public void GetPool()
+    {
+        _pool.Get();
+    }
 
     private void Awake()
     {
+        
         _platformRock = Resources.Load<PlatformController>("Prefabs/platform_rock");
         _platformWood = Resources.Load<PlatformController>("Prefabs/platform_wood");
         _platformBush = Resources.Load<PlatformController>("Prefabs/platform_bush");
         _pool = new ObjectPool<PlatformController>(CreatePlatform, OnTakePlatformFromPool,
             OnReturnedPlatformToPool, OnDestroyPlatform, true, _defaultCapacity, _maxSize);
+
+        /*
+        _pool = new ObjectPool<PlatformController>(CreatePlatform, ObjPool.OnGetFromPool,
+           ObjPool.OnReleaseToPool, ObjPool.OnDestroyPooledObject, true, _defaultCapacity, _maxSize);
+        */
     }
 
     private PlatformController CreatePlatform()

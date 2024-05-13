@@ -21,7 +21,7 @@ public class Managers : MonoBehaviour
     public GameManager GameManager { get; private set; }
     public UIManager UIManager { get; private set; }
     public ObjectManager ObjectManager { get; private set; }
-    public PlatformSpawnManager PlatformSpawnManager { get; private set; }
+    public ObjectPoolingManager ObjectPoolingManager { get; private set; }
 
 
 
@@ -30,6 +30,6 @@ public class Managers : MonoBehaviour
         GameManager = (new GameObject($"@{nameof(GameManager)}")).GetOrAddComponent<GameManager>();
         UIManager = (new GameObject($"@{nameof(UIManager)}")).GetOrAddComponent<UIManager>();
         ObjectManager = (new GameObject($"@{nameof(ObjectManager)}")).GetOrAddComponent<ObjectManager>();
-        PlatformSpawnManager = (new GameObject($"@{nameof(PlatformSpawnManager)}")).GetOrAddComponent<PlatformSpawnManager>();
+        ObjectPoolingManager = (new GameObject($"@{nameof(ObjectPoolingManager)}")).GetOrAddComponent<ObjectPoolingManager>();
     }
 }
