@@ -34,11 +34,6 @@ public class PlatformSpawner : MonoBehaviour
         _platformBush = Resources.Load<PlatformController>("Prefabs/platform_bush");
         _pool = new ObjectPool<PlatformController>(CreatePlatform, OnTakePlatformFromPool,
             OnReturnedPlatformToPool, OnDestroyPlatform, true, _defaultCapacity, _maxSize);
-
-        /*
-        _pool = new ObjectPool<PlatformController>(CreatePlatform, ObjPool.OnGetFromPool,
-           ObjPool.OnReleaseToPool, ObjPool.OnDestroyPooledObject, true, _defaultCapacity, _maxSize);
-        */
     }
 
     private PlatformController CreatePlatform()

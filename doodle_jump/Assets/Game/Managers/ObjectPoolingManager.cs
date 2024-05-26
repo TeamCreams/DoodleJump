@@ -5,20 +5,14 @@ using UnityEngine.Pool;
 
 public class ObjectPoolingManager : MonoBehaviour
 {
-
-    public void OnGetFromPool(GameObject poolingObject)
+    public void Instantiate<T>(string path)
     {
-        poolingObject.gameObject.SetActive(true);
+       
     }
 
-    public void OnReleaseToPool(GameObject poolingObject)
+    public void Destroy()
     {
-        poolingObject.gameObject.SetActive(false);
-    }
-
-    public void OnDestroyPooledObject(GameObject poolingObject)
-    {
-        Destroy(poolingObject.gameObject);
+        
     }
 
 }
