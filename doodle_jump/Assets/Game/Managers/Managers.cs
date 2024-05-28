@@ -18,18 +18,16 @@ public class Managers : MonoBehaviour
         }
     }
 
-    public GameManager GameManager { get; private set; }
-    public UIManager UIManager { get; private set; }
-    public ObjectManager ObjectManager { get; private set; }
-    public ObjectPoolingManager ObjectPoolingManager { get; private set; }
-
-
+    public GameManager Game { get; private set; }
+    public UIManager UI { get; private set; }
+    public ObjectManager Object { get; private set; }
+    public ResourceManager Resource { get; private set; } = new ResourceManager();//MonoBehaviour이 아니기 때문
+    public PoolManager Pool { get; private set; } = new PoolManager();
 
     private void Awake()
     {
-        GameManager = (new GameObject($"@{nameof(GameManager)}")).GetOrAddComponent<GameManager>();
-        UIManager = (new GameObject($"@{nameof(UIManager)}")).GetOrAddComponent<UIManager>();
-        ObjectManager = (new GameObject($"@{nameof(ObjectManager)}")).GetOrAddComponent<ObjectManager>();
-        ObjectPoolingManager = (new GameObject($"@{nameof(ObjectPoolingManager)}")).GetOrAddComponent<ObjectPoolingManager>();
+        Game = (new GameObject($"@{nameof(GameManager)}")).GetOrAddComponent<GameManager>(); ;//MonoBehaviour이기 때문
+        UI = (new GameObject($"@{nameof(UIManager)}")).GetOrAddComponent<UIManager>();
+        Object = (new GameObject($"@{nameof(ObjectManager)}")).GetOrAddComponent<ObjectManager>();
     }
 }
