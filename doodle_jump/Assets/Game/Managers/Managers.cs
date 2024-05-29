@@ -12,24 +12,28 @@ public class Managers : MonoBehaviour
         {
             if (_instance == null)
             {
-                _instance = new Managers();
+                var temp = new GameObject("@Managers");
+                _instance = temp.GetOrAddComponent<Managers>();
             }
             return _instance;
         }
     }
+    private GameManager _game;
+    private UIManager _ui;
+    private ResourceManager _resource = new ResourceManager();
+    private PoolManager _pool = new PoolManager();
 
-    public GameManager GameManager { get; private set; }
-    public UIManager UIManager { get; private set; }
-    public ObjectManager ObjectManager { get; private set; }
-    public ObjectPoolingManager ObjectPoolingManager { get; private set; }
+
+    public static GameManager Game => Instance._game;
+    public static UIManager UI => Instance._ui;
+    public static ResourceManager Resource => Instance._resource;
+    public static PoolManager Pool => Instance._pool;
 
 
 
     private void Awake()
     {
-        GameManager = (new GameObject($"@{nameof(GameManager)}")).GetOrAddComponent<GameManager>();
-        UIManager = (new GameObject($"@{nameof(UIManager)}")).GetOrAddComponent<UIManager>();
-        ObjectManager = (new GameObject($"@{nameof(ObjectManager)}")).GetOrAddComponent<ObjectManager>();
-        ObjectPoolingManager = (new GameObject($"@{nameof(ObjectPoolingManager)}")).GetOrAddComponent<ObjectPoolingManager>();
+        _game = (new GameObject($"@{nameof(GameManager)}")).GetOrAddComponent<GameManager>();
+        _ui = (new GameObject($"@{nameof(UIManager)}")).GetOrAddComponent<UIManager>();
     }
 }

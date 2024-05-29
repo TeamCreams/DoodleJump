@@ -6,8 +6,6 @@ using UnityEngine.Pool;
 
 public class PlatformSpawner : MonoBehaviour
 {
-    private ObjectPoolingManager ObjPool;
-    
     private ObjectPool<PlatformController> _pool;//->map에서 private으로 생성하고 map에서 manager을 불러오게
     private PlatformController _platformRock;
     private PlatformController _platformWood;
