@@ -49,7 +49,7 @@ public class NumberBlockController : MonoBehaviour
         set { _gameScore = value; ; } 
     }
 
-    private void Init(List<NumberBlockActor> numberBlocks)
+    public void Init(ref List<NumberBlockActor> numberBlocks)
     {
         _numberBlocks = numberBlocks;
         //위치 초기화
