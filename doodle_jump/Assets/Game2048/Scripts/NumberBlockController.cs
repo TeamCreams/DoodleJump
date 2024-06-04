@@ -29,6 +29,10 @@ public class NumberBlockController : MonoBehaviour
 
     private List<NumberBlockActor> _numberBlocks = new List<NumberBlockActor>(); // 블록
     private List<NumberBlockActor> _tempNumberBlocks = new List<NumberBlockActor>(); // 애니메이션 이동용 블럭
+
+    //tempBlcok GameObject
+    List<GameObject> _tempNumberBlocksGameObject = new List<GameObject>();
+
     private int[,] _blocksInfo = new int[4, 4]; // 블록 좌표 및 값
 
 	// 새로운 블럭 생성&생성해도 되는지 체크
@@ -49,19 +53,30 @@ public class NumberBlockController : MonoBehaviour
         set { _gameScore = value; ; } 
     }
 
-    public void Init(ref List<NumberBlockActor> numberBlocks)
+    public void Init(ref List<GameObject> numberBlocksGameObject)
     {
-        _numberBlocks = numberBlocks;
+        for(int i = 0; i < MAX_BLOCK_COUNT; i++)
+        {
+            _numberBlocks.Add(numberBlocksGameObject[i].GetComponent<NumberBlockActor>());
+        }
+
         //위치 초기화
         NumberBlockToZero();
         InitIsFull();
 
-        for (int i = 0; i < 16; i++)
+        GameObject parent = GameObject.Find("Background");
+       
+        for (int i = 0; i < MAX_BLOCK_COUNT; i++)
         {
-            NumberBlockActor tempBlock = new NumberBlockActor();
+            //아마 여기때문에 오류가 뜰지도
+
+            _tempNumberBlocksGameObject.Add(Managers.Resource.Instantiate("NumberBlock", parent.transform));
             //tempBlock->Init();
-            _tempNumberBlocks.Add(tempBlock);
             //CurrentScene.SpawnActor(_tempNumberBlocks.back());
+        }
+        for(int i = 0; i < MAX_BLOCK_COUNT; i++)
+        {
+            _tempNumberBlocks.Add(_tempNumberBlocksGameObject[i].GetComponent<NumberBlockActor>());
         }
     }
     public void Update()
@@ -149,13 +164,17 @@ public class NumberBlockController : MonoBehaviour
                     }
 
                     //임시 애니메이션 블럭 생성 및 이동
-                    for (int i = 0; i < 16; i++)
+                    for (int i = 0; i < MAX_BLOCK_COUNT; i++)
                     {
                         {
-                            int posX = (i / 4) * 100 - 200;
-                            int posY = (i % 4) * 100 - 200;
-                            _tempNumberBlocks[i].transform.position = new UnityEngine.Vector2(posX, posY);
+                            float posX = 33f + ((i / 4) * 33f);
+                            float posY = -50.5f + ((i % 4) * 33f) + 148.2f;// + parent.transform.position.y;
+                            // 얘는 걍 스크립트인데 얘를 움직여도 되는가?
+                            _tempNumberBlocksGameObject[i].transform.position = new Vector2(posX, posY);
+                            //_tempNumberBlocks[i].transform.position = new UnityEngine.Vector2(posX, posY);
                             //Vector2은 UnityEngine.Vector2 및 System.Numerics.Vector2 사이에 모호한 참조입니다.
+
+
                             _tempNumberBlocks[i].SetNumber(_numberBlocks[i].GetNumber());
                             _tempNumberBlocks[i].ChangeImage(_numberBlocks[i].GetNumber());
                         }
