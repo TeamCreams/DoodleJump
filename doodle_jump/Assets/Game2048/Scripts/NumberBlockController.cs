@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NumberBlockController : MonoBehaviour
@@ -53,13 +54,13 @@ public class NumberBlockController : MonoBehaviour
         set { _gameScore = value; ; } 
     }
 
-    public void Init(ref List<GameObject> numberBlocksGameObject)
+    public void Init(List<GameObject> numberBlocksGameObject)
     {
         for(int i = 0; i < MAX_BLOCK_COUNT; i++)
         {
             _numberBlocks.Add(numberBlocksGameObject[i].GetComponent<NumberBlockActor>());
         }
-
+        Debug.Log(_numberBlocks.Count);
         //위치 초기화
         NumberBlockToZero();
         InitIsFull();
@@ -68,9 +69,9 @@ public class NumberBlockController : MonoBehaviour
        
         for (int i = 0; i < MAX_BLOCK_COUNT; i++)
         {
-            //아마 여기때문에 오류가 뜰지도
-
+            //temp의 위치를 잘 잡아주어야함.. 근데 안됨
             _tempNumberBlocksGameObject.Add(Managers.Resource.Instantiate("NumberBlock", parent.transform));
+            _tempNumberBlocksGameObject[i].transform.position = numberBlocksGameObject[i].transform.position;
             //tempBlock->Init();
             //CurrentScene.SpawnActor(_tempNumberBlocks.back());
         }
@@ -79,7 +80,7 @@ public class NumberBlockController : MonoBehaviour
             _tempNumberBlocks.Add(_tempNumberBlocksGameObject[i].GetComponent<NumberBlockActor>());
         }
     }
-    public void Update()
+    public void UpdateFunc()
     {
         if (_gameState == Game2048State.Release)
         {
@@ -136,6 +137,8 @@ public class NumberBlockController : MonoBehaviour
                 random = Random.Range(0, 15);
             }
             _numberBlocks[random].SetNumber(2);
+
+            Debug.Log("is there?");
             _numberBlocks[random].ChangeImage(_numberBlocks[random].GetNumber());
         }
     }
@@ -325,7 +328,7 @@ public class NumberBlockController : MonoBehaviour
             }
         }
     }
-    private void MoveUp()
+    private void MoveDown()
     {
         for (int i = 0; i < 4; i++)
         {
@@ -368,7 +371,7 @@ public class NumberBlockController : MonoBehaviour
             }
         }
     }
-    private void MoveDown()
+    private void MoveUp()
     {
         for (int i = 0; i < 4; i++)
         {
