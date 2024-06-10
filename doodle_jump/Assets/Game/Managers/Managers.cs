@@ -12,8 +12,12 @@ public class Managers : MonoBehaviour
         {
             if (_instance == null)
             {
-                var temp = new GameObject("@Managers");
-                _instance = temp.GetOrAddComponent<Managers>();
+                _instance = FindObjectOfType<Managers>();
+                if (_instance == null)
+                {
+                    var temp = new GameObject("@Managers");
+                    _instance = temp.GetOrAddComponent<Managers>();
+                }
             }
             return _instance;
         }
@@ -29,11 +33,17 @@ public class Managers : MonoBehaviour
     public static ResourceManager Resource => Instance._resource;
     public static PoolManager Pool => Instance._pool;
 
+    public static Game2048 Game2048 => Instance._game2048;
+
+    [SerializeField]
+    private Game2048 _game2048;
 
 
     private void Awake()
     {
         _game = (new GameObject($"@{nameof(GameManager)}")).GetOrAddComponent<GameManager>();
         _ui = (new GameObject($"@{nameof(UIManager)}")).GetOrAddComponent<UIManager>();
+
+        _game2048 = this.GetComponent<Game2048>();
     }
 }

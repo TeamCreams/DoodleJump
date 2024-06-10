@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class Game2048 : MonoBehaviour
 {
     private List<GameObject> _numberBlocks = new List<GameObject>(); // ºí·Ï
+
+    public IReadOnlyList<GameObject> NumberBlocks => _numberBlocks;
+
     private NumberBlockController _numberBlockController;
     private GameObject NumberBlock = null;
     private void Awake()

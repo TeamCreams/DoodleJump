@@ -61,6 +61,7 @@ public class NumberBlockActor : MonoBehaviour
         switch (sum) 
         {
             case 0:
+
                 _image.color = new Color(_image.color.r, _image.color.g, _image.color.b, 0f);
                 break;
             case 2:
@@ -101,47 +102,38 @@ public class NumberBlockActor : MonoBehaviour
         }
     }
 
-    public void ChangeDirectionState(NumberBlockDirState directionState)
+    public void ChangeDirectionState(NumberBlockDirState directionState, Vector2 endPos)
     {
         _startPos = this.transform.position;
         _sumTime = 0.0f;
         _directionState = directionState;
+
+
+        if (_directionState == NumberBlockDirState.Up)
+        {
+            this.transform.DOMove(endPos, 0.1f).SetEase(Ease.Linear);
+            this._moveCount = 0;
+        }
+        else if (_directionState == NumberBlockDirState.Down)
+        {
+            this.transform.DOMove(endPos, 0.1f).SetEase(Ease.Linear);
+            this._moveCount = 0;
+        }
+        else if (_directionState == NumberBlockDirState.Left) //left
+        {
+            this.transform.DOMove(endPos, 0.1f).SetEase(Ease.Linear);
+            this._moveCount = 0;
+        }
+        else if (_directionState == NumberBlockDirState.Right) //right
+        {
+            this.transform.DOMove(endPos, 0.1f).SetEase(Ease.Linear);
+            this._moveCount = 0;
+
+
+        }
     }
 
     public void SlideActor()
     {
-        if (_directionState == NumberBlockDirState.Up)
-        {
-            Vector2 endPos = new Vector2(_startPos.x, _startPos.y + 66f * GetMoveCount());
-            _sumTime += Time.deltaTime * _speed;
-            float clampSumTime = Mathf.Clamp(_sumTime, 0.0f, 1.0f);
-            this.transform.DOLocalMoveY(endPos.y, clampSumTime).SetEase(Ease.Linear);
-            /*float clampSumTime = Mathf.Clamp(_sumTime, 0.0f, 1.0f); 
-            Vector2 newBlockPos = Mathf.Lerp(_startPos, endPos, clampSumTime);
-            newBlockPos.x = Mathf.Clamp(newBlockPos.x, -200, 100);
-            newBlockPos.y = Mathf.Clamp(newBlockPos.y, -200, 100);
-            this.SetPos(newBlockPos);*/
-        }
-        else if (_directionState == NumberBlockDirState.Down)
-        {
-            Vector2 endPos = new Vector2(_startPos.x, _startPos.y - 66f * GetMoveCount());
-            _sumTime += Time.deltaTime * _speed;
-            float clampSumTime = Mathf.Clamp(_sumTime, 0.0f, 1.0f);
-            this.transform.DOLocalMoveY(endPos.y, clampSumTime).SetEase(Ease.Linear);
-        }
-        else if (_directionState == NumberBlockDirState.Left) //left
-        {
-            Vector2 endPos = new Vector2(_startPos.x - 66f * GetMoveCount(), _startPos.y);
-            _sumTime += Time.deltaTime * _speed;
-            float clampSumTime = Mathf.Clamp(_sumTime, 0.0f, 1.0f);
-            this.transform.DOLocalMoveX(endPos.x, clampSumTime).SetEase(Ease.Linear);
-        }
-        else if (_directionState == NumberBlockDirState.Right) //right
-        {
-            Vector2 endPos = new Vector2(_startPos.x + 66f * GetMoveCount(), _startPos.y);
-            _sumTime += Time.deltaTime * _speed;
-            float clampSumTime = Mathf.Clamp(_sumTime, 0.0f, 1.0f);
-            this.transform.DOLocalMoveX(endPos.x, clampSumTime).SetEase(Ease.Linear);
-        }
     }
 }

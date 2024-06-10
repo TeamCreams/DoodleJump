@@ -70,8 +70,11 @@ public class NumberBlockController : MonoBehaviour
         for (int i = 0; i < MAX_BLOCK_COUNT; i++)
         {
             //temp의 위치를 잘 잡아주어야함.. 근데 안됨
-            _tempNumberBlocksGameObject.Add(Managers.Resource.Instantiate("NumberBlock", parent.transform));
-            _tempNumberBlocksGameObject[i].transform.position = numberBlocksGameObject[i].transform.position;
+            var instance = Managers.Resource.Instantiate("NumberBlock", parent.transform);
+            _tempNumberBlocksGameObject.Add(instance);
+            instance.transform.localPosition = Vector3.zero;
+            //instance.transform.localScale = Vector3.one;
+            instance.transform.localRotation = Quaternion.identity;
             //tempBlock->Init();
             //CurrentScene.SpawnActor(_tempNumberBlocks.back());
         }
@@ -170,10 +173,13 @@ public class NumberBlockController : MonoBehaviour
                     for (int i = 0; i < MAX_BLOCK_COUNT; i++)
                     {
                         {
-                            float posX = 33f + ((i / 4) * 33f);
-                            float posY = -50.5f + ((i % 4) * 33f) + 148.2f;// + parent.transform.position.y;
+                            //float posX = 33f + ((i / 4) * 33f);
+                            //float posY = -50.5f + ((i % 4) * 33f) + 148.2f;// + parent.transform.position.y;
                             // 얘는 걍 스크립트인데 얘를 움직여도 되는가?
-                            _tempNumberBlocksGameObject[i].transform.position = new Vector2(posX, posY);
+
+
+                            Vector3 pos = Managers.Game2048.NumberBlocks[i].transform.position;
+                            _tempNumberBlocksGameObject[i].transform.position = new Vector2(pos.x, pos.y);
                             //_tempNumberBlocks[i].transform.position = new UnityEngine.Vector2(posX, posY);
                             //Vector2은 UnityEngine.Vector2 및 System.Numerics.Vector2 사이에 모호한 참조입니다.
 
@@ -197,41 +203,55 @@ public class NumberBlockController : MonoBehaviour
     private void SetPressKeyState(PressKey state)
     {
         this.SetGame2048State(Game2048State.Animation);
+        for (int i = 0; i < _tempNumberBlocks.Count; i++)
+        {
+            _tempNumberBlocks[i].SetMoveCount(0);
+        }
         switch (state)
         {
             case PressKey.Down:
                 {
+                     
                     this.MoveDown();
-                    foreach (NumberBlockActor _tempBlock in _tempNumberBlocks)
+                    for (int i = 0; i< _tempNumberBlocks.Count; i++)
                     {
-                        _tempBlock.ChangeDirectionState(NumberBlockActor.NumberBlockDirState.Down);
+                        Debug.Log($"FROM : {i}, TO : {i - _tempNumberBlocks[i].GetMoveCount() * 4}");
+                        Vector3 endPos = Managers.Game2048.NumberBlocks[i - _tempNumberBlocks[i].GetMoveCount()].transform.position;
+
+                        _tempNumberBlocks[i].ChangeDirectionState(NumberBlockActor.NumberBlockDirState.Down, endPos);
                     }
                 }
                 break;
             case PressKey.Up:
                 {
                     this.MoveUp();
-                    foreach (NumberBlockActor _tempBlock in _tempNumberBlocks)
+                    for (int i = 0; i < _tempNumberBlocks.Count; i++)
                     {
-                        _tempBlock.ChangeDirectionState(NumberBlockActor.NumberBlockDirState.Up);
+                        Vector3 endPos = Managers.Game2048.NumberBlocks[i + _tempNumberBlocks[i].GetMoveCount()].transform.position;
+
+                        _tempNumberBlocks[i].ChangeDirectionState(NumberBlockActor.NumberBlockDirState.Up, endPos);
                     }
                 }
                 break;
             case PressKey.Left:
                 {
                     this.MoveLeft();
-                    foreach (NumberBlockActor _tempBlock in _tempNumberBlocks)
+                    for (int i = 0; i < _tempNumberBlocks.Count; i++)
                     {
-                        _tempBlock.ChangeDirectionState(NumberBlockActor.NumberBlockDirState.Left);
+                        Vector3 endPos = Managers.Game2048.NumberBlocks[i - _tempNumberBlocks[i].GetMoveCount() * 4].transform.position;
+
+                        _tempNumberBlocks[i].ChangeDirectionState(NumberBlockActor.NumberBlockDirState.Left, endPos);
                     }
                 }
                 break;
             case PressKey.Right:
                 {
                     this.MoveRight();
-                    foreach (NumberBlockActor _tempBlock in _tempNumberBlocks)
+                    for (int i = 0; i < _tempNumberBlocks.Count; i++)
                     {
-                        _tempBlock.ChangeDirectionState(NumberBlockActor.NumberBlockDirState.Right);
+                        Vector3 endPos = Managers.Game2048.NumberBlocks[i + _tempNumberBlocks[i].GetMoveCount() * 4].transform.position;
+
+                        _tempNumberBlocks[i].ChangeDirectionState(NumberBlockActor.NumberBlockDirState.Right, endPos);
                     }
                 }
                 break;
