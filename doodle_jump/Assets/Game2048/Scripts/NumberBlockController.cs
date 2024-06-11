@@ -29,7 +29,7 @@ public class NumberBlockController : MonoBehaviour
     };
 
     private List<NumberBlockActor> _numberBlocks = new List<NumberBlockActor>(); // 블록
-    private List<NumberBlockActor> _tempNumberBlocks = new List<NumberBlockActor>(); // 애니메이션 이동용 블럭
+    private List<NumberBlockAnimator> _tempNumberBlocks = new List<NumberBlockAnimator>(); // 애니메이션 이동용 블럭
 
     //tempBlcok GameObject
     List<GameObject> _tempNumberBlocksGameObject = new List<GameObject>();
@@ -58,7 +58,7 @@ public class NumberBlockController : MonoBehaviour
     {
         for(int i = 0; i < MAX_BLOCK_COUNT; i++)
         {
-            _numberBlocks.Add(numberBlocksGameObject[i].GetComponent<NumberBlockActor>());
+            _numberBlocks.Add(numberBlocksGameObject[i].GetOrAddComponent<NumberBlockActor>());
         }
         Debug.Log(_numberBlocks.Count);
         //위치 초기화
@@ -70,17 +70,15 @@ public class NumberBlockController : MonoBehaviour
         for (int i = 0; i < MAX_BLOCK_COUNT; i++)
         {
             //temp의 위치를 잘 잡아주어야함.. 근데 안됨
-            var instance = Managers.Resource.Instantiate("NumberBlock", parent.transform);
+            var instance = Managers.Resource.Instantiate("NumberBlock");
             _tempNumberBlocksGameObject.Add(instance);
-            instance.transform.localPosition = Vector3.zero;
+            instance.transform.position = numberBlocksGameObject[i].transform.position;
             //instance.transform.localScale = Vector3.one;
-            instance.transform.localRotation = Quaternion.identity;
-            //tempBlock->Init();
-            //CurrentScene.SpawnActor(_tempNumberBlocks.back());
+            instance.transform.rotation = Quaternion.identity;
         }
         for(int i = 0; i < MAX_BLOCK_COUNT; i++)
         {
-            _tempNumberBlocks.Add(_tempNumberBlocksGameObject[i].GetComponent<NumberBlockActor>());
+            _tempNumberBlocks.Add(_tempNumberBlocksGameObject[i].GetOrAddComponent<NumberBlockAnimator>());
         }
     }
     public void UpdateFunc()
@@ -125,7 +123,7 @@ public class NumberBlockController : MonoBehaviour
         {
             for (int j = 0; j < 4; j++)
             {
-                _blocksInfo[i, j] = _numberBlocks[count++].GetNumber();
+                _blocksInfo[i, j] = _numberBlocks[count++].Number;
             }
         }
     }
@@ -135,14 +133,13 @@ public class NumberBlockController : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             int random = Random.Range(0, 15);
-            while (_numberBlocks[random].GetNumber() != 0)//빈자리 찾기
+            while (_numberBlocks[random].Number != 0)//빈자리 찾기
             {
                 random = Random.Range(0, 15);
             }
-            _numberBlocks[random].SetNumber(2);
+            _numberBlocks[random].Number = 2;
 
-            Debug.Log("is there?");
-            _numberBlocks[random].ChangeImage(_numberBlocks[random].GetNumber());
+            _numberBlocks[random].ChangeImage(_numberBlocks[random].Number);
         }
     }
     private void SetGame2048State(Game2048State gameState)
@@ -153,9 +150,9 @@ public class NumberBlockController : MonoBehaviour
         {
             case Game2048State.Release:
                 {
-                    foreach (NumberBlockActor _tempNumberBlock in _tempNumberBlocks)
+                    foreach (NumberBlockAnimator _tempNumberBlock in _tempNumberBlocks)
                     {
-                        _tempNumberBlock.SetMoveCount(0);
+                        _tempNumberBlock.MoveCount = 0;
                         _tempNumberBlock.ChangeImage(0);
                     }
                 }
@@ -173,19 +170,10 @@ public class NumberBlockController : MonoBehaviour
                     for (int i = 0; i < MAX_BLOCK_COUNT; i++)
                     {
                         {
-                            //float posX = 33f + ((i / 4) * 33f);
-                            //float posY = -50.5f + ((i % 4) * 33f) + 148.2f;// + parent.transform.position.y;
-                            // 얘는 걍 스크립트인데 얘를 움직여도 되는가?
-
-
                             Vector3 pos = Managers.Game2048.NumberBlocks[i].transform.position;
                             _tempNumberBlocksGameObject[i].transform.position = new Vector2(pos.x, pos.y);
-                            //_tempNumberBlocks[i].transform.position = new UnityEngine.Vector2(posX, posY);
-                            //Vector2은 UnityEngine.Vector2 및 System.Numerics.Vector2 사이에 모호한 참조입니다.
-
-
-                            _tempNumberBlocks[i].SetNumber(_numberBlocks[i].GetNumber());
-                            _tempNumberBlocks[i].ChangeImage(_numberBlocks[i].GetNumber());
+                            _tempNumberBlocks[i].Number = _numberBlocks[i].Number;
+                            _tempNumberBlocks[i].ChangeImage(_numberBlocks[i].Number);
                         }
                     }
                 }
@@ -205,7 +193,7 @@ public class NumberBlockController : MonoBehaviour
         this.SetGame2048State(Game2048State.Animation);
         for (int i = 0; i < _tempNumberBlocks.Count; i++)
         {
-            _tempNumberBlocks[i].SetMoveCount(0);
+            _tempNumberBlocks[i].MoveCount = 0;
         }
         switch (state)
         {
@@ -215,10 +203,10 @@ public class NumberBlockController : MonoBehaviour
                     this.MoveDown();
                     for (int i = 0; i< _tempNumberBlocks.Count; i++)
                     {
-                        Debug.Log($"FROM : {i}, TO : {i - _tempNumberBlocks[i].GetMoveCount() * 4}");
-                        Vector3 endPos = Managers.Game2048.NumberBlocks[i - _tempNumberBlocks[i].GetMoveCount()].transform.position;
+                        Debug.Log($"FROM : {i}, TO : {i - _tempNumberBlocks[i].MoveCount * 4}");
+                        Vector3 endPos = Managers.Game2048.NumberBlocks[i - _tempNumberBlocks[i].MoveCount].transform.position;
 
-                        _tempNumberBlocks[i].ChangeDirectionState(NumberBlockActor.NumberBlockDirState.Down, endPos);
+                        _tempNumberBlocks[i].ChangeDirectionState(NumberBlockAnimator.NumberBlockDirState.Down, endPos);
                     }
                 }
                 break;
@@ -227,9 +215,9 @@ public class NumberBlockController : MonoBehaviour
                     this.MoveUp();
                     for (int i = 0; i < _tempNumberBlocks.Count; i++)
                     {
-                        Vector3 endPos = Managers.Game2048.NumberBlocks[i + _tempNumberBlocks[i].GetMoveCount()].transform.position;
+                        Vector3 endPos = Managers.Game2048.NumberBlocks[i + _tempNumberBlocks[i].MoveCount].transform.position;
 
-                        _tempNumberBlocks[i].ChangeDirectionState(NumberBlockActor.NumberBlockDirState.Up, endPos);
+                        _tempNumberBlocks[i].ChangeDirectionState(NumberBlockAnimator.NumberBlockDirState.Up, endPos);
                     }
                 }
                 break;
@@ -238,9 +226,9 @@ public class NumberBlockController : MonoBehaviour
                     this.MoveLeft();
                     for (int i = 0; i < _tempNumberBlocks.Count; i++)
                     {
-                        Vector3 endPos = Managers.Game2048.NumberBlocks[i - _tempNumberBlocks[i].GetMoveCount() * 4].transform.position;
+                        Vector3 endPos = Managers.Game2048.NumberBlocks[i - _tempNumberBlocks[i].MoveCount * 4].transform.position;
 
-                        _tempNumberBlocks[i].ChangeDirectionState(NumberBlockActor.NumberBlockDirState.Left, endPos);
+                        _tempNumberBlocks[i].ChangeDirectionState(NumberBlockAnimator.NumberBlockDirState.Left, endPos);
                     }
                 }
                 break;
@@ -249,9 +237,9 @@ public class NumberBlockController : MonoBehaviour
                     this.MoveRight();
                     for (int i = 0; i < _tempNumberBlocks.Count; i++)
                     {
-                        Vector3 endPos = Managers.Game2048.NumberBlocks[i + _tempNumberBlocks[i].GetMoveCount() * 4].transform.position;
+                        Vector3 endPos = Managers.Game2048.NumberBlocks[i + _tempNumberBlocks[i].MoveCount * 4].transform.position;
 
-                        _tempNumberBlocks[i].ChangeDirectionState(NumberBlockActor.NumberBlockDirState.Right, endPos);
+                        _tempNumberBlocks[i].ChangeDirectionState(NumberBlockAnimator.NumberBlockDirState.Right, endPos);
                     }
                 }
                 break;
@@ -449,8 +437,8 @@ public class NumberBlockController : MonoBehaviour
     {
         for (int i = 0; i < MAX_BLOCK_COUNT; i++)
         {
-            _numberBlocks[i].SetNumber(_blocksInfo[i / 4, i % 4]);
-            _numberBlocks[i].ChangeImage(_numberBlocks[i].GetNumber());
+            _numberBlocks[i].Number = _blocksInfo[i / 4, i % 4];
+            _numberBlocks[i].ChangeImage(_numberBlocks[i].Number);
         }
     }
     private void CreateNumberBlock()
@@ -465,20 +453,21 @@ public class NumberBlockController : MonoBehaviour
             }
 
             // 생성될 숫자 구하기
+            // 진행된 점수 비율에 따라 생성될 숫자 크기 올리기
             switch (Random.Range(1, 5))
             {
                 case 1: // 4는 20%로 생성
                     {
                         _blocksInfo[random / 4, random % 4] = 4;
-                        _numberBlocks[random].SetNumber(_blocksInfo[random / 4, random % 4]);
-                        _numberBlocks[random].ChangeImage(_numberBlocks[random].GetNumber());
+                        _numberBlocks[random].Number = _blocksInfo[random / 4, random % 4];
+                        _numberBlocks[random].ChangeImage(_numberBlocks[random].Number);
                     }
                     break;
                 default:
                     {
                         _blocksInfo[random / 4, random % 4] = 2;
-                        _numberBlocks[random].SetNumber(_blocksInfo[random / 4, random % 4]);
-                        _numberBlocks[random].ChangeImage(_numberBlocks[random].GetNumber());
+                        _numberBlocks[random].Number = _blocksInfo[random / 4, random % 4];
+                        _numberBlocks[random].ChangeImage(_numberBlocks[random].Number);
                     }
                     break;
             }

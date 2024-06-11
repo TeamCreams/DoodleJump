@@ -1,24 +1,42 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Assertions;
-using UnityEngine.UI;
 
-public class NumberBlockActor : MonoBehaviour
+public class NumberBlockAnimator : MonoBehaviour
 {
-    [SerializeField]
-    private int _number = 0;
-   
-    private Sprite[] _sprites;
-    private SpriteRenderer _spriteRenderer;
-    // Number
+    private int _number { get; set; }
     public int Number
     {
         get { return _number; }
         set { _number = value; }
     }
+
+    // MoveCount
+    private int _moveCount = 0;
+    public int MoveCount
+    {
+        get { return _moveCount; }
+        set { _moveCount = value; }
+    }
+    public void AddMoveCount() { _moveCount++; }
+
+    private NumberBlockDirState _directionState = NumberBlockDirState.None;
+
+    private Sprite[] _sprites;
+    private SpriteRenderer _spriteRenderer;
+
+
+    public enum NumberBlockDirState
+    {
+        Down,
+        Up,
+        Left,
+        Right,
+
+        None
+    };
+
     private void Awake()
     {
         // Image Resource 가져오기
@@ -31,10 +49,9 @@ public class NumberBlockActor : MonoBehaviour
     {
         _sprites = Resources.LoadAll<Sprite>("Image2048");
     }
-
     public void ChangeImage(int sum)
     {
-        switch (sum) 
+        switch (sum)
         {
             case 2:
                 _spriteRenderer.sprite = _sprites[0];
@@ -69,9 +86,36 @@ public class NumberBlockActor : MonoBehaviour
             case 2048:
                 _spriteRenderer.sprite = _sprites[10];
                 break;
-            default :
+            default:
                 _spriteRenderer.sprite = null;
                 break;
+        }
+    }
+
+    public void ChangeDirectionState(NumberBlockDirState directionState, Vector2 endPos)
+    {
+
+        _directionState = directionState;
+
+        if (_directionState == NumberBlockDirState.Up)
+        {
+            this.transform.DOMove(endPos, 0.1f).SetEase(Ease.Linear);
+            MoveCount = 0;
+        }
+        else if (_directionState == NumberBlockDirState.Down)
+        {
+            this.transform.DOMove(endPos, 0.1f).SetEase(Ease.Linear);
+            MoveCount = 0;
+        }
+        else if (_directionState == NumberBlockDirState.Left) //left
+        {
+            this.transform.DOMove(endPos, 0.1f).SetEase(Ease.Linear);
+            MoveCount = 0;
+        }
+        else if (_directionState == NumberBlockDirState.Right) //right
+        {
+            this.transform.DOMove(endPos, 0.1f).SetEase(Ease.Linear);
+            MoveCount = 0;
         }
     }
 }

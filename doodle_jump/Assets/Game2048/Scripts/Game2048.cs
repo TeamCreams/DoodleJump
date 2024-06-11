@@ -17,16 +17,16 @@ public class Game2048 : MonoBehaviour
         GameObject controllerObject = new GameObject("@NumberBlockController");
         _numberBlockController = controllerObject.AddComponent<NumberBlockController>();
 
-        NumberBlock = Resources.Load<GameObject>("Prefabs/NumberBlock");
-        GameObject parent = GameObject.Find("Background");
+        /*NumberBlock = Resources.Load<GameObject>("Prefabs/NumberBlock");
+        GameObject parent = GameObject.Find("Background");*/
         for (int i = 0; i < 16; i++)
         {
             //_numberBlocks.Add(Instantiate(NumberBlock));
-            _numberBlocks.Add(Managers.Resource.Instantiate("NumberBlock", parent.transform));
-            _numberBlocks[i].transform.SetParent(parent.transform);
-            RectTransform rectTransform = _numberBlocks[i].GetOrAddComponent<RectTransform>();
-            rectTransform.position = new Vector2(33f + ((i / 4) * 33f),
-                -50.5f + ((i % 4) * 33f) + parent.transform.position.y);
+            var instance = Managers.Resource.Instantiate("NumberBlock");
+            float x = -1.94f + (i / 4) * 1.3f;
+            float y = -1.94f + (i % 4) * 1.3f;
+            instance.transform.position = new Vector2(x, y);
+            _numberBlocks.Add(instance);
             //Debug.Log(parent.transform.position.y);
         }
 
