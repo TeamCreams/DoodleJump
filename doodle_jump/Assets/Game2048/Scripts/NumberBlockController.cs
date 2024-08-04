@@ -441,15 +441,15 @@ public class NumberBlockController : MonoBehaviour
             _numberBlocks[i].ChangeImage(_numberBlocks[i].Number);
         }
     }
-    private void CreateNumberBlock()
+    private void CreateNumberBlock() // 숫자 커지면 나타나는 숫자도 커지기
     {
         if (_checkCreateNumberBlock == true)
         {
             // 비어있는자리찾기
-            int random = Random.Range(0, 15);
+            int random = Random.Range(0, 16);
             while (_blocksInfo[random / 4, random % 4] != 0)
             {
-                random = Random.Range(0, 15);
+                random = Random.Range(0, 16);
             }
 
             // 생성될 숫자 구하기

@@ -11,23 +11,18 @@ public class Game2048 : MonoBehaviour
     public IReadOnlyList<GameObject> NumberBlocks => _numberBlocks;
 
     private NumberBlockController _numberBlockController;
-    private GameObject NumberBlock = null;
     private void Awake()
     {
         GameObject controllerObject = new GameObject("@NumberBlockController");
         _numberBlockController = controllerObject.AddComponent<NumberBlockController>();
 
-        /*NumberBlock = Resources.Load<GameObject>("Prefabs/NumberBlock");
-        GameObject parent = GameObject.Find("Background");*/
         for (int i = 0; i < 16; i++)
         {
-            //_numberBlocks.Add(Instantiate(NumberBlock));
             var instance = Managers.Resource.Instantiate("NumberBlock");
-            float x = -1.94f + (i / 4) * 1.3f;
-            float y = -1.94f + (i % 4) * 1.3f;
+            float x = -4 + (i / 4) * 4f;
+            float y = -4 + (i % 4) * 4f;
             instance.transform.position = new Vector2(x, y);
             _numberBlocks.Add(instance);
-            //Debug.Log(parent.transform.position.y);
         }
 
     }

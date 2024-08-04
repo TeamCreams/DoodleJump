@@ -47,7 +47,7 @@ public class NumberBlockAnimator : MonoBehaviour
 
     private void LoadResources()
     {
-        _sprites = Resources.LoadAll<Sprite>("Image2048");
+        _sprites = Resources.LoadAll<Sprite>("2048");
     }
     public void ChangeImage(int sum)
     {

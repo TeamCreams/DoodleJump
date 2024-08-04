@@ -4,10 +4,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-public class PoolManager
+public class PoolManager //여러 개의 Pool을 관리하는 상위 관리자
 {
 	#region Pool
-	class Pool
+	class Pool //특정 타입의 객체(프리팹)를 관리하는 풀. 객체의 생성, 반환, 요청 등의 작업을 수행.
     {
         public GameObject Original { get; private set; }
         public Transform Root { get; set; }
