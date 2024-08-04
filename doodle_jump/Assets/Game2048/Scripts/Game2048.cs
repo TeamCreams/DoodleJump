@@ -11,10 +11,20 @@ public class Game2048 : MonoBehaviour
     public IReadOnlyList<GameObject> NumberBlocks => _numberBlocks;
 
     private NumberBlockController _numberBlockController;
+    private ScoreText _scoreText;
+
     private void Awake()
     {
         GameObject controllerObject = new GameObject("@NumberBlockController");
         _numberBlockController = controllerObject.AddComponent<NumberBlockController>();
+
+        /*
+        GameObject scoreTextObject = new GameObject("@ScorePanel");
+        SpriteRenderer spriteRenderer = scoreTextObject.AddComponent<SpriteRenderer>();
+        scoreTextObject.transform.position = new Vector2(-2, 15);
+        spriteRenderer.sprite = Resources.Load<Sprite>("Panel");
+        _scoreText = scoreTextObject.AddComponent<ScoreText>();
+*/
 
         for (int i = 0; i < 16; i++)
         {
@@ -29,13 +39,14 @@ public class Game2048 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _numberBlockController.Init(_numberBlocks); // 실행하면 오류 뜸
+        _numberBlockController.Init(_numberBlocks);
     }
 
     // Update is called once per frame
     void Update()
     {
         _numberBlockController.UpdateFunc();
+        //_scoreText.GameScoreText.text = _numberBlockController.GameScore.ToString();
     }
 
 }
