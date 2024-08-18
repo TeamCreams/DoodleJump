@@ -1,0 +1,52 @@
+MummyKing.png
+size:512,512
+filter:Linear,Linear
+pma:true
+scale:0.83
+effect01
+bounds:407,111,84,86
+offsets:2,3,88,91
+rotate:90
+effect02
+bounds:351,3,106,106
+mummy king arm_r
+bounds:93,416,92,247
+rotate:90
+mummy king body
+bounds:342,261,148,189
+offsets:0,0,149,189
+mummy king deco01
+bounds:2,2,12,24
+offsets:0,1,12,25
+rotate:90
+mummy king deco02
+bounds:2,16,17,36
+mummy king eye
+bounds:21,25,70,27
+mummy king hand
+bounds:329,135,60,76
+offsets:3,0,63,77
+rotate:90
+mummy king head01
+bounds:87,57,176,202
+offsets:0,3,176,205
+mummy king head02
+bounds:265,8,84,121
+offsets:1,0,85,121
+mummy king_arm_r
+bounds:87,270,144,170
+rotate:90
+mummy king_belt
+bounds:342,452,161,56
+offsets:3,0,164,57
+mummy king_cane
+bounds:2,54,83,454
+offsets:0,0,84,454
+mummy king_leg_l
+bounds:265,131,62,144
+offsets:0,0,64,144
+mummy king_leg_r
+bounds:351,197,62,144
+rotate:90
+mummy king_skirt
+bounds:259,277,76,137

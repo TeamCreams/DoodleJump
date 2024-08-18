@@ -1,0 +1,13 @@
+Machinegun_05.png
+size:256,128
+filter:Linear,Linear
+pma:true
+eff01
+bounds:2,2,100,55
+offsets:1,1,102,57
+eff02
+bounds:136,66,61,55
+offsets:1,1,63,57
+machinegun01
+bounds:2,59,132,62
+offsets:1,1,134,64

@@ -5,12 +5,6 @@ using UnityEngine;
 
 public class NumberBlockAnimator : MonoBehaviour
 {
-    private int _number { get; set; }
-    public int Number
-    {
-        get { return _number; }
-        set { _number = value; }
-    }
 
     // MoveCount
     private int _moveCount = 0;

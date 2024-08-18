@@ -6,28 +6,28 @@ using Unity.VisualScripting;
 
 public class ScoreText : MonoBehaviour
 {
-
-    private TMP_Text _text;
     private TextMeshProUGUI _tmpGUI;
+    private int _tempScore = 0;
+    private Object _childTMP = null;
 
-    private NumberBlockController _blockController;
-    public TMP_Text GameScoreText
+    void Awake()
     {
-        get { return _text; }
-        set { _text = value; ; }
+        _childTMP = Util.FindChild<TextMeshProUGUI>(gameObject, "ScoreTMP", true);    
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        _blockController = FindObjectOfType<NumberBlockController>();
-        _tmpGUI = this.GetOrAddComponent<TextMeshProUGUI>();
-        _tmpGUI.text = _blockController.GameScore.ToString();
+        _tmpGUI = _childTMP.GetOrAddComponent<TextMeshProUGUI>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void ScoreUpdate(int score)
     {
-        
+        if (score != _tempScore)
+        {
+            _tmpGUI.text = score.ToString();
+            _tempScore = score;
+        }
     }
+
 }

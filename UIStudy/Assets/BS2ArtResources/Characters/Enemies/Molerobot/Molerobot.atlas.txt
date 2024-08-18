@@ -1,0 +1,33 @@
+Molerobot.png
+size:256,256
+filter:Linear,Linear
+pma:true
+scale:0.44
+Molerobot_ arm_l
+bounds:145,164,93,88
+Molerobot_ arm_r
+bounds:125,105,57,103
+rotate:90
+Molerobot_ cap
+bounds:90,11,76,53
+offsets:0,2,76,56
+rotate:90
+Molerobot_ eye
+bounds:145,13,39,19
+Molerobot_ leg_l
+bounds:187,43,38,60
+Molerobot_ leg_r
+bounds:145,34,40,69
+Molerobot_ light
+bounds:230,145,16,17
+offsets:0,1,17,19
+Molerobot_body
+bounds:2,2,86,85
+Molerobot_head
+bounds:2,89,121,84
+offsets:0,1,121,85
+Molerobot_tail
+bounds:187,2,38,39
+eff
+bounds:2,175,141,77
+offsets:0,0,143,78

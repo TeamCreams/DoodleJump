@@ -15,17 +15,16 @@ public class Game2048 : MonoBehaviour
 
     private void Awake()
     {
+        //NumberBlockController
         GameObject controllerObject = new GameObject("@NumberBlockController");
         _numberBlockController = controllerObject.AddComponent<NumberBlockController>();
 
-        /*
-        GameObject scoreTextObject = new GameObject("@ScorePanel");
-        SpriteRenderer spriteRenderer = scoreTextObject.AddComponent<SpriteRenderer>();
-        scoreTextObject.transform.position = new Vector2(-2, 15);
-        spriteRenderer.sprite = Resources.Load<Sprite>("Panel");
-        _scoreText = scoreTextObject.AddComponent<ScoreText>();
-*/
+        //ScoreText
+        var scorePanel = Managers.Resource.Instantiate("ScorePanel");
+        scorePanel.transform.position = new Vector2(-2, 15);
+        _scoreText = scorePanel.GetOrAddComponent<ScoreText>();
 
+        //NumberBlock
         for (int i = 0; i < 16; i++)
         {
             var instance = Managers.Resource.Instantiate("NumberBlock");
@@ -46,7 +45,8 @@ public class Game2048 : MonoBehaviour
     void Update()
     {
         _numberBlockController.UpdateFunc();
-        //_scoreText.GameScoreText.text = _numberBlockController.GameScore.ToString();
+
+        _scoreText.ScoreUpdate(_numberBlockController.GameScore);
     }
 
 }

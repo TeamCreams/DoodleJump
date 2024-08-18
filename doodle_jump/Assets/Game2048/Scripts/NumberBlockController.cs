@@ -69,11 +69,9 @@ public class NumberBlockController : MonoBehaviour
        
         for (int i = 0; i < MAX_BLOCK_COUNT; i++)
         {
-            //temp의 위치를 잘 잡아주어야함.. 근데 안됨
             var instance = Managers.Resource.Instantiate("NumberBlock");
             _tempNumberBlocksGameObject.Add(instance);
             instance.transform.position = numberBlocksGameObject[i].transform.position;
-            //instance.transform.localScale = Vector3.one;
             instance.transform.rotation = Quaternion.identity;
         }
         for(int i = 0; i < MAX_BLOCK_COUNT; i++)
@@ -172,17 +170,13 @@ public class NumberBlockController : MonoBehaviour
                         {
                             Vector3 pos = Managers.Game2048.NumberBlocks[i].transform.position;
                             _tempNumberBlocksGameObject[i].transform.position = new Vector2(pos.x, pos.y);
-                            _tempNumberBlocks[i].Number = _numberBlocks[i].Number;
                             _tempNumberBlocks[i].ChangeImage(_numberBlocks[i].Number);
                         }
                     }
                 }
                 break;
             case Game2048State.None:
-                {
-                    //GET_SINGLE(SceneManager)->ChangeScene(SceneType::Dev2Scene);
-                    break;
-                }
+                break;
             default:
                 break;
         }
@@ -203,7 +197,7 @@ public class NumberBlockController : MonoBehaviour
                     this.MoveDown();
                     for (int i = 0; i< _tempNumberBlocks.Count; i++)
                     {
-                        Debug.Log($"FROM : {i}, TO : {i - _tempNumberBlocks[i].MoveCount * 4}");
+                        //Debug.Log($"FROM : {i}, TO : {i - _tempNumberBlocks[i].MoveCount * 4}");
                         Vector3 endPos = Managers.Game2048.NumberBlocks[i - _tempNumberBlocks[i].MoveCount].transform.position;
 
                         _tempNumberBlocks[i].ChangeDirectionState(NumberBlockAnimator.NumberBlockDirState.Down, endPos);
@@ -496,6 +490,7 @@ public class NumberBlockController : MonoBehaviour
                 //game over
                 _checkCreateNumberBlock = false;
                 SetGame2048State(Game2048State.None);
+                // 실패 팝업 띄우기
             }
             else //if (count < 16)
             {

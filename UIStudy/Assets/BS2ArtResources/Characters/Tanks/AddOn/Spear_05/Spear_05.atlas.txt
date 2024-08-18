@@ -1,0 +1,13 @@
+Spear_05.png
+size:256,128
+filter:Linear,Linear
+pma:true
+spear01
+bounds:140,45,78,61
+offsets:1,1,80,63
+spear02
+bounds:2,2,88,15
+offsets:1,1,90,17
+spear03
+bounds:2,19,136,87
+offsets:1,1,138,89

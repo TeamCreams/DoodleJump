@@ -1,0 +1,14 @@
+Skyboosterengine_01.png
+size:256,256
+filter:Linear,Linear
+pma:true
+scale:0.85
+eff
+bounds:133,4,104,109
+offsets:5,7,113,122
+skyboosterengine01
+bounds:2,2,129,111
+offsets:4,1,133,112
+skyboosterengine02
+bounds:2,115,163,137
+offsets:6,10,170,175

@@ -1,0 +1,17 @@
+Laser_Water.png
+size:256,128
+filter:Linear,Linear
+pma:true
+scale:0.9
+eff01
+bounds:174,105,7,15
+offsets:0,0,7,16
+eff02
+bounds:95,31,34,47
+offsets:0,3,35,50
+lase01
+bounds:2,2,91,118
+offsets:1,0,95,119
+lase02
+bounds:95,80,77,40
+offsets:0,1,77,41

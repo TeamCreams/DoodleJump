@@ -1,0 +1,17 @@
+Laser_Wind.png
+size:256,128
+filter:Linear,Linear
+pma:true
+scale:0.9
+eff01
+bounds:171,100,9,20
+offsets:0,1,9,22
+eff02
+bounds:95,32,34,47
+offsets:0,3,35,50
+lase01
+bounds:2,2,91,118
+offsets:1,0,95,119
+lase02
+bounds:95,81,74,39
+offsets:0,1,75,41
