@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class GameManager
@@ -81,4 +82,19 @@ public class ItemData
 	public int Rare { get; set; }
 	public int Parts { get; set; }
 	public int Level { get; set; }
+}
+
+[System.Serializable] //얘가 있어야 직렬화 가능
+public class MessageData
+{
+    public string id; // get, set도 있으면 안 됨
+    public string name;
+    public string time; // 아직 안 쓸 듯.
+    public string message;
+}
+
+[System.Serializable]
+public class Messages
+{
+    public List<MessageData> Chatting;
 }

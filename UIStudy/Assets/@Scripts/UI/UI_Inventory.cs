@@ -17,8 +17,7 @@ public class UI_Inventory : UI_Base
     {
 
     }
-    GameObject _subItemRoot = null;
-    bool _isSubItemRootActive = false;
+    private GameObject _subItemRoot = null;
 
     private List<ItemData> _itemList;
     protected override void Init()

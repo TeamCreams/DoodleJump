@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +23,7 @@ public class UI_ChattingRoomScene : UI_Scene
 
     private GameObject _chattingBubbleRoot = null;
     private TMP_InputField _inputMessage = null;
-
+    private Messages _messages = null;
     protected override void Init()
     {
         base.Init();
@@ -32,7 +33,21 @@ public class UI_ChattingRoomScene : UI_Scene
         _chattingBubbleRoot = GetObject((int)GameObjects.ChatBubble);
         _inputMessage = GetObject((int)GameObjects.InputMessage).gameObject.GetOrAddComponent<TMP_InputField>();
 
-        
+        _messages = Managers.Message.ReadTextFile();
+        foreach (var message in _messages.Chatting)
+        {
+            if(message.name == "Me")
+            {
+                var go = GameObject.Instantiate(Resources.Load("Kakao/UI/Chat_ME"), _chattingBubbleRoot.transform) as GameObject;
+                go.GetComponentInChildren<TMP_Text>().text = message.message; // children¸»°í µý°É·Î ¹Ù²ã¾ßÇÒ µí.
+            }
+            else
+            {
+                var go = GameObject.Instantiate(Resources.Load("Kakao/UI/Chat_You"), _chattingBubbleRoot.transform) as GameObject;
+                go.GetComponentInChildren<TMP_Text>().text = message.message; // children¸»°í µý°É·Î ¹Ù²ã¾ßÇÒ µí.
+            }
+        }
+
         this.Get<Button>((int)Buttons.Button_Send).gameObject.BindEvent((evt) =>
         {
             this.SendBubble();
