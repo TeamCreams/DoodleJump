@@ -11,10 +11,11 @@ public class Managers : MonoBehaviour
     private GameManager _game = new GameManager();
 
     private MessageManager _message = new MessageManager();
+	private DataManager _data = new DataManager();
 
     public static GameManager Game { get { return Instance?._game; } }
 	public static MessageManager Message { get { return Instance?._message; } }
-
+	public static DataManager Data { get { return Instance?._data; } }
     #endregion
 
     #region Core

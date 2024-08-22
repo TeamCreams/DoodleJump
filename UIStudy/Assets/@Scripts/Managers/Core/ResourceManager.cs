@@ -11,6 +11,15 @@ public class ResourceManager
 	private Dictionary<string, UnityEngine.Object> _resources = new Dictionary<string, UnityEngine.Object>();
 	private Dictionary<string, AsyncOperationHandle> _handles = new Dictionary<string, AsyncOperationHandle>();
 
+	public void DebugLog()
+	{
+		foreach(var resourceObj in _resources)
+		{
+			Debug.Log(resourceObj.Key);
+			Debug.Log(resourceObj.Value);
+		}
+	}
+
 	#region Load Resource
 	public T Load<T>(string key) where T : Object
 	{

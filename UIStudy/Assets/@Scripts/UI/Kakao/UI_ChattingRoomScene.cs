@@ -38,13 +38,18 @@ public class UI_ChattingRoomScene : UI_Scene
         {
             if(message.name == "Me")
             {
+                //UI_ChatMe
                 var go = GameObject.Instantiate(Resources.Load("Kakao/UI/Chat_ME"), _chattingBubbleRoot.transform) as GameObject;
                 go.GetComponentInChildren<TMP_Text>().text = message.message; // children¸»°í µý°É·Î ¹Ù²ã¾ßÇÒ µí.
+
+                Invoke(nameof(ForceUpdate1), 1.0f);
             }
             else
             {
                 var go = GameObject.Instantiate(Resources.Load("Kakao/UI/Chat_You"), _chattingBubbleRoot.transform) as GameObject;
                 go.GetComponentInChildren<TMP_Text>().text = message.message; // children¸»°í µý°É·Î ¹Ù²ã¾ßÇÒ µí.
+
+                Invoke(nameof(ForceUpdate1), 1.0f);
             }
         }
 
@@ -61,5 +66,11 @@ public class UI_ChattingRoomScene : UI_Scene
         Debug.Log(_inputMessage.text);
         go.GetComponentInChildren<TMP_Text>().text = _inputMessage.text; // children¸»°í µý°É·Î ¹Ù²ã¾ßÇÒ µí.
         _inputMessage.text = "";
+        Invoke(nameof(ForceUpdate1), 1.0f);
+    }
+
+    void ForceUpdate1()
+    {
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_chattingBubbleRoot.GetComponent<RectTransform>());
     }
 }

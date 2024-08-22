@@ -32,9 +32,14 @@ public class UIManager
         {
             name = typeof(T).ToString();
         }
-        string resourcePath = $"UI/Scene/{name}";
+        //string resourcePath = $"UI/Scene/{name}";
 
-        var go = GameObject.Instantiate(Resources.Load(resourcePath), Root.transform) as GameObject;
+
+        var go = Managers.Resource.Instantiate(name, Root.transform);
+        if (go == null)
+        {
+            Debug.Log($"resource not found [{name}]");
+        }
 
         var rv = go.GetOrAddComponent<T>();
 
@@ -48,9 +53,13 @@ public class UIManager
         {
             name = typeof(T).ToString();
         }
-        string resourcePath = $"UI/Popup/{name}";
+        //string resourcePath = $"UI/Popup/{name}";
 
-        var go = GameObject.Instantiate(Resources.Load(resourcePath), Root.transform) as GameObject;
+        var go = Managers.Resource.Instantiate(name, Root.transform);
+        if (go == null)
+        {
+            Debug.Log($"resource not found [{name}]");
+        }
 
         var rv = go.GetOrAddComponent<T>();
         Debug.Log($"name : {rv.name}");
@@ -104,7 +113,11 @@ public class UIManager
             parent = Root.transform;
         }
 
-        var go = GameObject.Instantiate(Resources.Load(resourcePath), parent) as GameObject;
+        var go = Managers.Resource.Instantiate(name, parent);
+        if (go == null)
+        {
+            Debug.Log($"resource not found [{name}]");
+        }
 
         var rv = go.GetOrAddComponent<T>();
 

@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class UI_KakaoScene : UI_Scene
 {
     public enum Buttons
@@ -43,7 +42,10 @@ public class UI_KakaoScene : UI_Scene
                 Get<GameObject>((int)page).SetActive(false);
             }
             Get<GameObject>((int)GameObjects.ChattingPage).SetActive(true);
+
         }, Define.EUIEvent.Click);
+
+
     }
 
 

@@ -17,8 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: e0b1c6dd13f684d63b5df753c3c832e9
   m_SerializeEntries:
-  - m_GUID: 51bb9f6342b1740b880be25c1389dc37
-    m_Address: UI_Popup
+  - m_GUID: 97689659747042745a51b367e57b7e00
+    m_Address: UI_SampleScene
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
