@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using TMPro;
 using UnityEditor.VersionControl;
 using UnityEngine;
@@ -12,8 +12,7 @@ public class UI_ChattingRoomScene : UI_Scene
     }
     public enum GameObjects
     {
-        ChatBubble,
-        InputMessage
+        ChatBubble_GO
     }
 
     enum Buttons
@@ -21,56 +20,75 @@ public class UI_ChattingRoomScene : UI_Scene
         Button_Send
     }
 
+    enum InputFields
+    {
+        InputMessage_IF
+    }
+
     private GameObject _chattingBubbleRoot = null;
     private TMP_InputField _inputMessage = null;
     private Messages _messages = null;
+    private GameObject _chatMe = null;
+    private GameObject _chatYou = null;
+
     protected override void Init()
     {
         base.Init();
-        BindTexts(typeof(Texts));
+
         BindObjects(typeof(GameObjects));
         BindButtons(typeof(Buttons));
-        _chattingBubbleRoot = GetObject((int)GameObjects.ChatBubble);
-        _inputMessage = GetObject((int)GameObjects.InputMessage).gameObject.GetOrAddComponent<TMP_InputField>();
+        BindInputFields(typeof(InputFields));
 
+        _chattingBubbleRoot = GetObject((int)GameObjects.ChatBubble_GO);
+        _inputMessage = GetInputField((int)InputFields.InputMessage_IF);
+
+        // StartLoadAssetsì„ í•´ì¤˜ì•¼ í•¨
+        _chatMe = Managers.Resource.Load<GameObject>("Chat_ME"); // null
+        Debug.Log(_chatMe);
+        _chatYou = Managers.Resource.Load<GameObject>("Chat_YOU"); // null
+        Debug.Log(_chatYou);
         _messages = Managers.Message.ReadTextFile();
         foreach (var message in _messages.Chatting)
         {
             if(message.name == "Me")
             {
-                //UI_ChatMe
-                var go = GameObject.Instantiate(Resources.Load("Kakao/UI/Chat_ME"), _chattingBubbleRoot.transform) as GameObject;
-                go.GetComponentInChildren<TMP_Text>().text = message.message; // children¸»°í µı°É·Î ¹Ù²ã¾ßÇÒ µí.
-
-                Invoke(nameof(ForceUpdate1), 1.0f);
+                this.SendBubble(_chatMe, message.message);
             }
             else
             {
-                var go = GameObject.Instantiate(Resources.Load("Kakao/UI/Chat_You"), _chattingBubbleRoot.transform) as GameObject;
-                go.GetComponentInChildren<TMP_Text>().text = message.message; // children¸»°í µı°É·Î ¹Ù²ã¾ßÇÒ µí.
-
-                Invoke(nameof(ForceUpdate1), 1.0f);
+                this.SendBubble(_chatYou, message.message);
             }
         }
 
         this.Get<Button>((int)Buttons.Button_Send).gameObject.BindEvent((evt) =>
         {
-            this.SendBubble();
+            this.SendBubble(_chatMe, _inputMessage.text, true);
         }, Define.EUIEvent.Click);
     }
 
-    private void SendBubble()
+    private void SendBubble(GameObject prefab, string text, bool input = false)
     {
-        var go = GameObject.Instantiate(Resources.Load("Kakao/UI/Chat_ME"), _chattingBubbleRoot.transform) as GameObject;
-        //_inputMessage = GetObject((int)GameObjects.InputMessage).gameObject.GetOrAddComponent<TMP_InputField>();
-        Debug.Log(_inputMessage.text);
-        go.GetComponentInChildren<TMP_Text>().text = _inputMessage.text; // children¸»°í µı°É·Î ¹Ù²ã¾ßÇÒ µí.
-        _inputMessage.text = "";
-        Invoke(nameof(ForceUpdate1), 1.0f);
+        GameObject.Instantiate(prefab, _chattingBubbleRoot.transform);
+        //var go = GameObject.Instantiate(prefab, _chattingBubbleRoot.transform) as GameObject;
+        BindTexts(typeof(Texts)); // ë§ëŠ” ì§€ ëª¨ë¥´ê² ìŒ
+        GetText((int)Texts.ChattingTMP).text = text; // ChattingTMPê°€ cloneìœ¼ë¡œ ì—¬ëŸ¬ê°œ ìƒì„±ë  ê±´ë° ì ‘ê·¼ ì–´ì¼€í• ì§€..
+        //go.GetComponentInChildren<TMP_Text>().text = text; // Cloneìœ¼ë¡œ ìƒì„±ë˜ëŠ” ìì‹ì—ê²Œ ì–´ì¼€ ì ‘ê·¼í•˜ëŠ”ì§€.
+
+        if (input)
+        {
+            _inputMessage.text = "";
+        }
+        StartCoroutine(ForceUpdate()); //Invoke(nameof(ForceUpdate1), 1.0f);
     }
 
     void ForceUpdate1()
     {
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_chattingBubbleRoot.GetComponent<RectTransform>());
+    }
+
+    IEnumerator ForceUpdate()
+    {
+        yield return new WaitForSeconds(1.0f);
         LayoutRebuilder.ForceRebuildLayoutImmediate(_chattingBubbleRoot.GetComponent<RectTransform>());
     }
 }

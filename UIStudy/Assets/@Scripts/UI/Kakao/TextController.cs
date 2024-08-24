@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TextController : UI_Base
 {
     private const int MAX_WIDTH = 250;
+
     private LayoutElement _layoutElement = null;
     public enum Texts
     {
@@ -19,14 +20,10 @@ public class TextController : UI_Base
         _layoutElement = GetText((int)Texts.ChattingTMP).GetOrAddComponent<LayoutElement>();
     }
 
-    private void Start()
-    {
-        // µ¥ÀÌÅÍ¸¦ ¹Ş¾Æ¿Ã °Å´Ï±î ¿©±â ÀÖ¾î¾ßÇÔ.
-        //this.SetChattingBubbleSize(GetText((int)Texts.ChattingTMP).preferredWidth);
-    }
     void Update()
     {
         this.SetChattingBubbleSize(GetText((int)Texts.ChattingTMP).preferredWidth);
+        // ì´ê²Œ ì—…ë°ì´íŠ¸ì— ìˆì„ í•„ìš”ëŠ”..
     }
 
     private void SetChattingBubbleSize(float width)

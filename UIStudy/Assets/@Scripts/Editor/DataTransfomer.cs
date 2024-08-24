@@ -1,4 +1,4 @@
-
+﻿
 #if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ public class DataTransfomer : EditorWindow
 	[MenuItem("Tools/ParseExcel %#K")]
 	public static void ParseExcelDatas()
 	{
-		ParseExcelDataToJson<TestDataLoader, TestData>("TestData");
+		ParseExcelDataToJson<TestDataLoader, TestData>("TinyFarmEvent");
 
 		Debug.Log("Complete");
 	}
@@ -36,7 +36,7 @@ public class DataTransfomer : EditorWindow
 		AssetDatabase.Refresh();
 	}
 
-	private static List<LoaderData> ParseExcelDataToList<LoaderData>(string filename) where LoaderData : new()
+    private static List<LoaderData> ParseExcelDataToList<LoaderData>(string filename) where LoaderData : new()
 	{
 		List<LoaderData> loaderDatas = new List<LoaderData>();
 		string[] lines;
