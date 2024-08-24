@@ -1,0 +1,44 @@
+{
+  "tinyFarmDatas": [
+    {
+      "Id": 1,
+      "EventName": "Sunny Harvest",
+      "EventDetails": "Harvest 10 purple sweet potatoes and gather special sunshine to share with your friends.",
+      "Compensation1": 1000,
+      "Compensation2": 1000,
+      "Event": 1
+    },
+    {
+      "Id": 2,
+      "EventName": "Cute Animal Friends",
+      "EventDetails": "Raise 5 sheep on your farm and take adorable pictures of them.",
+      "Compensation1": 30,
+      "Compensation2": 2000,
+      "Event": 0
+    },
+    {
+      "Id": 3,
+      "EventName": "Secret Garden Creation",
+      "EventDetails": "Plant 3 new types of flowers and beautifully decorate your garden to show off to your friends.",
+      "Compensation1": 50,
+      "Compensation2": 1500,
+      "Event": 0
+    },
+    {
+      "Id": 4,
+      "EventName": "Delicious Cooking",
+      "EventDetails": "Prepare 3 dishes using ingredients grown on your farm and share them with your friends.",
+      "Compensation1": 400,
+      "Compensation2": 2000,
+      "Event": 0
+    },
+    {
+      "Id": 5,
+      "EventName": "Abundant Festival",
+      "EventDetails": "Harvest 20 fruits for visitors to your farm and prepare for a festive celebration.",
+      "Compensation1": 50,
+      "Compensation2": 3000,
+      "Event": 1
+    }
+  ]
+}

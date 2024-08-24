@@ -7,6 +7,9 @@ class TestScene : MonoBehaviour
     UI_Inventory _inven;
     [SerializeField]
     UnityEngine.UI.Image _image;
+
+    private GameObject _missionUI = null;
+
     void Awake()
     {
         StartLoadAssets();
@@ -17,7 +20,6 @@ class TestScene : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             _inven.gameObject.SetActive(!_inven.gameObject.activeSelf);
-
         }
 
         if(Input.GetKeyDown(KeyCode.J))
@@ -43,10 +45,12 @@ class TestScene : MonoBehaviour
                 Debug.Log("Load Complete");
                 Managers.Data.Init();
 
-                Managers.UI.ShowSceneUI<UI_SampleScene>();
+                //Managers.UI.ShowSceneUI<UI_SampleScene>();
 
                 _inven = Managers.UI.MakeSubItem<UI_Inventory>();
 
+                _missionUI = Managers.Resource.Load<GameObject>("Mission_UI");
+                Debug.Log(_missionUI);
             }
         });
     }

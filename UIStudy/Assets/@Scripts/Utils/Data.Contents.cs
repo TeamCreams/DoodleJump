@@ -27,4 +27,30 @@ namespace Data
 			return dict;
 		}
 	}
+
+    [Serializable]
+    public class TinyFarmData
+    {
+        public int Id;
+        public string EventName;
+        public string EventDetails;
+        public int Compensation1;
+        public int Compensation2;
+        public int Event;
+    }
+
+    [Serializable]
+    public class TinyFarmDataLoader : ILoader<int, TinyFarmData>
+    {
+        public List<TinyFarmData> tinyFarmDatas = new List<TinyFarmData>();
+
+        public Dictionary<int, TinyFarmData> MakeDict()
+        {
+            Dictionary<int, TinyFarmData> dict = new Dictionary<int, TinyFarmData>();
+            foreach (TinyFarmData tinyFarmData in tinyFarmDatas)
+                dict.Add(tinyFarmData.Id, tinyFarmData);
+
+            return dict;
+        }
+    }
 }

@@ -18,7 +18,7 @@ public class DataTransfomer : EditorWindow
 	[MenuItem("Tools/ParseExcel %#K")]
 	public static void ParseExcelDatas()
 	{
-		ParseExcelDataToJson<TestDataLoader, TestData>("TinyFarmEvent");
+		ParseExcelDataToJson<TinyFarmDataLoader, TinyFarmData>("TinyFarmEvent");
 
 		Debug.Log("Complete");
 	}
