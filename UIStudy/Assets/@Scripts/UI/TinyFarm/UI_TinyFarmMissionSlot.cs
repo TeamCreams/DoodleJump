@@ -15,7 +15,7 @@ public class UI_TinyFarmMissionSlot : UI_Base
     enum Texts
     {
         Title_Text,
-        ChattingTMP, // details
+        TextInBox, // details
         Ex_Text,
         Gold_Text
     }
@@ -30,7 +30,7 @@ public class UI_TinyFarmMissionSlot : UI_Base
     public void SetInfo(TinyFarmData data)
     {
         GetText((int)Texts.Title_Text).text = data.EventName;
-        GetText((int)Texts.ChattingTMP).text = data.EventDetails;
+        GetText((int)Texts.TextInBox).text = data.EventDetails;
         GetText((int)Texts.Ex_Text).text = data.Compensation1.ToString();
         GetText((int)Texts.Gold_Text).text = data.Compensation2.ToString();
 

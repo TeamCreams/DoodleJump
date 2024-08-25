@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 6179852041928350396}
   - component: {fileID: 7274127105889912953}
   m_Layer: 5
-  m_Name: ChattingTMP
+  m_Name: TextInBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

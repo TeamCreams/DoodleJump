@@ -59,7 +59,10 @@ public class UI_TinyFarmScene : UI_Scene
             {
                 Debug.Log("Load Complete");
                 Managers.Data.Init();
-                Managers.UI.MakeSubItem<UI_TinyFarmMission>("UI_Mission", _root.transform);
+                //Managers.UI.MakeSubItem<UI_TinyFarmMission>("UI_Mission", _root.transform);
+
+                var UI_Mission = Managers.Resource.Instantiate("UI_Mission", _root.transform);
+                UI_Mission.GetOrAddComponent<UI_TinyFarmMission>();
             }
         });
     }

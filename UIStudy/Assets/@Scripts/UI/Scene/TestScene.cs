@@ -8,8 +8,6 @@ class TestScene : MonoBehaviour
     [SerializeField]
     UnityEngine.UI.Image _image;
 
-    private GameObject _missionUI = null;
-
     void Awake()
     {
         StartLoadAssets();
@@ -27,6 +25,7 @@ class TestScene : MonoBehaviour
             //Managers.Resource.Load<Sprite>("Sprite_Loading")\
             Managers.Resource.DebugLog();
             Sprite sprite1 = Managers.Resource.Load<Sprite>("Sprite_Loading.sprite");
+            //Managers.Resource.Instantiate("Sprite_Loading.sprite");
             Debug.Log(sprite1);
             _image.sprite = sprite1;
             Debug.Log(Managers.Data.TestDic[1].Name);
@@ -45,12 +44,9 @@ class TestScene : MonoBehaviour
                 Debug.Log("Load Complete");
                 Managers.Data.Init();
 
-                //Managers.UI.ShowSceneUI<UI_SampleScene>();
+                Managers.UI.ShowSceneUI<UI_SampleScene>();
 
                 _inven = Managers.UI.MakeSubItem<UI_Inventory>();
-
-                _missionUI = Managers.Resource.Load<GameObject>("Mission_UI");
-                Debug.Log(_missionUI);
             }
         });
     }

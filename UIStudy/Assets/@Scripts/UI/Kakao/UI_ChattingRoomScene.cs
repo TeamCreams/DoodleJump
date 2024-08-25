@@ -6,10 +6,6 @@ using UnityEngine.UI;
 
 public class UI_ChattingRoomScene : UI_Scene
 {
-    public enum Texts
-    {
-        ChattingTMP
-    }
     public enum GameObjects
     {
         ChatBubble_GO
@@ -28,53 +24,18 @@ public class UI_ChattingRoomScene : UI_Scene
     private GameObject _chattingBubbleRoot = null;
     private TMP_InputField _inputMessage = null;
     private Messages _messages = null;
-    private GameObject _chatMe = null;
-    private GameObject _chatYou = null;
 
     protected override void Init()
     {
         base.Init();
-
-        BindObjects(typeof(GameObjects));
-        BindButtons(typeof(Buttons));
-        BindInputFields(typeof(InputFields));
-
-        _chattingBubbleRoot = GetObject((int)GameObjects.ChatBubble_GO);
-        _inputMessage = GetInputField((int)InputFields.InputMessage_IF);
-
-        // StartLoadAssets을 해줘야 함
-        _chatMe = Managers.Resource.Load<GameObject>("Chat_ME"); // null
-        Debug.Log(_chatMe);
-        _chatYou = Managers.Resource.Load<GameObject>("Chat_YOU"); // null
-        Debug.Log(_chatYou);
-        _messages = Managers.Message.ReadTextFile();
-        foreach (var message in _messages.Chatting)
-        {
-            if(message.name == "Me")
-            {
-                this.SendBubble(_chatMe, message.message);
-            }
-            else
-            {
-                this.SendBubble(_chatYou, message.message);
-            }
-        }
-
-        this.Get<Button>((int)Buttons.Button_Send).gameObject.BindEvent((evt) =>
-        {
-            this.SendBubble(_chatMe, _inputMessage.text, true);
-        }, Define.EUIEvent.Click);
+        StartLoadAssets(); // 그냥 기본 class를 만들어서 쓰는 것도 ㄱㅊ을 듯
     }
 
-    private void SendBubble(GameObject prefab, string text, bool input = false)
+    private void SendBubble(string name, string text, bool input = false)
     {
-        GameObject.Instantiate(prefab, _chattingBubbleRoot.transform);
-        //var go = GameObject.Instantiate(prefab, _chattingBubbleRoot.transform) as GameObject;
-        BindTexts(typeof(Texts)); // 맞는 지 모르겠음
-        GetText((int)Texts.ChattingTMP).text = text; // ChattingTMP가 clone으로 여러개 생성될 건데 접근 어케할지..
-        //go.GetComponentInChildren<TMP_Text>().text = text; // Clone으로 생성되는 자식에게 어케 접근하는지.
-
-        if (input)
+        var bubble = Managers.Resource.Instantiate(name, _chattingBubbleRoot.transform);
+        bubble.GetOrAddComponent<UI_Chatting>().SetText(text); 
+        if(input)
         {
             _inputMessage.text = "";
         }
@@ -88,7 +49,47 @@ public class UI_ChattingRoomScene : UI_Scene
 
     IEnumerator ForceUpdate()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.3f); // 문장이 길어지면 1초여도 안고쳐짐
         LayoutRebuilder.ForceRebuildLayoutImmediate(_chattingBubbleRoot.GetComponent<RectTransform>());
+    }
+    void StartLoadAssets()
+    {
+        Managers.Resource.LoadAllAsync<UnityEngine.Object>("PreLoad", (key, count, totalCount) =>
+        {
+            Debug.Log($"{key} {count}/{totalCount}");
+
+            if (count == totalCount)
+            {
+                Debug.Log("Load Complete");
+                Managers.Data.Init();
+
+                // 여기 아래로 넣으면 됨. 
+                // Init에 넣으면 안 됨.
+                BindObjects(typeof(GameObjects));
+                BindButtons(typeof(Buttons));
+                BindInputFields(typeof(InputFields));
+
+                _chattingBubbleRoot = GetObject((int)GameObjects.ChatBubble_GO);
+                _inputMessage = GetInputField((int)InputFields.InputMessage_IF);
+
+                _messages = Managers.Message.ReadTextFile();
+                foreach (var message in _messages.Chatting)
+                {
+                    if (message.name == "Me")
+                    {
+                        this.SendBubble("Chat_ME", message.message);
+                    }
+                    else
+                    {
+                        this.SendBubble("Chat_YOU", message.message);
+                    }
+                }
+
+                this.Get<Button>((int)Buttons.Button_Send).gameObject.BindEvent((evt) =>
+                {
+                    this.SendBubble("Chat_ME", _inputMessage.text, true);
+                }, Define.EUIEvent.Click);
+            }
+        });
     }
 }

@@ -10,22 +10,22 @@ public class TextController : UI_Base
     private LayoutElement _layoutElement = null;
     public enum Texts
     {
-        ChattingTMP
+        TextInBox
     }
 
     protected override void Init()
     {
         base.Init();
         BindTexts(typeof(Texts));
-        _layoutElement = GetText((int)Texts.ChattingTMP).GetOrAddComponent<LayoutElement>();
+        _layoutElement = GetText((int)Texts.TextInBox).GetOrAddComponent<LayoutElement>();
+        StartCoroutine(ForceUpdate());
     }
 
-    void Update()
+    IEnumerator ForceUpdate()
     {
-        this.SetChattingBubbleSize(GetText((int)Texts.ChattingTMP).preferredWidth);
-        // 이게 업데이트에 있을 필요는..
+        yield return new WaitForSeconds(0.1f);
+        this.SetChattingBubbleSize(GetText((int)Texts.TextInBox).preferredWidth);
     }
-
     private void SetChattingBubbleSize(float width)
     {
         if (MAX_WIDTH <= width)
