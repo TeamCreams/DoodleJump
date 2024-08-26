@@ -18,6 +18,15 @@ public class TextController : UI_Base
         base.Init();
         BindTexts(typeof(Texts));
         _layoutElement = GetText((int)Texts.TextInBox).GetOrAddComponent<LayoutElement>();
+
+
+        //_layoutElement.GetComponent<ContentSizeFitter>().SetLayoutHorizontal();
+        //_layoutElement.GetComponent<ContentSizeFitter>().SetLayoutVertical();
+        //Canvas.ForceUpdateCanvases();  // *
+        //LayoutRebuilder.ForceRebuildLayoutImmediate(_layoutElement.GetComponent<RectTransform>());
+
+
+        //SetChattingBubbleSize(GetText((int)Texts.TextInBox).preferredWidth);
         StartCoroutine(ForceUpdate());
     }
 

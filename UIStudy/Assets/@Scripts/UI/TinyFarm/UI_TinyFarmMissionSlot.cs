@@ -6,7 +6,16 @@ using UnityEngine.UI;
 
 public class UI_TinyFarmMissionSlot : UI_Base
 {
-
+    private TinyFarmData _data;
+    public TinyFarmData Data
+	{
+        get => _data;
+        private set
+		{
+            _data = value;
+            RefreshUI();
+		}
+	}
     enum GameObjects
     {
         Event
@@ -29,12 +38,16 @@ public class UI_TinyFarmMissionSlot : UI_Base
 
     public void SetInfo(TinyFarmData data)
     {
-        GetText((int)Texts.Title_Text).text = data.EventName;
-        GetText((int)Texts.TextInBox).text = data.EventDetails;
-        GetText((int)Texts.Ex_Text).text = data.Compensation1.ToString();
-        GetText((int)Texts.Gold_Text).text = data.Compensation2.ToString();
+        Data = data;
+    }
 
-        if (data.Event == 0)
+    public void RefreshUI()
+    {
+        GetText((int)Texts.Title_Text).text = Data.EventName;
+        GetText((int)Texts.TextInBox).text = Data.EventDetails;
+        GetText((int)Texts.Ex_Text).text = Data.Compensation1.ToString();
+        GetText((int)Texts.Gold_Text).text = Data.Compensation2.ToString();
+        if (Data.Event == 0)
         {
             GetObject((int)GameObjects.Event).SetActive(false);
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using TMPro;
+using UniRx;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,12 +35,51 @@ public class UI_ChattingRoomScene : UI_Scene
     private void SendBubble(string name, string text, bool input = false)
     {
         var bubble = Managers.Resource.Instantiate(name, _chattingBubbleRoot.transform);
-        bubble.GetOrAddComponent<UI_Chatting>().SetText(text); 
-        if(input)
+        bubble.GetOrAddComponent<UI_Chatting>().SetText(text);
+
+		//for (int i = 0; i < 5; i++)
+		//{
+		//    var a = bubble.transform.GetChild(0).GetComponent<HorizontalLayoutGroup>();
+
+		//    a.SetLayoutHorizontal();
+		//    a.CalculateLayoutInputHorizontal();
+
+		//    LayoutRebuilder.ForceRebuildLayoutImmediate(bubble.transform.GetChild(0).GetComponent<RectTransform>());
+		//    var csf = bubble.GetComponent<ContentSizeFitter>();
+		//    csf.SetLayoutVertical();
+		//    csf.SetLayoutHorizontal();
+
+
+		//    a.SetLayoutHorizontal();
+		//    a.CalculateLayoutInputHorizontal();
+
+		//    LayoutRebuilder.ForceRebuildLayoutImmediate(bubble.GetComponent<RectTransform>());
+		//    LayoutRebuilder.ForceRebuildLayoutImmediate(_chattingBubbleRoot.GetComponent<RectTransform>());
+
+
+		//}
+
+
+		Observable.Timer(new System.TimeSpan(0, 0, 0, 0, 200))
+           .Subscribe(_ =>
+           {
+	           var a = bubble.transform.GetChild(0).GetComponent<HorizontalLayoutGroup>();
+
+	           a.SetLayoutHorizontal();
+	           a.CalculateLayoutInputHorizontal();
+
+	           var csf = bubble.GetComponent<ContentSizeFitter>();
+	           csf.SetLayoutVertical();
+
+	           LayoutRebuilder.ForceRebuildLayoutImmediate(bubble.transform.GetChild(0).GetComponent<RectTransform>());
+	           LayoutRebuilder.ForceRebuildLayoutImmediate(bubble.GetComponent<RectTransform>());
+	           LayoutRebuilder.ForceRebuildLayoutImmediate(_chattingBubbleRoot.GetComponent<RectTransform>());
+           });
+		if (input)
         {
             _inputMessage.text = "";
         }
-        StartCoroutine(ForceUpdate()); //Invoke(nameof(ForceUpdate1), 1.0f);
+        //StartCoroutine(ForceUpdate()); //Invoke(nameof(ForceUpdate1), 1.0f);
     }
 
     void ForceUpdate1()

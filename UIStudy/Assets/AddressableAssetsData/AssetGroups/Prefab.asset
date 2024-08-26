@@ -36,13 +36,13 @@ MonoBehaviour:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5fe926992dac0744facb9d7f42f8ce70
-    m_Address: UI_MissionSlot
+    m_Address: UI_TinyFarmMissionSlot
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 059097beff497be4ea2fa8da36b3f24f
-    m_Address: UI_Mission
+    m_Address: UI_TinyFarmMission
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

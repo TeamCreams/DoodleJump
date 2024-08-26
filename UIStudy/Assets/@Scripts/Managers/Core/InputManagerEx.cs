@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System;
 
@@ -6,6 +6,7 @@ public class InputManagerEx
 {
 	public Action KeyAction = null;
 	public Action<Define.EMouseEvent> MouseAction = null;
+	public Action<float> ZoomGesture = null;
 	bool _mousePressed = false;
 
     public void OnUpdate()
@@ -31,6 +32,7 @@ public class InputManagerEx
                 _mousePressed = false;
 			}
 		}
+
 	}
 }
 

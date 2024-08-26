@@ -4,6 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/@Scenes/DevLoadingScene.unity
+    guid: c477269d130a00244a9ab2ae65f68614
+  - enabled: 1
+    path: Assets/@Scenes/TinyFarmScene.unity
+    guid: ee54dae78911b094091cf4e4e09ba037
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: b0e6879cb2d134a8e8fa24dac91d61db, type: 2}

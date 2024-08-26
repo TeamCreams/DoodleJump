@@ -47,6 +47,8 @@ public class UI_TinyFarmScene : UI_Scene
             _missions.SetActive(false);
         }, Define.EUIEvent.Click);
 
+        this.GetObject((int)GameObjects.Missions).SetActive(false);
+
     }
 
     void StartLoadAssets()
@@ -61,8 +63,10 @@ public class UI_TinyFarmScene : UI_Scene
                 Managers.Data.Init();
                 //Managers.UI.MakeSubItem<UI_TinyFarmMission>("UI_Mission", _root.transform);
 
-                var UI_Mission = Managers.Resource.Instantiate("UI_Mission", _root.transform);
-                UI_Mission.GetOrAddComponent<UI_TinyFarmMission>();
+                var uiTinyFarmMission = Managers.UI.MakeSubItem<UI_TinyFarmMission>(parent: _root.transform);
+
+                //var UI_Mission = Managers.Resource.Instantiate("UI_Mission", _root.transform);
+                //UI_Mission.GetOrAddComponent<UI_TinyFarmMission>();
             }
         });
     }
