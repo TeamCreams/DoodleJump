@@ -53,4 +53,28 @@ namespace Data
             return dict;
         }
     }
+
+    [Serializable]
+    public class EntityData
+    {
+        public int Id;
+        public string Name;
+        public int Speed;
+        public int Hp;
+    }
+
+    [Serializable]
+    public class EntityDataLoader : ILoader<int, EntityData>
+    {
+        public List<EntityData> entityDatas = new List<EntityData>();
+
+        public Dictionary<int, EntityData> MakeDict()
+        {
+            Dictionary<int, EntityData> dict = new Dictionary<int, EntityData>();
+            foreach (EntityData entityData in entityDatas)
+                dict.Add(entityData.Id, entityData);
+
+            return dict;
+        }
+    }
 }

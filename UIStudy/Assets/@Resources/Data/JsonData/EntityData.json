@@ -1,0 +1,28 @@
+{
+  "entityDatas": [
+    {
+      "Id": 1,
+      "Name": "Player",
+      "Speed": 50,
+      "Hp": 100
+    },
+    {
+      "Id": 2,
+      "Name": "Monster1",
+      "Speed": 40,
+      "Hp": 10
+    },
+    {
+      "Id": 3,
+      "Name": "Monster2",
+      "Speed": 50,
+      "Hp": 10
+    },
+    {
+      "Id": 4,
+      "Name": "Monster3",
+      "Speed": 60,
+      "Hp": 10
+    }
+  ]
+}

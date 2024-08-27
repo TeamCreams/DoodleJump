@@ -19,8 +19,9 @@ public class UI_DevLoadingScene : UI_Scene
 
 	enum Buttons
 	{
-		TinyFarmButton
-	}
+		TinyFarmButton,
+        SuberunkerButton
+    }
 
 	protected override void Init()
 	{
@@ -34,17 +35,21 @@ public class UI_DevLoadingScene : UI_Scene
 		GetObject((int)GameObjects.SceneList).SetActive(false);
 
 		GetButton((int)Buttons.TinyFarmButton).gameObject.BindEvent(OnClick_TinyFarmScene, Define.EUIEvent.Click);
+        GetButton((int)Buttons.SuberunkerButton).gameObject.BindEvent(OnClick_SuberunkerScene, Define.EUIEvent.Click);
 
 
-		StartLoadAssets("PreLoad");
+        StartLoadAssets("PreLoad");
 	}
 
 	private void OnClick_TinyFarmScene(PointerEventData eventData)
 	{
 		Managers.Scene.LoadScene(Define.EScene.TinyFarmScene);
 	}
-
-	void StartLoadAssets(string label)
+    private void OnClick_SuberunkerScene(PointerEventData eventData)
+    {
+        Managers.Scene.LoadScene(Define.EScene.SuberunkerScene);
+    }
+    void StartLoadAssets(string label)
 	{
 		Managers.Resource.LoadAllAsync<UnityEngine.Object>(label, (key, count, totalCount) =>
 		{

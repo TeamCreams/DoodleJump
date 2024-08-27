@@ -9,7 +9,8 @@ public static class Define
 		Unknown,
 		DevLoadingScene,
 		TinyFarmScene,
-	}
+        SuberunkerScene,
+    }
 
 	public enum EUIEvent
 	{

@@ -19,8 +19,9 @@ public class DataTransfomer : EditorWindow
 	public static void ParseExcelDatas()
 	{
 		ParseExcelDataToJson<TinyFarmDataLoader, TinyFarmData>("TinyFarmEvent");
+        ParseExcelDataToJson<EntityDataLoader, EntityData>("EntityData");
 
-		Debug.Log("Complete");
+        Debug.Log("Complete");
 	}
 
 	#region Helpers
