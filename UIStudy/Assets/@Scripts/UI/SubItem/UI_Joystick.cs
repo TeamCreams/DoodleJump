@@ -22,39 +22,41 @@ public class UI_Joystick : UI_Base
     {
         base.Init();
         BindImages(typeof(Images));
-        GetImage((int)Images.Lever).gameObject.BindEvent(OnClick_ClickEvent, Define.EUIEvent.Click);
         _rectTransform = GetImage((int)Images.Ground).rectTransform;
 
         this.Get<Image>((int)Images.Lever).gameObject.BindEvent((evt) =>
         {
             Debug.Log("BeginDrag");
+            JoystickMove();
         }, Define.EUIEvent.BeginDrag);
 
         this.Get<Image>((int)Images.Lever).gameObject.BindEvent((evt) =>
         {
-            Debug.Log("Drag");
+            //Debug.Log("Drag");
+            JoystickMove();
         }, Define.EUIEvent.Drag);
 
         this.Get<Image>((int)Images.Lever).gameObject.BindEvent((evt) =>
         {
             Debug.Log("EndDrag");
+            GetImage((int)Images.Lever).rectTransform.anchoredPosition = Vector2.zero;
+            Managers.Game.Amount = Vector2.zero;
         }, Define.EUIEvent.EndDrag);
     }
 
-
-    public void Update()
+    public void JoystickMove()
     {
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle
      (_rectTransform, Input.mousePosition, null, out Vector2 localPoint))
         {
-            //GetImage((int)Images.Lever).rectTransform.anchoredPosition = localPoint;
-
             var clampedDir = localPoint.magnitude < leverRange ?
            localPoint : localPoint.normalized * leverRange;
 
             GetImage((int)Images.Lever).rectTransform.anchoredPosition = clampedDir;
-        }
 
+            Managers.Game.Amount = localPoint.normalized;
+            //Debug.Log(Managers.Game.Amount);
+        }
     }
 
 }

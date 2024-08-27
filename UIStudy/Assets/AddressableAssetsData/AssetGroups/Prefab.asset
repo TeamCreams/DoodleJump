@@ -48,7 +48,7 @@ MonoBehaviour:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e533f7e9e23f458448333b0b2c9205c1
-    m_Address: Player
+    m_Address: Entity
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

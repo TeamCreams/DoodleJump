@@ -1,5 +1,5 @@
 Id,Name,Speed,Hp
-1,Player,50,100
-2,Monster1,40,10
-3,Monster2,50,10
-4,Monster3,60,10
+1,Player,100,100
+2,Monster1,60,10
+3,Monster2,70,10
+4,Monster3,80,10

@@ -17,7 +17,6 @@ public class UI_TinyFarmMission : UI_Base
         BindObjects(typeof(GameObjects));
 
         _root = GetObject((int)GameObjects.MissionsRoot);
-        int count = Managers.Data.TinyFarmDic.Count;
 
         foreach(var tinyFarmMissionData in Managers.Data.TinyFarmDic)
         {
@@ -32,8 +31,6 @@ public class UI_TinyFarmMission : UI_Base
         //    //slot2.SetInfo(Managers.Data.TinyFarmDic[i]);
         //    var slot3 = Managers.Resource.Instantiate("UI_MissionSlot", _root.transform);
         //    slot3.GetOrAddComponent<UI_TinyFarmMissionSlot>().SetInfo(Managers.Data.TinyFarmDic[i]);
-            
         //}
     }
-
 }

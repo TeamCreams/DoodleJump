@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -73,19 +73,24 @@ public class PoolManager
 	public GameObject Pop(GameObject prefab)
 	{
 		if (_pools.ContainsKey(prefab.name) == false)
-			CreatePool(prefab);
+            CreatePool(prefab);
 
-		return _pools[prefab.name].Pop();
+        return _pools[prefab.name].Pop();
 	}
 
 	public bool Push(GameObject go)
 	{
 		if (_pools.ContainsKey(go.name) == false)
-			return false;
+            return false;
 
-		_pools[go.name].Push(go);
+        _pools[go.name].Push(go);
 		return true;
 	}
+
+	public int Count()
+	{
+		return _pools.Count;
+    }
 
 	public void Clear()
 	{
@@ -95,6 +100,6 @@ public class PoolManager
 	private void CreatePool(GameObject original)
 	{
 		Pool pool = new Pool(original);
-		_pools.Add(original.name, pool);
-	}
+        _pools.Add(original.name, pool);
+    }
 }

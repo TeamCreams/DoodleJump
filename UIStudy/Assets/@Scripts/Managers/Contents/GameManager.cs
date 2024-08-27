@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -29,11 +29,25 @@ public class GameManager
 			OnJoystickStateChanged?.Invoke(_joystickState);
 		}
 	}
-	#endregion
 
-	#region Action
-	public event Action<(Vector2, float)> OnMoveDirChanged;
+    private Vector2 _amount;
+    public Vector2 Amount 
+    {
+        get { return _amount; }
+        set
+        {
+            _amount = value;
+            Joystickstate?.Invoke(value);
+        }
+    }
+
+
+    #endregion
+
+    #region Action
+    public event Action<(Vector2, float)> OnMoveDirChanged;
 	public event Action<Define.EJoystickState> OnJoystickStateChanged;
+    public event Action<Vector2> Joystickstate;
     #endregion
 
     private List<ItemData> items = new List<ItemData>()
@@ -84,12 +98,12 @@ public class ItemData
 	public int Level { get; set; }
 }
 
-[System.Serializable] //¾ê°¡ ÀÖ¾î¾ß Á÷·ÄÈ­ °¡´É
+[System.Serializable] //ì–˜ê°€ ìˆì–´ì•¼ ì§ë ¬í™” ê°€ëŠ¥
 public class MessageData
 {
-    public string id; // get, setµµ ÀÖÀ¸¸é ¾È µÊ
+    public string id; // get, setë„ ìˆìœ¼ë©´ ì•ˆ ë¨
     public string name;
-    public string time; // ¾ÆÁ÷ ¾È ¾µ µí.
+    public string time; // ì•„ì§ ì•ˆ ì“¸ ë“¯.
     public string message;
 }
 
