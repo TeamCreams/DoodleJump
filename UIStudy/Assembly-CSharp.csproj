@@ -67,6 +67,7 @@
     <Compile Include="Assets\@Scripts\UI\SubItem\UI_Joystick.cs" />
     <Compile Include="Assets\@Scripts\UI\SubItem\UI_TopBar.cs" />
     <Compile Include="Assets\@Scripts\Managers\Core\UIManager.cs" />
+    <Compile Include="Assets\@Scripts\UI\SubItem\UI_SuberunkerButtons.cs" />
     <Compile Include="Assets\@Scripts\Managers\Core\SoundManager.cs" />
     <Compile Include="Assets\@Scripts\Utils\Extension.cs" />
     <Compile Include="Assets\@Scripts\Managers\Contents\MessageManager.cs" />
