@@ -19,6 +19,17 @@ public class GameManager
 		}
 	}
 
+    // SuberunkerScene Player Life
+    private int _life;
+    public int Life
+    {
+        get { return _life; }
+        set
+        {
+            _life = value;
+        }
+    }
+
 	private Define.EJoystickState _joystickState;
 	public Define.EJoystickState JoystickState
 	{

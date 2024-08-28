@@ -60,7 +60,7 @@ namespace Data
         public int Id;
         public string Name;
         public int Speed;
-        public int Hp;
+        public int Life;
     }
 
     [Serializable]

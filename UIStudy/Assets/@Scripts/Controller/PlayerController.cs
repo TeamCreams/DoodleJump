@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private Rigidbody2D _rigid;
-    private float _hp = 0;
+    private float _life = 0;
     private float _speed = 0;
 
     void Update()
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         _rigid.constraints = RigidbodyConstraints2D.FreezePositionY;
         _rigid.freezeRotation = true;
 
-        _hp = Data.Hp;
+        _life = Data.Life;
         _speed = Data.Speed;
     }
 
