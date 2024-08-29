@@ -23,10 +23,10 @@ internal class Pool
 		}
 	}
 
-	public Pool(GameObject prefab)
+	public Pool(GameObject prefab, int defaultCapacity = 10)
 	{
 		_prefab = prefab;
-		_pool = new ObjectPool<GameObject>(OnCreate, OnGet, OnRelease, OnDestroy);
+		_pool = new ObjectPool<GameObject>(OnCreate, OnGet, OnRelease, OnDestroy, defaultCapacity: defaultCapacity);
 	}
 
 	public void Push(GameObject go)
@@ -97,9 +97,9 @@ public class PoolManager
 		_pools.Clear();
 	}
 
-	private void CreatePool(GameObject original)
+	public void CreatePool(GameObject original, int defaultCapacity = 10)
 	{
-		Pool pool = new Pool(original);
+		Pool pool = new Pool(original, defaultCapacity);
         _pools.Add(original.name, pool);
     }
 }

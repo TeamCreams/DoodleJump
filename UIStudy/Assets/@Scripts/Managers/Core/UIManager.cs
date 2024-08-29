@@ -46,6 +46,27 @@ public class UIManager
         return rv;
     }
 
+    public T ShowUIBase<T>(string name = null) where T : UI_Base
+	{
+        if (string.IsNullOrEmpty(name))
+        {
+            name = typeof(T).ToString();
+        }
+        //string resourcePath = $"UI/Scene/{name}";
+
+
+        var go = Managers.Resource.Instantiate(name, Root.transform);
+        if (go == null)
+        {
+            Debug.Log($"resource not found [{name}]");
+        }
+
+        var rv = go.GetOrAddComponent<T>();
+
+        return rv;
+    }
+
+
 
     public T ShowPopupUI<T>(string name = null) where T : UI_Popup
     {

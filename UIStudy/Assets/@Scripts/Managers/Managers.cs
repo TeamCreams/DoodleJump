@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
@@ -7,15 +7,17 @@ public class Managers : MonoBehaviour
 {
 	private static Managers s_instance;
 	private static Managers Instance { get { Init(); return s_instance; } }
-    #region Contents
-    private GameManager _game = new GameManager();
+	#region Contents
+	private GameManager _game = new GameManager();
 
-    private MessageManager _message = new MessageManager();
+	private MessageManager _message = new MessageManager();
 	private DataManager _data = new DataManager();
+	private ObjectManager _object = new ObjectManager();
 
-    public static GameManager Game { get { return Instance?._game; } }
+	public static GameManager Game { get { return Instance?._game; } }
 	public static MessageManager Message { get { return Instance?._message; } }
 	public static DataManager Data { get { return Instance?._data; } }
+	public static ObjectManager Object {  get { return Instance?._object; } }
     #endregion
 
     #region Core
@@ -58,4 +60,17 @@ public class Managers : MonoBehaviour
 		Input.OnUpdate();
     }
 
+	public static void Clear()
+	{
+		Pool.Clear();
+	}
 }
+
+
+
+// 1. 애니메이션
+// 2. 게임 이쁘게
+//    - 포트폴리오 용으로 만들거라서
+// 3. 스탯, 스킬하는거 붙여서  (액티브, 패시브)
+// 4. 캐릭터 종류
+// 리소스 

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 public class UI_TopBar : UI_Base
@@ -18,43 +19,37 @@ public class UI_TopBar : UI_Base
     }
 
     private int _time = 0;
-
+    System.IDisposable _lifeTimer; 
     protected override void Init()
     {
         base.Init();
         BindObjects(typeof(GameObjects));
         BindTexts(typeof(Texts));
-        StartCoroutine(UpdateLifeTime());
         GetText((int)Texts.GameOver_Text).enabled = false;
 
+        Managers.Game.OnChangedLife -= OnChangedLife;
+        Managers.Game.OnChangedLife += OnChangedLife;
+
+        _lifeTimer = Observable.Interval(new System.TimeSpan(0, 0, 1))
+            .Subscribe(_ =>
+            {
+                _time++;
+                int minutes = Mathf.FloorToInt(_time / 60);
+                float seconds = _time % 60;
+                GetText((int)Texts.Time_Text).text = string.Format($"{minutes}분 {seconds}초");
+            }).AddTo(this.gameObject);
     }
-    private void Update()
-    {
+
+    void OnChangedLife(int life)
+	{
+        if(life < 0)
+		{
+            _lifeTimer?.Dispose();
+        }
         UpdateLifeImage();
     }
 
-    IEnumerator UpdateLifeTime()
-    {
-        _time++;
-        int minutes = Mathf.FloorToInt(_time / 60);
-        float seconds = _time % 60;
-        GetText((int)Texts.Time_Text).text = string.Format($"{minutes}분 {seconds}초");
-        yield return new WaitForSeconds(1);
-        if(0 < Managers.Game.Life)
-        {
-            StartCoroutine(UpdateLifeTime());
-        }
-    }
-    /*private void UpdateLifeTime()
-    {
-        float deltaTime = Time.time;
-
-        int minutes = Mathf.FloorToInt(deltaTime / 60);
-        float seconds = deltaTime % 60;
-
-        GetText((int)Texts.Time_Text).text = string.Format($"{minutes}분 {seconds:F2}초");
-    }*/
-    private void UpdateLifeImage()
+	private void UpdateLifeImage()
     {
         int life = Managers.Game.Life;
 

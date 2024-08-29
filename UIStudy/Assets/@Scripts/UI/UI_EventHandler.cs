@@ -29,7 +29,7 @@ public class UI_EventHandler : MonoBehaviour, IPointerDownHandler, IPointerClick
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (OnDragHandler != null)
+        if (OnBeginDragHandler != null)
         {
             OnBeginDragHandler.Invoke(eventData);
         }
@@ -43,7 +43,7 @@ public class UI_EventHandler : MonoBehaviour, IPointerDownHandler, IPointerClick
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (OnDragHandler != null)
+        if (OnEndDragHandler != null)
         {
             OnEndDragHandler.Invoke(eventData);
         }

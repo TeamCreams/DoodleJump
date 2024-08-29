@@ -9,6 +9,7 @@ public class UI_Joystick : UI_Base
 {
     enum Images
     {
+        BlockingImage,
         Ground,
         Lever
     }
@@ -17,31 +18,46 @@ public class UI_Joystick : UI_Base
     private float leverRange = 65f;
 
     private RectTransform _rectTransform = null;
-    
+    Vector2 _touchPosition = Vector2.zero;
+
     protected override void Init()
     {
         base.Init();
         BindImages(typeof(Images));
-        _rectTransform = GetImage((int)Images.Ground).rectTransform;
+        //_rectTransform = GetImage((int)Images.Ground).rectTransform;
 
-        this.Get<Image>((int)Images.Lever).gameObject.BindEvent((evt) =>
-        {
-            Debug.Log("BeginDrag");
-            JoystickMove();
-        }, Define.EUIEvent.BeginDrag);
+        Debug.Log(this.GetImage((int)Images.BlockingImage));
 
-        this.Get<Image>((int)Images.Lever).gameObject.BindEvent((evt) =>
-        {
-            //Debug.Log("Drag");
-            JoystickMove();
-        }, Define.EUIEvent.Drag);
+        this.GetImage((int)Images.BlockingImage).gameObject.BindEvent(OnBeginDrag, Define.EUIEvent.PointerDown);
+        this.Get<Image>((int)Images.BlockingImage).gameObject.BindEvent(OnDrag, Define.EUIEvent.Drag);
+        this.Get<Image>((int)Images.BlockingImage).gameObject.BindEvent(OnEndDrag, Define.EUIEvent.EndDrag);
+    }
 
-        this.Get<Image>((int)Images.Lever).gameObject.BindEvent((evt) =>
-        {
-            Debug.Log("EndDrag");
-            GetImage((int)Images.Lever).rectTransform.anchoredPosition = Vector2.zero;
-            Managers.Game.Amount = Vector2.zero;
-        }, Define.EUIEvent.EndDrag);
+    void OnBeginDrag(PointerEventData eventData)
+	{
+        _touchPosition = eventData.position;
+        GetImage((int)Images.Ground).gameObject.transform.position = _touchPosition;
+        Managers.Game.JoystickState = Define.EJoystickState.PointerDown;
+    }
+    void OnDrag(PointerEventData eventData)
+    {
+        Vector2 targetPosition = eventData.position;
+
+        Vector2 moveDir = targetPosition - _touchPosition;
+
+        if(leverRange <= moveDir.magnitude)
+		{
+            moveDir = moveDir.normalized * leverRange;
+        }
+        GetImage((int)Images.Lever).transform.position = _touchPosition + moveDir;
+
+        Managers.Game.JoystickAmount = moveDir.normalized * (moveDir.magnitude / leverRange);
+        Managers.Game.JoystickState = Define.EJoystickState.Drag;
+    }
+    void OnEndDrag(PointerEventData eventData)
+    {
+        GetImage((int)Images.Lever).gameObject.transform.position = _touchPosition;
+        Managers.Game.JoystickState = Define.EJoystickState.PointerUp;
     }
 
     public void JoystickMove()
@@ -54,7 +70,7 @@ public class UI_Joystick : UI_Base
 
             GetImage((int)Images.Lever).rectTransform.anchoredPosition = clampedDir;
 
-            Managers.Game.Amount = localPoint.normalized;
+            Managers.Game.JoystickAmount = localPoint.normalized;
             //Debug.Log(Managers.Game.Amount);
         }
     }

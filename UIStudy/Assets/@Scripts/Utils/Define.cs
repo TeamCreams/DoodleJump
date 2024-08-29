@@ -41,4 +41,21 @@ public static class Define
 		Press,
 		Click
 	}
+
+	public enum EPlayerState
+	{
+		Move,
+		Idle,
+	}
+
+	public class Constants
+	{
+		public const int PLAYER_ID = 1;
+	}
+
+	public class HardCoding
+	{
+		public static readonly Vector2 PlayerStartPos = new Vector2(0, -120);
+	}
+
 }

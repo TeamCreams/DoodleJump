@@ -26,11 +26,16 @@ public class GameManager
         get { return _life; }
         set
         {
-            _life = value;
+            if (_life != value)
+            {
+                _life = value;
+                OnChangedLife?.Invoke(value);
+            }
         }
     }
+    public Action<int> OnChangedLife;
 
-	private Define.EJoystickState _joystickState;
+    private Define.EJoystickState _joystickState;
 	public Define.EJoystickState JoystickState
 	{
 		get { return _joystickState; }
@@ -41,13 +46,13 @@ public class GameManager
 		}
 	}
 
-    private Vector2 _amount;
-    public Vector2 Amount 
+    private Vector2 _joystickAmount;
+    public Vector2 JoystickAmount 
     {
-        get { return _amount; }
+        get { return _joystickAmount; }
         set
         {
-            _amount = value;
+            _joystickAmount = value;
             Joystickstate?.Invoke(value);
         }
     }

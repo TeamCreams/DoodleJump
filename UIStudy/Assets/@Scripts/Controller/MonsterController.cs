@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MonsterController : MonoBehaviour
+public class MonsterController : ObjectBase
 {
-    
     private const int CORRECTION_VALUE = 10;
     private EntityData _data;
     public EntityData Data
@@ -15,7 +14,6 @@ public class MonsterController : MonoBehaviour
         private set
         {
             _data = value;
-            MyAwake();
         }
     }
     private Rigidbody2D _rigid;
@@ -25,7 +23,28 @@ public class MonsterController : MonoBehaviour
     private SpriteRenderer _image;
     [SerializeField]
     private int _id = 0;
-    void Update()
+
+	public override bool Init()
+	{
+		if (false == base.Init())
+		{
+            return false;
+		}
+
+        _rigid = this.gameObject.GetOrAddComponent<Rigidbody2D>();
+        _collider = this.gameObject.GetOrAddComponent<BoxCollider2D>();
+        _collider.size = new Vector2(1.5f, 2f);
+        _image = this.gameObject.GetOrAddComponent<SpriteRenderer>();
+        _rigid.constraints = RigidbodyConstraints2D.FreezePositionX;
+        _collider.isTrigger = true;
+
+        OnTriggerEnter2D_Event -= Attack;
+        OnTriggerEnter2D_Event += Attack;
+
+        return true;
+	}
+
+	void Update()
     {
         Moving();
     }
@@ -33,20 +52,12 @@ public class MonsterController : MonoBehaviour
     public void SetInfo(EntityData data)
     {
         Data = data;
-    }
 
-    public void MyAwake()
-    {
-        _rigid = this.gameObject.GetOrAddComponent<Rigidbody2D>();
-        _collider = this.gameObject.GetOrAddComponent<BoxCollider2D>();
-        _collider.size = new Vector2(1.5f, 2f);
-        _image = this.gameObject.GetOrAddComponent<SpriteRenderer>();
         _image.sprite = Managers.Resource.Load<Sprite>("Sprite_Icon_Weapon_Stone_02.sprite");
-        _rigid.constraints = RigidbodyConstraints2D.FreezePositionX;
-        _collider.isTrigger = true;
         _speed = Data.Speed;
         _id = Data.Id;
     }
+
 
     public void Moving()
     {
@@ -59,9 +70,11 @@ public class MonsterController : MonoBehaviour
             Managers.Pool.Push(this.gameObject);
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+
+    void Attack(Collider2D collision)
     {
-        if(collision.gameObject.GetComponent<PlayerController>() == true)
+        if (collision.gameObject.GetComponent<PlayerController>() == true)
         {
             collision.gameObject.GetComponent<PlayerController>().Data.Life -= 1;
             //Debug.Log(other.gameObject.GetOrAddComponent<PlayerController>().Data.Life);
