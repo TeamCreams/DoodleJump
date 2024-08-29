@@ -3,10 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using static Define;
 public class MonsterController : ObjectBase
 {
     private const int CORRECTION_VALUE = 10;
+
+    public delegate void CustomAction(Component sender = null, object param = null);
+
+
     private EntityData _data;
     public EntityData Data
     {
@@ -71,14 +75,11 @@ public class MonsterController : ObjectBase
         }
     }
 
-
-    void Attack(Collider2D collision)
+    private void Attack(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<PlayerController>() == true)
         {
-            collision.gameObject.GetComponent<PlayerController>().Data.Life -= 1;
-            //Debug.Log(other.gameObject.GetOrAddComponent<PlayerController>().Data.Life);
-            Managers.Game.Life = collision.gameObject.GetComponent<PlayerController>().Data.Life;
+            Managers.Event.TriggerEvent(EEventType.Attacked_Player);
             Managers.Pool.Push(this.gameObject);
         }
     }

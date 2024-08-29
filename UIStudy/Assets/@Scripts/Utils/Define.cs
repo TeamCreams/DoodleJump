@@ -48,6 +48,11 @@ public static class Define
 		Idle,
 	}
 
+	public enum EEventType
+	{
+		Attacked_Player,
+	}
+
 	public class Constants
 	{
 		public const int PLAYER_ID = 1;

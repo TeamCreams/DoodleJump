@@ -27,6 +27,7 @@ public class Managers : MonoBehaviour
 	private SoundManager _sound = new SoundManager();
 	private InputManagerEx _input = new InputManagerEx();
 	private UIManager _ui = new UIManager(); 
+	private EventManager _event = new EventManager();
 
 	public static PoolManager Pool { get { return Instance?._pool; } }
 	public static ResourceManager Resource { get { return Instance?._resource; } }
@@ -34,6 +35,7 @@ public class Managers : MonoBehaviour
 	public static SoundManager Sound { get { return Instance?._sound; } }
 	public static InputManagerEx Input { get { return Instance?._input; } }
 	public static UIManager UI { get { return Instance?._ui; } } 
+	public static EventManager Event { get {  return Instance?._event; } }
     #endregion
 
 

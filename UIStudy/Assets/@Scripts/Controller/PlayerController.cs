@@ -51,6 +51,8 @@ public class PlayerController : ObjectBase
 
         _spriteRenderer = this.GetComponent<SpriteRenderer>();
 
+        Managers.Event.AddEvent(EEventType.Attacked_Player, DamagedHp);
+
         this.OnChangedState -= SetState;
         this.OnChangedState += SetState;
 
@@ -106,6 +108,12 @@ public class PlayerController : ObjectBase
             this.State = EPlayerState.Move;
 		}
 	}
+
+    private void DamagedHp(Component sender, object param)
+    {
+        Data.Life -= 1;
+        Managers.Game.Life = Data.Life;
+    }
 
     private void Update_Move()
     {
