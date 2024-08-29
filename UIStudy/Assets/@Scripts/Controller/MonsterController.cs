@@ -79,7 +79,7 @@ public class MonsterController : ObjectBase
     {
         if (collision.gameObject.GetComponent<PlayerController>() == true)
         {
-            Managers.Event.TriggerEvent(EEventType.Attacked_Player);
+            Managers.Event.TriggerEvent(EEventType.Attacked_Player, this);
             Managers.Pool.Push(this.gameObject);
         }
     }

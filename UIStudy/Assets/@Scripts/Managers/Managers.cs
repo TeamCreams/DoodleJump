@@ -54,6 +54,8 @@ public class Managers : MonoBehaviour
 
 			// 초기화
 			s_instance = go.GetComponent<Managers>();
+
+			Managers.Event.Init();
 		}
 	}
 
@@ -65,6 +67,7 @@ public class Managers : MonoBehaviour
 	public static void Clear()
 	{
 		Pool.Clear();
+		Event.Clear();
 	}
 }
 
