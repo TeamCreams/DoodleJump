@@ -6,10 +6,7 @@ using UnityEngine.UI;
 using static Define;
 public class MonsterController : ObjectBase
 {
-    private const int CORRECTION_VALUE = 10;
-
-    public delegate void CustomAction(Component sender = null, object param = null);
-
+    private const int CORRECTION_VALUE = 5;
 
     private EntityData _data;
     public EntityData Data
@@ -20,7 +17,6 @@ public class MonsterController : ObjectBase
             _data = value;
         }
     }
-    private Rigidbody2D _rigid;
     private BoxCollider2D _collider;
     [SerializeField]
     private float _speed = 0;
@@ -35,15 +31,13 @@ public class MonsterController : ObjectBase
             return false;
 		}
 
-        _rigid = this.gameObject.GetOrAddComponent<Rigidbody2D>();
         _collider = this.gameObject.GetOrAddComponent<BoxCollider2D>();
-        _collider.size = new Vector2(1.5f, 2f);
+        _collider.size = new Vector2(2f, 1.45f);
         _image = this.gameObject.GetOrAddComponent<SpriteRenderer>();
-        _rigid.constraints = RigidbodyConstraints2D.FreezePositionX;
         _collider.isTrigger = true;
 
-        OnTriggerEnter2D_Event -= Attack;
-        OnTriggerEnter2D_Event += Attack;
+       // OnTriggerEnter2D_Event -= Attack;
+        //OnTriggerEnter2D_Event += Attack;
 
         return true;
 	}
@@ -62,25 +56,24 @@ public class MonsterController : ObjectBase
         _id = Data.Id;
     }
 
-
     public void Moving()
     {
-        //Vector2 move = Vector2.down * _speed * CORRECTION_VALUE * Time.deltaTime;
-        //_rigid.MovePosition(_rigid.position + move);
-        _rigid.AddForce(Vector2.down * _speed * Time.deltaTime, ForceMode2D.Impulse);
+        transform.Translate(Vector2.down * _speed * CORRECTION_VALUE * Time.deltaTime);
         // 일정 높이가 되면 다시 Push
         if (this.transform.position.y < -130)
         {
             Managers.Pool.Push(this.gameObject);
         }
     }
-
+    /*
     private void Attack(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<PlayerController>() == true)
         {
+            Debug.Log("is Collision");
             Managers.Event.TriggerEvent(EEventType.Attacked_Player, this);
             Managers.Pool.Push(this.gameObject);
         }
     }
+    */
 }

@@ -22,7 +22,7 @@ public class SuberunkerScene : BaseScene
 
         Managers.UI.ShowSceneUI<UI_SuberunkerScene>();
         _joyStick = Managers.UI.ShowUIBase<UI_Joystick>();
-        Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("Entity"), 100);
+        Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("Entity"), 10);
         Managers.Object.Spawn<PlayerController>(HardCoding.PlayerStartPos);
         //Spawner라는 객체를 따로만들고
         StartCoroutine(GenerateMonster());

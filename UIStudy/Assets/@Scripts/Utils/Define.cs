@@ -44,16 +44,20 @@ public static class Define
 
 	public enum EPlayerState
 	{
-		Move,
-		Idle,
-	}
+        Ready = -2,
+        Relax = -1,
+        Idle = 0,
+        Walk = 1,
+        Run = 2,
+        Jump = 3
+    }
 
 	public enum EEventType
 	{
 		Attacked_Player,
 	}
 
-	public class Constants
+    public class Constants
 	{
 		public const int PLAYER_ID = 1;
 	}
@@ -61,6 +65,8 @@ public static class Define
 	public class HardCoding
 	{
 		public static readonly Vector2 PlayerStartPos = new Vector2(0, -120);
-	}
+        public static readonly Vector2 PlayerTeleportPos_Left = new Vector2(305, -120);
+        public static readonly Vector2 PlayerTeleportPos_Right = new Vector2(-305, -120);
+    }
 
 }

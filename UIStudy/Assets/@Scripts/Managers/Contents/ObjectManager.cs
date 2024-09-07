@@ -35,7 +35,7 @@ public class ObjectManager
         }
         else if(typeof(T) == typeof(PlayerController))
 		{
-            GameObject player = Managers.Resource.Instantiate("Entity", pooling: true);
+            GameObject player = Managers.Resource.Instantiate("Player", pooling: true);
             player.name = "player";
             player.GetOrAddComponent<PlayerController>().SetInfo(Define.Constants.PLAYER_ID);
             Managers.Game.Life = player.GetOrAddComponent<PlayerController>().Data.Life;

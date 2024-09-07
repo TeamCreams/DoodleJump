@@ -17,11 +17,12 @@ public class PlayerController : ObjectBase
         }
     }
 
-    private Rigidbody2D _rigid;
-    private float _life = 0;
     private float _speed = 0;
     [SerializeField]
     EPlayerState _state = EPlayerState.Idle;
+    private RaycastHit2D _hitStoneMonster;
+    private Animator _animator;
+
     public EPlayerState State
 	{
         get => _state;
@@ -36,20 +37,12 @@ public class PlayerController : ObjectBase
 	}
     public Action<EPlayerState, EPlayerState> OnChangedState;
 
-    private SpriteRenderer _spriteRenderer = null;
-
     public override bool Init()
 	{
 		if(false == base.Init())
 		{
             return false;
 		}
-
-        _rigid = this.gameObject.GetComponent<Rigidbody2D>();
-        _rigid.constraints = RigidbodyConstraints2D.FreezePositionY;
-        _rigid.freezeRotation = true;
-
-        _spriteRenderer = this.GetComponent<SpriteRenderer>();
 
         Managers.Event.AddEvent(EEventType.Attacked_Player, OnEvent_DamagedHp);
 
@@ -62,13 +55,18 @@ public class PlayerController : ObjectBase
 	void Update()
     {
         Update_Default();
-        switch(_state)
+        CheckAttacked();
+        _animator.SetInteger("State", (int)this.State);
+        switch (_state)
 		{
             case EPlayerState.Idle:
                 Update_Idle();
                 break;
-            case EPlayerState.Move:
-                Update_Move();
+            case EPlayerState.Walk:
+                Update_Walk();
+                break;
+            case EPlayerState.Run:
+                Update_Run();
                 break;
         }
     }
@@ -76,10 +74,9 @@ public class PlayerController : ObjectBase
 	public override void SetInfo(int templateId)
 	{
 		base.SetInfo(templateId);
+        _animator = GetComponentInChildren<Animator>();
         Data = Managers.Data.EntityDic[templateId];
 
-
-        _life = Data.Life;
         _speed = Data.Speed;
     }
 
@@ -88,16 +85,27 @@ public class PlayerController : ObjectBase
 
 	}
 
+    public void CheckAttacked()
+    {
+        _hitStoneMonster 
+            = Physics2D.Raycast(transform.position, Vector2.up, 0.5f, LayerMask.GetMask("StoneMonster"));
+        if(_hitStoneMonster.collider != null)
+        {
+            Managers.Pool.Push(_hitStoneMonster.collider.gameObject);
+            Managers.Event.TriggerEvent(EEventType.Attacked_Player, this);
+        }
+    }
+
     private void Update_Default()
 	{
 
         if (this.transform.position.x < -310)
         {
-            transform.position = new Vector2(305, this.transform.position.y);
+            transform.position = Define.HardCoding.PlayerTeleportPos_Left;
         }
         if (310 < this.transform.position.x)
         {
-            transform.position = new Vector2(-305, this.transform.position.y);
+            transform.position = Define.HardCoding.PlayerTeleportPos_Right;
         }
     }
 
@@ -105,8 +113,8 @@ public class PlayerController : ObjectBase
 	{
         if(Managers.Game.JoystickState == EJoystickState.PointerDown)
 		{
-            this.State = EPlayerState.Move;
-		}
+            this.State = EPlayerState.Walk;
+        }
 	}
 
     private void OnEvent_DamagedHp(Component sender, object param)
@@ -115,22 +123,55 @@ public class PlayerController : ObjectBase
         Managers.Game.Life = Data.Life;
     }
 
-    private void Update_Move()
+    private void Update_Walk()
     {
-        if(Managers.Game.JoystickState == Define.EJoystickState.PointerUp)
+        if (Managers.Game.JoystickState == Define.EJoystickState.PointerUp)
+        {
+            this.State = EPlayerState.Idle;
+        }
+        
+        this.transform.Translate(Managers.Game.JoystickAmount.x * _speed * Time.deltaTime, 0, 0);
+        
+        if (Managers.Game.JoystickAmount.x < 0)
+        {
+            this.transform.localScale
+                 = new Vector3(-Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
+        }
+        else if (0 < Managers.Game.JoystickAmount.x)
+        {
+            this.transform.localScale
+                    = new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
+        }
+        
+        if (0.5f <= Managers.Game.JoystickAmount.sqrMagnitude)
+        {
+            this.State = EPlayerState.Run;
+        }
+    }
+
+    private void Update_Run() 
+    {
+        if (Managers.Game.JoystickState == Define.EJoystickState.PointerUp)
         {
             this.State = EPlayerState.Idle;
         }
 
-        _rigid.AddForce(Managers.Game.JoystickAmount * _speed * Time.deltaTime, ForceMode2D.Impulse);
+        this.transform.Translate(Managers.Game.JoystickAmount.x * _speed * Time.deltaTime, 0, 0);
+
         if (Managers.Game.JoystickAmount.x < 0)
         {
-            _spriteRenderer.flipX = true;
+            this.transform.localScale
+                 = new Vector3(-Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
         }
         else if (0 < Managers.Game.JoystickAmount.x)
         {
-            _spriteRenderer.flipX = false;
+            this.transform.localScale
+                    = new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
         }
 
+        if (Managers.Game.JoystickAmount.sqrMagnitude < 0.5f)
+        {
+            this.State = EPlayerState.Walk;
+        }
     }
 }

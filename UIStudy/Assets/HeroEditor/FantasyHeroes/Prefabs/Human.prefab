@@ -303,7 +303,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4251510173260884
 Transform:
   m_ObjectHideFlags: 0
@@ -564,8 +564,7 @@ MonoBehaviour:
   - {fileID: 212294528675387754}
   DefaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   EyesPaintMaterial: {fileID: 2100000, guid: 76c39f1b79f94a6093d87b9b386ee91c, type: 2}
-  EquipmentPaintMaterial: {fileID: 2100000, guid: 422f5f2ea71549499f154becb259725a,
-    type: 2}
+  EquipmentPaintMaterial: {fileID: 2100000, guid: 422f5f2ea71549499f154becb259725a, type: 2}
   Animator: {fileID: 95570845223693640}
   WeaponType: 0
   HideEars: 0
@@ -3701,6 +3700,7 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 200
+  m_SortAtRoot: 0
 --- !u!1 &1561872377782110
 GameObject:
   m_ObjectHideFlags: 0
@@ -3717,7 +3717,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4838601623924276
 Transform:
   m_ObjectHideFlags: 0
@@ -5348,7 +5348,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 265
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7608,7 +7608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4057017056002823752
 Transform:
   m_ObjectHideFlags: 0
@@ -8015,6 +8015,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 4056839180877742088}
     m_Modifications:
     - target: {fileID: 1477060963716358, guid: 1f94dbec0c84cc94e9d9fc9b93e7dc44, type: 3}
@@ -8066,16 +8067,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f94dbec0c84cc94e9d9fc9b93e7dc44, type: 3}
 --- !u!198 &1220153771629482704 stripped
 ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 198416100499550440, guid: 1f94dbec0c84cc94e9d9fc9b93e7dc44,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 198416100499550440, guid: 1f94dbec0c84cc94e9d9fc9b93e7dc44, type: 3}
   m_PrefabInstance: {fileID: 1310038419336487480}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1314489140424727686 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4558475463343806, guid: 1f94dbec0c84cc94e9d9fc9b93e7dc44,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 4558475463343806, guid: 1f94dbec0c84cc94e9d9fc9b93e7dc44, type: 3}
   m_PrefabInstance: {fileID: 1310038419336487480}
   m_PrefabAsset: {fileID: 0}
