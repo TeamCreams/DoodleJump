@@ -8,8 +8,8 @@ public class MonsterController : ObjectBase
 {
     private const int CORRECTION_VALUE = 5;
 
-    private EntityData _data;
-    public EntityData Data
+    private EnemyData _data;
+    public EnemyData Data
     {
         get => _data;
         private set
@@ -47,7 +47,7 @@ public class MonsterController : ObjectBase
         Moving();
     }
 
-    public void SetInfo(EntityData data)
+    public void SetInfo(EnemyData data)
     {
         Data = data;
 

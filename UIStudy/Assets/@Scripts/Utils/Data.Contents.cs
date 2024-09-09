@@ -55,7 +55,7 @@ namespace Data
     }
 
     [Serializable]
-    public class EntityData
+    public class EnemyData
     {
         public int Id;
         public string Name;
@@ -64,15 +64,39 @@ namespace Data
     }
 
     [Serializable]
-    public class EntityDataLoader : ILoader<int, EntityData>
+    public class EnemyDataLoader : ILoader<int, EnemyData>
     {
-        public List<EntityData> entityDatas = new List<EntityData>();
+        public List<EnemyData> enemyDatas = new List<EnemyData>();
 
-        public Dictionary<int, EntityData> MakeDict()
+        public Dictionary<int, EnemyData> MakeDict()
         {
-            Dictionary<int, EntityData> dict = new Dictionary<int, EntityData>();
-            foreach (EntityData entityData in entityDatas)
-                dict.Add(entityData.Id, entityData);
+            Dictionary<int, EnemyData> dict = new Dictionary<int, EnemyData>();
+            foreach (EnemyData enemyData in enemyDatas)
+                dict.Add(enemyData.Id, enemyData);
+
+            return dict;
+        }
+    }
+
+    [Serializable]
+    public class PlayerData
+    {
+        public int Id;
+        public string Name;
+        public int Speed;
+        public int Life;
+    }
+
+    [Serializable]
+    public class PlayerDataLoader : ILoader<int, PlayerData>
+    {
+        public List<PlayerData> playerDatas = new List<PlayerData>();
+
+        public Dictionary<int, PlayerData> MakeDict()
+        {
+            Dictionary<int, PlayerData> dict = new Dictionary<int, PlayerData>();
+            foreach (PlayerData playerData in playerDatas)
+                dict.Add(playerData.Id, playerData);
 
             return dict;
         }

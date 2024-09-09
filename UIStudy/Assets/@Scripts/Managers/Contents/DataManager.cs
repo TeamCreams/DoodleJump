@@ -14,13 +14,15 @@ public class DataManager
 {
 	public Dictionary<int, Data.TestData> TestDic { get; private set; } = new Dictionary<int, Data.TestData>();
     public Dictionary<int, Data.TinyFarmData> TinyFarmDic { get; private set; } = new Dictionary<int, Data.TinyFarmData>();
-    public Dictionary<int, Data.EntityData> EntityDic { get; private set; } = new Dictionary<int, Data.EntityData>();
+    public Dictionary<int, Data.EnemyData> EnemyDic { get; private set; } = new Dictionary<int, Data.EnemyData>();
+    public Dictionary<int, Data.PlayerData> PlayerDic { get; private set; } = new Dictionary<int, Data.PlayerData>();
 
     public void Init()
 	{
 		TestDic = LoadJson<Data.TestDataLoader, int, Data.TestData>("TestData").MakeDict();
         TinyFarmDic = LoadJson<Data.TinyFarmDataLoader, int, Data.TinyFarmData>("TinyFarmEvent").MakeDict();
-        EntityDic = LoadJson<Data.EntityDataLoader, int, Data.EntityData>("EntityData").MakeDict();
+        EnemyDic = LoadJson<Data.EnemyDataLoader, int, Data.EnemyData>("EnemyData").MakeDict();
+        PlayerDic = LoadJson<Data.PlayerDataLoader, int, Data.PlayerData>("PlayerData").MakeDict();
     }
 
     private Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>

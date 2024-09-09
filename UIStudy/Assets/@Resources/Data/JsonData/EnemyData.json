@@ -1,27 +1,33 @@
 {
-  "entityDatas": [
+  "enemyDatas": [
     {
       "Id": 1,
-      "Name": "Player",
-      "Speed": 100,
-      "Life": 3
-    },
-    {
-      "Id": 2,
       "Name": "Monster1",
       "Speed": 60,
       "Life": 1
     },
     {
-      "Id": 3,
+      "Id": 2,
       "Name": "Monster2",
       "Speed": 70,
       "Life": 1
     },
     {
-      "Id": 4,
+      "Id": 3,
       "Name": "Monster3",
       "Speed": 80,
+      "Life": 1
+    },
+    {
+      "Id": 4,
+      "Name": "Monster4",
+      "Speed": 100,
+      "Life": 1
+    },
+    {
+      "Id": 5,
+      "Name": "Monster5",
+      "Speed": 90,
       "Life": 1
     }
   ]

@@ -7,8 +7,8 @@ using static Define;
 
 public class PlayerController : ObjectBase
 {
-    private EntityData _data;
-    public EntityData Data 
+    private PlayerData _data;
+    public PlayerData Data 
     {
         get => _data;
         private set
@@ -75,7 +75,7 @@ public class PlayerController : ObjectBase
 	{
 		base.SetInfo(templateId);
         _animator = GetComponentInChildren<Animator>();
-        Data = Managers.Data.EntityDic[templateId];
+        Data = Managers.Data.PlayerDic[templateId];
 
         _speed = Data.Speed;
     }
@@ -117,7 +117,7 @@ public class PlayerController : ObjectBase
         }
 	}
 
-    private void OnEvent_DamagedHp(Component sender, object param)
+    private void OnEvent_DamagedHp(Component sender, object param) // 굳이 이걸 event할 필요는 없다.
     {
         Data.Life -= 1;
         Managers.Game.Life = Data.Life;

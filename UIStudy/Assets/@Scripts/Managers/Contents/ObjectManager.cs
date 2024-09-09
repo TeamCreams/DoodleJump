@@ -28,7 +28,7 @@ public class ObjectManager
 		{
             GameObject go = Managers.Resource.Instantiate("Entity");
             int rand = UnityEngine.Random.Range(2, 5);
-            go.GetOrAddComponent<MonsterController>().SetInfo(Managers.Data.EntityDic[rand]);
+            go.GetOrAddComponent<MonsterController>().SetInfo(Managers.Data.EnemyDic[rand]);
             go.transform.position = pos;
 
             go.transform.parent = MonsterRoot;

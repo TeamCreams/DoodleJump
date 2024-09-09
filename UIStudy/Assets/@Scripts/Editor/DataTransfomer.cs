@@ -20,7 +20,8 @@ public class DataTransfomer : EditorWindow
 
 	{
 		ParseExcelDataToJson<TinyFarmDataLoader, TinyFarmData>("TinyFarmEvent");
-        ParseExcelDataToJson<EntityDataLoader, EntityData>("EntityData");
+        ParseExcelDataToJson<EnemyDataLoader, EnemyData>("EnemyData");
+        ParseExcelDataToJson<PlayerDataLoader, PlayerData>("PlayerData");
 
         Debug.Log("Complete");
 	}
