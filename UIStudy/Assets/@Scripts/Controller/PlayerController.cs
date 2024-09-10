@@ -17,6 +17,8 @@ public class PlayerController : ObjectBase
         }
     }
 
+    public GameObject _eyesGameobject = null;
+    private Sprite _emotion = null;
     private float _speed = 0;
     [SerializeField]
     EPlayerState _state = EPlayerState.Idle;
@@ -78,6 +80,9 @@ public class PlayerController : ObjectBase
         Data = Managers.Data.PlayerDic[templateId];
 
         _speed = Data.Speed;
+
+        _emotion = _eyesGameobject.GetComponent<Sprite>();
+
     }
 
     void SetState(EPlayerState prevState, EPlayerState currentState)
@@ -92,7 +97,7 @@ public class PlayerController : ObjectBase
         if(_hitStoneMonster.collider != null)
         {
             Managers.Pool.Push(_hitStoneMonster.collider.gameObject);
-            Managers.Event.TriggerEvent(EEventType.Attacked_Player, this);
+            Managers.Event.TriggerEvent(EEventType.Attacked_Player); // 새로 시작할 때 오류 뜸.
         }
     }
 
@@ -121,8 +126,17 @@ public class PlayerController : ObjectBase
     {
         Data.Life -= 1;
         Managers.Game.Life = Data.Life;
+
+        StartCoroutine(UpdateFace());
     }
 
+    IEnumerator UpdateFace()
+    {
+        Debug.Log("UpdateFace"); //뜨는데
+        _emotion = Managers.Resource.Load<Sprite>("Crying.sprite"); // 안 됨
+        yield return new WaitForSeconds(0.5f);
+        _emotion = Managers.Resource.Load<Sprite>("Sad.sprite");
+    }
     private void Update_Walk()
     {
         if (Managers.Game.JoystickState == Define.EJoystickState.PointerUp)

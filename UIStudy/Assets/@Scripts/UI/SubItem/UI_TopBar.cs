@@ -19,6 +19,12 @@ public class UI_TopBar : UI_Base
     }
 
     private int _time = 0;
+
+    public int Time
+    { 
+        get { return _time; } 
+        set {  _time = value; } 
+    }
     System.IDisposable _lifeTimer; 
     protected override void Init()
     {
@@ -42,14 +48,21 @@ public class UI_TopBar : UI_Base
 
     void OnChangedLife(int life)
 	{
-        if(life < 0)
-		{
+        if(life <= 0)
+        {
             _lifeTimer?.Dispose();
+            if (Managers.Game.TimeRecord < _time)
+            {
+                Managers.Game.TimeRecord = _time;
+            }
+            Managers.UI.ShowPopupUI<UI_RetryPopup>();
+            //Time.timeScale = 0; // 왜 안될까.
+
         }
-        UpdateLifeImage();
+        UpdateLifeImage();        
     }
 
-	private void UpdateLifeImage()
+    private void UpdateLifeImage()
     {
         int life = Managers.Game.Life;
 

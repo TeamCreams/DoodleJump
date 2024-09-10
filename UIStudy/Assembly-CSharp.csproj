@@ -172,6 +172,7 @@
     <Compile Include="Assets\HeroEditor\Common\Scripts\EditorScripts\AnimationManager.cs" />
     <Compile Include="Assets\HeroEditor\Common\Scripts\EditorScripts\ScreenshotTransparent.cs" />
     <Compile Include="Assets\@Scripts\Utils\Data.Contents.cs" />
+    <Compile Include="Assets\@Scripts\UI\Popup\UI_RetryPopup.cs" />
     <Compile Include="Assets\HeroEditor\Common\Scripts\ExampleScripts\PlayingAnimations.cs" />
     <Compile Include="Assets\HeroEditor\Common\Scripts\EditorScripts\CharacterReferencesResolver.cs" />
     <Compile Include="Assets\@Scripts\UI\Kakao\UI_Chatting.cs" />

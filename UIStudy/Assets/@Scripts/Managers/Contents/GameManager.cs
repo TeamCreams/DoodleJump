@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Security;
 using UnityEngine;
 
 public class GameManager
@@ -34,6 +35,19 @@ public class GameManager
         }
     }
     public Action<int> OnChangedLife;
+
+    private int _timeRecord = 0;
+    public int TimeRecord
+    {
+        get { return _timeRecord; }
+        set
+        {
+            if (_timeRecord != value)
+            {
+                _timeRecord = value;
+            }
+        }
+    }
 
     private Define.EJoystickState _joystickState;
 	public Define.EJoystickState JoystickState

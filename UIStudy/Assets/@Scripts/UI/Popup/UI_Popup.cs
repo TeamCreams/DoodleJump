@@ -13,6 +13,7 @@ public class UI_Popup : UI_Base
     {
         base.Init();
 
+        /*
         BindImages(typeof(Images));
         GetImage((int)Images.Image_Test).color = 
             new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
@@ -20,9 +21,10 @@ public class UI_Popup : UI_Base
         {
             Managers.UI.ClosePopupUI(this);
         }, Define.EUIEvent.Click);
+        */
     }
 
-    public void SetOrder(int sortOrder)
+    public virtual void SetOrder(int sortOrder)
     {
         this.GetComponent<Canvas>().sortingOrder = sortOrder;
     }
