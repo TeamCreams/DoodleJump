@@ -18,7 +18,7 @@ public class PlayerController : ObjectBase
     }
 
     public GameObject _eyesGameobject = null;
-    private Sprite _emotion = null;
+    private SpriteRenderer _emotion = null;
     private float _speed = 0;
     [SerializeField]
     EPlayerState _state = EPlayerState.Idle;
@@ -54,6 +54,11 @@ public class PlayerController : ObjectBase
         return true;
     }
 
+	private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.Attacked_Player, OnEvent_DamagedHp);
+    }
+
 	void Update()
     {
         Update_Default();
@@ -81,7 +86,7 @@ public class PlayerController : ObjectBase
 
         _speed = Data.Speed;
 
-        _emotion = _eyesGameobject.GetComponent<Sprite>();
+        _emotion = _eyesGameobject.GetComponent<SpriteRenderer>();
 
     }
 
@@ -133,9 +138,9 @@ public class PlayerController : ObjectBase
     IEnumerator UpdateFace()
     {
         Debug.Log("UpdateFace"); //뜨는데
-        _emotion = Managers.Resource.Load<Sprite>("Crying.sprite"); // 안 됨
+        _emotion.sprite = Managers.Resource.Load<Sprite>("Crying.sprite"); // 안 됨
         yield return new WaitForSeconds(0.5f);
-        _emotion = Managers.Resource.Load<Sprite>("Sad.sprite");
+        _emotion.sprite = Managers.Resource.Load<Sprite>("Sad.sprite");
     }
     private void Update_Walk()
     {

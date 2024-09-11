@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,10 +11,7 @@ public class EventManager
     
     public void Init()
     {
-        if (_event == null)
-        {
-            _event = new Dictionary<EEventType, List<CustomAction>>();
-        }
+        _event = new Dictionary<EEventType, List<CustomAction>>();
     }
 
     public void AddEvent(EEventType eventType, CustomAction listener)

@@ -23,7 +23,6 @@ class TestScene : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.J))
 		{
             //Managers.Resource.Load<Sprite>("Sprite_Loading")\
-            Managers.Resource.DebugLog();
             Sprite sprite1 = Managers.Resource.Load<Sprite>("Sprite_Loading.sprite");
             //Managers.Resource.Instantiate("Sprite_Loading.sprite");
             Debug.Log(sprite1);

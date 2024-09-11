@@ -8,9 +8,7 @@ public class UI_TopBar : UI_Base
 
     public enum GameObjects
     {
-        FirstHeart_Image,
-        SecondHeart_Image,
-        ThirdHeart_Image
+        UI_HeartRoot,
     }
     public enum Texts
     {
@@ -25,13 +23,19 @@ public class UI_TopBar : UI_Base
         get { return _time; } 
         set {  _time = value; } 
     }
-    System.IDisposable _lifeTimer; 
+
+    System.IDisposable _lifeTimer;
+
+    UI_HeartRoot _heartRoot;
+
     protected override void Init()
     {
         base.Init();
         BindObjects(typeof(GameObjects));
         BindTexts(typeof(Texts));
         GetText((int)Texts.GameOver_Text).enabled = false;
+
+        _heartRoot = GetObject((int)GameObjects.UI_HeartRoot).GetComponent<UI_HeartRoot>();
 
         Managers.Game.OnChangedLife -= OnChangedLife;
         Managers.Game.OnChangedLife += OnChangedLife;
@@ -44,9 +48,17 @@ public class UI_TopBar : UI_Base
                 float seconds = _time % 60;
                 GetText((int)Texts.Time_Text).text = string.Format($"{minutes}분 {seconds}초");
             }).AddTo(this.gameObject);
+
+
+        Debug.Log("=======UI Scene Init");
     }
 
-    void OnChangedLife(int life)
+	private void OnDestroy()
+	{
+        Managers.Game.OnChangedLife -= OnChangedLife;
+    }
+
+	void OnChangedLife(int life)
 	{
         if(life <= 0)
         {
@@ -55,9 +67,8 @@ public class UI_TopBar : UI_Base
             {
                 Managers.Game.TimeRecord = _time;
             }
+            Debug.Log($"최고기록 : {Managers.Game.TimeRecord}");
             Managers.UI.ShowPopupUI<UI_RetryPopup>();
-            //Time.timeScale = 0; // 왜 안될까.
-
         }
         UpdateLifeImage();        
     }
@@ -66,13 +77,16 @@ public class UI_TopBar : UI_Base
     {
         int life = Managers.Game.Life;
 
-        if (0 <= life && life < 3)
-        {
-            GetObject((int)(GameObjects.FirstHeart_Image + (2 - life))).SetActive(false);
-        }
-        else if(life < 0)
-        {
-            GetText((int)Texts.GameOver_Text).enabled = true;
-        }
-    }
+        _heartRoot.SetLife(life);
+        if (life == 0)
+		{
+			GetText((int)Texts.GameOver_Text).enabled = true;
+		}
+	}
 }
+
+// 2가지 방법
+// 1. 프로그레스바로 만들기 (x)
+// 2. 2번째
+//   - 상위부모를 Horizon Layout
+//    - 그아래에 생성한다.

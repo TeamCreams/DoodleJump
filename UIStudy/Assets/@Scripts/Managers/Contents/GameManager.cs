@@ -27,6 +27,7 @@ public class GameManager
         get { return _life; }
         set
         {
+            Debug.Log($"Life = {value}");
             if (_life != value)
             {
                 _life = value;

@@ -32,23 +32,19 @@ public class UI_RetryPopup : UI_Popup
         {
             int minutes = Mathf.FloorToInt(Managers.Game.TimeRecord / 60);
             float seconds = Managers.Game.TimeRecord % 60;
-            GetText((int)Texts.LifeTime_Text).text = string.Format($"{minutes}분 {seconds}초");
+            GetText((int)Texts.LifeTime_Text).text = $"생존 시간 : {minutes}분 {seconds}초";
         }
-
-        StartCoroutine(RefreshPage());
 
         GetButton((int)Buttons.Retry_Button).gameObject.BindEvent((evt) =>
         {
             Managers.Scene.LoadScene(Define.EScene.SuberunkerScene);
             Managers.UI.ClosePopupUI(this);
+            Time.timeScale = 1;
         }, Define.EUIEvent.Click);
+
+        Time.timeScale = 0f;
     }
 
-    IEnumerator RefreshPage() //안됨..
-    {
-        yield return new WaitForSeconds(0.3f);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(GetObject((int)GameObjects.LifeRecord).GetComponent<RectTransform>());
-    }
 
     public override void SetOrder(int sortOrder)
     {
