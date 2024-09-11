@@ -63,17 +63,14 @@ public class PlayerController : ObjectBase
     {
         Update_Default();
         CheckAttacked();
-        _animator.SetInteger("State", (int)this.State);
+        //_animator.SetInteger("State", (int)this.State);
         switch (_state)
 		{
             case EPlayerState.Idle:
                 Update_Idle();
                 break;
             case EPlayerState.Walk:
-                Update_Walk();
-                break;
-            case EPlayerState.Run:
-                Update_Run();
+                Update_Move();
                 break;
         }
     }
@@ -87,7 +84,6 @@ public class PlayerController : ObjectBase
         _speed = Data.Speed;
 
         _emotion = _eyesGameobject.GetComponent<SpriteRenderer>();
-
     }
 
     void SetState(EPlayerState prevState, EPlayerState currentState)
@@ -97,9 +93,14 @@ public class PlayerController : ObjectBase
 
     public void CheckAttacked()
     {
-        _hitStoneMonster 
+        //Physics2D.BoxCast
+
+        _hitStoneMonster
+            = Physics2D.BoxCast(transform.position, new Vector2(1f, 1f), 0f, Vector2.up, 0.5f, LayerMask.GetMask("StoneMonster"));
+
+/*        _hitStoneMonster
             = Physics2D.Raycast(transform.position, Vector2.up, 0.5f, LayerMask.GetMask("StoneMonster"));
-        if(_hitStoneMonster.collider != null)
+*/        if(_hitStoneMonster.collider != null)
         {
             Managers.Pool.Push(_hitStoneMonster.collider.gameObject);
             Managers.Event.TriggerEvent(EEventType.Attacked_Player); // 새로 시작할 때 오류 뜸.
@@ -108,7 +109,7 @@ public class PlayerController : ObjectBase
 
     private void Update_Default()
 	{
-
+        // 여기를 바꾸자
         if (this.transform.position.x < -310)
         {
             transform.position = Define.HardCoding.PlayerTeleportPos_Left;
@@ -137,45 +138,21 @@ public class PlayerController : ObjectBase
 
     IEnumerator UpdateFace()
     {
-        Debug.Log("UpdateFace"); //뜨는데
-        _emotion.sprite = Managers.Resource.Load<Sprite>("Crying.sprite"); // 안 됨
-        yield return new WaitForSeconds(0.5f);
+        _emotion.sprite = Managers.Resource.Load<Sprite>("Crying.sprite");
+        yield return new WaitForSeconds(1f);
         _emotion.sprite = Managers.Resource.Load<Sprite>("Sad.sprite");
     }
-    private void Update_Walk()
+    
+    private void Update_Move()
     {
         if (Managers.Game.JoystickState == Define.EJoystickState.PointerUp)
         {
             this.State = EPlayerState.Idle;
         }
-        
         this.transform.Translate(Managers.Game.JoystickAmount.x * _speed * Time.deltaTime, 0, 0);
         
-        if (Managers.Game.JoystickAmount.x < 0)
-        {
-            this.transform.localScale
-                 = new Vector3(-Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
-        }
-        else if (0 < Managers.Game.JoystickAmount.x)
-        {
-            this.transform.localScale
-                    = new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
-        }
-        
-        if (0.5f <= Managers.Game.JoystickAmount.sqrMagnitude)
-        {
-            this.State = EPlayerState.Run;
-        }
-    }
+        _animator.SetFloat("MoveSpeed", Mathf.Abs(Managers.Game.JoystickAmount.x));
 
-    private void Update_Run() 
-    {
-        if (Managers.Game.JoystickState == Define.EJoystickState.PointerUp)
-        {
-            this.State = EPlayerState.Idle;
-        }
-
-        this.transform.Translate(Managers.Game.JoystickAmount.x * _speed * Time.deltaTime, 0, 0);
 
         if (Managers.Game.JoystickAmount.x < 0)
         {
@@ -186,11 +163,6 @@ public class PlayerController : ObjectBase
         {
             this.transform.localScale
                     = new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
-        }
-
-        if (Managers.Game.JoystickAmount.sqrMagnitude < 0.5f)
-        {
-            this.State = EPlayerState.Walk;
         }
     }
 }

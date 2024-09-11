@@ -44,13 +44,10 @@ public class UI_TopBar : UI_Base
             .Subscribe(_ =>
             {
                 _time++;
-                int minutes = Mathf.FloorToInt(_time / 60);
+                int minutes = _time / 60;
                 float seconds = _time % 60;
                 GetText((int)Texts.Time_Text).text = string.Format($"{minutes}분 {seconds}초");
             }).AddTo(this.gameObject);
-
-
-        Debug.Log("=======UI Scene Init");
     }
 
 	private void OnDestroy()

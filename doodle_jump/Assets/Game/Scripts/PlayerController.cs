@@ -96,4 +96,5 @@ public class PlayerController : MonoBehaviour
         Vector2 jumpVelocity = new Vector2(0, _jumpPower);
         _rigid.AddForce(jumpVelocity, ForceMode2D.Impulse);
     }
+    // 오랫동안 가만히 있으면 모션이나 표정 바꾸기
 }

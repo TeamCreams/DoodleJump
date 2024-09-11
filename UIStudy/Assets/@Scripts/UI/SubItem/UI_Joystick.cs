@@ -57,6 +57,7 @@ public class UI_Joystick : UI_Base
     void OnEndDrag(PointerEventData eventData)
     {
         GetImage((int)Images.Lever).gameObject.transform.position = _touchPosition;
+        Managers.Game.JoystickAmount = Vector2.zero;
         Managers.Game.JoystickState = Define.EJoystickState.PointerUp;
     }
 

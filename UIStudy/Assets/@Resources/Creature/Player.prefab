@@ -19604,8 +19604,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2033388287896426787}
-  - component: {fileID: 7304213780148293319}
   - component: {fileID: 5387521894063157259}
+  - component: {fileID: 42320011262568380}
   m_Layer: 0
   m_Name: Animation
   m_TagString: Untagged
@@ -19631,27 +19631,6 @@ Transform:
   m_Father: {fileID: 8269806704881530783}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &7304213780148293319
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6384377329203325513}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0acc6d8cc6cc44ce9eafa9ecf65691be, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &5387521894063157259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19664,6 +19643,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db3728f3e374091b4966199eb8dd2cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &42320011262568380
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6384377329203325513}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d1513a3c3fd123b47bb76150b5f1a021, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6516155159872491471
 GameObject:
   m_ObjectHideFlags: 0
@@ -20246,7 +20246,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7080452942242001423}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9bab99a464f488298c9d9629a889d97, type: 3}
   m_Name: 
@@ -20386,7 +20386,7 @@ MonoBehaviour:
   DefaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   EyesPaintMaterial: {fileID: 2100000, guid: 76c39f1b79f94a6093d87b9b386ee91c, type: 2}
   EquipmentPaintMaterial: {fileID: 2100000, guid: 422f5f2ea71549499f154becb259725a, type: 2}
-  Animator: {fileID: 7304213780148293319}
+  Animator: {fileID: 0}
   WeaponType: 0
   HideEars: 0
   FullHair: 1
@@ -20534,7 +20534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _eyesGameobject: {fileID: 7501370005159226022}
-  _state: 1
+  _state: 0
 --- !u!143 &7886743014392695807
 CharacterController:
   m_ObjectHideFlags: 0
