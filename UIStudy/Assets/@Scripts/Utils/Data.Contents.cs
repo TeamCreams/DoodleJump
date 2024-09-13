@@ -83,7 +83,7 @@ namespace Data
     {
         public int Id;
         public string Name;
-        public int Speed;
+        public float Speed;
         public int Life;
     }
 

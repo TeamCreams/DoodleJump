@@ -47,9 +47,10 @@ public static class Define
         Ready = -2,
         Relax = -1,
         Idle = 0,
-        Walk = 1,
+        Move = 1,
         Run = 2,
-        Jump = 3
+        Jump = 3,
+		Boring = 4,
     }
 
 	public enum EEventType

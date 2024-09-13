@@ -25,8 +25,7 @@ public class PlayerController : ObjectBase
     EPlayerState _state = EPlayerState.Idle;
     private RaycastHit2D _hitStoneMonster;
     private Animator _animator;
-
-    private bool _isBoring = false;
+    private CharacterController _characterController;
 
     public EPlayerState State
 	{
@@ -71,8 +70,11 @@ public class PlayerController : ObjectBase
             case EPlayerState.Idle:
                 Update_Idle();
                 break;
-            case EPlayerState.Walk:
+            case EPlayerState.Move:
                 Update_Move();
+                break;
+            case EPlayerState.Boring:
+                Update_Boring();
                 break;
         }
     }
@@ -86,6 +88,8 @@ public class PlayerController : ObjectBase
         _speed = Data.Speed;
 
         _emotion = _eyesGameobject.GetComponent<SpriteRenderer>();
+        _characterController = GetComponent<CharacterController>();
+        _characterController.isTrigger = true;
     }
 
     void SetState(EPlayerState prevState, EPlayerState currentState)
@@ -127,14 +131,12 @@ public class PlayerController : ObjectBase
         if (Managers.Game.JoystickState == EJoystickState.PointerDown)
         {
             _waitTime = 0;
-            this.State = EPlayerState.Walk;
+            this.State = EPlayerState.Move;
         }
-
         _waitTime += Time.deltaTime;
-        if (10 <= _waitTime)
+        if (4 <= _waitTime)
         {
-            LongWait();
-            _waitTime = 0;
+            this.State = EPlayerState.Boring;
         }
     }
 
@@ -143,31 +145,30 @@ public class PlayerController : ObjectBase
         Data.Life -= 1;
         Managers.Game.Life = Data.Life;
 
-        StartCoroutine(UpdateFace());
+        StartCoroutine(Update_CryingFace());
     }
-
-    IEnumerator UpdateFace()
+     
+    IEnumerator Update_CryingFace()
     {
         _emotion.sprite = Managers.Resource.Load<Sprite>("Crying.sprite");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.8f);
         _emotion.sprite = Managers.Resource.Load<Sprite>("Sad.sprite");
     }
     
     private void Update_Move()
     {
+        _animator.SetBool("Boring", false);
+
         if (Managers.Game.JoystickState == Define.EJoystickState.PointerUp)
         {
             this.State = EPlayerState.Idle;
-            if(_isBoring == true)
-            {
-                _isBoring = false;
-                _animator.SetBool("Boring", _isBoring);
-            }
+            
         }
-        this.transform.Translate(Managers.Game.JoystickAmount.x * _speed * Time.deltaTime, 0, 0);
-        
-        _animator.SetFloat("MoveSpeed", Mathf.Abs(Managers.Game.JoystickAmount.x));
+        //this.transform.Translate(Managers.Game.JoystickAmount.x * Data.Speed * Time.deltaTime, 0, 0);
 
+        _animator.SetFloat("MoveSpeed", Mathf.Abs(Managers.Game.JoystickAmount.x));
+        Vector2 motion = Vector2.right * (Managers.Game.JoystickAmount.x * Data.Speed * Time.deltaTime);
+        _characterController.Move(motion);
 
         if (Managers.Game.JoystickAmount.x < 0)
         {
@@ -181,9 +182,32 @@ public class PlayerController : ObjectBase
         }
     }
 
-    private void LongWait()
+    private void Update_Boring()
     {
-        _isBoring = true;
-        _animator.SetBool("Boring", _isBoring);
+        _waitTime = 0;
+
+        if (Managers.Game.JoystickState == EJoystickState.PointerDown)
+        {
+            this.State = EPlayerState.Move;
+        }
+        _animator.SetBool("Boring", true);
+    }
+
+    public void SetSpeedSkill(float speed)//OnEvent로 하고 싶은데 parameter값 ??
+    {
+        Data.Speed *= speed;
+    }
+    public void SetLife(int life = 1)
+    {
+        this.Data.Life += life;
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if(hit.collider.gameObject.GetComponent<SkillItem>())
+        {
+            Debug.Log("-------------------------------------");
+        }
+
     }
 }

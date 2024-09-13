@@ -32,7 +32,7 @@ public class MonsterController : ObjectBase
 		}
 
         _collider = this.gameObject.GetOrAddComponent<BoxCollider2D>();
-        _collider.size = new Vector2(2f, 1.45f);
+        _collider.size = new Vector2(1.8f, 1.45f);
         _image = this.gameObject.GetOrAddComponent<SpriteRenderer>();
         _collider.isTrigger = true;
 

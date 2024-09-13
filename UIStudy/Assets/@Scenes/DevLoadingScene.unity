@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311932, g: 0.38073996, b: 0.35872707, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -338,10 +338,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 851803665468800987, guid: 0ab5aff6a92aaed4ca7cb5f4805eb76f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1651336778138865765, guid: 0ab5aff6a92aaed4ca7cb5f4805eb76f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -429,10 +425,6 @@ PrefabInstance:
     - target: {fileID: 2876637568845584942, guid: 0ab5aff6a92aaed4ca7cb5f4805eb76f, type: 3}
       propertyPath: m_Name
       value: UI_DevLoadingScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 2876637568845584942, guid: 0ab5aff6a92aaed4ca7cb5f4805eb76f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3442815860805043453, guid: 0ab5aff6a92aaed4ca7cb5f4805eb76f, type: 3}
       propertyPath: m_AnchorMax.y
