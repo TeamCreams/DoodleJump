@@ -20,10 +20,13 @@ public class PlayerController : ObjectBase
     public GameObject _eyesGameobject = null;
     private SpriteRenderer _emotion = null;
     private float _speed = 0;
+    private float _waitTime = 0;
     [SerializeField]
     EPlayerState _state = EPlayerState.Idle;
     private RaycastHit2D _hitStoneMonster;
     private Animator _animator;
+
+    private bool _isBoring = false;
 
     public EPlayerState State
 	{
@@ -61,9 +64,8 @@ public class PlayerController : ObjectBase
 
 	void Update()
     {
-        Update_Default();
+        //Update_PositionX();
         CheckAttacked();
-        //_animator.SetInteger("State", (int)this.State);
         switch (_state)
 		{
             case EPlayerState.Idle:
@@ -93,21 +95,21 @@ public class PlayerController : ObjectBase
 
     public void CheckAttacked()
     {
-        //Physics2D.BoxCast
-
         _hitStoneMonster
-            = Physics2D.BoxCast(transform.position, new Vector2(1f, 1f), 0f, Vector2.up, 0.5f, LayerMask.GetMask("StoneMonster"));
+            = Physics2D.BoxCast(transform.position, new Vector2(1f, 1f), 0f, Vector2.up, 1f, LayerMask.GetMask("StoneMonster"));
 
-/*        _hitStoneMonster
+/*
+        _hitStoneMonster
             = Physics2D.Raycast(transform.position, Vector2.up, 0.5f, LayerMask.GetMask("StoneMonster"));
-*/        if(_hitStoneMonster.collider != null)
+*/      
+        if(_hitStoneMonster.collider != null)
         {
             Managers.Pool.Push(_hitStoneMonster.collider.gameObject);
             Managers.Event.TriggerEvent(EEventType.Attacked_Player); // 새로 시작할 때 오류 뜸.
         }
     }
 
-    private void Update_Default()
+    private void Update_PositionX()
 	{
         // 여기를 바꾸자
         if (this.transform.position.x < -310)
@@ -122,11 +124,19 @@ public class PlayerController : ObjectBase
 
     private void Update_Idle()
 	{
-        if(Managers.Game.JoystickState == EJoystickState.PointerDown)
-		{
+        if (Managers.Game.JoystickState == EJoystickState.PointerDown)
+        {
+            _waitTime = 0;
             this.State = EPlayerState.Walk;
         }
-	}
+
+        _waitTime += Time.deltaTime;
+        if (10 <= _waitTime)
+        {
+            LongWait();
+            _waitTime = 0;
+        }
+    }
 
     private void OnEvent_DamagedHp(Component sender, object param) // 굳이 이걸 event할 필요는 없다.
     {
@@ -148,6 +158,11 @@ public class PlayerController : ObjectBase
         if (Managers.Game.JoystickState == Define.EJoystickState.PointerUp)
         {
             this.State = EPlayerState.Idle;
+            if(_isBoring == true)
+            {
+                _isBoring = false;
+                _animator.SetBool("Boring", _isBoring);
+            }
         }
         this.transform.Translate(Managers.Game.JoystickAmount.x * _speed * Time.deltaTime, 0, 0);
         
@@ -164,5 +179,11 @@ public class PlayerController : ObjectBase
             this.transform.localScale
                     = new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
         }
+    }
+
+    private void LongWait()
+    {
+        _isBoring = true;
+        _animator.SetBool("Boring", _isBoring);
     }
 }

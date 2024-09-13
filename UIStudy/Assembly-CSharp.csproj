@@ -138,10 +138,12 @@
     <Compile Include="Assets\HeroEditor\InventorySystem\Scripts\Elements\ItemInfo.cs" />
     <Compile Include="Assets\@Scripts\Controller\MonsterController.cs" />
     <Compile Include="Assets\@Scripts\UI\Scene\TestScene.cs" />
+    <Compile Include="Assets\@Scripts\Skill\SkillBase.cs" />
     <Compile Include="Assets\@Scripts\UI\Scene\UI_SuberunkerScene.cs" />
     <Compile Include="Assets\HeroEditor\Common\Scripts\ExampleScripts\EquipmentExample.cs" />
     <Compile Include="Assets\@Scripts\Utils\Define.cs" />
     <Compile Include="Assets\@Scripts\UI\TinyFarm\UI_TinyFarmMissionSlot.cs" />
+    <Compile Include="Assets\@Scripts\Skill\SkillSpeed.cs" />
     <Compile Include="Assets\@Scripts\UI\SubItem\UI_InventorySlot.cs" />
     <Compile Include="Assets\HeroEditor\InventorySystem\Scripts\Data\Property.cs" />
     <Compile Include="Assets\@Scripts\UI\Kakao\UI_ChattingRoomScene.cs" />
