@@ -92,6 +92,7 @@
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/QuickStart.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/CaptureOptions.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterExtensions.cs" />
+    <Compile Include="Assets/@Scripts/Spawner/Spawner.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/Collections/IconCollection.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/SpriteSheetCapture.cs" />
     <Compile Include="Assets/@Scripts/Systems/Contents/UserSystem.cs" />

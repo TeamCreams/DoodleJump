@@ -17,34 +17,38 @@ public class MonsterController : ObjectBase
             _data = value;
         }
     }
-    private BoxCollider2D _collider;
+
+    private BoxCollider _collider;
     [SerializeField]
     private float _speed = 0;
     private SpriteRenderer _image;
     [SerializeField]
     private int _id = 0;
+    private RaycastHit _hitInfo;
 
-	public override bool Init()
+    public override bool Init()
 	{
 		if (false == base.Init())
 		{
             return false;
 		}
 
-        _collider = this.gameObject.GetOrAddComponent<BoxCollider2D>();
-        _collider.size = new Vector2(1.8f, 1.45f);
         _image = this.gameObject.GetOrAddComponent<SpriteRenderer>();
-        _collider.isTrigger = true;
 
-       // OnTriggerEnter2D_Event -= Attack;
-        //OnTriggerEnter2D_Event += Attack;
+       OnTriggerEnter_Event -= Attack;
+       OnTriggerEnter_Event += Attack;
 
         return true;
 	}
 
 	void Update()
     {
-        Moving();
+        HitGround();
+    }
+    private void FixedUpdate()
+    {
+        Vector3 movement = Vector2.down * _speed * Time.fixedDeltaTime;
+        transform.Translate(movement);
     }
 
     public void SetInfo(EnemyData data)
@@ -56,24 +60,29 @@ public class MonsterController : ObjectBase
         _id = Data.Id;
     }
 
-    public void Moving()
+    public void HitGround()
     {
-        transform.Translate(Vector2.down * _speed * CORRECTION_VALUE * Time.deltaTime);
         // 일정 높이가 되면 다시 Push
+        Physics.Raycast(transform.position, Vector3.down, out _hitInfo, 3f, LayerMask.GetMask("Ground"));
+        if (_hitInfo.collider != null)
+        {
+            Managers.Pool.Push(this.gameObject);
+        }
+        /*
         if (this.transform.position.y < -130)
         {
             Managers.Pool.Push(this.gameObject);
         }
+        */
     }
-    /*
-    private void Attack(Collider2D collision)
+
+
+    private void Attack(Collider collision)
     {
-        if (collision.gameObject.GetComponent<PlayerController>() == true)
+        if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
-            Debug.Log("is Collision");
             Managers.Event.TriggerEvent(EEventType.Attacked_Player, this);
             Managers.Pool.Push(this.gameObject);
         }
     }
-    */
 }

@@ -23,7 +23,7 @@ public class PlayerController : ObjectBase
     private float _waitTime = 0;
     [SerializeField]
     EPlayerState _state = EPlayerState.Idle;
-    private RaycastHit2D _hitStoneMonster;
+    //private RaycastHit2D _hitStoneMonster;
     private Animator _animator;
     private CharacterController _characterController;
 
@@ -64,7 +64,7 @@ public class PlayerController : ObjectBase
 	void Update()
     {
         //Update_PositionX();
-        CheckAttacked();
+        //CheckAttacked();
         switch (_state)
 		{
             case EPlayerState.Idle:
@@ -89,30 +89,30 @@ public class PlayerController : ObjectBase
 
         _emotion = _eyesGameobject.GetComponent<SpriteRenderer>();
         _characterController = GetComponent<CharacterController>();
-        _characterController.isTrigger = true;
+        //_characterController.isTrigger = true;
     }
 
     void SetState(EPlayerState prevState, EPlayerState currentState)
 	{
 
 	}
-
+    /*
     public void CheckAttacked()
     {
         _hitStoneMonster
             = Physics2D.BoxCast(transform.position, new Vector2(1f, 1f), 0f, Vector2.up, 1f, LayerMask.GetMask("StoneMonster"));
 
-/*
+
         _hitStoneMonster
             = Physics2D.Raycast(transform.position, Vector2.up, 0.5f, LayerMask.GetMask("StoneMonster"));
-*/      
+      
         if(_hitStoneMonster.collider != null)
         {
             Managers.Pool.Push(_hitStoneMonster.collider.gameObject);
             Managers.Event.TriggerEvent(EEventType.Attacked_Player); // 새로 시작할 때 오류 뜸.
         }
     }
-
+    */
     private void Update_PositionX()
 	{
         // 여기를 바꾸자
@@ -140,7 +140,7 @@ public class PlayerController : ObjectBase
         }
     }
 
-    private void OnEvent_DamagedHp(Component sender, object param) // 굳이 이걸 event할 필요는 없다.
+    private void OnEvent_DamagedHp(Component sender, object param)
     {
         Data.Life -= 1;
         Managers.Game.Life = Data.Life;
@@ -200,14 +200,5 @@ public class PlayerController : ObjectBase
     public void SetLife(int life = 1)
     {
         this.Data.Life += life;
-    }
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if(hit.collider.gameObject.GetComponent<SkillItem>())
-        {
-            Debug.Log("-------------------------------------");
-        }
-
     }
 }

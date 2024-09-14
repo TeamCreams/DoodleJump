@@ -18,7 +18,7 @@ public class ObjectBase : InitBase
 		}
 	}
 	public Action<int> OnChangedTemplateId;
-	public Action<Collider2D> OnTriggerEnter2D_Event;
+	public Action<Collider> OnTriggerEnter_Event;
 
 	public override bool Init()
 	{
@@ -39,8 +39,8 @@ public class ObjectBase : InitBase
 	}
 
 
-	public virtual void OnTriggerEnter2D(Collider2D collision)
+	public virtual void OnTriggerEnter(Collider collision)
 	{
-		OnTriggerEnter2D_Event?.Invoke(collision);
+		OnTriggerEnter_Event?.Invoke(collision);
 	}
 }

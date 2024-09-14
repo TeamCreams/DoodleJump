@@ -12,6 +12,7 @@ public class ObjectManager
 	private GameObject _monsterRoot;
     public Transform MonsterRoot => GetRootTransform("@Monsters");
     public Transform PlayerRoot => GetRootTransform("@Players");
+    public Transform ItemRoot => GetRootTransform("@Item");
 
     public Transform GetRootTransform(string name)
     {
@@ -43,6 +44,16 @@ public class ObjectManager
 
             player.transform.parent = PlayerRoot;
         }
-	}
+        else if(typeof(T) == typeof(SkillItem))
+        {
+            GameObject item = Managers.Resource.Instantiate("SkillItem", pooling: true);
+            item.name = "item";
+            item.GetOrAddComponent<SkillSpeed>().SetSpeedSkillEvent(2);
+            item.transform.position = pos;
+
+            item.transform.parent = ItemRoot;
+        }
+
+    }
 
 }

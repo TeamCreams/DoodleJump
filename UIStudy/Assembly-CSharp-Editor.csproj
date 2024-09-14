@@ -63,6 +63,7 @@
     <Compile Include="Assets/HeroEditor/Common/Scripts/Editor/IconCollectionEditor.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/Editor/SpriteCollectionEditor.cs" />
     <Compile Include="Assets/@Scripts/Editor/DataTransfomer.cs" />
+    <Compile Include="Assets\%40Scripts\Spawner\ItemSpawner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/HeroEditor/Common/Scripts/Editor/HeroEditor.Common.Editor.dll" />

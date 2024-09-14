@@ -11,21 +11,21 @@ public class SkillItem : ObjectBase
             return false;
         }
 
-        OnTriggerEnter2D_Event -= OnTriggerEnterPlayer;
-        OnTriggerEnter2D_Event += OnTriggerEnterPlayer;
+        OnTriggerEnter_Event -= OnTriggerEnterPlayer;
+        OnTriggerEnter_Event += OnTriggerEnterPlayer;
 
         return true;
     }
 
 
-    private void OnTriggerEnterPlayer(Collider2D collision)
+    private void OnTriggerEnterPlayer(Collider collision)
     {
-        if (collision.gameObject.GetComponent<PlayerController>() == true)
+        if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
             Debug.Log("is Collision");
-            var go = Managers.Resource.Instantiate("SkillItem", collision.gameObject.transform);
-            go.GetOrAddComponent<SkillSpeed>().SetSpeedSkillEvent(2);
+            var go = Managers.Resource.Instantiate("AddSkill", collision.gameObject.transform);
             //  이것도 pooling으로 만들어서 닿으면 수납
+            Managers.Pool.Push(this.gameObject);
         }
     }
 }
