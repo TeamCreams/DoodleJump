@@ -50,6 +50,17 @@ public class GameManager
         }
     }
 
+    private ChracterStyleInfo _chracterStyleInfo;
+    public ChracterStyleInfo ChracterStyleInfo
+    {
+        get { return _chracterStyleInfo; }
+        set
+        {
+            _chracterStyleInfo = value;
+        }
+
+    }
+
     private Define.EJoystickState _joystickState;
 	public Define.EJoystickState JoystickState
 	{
@@ -128,6 +139,15 @@ public class ItemData
 	public int Parts { get; set; }
 	public int Level { get; set; }
 }
+
+public class ChracterStyleInfo
+{
+    public string Eyes { get; set; } = "Dizzy";
+    public string Eyebrows { get; set; } = "DizzyEyebrows";
+    public string Hair { get; set; } = "ZombieShabby";
+    public int Stat { get; set; }
+}
+
 
 [System.Serializable] //얘가 있어야 직렬화 가능
 public class MessageData

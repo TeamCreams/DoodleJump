@@ -3,25 +3,25 @@
     {
       "Id": 1,
       "Name": "Player1",
-      "Speed": 100,
+      "Speed": 100.0,
       "Life": 3
     },
     {
       "Id": 2,
       "Name": "Player2",
-      "Speed": 150,
+      "Speed": 150.0,
       "Life": 2
     },
     {
       "Id": 3,
       "Name": "Player3",
-      "Speed": 130,
+      "Speed": 130.0,
       "Life": 3
     },
     {
       "Id": 4,
       "Name": "Player4",
-      "Speed": 120,
+      "Speed": 120.0,
       "Life": 3
     }
   ]

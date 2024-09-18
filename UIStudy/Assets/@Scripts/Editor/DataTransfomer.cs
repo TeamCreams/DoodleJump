@@ -22,7 +22,7 @@ public class DataTransfomer : EditorWindow
 		ParseExcelDataToJson<TinyFarmDataLoader, TinyFarmData>("TinyFarmEvent");
         ParseExcelDataToJson<EnemyDataLoader, EnemyData>("EnemyData");
         ParseExcelDataToJson<PlayerDataLoader, PlayerData>("PlayerData");
-
+        ParseExcelDataToJson<CharacterItemSpriteDataLoader, CharacterItemSpriteData>("CharacterItemSpriteData");
         Debug.Log("Complete");
 	}
 

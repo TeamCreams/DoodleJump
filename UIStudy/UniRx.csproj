@@ -285,7 +285,6 @@
     <Compile Include="Assets/Plugins/UniRx/Scripts/System/Unit.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/UnityEngineBridge/Triggers/ObservableCanvasGroupChangedTrigger.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/Operators/ForEachAsync.cs" />
-    <Compile Include="Assets\%40Scripts\Spawner\ItemSpawner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/Plugins/UniRx/Scripts/UniRx.asmdef" />

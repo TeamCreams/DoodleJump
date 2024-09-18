@@ -56,6 +56,7 @@ public static class Define
 	public enum EEventType
 	{
 		Attacked_Player,
+		SetStyle_Player,
 	}
 
     public class Constants

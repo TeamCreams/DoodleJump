@@ -7,9 +7,9 @@ using UnityEngine;
 
 public class ObjectManager
 {
-	private HashSet<MonsterController> _monsters;
+    private HashSet<MonsterController> _monsters;
 
-	private GameObject _monsterRoot;
+    private GameObject _monsterRoot;
     public Transform MonsterRoot => GetRootTransform("@Monsters");
     public Transform PlayerRoot => GetRootTransform("@Players");
     public Transform ItemRoot => GetRootTransform("@Item");
@@ -24,34 +24,33 @@ public class ObjectManager
     }
 
     public void Spawn<T>(Vector2 pos) where T : ObjectBase
-	{
-        if(typeof(T) ==  typeof(MonsterController))
-		{
-            GameObject go = Managers.Resource.Instantiate("Entity");
-            int rand = UnityEngine.Random.Range(2, 5);
+    {
+        if (typeof(T) == typeof(MonsterController))
+        {
+            GameObject go = Managers.Resource.Instantiate("Entity", pooling: true);
+            int rand = UnityEngine.Random.Range(1, 5);
             go.GetOrAddComponent<MonsterController>().SetInfo(Managers.Data.EnemyDic[rand]);
             go.transform.position = pos;
 
-            go.transform.parent = MonsterRoot;
+            //go.transform.parent = MonsterRoot;
         }
-        else if(typeof(T) == typeof(PlayerController))
-		{
+        else if (typeof(T) == typeof(PlayerController))
+        {
             GameObject player = Managers.Resource.Instantiate("Player", pooling: true);
             player.name = "player";
             player.GetOrAddComponent<PlayerController>().SetInfo(Define.Constants.PLAYER_ID);
             Managers.Game.Life = player.GetOrAddComponent<PlayerController>().Data.Life;
             player.transform.position = pos;
 
-            player.transform.parent = PlayerRoot;
+            //player.transform.parent = PlayerRoot;
         }
-        else if(typeof(T) == typeof(SkillItem))
+        else if (typeof(T) == typeof(SkillItem))
         {
             GameObject item = Managers.Resource.Instantiate("SkillItem", pooling: true);
             item.name = "item";
-            item.GetOrAddComponent<SkillSpeed>().SetSpeedSkillEvent(2);
             item.transform.position = pos;
 
-            item.transform.parent = ItemRoot;
+            //item.transform.parent = ItemRoot;
         }
 
     }

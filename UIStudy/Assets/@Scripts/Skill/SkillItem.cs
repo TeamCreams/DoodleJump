@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SkillItem : ObjectBase
 {
+    private float _skillTime = 2.0f;
     public override bool Init()
     {
         if (false == base.Init())
@@ -24,7 +25,8 @@ public class SkillItem : ObjectBase
         {
             Debug.Log("is Collision");
             var go = Managers.Resource.Instantiate("AddSkill", collision.gameObject.transform);
-            //  이것도 pooling으로 만들어서 닿으면 수납
+            go.GetOrAddComponent<SkillSpeed>().SetSpeedSkillEvent(_skillTime);
+            Destroy(go, _skillTime);
             Managers.Pool.Push(this.gameObject);
         }
     }

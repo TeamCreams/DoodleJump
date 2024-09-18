@@ -1,0 +1,176 @@
+{
+  "characterItemSpriteDatas": [
+    {
+      "Id": 10001,
+      "SpriteName": "Afro"
+    },
+    {
+      "Id": 10002,
+      "SpriteName": "AfroSmall"
+    },
+    {
+      "Id": 10003,
+      "SpriteName": "BuzzCut"
+    },
+    {
+      "Id": 10004,
+      "SpriteName": "Leaky"
+    },
+    {
+      "Id": 10005,
+      "SpriteName": "LongHair"
+    },
+    {
+      "Id": 10006,
+      "SpriteName": "Mohawk"
+    },
+    {
+      "Id": 10007,
+      "SpriteName": "PushedBack"
+    },
+    {
+      "Id": 10008,
+      "SpriteName": "Shaggy"
+    },
+    {
+      "Id": 10009,
+      "SpriteName": "ShortHair"
+    },
+    {
+      "Id": 10010,
+      "SpriteName": "ShortPonytail"
+    },
+    {
+      "Id": 10011,
+      "SpriteName": "SideFringe"
+    },
+    {
+      "Id": 10012,
+      "SpriteName": "Slicked"
+    },
+    {
+      "Id": 10013,
+      "SpriteName": "SlickedTwintales"
+    },
+    {
+      "Id": 10014,
+      "SpriteName": "ZombieShabby"
+    },
+    {
+      "Id": 10015,
+      "SpriteName": "ZombieSticks"
+    },
+    {
+      "Id": 11001,
+      "SpriteName": "AnnoyedEyebrows"
+    },
+    {
+      "Id": 11002,
+      "SpriteName": "CryingEyebrows"
+    },
+    {
+      "Id": 11003,
+      "SpriteName": "DizzyEyebrows"
+    },
+    {
+      "Id": 11004,
+      "SpriteName": "EhEyebrows"
+    },
+    {
+      "Id": 11005,
+      "SpriteName": "EnrageEyebrows"
+    },
+    {
+      "Id": 11006,
+      "SpriteName": "GreedyEyebrows"
+    },
+    {
+      "Id": 11007,
+      "SpriteName": "HappyEyebrows"
+    },
+    {
+      "Id": 11008,
+      "SpriteName": "InjuredEyebrows"
+    },
+    {
+      "Id": 11009,
+      "SpriteName": "InLoveEyebrows"
+    },
+    {
+      "Id": 11010,
+      "SpriteName": "OMGEyebrows"
+    },
+    {
+      "Id": 11011,
+      "SpriteName": "PervertedEyebrows"
+    },
+    {
+      "Id": 11012,
+      "SpriteName": "SadEyebrows"
+    },
+    {
+      "Id": 11013,
+      "SpriteName": "SickEyebrows"
+    },
+    {
+      "Id": 11014,
+      "SpriteName": "SweatDropEyebrows"
+    },
+    {
+      "Id": 12001,
+      "SpriteName": "Annoyed"
+    },
+    {
+      "Id": 12002,
+      "SpriteName": "Kitty"
+    },
+    {
+      "Id": 12003,
+      "SpriteName": "Dizzy"
+    },
+    {
+      "Id": 12004,
+      "SpriteName": "Eh"
+    },
+    {
+      "Id": 12005,
+      "SpriteName": "Enrage"
+    },
+    {
+      "Id": 12006,
+      "SpriteName": "Greedy"
+    },
+    {
+      "Id": 12007,
+      "SpriteName": "Happy"
+    },
+    {
+      "Id": 12008,
+      "SpriteName": "Injured"
+    },
+    {
+      "Id": 12009,
+      "SpriteName": "InLove"
+    },
+    {
+      "Id": 12010,
+      "SpriteName": "OMG"
+    },
+    {
+      "Id": 12011,
+      "SpriteName": "Perverted"
+    },
+    {
+      "Id": 12012,
+      "SpriteName": "Sad"
+    },
+    {
+      "Id": 12013,
+      "SpriteName": "Sick"
+    },
+    {
+      "Id": 12014,
+      "SpriteName": "SweatDrop"
+    }
+  ]
+}

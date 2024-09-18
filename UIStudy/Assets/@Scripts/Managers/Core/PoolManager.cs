@@ -97,7 +97,7 @@ public class PoolManager
 		_pools.Clear();
 	}
 
-	public void CreatePool(GameObject original, int defaultCapacity = 10)
+    public void CreatePool(GameObject original, int defaultCapacity = 10)
 	{
 		Pool pool = new Pool(original, defaultCapacity);
         _pools.Add(original.name, pool);

@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.6f);
+            yield return new WaitForSeconds(1.2f);
             int x = UnityEngine.Random.Range(-100, 101);
             Managers.Object.Spawn<MonsterController>(new Vector2(x, 140));
         }
@@ -18,9 +18,9 @@ public class Spawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(15f);
+            yield return new WaitForSeconds(10f);
             int x = UnityEngine.Random.Range(-100, 101);
-            Managers.Object.Spawn<SkillItem>(new Vector2(x, -130));
+            Managers.Object.Spawn<SkillItem>(new Vector2(x, -140));
         }
     }
 }

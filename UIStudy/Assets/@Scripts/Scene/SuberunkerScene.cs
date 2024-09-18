@@ -13,6 +13,7 @@ using static Define;
 public class SuberunkerScene : BaseScene
 {
     UI_Joystick _joyStick = null;
+    Spawner _spawner;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -28,19 +29,11 @@ public class SuberunkerScene : BaseScene
         Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("SkillItem"), 10);
 
         //Spawner라는 객체를 따로만들고
-        StartCoroutine(GenerateMonster());
+        _spawner = Instantiate(Managers.Resource.Load<GameObject>("Spawner")).GetOrAddComponent<Spawner>();
+
+        StartCoroutine(_spawner.GenerateItem());
+        StartCoroutine(_spawner.GenerateMonster());
         return true;
     }
 
-
-
-    IEnumerator GenerateMonster()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(0.6f);
-			int x = UnityEngine.Random.Range(-300, 301);
-            Managers.Object.Spawn<MonsterController>(new Vector2(x, 140));
-        }
-    }
 }

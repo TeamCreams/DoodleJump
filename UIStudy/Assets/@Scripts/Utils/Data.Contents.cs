@@ -101,4 +101,27 @@ namespace Data
             return dict;
         }
     }
+
+    [Serializable]
+    public class CharacterItemSpriteData
+    {
+        public int Id;
+        public string SpriteName;
+    }
+
+    [Serializable]
+    public class CharacterItemSpriteDataLoader : ILoader<int, CharacterItemSpriteData>
+    {
+        public List<CharacterItemSpriteData> characterItemSpriteDatas = new List<CharacterItemSpriteData>();
+
+        public Dictionary<int, CharacterItemSpriteData> MakeDict()
+        {
+            Dictionary<int, CharacterItemSpriteData> dict = new Dictionary<int, CharacterItemSpriteData>();
+            foreach (CharacterItemSpriteData characterItemSpriteData in characterItemSpriteDatas)
+                dict.Add(characterItemSpriteData.Id, characterItemSpriteData);
+
+            return dict;
+        }
+    }
+
 }
