@@ -9,7 +9,7 @@ internal class Pool
 	private IObjectPool<GameObject> _pool;
 
 	private Transform _root;
-	private Transform Root
+	public Transform Root
 	{
 		get
 		{
@@ -83,7 +83,9 @@ public class PoolManager
 		if (_pools.ContainsKey(go.name) == false)
             return false;
 
-        _pools[go.name].Push(go);
+		go.transform.SetParent(_pools[go.name].Root, false);
+
+		_pools[go.name].Push(go);
 		return true;
 	}
 

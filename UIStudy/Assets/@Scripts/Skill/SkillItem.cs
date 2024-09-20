@@ -1,9 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SkillItem : ObjectBase
 {
+    private StatModifier _statModifier;
     private float _skillTime = 2.0f;
     public override bool Init()
     {

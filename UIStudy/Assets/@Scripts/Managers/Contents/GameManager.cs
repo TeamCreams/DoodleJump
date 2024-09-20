@@ -92,6 +92,16 @@ public class GameManager
     public event Action<Vector2> Joystickstate;
     #endregion
 
+
+    public void Init()
+    {
+        _chracterStyleInfo = new ChracterStyleInfo();
+    }
+    public void Clear()
+    {
+        _chracterStyleInfo = null;
+    }
+
     private List<ItemData> items = new List<ItemData>()
         {
             new ItemData() { Icon = "Shoese1", Rare = 1, Parts = 1, Level = 1 },

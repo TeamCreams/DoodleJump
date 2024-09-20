@@ -1,8 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static Define;
 using static UnityEditor.PlayerSettings;
+using System.Linq;
 
 public class UI_ChooseCharacter : UI_Base
 {
@@ -28,41 +30,36 @@ public class UI_ChooseCharacter : UI_Base
         GetImage((int)Images.HairItem).gameObject.BindEvent(OnClick_HairItem, Define.EUIEvent.Click);
         GetImage((int)Images.EyesItem).gameObject.BindEvent(OnClick_EyesItem, Define.EUIEvent.Click);
         GetImage((int)Images.EyebrowsItem).gameObject.BindEvent(OnClick_EyebrowsItem, Define.EUIEvent.Click);
-        _itemRoot = GameObject.Find("InventoryItemRoot");
+        _itemRoot = GetObject((int)GameObjects.InventoryItemRoot);
 
         foreach (Transform slotObject in _itemRoot.transform)
         {
-            Destroy(slotObject.gameObject);
+            Managers.Resource.Destroy(slotObject.gameObject);
         }
     }
 
     private void OnClick_HairItem(PointerEventData eventData)
     {
-        AllPush();
-
-
-        for (int id = 10001; id <= 10015; id++)
-        {
-            SpawnItem(id);
-            // var slot = Managers.UI.MakeSubItem<UI_InventoryItem>(null, GetObject((int)GameObjects.InventoryItemRoot).transform); //pooling ㅅㅏ용 
-        }
+        SetInventoryItems(EEquipType.Hair);
     }
+
     private void OnClick_EyesItem(PointerEventData eventData)
     {
-        AllPush();
-        for (int id = 11001; id <= 11014; id++)
-        {
-            SpawnItem(id);
-
-        }
-
+        SetInventoryItems(EEquipType.Eyes);
     }
+
     private void OnClick_EyebrowsItem(PointerEventData eventData)
     {
+        SetInventoryItems(EEquipType.Eyebrows);
+    }
+
+    private void SetInventoryItems(EEquipType equipType)
+    {
         AllPush();
-        for (int id = 12001; id <= 12014; id++)
-        {
-            SpawnItem(id);
+        var equipList = Managers.Data.CharacterItemSpriteDic.Where(cis => cis.Value.EquipType == equipType);
+        foreach (var characterItemSprite in equipList)
+        { 
+            SpawnItem(characterItemSprite.Key);
         }
     }
 
@@ -70,21 +67,16 @@ public class UI_ChooseCharacter : UI_Base
     {
         foreach(var _item in _itemList)
         {
-            _item.GetComponent<UI_InventoryItem>().CloseItem();
+            Managers.Resource.Destroy(_item.gameObject);
         }
         _itemList.Clear();
     }
 
     private void SpawnItem(int id)
     {
-        var item = Managers.Resource.Instantiate("UI_InventoryItem", GetObject((int)GameObjects.InventoryItemRoot).transform, pooling: true);
-        item.GetOrAddComponent<UI_InventoryItem>().SetInfo(id);
-        if (item.transform.parent != _itemRoot.transform)
-        {
-            item.transform.SetParent(GetObject((int)GameObjects.InventoryItemRoot).transform, false);
-            item.GetComponent<UI_InventoryItem>().MyParent = _itemRoot;
-        }
-        _itemList.Add(item);
+        var item = Managers.UI.MakeSubItem<UI_InventoryItem>(parent: GetObject((int)GameObjects.InventoryItemRoot).transform, pooling: true);
+        item.SetInfo(id);
+        _itemList.Add(item.gameObject);
     }
 
 

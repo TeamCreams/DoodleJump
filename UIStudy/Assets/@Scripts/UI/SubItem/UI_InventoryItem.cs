@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Data;
 using UnityEngine;
@@ -52,10 +52,6 @@ public class UI_InventoryItem : UI_Base
         BindImages(typeof(Images));
         this.gameObject.BindEvent(OnClick_SetCharacter, Define.EUIEvent.Click);
         _toggle = this.gameObject.GetComponent<Toggle>();
-        GameObject foundObject = GameObject.Find("InventoryItemRoot");
-        _toggle.group = foundObject.GetComponent<ToggleGroup>(); // 부모가 poolingRoot로 되어있음
-
-        //toggle.group = this.transform.parent.gameObject.GetComponent<ToggleGroup>(); // 부모가 poolingRoot로 되어있음
     }
 
     public void SetInfo(int templateId)
@@ -63,23 +59,27 @@ public class UI_InventoryItem : UI_Base
         Data = Managers.Data.CharacterItemSpriteDic[templateId];
         string spriteName = Data.SpriteName;
         GetImage((int)Images.Icon).sprite = Managers.Resource.Load<Sprite>($"{spriteName}Icon.sprite");
+        _toggle.group = this.transform.parent.gameObject.GetComponent<ToggleGroup>(); // 부모가 poolingRoot로 되어있음
     }
 
     public void OnClick_SetCharacter(PointerEventData eventData)
     {
-        Debug.Log("jijihihihihihihihi");
         _toggle.isOn = true;
-        if (Data.Id < (int)State.Eyebrows)
+
+        switch (Data.EquipType)
         {
-            Managers.Game.ChracterStyleInfo.Hair = Data.SpriteName;
-        }
-        else if (Data.Id < (int)State.Eyes)
-        {
-            Managers.Game.ChracterStyleInfo.Eyebrows = Data.SpriteName;
-        }
-        else if (Data.Id < (int)State.None)
-        {
-            Managers.Game.ChracterStyleInfo.Eyes = Data.SpriteName;
+            case EEquipType.Hair:
+                Managers.Game.ChracterStyleInfo.Hair = Data.SpriteName;
+                break;
+            case EEquipType.Eyebrows:
+                Managers.Game.ChracterStyleInfo.Eyebrows = Data.SpriteName;
+                break;
+            case EEquipType.Eyes:
+                Managers.Game.ChracterStyleInfo.Eyes = Data.SpriteName;
+                break;
+            case EEquipType.None:
+                //에러 팝업
+                break;
         }
 
         Managers.Event.TriggerEvent(EEventType.SetStyle_Player, this);
@@ -87,9 +87,5 @@ public class UI_InventoryItem : UI_Base
     }
 
 
-    public void CloseItem()
-    {
-        Managers.Pool.Push(this.gameObject);
-    }
 
 }

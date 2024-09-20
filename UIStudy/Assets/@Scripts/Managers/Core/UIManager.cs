@@ -121,7 +121,7 @@ public class UIManager
         _popupOrder--;
     }
 
-    public T MakeSubItem<T>(string name = null, Transform parent = null) where T : UI_Base
+    public T MakeSubItem<T>(string name = null, Transform parent = null, bool pooling = false) where T : UI_Base
     {
         if (string.IsNullOrEmpty(name))
         {
@@ -134,7 +134,7 @@ public class UIManager
             parent = Root.transform;
         }
 
-        var go = Managers.Resource.Instantiate(name, parent);
+        var go = Managers.Resource.Instantiate(name, parent, pooling);
         if (go == null)
         {
             Debug.Log($"resource not found [{name}]");

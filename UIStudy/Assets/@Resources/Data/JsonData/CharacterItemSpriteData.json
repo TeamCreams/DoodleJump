@@ -2,175 +2,218 @@
   "characterItemSpriteDatas": [
     {
       "Id": 10001,
-      "SpriteName": "Afro"
+      "SpriteName": "Afro",
+      "EquipType": 1
     },
     {
       "Id": 10002,
-      "SpriteName": "AfroSmall"
+      "SpriteName": "AfroSmall",
+      "EquipType": 1
     },
     {
       "Id": 10003,
-      "SpriteName": "BuzzCut"
+      "SpriteName": "BuzzCut",
+      "EquipType": 1
     },
     {
       "Id": 10004,
-      "SpriteName": "Leaky"
+      "SpriteName": "Leaky",
+      "EquipType": 1
     },
     {
       "Id": 10005,
-      "SpriteName": "LongHair"
+      "SpriteName": "LongHair",
+      "EquipType": 1
     },
     {
       "Id": 10006,
-      "SpriteName": "Mohawk"
+      "SpriteName": "Mohawk",
+      "EquipType": 1
     },
     {
       "Id": 10007,
-      "SpriteName": "PushedBack"
+      "SpriteName": "PushedBack",
+      "EquipType": 1
     },
     {
       "Id": 10008,
-      "SpriteName": "Shaggy"
+      "SpriteName": "Shaggy",
+      "EquipType": 1
     },
     {
       "Id": 10009,
-      "SpriteName": "ShortHair"
+      "SpriteName": "ShortHair",
+      "EquipType": 1
     },
     {
       "Id": 10010,
-      "SpriteName": "ShortPonytail"
+      "SpriteName": "ShortPonytail",
+      "EquipType": 1
     },
     {
       "Id": 10011,
-      "SpriteName": "SideFringe"
+      "SpriteName": "SideFringe",
+      "EquipType": 1
     },
     {
       "Id": 10012,
-      "SpriteName": "Slicked"
+      "SpriteName": "Slicked",
+      "EquipType": 1
     },
     {
       "Id": 10013,
-      "SpriteName": "SlickedTwintales"
+      "SpriteName": "SlickedTwintales",
+      "EquipType": 1
     },
     {
       "Id": 10014,
-      "SpriteName": "ZombieShabby"
+      "SpriteName": "ZombieShabby",
+      "EquipType": 1
     },
     {
       "Id": 10015,
-      "SpriteName": "ZombieSticks"
+      "SpriteName": "ZombieSticks",
+      "EquipType": 1
     },
     {
       "Id": 11001,
-      "SpriteName": "AnnoyedEyebrows"
+      "SpriteName": "AnnoyedEyebrows",
+      "EquipType": 2
     },
     {
       "Id": 11002,
-      "SpriteName": "CryingEyebrows"
+      "SpriteName": "CryingEyebrows",
+      "EquipType": 2
     },
     {
       "Id": 11003,
-      "SpriteName": "DizzyEyebrows"
+      "SpriteName": "DizzyEyebrows",
+      "EquipType": 2
     },
     {
       "Id": 11004,
-      "SpriteName": "EhEyebrows"
+      "SpriteName": "EhEyebrows",
+      "EquipType": 2
     },
     {
       "Id": 11005,
-      "SpriteName": "EnrageEyebrows"
+      "SpriteName": "EnrageEyebrows",
+      "EquipType": 2
     },
     {
       "Id": 11006,
-      "SpriteName": "GreedyEyebrows"
+      "SpriteName": "GreedyEyebrows",
+      "EquipType": 2
     },
     {
       "Id": 11007,
-      "SpriteName": "HappyEyebrows"
+      "SpriteName": "HappyEyebrows",
+      "EquipType": 2
     },
     {
       "Id": 11008,
-      "SpriteName": "InjuredEyebrows"
+      "SpriteName": "InjuredEyebrows",
+      "EquipType": 2
     },
     {
       "Id": 11009,
-      "SpriteName": "InLoveEyebrows"
+      "SpriteName": "InLoveEyebrows",
+      "EquipType": 2
     },
     {
       "Id": 11010,
-      "SpriteName": "OMGEyebrows"
+      "SpriteName": "OMGEyebrows",
+      "EquipType": 2
     },
     {
       "Id": 11011,
-      "SpriteName": "PervertedEyebrows"
+      "SpriteName": "PervertedEyebrows",
+      "EquipType": 2
     },
     {
       "Id": 11012,
-      "SpriteName": "SadEyebrows"
+      "SpriteName": "SadEyebrows",
+      "EquipType": 2
     },
     {
       "Id": 11013,
-      "SpriteName": "SickEyebrows"
+      "SpriteName": "SickEyebrows",
+      "EquipType": 2
     },
     {
       "Id": 11014,
-      "SpriteName": "SweatDropEyebrows"
+      "SpriteName": "SweatDropEyebrows",
+      "EquipType": 2
     },
     {
       "Id": 12001,
-      "SpriteName": "Annoyed"
+      "SpriteName": "Annoyed",
+      "EquipType": 3
     },
     {
       "Id": 12002,
-      "SpriteName": "Kitty"
+      "SpriteName": "Kitty",
+      "EquipType": 3
     },
     {
       "Id": 12003,
-      "SpriteName": "Dizzy"
+      "SpriteName": "Dizzy",
+      "EquipType": 3
     },
     {
       "Id": 12004,
-      "SpriteName": "Eh"
+      "SpriteName": "Eh",
+      "EquipType": 3
     },
     {
       "Id": 12005,
-      "SpriteName": "Enrage"
+      "SpriteName": "Enrage",
+      "EquipType": 3
     },
     {
       "Id": 12006,
-      "SpriteName": "Greedy"
+      "SpriteName": "Greedy",
+      "EquipType": 3
     },
     {
       "Id": 12007,
-      "SpriteName": "Happy"
+      "SpriteName": "Happy",
+      "EquipType": 3
     },
     {
       "Id": 12008,
-      "SpriteName": "Injured"
+      "SpriteName": "Injured",
+      "EquipType": 3
     },
     {
       "Id": 12009,
-      "SpriteName": "InLove"
+      "SpriteName": "InLove",
+      "EquipType": 3
     },
     {
       "Id": 12010,
-      "SpriteName": "OMG"
+      "SpriteName": "OMG",
+      "EquipType": 3
     },
     {
       "Id": 12011,
-      "SpriteName": "Perverted"
+      "SpriteName": "Perverted",
+      "EquipType": 3
     },
     {
       "Id": 12012,
-      "SpriteName": "Sad"
+      "SpriteName": "Sad",
+      "EquipType": 3
     },
     {
       "Id": 12013,
-      "SpriteName": "Sick"
+      "SpriteName": "Sick",
+      "EquipType": 3
     },
     {
       "Id": 12014,
-      "SpriteName": "SweatDrop"
+      "SpriteName": "SweatDrop",
+      "EquipType": 3
     }
   ]
 }

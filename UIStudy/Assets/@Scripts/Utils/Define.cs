@@ -57,9 +57,57 @@ public static class Define
 	{
 		Attacked_Player,
 		SetStyle_Player,
+    }
+
+    public enum EEquipType
+    {
+		None = 0,
+		Hair,
+		Eyebrows,
+		Eyes
 	}
 
-    public class Constants
+
+    public enum EStat
+    {
+        Atk,
+        Def,
+        MaxHp,
+        Recovery,
+        CritRate,
+        AttackRange,
+        AttackDelay,
+        AttackDelayReduceRate,
+        DodgeRate,
+        SkillCooldownReduceRate,
+        MoveSpeed,
+        ElementAdvantageRate,
+        GoldAmountAdvantageRate,
+        ExpAmountAdvantageRate,
+        BossAtkAdvantageRate,
+        ActiveSKillAdvantageRate,
+        MaxCount,
+    }
+
+    public enum EStatModifierKind
+    {
+        Item,
+        Pet,
+        Summon,
+        Passive,
+        Buff,
+        Relic,
+    }
+
+    public enum EStatModifierType
+    {
+        Flat,
+        Percentage,
+    }
+
+
+
+	public class Constants
 	{
 		public const int PLAYER_ID = 1;
 	}

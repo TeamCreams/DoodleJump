@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Define;
 
 namespace Data
 {
@@ -27,6 +28,48 @@ namespace Data
 			return dict;
 		}
 	}
+	#region Creature
+    [Serializable]
+    public class CreatureInfoData
+    {
+        public int DataID;
+        public string Remark;
+        // Stat
+        public float Atk;
+        public float Def;
+        public float MaxHp;
+        public float Recovery;
+        public float CritRate;
+        public float AttackRange;
+        public float AttackDelay;
+        public float AttackDelayReduceRate;
+        public float DodgeRate;
+        public float SkillCooldownReduceRate;
+        public float MoveSpeed;
+        public float ElementAdvantageRate;
+        public float GoldAmountAdvantageRate;
+        public float ExpAmountAdvantageRate;
+        public float BossAtkAdvantageRate;
+        public float ActiveSKillAdvantageRate;
+    }
+
+    [Serializable]
+    public class CreatureInfoDataLoader : ILoader<int, CreatureInfoData>
+    {
+        public List<CreatureInfoData> CreatureInfoDataList = new List<CreatureInfoData>();
+
+        public Dictionary<int, CreatureInfoData> MakeDict()
+        {
+            Dictionary<int, CreatureInfoData> dict = new Dictionary<int, CreatureInfoData>();
+            foreach (CreatureInfoData infoData in CreatureInfoDataList)
+            {
+                dict.Add(infoData.DataID, infoData);
+            }
+
+            return dict;
+        }
+    }
+	#endregion
 
     [Serializable]
     public class TinyFarmData
@@ -107,6 +150,7 @@ namespace Data
     {
         public int Id;
         public string SpriteName;
+        public EEquipType EquipType;
     }
 
     [Serializable]

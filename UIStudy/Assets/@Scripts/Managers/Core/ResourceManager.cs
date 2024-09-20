@@ -30,10 +30,20 @@ public class ResourceManager
 			return null;
 		}
 
+		GameObject go = null;
 		if (pooling)
-			return Managers.Pool.Pop(prefab);
+		{
+			go = Managers.Pool.Pop(prefab);
+			if(parent != null)
+            {
+				go.transform.SetParent(parent, false);
+			}
+		}
+		else
+		{
+			go = Object.Instantiate(prefab, parent);
+		}
 
-		GameObject go = Object.Instantiate(prefab, parent);
 		go.name = prefab.name;
 
 		return go;

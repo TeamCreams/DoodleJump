@@ -27,6 +27,8 @@ public class PlayerController : ObjectBase
     private Animator _animator;
     private CharacterController _characterController;
 
+    private Transform EyeTransform;
+
     public EPlayerState State
 	{
         get => _state;
@@ -89,6 +91,9 @@ public class PlayerController : ObjectBase
 
         _emotion = _eyesGameobject.GetComponent<SpriteRenderer>();
         _characterController = GetComponent<CharacterController>();
+
+
+        EyeTransform = Util.FindChild(go: _animator.gameObject, name: "Eyes", recursive : true).transform;
         //_characterController.isTrigger = true;
     }
 
