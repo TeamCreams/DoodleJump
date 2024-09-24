@@ -45,7 +45,10 @@ public class UI_Base : MonoBehaviour
     protected void BindButtons(Type type) { Bind<Button>(type); }
     protected void BindToggles(Type type) { Bind<Toggle>(type); }
     protected void BindInputFields(Type type) { Bind<TMP_InputField>(type); }
-    protected void BindSlider(Type type) { Bind<Slider>(type); }
+    protected void BindSliders(Type type) { Bind<Slider>(type); }
+    protected void BindLegacyTexts(Type type) { Bind<Text>(type); }
+    protected void BindLegacyInputFields(Type type) { Bind<InputField>(type); }
+
 
     protected T Get<T>(int idx) where T : UnityEngine.Object
     {
@@ -63,6 +66,10 @@ public class UI_Base : MonoBehaviour
     protected Toggle GetToggle(int idx) { return Get<Toggle>(idx); }
     protected TMP_InputField GetInputField(int idx) { return Get<TMP_InputField>(idx); }
     protected Slider GetSlider(int idx) { return Get<Slider>(idx); }
+
+    // FIX : 현재 ChooseStats에서 사용되는 Text와 InputField는 Legacy(옛날거) 라서 이거로 사용해야함.
+    protected Text GetLegacyText(int idx) { return Get<Text>(idx); }
+    protected InputField GetLegacyInputField(int idx) { return Get<InputField>(idx); }
 
     public static void BindEvent(GameObject go, Action<PointerEventData> action = null, Define.EUIEvent type = Define.EUIEvent.Click)
     {

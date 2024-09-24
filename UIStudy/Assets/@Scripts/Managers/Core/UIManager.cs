@@ -145,5 +145,10 @@ public class UIManager
         return rv;
     }
 
+    public T GetSceneUI<T>() where T : UI_Scene
+    {
+        var rv = Util.FindChild<T>(Root);
+        return rv;
+    }
 }
 

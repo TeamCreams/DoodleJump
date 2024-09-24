@@ -1,3 +1,4 @@
+﻿using Assets.HeroEditor4D.SimpleColorPicker.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class UI_ColorSlider : UI_Base
         Slider,
     }
 
-    enum Texts
+    enum LegacyTexts
     {
         Input_Text,
 
@@ -24,13 +25,15 @@ public class UI_ColorSlider : UI_Base
     protected override void Init()
     {
         base.Init();
-        BindSlider(typeof(Sliders));
-        BindTexts(typeof(Texts));
-        _colorPicker = this.transform.parent.gameObject.GetComponent<UI_ColorPicker>();
-        if(_colorPicker == null)
-        {
-            Debug.Log("is nullllllllllllllllllllllllllllllllllllllllllllll");
-        }
+        BindSliders(typeof(Sliders));
+        BindLegacyTexts(typeof(LegacyTexts));
+        //_colorPicker = this.transform.parent.gameObject.GetComponent<UI_ColorPicker>();
+        // FIX : parent에 있는것이 아니라, parent의 parent의 parent에 있는것으로 추정됨.
+        //      이런 경우에는 그냥 심플하게 생각하는게 좋음 아래처럼
+        _colorPicker = Managers.UI.GetSceneUI<UI_ChooseStats>().ColorPicker;
+
+        Debug.Assert(_colorPicker != null, $"{nameof(_colorPicker)} is null");
+
     }
 
     /// <summary>
@@ -44,7 +47,7 @@ public class UI_ColorSlider : UI_Base
     public void Set(float value)
     {
         GetSlider((int)Sliders.Slider).value = value;
-        GetText((int)Texts.Input_Text).text = Mathf.RoundToInt(value * MaxValue).ToString();
+        GetLegacyText((int)LegacyTexts.Input_Text).text = Mathf.RoundToInt(value * MaxValue).ToString();
     }
 
     /// <summary>
@@ -52,9 +55,9 @@ public class UI_ColorSlider : UI_Base
     /// </summary>
     public void OnValueChanged(float value)
     {
-        if (_colorPicker.Locked) return;
+        if (_colorPicker != null && _colorPicker.Locked) return;
 
-        GetText((int)Texts.Input_Text).text = Mathf.RoundToInt(value * MaxValue).ToString();
+        GetLegacyText((int)LegacyTexts.Input_Text).text = Mathf.RoundToInt(value * MaxValue).ToString();
         _colorPicker.OnSliderChanged();
     }
 
@@ -69,13 +72,13 @@ public class UI_ColorSlider : UI_Base
 
         if (value == "")
         {
-            GetText((int)Texts.Input_Text).text = "";
+            GetLegacyText((int)LegacyTexts.Input_Text).text = "";
         }
         else
         {
             var integer = Mathf.Min(int.Parse(value), MaxValue);
 
-            GetText((int)Texts.Input_Text).text = integer.ToString();
+            GetLegacyText((int)LegacyTexts.Input_Text).text = integer.ToString();
             GetSlider((int)Sliders.Slider).value = (float)integer / MaxValue;
             _colorPicker.OnSliderChanged();
         }

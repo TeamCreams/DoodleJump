@@ -13,7 +13,11 @@ public class UI_ColorPicker : UI_Base
     //public Image Gradient;
     //public RectTransform RectTransform;
     //public Slider Hue;
-    private UI_ColorSlider[] colorSliders;
+    //private UI_ColorSlider[] colorSliders;
+
+    // FIX : 정적배열보다는 List로 관리하는게 대부분의 상황에서 좋음
+    private List<UI_ColorSlider> colorSliders = new List<UI_ColorSlider>();
+
     //public UI_ColorSlider R, G, B, H, S, V, A;
     //public InputField Hex;
     //public Image[] CompareLook; // [0] is old color, [1] is new color.
@@ -43,11 +47,11 @@ public class UI_ColorPicker : UI_Base
     {
         Hue,
     }
-    enum InputFields
+    enum LegacyInputFields
     {
         Hex
     }
-    enum Texts
+    enum LegacyTexts
     {
         Mode_Text,
     }
@@ -60,8 +64,8 @@ public class UI_ColorPicker : UI_Base
         S,
         V,
         A,
-        Rgb, //RgbSliders,
-        Hsv, //HsvSliders
+        RGB, //RgbSliders,      // FIX : 대소문자 구분으로 못찾음
+        HSV, //HsvSliders       // FIX : 대소문자 구분으로 못찾음
     }
 
     [HideInInspector] public Texture2D Texture;
@@ -76,9 +80,9 @@ public class UI_ColorPicker : UI_Base
         base.Init();
 
         BindImages(typeof(Images));
-        BindSlider(typeof(Sliders));
-        BindInputFields(typeof(InputFields));
-        BindTexts(typeof(Texts));
+        BindSliders(typeof(Sliders));
+        BindLegacyInputFields(typeof(LegacyInputFields));
+        BindLegacyTexts(typeof(LegacyTexts));
         BindObjects(typeof(GameObjects));
 
         Texture = new Texture2D(128, 128) { filterMode = FilterMode.Point };
@@ -88,11 +92,16 @@ public class UI_ColorPicker : UI_Base
         foreach (var slider in Enum.GetValues(typeof(GameObjects)))
         {
             var gameObject = Get<GameObject>((int)slider);
+            // FIX : 이렇게 현재 못찾은 애가 누구인지 로그찍어보기
+            if (gameObject == null)
+            {
+                Debug.LogError($"{(GameObjects)slider} 을 못찾음");
+            }
             var uiColorSlider = gameObject.GetComponent<UI_ColorSlider>();
 
             if (uiColorSlider != null)
             {
-                colorSliders[i] = uiColorSlider;//gameObject.GetOrAddComponent<UI_ColorSlider>();
+                colorSliders.Add(uiColorSlider);//gameObject.GetOrAddComponent<UI_ColorSlider>();
                 i++;
             }
         }
@@ -156,7 +165,7 @@ public class UI_ColorPicker : UI_Base
 
         
         if (hue) GetSlider((int)Sliders.Hue).value = h;
-        if (hex) GetInputField((int)InputFields.Hex).text = ColorUtility.ToHtmlStringRGBA(Color);
+        if (hex) GetLegacyInputField((int)LegacyInputFields.Hex).text = ColorUtility.ToHtmlStringRGBA(Color);
 
         Locked = false;
         UpdateGradient();
@@ -200,7 +209,7 @@ public class UI_ColorPicker : UI_Base
         if (Locked) return;
 
         value = Regex.Replace(value.ToUpper(), "[^0-9A-F]", "");
-        GetInputField((int)InputFields.Hex).text = value;
+        GetLegacyInputField((int)LegacyInputFields.Hex).text = value;
 
         if (ColorUtility.TryParseHtmlString("#" + value, out var color))
         {
@@ -222,9 +231,9 @@ public class UI_ColorPicker : UI_Base
     /// </summary>
     public void SetMode(EColorMode mode)
     {
-        GetObject((int)GameObjects.Rgb).SetActive(mode == EColorMode.Rgb);
-        GetObject((int)GameObjects.Hsv).SetActive(mode == EColorMode.Hsv);
-        GetText((int)Texts.Mode_Text).text = mode == EColorMode.Rgb ? "HSV" : "RGB";
+        GetObject((int)GameObjects.RGB).SetActive(mode == EColorMode.Rgb);
+        GetObject((int)GameObjects.HSV).SetActive(mode == EColorMode.Hsv);
+        GetText((int)LegacyTexts.Mode_Text).text = mode == EColorMode.Rgb ? "HSV" : "RGB";
     }
 
     private void UpdateGradient()
