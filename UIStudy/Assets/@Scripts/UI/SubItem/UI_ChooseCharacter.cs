@@ -21,15 +21,23 @@ public class UI_ChooseCharacter : UI_Base
         EyesItem,
         EyebrowsItem,
     }
+    enum Buttons
+    {
+        Next_Button
+    }
 
     protected override void Init()
     {
         base.Init();
         BindObjects(typeof(GameObjects));
         BindImages(typeof(Images));
+        BindButtons(typeof(Buttons));
+
         GetImage((int)Images.HairItem).gameObject.BindEvent(OnClick_HairItem, Define.EUIEvent.Click);
         GetImage((int)Images.EyesItem).gameObject.BindEvent(OnClick_EyesItem, Define.EUIEvent.Click);
         GetImage((int)Images.EyebrowsItem).gameObject.BindEvent(OnClick_EyebrowsItem, Define.EUIEvent.Click);
+
+        GetButton((int)Buttons.Next_Button).gameObject.BindEvent(OnClick_NextButton, Define.EUIEvent.Click);
         _itemRoot = GetObject((int)GameObjects.InventoryItemRoot);
 
         foreach (Transform slotObject in _itemRoot.transform)
@@ -51,6 +59,11 @@ public class UI_ChooseCharacter : UI_Base
     private void OnClick_EyebrowsItem(PointerEventData eventData)
     {
         SetInventoryItems(EEquipType.Eyebrows);
+    }
+
+    private void OnClick_NextButton(PointerEventData eventData)
+    {
+
     }
 
     private void SetInventoryItems(EEquipType equipType)

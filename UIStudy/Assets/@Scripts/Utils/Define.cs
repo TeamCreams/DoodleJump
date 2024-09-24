@@ -105,9 +105,14 @@ public static class Define
         Percentage,
     }
 
+    public enum EColorMode
+    {
+        Rgb,
+        Hsv
+    }
 
 
-	public class Constants
+    public class Constants
 	{
 		public const int PLAYER_ID = 1;
 	}

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class CreatureBase : ObjectBase
 {
-    protected Stats _stats = new Stats();
+    protected Stats _stats = new Stats(null);
 
 
 
