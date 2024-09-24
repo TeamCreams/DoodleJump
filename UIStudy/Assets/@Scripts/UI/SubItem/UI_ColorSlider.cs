@@ -6,29 +6,31 @@ using static Define;
 
 public class UI_ColorSlider : UI_Base
 {
-    private UI_ColorPicker _colorPicker;
+    public UI_ColorPicker _colorPicker;
     enum Sliders
     {
         Slider,
     }
 
-    enum InputFields
+    enum Texts
     {
-        Input,
+        Input_Text,
 
     }
 
     private int MaxValue;
 
 
-
     protected override void Init()
     {
         base.Init();
         BindSlider(typeof(Sliders));
-        BindInputFields(typeof(InputFields));
+        BindTexts(typeof(Texts));
         _colorPicker = this.transform.parent.gameObject.GetComponent<UI_ColorPicker>();
-
+        if(_colorPicker == null)
+        {
+            Debug.Log("is nullllllllllllllllllllllllllllllllllllllllllllll");
+        }
     }
 
     /// <summary>
@@ -42,7 +44,7 @@ public class UI_ColorSlider : UI_Base
     public void Set(float value)
     {
         GetSlider((int)Sliders.Slider).value = value;
-        GetInputField((int)InputFields.Input).text = Mathf.RoundToInt(value * MaxValue).ToString();
+        GetText((int)Texts.Input_Text).text = Mathf.RoundToInt(value * MaxValue).ToString();
     }
 
     /// <summary>
@@ -52,7 +54,7 @@ public class UI_ColorSlider : UI_Base
     {
         if (_colorPicker.Locked) return;
 
-        GetInputField((int)InputFields.Input).text = Mathf.RoundToInt(value * MaxValue).ToString();
+        GetText((int)Texts.Input_Text).text = Mathf.RoundToInt(value * MaxValue).ToString();
         _colorPicker.OnSliderChanged();
     }
 
@@ -67,13 +69,13 @@ public class UI_ColorSlider : UI_Base
 
         if (value == "")
         {
-            GetInputField((int)InputFields.Input).text = "";
+            GetText((int)Texts.Input_Text).text = "";
         }
         else
         {
             var integer = Mathf.Min(int.Parse(value), MaxValue);
 
-            GetInputField((int)InputFields.Input).text = integer.ToString();
+            GetText((int)Texts.Input_Text).text = integer.ToString();
             GetSlider((int)Sliders.Slider).value = (float)integer / MaxValue;
             _colorPicker.OnSliderChanged();
         }

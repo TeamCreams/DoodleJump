@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd429b8148a6f4fe8a3f57e7c70947f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _colorPicker: {fileID: 0}
 --- !u!114 &5479708394370012992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,7 +442,7 @@ GameObject:
   - component: {fileID: 8489260617031210673}
   - component: {fileID: 4534532208976667494}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Input_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -634,7 +635,7 @@ GameObject:
   - component: {fileID: 6523211414472635206}
   - component: {fileID: 7831123052522238027}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Input_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2496,7 +2497,7 @@ GameObject:
   - component: {fileID: 5468236320974325922}
   - component: {fileID: 1102767308489044495}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Input_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3516,6 +3517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd429b8148a6f4fe8a3f57e7c70947f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _colorPicker: {fileID: 0}
 --- !u!114 &3363667726098559050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3540,7 +3542,7 @@ GameObject:
   - component: {fileID: 1278811985303235385}
   - component: {fileID: 8856738475126049724}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Input_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3884,7 +3886,7 @@ GameObject:
   - component: {fileID: 1205829120215925147}
   - component: {fileID: 1069603746642593958}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Input_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5215,6 +5217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd429b8148a6f4fe8a3f57e7c70947f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _colorPicker: {fileID: 0}
 --- !u!114 &7247033403448162839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5926,7 +5929,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &443442887160034737
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6562,6 +6565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd429b8148a6f4fe8a3f57e7c70947f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _colorPicker: {fileID: 0}
 --- !u!114 &6268501353200122609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6795,7 +6799,7 @@ GameObject:
   - component: {fileID: 3429335290097474895}
   - component: {fileID: 3064186895314129865}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Input_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6916,6 +6920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd429b8148a6f4fe8a3f57e7c70947f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _colorPicker: {fileID: 0}
 --- !u!114 &2339889045110607445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7062,6 +7067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd429b8148a6f4fe8a3f57e7c70947f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _colorPicker: {fileID: 0}
 --- !u!114 &5584352887048348481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8744,9 +8750,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2184860053881157193}
-  - component: {fileID: 4328822717161107333}
+  - component: {fileID: 488691049264622636}
   m_Layer: 5
-  m_Name: ColorPicker
+  m_Name: UI_ColorPicker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8774,7 +8780,7 @@ RectTransform:
   m_AnchoredPosition: {x: -19, y: -573}
   m_SizeDelta: {x: -1920, y: -3413.3333}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4328822717161107333
+--- !u!114 &488691049264622636
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8841,6 +8847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd429b8148a6f4fe8a3f57e7c70947f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _colorPicker: {fileID: 0}
 --- !u!114 &6994706171873802177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9117,7 +9124,7 @@ GameObject:
   - component: {fileID: 2079619036576940797}
   - component: {fileID: 3974495158815551122}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Input_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
