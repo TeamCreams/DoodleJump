@@ -23,9 +23,12 @@ public class UI_RetryPopup : UI_Popup
     }
 
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
         BindTexts(typeof(Texts));
         BindButtons(typeof(Buttons));
         BindObjects(typeof(GameObjects));
@@ -43,6 +46,7 @@ public class UI_RetryPopup : UI_Popup
         }, Define.EUIEvent.Click);
 
         Time.timeScale = 0f;
+        return true;
     }
 
 

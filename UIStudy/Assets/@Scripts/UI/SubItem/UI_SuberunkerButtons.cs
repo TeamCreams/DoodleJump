@@ -10,14 +10,18 @@ public class UI_SuberunkerButtons : UI_Base
         Retry_Button,
     }
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
         BindButtons(typeof(Buttons));
 
         this.Get<Button>((int)Buttons.Retry_Button).gameObject.BindEvent((evt) =>
         {
             Managers.Scene.LoadScene(Define.EScene.SuberunkerScene);
         }, Define.EUIEvent.Click);
+        return true;
     }
 }

@@ -22,20 +22,26 @@ public class UI_ColorSlider : UI_Base
     private int MaxValue;
 
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
         BindSliders(typeof(Sliders));
         BindLegacyTexts(typeof(LegacyTexts));
+        return true;
+    }
+
+    private void OnEnable()
+    {
         //_colorPicker = this.transform.parent.gameObject.GetComponent<UI_ColorPicker>();
         // FIX : parent에 있는것이 아니라, parent의 parent의 parent에 있는것으로 추정됨.
         //      이런 경우에는 그냥 심플하게 생각하는게 좋음 아래처럼
+
         _colorPicker = Managers.UI.GetSceneUI<UI_ChooseStats>().ColorPicker;
-
         Debug.Assert(_colorPicker != null, $"{nameof(_colorPicker)} is null");
-
     }
-
     /// <summary>
     /// Quick access.
     /// </summary>

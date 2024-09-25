@@ -23,9 +23,12 @@ public class UI_SampleScene : UI_Scene
     {
     }
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
 
         this.BindButtons(typeof(Buttons));
         this.BindImages(typeof(Images));
@@ -54,6 +57,7 @@ public class UI_SampleScene : UI_Scene
         {
             Debug.Log("OnClick 2");
         });
+        return true;
     }
 
 }

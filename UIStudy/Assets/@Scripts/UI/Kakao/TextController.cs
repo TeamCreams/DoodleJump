@@ -13,9 +13,12 @@ public class TextController : UI_Base
         TextInBox
     }
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
         BindTexts(typeof(Texts));
         _layoutElement = GetText((int)Texts.TextInBox).GetOrAddComponent<LayoutElement>();
 
@@ -28,6 +31,7 @@ public class TextController : UI_Base
 
         //SetChattingBubbleSize(GetText((int)Texts.TextInBox).preferredWidth);
         StartCoroutine(ForceUpdate());
+        return true;
     }
 
     IEnumerator ForceUpdate()

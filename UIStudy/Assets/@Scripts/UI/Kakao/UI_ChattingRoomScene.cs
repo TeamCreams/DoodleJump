@@ -26,10 +26,16 @@ public class UI_ChattingRoomScene : UI_Scene
     private TMP_InputField _inputMessage = null;
     private Messages _messages = null;
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
+
+
         StartLoadAssets(); // 그냥 기본 class를 만들어서 쓰는 것도 ㄱㅊ을 듯
+        return true;
     }
 
     private void SendBubble(string name, string text, bool input = false)

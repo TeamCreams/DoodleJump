@@ -75,9 +75,13 @@ public class UI_ColorPicker : UI_Base
     /// <summary>
     /// Called on app start if script is enabled.
     /// </summary>
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
+
 
         BindImages(typeof(Images));
         BindSliders(typeof(Sliders));
@@ -88,6 +92,7 @@ public class UI_ColorPicker : UI_Base
         Texture = new Texture2D(128, 128) { filterMode = FilterMode.Point };
         GetImage((int)Images.Gradient).sprite = Sprite.Create(Texture, new Rect(0f, 0f, Texture.width, Texture.height), new Vector2(0.5f, 0.5f), 100f);
 
+        Debug.Log("0987654321234567890ColorPicker");
         int i = 0;
         foreach (var slider in Enum.GetValues(typeof(GameObjects)))
         {
@@ -107,6 +112,7 @@ public class UI_ColorPicker : UI_Base
         }
 
 
+        return true;
     }
 
     public void OnEnable()

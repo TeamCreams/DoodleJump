@@ -8,7 +8,7 @@ using static Define;
 public class PlayerController : ObjectBase
 {
     private PlayerData _data;
-    public PlayerData Data 
+    public PlayerData Data
     {
         get => _data;
         private set
@@ -28,27 +28,29 @@ public class PlayerController : ObjectBase
     private CharacterController _characterController;
 
     private Transform EyeTransform;
+    private Transform EyebrowsTransform;
+    private Transform HairTransform;
 
     public EPlayerState State
-	{
+    {
         get => _state;
         set
-		{
-            if(_state != value)
+        {
+            if (_state != value)
             {
                 OnChangedState?.Invoke(_state, value);
                 _state = value;
             }
-		}
-	}
+        }
+    }
     public Action<EPlayerState, EPlayerState> OnChangedState;
 
     public override bool Init()
-	{
-		if(false == base.Init())
-		{
+    {
+        if (false == base.Init())
+        {
             return false;
-		}
+        }
 
         Managers.Event.AddEvent(EEventType.Attacked_Player, OnEvent_DamagedHp);
 
@@ -58,17 +60,17 @@ public class PlayerController : ObjectBase
         return true;
     }
 
-	private void OnDestroy()
+    private void OnDestroy()
     {
         Managers.Event.RemoveEvent(EEventType.Attacked_Player, OnEvent_DamagedHp);
     }
 
-	void Update()
+    void Update()
     {
         //Update_PositionX();
         //CheckAttacked();
         switch (_state)
-		{
+        {
             case EPlayerState.Idle:
                 Update_Idle();
                 break;
@@ -81,43 +83,35 @@ public class PlayerController : ObjectBase
         }
     }
 
-	public override void SetInfo(int templateId)
-	{
-		base.SetInfo(templateId);
+    public override void SetInfo(int templateId)
+    {
+        base.SetInfo(templateId);
         _animator = GetComponentInChildren<Animator>();
         Data = Managers.Data.PlayerDic[templateId];
 
         _speed = Data.Speed;
 
-        _emotion = _eyesGameobject.GetComponent<SpriteRenderer>();
+        //_emotion = _eyesGameobject.GetComponent<SpriteRenderer>();
         _characterController = GetComponent<CharacterController>();
 
+        EyeTransform = Util.FindChild(go: _animator.gameObject, name: "Eyes", recursive: true).transform;
+        EyebrowsTransform = Util.FindChild(go: _animator.gameObject, name: "Eyebrows", recursive: true).transform;
+        HairTransform = Util.FindChild(go: _animator.gameObject, name: "Hair", recursive: true).transform;
 
-        EyeTransform = Util.FindChild(go: _animator.gameObject, name: "Eyes", recursive : true).transform;
-        //_characterController.isTrigger = true;
+    }
+
+    private void CommitPlayerCustomization()
+    {
+        HairTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Hair}.sprite");
+        EyebrowsTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyebrows}.sprite");
+        EyeTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyes}.sprite");
     }
 
     void SetState(EPlayerState prevState, EPlayerState currentState)
 	{
 
 	}
-    /*
-    public void CheckAttacked()
-    {
-        _hitStoneMonster
-            = Physics2D.BoxCast(transform.position, new Vector2(1f, 1f), 0f, Vector2.up, 1f, LayerMask.GetMask("StoneMonster"));
 
-
-        _hitStoneMonster
-            = Physics2D.Raycast(transform.position, Vector2.up, 0.5f, LayerMask.GetMask("StoneMonster"));
-      
-        if(_hitStoneMonster.collider != null)
-        {
-            Managers.Pool.Push(_hitStoneMonster.collider.gameObject);
-            Managers.Event.TriggerEvent(EEventType.Attacked_Player); // 새로 시작할 때 오류 뜸.
-        }
-    }
-    */
     private void Update_PositionX()
 	{
         // 여기를 바꾸자
@@ -132,7 +126,7 @@ public class PlayerController : ObjectBase
     }
 
     private void Update_Idle()
-	{
+    {
         if (Managers.Game.JoystickState == EJoystickState.PointerDown)
         {
             _waitTime = 0;
@@ -143,21 +137,6 @@ public class PlayerController : ObjectBase
         {
             this.State = EPlayerState.Boring;
         }
-    }
-
-    private void OnEvent_DamagedHp(Component sender, object param)
-    {
-        Data.Life -= 1;
-        Managers.Game.Life = Data.Life;
-
-        StartCoroutine(Update_CryingFace());
-    }
-     
-    IEnumerator Update_CryingFace()
-    {
-        _emotion.sprite = Managers.Resource.Load<Sprite>("Crying.sprite");
-        yield return new WaitForSeconds(0.8f);
-        _emotion.sprite = Managers.Resource.Load<Sprite>("Sad.sprite");
     }
     
     private void Update_Move()
@@ -185,6 +164,21 @@ public class PlayerController : ObjectBase
             this.transform.localScale
                     = new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
         }
+    }
+
+    private void OnEvent_DamagedHp(Component sender, object param)
+    {
+        Data.Life -= 1;
+        Managers.Game.Life = Data.Life;
+
+        StartCoroutine(Update_CryingFace());
+    }
+
+    IEnumerator Update_CryingFace()
+    {
+        EyeTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>("Crying.sprite");
+        yield return new WaitForSeconds(0.8f);
+        EyeTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>("Sad.sprite");
     }
 
     private void Update_Boring()

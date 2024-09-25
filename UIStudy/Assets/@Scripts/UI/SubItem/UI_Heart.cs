@@ -7,11 +7,14 @@ public class UI_Heart : UI_Base
 {
 	Image _image;
 
-	protected override void Init()
-	{
-		base.Init();
-
-		_image = this.GetComponent<Image>();
+    public override bool Init()
+    {
+        if (base.Init() == false)
+        {
+            return false;
+        }
+        _image = this.GetComponent<Image>();
+		return true;
 	}
 
 	public void Show()

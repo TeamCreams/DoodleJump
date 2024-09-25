@@ -26,9 +26,12 @@ public class UI_ChooseCharacter : UI_Base
         Next_Button
     }
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
         BindObjects(typeof(GameObjects));
         BindImages(typeof(Images));
         BindButtons(typeof(Buttons));
@@ -44,6 +47,7 @@ public class UI_ChooseCharacter : UI_Base
         {
             Managers.Resource.Destroy(slotObject.gameObject);
         }
+        return true;
     }
 
     private void OnClick_HairItem(PointerEventData eventData)

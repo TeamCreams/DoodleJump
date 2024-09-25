@@ -9,11 +9,14 @@ public class UI_Chatting : UI_Base
         TextInBox
     }
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
         BindTexts(typeof(Texts));
-
+        return true;
     }
 
     public void SetText(string text)

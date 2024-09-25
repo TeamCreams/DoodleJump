@@ -5,11 +5,15 @@ public class UI_Scene : UI_Base
 {
     protected UI_EventHandler _eventHandler;
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
 
         this.gameObject.GetOrAddComponent<UI_EventHandler>();
+        return true;
     }
 }
 

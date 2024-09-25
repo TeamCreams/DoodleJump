@@ -38,9 +38,12 @@ public class UI_InventorySlot : UI_Base
     private int _rare;
     private int _parts;
     private int _level;
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
         BindImages(typeof(Images));
         BindTexts(typeof(Texts));
         
@@ -48,6 +51,7 @@ public class UI_InventorySlot : UI_Base
         {
             //Managers.UI.ShowPopupUI<UI_Popup>();
         }, Define.EUIEvent.Click);
+        return true;
     }
 
     public void SetInfo(ItemData data)

@@ -11,9 +11,12 @@ public class UI_TinyFarmMission : UI_Base
 
     private GameObject _root = null;
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
         BindObjects(typeof(GameObjects));
 
         _root = GetObject((int)GameObjects.MissionsRoot);
@@ -23,6 +26,7 @@ public class UI_TinyFarmMission : UI_Base
             UI_TinyFarmMissionSlot slot3 = Managers.UI.MakeSubItem<UI_TinyFarmMissionSlot>(parent:_root.transform);
             slot3.SetInfo(tinyFarmMissionData.Value);
         }
+        return true;
 
         //for (int i = 1; i <= count; i++)
         //{

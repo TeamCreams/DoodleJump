@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class UI_Base : MonoBehaviour
+public class UI_Base : InitBase
 {
 
     protected Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
@@ -16,9 +16,14 @@ public class UI_Base : MonoBehaviour
         this.Init();
     }
 
-    protected virtual void Init()
+    public override bool Init()
     {
+        if (base.Init() == false)
+        {
+            return false;
+        }
 
+        return true;
     }
 
     protected void Bind<T>(Type type) where T : UnityEngine.Object

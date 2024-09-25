@@ -8,10 +8,14 @@ public class UI_HeartRoot : UI_Base
 	HorizontalLayoutGroup _horizontalLayoutGroup;
 
 	List<UI_Heart> _heartList = new List<UI_Heart>();
-	protected override void Init()
-	{
-		base.Init();
-		_horizontalLayoutGroup = this.GetComponent<HorizontalLayoutGroup>();
+    public override bool Init()
+    {
+        if (base.Init() == false)
+        {
+            return false;
+        }
+        _horizontalLayoutGroup = this.GetComponent<HorizontalLayoutGroup>();
+		return true;
 	}
 
 	public void SetLife(int life)

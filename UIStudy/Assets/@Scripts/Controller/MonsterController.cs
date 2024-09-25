@@ -69,12 +69,6 @@ public class MonsterController : ObjectBase
             Debug.Log("is collider");
             Managers.Pool.Push(this.gameObject);
         }
-        /*
-        if (this.transform.position.y < -130)
-        {
-            Managers.Pool.Push(this.gameObject);
-        }
-        */
     }
 
 
@@ -82,7 +76,13 @@ public class MonsterController : ObjectBase
     {
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
-            Managers.Event.TriggerEvent(EEventType.Attacked_Player, this);
+            //  플레이어가 가진 행운에 따라 무시.
+            float playerLuck = collision.gameObject.GetComponent<PlayerController>().Data.Luck;
+            float rand = Random.Range(0, 1.0f);
+            if(rand <= playerLuck)
+            {
+                Managers.Event.TriggerEvent(EEventType.Attacked_Player, this);
+            }
             Managers.Pool.Push(this.gameObject);
         }
     }

@@ -21,14 +21,18 @@ public class UI_SuberunkerScene : UI_Scene
     
     }
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
-    
+        if (base.Init() == false)
+        {
+            return false;
+        }
+
         StartLoadAssets();
 
         //Managers.Game.OnChangedLife -= RefreshUI;
         //Managers.Game.OnChangedLife += RefreshUI;
+        return true;
     }
 
     void StartLoadAssets()

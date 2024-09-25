@@ -20,9 +20,13 @@ public class UI_Inventory : UI_Base
     private GameObject _subItemRoot = null;
 
     private List<ItemData> _itemList;
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
+
         _itemList = Managers.Game.Items;
         BindObjects(typeof(GameObjects));
 
@@ -39,6 +43,7 @@ public class UI_Inventory : UI_Base
             //item.GeneratorIcon(i);
             slot.SetInfo(_itemList[i]);
         }
+        return true;
 
     }
 

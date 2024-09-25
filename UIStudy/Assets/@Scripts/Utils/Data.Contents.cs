@@ -128,6 +128,7 @@ namespace Data
         public string Name;
         public float Speed;
         public int Life;
+        public float Luck;
     }
 
     [Serializable]

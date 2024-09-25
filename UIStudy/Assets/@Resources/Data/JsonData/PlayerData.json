@@ -1,28 +1,46 @@
 {
   "playerDatas": [
     {
-      "Id": 1,
+      "Id": 20001,
       "Name": "Player1",
       "Speed": 100.0,
-      "Life": 3
+      "Life": 3,
+      "Luck": 0.25
     },
     {
-      "Id": 2,
+      "Id": 20002,
       "Name": "Player2",
-      "Speed": 150.0,
-      "Life": 2
+      "Speed": 100.0,
+      "Life": 3,
+      "Luck": 0.3
     },
     {
-      "Id": 3,
+      "Id": 20003,
       "Name": "Player3",
-      "Speed": 130.0,
-      "Life": 3
+      "Speed": 110.0,
+      "Life": 3,
+      "Luck": 0.25
     },
     {
-      "Id": 4,
+      "Id": 20004,
       "Name": "Player4",
-      "Speed": 120.0,
-      "Life": 3
+      "Speed": 130.0,
+      "Life": 2,
+      "Luck": 0.4
+    },
+    {
+      "Id": 20005,
+      "Name": "Player5",
+      "Speed": 150.0,
+      "Life": 2,
+      "Luck": 0.15
+    },
+    {
+      "Id": 20006,
+      "Name": "Player6",
+      "Speed": 80.0,
+      "Life": 2,
+      "Luck": 0.1
     }
   ]
 }

@@ -14,11 +14,15 @@ public class UI_PlayerDesign : UI_Base
         Eyebrows,
     }
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
         BindImages(typeof(Images));
         Managers.Event.AddEvent(EEventType.SetStyle_Player, OnEvent_SetStyle);
+        return true;
     }
     private void OnDestroy()
     {

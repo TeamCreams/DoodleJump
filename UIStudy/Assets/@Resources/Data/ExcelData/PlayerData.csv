@@ -1,5 +1,7 @@
-Id,Name,Speed,Life
-1,Player1,100,3
-2,Player2,150,2
-3,Player3,130,3
-4,Player4,120,3
+Id,Name,Speed,Life,Luck
+20001,Player1,100,3,0.25
+20002,Player2,100,3,0.3
+20003,Player3,110,3,0.25
+20004,Player4,130,2,0.4
+20005,Player5,150,2,0.15
+20006,Player6,80,2,0.1

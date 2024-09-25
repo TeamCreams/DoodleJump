@@ -15,12 +15,15 @@ public class UI_KakaoScene : UI_Scene
     {
         FriendsPage,
         ChattingPage
-    }// Ãß°¡µÉ ¿¹Á¤
-    // Ã¤ÆÃ¹æÀº GameObjectsÀÎ°¡?
+    }// ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    // Ã¤ï¿½Ã¹ï¿½ï¿½ï¿½ GameObjectsï¿½Î°ï¿½?
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
         BindButtons(typeof(Buttons));
         BindObjects(typeof(GameObjects));
 
@@ -45,7 +48,7 @@ public class UI_KakaoScene : UI_Scene
 
         }, Define.EUIEvent.Click);
 
-
+        return true;
     }
 
 

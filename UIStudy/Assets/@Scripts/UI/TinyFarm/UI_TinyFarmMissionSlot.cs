@@ -29,11 +29,15 @@ public class UI_TinyFarmMissionSlot : UI_Base
         Gold_Text
     }
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
         BindObjects(typeof(GameObjects));
         BindTexts(typeof(Texts));
+        return true;
     }
 
     public void SetInfo(TinyFarmData data)

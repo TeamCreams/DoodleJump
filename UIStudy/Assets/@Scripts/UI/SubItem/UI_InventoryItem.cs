@@ -46,12 +46,16 @@ public class UI_InventoryItem : UI_Base
         Icon
     }
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
         BindImages(typeof(Images));
         this.gameObject.BindEvent(OnClick_SetCharacter, Define.EUIEvent.Click);
         _toggle = this.gameObject.GetComponent<Toggle>();
+        return true;
     }
 
     public void SetInfo(int templateId)
@@ -59,7 +63,7 @@ public class UI_InventoryItem : UI_Base
         Data = Managers.Data.CharacterItemSpriteDic[templateId];
         string spriteName = Data.SpriteName;
         GetImage((int)Images.Icon).sprite = Managers.Resource.Load<Sprite>($"{spriteName}Icon.sprite");
-        _toggle.group = this.transform.parent.gameObject.GetComponent<ToggleGroup>(); // 부모가 poolingRoot로 되어있음
+        _toggle.group = this.transform.parent.gameObject.GetComponent<ToggleGroup>();
     }
 
     public void OnClick_SetCharacter(PointerEventData eventData)

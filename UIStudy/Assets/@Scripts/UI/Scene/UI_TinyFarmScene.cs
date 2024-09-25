@@ -25,11 +25,14 @@ public class UI_TinyFarmScene : UI_Scene
 
     private GameObject _root = null;
     private GameObject _missions = null;
-    
 
-    protected override void Init()
+
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
         BindObjects(typeof(GameObjects));
         BindButtons(typeof(Buttons));
         _root = GetObject((int)GameObjects.Content);
@@ -48,6 +51,7 @@ public class UI_TinyFarmScene : UI_Scene
         }, Define.EUIEvent.Click);
 
         this.GetObject((int)GameObjects.Missions).SetActive(false);
+        return true;
 
     }
 

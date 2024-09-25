@@ -20,9 +20,12 @@ public class UI_Joystick : UI_Base
     private RectTransform _rectTransform = null;
     Vector2 _touchPosition = Vector2.zero;
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
         BindImages(typeof(Images));
         //_rectTransform = GetImage((int)Images.Ground).rectTransform;
 
@@ -31,6 +34,7 @@ public class UI_Joystick : UI_Base
         this.GetImage((int)Images.BlockingImage).gameObject.BindEvent(OnBeginDrag, Define.EUIEvent.PointerDown);
         this.Get<Image>((int)Images.BlockingImage).gameObject.BindEvent(OnDrag, Define.EUIEvent.Drag);
         this.Get<Image>((int)Images.BlockingImage).gameObject.BindEvent(OnEndDrag, Define.EUIEvent.EndDrag);
+        return true;
     }
 
     void OnBeginDrag(PointerEventData eventData)

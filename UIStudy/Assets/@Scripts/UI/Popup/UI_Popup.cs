@@ -9,9 +9,13 @@ public class UI_Popup : UI_Base
         Image_Test
     }
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
+        return true;
 
         /*
         BindImages(typeof(Images));

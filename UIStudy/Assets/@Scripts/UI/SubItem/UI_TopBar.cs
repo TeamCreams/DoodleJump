@@ -28,9 +28,12 @@ public class UI_TopBar : UI_Base
 
     UI_HeartRoot _heartRoot;
 
-    protected override void Init()
+    public override bool Init()
     {
-        base.Init();
+        if (base.Init() == false)
+        {
+            return false;
+        }
         BindObjects(typeof(GameObjects));
         BindTexts(typeof(Texts));
         GetText((int)Texts.GameOver_Text).enabled = false;
@@ -48,6 +51,7 @@ public class UI_TopBar : UI_Base
                 float seconds = _time % 60;
                 GetText((int)Texts.Time_Text).text = string.Format($"{minutes}분 {seconds}초");
             }).AddTo(this.gameObject);
+        return true;
     }
 
 	private void OnDestroy()

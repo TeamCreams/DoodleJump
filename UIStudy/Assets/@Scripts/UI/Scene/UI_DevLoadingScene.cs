@@ -23,11 +23,14 @@ public class UI_DevLoadingScene : UI_Scene
         SuberunkerButton
     }
 
-	protected override void Init()
-	{
-		base.Init();
+    public override bool Init()
+    {
+        if (base.Init() == false)
+        {
+            return false;
+        }
 
-		BindButtons(typeof(Buttons));
+        BindButtons(typeof(Buttons));
 		BindTexts(typeof(Texts));
 		BindObjects(typeof(GameObjects));
 
@@ -39,6 +42,7 @@ public class UI_DevLoadingScene : UI_Scene
 
 
         StartLoadAssets("PreLoad");
+		return true;
 	}
 
 	private void OnClick_TinyFarmScene(PointerEventData eventData)
