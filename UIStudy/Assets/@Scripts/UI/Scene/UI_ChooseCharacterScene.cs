@@ -7,15 +7,20 @@ using static UnityEditor.PlayerSettings;
 using System.Linq;
 using Data;
 
-public class UI_ChooseCharacter : UI_Base
+public class UI_ChooseCharacterScene : UI_Scene
 {
 
     private List<GameObject> _itemList = new List<GameObject>();
     private GameObject _itemRoot = null;
+    public UI_ColorPicker ColorPicker { get; private set; }
+
     enum GameObjects
     {
         InventoryItemRoot,
+
+        //UI_ColorPicker
     }
+
     enum Images
     {
         HairItem,
@@ -33,10 +38,16 @@ public class UI_ChooseCharacter : UI_Base
         {
             return false;
         }
+        //StartLoadAssets();
+
+
         BindObjects(typeof(GameObjects));
         BindImages(typeof(Images));
         BindButtons(typeof(Buttons));
-
+        /*
+        ColorPicker = Get<GameObject>((int)GameObjects.UI_ColorPicker).GetComponent<UI_ColorPicker>();
+        Debug.Assert(ColorPicker != null, $"{nameof(UI_ColorPicker)} is null---------------");
+        */
         GetImage((int)Images.HairItem).gameObject.BindEvent(OnClick_HairItem, Define.EUIEvent.Click);
         GetImage((int)Images.EyesItem).gameObject.BindEvent(OnClick_EyesItem, Define.EUIEvent.Click);
         GetImage((int)Images.EyebrowsItem).gameObject.BindEvent(OnClick_EyebrowsItem, Define.EUIEvent.Click);
@@ -71,6 +82,7 @@ public class UI_ChooseCharacter : UI_Base
         PlayerSettingData playerSettingData
             = new PlayerSettingData(Managers.Game.ChracterStyleInfo.CharacterId, $"{Managers.Game.ChracterStyleInfo.Eyes}", $"{Managers.Game.ChracterStyleInfo.Eyebrows}", $"{Managers.Game.ChracterStyleInfo.Hair}");
         SavePlayerSettingData(playerSettingData);
+        Managers.Scene.LoadScene(Define.EScene.SuberunkerScene);
     }
 
     private void SetInventoryItems(EEquipType equipType)
@@ -105,6 +117,20 @@ public class UI_ChooseCharacter : UI_Base
 
         PlayerPrefs.SetString("PlayerSettingData", json);
         PlayerPrefs.Save();
+    }
+
+    void StartLoadAssets()
+    {
+        Managers.Resource.LoadAllAsync<UnityEngine.Object>("PreLoad", (key, count, totalCount) =>
+        {
+            Debug.Log($"{key} {count}/{totalCount}");
+
+            if (count == totalCount)
+            {
+                Debug.Log("Load Complete");
+                Managers.Data.Init();
+            }
+        });
     }
 
 }

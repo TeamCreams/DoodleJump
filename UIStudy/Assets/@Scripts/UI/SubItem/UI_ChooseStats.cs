@@ -3,11 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class UI_ChooseStats : UI_Scene
+public class UI_ChooseStats : UI_Base
 {
-    enum Images
-    {
-    }
 
     enum Buttons
     {
@@ -23,12 +20,6 @@ public class UI_ChooseStats : UI_Scene
         Stat_Text
     }
 
-    enum GameObjects
-    {
-        UI_ColorPicker
-    }
-
-    public UI_ColorPicker ColorPicker { get; private set; }
 
     private int _playerDataLastId = 0;
     private int _playerDataId = 20001;
@@ -47,14 +38,9 @@ public class UI_ChooseStats : UI_Scene
             return false;
         }
 
-        BindObjects(typeof(GameObjects));
         BindButtons(typeof(Buttons));
         BindTexts(typeof(Texts));
-        /*
-        ColorPicker = Get<GameObject>((int)GameObjects.UI_ColorPicker).GetComponent<UI_ColorPicker>();
-        Debug.Assert(ColorPicker != null, $"{nameof(UI_ColorPicker)} is null---------------");
-        Debug.Log("0987654321234567890ChooseStat");
-        */
+        
         GetButton((int)Buttons.Back).gameObject.BindEvent(OnClick_BackButton, Define.EUIEvent.Click);
         GetButton((int)Buttons.Next).gameObject.BindEvent(OnClick_NextButton, Define.EUIEvent.Click);
 

@@ -17,9 +17,6 @@ public class PlayerController : ObjectBase
         }
     }
 
-    public GameObject _eyesGameobject = null;
-    private SpriteRenderer _emotion = null;
-    private float _speed = 0;
     private float _waitTime = 0;
     [SerializeField]
     EPlayerState _state = EPlayerState.Idle;
@@ -30,6 +27,8 @@ public class PlayerController : ObjectBase
     private Transform EyeTransform;
     private Transform EyebrowsTransform;
     private Transform HairTransform;
+
+    private PlayerSettingData _playerSettingData;
 
     public EPlayerState State
     {
@@ -89,22 +88,35 @@ public class PlayerController : ObjectBase
         _animator = GetComponentInChildren<Animator>();
         Data = Managers.Data.PlayerDic[templateId];
 
-        _speed = Data.Speed;
-
-        //_emotion = _eyesGameobject.GetComponent<SpriteRenderer>();
         _characterController = GetComponent<CharacterController>();
 
         EyeTransform = Util.FindChild(go: _animator.gameObject, name: "Eyes", recursive: true).transform;
         EyebrowsTransform = Util.FindChild(go: _animator.gameObject, name: "Eyebrows", recursive: true).transform;
         HairTransform = Util.FindChild(go: _animator.gameObject, name: "Hair", recursive: true).transform;
 
+        _playerSettingData = LoadPlayerSettingData();
+        CommitPlayerCustomization();
     }
 
-    private void CommitPlayerCustomization()
+    public void CommitPlayerCustomization()
     {
-        HairTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Hair}.sprite");
-        EyebrowsTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyebrows}.sprite");
-        EyeTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyes}.sprite");
+        HairTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{_playerSettingData.Hair}.sprite");
+        EyebrowsTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{_playerSettingData.Eyebrows}.sprite");
+        EyeTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{_playerSettingData.Eyes}.sprite");
+    }
+
+    private PlayerSettingData LoadPlayerSettingData()
+    {
+        string json = PlayerPrefs.GetString("PlayerSettingData", null);
+
+        if (!string.IsNullOrEmpty(json))
+        {
+            return JsonUtility.FromJson<PlayerSettingData>(json);
+        }
+        else
+        {
+            return null;
+        }
     }
 
     void SetState(EPlayerState prevState, EPlayerState currentState)
@@ -148,7 +160,6 @@ public class PlayerController : ObjectBase
             this.State = EPlayerState.Idle;
             
         }
-        //this.transform.Translate(Managers.Game.JoystickAmount.x * Data.Speed * Time.deltaTime, 0, 0);
 
         _animator.SetFloat("MoveSpeed", Mathf.Abs(Managers.Game.JoystickAmount.x));
         Vector2 motion = Vector2.right * (Managers.Game.JoystickAmount.x * Data.Speed * Time.deltaTime);
@@ -178,7 +189,7 @@ public class PlayerController : ObjectBase
     {
         EyeTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>("Crying.sprite");
         yield return new WaitForSeconds(0.8f);
-        EyeTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>("Sad.sprite");
+        EyeTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{_playerSettingData.Eyes}.sprite");
     }
 
     private void Update_Boring()
@@ -190,6 +201,7 @@ public class PlayerController : ObjectBase
             this.State = EPlayerState.Move;
         }
         _animator.SetBool("Boring", true);
+        CommitPlayerCustomization();
     }
 
     public void SetSpeedSkill(float speed)//OnEvent로 하고 싶은데 parameter값 ??

@@ -10,6 +10,7 @@ public static class Define
 		DevLoadingScene,
 		TinyFarmScene,
         SuberunkerScene,
+        ChooseCharacterScene,
     }
 
 	public enum EUIEvent

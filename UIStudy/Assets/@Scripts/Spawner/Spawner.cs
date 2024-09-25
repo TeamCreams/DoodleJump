@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
         {
             yield return new WaitForSeconds(10f);
             int x = UnityEngine.Random.Range(-100, 101);
-            Managers.Object.Spawn<SkillItem>(new Vector2(x, -140));
+            Managers.Object.Spawn<SkillItem>(new Vector2(x, -110));
         }
     }
 }

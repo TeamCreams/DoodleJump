@@ -51,7 +51,7 @@ public class UI_DevLoadingScene : UI_Scene
 	}
     private void OnClick_SuberunkerScene(PointerEventData eventData)
     {
-        Managers.Scene.LoadScene(Define.EScene.SuberunkerScene);
+        Managers.Scene.LoadScene(Define.EScene.ChooseCharacterScene);
     }
     void StartLoadAssets(string label)
 	{
