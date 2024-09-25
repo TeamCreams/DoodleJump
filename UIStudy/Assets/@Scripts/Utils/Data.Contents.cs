@@ -169,4 +169,21 @@ namespace Data
         }
     }
 
+    //playerPrefs
+    [System.Serializable]
+    public class PlayerSettingData
+    {
+        public int CharacterId;
+        public string Eyes;
+        public string Eyebrows;
+        public string Hair;
+
+        public PlayerSettingData(int CharacterId, string Eyes, string Eyebrows, string Hair)
+        {
+            this.CharacterId = CharacterId;
+            this.Eyes = Eyes;
+            this.Eyebrows = Eyebrows;
+            this.Hair = Hair;
+        }
+    }
 }

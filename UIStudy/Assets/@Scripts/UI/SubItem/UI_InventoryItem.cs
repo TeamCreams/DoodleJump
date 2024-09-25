@@ -30,7 +30,6 @@ public class UI_InventoryItem : UI_Base
         None = 13000,
     }
   
-    private State _state = State.Eyebrows;
     private CharacterItemSpriteData _data;
     public CharacterItemSpriteData Data
     {

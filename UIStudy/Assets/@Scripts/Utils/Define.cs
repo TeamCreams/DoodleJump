@@ -114,7 +114,7 @@ public static class Define
 
     public class Constants
 	{
-		public const int PLAYER_ID = 1;
+		public const int PLAYER_ID = 20001;
 	}
 
 	public class HardCoding

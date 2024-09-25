@@ -152,10 +152,10 @@ public class ItemData
 
 public class ChracterStyleInfo
 {
+    public int CharacterId { get; set; } = 20001;
     public string Eyes { get; set; } = "Dizzy";
     public string Eyebrows { get; set; } = "DizzyEyebrows";
     public string Hair { get; set; } = "ZombieShabby";
-    public int Stat { get; set; }
 }
 
 

@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using static Define;
 using static UnityEditor.PlayerSettings;
 using System.Linq;
+using Data;
 
 public class UI_ChooseCharacter : UI_Base
 {
@@ -67,7 +68,9 @@ public class UI_ChooseCharacter : UI_Base
 
     private void OnClick_NextButton(PointerEventData eventData)
     {
-
+        PlayerSettingData playerSettingData
+            = new PlayerSettingData(Managers.Game.ChracterStyleInfo.CharacterId, $"{Managers.Game.ChracterStyleInfo.Eyes}", $"{Managers.Game.ChracterStyleInfo.Eyebrows}", $"{Managers.Game.ChracterStyleInfo.Hair}");
+        SavePlayerSettingData(playerSettingData);
     }
 
     private void SetInventoryItems(EEquipType equipType)
@@ -96,6 +99,12 @@ public class UI_ChooseCharacter : UI_Base
         _itemList.Add(item.gameObject);
     }
 
+    public void SavePlayerSettingData(PlayerSettingData playerSettingData)
+    {
+        string json = JsonUtility.ToJson(playerSettingData);
 
+        PlayerPrefs.SetString("PlayerSettingData", json);
+        PlayerPrefs.Save();
+    }
 
 }
