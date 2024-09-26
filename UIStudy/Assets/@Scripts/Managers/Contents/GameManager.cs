@@ -97,10 +97,7 @@ public class GameManager
     {
         _chracterStyleInfo = new ChracterStyleInfo();
     }
-    public void Clear()
-    {
-        _chracterStyleInfo = null;
-    }
+   
 
     private List<ItemData> items = new List<ItemData>()
         {

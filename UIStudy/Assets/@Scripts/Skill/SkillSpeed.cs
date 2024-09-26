@@ -31,6 +31,7 @@ public class SkillSpeed : SkillBase
         _player.SetSpeedSkill(_changeValue);
         yield return new WaitForSeconds(3);
         _player.SetSpeedSkill(speed/afterValue);
+        Destroy(this.gameObject, 3);
     }
 
 

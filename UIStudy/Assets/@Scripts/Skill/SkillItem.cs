@@ -27,7 +27,6 @@ public class SkillItem : ObjectBase
             Debug.Log("is Collision");
             var go = Managers.Resource.Instantiate("AddSkill", collision.gameObject.transform);
             go.GetOrAddComponent<SkillSpeed>().SetSpeedSkillEvent(_skillTime);
-            Destroy(go, _skillTime);
             Managers.Pool.Push(this.gameObject);
         }
     }

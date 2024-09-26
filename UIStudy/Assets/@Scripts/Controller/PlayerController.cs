@@ -86,7 +86,9 @@ public class PlayerController : ObjectBase
     {
         base.SetInfo(templateId);
         _animator = GetComponentInChildren<Animator>();
-        Data = Managers.Data.PlayerDic[templateId];
+
+        PlayerData originalData = Managers.Data.PlayerDic[templateId];
+        Data = new PlayerData(originalData);
 
         _characterController = GetComponent<CharacterController>();
 
@@ -158,7 +160,6 @@ public class PlayerController : ObjectBase
         if (Managers.Game.JoystickState == Define.EJoystickState.PointerUp)
         {
             this.State = EPlayerState.Idle;
-            
         }
 
         _animator.SetFloat("MoveSpeed", Mathf.Abs(Managers.Game.JoystickAmount.x));
@@ -194,14 +195,12 @@ public class PlayerController : ObjectBase
 
     private void Update_Boring()
     {
-        _waitTime = 0;
-
         if (Managers.Game.JoystickState == EJoystickState.PointerDown)
         {
             this.State = EPlayerState.Move;
         }
+        _waitTime = 0;
         _animator.SetBool("Boring", true);
-        CommitPlayerCustomization(); //애니메이션 실행시 자꾸 sprite변경 
     }
 
     public void SetSpeedSkill(float speed)//OnEvent로 하고 싶은데 parameter값 ??

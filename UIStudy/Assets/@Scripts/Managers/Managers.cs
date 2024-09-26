@@ -68,13 +68,10 @@ public class Managers : MonoBehaviour
 
 	public static void Clear()
 	{
-		Managers.Game.Clear();
-		Pool.Clear();
+        Pool.Clear();
 		Event.Clear();
 	}
 }
-
-
 
 // 1. 애니메이션
 // 2. 게임 이쁘게

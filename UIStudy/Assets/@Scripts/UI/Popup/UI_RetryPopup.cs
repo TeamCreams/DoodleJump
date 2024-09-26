@@ -36,6 +36,7 @@ public class UI_RetryPopup : UI_Popup
             int minutes = Mathf.FloorToInt(Managers.Game.TimeRecord / 60);
             float seconds = Managers.Game.TimeRecord % 60;
             GetText((int)Texts.LifeTime_Text).text = $"생존 시간 : {minutes}분 {seconds}초";
+            //최고기록 
         }
 
         GetButton((int)Buttons.Retry_Button).gameObject.BindEvent((evt) =>

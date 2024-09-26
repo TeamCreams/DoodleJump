@@ -129,6 +129,20 @@ namespace Data
         public float Speed;
         public int Life;
         public float Luck;
+
+        public PlayerData()
+        {
+
+        }
+
+        public PlayerData(PlayerData original)
+        {
+            Id = original.Id;
+            Name = original.Name;
+            Speed = original.Speed;
+            Life = original.Life;
+            Luck = original.Luck;
+        }
     }
 
     [Serializable]

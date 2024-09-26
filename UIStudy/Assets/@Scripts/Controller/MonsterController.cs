@@ -76,7 +76,8 @@ public class MonsterController : ObjectBase
     {
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
-            //  플레이어가 가진 행운에 따라 무시.
+            //  플레이어가 가진 행운에 따라 무시
+            // 이펙트 추가 사용   
             float playerLuck = collision.gameObject.GetComponent<PlayerController>().Data.Luck;
             float rand = Random.Range(0, 1.0f);
             if(rand <= playerLuck)

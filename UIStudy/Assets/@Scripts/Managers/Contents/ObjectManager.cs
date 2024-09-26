@@ -49,7 +49,7 @@ public class ObjectManager
         else if (typeof(T) == typeof(SkillItem))
         {
             GameObject item = Managers.Resource.Instantiate("SkillItem", pooling: true);
-            item.name = "item";
+            item.name = "SkillItem";
             item.transform.position = pos;
 
             //item.transform.parent = ItemRoot;
