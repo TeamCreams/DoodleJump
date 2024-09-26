@@ -38,7 +38,6 @@ public class UI_ChooseCharacterScene : UI_Scene
         {
             return false;
         }
-        //StartLoadAssets();
 
 
         BindObjects(typeof(GameObjects));
@@ -59,6 +58,9 @@ public class UI_ChooseCharacterScene : UI_Scene
         {
             Managers.Resource.Destroy(slotObject.gameObject);
         }
+
+        //StartLoadAssets("PreLoad");
+
         return true;
     }
 
@@ -119,17 +121,17 @@ public class UI_ChooseCharacterScene : UI_Scene
         PlayerPrefs.Save();
     }
 
-    void StartLoadAssets()
+    void StartLoadAssets(string label)
     {
-        Managers.Resource.LoadAllAsync<UnityEngine.Object>("PreLoad", (key, count, totalCount) =>
+        Managers.Resource.LoadAllAsync<UnityEngine.Object>(label, (key, count, totalCount) =>
         {
-            Debug.Log($"{key} {count}/{totalCount}");
-
+            
             if (count == totalCount)
             {
                 Debug.Log("Load Complete");
                 Managers.Data.Init();
             }
+            
         });
     }
 

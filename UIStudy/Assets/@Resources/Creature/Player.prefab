@@ -20533,7 +20533,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99be83a152327c48a54809693434be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _eyesGameobject: {fileID: 7501370005159226022}
   _state: 0
 --- !u!143 &7886743014392695807
 CharacterController:

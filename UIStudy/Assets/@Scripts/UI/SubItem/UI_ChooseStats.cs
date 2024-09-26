@@ -45,6 +45,7 @@ public class UI_ChooseStats : UI_Base
         GetButton((int)Buttons.Next).gameObject.BindEvent(OnClick_NextButton, Define.EUIEvent.Click);
 
         //_playerDataLastId = 20000 + Managers.Data.PlayerDic.Count;
+        DisplayInfo(PlayerDataId);
         return true;
     }
 

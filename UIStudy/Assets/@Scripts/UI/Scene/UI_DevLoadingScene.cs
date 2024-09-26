@@ -38,7 +38,7 @@ public class UI_DevLoadingScene : UI_Scene
 		GetObject((int)GameObjects.SceneList).SetActive(false);
 
 		GetButton((int)Buttons.TinyFarmButton).gameObject.BindEvent(OnClick_TinyFarmScene, Define.EUIEvent.Click);
-        GetButton((int)Buttons.SuberunkerButton).gameObject.BindEvent(OnClick_SuberunkerScene, Define.EUIEvent.Click);
+        GetButton((int)Buttons.SuberunkerButton).gameObject.BindEvent(OnClick_ChooseCharacterScene, Define.EUIEvent.Click);
 
 
         StartLoadAssets("PreLoad");
@@ -49,7 +49,7 @@ public class UI_DevLoadingScene : UI_Scene
 	{
 		Managers.Scene.LoadScene(Define.EScene.TinyFarmScene);
 	}
-    private void OnClick_SuberunkerScene(PointerEventData eventData)
+    private void OnClick_ChooseCharacterScene(PointerEventData eventData)
     {
         Managers.Scene.LoadScene(Define.EScene.ChooseCharacterScene);
     }
@@ -61,7 +61,7 @@ public class UI_DevLoadingScene : UI_Scene
 
 			if (count == totalCount)
 			{
-				Debug.Log("Load Complete");
+				//Debug.Log("Load Complete");
 				Managers.Data.Init();
 
 				//Observable.Timer(new System.TimeSpan(0, 0, 5))

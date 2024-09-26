@@ -201,7 +201,7 @@ public class PlayerController : ObjectBase
             this.State = EPlayerState.Move;
         }
         _animator.SetBool("Boring", true);
-        CommitPlayerCustomization();
+        CommitPlayerCustomization(); //애니메이션 실행시 자꾸 sprite변경 
     }
 
     public void SetSpeedSkill(float speed)//OnEvent로 하고 싶은데 parameter값 ??

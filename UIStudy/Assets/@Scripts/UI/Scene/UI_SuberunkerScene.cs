@@ -28,7 +28,7 @@ public class UI_SuberunkerScene : UI_Scene
             return false;
         }
 
-        StartLoadAssets();
+        //StartLoadAssets();
 
         //Managers.Game.OnChangedLife -= RefreshUI;
         //Managers.Game.OnChangedLife += RefreshUI;
