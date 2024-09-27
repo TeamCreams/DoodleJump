@@ -5,7 +5,7 @@ using UnityEngine;
 public class SkillItem : ObjectBase
 {
     private StatModifier _statModifier;
-    private float _skillTime = 2.0f;
+    private float _skillSpeed = 2.0f;
     public override bool Init()
     {
         if (false == base.Init())
@@ -24,9 +24,17 @@ public class SkillItem : ObjectBase
     {
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
-            Debug.Log("is Collision");
-            var go = Managers.Resource.Instantiate("AddSkill", collision.gameObject.transform);
-            go.GetOrAddComponent<SkillSpeed>().SetSpeedSkillEvent(_skillTime);
+            SkillSpeed skillSpeedComponent = collision.gameObject.GetComponentInChildren<SkillSpeed>();
+
+            if (skillSpeedComponent != null)
+            {
+                skillSpeedComponent.ResetSpeedSkillEvent(_skillSpeed);
+            }
+            else
+            {
+                var go = Managers.Resource.Instantiate("AddSkill", collision.gameObject.transform);
+                go.GetOrAddComponent<SkillSpeed>().SetSpeedSkillEvent(_skillSpeed);
+            }
             Managers.Pool.Push(this.gameObject);
         }
     }

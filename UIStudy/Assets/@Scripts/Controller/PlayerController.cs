@@ -204,7 +204,7 @@ public class PlayerController : ObjectBase
 
     public void SetSpeedSkill(float speed)//OnEvent로 하고 싶은데 parameter값 ??
     {
-        Data.Speed *= speed;
+        Data.Speed = speed;
     }
     public void SetLife(int life = 1)
     {

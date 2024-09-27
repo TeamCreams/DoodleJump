@@ -6,7 +6,7 @@ public class SkillSpeed : SkillBase
 {
     private PlayerController _player = null;
     private float _changeValue = 0;
-    
+    private float _speed = 0;
 
     public override bool Init()
     {
@@ -14,23 +14,33 @@ public class SkillSpeed : SkillBase
         {
             return false;
         }
+        _player = transform.parent.gameObject.GetComponent<PlayerController>();
+        _speed = _player.Data.Speed;
+
         return true;
     }
 
     public void SetSpeedSkillEvent(float value)
     {
-        _player = transform.parent.gameObject.GetComponent<PlayerController>();
         _changeValue = value;
+        StartCoroutine(ChangeSpeedValue());
+    }
+
+    public void ResetSpeedSkillEvent(float value)
+    {
+        _changeValue = value;
+        StopCoroutine(ChangeSpeedValue());
         StartCoroutine(ChangeSpeedValue());
     }
 
     IEnumerator ChangeSpeedValue()
     {
-        float speed = _player.Data.Speed;
-        float afterValue = speed * _changeValue;
-        _player.SetSpeedSkill(_changeValue);
+        _player.SetSpeedSkill(_speed);
+
+        float afterValue = _speed * _changeValue;
+        _player.SetSpeedSkill(afterValue);
         yield return new WaitForSeconds(3);
-        _player.SetSpeedSkill(speed/afterValue);
+        _player.SetSpeedSkill(_speed);
         Destroy(this.gameObject, 3);
     }
 
