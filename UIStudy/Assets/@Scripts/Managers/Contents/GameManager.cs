@@ -37,19 +37,30 @@ public class GameManager
     }
     public Action<int> OnChangedLife;
 
-    private int _timeRecord = 0;
-    public int TimeRecord
+    private int _playTimeRecord = 0;
+    public int PlayTimeRecord
     {
-        get { return _timeRecord; }
+        get { return _playTimeRecord; }
         set
         {
-            if (_timeRecord != value)
+            if (_playTimeRecord != value)
             {
-                _timeRecord = value;
+                _playTimeRecord = value;
             }
         }
     }
-
+    private int _playTime = 0;
+    public int PlayTime
+    {
+        get { return _playTime; }
+        set
+        {
+            if (_playTime != value)
+            {
+                _playTime = value;
+            }
+        }
+    }
     private ChracterStyleInfo _chracterStyleInfo;
     public ChracterStyleInfo ChracterStyleInfo
     {

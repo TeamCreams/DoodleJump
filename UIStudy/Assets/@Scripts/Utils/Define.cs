@@ -58,6 +58,7 @@ public static class Define
 	{
 		Attacked_Player,
 		SetStyle_Player,
+        LuckyTrigger_Player,
     }
 
     public enum EEquipType

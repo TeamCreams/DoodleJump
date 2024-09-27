@@ -20,7 +20,6 @@ public class PlayerController : ObjectBase
     private float _waitTime = 0;
     [SerializeField]
     EPlayerState _state = EPlayerState.Idle;
-    //private RaycastHit2D _hitStoneMonster;
     private Animator _animator;
     private CharacterController _characterController;
 

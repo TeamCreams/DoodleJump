@@ -84,6 +84,12 @@ public class MonsterController : ObjectBase
             {
                 Managers.Event.TriggerEvent(EEventType.Attacked_Player, this);
             }
+            else
+            {
+                Debug.Log("is Lucky!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                Managers.Event.TriggerEvent(EEventType.LuckyTrigger_Player, this);
+            }
+
             Managers.Pool.Push(this.gameObject);
         }
     }

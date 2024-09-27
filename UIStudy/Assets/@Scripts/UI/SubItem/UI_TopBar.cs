@@ -63,12 +63,12 @@ public class UI_TopBar : UI_Base
 	{
         if(life <= 0)
         {
+            Managers.Game.PlayTime = _time;
             _lifeTimer?.Dispose();
-            if (Managers.Game.TimeRecord < _time)
+            if (Managers.Game.PlayTimeRecord < _time)
             {
-                Managers.Game.TimeRecord = _time;
+                Managers.Game.PlayTimeRecord = _time;
             }
-            Debug.Log($"최고기록 : {Managers.Game.TimeRecord}");
             Managers.UI.ShowPopupUI<UI_RetryPopup>();
         }
         UpdateLifeImage();        

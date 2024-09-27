@@ -19,7 +19,7 @@ public class UI_ColorSlider : UI_Base
 
     }
 
-    private int MaxValue;
+    private int MaxValue = 0;
 
 
     public override bool Init()

@@ -9,6 +9,7 @@ public class UI_RetryPopup : UI_Popup
     enum Texts
     {
         LifeTime_Text,
+        LifeRecordTime_Text
     }
 
     enum GameObjects
@@ -33,10 +34,13 @@ public class UI_RetryPopup : UI_Popup
         BindButtons(typeof(Buttons));
         BindObjects(typeof(GameObjects));
         {
-            int minutes = Mathf.FloorToInt(Managers.Game.TimeRecord / 60);
-            float seconds = Managers.Game.TimeRecord % 60;
+            int recordMinutes = Mathf.FloorToInt(Managers.Game.PlayTimeRecord / 60);
+            float recordSeconds = Managers.Game.PlayTimeRecord % 60;
+            GetText((int)Texts.LifeRecordTime_Text).text = $"최고 생존 시간 : {recordMinutes}분 {recordSeconds}초";
+
+            int minutes = Mathf.FloorToInt(Managers.Game.PlayTime / 60);
+            float seconds = Managers.Game.PlayTime % 60;
             GetText((int)Texts.LifeTime_Text).text = $"생존 시간 : {minutes}분 {seconds}초";
-            //최고기록 
         }
 
         GetButton((int)Buttons.Retry_Button).gameObject.BindEvent((evt) =>

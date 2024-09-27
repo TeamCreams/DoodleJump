@@ -215,6 +215,7 @@
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterAnimation.cs" />
     <Compile Include="Assets/@Scripts/Managers/Core/SceneManagerEx.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/Scarecrow.cs" />
+    <Compile Include="Assets/@Scripts/Skill/SkillEffect.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Character.cs" />
   </ItemGroup>
   <ItemGroup>
