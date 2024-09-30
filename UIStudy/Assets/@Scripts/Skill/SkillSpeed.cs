@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class SkillSpeed : SkillBase
 {
@@ -39,8 +40,10 @@ public class SkillSpeed : SkillBase
 
         float afterValue = _speed * _changeValue;
         _player.SetSpeedSkill(afterValue);
+        Managers.Event.TriggerEvent(EEventType.SkillSpeed_Player, this);
         yield return new WaitForSeconds(3);
         _player.SetSpeedSkill(_speed);
+        Managers.Event.TriggerEvent(EEventType.SkillSpeed_Player, this);
         Destroy(this.gameObject, 3);
     }
 

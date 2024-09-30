@@ -5,7 +5,16 @@ using UnityEngine;
 public class SkillItem : ObjectBase
 {
     private StatModifier _statModifier;
-    private float _skillSpeed = 2.0f;
+    private float _skillSpeed = 1.6f;
+    private float _skillLuck = 1.5f;
+    private Skill _skillState = Skill.Speed;
+
+    enum Skill
+    {
+        Speed,
+        Luck,
+        None
+    }
     public override bool Init()
     {
         if (false == base.Init())
@@ -19,23 +28,60 @@ public class SkillItem : ObjectBase
         return true;
     }
 
+    public void SetSkillInfo(int id)
+    {
+        _skillState = (Skill)id;
+    }
 
     private void OnTriggerEnterPlayer(Collider collision)
     {
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
-            SkillSpeed skillSpeedComponent = collision.gameObject.GetComponentInChildren<SkillSpeed>();
+            switch(_skillState)
+            {
+                case Skill.Speed:
+                    SkillSpeedItem(collision);
+                    break;
+                case Skill.Luck:
+                    SkillLuckItem(collision);
+                    break;
+                case Skill.None:
+                    break;
 
-            if (skillSpeedComponent != null)
-            {
-                skillSpeedComponent.ResetSpeedSkillEvent(_skillSpeed);
-            }
-            else
-            {
-                var go = Managers.Resource.Instantiate("AddSkill", collision.gameObject.transform);
-                go.GetOrAddComponent<SkillSpeed>().SetSpeedSkillEvent(_skillSpeed);
             }
             Managers.Pool.Push(this.gameObject);
         }
+    }
+
+    private void SkillSpeedItem(Collider collision)
+    {
+        SkillSpeed skillSpeedComponent = collision.gameObject.GetComponentInChildren<SkillSpeed>();
+
+        if (skillSpeedComponent != null)
+        {
+            skillSpeedComponent.ResetSpeedSkillEvent(_skillSpeed);
+        }
+        else
+        {
+            var go = Managers.Resource.Instantiate("AddSkill", collision.gameObject.transform);
+            go.GetOrAddComponent<SkillSpeed>().SetSpeedSkillEvent(_skillSpeed);
+        }
+        Managers.Pool.Push(this.gameObject);
+    }
+
+    private void SkillLuckItem(Collider collision)
+    {
+        SkillLuck skillLuckComponent = collision.gameObject.GetComponentInChildren<SkillLuck>();
+
+        if (skillLuckComponent != null)
+        {
+            skillLuckComponent.ResetLuckSkillEvent(_skillLuck);
+        }
+        else
+        {
+            var go = Managers.Resource.Instantiate("AddSkill", collision.gameObject.transform);
+            go.GetOrAddComponent<SkillLuck>().SetLuckSkillEvent(_skillLuck);
+        }
+        Managers.Pool.Push(this.gameObject);
     }
 }

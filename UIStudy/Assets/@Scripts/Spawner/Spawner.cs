@@ -1,9 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Spawner : MonoBehaviour
+public class Spawner : InitBase
 {
+    public override bool Init()
+    {
+        if (base.Init() == false)
+        {
+            return false;
+        }
 
+        return true;
+    }
     public IEnumerator GenerateMonster()
     {
         while (true)

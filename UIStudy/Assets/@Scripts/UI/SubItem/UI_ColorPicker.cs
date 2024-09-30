@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine.UI;
 using static Define;
+using UnityEngine.EventSystems;
 
 public class UI_ColorPicker : UI_Base
 {
@@ -41,7 +42,9 @@ public class UI_ColorPicker : UI_Base
         Gradient,
         Current, //is old color
         New, //is new color
-        Sample // TransparencyLook
+        Sample, // TransparencyLook
+        Cancel,
+        Confirm,
     }
     enum Sliders
     {
@@ -110,6 +113,13 @@ public class UI_ColorPicker : UI_Base
                 i++;
             }
         }
+
+
+        GetImage((int)Images.Cancel).gameObject.BindEvent(OnClick_Cancle, Define.EUIEvent.Click);
+
+        GetImage((int)Images.Confirm).gameObject.BindEvent(OnClick_Confirm, Define.EUIEvent.Click);
+
+        //        this.gameObject.SetActive(false);
 
 
         return true;
@@ -258,5 +268,14 @@ public class UI_ColorPicker : UI_Base
         Texture.Apply();
     }
 
+    private void OnClick_Cancle(PointerEventData eventData)
+    {
+        this.gameObject.SetActive(false);
+    }
+
+    private void OnClick_Confirm(PointerEventData eventData)
+    {
+
+    }
 }
 

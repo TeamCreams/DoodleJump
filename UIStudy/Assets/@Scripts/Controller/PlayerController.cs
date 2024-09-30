@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 using static Define;
 
 public class PlayerController : ObjectBase
@@ -26,6 +27,12 @@ public class PlayerController : ObjectBase
     private Transform EyeTransform;
     private Transform EyebrowsTransform;
     private Transform HairTransform;
+    private Transform ShoseLeftTransform;
+    private Transform ShoseRightTransform;
+    private Transform MaskTransform;
+
+    private bool _SkillSpeed = false;
+    private bool _SkillLuck = false;
 
     private PlayerSettingData _playerSettingData;
 
@@ -51,6 +58,8 @@ public class PlayerController : ObjectBase
         }
 
         Managers.Event.AddEvent(EEventType.Attacked_Player, OnEvent_DamagedHp);
+        Managers.Event.AddEvent(EEventType.SkillSpeed_Player, OnEvent_SkillSpeed);
+        Managers.Event.AddEvent(EEventType.SkillLuck_Player, OnEvent_SkillLuck);
 
         this.OnChangedState -= SetState;
         this.OnChangedState += SetState;
@@ -95,6 +104,14 @@ public class PlayerController : ObjectBase
         EyebrowsTransform = Util.FindChild(go: _animator.gameObject, name: "Eyebrows", recursive: true).transform;
         HairTransform = Util.FindChild(go: _animator.gameObject, name: "Hair", recursive: true).transform;
 
+        ShoseLeftTransform = Util.FindChild(go: _animator.gameObject, name: "Shin[Armor][L]", recursive: true).transform;
+        ShoseRightTransform = Util.FindChild(go: _animator.gameObject, name: "Shin[Armor][R]", recursive: true).transform;
+        ShoseLeftTransform.gameObject.SetActive(_SkillSpeed);
+        ShoseRightTransform.gameObject.SetActive(_SkillSpeed);
+
+        MaskTransform = Util.FindChild(go: _animator.gameObject, name: "Mask", recursive: true).transform;
+        MaskTransform.gameObject.SetActive(_SkillLuck);
+        
         _playerSettingData = LoadPlayerSettingData();
         CommitPlayerCustomization();
     }
@@ -202,12 +219,27 @@ public class PlayerController : ObjectBase
         _animator.SetBool("Boring", true);
     }
 
-    public void SetSpeedSkill(float speed)//OnEvent로 하고 싶은데 parameter값 ??
+    public void SetSpeedSkill(float speed)
     {
         Data.Speed = speed;
     }
-    public void SetLife(int life = 1)
+    public void SetLuckSkill(float luck)
     {
-        this.Data.Life += life;
+        Data.Luck = luck;
+    }
+
+    public void OnEvent_SkillSpeed(Component sender, object param)
+    {
+        _SkillSpeed = !_SkillSpeed;
+        ShoseLeftTransform.gameObject.SetActive(_SkillSpeed);
+        ShoseRightTransform.gameObject.SetActive(_SkillSpeed);
+        //ShoseLeftTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"Shin.sprite");
+        //ShoseRightTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"Shin.sprite");
+    }
+
+    public void OnEvent_SkillLuck(Component sender, object param)
+    {
+        _SkillLuck = !_SkillLuck;
+        MaskTransform.gameObject.SetActive(_SkillLuck);
     }
 }

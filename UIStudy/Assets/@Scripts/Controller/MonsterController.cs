@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using static Define;
 public class MonsterController : ObjectBase
 {
-    private const int CORRECTION_VALUE = 5;
+    private const float CORRECTION_VALUE = 2.9f;
 
     private EnemyData _data;
     public EnemyData Data
@@ -47,7 +47,7 @@ public class MonsterController : ObjectBase
     }
     private void FixedUpdate()
     {
-        Vector3 movement = Vector2.down * _speed * Time.fixedDeltaTime;
+        Vector3 movement = Vector2.down * _speed * Time.fixedDeltaTime * CORRECTION_VALUE;
         transform.Translate(movement);
     }
 
@@ -80,15 +80,15 @@ public class MonsterController : ObjectBase
             // 이펙트 추가 사용   
             float playerLuck = collision.gameObject.GetComponent<PlayerController>().Data.Luck;
             float rand = Random.Range(0, 1.0f);
-            if(rand <= playerLuck)
+            if (rand <= playerLuck)
             {
-                Managers.Event.TriggerEvent(EEventType.Attacked_Player, this);
+                Managers.Event.TriggerEvent(EEventType.LuckyTrigger_Player, this);
             }
             else
             {
-                Debug.Log("is Lucky!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                Managers.Event.TriggerEvent(EEventType.LuckyTrigger_Player, this);
+                Managers.Event.TriggerEvent(EEventType.Attacked_Player, this);
             }
+        
 
             Managers.Pool.Push(this.gameObject);
         }

@@ -50,9 +50,10 @@ public class ObjectManager
         {
             GameObject item = Managers.Resource.Instantiate("SkillItem", pooling: true);
             item.name = "SkillItem";
+            int rand = UnityEngine.Random.Range(0, 2);
+            Debug.Log($"rand : {rand}");
+            item.GetOrAddComponent<SkillItem>().SetSkillInfo(rand);
             item.transform.position = pos;
-
-            //item.transform.parent = ItemRoot;
         }
 
     }
