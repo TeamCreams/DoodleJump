@@ -40,8 +40,10 @@ public class UI_TopBar : UI_Base
 
         _heartRoot = GetObject((int)GameObjects.UI_HeartRoot).GetComponent<UI_HeartRoot>();
 
-        Managers.Game.OnChangedLife -= OnChangedLife;
-        Managers.Game.OnChangedLife += OnChangedLife;
+        //Managers.Game.OnChangedLife -= OnChangedLife;
+        //Managers.Game.OnChangedLife += OnChangedLife;
+        Managers.Event.RemoveEvent(Define.EEventType.ChangePlayerLife, OnChangedLife);
+        Managers.Event.AddEvent(Define.EEventType.ChangePlayerLife, OnChangedLife);
 
         _lifeTimer = Observable.Interval(new System.TimeSpan(0, 0, 1))
             .Subscribe(_ =>
@@ -55,13 +57,15 @@ public class UI_TopBar : UI_Base
     }
 
 	private void OnDestroy()
-	{
-        Managers.Game.OnChangedLife -= OnChangedLife;
+    {
+        Managers.Event.RemoveEvent(Define.EEventType.ChangePlayerLife, OnChangedLife);
     }
 
-	void OnChangedLife(int life)
+	void OnChangedLife(Component sender, object param)
 	{
-        if(life <= 0)
+        int life = (int)((float)param);
+
+        if (life <= 0)
         {
             Managers.Game.PlayTime = _time;
             _lifeTimer?.Dispose();

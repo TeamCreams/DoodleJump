@@ -23,7 +23,8 @@ public class DataTransfomer : EditorWindow
         ParseExcelDataToJson<EnemyDataLoader, EnemyData>("EnemyData");
         ParseExcelDataToJson<PlayerDataLoader, PlayerData>("PlayerData");
         ParseExcelDataToJson<CharacterItemSpriteDataLoader, CharacterItemSpriteData>("CharacterItemSpriteData");
-        Debug.Log("Complete");
+		ParseExcelDataToJson<SuberunkerItemDataLoader, SuberunkerItemData>("SuberunkerItemData");
+		Debug.Log("Complete");
 	}
 
 	#region Helpers
@@ -48,6 +49,7 @@ public class DataTransfomer : EditorWindow
 			using (StreamReader sr = new StreamReader(fs))
 			{
 				lines = sr.ReadToEnd().Split("\n");
+				Debug.Log(String.Join("\n",  lines));
 			}
 		}
 

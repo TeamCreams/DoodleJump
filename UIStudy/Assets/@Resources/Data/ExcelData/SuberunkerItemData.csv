@@ -1,0 +1,9 @@
+Id,Name,Chance,Option1,Option1StatModifierType,Option1Param,Option2,Option2StatModifierType,Option2Param,Option3,Option3StatModifierType,Option3Param
+30001,Swift Boots,0.6,Speed,Percentage,1.5,,,,,,
+30002,Luck Charm,0.6,Luck,Percentage,2,,,,,,
+30003,Life Ring,0.6,Life,Flat,1,,,,,,
+30004,Speed Cloak,0.85,Speed,Percentage,1.5,Luck,Percentage,2,,,
+30005,Fortune Blade,0.85,Luck,Percentage,1.5,Life,Flat,1,,,
+30006,Vital Amulet,0.85,Life,Flat,1,Speed,Percentage,1.8,,,
+30007,Lucky Coin,1,Luck,Percentage,3,Speed,Percentage,0.5,Life,Flat,1
+30008,Speed Potion,1,Speed,Percentage,1.8,Life,Flat,1,Luck,Percentage,1.2

@@ -57,6 +57,7 @@ public class Managers : MonoBehaviour
 
 			Managers.Event.Init();
 			Managers.Game.Init();
+			Managers.Sound.Init();
 		}
 	}
 

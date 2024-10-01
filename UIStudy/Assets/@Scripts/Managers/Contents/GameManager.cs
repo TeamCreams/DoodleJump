@@ -156,6 +156,14 @@ public class ItemData
 	public int Rare { get; set; }
 	public int Parts { get; set; }
 	public int Level { get; set; }
+
+    //public OptionType Option1 { get; set; }
+    //public float Option1Paramter1 { get; set; }
+    //public OptionType Option2 { get; set; }
+    //public float Option2Paramter1 { get; set; }
+
+    //public ClothType ClothType { get; set; }
+    //public string ClothPrefab { get; set; }
 }
 
 public class ChracterStyleInfo

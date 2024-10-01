@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class SkillSpeed : SkillBase
+public class SkillSpeed : ItemBase
 {
     private PlayerController _player = null;
     private float _changeValue = 0;

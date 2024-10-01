@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 public class CreatureBase : ObjectBase
 {
-    protected Stats _stats = new Stats(null);
+    protected Stats _stats = new Stats(new CreatureInfoData());
 
 
 

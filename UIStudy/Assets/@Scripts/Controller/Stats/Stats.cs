@@ -98,25 +98,17 @@ public class Stats
     public Dictionary<EStat, Stat> StatDic { get; private set; } = new Dictionary<EStat, Stat>();
     public float Hp { get; set; }
 
+    public Stats(PlayerData data)
+    {
+        Hp = StatDic[EStat.MaxHp].Value;
+        StatDic.Add(EStat.MaxHp, new Stat(data.Life));
+        StatDic.Add(EStat.Luck, new Stat(data.Luck));
+        StatDic.Add(EStat.MoveSpeed, new Stat(data.Speed));
+    }
+
+
     public Stats(CreatureInfoData data)
     {
-        StatDic.Add(EStat.Atk, new Stat(data.Atk));
-        StatDic.Add(EStat.Def, new Stat(data.Def));
-        StatDic.Add(EStat.MaxHp, new Stat(data.MaxHp));
-        StatDic.Add(EStat.Recovery, new Stat(data.Recovery));
-        StatDic.Add(EStat.CritRate, new Stat(data.CritRate));
-        StatDic.Add(EStat.AttackRange, new Stat(data.AttackRange));
-        StatDic.Add(EStat.AttackDelay, new Stat(data.AttackDelay));
-        StatDic.Add(EStat.AttackDelayReduceRate, new Stat(data.AttackDelayReduceRate));
-        StatDic.Add(EStat.DodgeRate, new Stat(data.DodgeRate));
-        StatDic.Add(EStat.SkillCooldownReduceRate, new Stat(data.SkillCooldownReduceRate));
-        StatDic.Add(EStat.MoveSpeed, new Stat(data.MoveSpeed));
-        StatDic.Add(EStat.ElementAdvantageRate, new Stat(data.ElementAdvantageRate));
-        StatDic.Add(EStat.GoldAmountAdvantageRate, new Stat(data.GoldAmountAdvantageRate));
-        StatDic.Add(EStat.ExpAmountAdvantageRate, new Stat(data.ExpAmountAdvantageRate));
-        StatDic.Add(EStat.BossAtkAdvantageRate, new Stat(data.BossAtkAdvantageRate));
-        StatDic.Add(EStat.ActiveSKillAdvantageRate, new Stat(data.ActiveSKillAdvantageRate));
-
         Hp = StatDic[EStat.MaxHp].Value;
     }
 }

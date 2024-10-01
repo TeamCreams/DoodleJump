@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.XR;
 using static Define;
 
-public class PlayerController : ObjectBase
+public class PlayerController : CreatureBase
 {
     private PlayerData _data;
     public PlayerData Data
@@ -24,16 +24,23 @@ public class PlayerController : ObjectBase
     private Animator _animator;
     private CharacterController _characterController;
 
-    private Transform EyeTransform;
-    private Transform EyebrowsTransform;
-    private Transform HairTransform;
-    private Transform ShoseLeftTransform;
-    private Transform ShoseRightTransform;
-    private Transform MaskTransform;
+    private SpriteRenderer EyeTransform;
+    private SpriteRenderer EyebrowsTransform;
+    private SpriteRenderer HairTransform;
+    private SpriteRenderer ShoseLeftTransform;
+    private SpriteRenderer ShoseRightTransform;
+    private SpriteRenderer MaskTransform;
 
-    private bool _SkillSpeed = false;
-    private bool _SkillLuck = false;
 
+    public PlayerSettingData PlayerSettingData
+    {
+        get => _playerSettingData;
+        set
+        {
+            _playerSettingData = value;
+            CommitPlayerCustomization();
+        }
+    }
     private PlayerSettingData _playerSettingData;
 
     public EPlayerState State
@@ -61,8 +68,6 @@ public class PlayerController : ObjectBase
         Managers.Event.AddEvent(EEventType.SkillSpeed_Player, OnEvent_SkillSpeed);
         Managers.Event.AddEvent(EEventType.SkillLuck_Player, OnEvent_SkillLuck);
 
-        this.OnChangedState -= SetState;
-        this.OnChangedState += SetState;
 
         return true;
     }
@@ -74,8 +79,6 @@ public class PlayerController : ObjectBase
 
     void Update()
     {
-        //Update_PositionX();
-        //CheckAttacked();
         switch (_state)
         {
             case EPlayerState.Idle:
@@ -95,25 +98,25 @@ public class PlayerController : ObjectBase
         base.SetInfo(templateId);
         _animator = GetComponentInChildren<Animator>();
 
-        PlayerData originalData = Managers.Data.PlayerDic[templateId];
-        Data = new PlayerData(originalData);
+        Data = Managers.Data.PlayerDic[templateId];
+        this._stats = new Stats(Data);
 
         _characterController = GetComponent<CharacterController>();
 
-        EyeTransform = Util.FindChild(go: _animator.gameObject, name: "Eyes", recursive: true).transform;
-        EyebrowsTransform = Util.FindChild(go: _animator.gameObject, name: "Eyebrows", recursive: true).transform;
-        HairTransform = Util.FindChild(go: _animator.gameObject, name: "Hair", recursive: true).transform;
+        EyeTransform = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Eyes", recursive: true);
+        EyebrowsTransform = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Eyebrows", recursive: true);
+        HairTransform = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Hair", recursive: true);
+        ShoseLeftTransform = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Shin[Armor][L]", recursive: true);
+        ShoseRightTransform = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Shin[Armor][R]", recursive: true);
+        MaskTransform = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Mask", recursive: true);
 
-        ShoseLeftTransform = Util.FindChild(go: _animator.gameObject, name: "Shin[Armor][L]", recursive: true).transform;
-        ShoseRightTransform = Util.FindChild(go: _animator.gameObject, name: "Shin[Armor][R]", recursive: true).transform;
-        ShoseLeftTransform.gameObject.SetActive(_SkillSpeed);
-        ShoseRightTransform.gameObject.SetActive(_SkillSpeed);
+        ShoseLeftTransform.sprite = null;
+        ShoseRightTransform.sprite = null;
+        MaskTransform.sprite = null;
 
-        MaskTransform = Util.FindChild(go: _animator.gameObject, name: "Mask", recursive: true).transform;
-        MaskTransform.gameObject.SetActive(_SkillLuck);
-        
-        _playerSettingData = LoadPlayerSettingData();
-        CommitPlayerCustomization();
+
+
+        PlayerSettingData = LoadPlayerSettingData();
     }
 
     public void CommitPlayerCustomization()
@@ -136,11 +139,6 @@ public class PlayerController : ObjectBase
             return null;
         }
     }
-
-    void SetState(EPlayerState prevState, EPlayerState currentState)
-	{
-
-	}
 
     private void Update_PositionX()
 	{
@@ -179,7 +177,7 @@ public class PlayerController : ObjectBase
         }
 
         _animator.SetFloat("MoveSpeed", Mathf.Abs(Managers.Game.JoystickAmount.x));
-        Vector2 motion = Vector2.right * (Managers.Game.JoystickAmount.x * Data.Speed * Time.deltaTime);
+        Vector2 motion = Vector2.right * (Managers.Game.JoystickAmount.x * this._stats.StatDic[EStat.MoveSpeed].Value * Time.deltaTime);
         _characterController.Move(motion);
 
         if (Managers.Game.JoystickAmount.x < 0)
@@ -196,8 +194,8 @@ public class PlayerController : ObjectBase
 
     private void OnEvent_DamagedHp(Component sender, object param)
     {
-        Data.Life -= 1;
-        Managers.Game.Life = Data.Life;
+        this._stats.Hp -= 1f;
+        Managers.Event.TriggerEvent(EEventType.ChangePlayerLife, this, this._stats.Hp);
 
         StartCoroutine(Update_CryingFace());
     }
@@ -230,16 +228,35 @@ public class PlayerController : ObjectBase
 
     public void OnEvent_SkillSpeed(Component sender, object param)
     {
-        _SkillSpeed = !_SkillSpeed;
-        ShoseLeftTransform.gameObject.SetActive(_SkillSpeed);
-        ShoseRightTransform.gameObject.SetActive(_SkillSpeed);
         //ShoseLeftTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"Shin.sprite");
         //ShoseRightTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"Shin.sprite");
     }
 
     public void OnEvent_SkillLuck(Component sender, object param)
     {
-        _SkillLuck = !_SkillLuck;
-        MaskTransform.gameObject.SetActive(_SkillLuck);
+        ItemBase data = sender as ItemBase;
+
+        // 1. 스탯을 증가시킨다.
+        // 2. 외형을 변경시킨다.
+        // 3. 아이템 유지시간이 지나면 스탯증가를 해제한다.
+        // 4. 외형을 되돌린다.
+
+
+        // 스탯의 이상한 스탯을 추가
+        // 스탯중에서 IsFireMode 라는 스탯을 추가해서 
+    }
+
+    public void OnEvent_TakeItem(Component sender, object param)
+    {
+        ItemBase data = sender as ItemBase;
+
+        // 아이템
+        // 옵션을 어떻게 만들것이냐
+
+
+
+
+        // 스탯의 이상한 스탯을 추가
+        // 스탯중에서 IsFireMode 라는 스탯을 추가해서 
     }
 }

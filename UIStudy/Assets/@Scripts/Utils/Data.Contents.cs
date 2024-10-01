@@ -161,6 +161,39 @@ namespace Data
     }
 
     [Serializable]
+    public class SuberunkerItemData
+    {
+        public int Id;
+        public string Name;
+        public float Chance;
+        public EItem Option1;
+        public EStatModifierType Option1StatModifierType;
+        public float Option1Param;
+        public EItem Option2;
+        public EStatModifierType Option2StatModifierType;
+        public float Option2Param;
+        public EItem Option3;
+        public EStatModifierType Option3StatModifierType;
+        public float Option3Param;
+    }
+
+
+    [Serializable]
+    public class SuberunkerItemDataLoader : ILoader<int, SuberunkerItemData>
+    {
+        public List<SuberunkerItemData> suberunkerItemDatas = new List<SuberunkerItemData>();
+
+        public Dictionary<int, SuberunkerItemData> MakeDict()
+        {
+            Dictionary<int, SuberunkerItemData> dict = new Dictionary<int, SuberunkerItemData>();
+            foreach (SuberunkerItemData suberunkerItemData in suberunkerItemDatas)
+                dict.Add(suberunkerItemData.Id, suberunkerItemData);
+
+            return dict;
+        }
+    }
+
+    [Serializable]
     public class CharacterItemSpriteData
     {
         public int Id;

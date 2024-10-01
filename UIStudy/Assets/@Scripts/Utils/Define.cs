@@ -61,6 +61,9 @@ public static class Define
         LuckyTrigger_Player,
         SkillSpeed_Player,
         SkillLuck_Player,
+
+        TakeItem,
+        ChangePlayerLife
     }
 
     public enum EEquipType
@@ -71,25 +74,18 @@ public static class Define
 		Eyes
 	}
 
+    public enum EItem
+    {
+        Speed,
+        Luck,
+        Life
+    }
 
     public enum EStat
     {
-        Atk,
-        Def,
         MaxHp,
-        Recovery,
-        CritRate,
-        AttackRange,
-        AttackDelay,
-        AttackDelayReduceRate,
-        DodgeRate,
-        SkillCooldownReduceRate,
         MoveSpeed,
-        ElementAdvantageRate,
-        GoldAmountAdvantageRate,
-        ExpAmountAdvantageRate,
-        BossAtkAdvantageRate,
-        ActiveSKillAdvantageRate,
+        Luck,
         MaxCount,
     }
 
