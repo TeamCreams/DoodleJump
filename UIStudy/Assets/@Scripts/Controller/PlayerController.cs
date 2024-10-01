@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 using static Define;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerController : CreatureBase
 {
@@ -24,13 +25,14 @@ public class PlayerController : CreatureBase
     private Animator _animator;
     private CharacterController _characterController;
 
-    private SpriteRenderer EyeTransform;
-    private SpriteRenderer EyebrowsTransform;
-    private SpriteRenderer HairTransform;
-    private SpriteRenderer ShoseLeftTransform;
-    private SpriteRenderer ShoseRightTransform;
-    private SpriteRenderer MaskTransform;
+    private SpriteRenderer EyeSpriteRenderer;
+    private SpriteRenderer EyebrowsSpriteRenderer;
+    private SpriteRenderer HairSpriteRenderer;
+    private SpriteRenderer ShoseLeftSpriteRenderer;
+    private SpriteRenderer ShoseRightSpriteRenderer;
+    private SpriteRenderer MaskSpriteRenderer;
 
+    private List<StatModifier> _statModifier;
 
     public PlayerSettingData PlayerSettingData
     {
@@ -66,8 +68,7 @@ public class PlayerController : CreatureBase
 
         Managers.Event.AddEvent(EEventType.Attacked_Player, OnEvent_DamagedHp);
         Managers.Event.AddEvent(EEventType.SkillSpeed_Player, OnEvent_SkillSpeed);
-        Managers.Event.AddEvent(EEventType.SkillLuck_Player, OnEvent_SkillLuck);
-
+        Managers.Event.AddEvent(EEventType.TakeItem, OnEvent_TakeItem);
 
         return true;
     }
@@ -103,16 +104,16 @@ public class PlayerController : CreatureBase
 
         _characterController = GetComponent<CharacterController>();
 
-        EyeTransform = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Eyes", recursive: true);
-        EyebrowsTransform = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Eyebrows", recursive: true);
-        HairTransform = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Hair", recursive: true);
-        ShoseLeftTransform = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Shin[Armor][L]", recursive: true);
-        ShoseRightTransform = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Shin[Armor][R]", recursive: true);
-        MaskTransform = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Mask", recursive: true);
+        EyeSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Eyes", recursive: true);
+        EyebrowsSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Eyebrows", recursive: true);
+        HairSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Hair", recursive: true);
+        ShoseLeftSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Shin[Armor][L]", recursive: true);
+        ShoseRightSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Shin[Armor][R]", recursive: true);
+        MaskSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Mask", recursive: true);
 
-        ShoseLeftTransform.sprite = null;
-        ShoseRightTransform.sprite = null;
-        MaskTransform.sprite = null;
+        ShoseLeftSpriteRenderer.sprite = null;
+        ShoseRightSpriteRenderer.sprite = null;
+        MaskSpriteRenderer.sprite = null;
 
 
 
@@ -121,9 +122,9 @@ public class PlayerController : CreatureBase
 
     public void CommitPlayerCustomization()
     {
-        HairTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{_playerSettingData.Hair}.sprite");
-        EyebrowsTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{_playerSettingData.Eyebrows}.sprite");
-        EyeTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{_playerSettingData.Eyes}.sprite");
+        HairSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{_playerSettingData.Hair}.sprite"); // GameManagers 정보로     
+        EyebrowsSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{_playerSettingData.Eyebrows}.sprite");
+        EyeSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{_playerSettingData.Eyes}.sprite");
     }
 
     private PlayerSettingData LoadPlayerSettingData()
@@ -202,9 +203,9 @@ public class PlayerController : CreatureBase
 
     IEnumerator Update_CryingFace()
     {
-        EyeTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>("Crying.sprite");
+        EyeSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>("Crying.sprite");
         yield return new WaitForSeconds(0.8f);
-        EyeTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{_playerSettingData.Eyes}.sprite");
+        EyeSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{_playerSettingData.Eyes}.sprite");
     }
 
     private void Update_Boring()
@@ -232,31 +233,25 @@ public class PlayerController : CreatureBase
         //ShoseRightTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"Shin.sprite");
     }
 
-    public void OnEvent_SkillLuck(Component sender, object param)
+    public void OnEvent_TakeItem(Component sender, object param)
     {
         ItemBase data = sender as ItemBase;
+        _statModifier = data.ModifierList;
+        // 아이템
+        // 옵션을 어떻게 만들것이냐
 
-        // 1. 스탯을 증가시킨다.
-        // 2. 외형을 변경시킨다.
-        // 3. 아이템 유지시간이 지나면 스탯증가를 해제한다.
-        // 4. 외형을 되돌린다.
-
-
+        StartCoroutine(ChangeStat());
         // 스탯의 이상한 스탯을 추가
         // 스탯중에서 IsFireMode 라는 스탯을 추가해서 
     }
 
-    public void OnEvent_TakeItem(Component sender, object param)
+
+    IEnumerator ChangeStat()
     {
-        ItemBase data = sender as ItemBase;
-
-        // 아이템
-        // 옵션을 어떻게 만들것이냐
-
-
-
-
-        // 스탯의 이상한 스탯을 추가
-        // 스탯중에서 IsFireMode 라는 스탯을 추가해서 
+        Stat stat = new Stat(this._stats.Hp);
+        stat.AddStatModifier(_statModifier[0]);
+        yield return new WaitForSeconds(3);
+        stat.RemoveStatModifier(_statModifier[0].Id);
+        // 스피드면 신발, 가면 등등 cvs파일 만들고 join이런거 쓰는 것도 ㄱㅊ을 
     }
 }

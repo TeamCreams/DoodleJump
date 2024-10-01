@@ -16,7 +16,16 @@ public class ItemBase : InitBase
         }
     }
 
-    List<StatModifier> _modifierList = new List<StatModifier>();
+    private List<StatModifier> _modifierList = new List<StatModifier>();
+    public List<StatModifier> ModifierList
+    {
+        get => _modifierList;
+        private set
+        {
+            _modifierList = value;
+        }
+
+    }
 
     public override bool Init()
     {
@@ -31,10 +40,30 @@ public class ItemBase : InitBase
     {
         // 아이템받아오기
         Data = Managers.Data.SuberunkerItemDic[templateId];
+        SetModifierList();
+
         // 1. modifierList 세팅하기
         // _modifierList
     }
 
+    private void SetModifierList()
+    {
+        List<(EStatModifierType, float)> options = new List<(EStatModifierType, float)>
+        {
+            (Data.Option1StatModifierType, Data.Option1Param),
+            (Data.Option2StatModifierType, Data.Option2Param),
+            (Data.Option3StatModifierType, Data.Option3Param)
+        };
+
+        foreach (var option in options)
+        {
+            if (option.Item1 != 0)
+            {
+                StatModifier temp = new StatModifier(EStatModifierKind.Buff, option.Item1, option.Item2);
+                _modifierList.Add(temp);
+            }
+        }
+    }
 
     private void OnTriggerEnterPlayer(Collider collision)
     {
