@@ -39,8 +39,8 @@ public class ObjectManager
         {
             GameObject player = Managers.Resource.Instantiate("Player", pooling: true);
             player.name = "player";
-            PlayerSettingData playerSettingData = LoadPlayerSettingData();
-            player.GetOrAddComponent<PlayerController>().SetInfo(playerSettingData.CharacterId);
+            //Debug.Log(Managers.Game.ChracterStyleInfo.CharacterId);
+            player.GetOrAddComponent<PlayerController>().SetInfo(Managers.Game.ChracterStyleInfo.CharacterId);
             Managers.Game.Life = player.GetOrAddComponent<PlayerController>().Data.Life;
             player.transform.position = pos;
 
@@ -56,20 +56,6 @@ public class ObjectManager
             item.transform.position = pos;
         }
 
-    }
-
-    private PlayerSettingData LoadPlayerSettingData()
-    {
-        string json = PlayerPrefs.GetString("PlayerSettingData", null);
-
-        if (!string.IsNullOrEmpty(json))
-        {
-            return JsonUtility.FromJson<PlayerSettingData>(json);
-        }
-        else
-        {
-            return null;
-        }
     }
 
 }

@@ -51,6 +51,7 @@ namespace Data
         public float ExpAmountAdvantageRate;
         public float BossAtkAdvantageRate;
         public float ActiveSKillAdvantageRate;
+        public float Luck;
     }
 
     [Serializable]
@@ -166,15 +167,19 @@ namespace Data
         public int Id;
         public string Name;
         public float Chance;
-        public EItem Option1;
-        public EStatModifierType Option1StatModifierType;
+        public EStat Option1;
+        public EStatModifierType Option1ModifierType;
         public float Option1Param;
-        public EItem Option2;
-        public EStatModifierType Option2StatModifierType;
+        public EStat Option2;
+        public EStatModifierType Option2ModifierType;
         public float Option2Param;
-        public EItem Option3;
-        public EStatModifierType Option3StatModifierType;
+        public EStat Option3;
+        public EStatModifierType Option3ModifierType;
         public float Option3Param;
+        public EStat Option4;
+        public EStatModifierType Option4ModifierType;
+        public float Option4Param;
+        public int AddLife;
     }
 
 
@@ -216,21 +221,26 @@ namespace Data
         }
     }
 
-    //playerPrefs
-    [System.Serializable]
-    public class PlayerSettingData
+    [Serializable]
+    public class SuberunkerItemSpriteData
     {
-        public int CharacterId;
-        public string Eyes;
-        public string Eyebrows;
-        public string Hair;
+        public int Id;
+        public string Name;
+        public EStat StatOption;
+    }
 
-        public PlayerSettingData(int CharacterId, string Eyes, string Eyebrows, string Hair)
+    [Serializable]
+    public class SuberunkerItemSpriteDataLoader : ILoader<int, SuberunkerItemSpriteData>
+    {
+        public List<SuberunkerItemSpriteData> suberunkerItemSpriteDatas = new List<SuberunkerItemSpriteData>();
+
+        public Dictionary<int, SuberunkerItemSpriteData> MakeDict()
         {
-            this.CharacterId = CharacterId;
-            this.Eyes = Eyes;
-            this.Eyebrows = Eyebrows;
-            this.Hair = Hair;
+            Dictionary<int, SuberunkerItemSpriteData> dict = new Dictionary<int, SuberunkerItemSpriteData>();
+            foreach (SuberunkerItemSpriteData suberunkerItemSpriteData in suberunkerItemSpriteDatas)
+                dict.Add(suberunkerItemSpriteData.Id, suberunkerItemSpriteData);
+
+            return dict;
         }
     }
 }

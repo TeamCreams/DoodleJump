@@ -18,6 +18,7 @@ public class DataManager
     public Dictionary<int, Data.PlayerData> PlayerDic { get; private set; } = new Dictionary<int, Data.PlayerData>();
     public Dictionary<int, Data.CharacterItemSpriteData> CharacterItemSpriteDic { get; private set; } = new Dictionary<int, Data.CharacterItemSpriteData>();
     public Dictionary<int, Data.SuberunkerItemData> SuberunkerItemDic { get; private set; } = new Dictionary<int, Data.SuberunkerItemData>();
+    public Dictionary<int, Data.SuberunkerItemSpriteData> SuberunkerItemSpriteDic { get; private set; } = new Dictionary<int, Data.SuberunkerItemSpriteData>();
 
     public void Init()
 	{
@@ -27,6 +28,8 @@ public class DataManager
         PlayerDic = LoadJson<Data.PlayerDataLoader, int, Data.PlayerData>("PlayerData").MakeDict();
         CharacterItemSpriteDic = LoadJson<Data.CharacterItemSpriteDataLoader, int, Data.CharacterItemSpriteData>("CharacterItemSpriteData").MakeDict();
         SuberunkerItemDic = LoadJson<Data.SuberunkerItemDataLoader, int, Data.SuberunkerItemData>("SuberunkerItemData").MakeDict();
+        SuberunkerItemSpriteDic = LoadJson<Data.SuberunkerItemSpriteDataLoader, int, Data.SuberunkerItemSpriteData>("SuberunkerItemSpriteData").MakeDict();
+
     }
 
     private Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>

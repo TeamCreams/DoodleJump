@@ -48,18 +48,19 @@ public class ItemBase : InitBase
 
     private void SetModifierList()
     {
-        List<(EStatModifierType, float)> options = new List<(EStatModifierType, float)>
+        List<(EStat, EStatModifierType, float)> options = new List<(EStat, EStatModifierType, float)>
         {
-            (Data.Option1StatModifierType, Data.Option1Param),
-            (Data.Option2StatModifierType, Data.Option2Param),
-            (Data.Option3StatModifierType, Data.Option3Param)
+            (Data.Option1, Data.Option1ModifierType, Data.Option1Param),
+            (Data.Option2, Data.Option2ModifierType, Data.Option2Param),
+            (Data.Option3, Data.Option3ModifierType, Data.Option3Param),
+            (Data.Option4, Data.Option4ModifierType, Data.Option4Param)
         };
 
         foreach (var option in options)
         {
             if (option.Item1 != 0)
             {
-                StatModifier temp = new StatModifier(EStatModifierKind.Buff, option.Item1, option.Item2);
+                StatModifier temp = new StatModifier(EStatModifierKind.Buff, option.Item2, option.Item3);
                 _modifierList.Add(temp);
             }
         }
@@ -69,15 +70,17 @@ public class ItemBase : InitBase
     {
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
+            Managers.Event.TriggerEvent(EEventType.TakeItem);
+            /*
             switch (Data.Option1)
             {
-                case EItem.Speed:
+                case EStat.MoveSpeed:
                     SkillSpeedItem(collision, Data.Option1Param);
                     break;
-                case EItem.Luck:
+                case EStat.Luck:
                     SkillLuckItem(collision, Data.Option1Param);
                     break;
-                case EItem.Life:
+                case EStat.MaxHp: 
                     break;
                 default:
                     break;
@@ -85,13 +88,13 @@ public class ItemBase : InitBase
 
             switch (Data.Option2)
             {
-                case EItem.Speed:
+                case EStat.MoveSpeed:
                     SkillSpeedItem(collision, Data.Option2Param);
                     break;
-                case EItem.Luck:
+                case EStat.Luck:
                     SkillLuckItem(collision, Data.Option2Param);
                     break;
-                case EItem.Life:
+                case EStat.MaxHp:
                     break;
                 default:
                     break;
@@ -99,17 +102,18 @@ public class ItemBase : InitBase
 
             switch (Data.Option3)
             {
-                case EItem.Speed:
+                case EStat.MoveSpeed:
                     SkillSpeedItem(collision, Data.Option3Param);
                     break;
-                case EItem.Luck:
+                case EStat.Luck:
                     SkillLuckItem(collision, Data.Option3Param);
                     break;
-                case EItem.Life:
+                case EStat.MaxHp:
                     break;
                 default:
                     break;
             }
+            */
             Managers.Pool.Push(this.gameObject);
         }
     }
@@ -127,7 +131,6 @@ public class ItemBase : InitBase
             var go = Managers.Resource.Instantiate("AddSkill", collision.gameObject.transform);
             go.GetOrAddComponent<SkillSpeed>().SetSpeedSkillEvent(param);
         }
-        Managers.Pool.Push(this.gameObject);
     }
 
     private void SkillLuckItem(Collider collision, float param)
@@ -143,6 +146,10 @@ public class ItemBase : InitBase
             var go = Managers.Resource.Instantiate("AddSkill", collision.gameObject.transform);
             go.GetOrAddComponent<SkillLuck>().SetLuckSkillEvent(param);
         }
-        Managers.Pool.Push(this.gameObject);
+    }
+
+    private void SkillHpItem(Collider collision, float param)
+    {
+        
     }
 }

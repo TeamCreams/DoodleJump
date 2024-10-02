@@ -74,13 +74,6 @@ public static class Define
 		Eyes
 	}
 
-    public enum EItem
-    {
-        Speed,
-        Luck,
-        Life
-    }
-
     public enum EStat
     {
         MaxHp,

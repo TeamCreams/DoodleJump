@@ -1,0 +1,14 @@
+{
+  "suberunkerItemSpriteDatas": [
+    {
+      "Id": 40001,
+      "Name": "Shin",
+      "StatOption": 1
+    },
+    {
+      "Id": 40002,
+      "Name": "CarnivalMask",
+      "StatOption": 2
+    }
+  ]
+}

@@ -23,14 +23,7 @@ public class UI_ChooseStats : UI_Base
 
     private int _playerDataLastId = 0;
     private int _playerDataId = 20001;
-    public int PlayerDataId
-    {
-        get => _playerDataId;
-        private set
-        {
-            _playerDataId = value;
-        }
-    }
+
     public override bool Init()
     {
         if (base.Init() == false)
@@ -45,36 +38,36 @@ public class UI_ChooseStats : UI_Base
         GetButton((int)Buttons.Next).gameObject.BindEvent(OnClick_NextButton, Define.EUIEvent.Click);
 
         //_playerDataLastId = 20000 + Managers.Data.PlayerDic.Count;
-        DisplayInfo(PlayerDataId);
+        DisplayInfo();
         return true;
     }
 
     private void OnClick_BackButton(PointerEventData eventData)
     {
-        PlayerDataId--;
-        if (PlayerDataId < 20001)
+        _playerDataId--;
+        if (_playerDataId < 20001)
         {
-            PlayerDataId = 20000 + Managers.Data.PlayerDic.Count;
+            _playerDataId = 20000 + Managers.Data.PlayerDic.Count;
         }
-        this.DisplayInfo(PlayerDataId);
+        this.DisplayInfo();
     }
     private void OnClick_NextButton(PointerEventData eventData)
     {
-        PlayerDataId++;
-        if(20000 + Managers.Data.PlayerDic.Count < PlayerDataId)
+        _playerDataId++;
+        if(20000 + Managers.Data.PlayerDic.Count < _playerDataId)
         {
-            PlayerDataId = 20001;
+            _playerDataId = 20001;
         }
-        this.DisplayInfo(PlayerDataId);
+        this.DisplayInfo();
     }
 
-    private void DisplayInfo(int templateId)
+    private void DisplayInfo()
     {
-        Managers.Game.ChracterStyleInfo.CharacterId = PlayerDataId;
-        GetText((int)Texts.Stat_Text).text = $"{Managers.Data.PlayerDic[templateId].Name}";
-        GetText((int)Texts.Speed_Text).text = $"Default Speed : {Managers.Data.PlayerDic[templateId].Speed}";
-        GetText((int)Texts.Life_Text).text = $"Default Life : {Managers.Data.PlayerDic[templateId].Life}";
-        GetText((int)Texts.Luck_Text).text = $"Default Luck : {Managers.Data.PlayerDic[templateId].Luck}";
+        Managers.Game.ChracterStyleInfo.CharacterId = _playerDataId;
+        GetText((int)Texts.Stat_Text).text = $"{Managers.Data.PlayerDic[_playerDataId].Name}";
+        GetText((int)Texts.Speed_Text).text = $"Default Speed : {Managers.Data.PlayerDic[_playerDataId].Speed}";
+        GetText((int)Texts.Life_Text).text = $"Default Life : {Managers.Data.PlayerDic[_playerDataId].Life}";
+        GetText((int)Texts.Luck_Text).text = $"Default Luck : {Managers.Data.PlayerDic[_playerDataId].Luck}";
     }
 
 }

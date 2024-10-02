@@ -24,7 +24,8 @@ public class DataTransfomer : EditorWindow
         ParseExcelDataToJson<PlayerDataLoader, PlayerData>("PlayerData");
         ParseExcelDataToJson<CharacterItemSpriteDataLoader, CharacterItemSpriteData>("CharacterItemSpriteData");
 		ParseExcelDataToJson<SuberunkerItemDataLoader, SuberunkerItemData>("SuberunkerItemData");
-		Debug.Log("Complete");
+        ParseExcelDataToJson<SuberunkerItemSpriteDataLoader, SuberunkerItemSpriteData>("SuberunkerItemSpriteData");
+        Debug.Log("Complete");
 	}
 
 	#region Helpers

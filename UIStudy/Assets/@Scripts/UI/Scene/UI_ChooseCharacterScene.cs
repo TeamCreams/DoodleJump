@@ -81,9 +81,6 @@ public class UI_ChooseCharacterScene : UI_Scene
 
     private void OnClick_NextButton(PointerEventData eventData)
     {
-        PlayerSettingData playerSettingData
-            = new PlayerSettingData(Managers.Game.ChracterStyleInfo.CharacterId, $"{Managers.Game.ChracterStyleInfo.Eyes}", $"{Managers.Game.ChracterStyleInfo.Eyebrows}", $"{Managers.Game.ChracterStyleInfo.Hair}");
-        SavePlayerSettingData(playerSettingData);
         Managers.Scene.LoadScene(Define.EScene.SuberunkerScene);
     }
 
@@ -111,14 +108,6 @@ public class UI_ChooseCharacterScene : UI_Scene
         var item = Managers.UI.MakeSubItem<UI_InventoryItem>(parent: GetObject((int)GameObjects.InventoryItemRoot).transform, pooling: true);
         item.SetInfo(id);
         _itemList.Add(item.gameObject);
-    }
-
-    public void SavePlayerSettingData(PlayerSettingData playerSettingData)
-    {
-        string json = JsonUtility.ToJson(playerSettingData);
-
-        PlayerPrefs.SetString("PlayerSettingData", json);
-        PlayerPrefs.Save();
     }
 
     void StartLoadAssets(string label)

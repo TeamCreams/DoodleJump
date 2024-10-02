@@ -2,10 +2,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.XR;
 using static Define;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEditor.Progress;
 
 public class PlayerController : CreatureBase
 {
@@ -16,6 +19,16 @@ public class PlayerController : CreatureBase
         private set
         {
             _data = value;
+        }
+    }
+
+    private SuberunkerItemData _itemData;
+    public SuberunkerItemData ItemData
+    {
+        get => _itemData;
+        private set
+        {
+            _itemData = value;
         }
     }
 
@@ -34,17 +47,7 @@ public class PlayerController : CreatureBase
 
     private List<StatModifier> _statModifier;
 
-    public PlayerSettingData PlayerSettingData
-    {
-        get => _playerSettingData;
-        set
-        {
-            _playerSettingData = value;
-            CommitPlayerCustomization();
-        }
-    }
-    private PlayerSettingData _playerSettingData;
-
+   
     public EPlayerState State
     {
         get => _state;
@@ -67,7 +70,6 @@ public class PlayerController : CreatureBase
         }
 
         Managers.Event.AddEvent(EEventType.Attacked_Player, OnEvent_DamagedHp);
-        Managers.Event.AddEvent(EEventType.SkillSpeed_Player, OnEvent_SkillSpeed);
         Managers.Event.AddEvent(EEventType.TakeItem, OnEvent_TakeItem);
 
         return true;
@@ -100,10 +102,13 @@ public class PlayerController : CreatureBase
         _animator = GetComponentInChildren<Animator>();
 
         Data = Managers.Data.PlayerDic[templateId];
-        this._stats = new Stats(Data);
+        this._stats = new Stats(Data); 
 
         _characterController = GetComponent<CharacterController>();
-
+        if(_characterController == null)
+        {
+            Debug.Log("================================");
+        }
         EyeSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Eyes", recursive: true);
         EyebrowsSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Eyebrows", recursive: true);
         HairSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Hair", recursive: true);
@@ -115,31 +120,16 @@ public class PlayerController : CreatureBase
         ShoseRightSpriteRenderer.sprite = null;
         MaskSpriteRenderer.sprite = null;
 
-
-
-        PlayerSettingData = LoadPlayerSettingData();
+        CommitPlayerCustomization();
     }
 
     public void CommitPlayerCustomization()
     {
-        HairSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{_playerSettingData.Hair}.sprite"); // GameManagers 정보로     
-        EyebrowsSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{_playerSettingData.Eyebrows}.sprite");
-        EyeSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{_playerSettingData.Eyes}.sprite");
+        HairSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Hair}.sprite"); // GameManagers 정보로     
+        EyebrowsSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyebrows}.sprite");
+        EyeSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyes}.sprite");
     }
 
-    private PlayerSettingData LoadPlayerSettingData()
-    {
-        string json = PlayerPrefs.GetString("PlayerSettingData", null);
-
-        if (!string.IsNullOrEmpty(json))
-        {
-            return JsonUtility.FromJson<PlayerSettingData>(json);
-        }
-        else
-        {
-            return null;
-        }
-    }
 
     private void Update_PositionX()
 	{
@@ -178,8 +168,8 @@ public class PlayerController : CreatureBase
         }
 
         _animator.SetFloat("MoveSpeed", Mathf.Abs(Managers.Game.JoystickAmount.x));
-        Vector2 motion = Vector2.right * (Managers.Game.JoystickAmount.x * this._stats.StatDic[EStat.MoveSpeed].Value * Time.deltaTime);
-        _characterController.Move(motion);
+        Vector2 motion = Vector2.right * (Managers.Game.JoystickAmount.x * this._stats.StatDic[EStat.MoveSpeed].Value * Time.deltaTime); // 문제 발생    
+        _characterController.Move(motion); // 문제 발생    
 
         if (Managers.Game.JoystickAmount.x < 0)
         {
@@ -205,7 +195,7 @@ public class PlayerController : CreatureBase
     {
         EyeSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>("Crying.sprite");
         yield return new WaitForSeconds(0.8f);
-        EyeSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{_playerSettingData.Eyes}.sprite");
+        EyeSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyes}.sprite");
     }
 
     private void Update_Boring()
@@ -227,31 +217,92 @@ public class PlayerController : CreatureBase
         Data.Luck = luck;
     }
 
-    public void OnEvent_SkillSpeed(Component sender, object param)
-    {
-        //ShoseLeftTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"Shin.sprite");
-        //ShoseRightTransform.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"Shin.sprite");
-    }
+    
 
     public void OnEvent_TakeItem(Component sender, object param)
     {
         ItemBase data = sender as ItemBase;
         _statModifier = data.ModifierList;
+        ItemData = data.Data;
         // 아이템
         // 옵션을 어떻게 만들것이냐
 
-        StartCoroutine(ChangeStat());
+        StopCoroutine(ChangeStats());
+        StartCoroutine(ChangeStats());
         // 스탯의 이상한 스탯을 추가
         // 스탯중에서 IsFireMode 라는 스탯을 추가해서 
     }
 
 
-    IEnumerator ChangeStat()
+    IEnumerator ChangeStats()
     {
-        Stat stat = new Stat(this._stats.Hp);
-        stat.AddStatModifier(_statModifier[0]);
+        List<EStat> options = new List<EStat>
+        {
+            ItemData.Option1,
+            ItemData.Option2,
+            ItemData.Option3,
+            ItemData.Option4
+        };
+
+        foreach(var (option, statModifier) in options.Zip(_statModifier, (optionIndex, StatModifierIndex) => (optionIndex, StatModifierIndex)))
+        {
+            if (option != 0)
+            {
+                this._stats.StatDic[option].AddStatModifier(statModifier);
+            }
+        }
+        ChangeSprite(options);
+
+        if (ItemData.AddLife == 1)
+        {
+            this._stats.Hp += 1;
+        }
+
         yield return new WaitForSeconds(3);
-        stat.RemoveStatModifier(_statModifier[0].Id);
+        foreach (var (option, statModifier) in options.Zip(_statModifier, (optionIndex, StatModifierIndex) => (optionIndex, StatModifierIndex)))
+        {
+            if (option != 0)
+            {
+                this._stats.StatDic[option].RemoveStatModifier(statModifier.Id);
+            }
+        }
+        ChangeSprite(options);
+
+        
         // 스피드면 신발, 가면 등등 cvs파일 만들고 join이런거 쓰는 것도 ㄱㅊ을 
+    }
+
+    public void ChangeSprite(List<EStat> options)
+    {
+
+        /*
+        var spriteNames = from spriteName in Managers.Data.SuberunkerItemSpriteDic
+                            join option in options on spriteName.Value.StatOption equals option
+                          select spriteName.Value.Name;
+        */
+
+        ShoseLeftSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>(null);
+        ShoseRightSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>(null);
+        MaskSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>(null);
+
+        foreach (var option in options)
+        {
+            switch (option)
+            {
+                case EStat.MoveSpeed:
+                    {
+                        ShoseLeftSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Data.SuberunkerItemSpriteDic[40001].Name}.sprite");
+                        ShoseRightSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Data.SuberunkerItemSpriteDic[40001].Name}.sprite");
+                    }
+                    break;
+                case EStat.Luck:
+                    {
+                        MaskSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Data.SuberunkerItemSpriteDic[40002].Name}.sprite");
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
