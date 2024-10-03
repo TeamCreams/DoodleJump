@@ -8,6 +8,7 @@ using UnityEngine.XR;
 using static Define;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEditor.PlayerSettings;
 using static UnityEditor.Progress;
 
 public class PlayerController : CreatureBase
@@ -105,10 +106,7 @@ public class PlayerController : CreatureBase
         this._stats = new Stats(Data); 
 
         _characterController = GetComponent<CharacterController>();
-        if(_characterController == null)
-        {
-            Debug.Log("================================");
-        }
+      
         EyeSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Eyes", recursive: true);
         EyebrowsSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Eyebrows", recursive: true);
         HairSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Hair", recursive: true);
@@ -130,19 +128,6 @@ public class PlayerController : CreatureBase
         EyeSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyes}.sprite");
     }
 
-
-    private void Update_PositionX()
-	{
-        // 여기를 바꾸자
-        if (this.transform.position.x < -310)
-        {
-            transform.position = Define.HardCoding.PlayerTeleportPos_Left;
-        }
-        if (310 < this.transform.position.x)
-        {
-            transform.position = Define.HardCoding.PlayerTeleportPos_Right;
-        }
-    }
 
     private void Update_Idle()
     {
@@ -222,10 +207,9 @@ public class PlayerController : CreatureBase
     public void OnEvent_TakeItem(Component sender, object param)
     {
         ItemBase data = sender as ItemBase;
+        Debug.Assert(data != null, "is null");
         _statModifier = data.ModifierList;
         ItemData = data.Data;
-        // 아이템
-        // 옵션을 어떻게 만들것이냐
 
         StopCoroutine(ChangeStats());
         StartCoroutine(ChangeStats());
@@ -268,7 +252,6 @@ public class PlayerController : CreatureBase
         }
         ChangeSprite(options);
 
-        
         // 스피드면 신발, 가면 등등 cvs파일 만들고 join이런거 쓰는 것도 ㄱㅊ을 
     }
 
@@ -304,5 +287,12 @@ public class PlayerController : CreatureBase
                     break;
             }
         }
+    }
+
+    public void Teleport()
+    {
+        _characterController.enabled = false;
+        _characterController.transform.position = HardCoding.PlayerStartPos;
+        _characterController.enabled = true;
     }
 }

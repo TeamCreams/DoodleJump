@@ -100,15 +100,18 @@ public class Stats
 
     public Stats(PlayerData data)
     {
-        Hp = StatDic[EStat.MaxHp].Value;
         StatDic.Add(EStat.MaxHp, new Stat(data.Life));
         StatDic.Add(EStat.Luck, new Stat(data.Luck));
         StatDic.Add(EStat.MoveSpeed, new Stat(data.Speed));
+        Hp = StatDic[EStat.MaxHp].Value;
     }
 
 
     public Stats(CreatureInfoData data)
     {
+        StatDic.Add(EStat.MaxHp, new Stat(0));
+        StatDic.Add(EStat.Luck, new Stat(0));
+        StatDic.Add(EStat.MoveSpeed, new Stat(0));
         Hp = StatDic[EStat.MaxHp].Value;
     }
 }

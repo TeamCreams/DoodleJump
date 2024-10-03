@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class ItemBase : InitBase
+public class ItemBase : ObjectBase
 {
     private SuberunkerItemData _data;
     public SuberunkerItemData Data
@@ -33,10 +33,13 @@ public class ItemBase : InitBase
         {
             return false;
         }
+        OnTriggerEnter_Event -= OnTriggerEnterPlayer;
+        OnTriggerEnter_Event += OnTriggerEnterPlayer;
+
         return true;
     }
 
-    public virtual void SetInfo(int templateId)
+    public override void SetInfo(int templateId)
     {
         // 아이템받아오기
         Data = Managers.Data.SuberunkerItemDic[templateId];
@@ -70,7 +73,7 @@ public class ItemBase : InitBase
     {
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
-            Managers.Event.TriggerEvent(EEventType.TakeItem);
+            Managers.Event.TriggerEvent(EEventType.TakeItem, this);
             /*
             switch (Data.Option1)
             {

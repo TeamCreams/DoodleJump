@@ -26,7 +26,7 @@ public class SuberunkerScene : BaseScene
         Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("Entity"), 10);
         Managers.Object.Spawn<PlayerController>(HardCoding.PlayerStartPos);
 
-        Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("SkillItem"), 10);
+        Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("ItemBase"), 10);
 
         //Spawner라는 객체를 따로만들고
         _spawner = Instantiate(Managers.Resource.Load<GameObject>("Spawner")).GetOrAddComponent<Spawner>();

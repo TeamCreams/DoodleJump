@@ -41,18 +41,17 @@ public class ObjectManager
             player.name = "player";
             //Debug.Log(Managers.Game.ChracterStyleInfo.CharacterId);
             player.GetOrAddComponent<PlayerController>().SetInfo(Managers.Game.ChracterStyleInfo.CharacterId);
+            player.GetOrAddComponent<PlayerController>().Teleport();
             Managers.Game.Life = player.GetOrAddComponent<PlayerController>().Data.Life;
-            player.transform.position = pos;
 
             //player.transform.parent = PlayerRoot;
         }
-        else if (typeof(T) == typeof(SkillItem))
+        else if (typeof(T) == typeof(ItemBase))
         {
-            GameObject item = Managers.Resource.Instantiate("SkillItem", pooling: true);
-            item.name = "SkillItem";
-            int rand = UnityEngine.Random.Range(0, 2);
-            Debug.Log($"rand : {rand}");
-            item.GetOrAddComponent<SkillItem>().SetSkillInfo(rand);
+            GameObject item = Managers.Resource.Instantiate("ItemBase", pooling: true);
+            item.name = "ItemBase";
+            int randId = UnityEngine.Random.Range(30001, 30001 + Managers.Data.SuberunkerItemDic.Count);
+            item.GetOrAddComponent<ItemBase>().SetInfo(randId);
             item.transform.position = pos;
         }
 
