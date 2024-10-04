@@ -73,6 +73,9 @@ public class ItemBase : ObjectBase
     {
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
+            AudioClip getItemAudio = Managers.Resource.Load<AudioClip>("GetItemSound");
+            Managers.Sound.Play(Define.ESound.Effect, getItemAudio);
+
             Managers.Event.TriggerEvent(EEventType.TakeItem, this);
         
             Managers.Pool.Push(this.gameObject);

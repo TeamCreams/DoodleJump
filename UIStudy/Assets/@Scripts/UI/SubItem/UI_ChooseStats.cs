@@ -21,7 +21,6 @@ public class UI_ChooseStats : UI_Base
     }
 
 
-    private int _playerDataLastId = 0;
     private int _playerDataId = 20001;
 
     public override bool Init()
@@ -37,7 +36,6 @@ public class UI_ChooseStats : UI_Base
         GetButton((int)Buttons.Back).gameObject.BindEvent(OnClick_BackButton, Define.EUIEvent.Click);
         GetButton((int)Buttons.Next).gameObject.BindEvent(OnClick_NextButton, Define.EUIEvent.Click);
 
-        //_playerDataLastId = 20000 + Managers.Data.PlayerDic.Count;
         DisplayInfo();
         return true;
     }

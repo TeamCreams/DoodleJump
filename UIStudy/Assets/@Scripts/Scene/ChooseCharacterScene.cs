@@ -13,6 +13,9 @@ public class ChooseCharacterScene : BaseScene
 
         Managers.UI.ShowSceneUI<UI_ChooseCharacterScene>();
 
+        AudioClip lobbyBGMAudio = Managers.Resource.Load<AudioClip>("LobbyBGMSound");
+        Managers.Sound.Play(Define.ESound.Bgm, lobbyBGMAudio, 0.6f);
+
         return true;
     }
 }

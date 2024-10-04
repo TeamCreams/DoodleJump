@@ -18,7 +18,7 @@ public class Spawner : InitBase
         {
             yield return new WaitForSeconds(1.2f);
             int x = UnityEngine.Random.Range(-100, 101);
-            Managers.Object.Spawn<MonsterController>(new Vector2(x, 140));
+            Managers.Object.Spawn<StoneController>(new Vector2(x, 140));
         }
     }
 

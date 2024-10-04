@@ -21,5 +21,8 @@ public class SkillEffect : InitBase
     private void OnEvent_LuckyTrigger(Component sender, object param)
     {
         _animator.SetTrigger("isSkillEffect");
+
+        AudioClip luckSkillAudio = Managers.Resource.Load<AudioClip>("LuckSkillSound");
+        Managers.Sound.Play(Define.ESound.Effect, luckSkillAudio);
     }
 }

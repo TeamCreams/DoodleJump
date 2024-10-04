@@ -103,8 +103,8 @@ namespace Data
     {
         public int Id;
         public string Name;
+        public string SpriteName;
         public int Speed;
-        public int Life;
     }
 
     [Serializable]

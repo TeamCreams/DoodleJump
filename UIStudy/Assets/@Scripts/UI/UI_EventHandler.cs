@@ -15,6 +15,8 @@ public class UI_EventHandler : MonoBehaviour, IPointerDownHandler, IPointerClick
     {
         if (OnClickHandler != null)
         {
+            AudioClip selectAudio = Managers.Resource.Load<AudioClip>("SelectSound");
+            Managers.Sound.Play(Define.ESound.Effect, selectAudio, 0.7f);
             OnClickHandler.Invoke(eventData);
         }
     }

@@ -172,7 +172,8 @@ public class PlayerController : CreatureBase
     {
         this._stats.Hp -= 1f;
         Managers.Event.TriggerEvent(EEventType.ChangePlayerLife, this, this._stats.Hp);
-
+        AudioClip attackedAudio = Managers.Resource.Load<AudioClip>("AttackedSound");
+        Managers.Sound.Play(ESound.Effect, attackedAudio, 0.7f);
         StartCoroutine(Update_CryingFace());
     }
 
@@ -242,13 +243,10 @@ public class PlayerController : CreatureBase
             }
         }
         MakeNullSprite();
-
-        // 스피드면 신발, 가면 등등 cvs파일 만들고 join이런거 쓰는 것도 ㄱㅊ을 
     }
 
     public void ChangeSprite(List<EStat> options)
     {
-        
         var groupInfo = from sprite in Managers.Data.SuberunkerItemSpriteDic
                         join option in options on sprite.Value.StatOption equals option
                         select new

@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class ObjectManager
 {
-    private HashSet<MonsterController> _monsters;
+    private HashSet<StoneController> _monsters;
 
     private GameObject _monsterRoot;
     public Transform MonsterRoot => GetRootTransform("@Monsters");
@@ -26,11 +26,11 @@ public class ObjectManager
 
     public void Spawn<T>(Vector2 pos) where T : ObjectBase
     {
-        if (typeof(T) == typeof(MonsterController))
+        if (typeof(T) == typeof(StoneController))
         {
             GameObject go = Managers.Resource.Instantiate("Entity", pooling: true);
-            int rand = UnityEngine.Random.Range(1, 5);
-            go.GetOrAddComponent<MonsterController>().SetInfo(Managers.Data.EnemyDic[rand]);
+            int rand = UnityEngine.Random.Range(60001, 60001 + Managers.Data.EnemyDic.Count);
+            go.GetOrAddComponent<StoneController>().SetInfo(Managers.Data.EnemyDic[rand]);
             go.transform.position = pos;
         }
         else if (typeof(T) == typeof(PlayerController))
@@ -47,7 +47,7 @@ public class ObjectManager
             GameObject item = Managers.Resource.Instantiate("ItemBase", pooling: true);
             item.name = "ItemBase";
             int randId = UnityEngine.Random.Range(30001, 30001 + Managers.Data.SuberunkerItemDic.Count);
-            item.GetOrAddComponent<ItemBase>().SetInfo(30003);
+            item.GetOrAddComponent<ItemBase>().SetInfo(randId);
             item.transform.position = pos;
         }
 

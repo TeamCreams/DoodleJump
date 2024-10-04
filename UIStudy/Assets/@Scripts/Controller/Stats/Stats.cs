@@ -39,6 +39,7 @@ public class Stat
 
     public void AddStatModifier(StatModifier StatModifier)
     {
+        Debug.Log("is AddStatModifier ~~~~~~~~~~~~~~~~~~~~~~~");
         if(StatModifier.ModifierType == EStatModifierType.Flat)
         {
             if (!_flatModifierValueDic.ContainsKey(StatModifier.Id))

@@ -1,34 +1,34 @@
 {
   "enemyDatas": [
     {
-      "Id": 1,
-      "Name": "Monster1",
-      "Speed": 60,
-      "Life": 1
+      "Id": 60001,
+      "Name": "AncientGuardianStone",
+      "SpriteName": "stone_stout decorative lantern",
+      "Speed": 100
     },
     {
-      "Id": 2,
-      "Name": "Monster2",
-      "Speed": 70,
-      "Life": 1
+      "Id": 60002,
+      "Name": "ShardofDestiny",
+      "SpriteName": "stone_tall decorative lantern",
+      "Speed": 90
     },
     {
-      "Id": 3,
-      "Name": "Monster3",
-      "Speed": 80,
-      "Life": 1
+      "Id": 60003,
+      "Name": "CelestialStone",
+      "SpriteName": "stone_round boulder",
+      "Speed": 80
     },
     {
-      "Id": 4,
-      "Name": "Monster4",
-      "Speed": 100,
-      "Life": 1
+      "Id": 60004,
+      "Name": "Soulstone",
+      "SpriteName": "stone_small rock",
+      "Speed": 70
     },
     {
-      "Id": 5,
-      "Name": "Monster5",
-      "Speed": 90,
-      "Life": 1
+      "Id": 60005,
+      "Name": "MysticQuartz",
+      "SpriteName": "stone_long rock",
+      "Speed": 60
     }
   ]
 }

@@ -1,6 +1,6 @@
-Id,Name,Speed,Life
-1,Monster1,60,1
-2,Monster2,70,1
-3,Monster3,80,1
-4,Monster4,100,1
-5,Monster5,90,1
+Id,Name,SpriteName,Speed
+60001,AncientGuardianStone,stone_stout decorative lantern,100
+60002,ShardofDestiny,stone_tall decorative lantern,90
+60003,CelestialStone,stone_round boulder,80
+60004,Soulstone,stone_small rock,70
+60005,MysticQuartz,stone_long rock,60
