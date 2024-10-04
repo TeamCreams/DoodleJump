@@ -111,8 +111,8 @@ public static class Define
 	public class HardCoding
 	{
 		public static readonly Vector2 PlayerStartPos = new Vector2(0, -120);
-        public static readonly Vector2 PlayerTeleportPos_Left = new Vector2(305, -120);
-        public static readonly Vector2 PlayerTeleportPos_Right = new Vector2(-305, -120);
+        public static readonly Vector3 PlayerTeleportPos_Left = new Vector3(-80, -120, 0);
+        public static readonly Vector3 PlayerTeleportPos_Right = new Vector3(80, -120, 0);
     }
 
 }

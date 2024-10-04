@@ -79,6 +79,7 @@
     <Compile Include="Assets/HeroEditor/Common/SimpleColorPicker/Scripts/PaletteGradient.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/LayerManager.cs" />
     <Compile Include="Assets/HeroEditor/Common/SimpleColorPicker/Scripts/ColorSlider.cs" />
+    <Compile Include="Assets/@Scripts/Teleport/TeleportController.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterState.cs" />
     <Compile Include="Assets/HeroEditor/Common/SimpleColorPicker/Scripts/RainbowGenerator.cs" />
     <Compile Include="Assets/@Scripts/Utils/Data.Core.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Assets/@Scripts/UI/Popup/UI_Popup.cs" />
     <Compile Include="Assets/HeroEditor/Common/SimpleColorPicker/Scripts/ColorMode.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/MonsterState.cs" />
+    <Compile Include="Assets/@Scripts/Teleport/Teleport.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SampleScene.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/MonsterVariation.cs" />
     <Compile Include="Assets/@Scripts/Managers/Core/ResourceManager.cs" />

@@ -19,8 +19,10 @@ public class ObjectBase : InitBase
 	}
 	public Action<int> OnChangedTemplateId;
 	public Action<Collider> OnTriggerEnter_Event;
+	public Action<Collider> OnTriggerExit_Event;
 
-	public override bool Init()
+
+    public override bool Init()
 	{
 		if(base.Init() == false)
 		{
@@ -43,4 +45,10 @@ public class ObjectBase : InitBase
 	{
 		OnTriggerEnter_Event?.Invoke(collision);
 	}
+
+    public virtual void OnTriggerExit(Collider collision)
+    {
+        OnTriggerExit_Event?.Invoke(collision);
+    }
+
 }
