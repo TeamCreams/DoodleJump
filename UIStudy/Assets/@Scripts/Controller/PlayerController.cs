@@ -123,9 +123,9 @@ public class PlayerController : CreatureBase
 
     public void CommitPlayerCustomization()
     {
-        HairSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Hair}.sprite"); // GameManagers 정보로     
-        EyebrowsSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyebrows}.sprite");
-        EyeSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyes}.sprite");
+        HairSpriteRenderer.sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Hair}.sprite"); // GameManagers 정보로     
+        EyebrowsSpriteRenderer.sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyebrows}.sprite");
+        EyeSpriteRenderer.sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyes}.sprite");
     }
 
 
@@ -153,8 +153,8 @@ public class PlayerController : CreatureBase
         }
 
         _animator.SetFloat("MoveSpeed", Mathf.Abs(Managers.Game.JoystickAmount.x));
-        Vector2 motion = Vector2.right * (Managers.Game.JoystickAmount.x * this._stats.StatDic[EStat.MoveSpeed].Value * Time.deltaTime); // 문제 발생    
-        _characterController.Move(motion); // 문제 발생    
+        Vector2 motion = Vector2.right * (Managers.Game.JoystickAmount.x * this._stats.StatDic[EStat.MoveSpeed].Value * Time.deltaTime);
+        _characterController.Move(motion);
 
         if (Managers.Game.JoystickAmount.x < 0)
         {
@@ -178,9 +178,9 @@ public class PlayerController : CreatureBase
 
     IEnumerator Update_CryingFace()
     {
-        EyeSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>("Crying.sprite");
+        EyeSpriteRenderer.sprite = Managers.Resource.Load<Sprite>("Crying.sprite");
         yield return new WaitForSeconds(0.8f);
-        EyeSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyes}.sprite");
+        EyeSpriteRenderer.sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyes}.sprite");
     }
 
     private void Update_Boring()
@@ -235,6 +235,7 @@ public class PlayerController : CreatureBase
                 this._stats.StatDic[option].AddStatModifier(statModifier);
             }
         }
+        MakeNullSprite();
         ChangeSprite(options);
 
         if (ItemData.AddLife == 1)
@@ -250,43 +251,57 @@ public class PlayerController : CreatureBase
                 this._stats.StatDic[option].RemoveStatModifier(statModifier.Id);
             }
         }
-        ChangeSprite(options);
+        MakeNullSprite();
 
         // 스피드면 신발, 가면 등등 cvs파일 만들고 join이런거 쓰는 것도 ㄱㅊ을 
     }
 
     public void ChangeSprite(List<EStat> options)
     {
+        
+        var groupInfo = from sprite in Managers.Data.SuberunkerItemSpriteDic
+                        join option in options on sprite.Value.StatOption equals option
+                        select new
+                        {
+                            SpriteName = sprite.Value.Name,
+                            EStatOption = option
+                        };
 
-        /*
-        var spriteNames = from spriteName in Managers.Data.SuberunkerItemSpriteDic
-                            join option in options on spriteName.Value.StatOption equals option
-                          select spriteName.Value.Name;
-        */
-
-        ShoseLeftSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>(null);
-        ShoseRightSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>(null);
-        MaskSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>(null);
-
-        foreach (var option in options)
+        foreach (var group in groupInfo)
         {
-            switch (option)
+            switch (group.EStatOption)
             {
                 case EStat.MoveSpeed:
                     {
-                        ShoseLeftSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Data.SuberunkerItemSpriteDic[40001].Name}.sprite");
-                        ShoseRightSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Data.SuberunkerItemSpriteDic[40001].Name}.sprite");
+                        var sprite = Managers.Resource.Load<Sprite>($"{group.SpriteName}.sprite");
+                        if (sprite != null)
+                        {
+                            ShoseLeftSpriteRenderer.sprite = sprite;
+                            ShoseRightSpriteRenderer.sprite = sprite;
+                        }
                     }
                     break;
                 case EStat.Luck:
                     {
-                        MaskSpriteRenderer.GetComponent<SpriteRenderer>().sprite = Managers.Resource.Load<Sprite>($"{Managers.Data.SuberunkerItemSpriteDic[40002].Name}.sprite");
+                        var sprite = Managers.Resource.Load<Sprite>($"{group.SpriteName}.sprite");
+                        if (sprite != null)
+                        {
+                            MaskSpriteRenderer.sprite = sprite;
+                        }
                     }
                     break;
                 default:
                     break;
             }
         }
+    }
+
+
+    public void MakeNullSprite()
+    {
+        ShoseLeftSpriteRenderer.sprite = null;
+        ShoseRightSpriteRenderer.sprite = null;
+        MaskSpriteRenderer.sprite = null;
     }
 
     public void Teleport()

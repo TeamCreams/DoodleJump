@@ -32,8 +32,6 @@ public class ObjectManager
             int rand = UnityEngine.Random.Range(1, 5);
             go.GetOrAddComponent<MonsterController>().SetInfo(Managers.Data.EnemyDic[rand]);
             go.transform.position = pos;
-
-            //go.transform.parent = MonsterRoot;
         }
         else if (typeof(T) == typeof(PlayerController))
         {
@@ -43,8 +41,6 @@ public class ObjectManager
             player.GetOrAddComponent<PlayerController>().SetInfo(Managers.Game.ChracterStyleInfo.CharacterId);
             player.GetOrAddComponent<PlayerController>().Teleport();
             Managers.Game.Life = player.GetOrAddComponent<PlayerController>().Data.Life;
-
-            //player.transform.parent = PlayerRoot;
         }
         else if (typeof(T) == typeof(ItemBase))
         {
