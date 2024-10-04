@@ -127,6 +127,7 @@
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/SoloState.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/Collections/FirearmCollection.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Enums/ItemClass.cs" />
+    <Compile Include="Assets/@Scripts/Animation/BackgroundAnimation.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_TinyFarmScene.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Enums/ItemType.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/Data/ItemIcon.cs" />

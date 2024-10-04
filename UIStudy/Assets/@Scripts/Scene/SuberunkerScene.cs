@@ -25,6 +25,7 @@ public class SuberunkerScene : BaseScene
         _joyStick = Managers.UI.ShowUIBase<UI_Joystick>();
         Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("Entity"), 10);
         Managers.Object.Spawn<PlayerController>(HardCoding.PlayerStartPos);
+        Managers.Object.Spawn<TeleportController>(Vector2.zero);
 
         Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("ItemBase"), 10);
 
