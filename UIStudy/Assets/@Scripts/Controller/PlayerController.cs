@@ -193,17 +193,6 @@ public class PlayerController : CreatureBase
         _animator.SetBool("Boring", true);
     }
 
-    public void SetSpeedSkill(float speed)
-    {
-        Data.Speed = speed;
-    }
-    public void SetLuckSkill(float luck)
-    {
-        Data.Luck = luck;
-    }
-
-    
-
     public void OnEvent_TakeItem(Component sender, object param)
     {
         ItemBase data = sender as ItemBase;
@@ -241,6 +230,7 @@ public class PlayerController : CreatureBase
         if (ItemData.AddLife == 1)
         {
             this._stats.Hp += 1;
+            Managers.Event.TriggerEvent(EEventType.GetLife);
         }
 
         yield return new WaitForSeconds(3);

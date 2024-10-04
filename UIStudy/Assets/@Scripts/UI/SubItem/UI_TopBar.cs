@@ -26,7 +26,7 @@ public class UI_TopBar : UI_Base
 
     System.IDisposable _lifeTimer;
 
-    UI_HeartRoot _heartRoot;
+    private UI_HeartRoot _heartRoot;
 
     public override bool Init()
     {
@@ -75,13 +75,12 @@ public class UI_TopBar : UI_Base
             }
             Managers.UI.ShowPopupUI<UI_RetryPopup>();
         }
-        UpdateLifeImage();        
+        UpdateLifeImage(life);        
     }
 
-    private void UpdateLifeImage()
+    private void UpdateLifeImage(int life)
     {
-        int life = Managers.Game.Life;
-
+        Debug.Log($"Life : {life}");
         _heartRoot.SetLife(life);
         if (life == 0)
 		{

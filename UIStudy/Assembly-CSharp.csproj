@@ -72,7 +72,6 @@
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterSetup.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_ColorPicker.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/StateHandler.cs" />
-    <Compile Include="Assets/@Scripts/Item/SkillItem.cs" />
     <Compile Include="Assets/@Scripts/UI/UI_Inventory.cs" />
     <Compile Include="Assets/@Scripts/UI/UI_Button.cs" />
     <Compile Include="Assets/@Scripts/UI/Kakao/UI_KakaoScene.cs" />
@@ -94,10 +93,8 @@
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_TopBar.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/QuickStart.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/CaptureOptions.cs" />
-    <Compile Include="Assets/@Scripts/Item/SkillSpeed.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterExtensions.cs" />
     <Compile Include="Assets/@Scripts/Spawner/Spawner.cs" />
-    <Compile Include="Assets/@Scripts/Item/SkillLuck.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/Collections/IconCollection.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/SpriteSheetCapture.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_ColorSlider.cs" />
@@ -121,7 +118,6 @@
     <Compile Include="Assets/@Scripts/Item/ItemBase.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/LayerManager.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Data/ItemParams.cs" />
-    <Compile Include="Assets/UI_PlayerDesign.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/ItemSlot.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/RuntimeSetup.cs" />
     <Compile Include="Assets/@Scripts/Scene/BaseScene.cs" />
@@ -184,6 +180,7 @@
     <Compile Include="Assets/@Scripts/Managers/Managers.cs" />
     <Compile Include="Assets/@Scripts/UI/Kakao/TextController.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/SortingOrderExample.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_PlayerDesign.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/AnimationManager.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/ScreenshotTransparent.cs" />
     <Compile Include="Assets/@Scripts/Utils/Data.Contents.cs" />

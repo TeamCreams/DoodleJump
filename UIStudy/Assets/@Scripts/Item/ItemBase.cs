@@ -74,53 +74,12 @@ public class ItemBase : ObjectBase
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
             Managers.Event.TriggerEvent(EEventType.TakeItem, this);
-            /*
-            switch (Data.Option1)
-            {
-                case EStat.MoveSpeed:
-                    SkillSpeedItem(collision, Data.Option1Param);
-                    break;
-                case EStat.Luck:
-                    SkillLuckItem(collision, Data.Option1Param);
-                    break;
-                case EStat.MaxHp: 
-                    break;
-                default:
-                    break;
-            }
-
-            switch (Data.Option2)
-            {
-                case EStat.MoveSpeed:
-                    SkillSpeedItem(collision, Data.Option2Param);
-                    break;
-                case EStat.Luck:
-                    SkillLuckItem(collision, Data.Option2Param);
-                    break;
-                case EStat.MaxHp:
-                    break;
-                default:
-                    break;
-            }
-
-            switch (Data.Option3)
-            {
-                case EStat.MoveSpeed:
-                    SkillSpeedItem(collision, Data.Option3Param);
-                    break;
-                case EStat.Luck:
-                    SkillLuckItem(collision, Data.Option3Param);
-                    break;
-                case EStat.MaxHp:
-                    break;
-                default:
-                    break;
-            }
-            */
+        
             Managers.Pool.Push(this.gameObject);
         }
     }
-
+    /*
+     
     private void SkillSpeedItem(Collider collision, float param)
     {
         SkillSpeed skillSpeedComponent = collision.gameObject.GetComponentInChildren<SkillSpeed>();
@@ -155,4 +114,5 @@ public class ItemBase : ObjectBase
     {
         
     }
+     */
 }

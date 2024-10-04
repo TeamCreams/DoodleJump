@@ -47,7 +47,7 @@ public class ObjectManager
             GameObject item = Managers.Resource.Instantiate("ItemBase", pooling: true);
             item.name = "ItemBase";
             int randId = UnityEngine.Random.Range(30001, 30001 + Managers.Data.SuberunkerItemDic.Count);
-            item.GetOrAddComponent<ItemBase>().SetInfo(randId);
+            item.GetOrAddComponent<ItemBase>().SetInfo(30003);
             item.transform.position = pos;
         }
 

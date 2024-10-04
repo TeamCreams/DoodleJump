@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using static Define;
+
 public class UI_HeartRoot : UI_Base
 {
 	HorizontalLayoutGroup _horizontalLayoutGroup;
@@ -15,6 +17,7 @@ public class UI_HeartRoot : UI_Base
             return false;
         }
         _horizontalLayoutGroup = this.GetComponent<HorizontalLayoutGroup>();
+		Managers.Event.AddEvent(EEventType.GetLife, OnEvent_AddHeart);
 		return true;
 	}
 
@@ -47,7 +50,13 @@ public class UI_HeartRoot : UI_Base
 		}
 	}
 
-	public void AddHeart(int addCount = 1)
+	public void OnEvent_AddHeart(Component sender, object param)
+    {
+        var heart = Managers.UI.MakeSubItem<UI_Heart>(parent: _horizontalLayoutGroup.transform);
+        _heartList.Add(heart);
+    }
+
+    public void AddHeart(int addCount = 1)
 	{
 		for (int i = 0; i < addCount; i++)
 		{
