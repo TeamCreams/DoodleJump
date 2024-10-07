@@ -203,6 +203,7 @@
     <Compile Include="Assets/@Scripts/Managers/Contents/ObjectManager.cs" />
     <Compile Include="Assets/@Scripts/Utils/InitBase.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/InventoryItem.cs" />
+    <Compile Include="Assets/@Scripts/Animation/BackgroundAnimationEvents.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/Common/StateHandler.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/ScrollInventory.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/Common/Springs/SpringBase.cs" />

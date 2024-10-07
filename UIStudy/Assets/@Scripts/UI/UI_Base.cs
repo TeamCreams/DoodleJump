@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.Playables;
 
 public class UI_Base : InitBase
 {
@@ -53,7 +54,7 @@ public class UI_Base : InitBase
     protected void BindSliders(Type type) { Bind<Slider>(type); }
     protected void BindLegacyTexts(Type type) { Bind<Text>(type); }
     protected void BindLegacyInputFields(Type type) { Bind<InputField>(type); }
-
+    protected void BindPlayableDirector(Type type) { Bind<PlayableDirector>(type); }
 
     protected T Get<T>(int idx) where T : UnityEngine.Object
     {
@@ -75,6 +76,7 @@ public class UI_Base : InitBase
     // FIX : 현재 ChooseStats에서 사용되는 Text와 InputField는 Legacy(옛날거) 라서 이거로 사용해야함.
     protected Text GetLegacyText(int idx) { return Get<Text>(idx); }
     protected InputField GetLegacyInputField(int idx) { return Get<InputField>(idx); }
+    protected PlayableDirector GetPlayableDirector(int idx) { return Get<PlayableDirector>(idx); }
 
     public static void BindEvent(GameObject go, Action<PointerEventData> action = null, Define.EUIEvent type = Define.EUIEvent.Click)
     {
