@@ -9,6 +9,7 @@ using UnityEngine;
 public class ObjectManager
 {
     private HashSet<StoneController> _monsters;
+    private List<int> _itemList = new List<int>();
 
     private GameObject _monsterRoot;
     public Transform MonsterRoot => GetRootTransform("@Monsters");
@@ -46,7 +47,7 @@ public class ObjectManager
         {
             GameObject item = Managers.Resource.Instantiate("ItemBase", pooling: true);
             item.name = "ItemBase";
-            int randId = UnityEngine.Random.Range(30001, 30001 + Managers.Data.SuberunkerItemDic.Count);
+            int randId = RandomItem();
             item.GetOrAddComponent<ItemBase>().SetInfo(randId);
             item.transform.position = pos;
         }
@@ -58,4 +59,42 @@ public class ObjectManager
         }
     }
 
+    private int RandomItem()
+    {
+        _itemList.Clear();
+        float range = UnityEngine.Random.Range(0, 1.0f);
+
+        float min = 1;
+        float closeValue = 0;
+
+        foreach (var item in Managers.Data.SuberunkerItemDic)
+        {
+            float difference = Math.Abs(item.Value.Chance - range);
+            if (difference < min)
+            {
+                min = difference;
+                closeValue = item.Value.Chance;
+            }
+            else if(difference == min)
+            {
+                if(0 <= item.Value.Chance - range)
+                {
+                    min = difference;
+                    closeValue = item.Value.Chance;
+                }
+            }
+        }
+
+        foreach (var item in Managers.Data.SuberunkerItemDic)
+        {
+            if(closeValue == item.Value.Chance)
+            {
+                _itemList.Add(item.Value.Id);
+            }
+        }
+
+        int randItem = UnityEngine.Random.Range(0, _itemList.Count);
+                
+        return _itemList[randItem];
+    }
 }

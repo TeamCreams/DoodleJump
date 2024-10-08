@@ -76,6 +76,106 @@
       "EquipType": 1
     },
     {
+      "Id": 10016,
+      "SpriteName": "AnimeGirl",
+      "EquipType": 1
+    },
+    {
+      "Id": 10017,
+      "SpriteName": "Army",
+      "EquipType": 1
+    },
+    {
+      "Id": 10018,
+      "SpriteName": "BowlCut",
+      "EquipType": 1
+    },
+    {
+      "Id": 10019,
+      "SpriteName": "Bundle",
+      "EquipType": 1
+    },
+    {
+      "Id": 10020,
+      "SpriteName": "Clumsy",
+      "EquipType": 1
+    },
+    {
+      "Id": 10021,
+      "SpriteName": "CoolBoy",
+      "EquipType": 1
+    },
+    {
+      "Id": 10022,
+      "SpriteName": "Dandy",
+      "EquipType": 1
+    },
+    {
+      "Id": 10023,
+      "SpriteName": "ElfaHair",
+      "EquipType": 1
+    },
+    {
+      "Id": 10024,
+      "SpriteName": "FauxHawk",
+      "EquipType": 1
+    },
+    {
+      "Id": 10025,
+      "SpriteName": "FringedUp",
+      "EquipType": 1
+    },
+    {
+      "Id": 10026,
+      "SpriteName": "NemeanHair",
+      "EquipType": 1
+    },
+    {
+      "Id": 10027,
+      "SpriteName": "OrientalWarriorHair",
+      "EquipType": 1
+    },
+    {
+      "Id": 10028,
+      "SpriteName": "SideFringeDisheveled",
+      "EquipType": 1
+    },
+    {
+      "Id": 10029,
+      "SpriteName": "SlickedTwintalesDisheveled",
+      "EquipType": 1
+    },
+    {
+      "Id": 10030,
+      "SpriteName": "TeslaHairNormal",
+      "EquipType": 1
+    },
+    {
+      "Id": 10031,
+      "SpriteName": "TeslaHairShocked",
+      "EquipType": 1
+    },
+    {
+      "Id": 10032,
+      "SpriteName": "Twisty",
+      "EquipType": 1
+    },
+    {
+      "Id": 10033,
+      "SpriteName": "UncleSamHair",
+      "EquipType": 1
+    },
+    {
+      "Id": 10034,
+      "SpriteName": "ValkyrieHair",
+      "EquipType": 1
+    },
+    {
+      "Id": 10035,
+      "SpriteName": "VillageGirl",
+      "EquipType": 1
+    },
+    {
       "Id": 11001,
       "SpriteName": "AnnoyedEyebrows",
       "EquipType": 2
@@ -213,6 +313,66 @@
     {
       "Id": 12014,
       "SpriteName": "SweatDrop",
+      "EquipType": 3
+    },
+    {
+      "Id": 12015,
+      "SpriteName": "Dead",
+      "EquipType": 3
+    },
+    {
+      "Id": 12016,
+      "SpriteName": "83",
+      "EquipType": 3
+    },
+    {
+      "Id": 12017,
+      "SpriteName": "Blank",
+      "EquipType": 3
+    },
+    {
+      "Id": 12018,
+      "SpriteName": "Fishy",
+      "EquipType": 3
+    },
+    {
+      "Id": 12019,
+      "SpriteName": "Orly",
+      "EquipType": 3
+    },
+    {
+      "Id": 12020,
+      "SpriteName": "Sigh",
+      "EquipType": 3
+    },
+    {
+      "Id": 12021,
+      "SpriteName": "Wanting",
+      "EquipType": 3
+    },
+    {
+      "Id": 12022,
+      "SpriteName": "WTF",
+      "EquipType": 3
+    },
+    {
+      "Id": 12023,
+      "SpriteName": "XD",
+      "EquipType": 3
+    },
+    {
+      "Id": 12024,
+      "SpriteName": "ZombieEyes1",
+      "EquipType": 3
+    },
+    {
+      "Id": 12025,
+      "SpriteName": "ZombieEyes7",
+      "EquipType": 3
+    },
+    {
+      "Id": 12026,
+      "SpriteName": "GlowingEyes",
       "EquipType": 3
     }
   ]

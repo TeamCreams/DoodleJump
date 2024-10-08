@@ -1,11 +1,11 @@
 Id,Name,Chance,Option1,Option1ModifierType,Option1Param,Option2,Option2ModifierType,Option2Param,Option3,Option3ModifierType,Option3Param,Option4,Option4ModifierType,Option4Param,AddLife
-30001,Swift Boots,0.6,MoveSpeed,Percentage,0.4,,,,,,,,,,
-30002,Luck Charm,0.6,Luck,Percentage,0.2,,,,,,,,,,
+30001,Swift Boots,0.6,MoveSpeed,Percentage,40,,,,,,,,,,
+30002,Luck Charm,0.6,Luck,Percentage,20,,,,,,,,,,
 30003,Life Ring,0.6,,,,,,,,,,,,,1
-30004,Speed Cloak,0.85,MoveSpeed,Percentage,0.6,,,,,,,,,,
-30005,Fortune Blade,0.85,Luck,Percentage,0.3,MoveSpeed,Percentage,0.3,,,,,,,1
+30004,Speed Cloak,0.85,MoveSpeed,Percentage,60,,,,,,,,,,
+30005,Fortune Blade,0.85,Luck,Percentage,30,MoveSpeed,Percentage,30,,,,,,,1
 30006,Vital Amulet,0.6,,,,,,,,,,,,,1
-30007,Lucky Coin,0.85,Luck,Percentage,0.3,MoveSpeed,Flat,30,,,,,,,
+30007,Lucky Coin,0.85,Luck,Percentage,30,MoveSpeed,Flat,30,,,,,,,
 30008,Speed Potion,0.6,MoveSpeed,Flat,50,,,,,,,,,,
-30009,Dragon Heart,1,Luck,Percentage,0.5,MoveSpeed,Percentage,0.3,,,,,,,1
-30010,Lucky Thunder,1,Luck,Percentage,0.5,MoveSpeed,Flat,20,,,,,,,
+30009,Dragon Heart,1,Luck,Percentage,50,MoveSpeed,Percentage,30,,,,,,,1
+30010,Lucky Thunder,1,Luck,Percentage,50,MoveSpeed,Flat,20,,,,,,,

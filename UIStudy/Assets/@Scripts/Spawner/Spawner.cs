@@ -17,7 +17,7 @@ public class Spawner : InitBase
         while (true)
         {
             yield return new WaitForSeconds(1.2f);
-            int x = UnityEngine.Random.Range(-100, 101);
+            int x = UnityEngine.Random.Range(-90, 91);
             Managers.Object.Spawn<StoneController>(new Vector2(x, 140));
         }
     }
@@ -27,7 +27,7 @@ public class Spawner : InitBase
         while (true)
         {
             yield return new WaitForSeconds(10f);
-            int x = UnityEngine.Random.Range(-100, 101);
+            int x = UnityEngine.Random.Range(-90, 91);
             Managers.Object.Spawn<ItemBase>(new Vector2(x, -110));
         }
     }
