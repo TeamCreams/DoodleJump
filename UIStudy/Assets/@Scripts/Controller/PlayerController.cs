@@ -174,6 +174,9 @@ public class PlayerController : CreatureBase
         Managers.Event.TriggerEvent(EEventType.ChangePlayerLife, this, this._stats.Hp);
         AudioClip attackedAudio = Managers.Resource.Load<AudioClip>("AttackedSound");
         Managers.Sound.Play(ESound.Effect, attackedAudio, 0.7f);
+
+        Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
+
         StartCoroutine(Update_CryingFace());
     }
 

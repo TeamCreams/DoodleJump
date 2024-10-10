@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Newtonsoft.Json;
+using Data;
 
 public interface ILoader<Key, Value>
 {
@@ -19,6 +20,8 @@ public class DataManager
     public Dictionary<int, Data.CharacterItemSpriteData> CharacterItemSpriteDic { get; private set; } = new Dictionary<int, Data.CharacterItemSpriteData>();
     public Dictionary<int, Data.SuberunkerItemData> SuberunkerItemDic { get; private set; } = new Dictionary<int, Data.SuberunkerItemData>();
     public Dictionary<int, Data.SuberunkerItemSpriteData> SuberunkerItemSpriteDic { get; private set; } = new Dictionary<int, Data.SuberunkerItemSpriteData>();
+    public Dictionary<int, Data.DifficultySettingsData> DifficultySettingsDic { get; private set; } = new Dictionary<int, Data.DifficultySettingsData>();
+
 
     public void Init()
 	{
@@ -29,7 +32,7 @@ public class DataManager
         CharacterItemSpriteDic = LoadJson<Data.CharacterItemSpriteDataLoader, int, Data.CharacterItemSpriteData>("CharacterItemSpriteData").MakeDict();
         SuberunkerItemDic = LoadJson<Data.SuberunkerItemDataLoader, int, Data.SuberunkerItemData>("SuberunkerItemData").MakeDict();
         SuberunkerItemSpriteDic = LoadJson<Data.SuberunkerItemSpriteDataLoader, int, Data.SuberunkerItemSpriteData>("SuberunkerItemSpriteData").MakeDict();
-
+        DifficultySettingsDic = LoadJson<Data.DifficultySettingsDataLoader, int, Data.DifficultySettingsData>("DifficultySettingsData").MakeDict();
     }
 
     private Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>

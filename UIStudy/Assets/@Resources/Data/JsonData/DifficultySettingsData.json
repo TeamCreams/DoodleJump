@@ -1,0 +1,54 @@
+{
+  "difficultySettingsDatas": [
+    {
+      "Id": 70001,
+      "ChallengeScale": 10,
+      "StoneShower": 0
+    },
+    {
+      "Id": 70002,
+      "ChallengeScale": 20,
+      "StoneShower": 0
+    },
+    {
+      "Id": 70003,
+      "ChallengeScale": 30,
+      "StoneShower": 30
+    },
+    {
+      "Id": 70004,
+      "ChallengeScale": 40,
+      "StoneShower": 25
+    },
+    {
+      "Id": 70005,
+      "ChallengeScale": 50,
+      "StoneShower": 20
+    },
+    {
+      "Id": 70006,
+      "ChallengeScale": 50,
+      "StoneShower": 18
+    },
+    {
+      "Id": 70007,
+      "ChallengeScale": 60,
+      "StoneShower": 15
+    },
+    {
+      "Id": 70008,
+      "ChallengeScale": 60,
+      "StoneShower": 12
+    },
+    {
+      "Id": 70009,
+      "ChallengeScale": 70,
+      "StoneShower": 10
+    },
+    {
+      "Id": 70010,
+      "ChallengeScale": 10000,
+      "StoneShower": 0
+    }
+  ]
+}

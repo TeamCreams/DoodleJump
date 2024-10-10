@@ -59,6 +59,7 @@ public class StoneController : ObjectBase
         Physics.Raycast(transform.position, Vector3.down, out _hitInfo, 3f, LayerMask.GetMask("Ground"));
         if (_hitInfo.collider != null)
         {
+            
             Managers.Pool.Push(this.gameObject);
         }
     }

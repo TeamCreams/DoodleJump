@@ -72,6 +72,17 @@ public class GameManager
 
     }
 
+    private DifficultySettingsInfo _difficultySettingsInfo;
+    public DifficultySettingsInfo DifficultySettingsInfo
+    {
+        get { return _difficultySettingsInfo; }
+        set
+        {
+            _difficultySettingsInfo = value;
+        }
+
+    }
+
     private Define.EJoystickState _joystickState;
 	public Define.EJoystickState JoystickState
 	{
@@ -107,6 +118,7 @@ public class GameManager
     public void Init()
     {
         _chracterStyleInfo = new ChracterStyleInfo();
+        _difficultySettingsInfo = new DifficultySettingsInfo();
     }
    
 
@@ -172,6 +184,13 @@ public class ChracterStyleInfo
     public string Eyes { get; set; } = "Dizzy";
     public string Eyebrows { get; set; } = "DizzyEyebrows";
     public string Hair { get; set; } = "ZombieShabby";
+}
+
+public class DifficultySettingsInfo // 다시시작할 때마다 초기화 필요 
+{
+    public int StageId { get; set; } = 70001;
+    public int ChallengeScale { get; set; } = 0;
+    public int StoneShower { get; set; } = 0;
 }
 
 

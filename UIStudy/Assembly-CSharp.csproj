@@ -100,6 +100,7 @@
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/SpriteSheetCapture.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_ColorSlider.cs" />
     <Compile Include="Assets/@Scripts/Systems/Contents/UserSystem.cs" />
+    <Compile Include="Assets/@Scenes/TestScript.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/ScrollInventoryFilter.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Firearms/Firearm.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Data/Modifier.cs" />

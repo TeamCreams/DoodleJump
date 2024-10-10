@@ -243,4 +243,27 @@ namespace Data
             return dict;
         }
     }
+
+    [Serializable]
+    public class DifficultySettingsData
+    {
+        public int Id;
+        public int ChallengeScale;
+        public int StoneShower;
+    }
+
+    [Serializable]
+    public class DifficultySettingsDataLoader : ILoader<int, DifficultySettingsData>
+    {
+        public List<DifficultySettingsData> difficultySettingsDatas = new List<DifficultySettingsData>();
+
+        public Dictionary<int, DifficultySettingsData> MakeDict()
+        {
+            Dictionary<int, DifficultySettingsData> dict = new Dictionary<int, DifficultySettingsData>();
+            foreach (DifficultySettingsData difficultySettingsData in difficultySettingsDatas)
+                dict.Add(difficultySettingsData.Id, difficultySettingsData);
+
+            return dict;
+        }
+    }
 }
