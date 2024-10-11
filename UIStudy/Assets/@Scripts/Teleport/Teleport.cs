@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
@@ -100,18 +100,18 @@ public class Teleport : ObjectBase
 
     private void TeleportRight(PlayerController playerController)
     {
-        CharacterController characterController = playerController.GetComponent<CharacterController>();
-        characterController.enabled = false;
-        playerController.transform.position = HardCoding.PlayerTeleportPos_Left;
-        characterController.enabled = true;
+        playerController.Teleport(HardCoding.PlayerTeleportPos_Left);
     }
 
     private void TeleportLeft(PlayerController playerController)
     {
-        CharacterController characterController = playerController.GetComponent<CharacterController>();
-        characterController.enabled = false;
-        playerController.transform.position = HardCoding.PlayerTeleportPos_Right;
-        characterController.enabled = true;
+        playerController.Teleport(HardCoding.PlayerTeleportPos_Right);
     }
 
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(HardCoding.PlayerTeleportPos_Left, 5.5f);
+        Gizmos.DrawSphere(HardCoding.PlayerTeleportPos_Right, 5.5f);
+    }
 }

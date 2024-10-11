@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Data;
 using UnityEngine;
+using static Define;
 
 public class ObjectManager
 {
@@ -40,7 +41,7 @@ public class ObjectManager
             player.name = "player";
             //Debug.Log(Managers.Game.ChracterStyleInfo.CharacterId);
             player.GetOrAddComponent<PlayerController>().SetInfo(Managers.Game.ChracterStyleInfo.CharacterId);
-            player.GetOrAddComponent<PlayerController>().Teleport();
+            player.GetOrAddComponent<PlayerController>().Teleport(pos);
             Managers.Game.Life = player.GetOrAddComponent<PlayerController>().Data.Life;
         }
         else if (typeof(T) == typeof(ItemBase))

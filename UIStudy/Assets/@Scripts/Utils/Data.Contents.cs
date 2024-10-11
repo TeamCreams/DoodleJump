@@ -248,7 +248,7 @@ namespace Data
     public class DifficultySettingsData
     {
         public int Id;
-        public int ChallengeScale;
+        public int ChallengeScale;  // 데이터로만 게임 세팅할수있게끔.
         public int StoneShower;
     }
 

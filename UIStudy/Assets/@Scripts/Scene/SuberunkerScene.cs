@@ -25,6 +25,13 @@ public class SuberunkerScene : BaseScene
         }
 
         Managers.UI.ShowSceneUI<UI_SuberunkerScene>();
+
+        var inputObject = new GameObject("@Input_Scene");
+        var inputScene = inputObject.GetOrAddComponent<Input_SuberunkerScene>();
+
+        Managers.Input.KeyAction -= inputScene.OnKeyAction;
+        Managers.Input.KeyAction += inputScene.OnKeyAction;
+
         _joyStick = Managers.UI.ShowUIBase<UI_Joystick>();
         Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("Entity"), 10);
         Managers.Object.Spawn<PlayerController>(HardCoding.PlayerStartPos);
@@ -40,8 +47,18 @@ public class SuberunkerScene : BaseScene
 
         StartCoroutine(_spawner.GenerateItem());
         StartCoroutine(_spawner.GenerateStone());
+
+
+
+        Managers.Event.AddEvent(EEventType.Attacked_Player, OnEvent_Attacked_Player);
         return true;
     }
+
+    private void OnEvent_Attacked_Player(Component sender, object param)
+    {
+        Managers.Camera.Shake(1.0f, 0.2f);
+    }
+
 
     IEnumerator StartStoneShower()
     {

@@ -231,9 +231,9 @@ public class PlayerController : CreatureBase
         MakeNullSprite();
         ChangeSprite(options);
 
-        if (ItemData.AddLife == 1)
+        if (0 < ItemData.AddLife)
         {
-            this._stats.Hp += 1;
+            this._stats.Hp += ItemData.AddLife;
             Managers.Event.TriggerEvent(EEventType.GetLife);
         }
 
@@ -250,8 +250,9 @@ public class PlayerController : CreatureBase
 
     public void ChangeSprite(List<EStat> options)
     {
-        var groupInfo = from sprite in Managers.Data.SuberunkerItemSpriteDic
-                        join option in options on sprite.Value.StatOption equals option
+        var groupInfo = from option in options
+                        join sprite in Managers.Data.SuberunkerItemSpriteDic
+                        on option equals sprite.Value.StatOption
                         select new
                         {
                             SpriteName = sprite.Value.Name,
@@ -295,10 +296,10 @@ public class PlayerController : CreatureBase
         MaskSpriteRenderer.sprite = null;
     }
 
-    public void Teleport()
+    public void Teleport(Vector3 pos)
     {
         _characterController.enabled = false;
-        _characterController.transform.position = HardCoding.PlayerStartPos;
+        _characterController.transform.position = pos;
         _characterController.enabled = true;
     }
 }

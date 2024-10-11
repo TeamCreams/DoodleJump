@@ -28,6 +28,7 @@ public class Managers : MonoBehaviour
 	private InputManagerEx _input = new InputManagerEx();
 	private UIManager _ui = new UIManager(); 
 	private EventManager _event = new EventManager();
+	private CameraManager _camera = new CameraManager();
 
 	public static PoolManager Pool { get { return Instance?._pool; } }
 	public static ResourceManager Resource { get { return Instance?._resource; } }
@@ -36,10 +37,11 @@ public class Managers : MonoBehaviour
 	public static InputManagerEx Input { get { return Instance?._input; } }
 	public static UIManager UI { get { return Instance?._ui; } } 
 	public static EventManager Event { get {  return Instance?._event; } }
-    #endregion
+	public static CameraManager Camera { get { return Instance?._camera; } }
+	#endregion
 
 
-    public static void Init()
+	public static void Init()
 	{
 		if (s_instance == null)
 		{

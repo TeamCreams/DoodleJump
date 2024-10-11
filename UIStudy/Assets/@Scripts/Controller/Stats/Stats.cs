@@ -96,7 +96,16 @@ public class StatModifier
 public class Stats
 {
     public Dictionary<EStat, Stat> StatDic { get; private set; } = new Dictionary<EStat, Stat>();
-    public float Hp { get; set; }
+    public float Hp 
+    {
+        get => _hp;
+        set
+        {
+            var newHp = Mathf.Clamp(value, 0, StatDic[EStat.MaxHp].Value);
+            _hp = newHp;
+        }
+    }
+    public float _hp { get; set; }
 
     public Stats(PlayerData data)
     {
