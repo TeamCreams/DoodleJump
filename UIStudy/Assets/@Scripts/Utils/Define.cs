@@ -62,6 +62,7 @@ public static class Define
         TakeItem,
         ChangePlayerLife,
         GetLife,
+        LevelStageUp
     }
 
     public enum EEquipType
@@ -113,6 +114,7 @@ public static class Define
 		public static readonly Vector2 PlayerStartPos = new Vector2(0, -120);
         public static readonly Vector3 PlayerTeleportPos_Left = new Vector3(-60, -120, 0);
         public static readonly Vector3 PlayerTeleportPos_Right = new Vector3(50, -120, 0);
+        public static readonly int PlayerMaxHp = 8;
     }
 
 }

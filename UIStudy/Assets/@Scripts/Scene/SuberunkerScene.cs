@@ -46,7 +46,7 @@ public class SuberunkerScene : BaseScene
         _spawner = Instantiate(Managers.Resource.Load<GameObject>("Spawner")).GetOrAddComponent<Spawner>();
 
         StartCoroutine(_spawner.GenerateItem());
-        StartCoroutine(_spawner.GenerateStone());
+        StartCoroutine(_spawner.GenerateTestCor());
 
 
 
@@ -59,22 +59,6 @@ public class SuberunkerScene : BaseScene
         Managers.Camera.Shake(1.0f, 0.2f);
     }
 
-
-    IEnumerator StartStoneShower()
-    {
-        /* 주기적으로 확인이 필요한 정보 
-        _difficultySettings = Managers.Data.DifficultySettingsDic[Managers.Game.DifficultySettingsInfo.StageId];
-
-        if (_difficultySettings.StoneShower != 0)
-        {
-
-        }
-        */
-        yield return new WaitForSeconds(_difficultySettings.StoneShower);
-        StopCoroutine(_spawner.GenerateStone());
-        Managers.Game.DifficultySettingsInfo.StoneShower++;
-        StartCoroutine(_spawner.GenerateStoneShower());
-    }
 
 
 }

@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/@Scenes/ChooseCharacterScene.unity
     guid: 661663cc4ae244ed9818fefb28c794e5
+  - enabled: 1
+    path: Assets/@Scenes/SuberunkerTimelineScene.unity
+    guid: 3b4e7ddedd84b4b6791e7920db550a32
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: b0e6879cb2d134a8e8fa24dac91d61db, type: 2}

@@ -231,13 +231,13 @@ public class PlayerController : CreatureBase
         MakeNullSprite();
         ChangeSprite(options);
 
-        if (0 < ItemData.AddLife)
+        if (0 < ItemData.AddLife && this._stats.Hp <= 8)
         {
             this._stats.Hp += ItemData.AddLife;
             Managers.Event.TriggerEvent(EEventType.GetLife);
         }
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(ItemData.Duration);
         foreach (var (option, statModifier) in options.Zip(_statModifier, (optionIndex, StatModifierIndex) => (optionIndex, StatModifierIndex)))
         {
             if (option != 0)

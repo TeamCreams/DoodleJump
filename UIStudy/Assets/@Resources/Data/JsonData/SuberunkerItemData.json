@@ -16,7 +16,8 @@
       "Option4": 0,
       "Option4ModifierType": 0,
       "Option4Param": 0.0,
-      "AddLife": 0
+      "AddLife": 0,
+      "Duration": 3.0
     },
     {
       "Id": 30002,
@@ -34,7 +35,8 @@
       "Option4": 0,
       "Option4ModifierType": 0,
       "Option4Param": 0.0,
-      "AddLife": 0
+      "AddLife": 0,
+      "Duration": 3.0
     },
     {
       "Id": 30003,
@@ -52,7 +54,8 @@
       "Option4": 0,
       "Option4ModifierType": 0,
       "Option4Param": 0.0,
-      "AddLife": 1
+      "AddLife": 1,
+      "Duration": 0.0
     },
     {
       "Id": 30004,
@@ -70,7 +73,8 @@
       "Option4": 0,
       "Option4ModifierType": 0,
       "Option4Param": 0.0,
-      "AddLife": 0
+      "AddLife": 0,
+      "Duration": 5.0
     },
     {
       "Id": 30005,
@@ -88,7 +92,8 @@
       "Option4": 0,
       "Option4ModifierType": 0,
       "Option4Param": 0.0,
-      "AddLife": 1
+      "AddLife": 1,
+      "Duration": 5.0
     },
     {
       "Id": 30006,
@@ -106,7 +111,8 @@
       "Option4": 0,
       "Option4ModifierType": 0,
       "Option4Param": 0.0,
-      "AddLife": 1
+      "AddLife": 1,
+      "Duration": 0.0
     },
     {
       "Id": 30007,
@@ -124,7 +130,8 @@
       "Option4": 0,
       "Option4ModifierType": 0,
       "Option4Param": 0.0,
-      "AddLife": 0
+      "AddLife": 0,
+      "Duration": 5.0
     },
     {
       "Id": 30008,
@@ -142,7 +149,8 @@
       "Option4": 0,
       "Option4ModifierType": 0,
       "Option4Param": 0.0,
-      "AddLife": 0
+      "AddLife": 0,
+      "Duration": 3.0
     },
     {
       "Id": 30009,
@@ -160,7 +168,8 @@
       "Option4": 0,
       "Option4ModifierType": 0,
       "Option4Param": 0.0,
-      "AddLife": 1
+      "AddLife": 1,
+      "Duration": 8.0
     },
     {
       "Id": 30010,
@@ -178,7 +187,8 @@
       "Option4": 0,
       "Option4ModifierType": 0,
       "Option4Param": 0.0,
-      "AddLife": 0
+      "AddLife": 0,
+      "Duration": 8.0
     }
   ]
 }

@@ -64,6 +64,7 @@ public class UI_TopBar : UI_Base
 	void OnChangedLife(Component sender, object param)
 	{
         int life = (int)((float)param);
+        Debug.Log($"Life : {life}");
 
         if (life <= 0)
         {
@@ -80,7 +81,6 @@ public class UI_TopBar : UI_Base
 
     private void UpdateLifeImage(int life)
     {
-        Debug.Log($"Life : {life}");
         _heartRoot.SetLife(life);
         if (life == 0)
 		{

@@ -180,6 +180,7 @@ namespace Data
         public EStatModifierType Option4ModifierType;
         public float Option4Param;
         public int AddLife;
+        public float Duration;
     }
 
 
@@ -248,8 +249,14 @@ namespace Data
     public class DifficultySettingsData
     {
         public int Id;
+        public int Level;
         public int ChallengeScale;  // 데이터로만 게임 세팅할수있게끔.
-        public int StoneShower;
+        public float StoneGenerateStartTime;
+        public float StoneGenerateFinishTime;
+        //public float StoneShowerStartTime;
+        //public float StoneShowerFinishTime;
+        public float StoneShowerPeriodStartTime;
+        public float StoneShowerPeriodFinishTime;
     }
 
     [Serializable]

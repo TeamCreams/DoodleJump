@@ -101,7 +101,7 @@ public class Stats
         get => _hp;
         set
         {
-            var newHp = Mathf.Clamp(value, 0, StatDic[EStat.MaxHp].Value);
+            var newHp = Mathf.Clamp(value, 0, HardCoding.PlayerMaxHp);
             _hp = newHp;
         }
     }

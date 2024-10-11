@@ -52,14 +52,14 @@ public class UI_HeartRoot : UI_Base
 
 	public void OnEvent_AddHeart(Component sender, object param)
     {
+        AudioClip addAudio = Managers.Resource.Load<AudioClip>("AddLifeSound");
+        Managers.Sound.Play(ESound.Effect, addAudio);
         var heart = Managers.UI.MakeSubItem<UI_Heart>(parent: _horizontalLayoutGroup.transform);
         _heartList.Add(heart);
     }
 
     public void AddHeart(int addCount = 1)
 	{
-		AudioClip addAudio = Managers.Resource.Load<AudioClip>("AddLifeSound");
-		Managers.Sound.Play(ESound.Effect, addAudio);
 		for (int i = 0; i < addCount; i++)
 		{
 			var heart = Managers.UI.MakeSubItem<UI_Heart>(parent: _horizontalLayoutGroup.transform);
