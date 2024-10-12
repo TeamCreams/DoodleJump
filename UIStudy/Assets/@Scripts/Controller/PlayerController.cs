@@ -156,15 +156,17 @@ public class PlayerController : CreatureBase
         Vector2 motion = Vector2.right * (Managers.Game.JoystickAmount.x * this._stats.StatDic[EStat.MoveSpeed].Value * Time.deltaTime);
         _characterController.Move(motion);
 
+        Transform animationTransform = _animator.gameObject.transform;
+
         if (Managers.Game.JoystickAmount.x < 0)
         {
-            this.transform.localScale
-                 = new Vector3(-Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
+            animationTransform.localScale
+                 = new Vector3(-Mathf.Abs(animationTransform.localScale.x), animationTransform.localScale.y, animationTransform.localScale.z);
         }
         else if (0 < Managers.Game.JoystickAmount.x)
         {
-            this.transform.localScale
-                    = new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
+            _animator.gameObject.transform.localScale
+                    = new Vector3(Mathf.Abs(animationTransform.localScale.x), animationTransform.localScale.y, animationTransform.localScale.z);
         }
     }
 

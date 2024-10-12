@@ -17,10 +17,6 @@ public class UI_DevLoadingScene : UI_Scene
 		SceneList
     }
 
-	enum PlayableDirector
-	{
-        SuberunkerTimeline
-    }
 	enum Buttons
 	{
 		TinyFarmButton,
@@ -37,7 +33,6 @@ public class UI_DevLoadingScene : UI_Scene
         BindButtons(typeof(Buttons));
 		BindTexts(typeof(Texts));
 		BindObjects(typeof(GameObjects));
-		BindPlayableDirector(typeof(PlayableDirector));
 		GetText((int)Texts.LoadingText).text = "로딩중...";
 		GetObject((int)GameObjects.SceneList).SetActive(false);
 
@@ -54,8 +49,7 @@ public class UI_DevLoadingScene : UI_Scene
 	}
     private void OnClick_ChooseCharacterScene(PointerEventData eventData)
     {
-		GetPlayableDirector((int)PlayableDirector.SuberunkerTimeline).Play();
-        //Managers.Scene.LoadScene(Define.EScene.ChooseCharacterScene);
+        Managers.Scene.LoadScene(Define.EScene.ChooseCharacterScene);
     }
     void StartLoadAssets(string label)
 	{

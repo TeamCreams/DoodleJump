@@ -17,8 +17,6 @@ public class UI_ChooseCharacterScene : UI_Scene
     enum GameObjects
     {
         InventoryItemRoot,
-
-        //UI_ColorPicker
     }
 
     enum Images
@@ -43,10 +41,7 @@ public class UI_ChooseCharacterScene : UI_Scene
         BindObjects(typeof(GameObjects));
         BindImages(typeof(Images));
         BindButtons(typeof(Buttons));
-        /*
-        ColorPicker = Get<GameObject>((int)GameObjects.UI_ColorPicker).GetComponent<UI_ColorPicker>();
-        Debug.Assert(ColorPicker != null, $"{nameof(UI_ColorPicker)} is null---------------");
-        */
+ 
         GetImage((int)Images.HairItem).gameObject.BindEvent(OnClick_HairItem, Define.EUIEvent.Click);
         GetImage((int)Images.EyesItem).gameObject.BindEvent(OnClick_EyesItem, Define.EUIEvent.Click);
         GetImage((int)Images.EyebrowsItem).gameObject.BindEvent(OnClick_EyebrowsItem, Define.EUIEvent.Click);
@@ -81,7 +76,7 @@ public class UI_ChooseCharacterScene : UI_Scene
 
     private void OnClick_NextButton(PointerEventData eventData)
     {
-        Managers.Scene.LoadScene(Define.EScene.SuberunkerScene);
+        Managers.Scene.LoadScene(Define.EScene.SuberunkerTimelineScene);
     }
 
     private void SetInventoryItems(EEquipType equipType)

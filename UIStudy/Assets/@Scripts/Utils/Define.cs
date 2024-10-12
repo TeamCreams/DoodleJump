@@ -10,7 +10,9 @@ public static class Define
 		DevLoadingScene,
 		TinyFarmScene,
         SuberunkerScene,
+        SuberunkerTimelineScene,
         ChooseCharacterScene,
+
     }
 
 	public enum EUIEvent
@@ -112,8 +114,8 @@ public static class Define
 	public class HardCoding
 	{
 		public static readonly Vector2 PlayerStartPos = new Vector2(0, -120);
-        public static readonly Vector3 PlayerTeleportPos_Left = new Vector3(-60, -120, 0);
-        public static readonly Vector3 PlayerTeleportPos_Right = new Vector3(50, -120, 0);
+        public static readonly Vector3 PlayerTeleportPos_Left = new Vector3(-70, -120, 0);
+        public static readonly Vector3 PlayerTeleportPos_Right = new Vector3(70, -120, 0);
         public static readonly int PlayerMaxHp = 8;
     }
 

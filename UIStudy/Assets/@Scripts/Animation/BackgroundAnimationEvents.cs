@@ -16,6 +16,6 @@ public class BackgroundAnimationEvents : InitBase
 
     public void LoadingChooseCharacterScene()
     {
-        Managers.Scene.LoadScene(Define.EScene.ChooseCharacterScene);
+        Managers.Scene.LoadScene(Define.EScene.SuberunkerScene);
     }
 }

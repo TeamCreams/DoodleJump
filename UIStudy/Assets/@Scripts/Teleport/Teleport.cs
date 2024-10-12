@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
@@ -13,7 +13,6 @@ public class Teleport : ObjectBase
     }
     private DirectionPosition _directionPosition = DirectionPosition.Left;
 
-    private TeleportController _teleportController;
 
     public override bool Init()
     {
@@ -25,16 +24,12 @@ public class Teleport : ObjectBase
         OnTriggerEnter_Event -= OnTriggerEnterPlayer;
         OnTriggerEnter_Event += OnTriggerEnterPlayer;
 
-        OnTriggerExit_Event -= OnTriggerExitPlayer;
-        OnTriggerExit_Event += OnTriggerExitPlayer;
-
-        _teleportController = GetComponentInParent<TeleportController>();
         return true;
     }
 
     private void CheckDirection()
     {
-        if(this.transform.position.x < 0)
+        if (this.transform.position.x < 0)
         {
             _directionPosition = DirectionPosition.Left;
         }
@@ -48,42 +43,7 @@ public class Teleport : ObjectBase
     {
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
-            
-            if(_teleportController.IsTeleportable == true)
-            {
 
-                PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
-
-                if (playerController.transform.position.x < HardCoding.PlayerTeleportPos_Left.x)
-                {
-                    TeleportLeft(playerController);
-                }
-                else if (HardCoding.PlayerTeleportPos_Right.x < playerController.transform.position.x)
-                {
-                    TeleportRight(playerController);
-                }
-                else
-                {
-                    switch (_directionPosition)
-                    {
-                        case DirectionPosition.Left:
-                            TeleportLeft(playerController);
-                            break;
-
-                        case DirectionPosition.Right:
-                            TeleportRight(playerController);
-                            break;
-                    }
-                }
-                _teleportController.IsTeleportable = false;
-            }
-        }
-    }
-
-    private void OnTriggerExitPlayer(Collider collision)
-    {
-        if(collision.gameObject.GetComponent<PlayerController>() != null)
-        {
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
 
             if (playerController.transform.position.x < HardCoding.PlayerTeleportPos_Left.x)
@@ -94,9 +54,22 @@ public class Teleport : ObjectBase
             {
                 TeleportRight(playerController);
             }
-            _teleportController.IsTeleportable = true;
+            else
+            {
+                switch (_directionPosition)
+                {
+                    case DirectionPosition.Left:
+                        TeleportLeft(playerController);
+                        break;
+
+                    case DirectionPosition.Right:
+                        TeleportRight(playerController);
+                        break;
+                }
+            }
         }
     }
+
 
     private void TeleportRight(PlayerController playerController)
     {
@@ -107,8 +80,6 @@ public class Teleport : ObjectBase
     {
         playerController.Teleport(HardCoding.PlayerTeleportPos_Right);
     }
-
-
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(HardCoding.PlayerTeleportPos_Left, 5.5f);

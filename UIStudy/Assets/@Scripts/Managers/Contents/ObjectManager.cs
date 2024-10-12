@@ -52,7 +52,7 @@ public class ObjectManager
             item.GetOrAddComponent<ItemBase>().SetInfo(randId);
             item.transform.position = pos;
         }
-        else if (typeof(T) == typeof(TeleportController))
+        else if (typeof(T) == typeof(Teleport))
         {
             GameObject item = Managers.Resource.Instantiate("TeleportController", pooling: false);
 

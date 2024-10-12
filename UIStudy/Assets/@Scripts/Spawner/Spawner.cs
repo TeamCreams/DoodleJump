@@ -68,6 +68,7 @@ public class Spawner : InitBase
             yield return null;
         }
     }
+
     public IEnumerator GenerateStone()
     {
         if (_generateStoneShower != null)
@@ -105,7 +106,6 @@ public class Spawner : InitBase
         _stoneShowerPeriodTime = UnityEngine.Random.Range(Managers.Data.DifficultySettingsDic[_id].StoneShowerPeriodStartTime, Managers.Data.DifficultySettingsDic[_id].StoneShowerPeriodFinishTime);
         _generateStoneShower = null;
     }
-
 
 
     private void OnEvent_LevelStageUp(Component sender, object param)

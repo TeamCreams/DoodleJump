@@ -79,7 +79,6 @@
     <Compile Include="Assets/HeroEditor/Common/SimpleColorPicker/Scripts/PaletteGradient.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/LayerManager.cs" />
     <Compile Include="Assets/HeroEditor/Common/SimpleColorPicker/Scripts/ColorSlider.cs" />
-    <Compile Include="Assets/@Scripts/Teleport/TeleportController.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterState.cs" />
     <Compile Include="Assets/HeroEditor/Common/SimpleColorPicker/Scripts/RainbowGenerator.cs" />
     <Compile Include="Assets/@Scripts/Utils/Data.Core.cs" />
@@ -148,6 +147,8 @@
     <Compile Include="Assets/@Scripts/Managers/Core/InputManagerEx.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/ItemInfo.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/TestScene.cs" />
+    <Compile Include="Assets/@Scripts/Animation/CameraAnimationEvents.cs" />
+    <Compile Include="Assets/@Scripts/Scene/SuberunkerTimelineScene.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SuberunkerScene.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/EquipmentExample.cs" />
     <Compile Include="Assets/@Scripts/Utils/Define.cs" />

@@ -783,7 +783,7 @@ Transform:
   - {fileID: 1138272561271744234}
   - {fileID: 5755074032221912529}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4913134481585937563
 SpriteRenderer:
@@ -856,8 +856,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 19.2, y: 0.2, z: 0.20000002}
-  m_Center: {x: 0, y: -2.9379292, z: 0}
+  m_Size: {x: 36, y: 0.2, z: 0.20000002}
+  m_Center: {x: 0, y: -3, z: 0}
 --- !u!95 &1120926818501402807
 Animator:
   serializedVersion: 5
@@ -886,7 +886,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090899892266281481}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c102be6755b9542139b3dea9561300cd, type: 3}
   m_Name: 

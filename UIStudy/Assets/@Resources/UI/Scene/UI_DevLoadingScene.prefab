@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 2065408260622774604}
   - component: {fileID: 7720863701800480479}
   - component: {fileID: 3754108826394938658}
-  - component: {fileID: 2935653023226960364}
+  - component: {fileID: 5514995857888382938}
   m_Layer: 5
   m_Name: UI_DevLoadingScene
   m_TagString: Untagged
@@ -369,7 +369,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2935653023226960364
+--- !u!114 &5514995857888382938
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

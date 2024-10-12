@@ -30,16 +30,12 @@ public class StoneController : ObjectBase
 
         _rockImage = this.gameObject.GetOrAddComponent<SpriteRenderer>();
 
-       OnTriggerEnter_Event -= Attack;
-       OnTriggerEnter_Event += Attack;
+        OnTriggerEnter_Event -= Attack;
+        OnTriggerEnter_Event += Attack;
 
         return true;
 	}
 
-	void Update()
-    {
-        HitGround();
-    }
     private void FixedUpdate()
     {
         Vector3 movement = Vector2.down * Data.Speed * Time.fixedDeltaTime * CORRECTION_VALUE;
@@ -51,19 +47,24 @@ public class StoneController : ObjectBase
         Data = data;
 
         _rockImage.sprite = Managers.Resource.Load<Sprite>($"{Managers.Data.EnemyDic[Data.Id].SpriteName}.sprite");
+
+        StartCoroutine(PushStoneCor());
     }
 
-    public void HitGround()
+    public void PushStone()
     {
-        // 일정 높이가 되면 다시 Push
         Physics.Raycast(transform.position, Vector3.down, out _hitInfo, 3f, LayerMask.GetMask("Ground"));
         if (_hitInfo.collider != null)
         {
-            
             Managers.Pool.Push(this.gameObject);
         }
     }
 
+    IEnumerator PushStoneCor()
+    {
+        yield return new WaitForSeconds(5);
+        Managers.Pool.Push(this.gameObject);
+    }
 
     private void Attack(Collider collision)
     {
