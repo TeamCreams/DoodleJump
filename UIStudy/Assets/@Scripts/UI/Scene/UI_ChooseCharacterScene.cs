@@ -76,7 +76,7 @@ public class UI_ChooseCharacterScene : UI_Scene
 
     private void OnClick_NextButton(PointerEventData eventData)
     {
-        Managers.Scene.LoadScene(Define.EScene.SuberunkerTimelineScene);
+        Managers.Scene.LoadScene(Define.EScene.InputNameScene);
     }
 
     private void SetInventoryItems(EEquipType equipType)

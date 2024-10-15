@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundAnimationEvents : InitBase
+public class InputNameScene : BaseScene
 {
     public override bool Init()
     {
@@ -10,12 +10,9 @@ public class BackgroundAnimationEvents : InitBase
         {
             return false;
         }
+
+        Managers.UI.ShowSceneUI<UI_InputNameScene>();
+
         return true;
-    }
-
-
-    public void LoadingSuberunkerScene()
-    {
-        Managers.Scene.LoadScene(Define.EScene.SuberunkerScene);
     }
 }

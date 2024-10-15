@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.XR;
 using static Define;
@@ -38,6 +39,9 @@ public class PlayerController : CreatureBase
     EPlayerState _state = EPlayerState.Idle;
     private Animator _animator;
     private CharacterController _characterController;
+
+    private UI_Player _uiPlayer;
+    private TMP_Text _nickname;
 
     private SpriteRenderer EyeSpriteRenderer;
     private SpriteRenderer EyebrowsSpriteRenderer;
@@ -101,6 +105,7 @@ public class PlayerController : CreatureBase
     {
         base.SetInfo(templateId);
         _animator = GetComponentInChildren<Animator>();
+        _uiPlayer = GetComponentInChildren<UI_Player>();
 
         Data = Managers.Data.PlayerDic[templateId];
         this._stats = new Stats(Data); 
@@ -113,7 +118,8 @@ public class PlayerController : CreatureBase
         ShoseLeftSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Shin[Armor][L]", recursive: true);
         ShoseRightSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Shin[Armor][R]", recursive: true);
         MaskSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Mask", recursive: true);
-
+        _nickname = Util.FindChild<TMP_Text>(go: _uiPlayer.gameObject, name: "Nickname", recursive: true);
+        Debug.Assert(_nickname != null, "is Nickname null");
         ShoseLeftSpriteRenderer.sprite = null;
         ShoseRightSpriteRenderer.sprite = null;
         MaskSpriteRenderer.sprite = null;
@@ -126,6 +132,7 @@ public class PlayerController : CreatureBase
         HairSpriteRenderer.sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Hair}.sprite"); // GameManagers 정보로     
         EyebrowsSpriteRenderer.sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyebrows}.sprite");
         EyeSpriteRenderer.sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyes}.sprite");
+        _nickname.text = Managers.Game.ChracterStyleInfo.PlayerName;
     }
 
 

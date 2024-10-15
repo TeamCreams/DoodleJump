@@ -9,10 +9,10 @@ public static class Define
 		Unknown,
 		DevLoadingScene,
 		TinyFarmScene,
-        SuberunkerScene,
         SuberunkerTimelineScene,
         ChooseCharacterScene,
-
+        InputNameScene,
+        SuberunkerScene,
     }
 
 	public enum EUIEvent

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Input_SuberunkerScene : MonoBehaviour
+public class Input_SuberunkerScene : MonoBehaviour //BaseScene
 {
     public void OnKeyAction()
     {
