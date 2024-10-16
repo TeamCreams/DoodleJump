@@ -114,6 +114,8 @@ public class Spawner : InitBase
         _id = Managers.Game.DifficultySettingsInfo.StageId;
         _stoneGenerateTime = UnityEngine.Random.Range(Managers.Data.DifficultySettingsDic[_id].StoneGenerateStartTime, Managers.Data.DifficultySettingsDic[_id].StoneGenerateFinishTime);
         _stoneShowerPeriodTime = UnityEngine.Random.Range(Managers.Data.DifficultySettingsDic[_id].StoneShowerPeriodStartTime, Managers.Data.DifficultySettingsDic[_id].StoneShowerPeriodFinishTime);
+        Managers.Game.DifficultySettingsInfo.StageLevel++;
+        Managers.Object.Spawn<Confetti_Particle>(HardCoding.ConfetiParticlePos);
     }
 }
 

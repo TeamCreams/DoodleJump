@@ -26,7 +26,7 @@ public class ObjectManager
         return root.transform;
     }
 
-    public void Spawn<T>(Vector2 pos) where T : ObjectBase
+    public void Spawn<T>(Vector3 pos) where T : ObjectBase
     {
         if (typeof(T) == typeof(StoneController))
         {
@@ -55,6 +55,12 @@ public class ObjectManager
         else if (typeof(T) == typeof(Teleport))
         {
             GameObject item = Managers.Resource.Instantiate("TeleportController", pooling: false);
+
+            item.transform.position = pos;
+        }
+        else if (typeof(T) == typeof(Confetti_Particle))
+        {
+            GameObject item = Managers.Resource.Instantiate("Confetti_Particle", pooling: true);
 
             item.transform.position = pos;
         }

@@ -5,6 +5,7 @@ using static Define;
 
 public class Teleport : ObjectBase
 {
+    private ParticleSystem _teleportEffect;
 
     enum DirectionPosition
     {
@@ -21,6 +22,8 @@ public class Teleport : ObjectBase
             return false;
         }
         CheckDirection();
+        _teleportEffect = Managers.Resource.Instantiate("TeleportEffect").GetComponent<ParticleSystem>();
+        _teleportEffect.gameObject.transform.position = this.transform.position;
         OnTriggerEnter_Event -= OnTriggerEnterPlayer;
         OnTriggerEnter_Event += OnTriggerEnterPlayer;
 
@@ -84,5 +87,13 @@ public class Teleport : ObjectBase
     {
         Gizmos.DrawSphere(HardCoding.PlayerTeleportPos_Left, 5.5f);
         Gizmos.DrawSphere(HardCoding.PlayerTeleportPos_Right, 5.5f);
+    }
+
+    IEnumerator TeleportEffect()
+    {
+        _teleportEffect.gameObject.SetActive(true);
+        yield return new WaitForSeconds(_teleportEffect.main.duration);
+        _teleportEffect.gameObject.SetActive(false);
+
     }
 }

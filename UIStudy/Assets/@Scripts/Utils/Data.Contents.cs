@@ -273,4 +273,27 @@ namespace Data
             return dict;
         }
     }
+
+    [Serializable]
+    public class ThoughtBubbleData
+    {
+        public int Id;
+        public string Text;
+        public EBehavior Behavior;
+    }
+
+    [Serializable]
+    public class ThoughtBubbleDataLoader : ILoader<int, ThoughtBubbleData>
+    {
+        public List<ThoughtBubbleData> thoughtBubbleDatas = new List<ThoughtBubbleData>();
+
+        public Dictionary<int, ThoughtBubbleData> MakeDict()
+        {
+            Dictionary<int, ThoughtBubbleData> dict = new Dictionary<int, ThoughtBubbleData>();
+            foreach (ThoughtBubbleData thoughtBubbleData in thoughtBubbleDatas)
+                dict.Add(thoughtBubbleData.Id, thoughtBubbleData);
+
+            return dict;
+        }
+    }
 }

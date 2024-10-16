@@ -192,6 +192,7 @@ public class DifficultySettingsInfo // 다시시작할 때마다 초기화 필�
     public int StageId { get; set; } = 70001;
     public int ChallengeScale { get; set; } = 0;
     public int StoneShower { get; set; } = 0;
+    public int StageLevel { get; set; } = 1;
 }
 
 

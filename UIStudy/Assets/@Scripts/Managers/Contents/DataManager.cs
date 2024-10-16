@@ -21,7 +21,7 @@ public class DataManager
     public Dictionary<int, Data.SuberunkerItemData> SuberunkerItemDic { get; private set; } = new Dictionary<int, Data.SuberunkerItemData>();
     public Dictionary<int, Data.SuberunkerItemSpriteData> SuberunkerItemSpriteDic { get; private set; } = new Dictionary<int, Data.SuberunkerItemSpriteData>();
     public Dictionary<int, Data.DifficultySettingsData> DifficultySettingsDic { get; private set; } = new Dictionary<int, Data.DifficultySettingsData>();
-
+    public Dictionary<int, Data.ThoughtBubbleData> ThoughtBubbleDataDic { get; private set; } = new Dictionary<int, Data.ThoughtBubbleData>();
 
     public void Init()
 	{
@@ -33,6 +33,8 @@ public class DataManager
         SuberunkerItemDic = LoadJson<Data.SuberunkerItemDataLoader, int, Data.SuberunkerItemData>("SuberunkerItemData").MakeDict();
         SuberunkerItemSpriteDic = LoadJson<Data.SuberunkerItemSpriteDataLoader, int, Data.SuberunkerItemSpriteData>("SuberunkerItemSpriteData").MakeDict();
         DifficultySettingsDic = LoadJson<Data.DifficultySettingsDataLoader, int, Data.DifficultySettingsData>("DifficultySettingsData").MakeDict();
+        ThoughtBubbleDataDic = LoadJson<Data.ThoughtBubbleDataLoader, int, Data.ThoughtBubbleData>("ThoughtBubbleData").MakeDict();
+
     }
 
     private Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>

@@ -105,6 +105,12 @@ public static class Define
         Hsv
     }
 
+    public enum EBehavior
+    {
+        Attack,
+        Boring,
+        Item
+    }
 
     public class Constants
 	{
@@ -117,6 +123,7 @@ public static class Define
         public static readonly Vector3 PlayerTeleportPos_Left = new Vector3(-70, -120, 0);
         public static readonly Vector3 PlayerTeleportPos_Right = new Vector3(70, -120, 0);
         public static readonly int PlayerMaxHp = 8;
+        public static readonly Vector3 ConfetiParticlePos = new Vector3(0, 0, -100);
     }
 
 }

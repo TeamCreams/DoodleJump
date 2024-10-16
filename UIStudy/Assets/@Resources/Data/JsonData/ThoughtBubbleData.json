@@ -1,0 +1,59 @@
+{
+  "thoughtBubbleDatas": [
+    {
+      "Id": 80001,
+      "Text": "아야!",
+      "Behavior": 0
+    },
+    {
+      "Id": 80002,
+      "Text": "아파!",
+      "Behavior": 0
+    },
+    {
+      "Id": 80003,
+      "Text": "돌이 왜 하늘에서 떨어질까?",
+      "Behavior": 0
+    },
+    {
+      "Id": 80004,
+      "Text": "왜 떄려!",
+      "Behavior": 0
+    },
+    {
+      "Id": 80005,
+      "Text": "나는 춤을 춰도 돌을 맞지 않지",
+      "Behavior": 1
+    },
+    {
+      "Id": 80006,
+      "Text": "나는 돌을 피해야 해",
+      "Behavior": 1
+    },
+    {
+      "Id": 80007,
+      "Text": "(노래 부르는 중)",
+      "Behavior": 1
+    },
+    {
+      "Id": 80008,
+      "Text": "깡!",
+      "Behavior": 2
+    },
+    {
+      "Id": 80009,
+      "Text": "필요한 게 없어",
+      "Behavior": 2
+    },
+    {
+      "Id": 80010,
+      "Text": "필요한 게 있어",
+      "Behavior": 2
+    },
+    {
+      "Id": 80011,
+      "Text": "더 센 게 필요해",
+      "Behavior": 2
+    }
+  ]
+}
