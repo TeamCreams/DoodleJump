@@ -5047,7 +5047,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: OrangeAde
+  m_text: Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8ee9c66c4d911b54b989f116e0625238, type: 2}
   m_sharedMaterial: {fileID: 6791107774637935141, guid: 8ee9c66c4d911b54b989f116e0625238, type: 2}
@@ -5504,7 +5504,7 @@ GameObject:
   - component: {fileID: 575704525544364864}
   - component: {fileID: 7143687178548031599}
   m_Layer: 5
-  m_Name: Nickname
+  m_Name: Nickname_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6096,6 +6096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85623371a3361e3409b6c42afd8950da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _thoughtBubble: {fileID: 0}
 --- !u!1 &7679352610553864500
 GameObject:
   m_ObjectHideFlags: 0

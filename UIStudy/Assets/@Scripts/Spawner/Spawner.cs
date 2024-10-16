@@ -49,7 +49,6 @@ public class Spawner : InitBase
         {
             if (_generateStone == null && _generateStoneShower == null)
             {
-
                 Debug.Log("hihihihihihihihihi");
                 _generateStone = StartCoroutine(GenerateStone());
                 yield return new WaitForSeconds(_stoneShowerPeriodTime);
@@ -82,7 +81,6 @@ public class Spawner : InitBase
             int x = UnityEngine.Random.Range(-90, 91);
             Managers.Object.Spawn<StoneController>(new Vector2(x, 140));
 
-            Managers.Game.DifficultySettingsInfo.ChallengeScale++;
             if (Managers.Data.DifficultySettingsDic[_id].ChallengeScale <= Managers.Game.DifficultySettingsInfo.ChallengeScale)
             {
                 Managers.Event.TriggerEvent(EEventType.LevelStageUp);
@@ -99,7 +97,7 @@ public class Spawner : InitBase
         int reversDirectionDistance = reversDirection * 7;
         while ((direction == 1 && endX <= startX) || (direction == -1 && startX <= endX))
         {
-            Managers.Object.Spawn<StoneController>(new Vector2(startX, 140));
+            Managers.Object.Spawn<StoneController>(new Vector2(startX, 150));
             startX += reversDirectionDistance;
             yield return new WaitForSeconds(0.2f);
         }
@@ -110,6 +108,7 @@ public class Spawner : InitBase
 
     private void OnEvent_LevelStageUp(Component sender, object param)
     {
+        Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
         Managers.Game.DifficultySettingsInfo.StageId++;
         _id = Managers.Game.DifficultySettingsInfo.StageId;
         _stoneGenerateTime = UnityEngine.Random.Range(Managers.Data.DifficultySettingsDic[_id].StoneGenerateStartTime, Managers.Data.DifficultySettingsDic[_id].StoneGenerateFinishTime);

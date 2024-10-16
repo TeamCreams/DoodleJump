@@ -40,8 +40,6 @@ public class PlayerController : CreatureBase
     private Animator _animator;
     private CharacterController _characterController;
 
-    private UI_Player _uiPlayer;
-    private TMP_Text _nickname;
 
     private SpriteRenderer EyeSpriteRenderer;
     private SpriteRenderer EyebrowsSpriteRenderer;
@@ -99,13 +97,14 @@ public class PlayerController : CreatureBase
                 Update_Boring();
                 break;
         }
+
+        Debug.Log($"count  : {Managers.Game.DifficultySettingsInfo.ChallengeScale}");
     }
 
     public override void SetInfo(int templateId)
     {
         base.SetInfo(templateId);
         _animator = GetComponentInChildren<Animator>();
-        _uiPlayer = GetComponentInChildren<UI_Player>();
 
         Data = Managers.Data.PlayerDic[templateId];
         this._stats = new Stats(Data); 
@@ -118,8 +117,7 @@ public class PlayerController : CreatureBase
         ShoseLeftSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Shin[Armor][L]", recursive: true);
         ShoseRightSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Shin[Armor][R]", recursive: true);
         MaskSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Mask", recursive: true);
-        _nickname = Util.FindChild<TMP_Text>(go: _uiPlayer.gameObject, name: "Nickname", recursive: true);
-        Debug.Assert(_nickname != null, "is Nickname null");
+       
         ShoseLeftSpriteRenderer.sprite = null;
         ShoseRightSpriteRenderer.sprite = null;
         MaskSpriteRenderer.sprite = null;
@@ -132,7 +130,6 @@ public class PlayerController : CreatureBase
         HairSpriteRenderer.sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Hair}.sprite"); // GameManagers 정보로     
         EyebrowsSpriteRenderer.sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyebrows}.sprite");
         EyeSpriteRenderer.sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyes}.sprite");
-        _nickname.text = Managers.Game.ChracterStyleInfo.PlayerName;
     }
 
 
@@ -147,6 +144,7 @@ public class PlayerController : CreatureBase
         if (4 <= _waitTime)
         {
             this.State = EPlayerState.Boring;
+            Managers.Event.TriggerEvent(EEventType.ThoughtBubble, this, EBehavior.Boring);
         }
     }
     
@@ -181,6 +179,7 @@ public class PlayerController : CreatureBase
     {
         this._stats.Hp -= 1f;
         Managers.Event.TriggerEvent(EEventType.ChangePlayerLife, this, this._stats.Hp);
+        Managers.Event.TriggerEvent(EEventType.ThoughtBubble, this, EBehavior.Attack);
         AudioClip attackedAudio = Managers.Resource.Load<AudioClip>("AttackedSound");
         Managers.Sound.Play(ESound.Effect, attackedAudio, 0.7f);
 
@@ -212,6 +211,8 @@ public class PlayerController : CreatureBase
         Debug.Assert(data != null, "is null");
         _statModifier = data.ModifierList;
         ItemData = data.Data;
+        Managers.Event.TriggerEvent(EEventType.ThoughtBubble, this, EBehavior.Item);
+
 
         StopCoroutine(ChangeStats());
         StartCoroutine(ChangeStats());

@@ -32,8 +32,8 @@ public class ObjectManager
         {
             GameObject go = Managers.Resource.Instantiate("Entity", pooling: true);
             int rand = UnityEngine.Random.Range(60001, 60001 + Managers.Data.EnemyDic.Count);
-            go.GetOrAddComponent<StoneController>().SetInfo(Managers.Data.EnemyDic[rand]);
             go.transform.position = pos;
+            go.GetOrAddComponent<StoneController>().SetInfo(Managers.Data.EnemyDic[rand]);
         }
         else if (typeof(T) == typeof(PlayerController))
         {

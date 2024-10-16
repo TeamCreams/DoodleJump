@@ -8,6 +8,7 @@ public class StoneController : ObjectBase
 {
     private const float CORRECTION_VALUE = 2.9f;
 
+    private bool _isCount = true;
     private EnemyData _data;
     public EnemyData Data
     {
@@ -48,6 +49,10 @@ public class StoneController : ObjectBase
 
         _rockImage.sprite = Managers.Resource.Load<Sprite>($"{Managers.Data.EnemyDic[Data.Id].SpriteName}.sprite");
 
+        if(140 < this.transform.position.y)
+        {
+            _isCount = false;
+        }
         StartCoroutine(PushStoneCor());
     }
 
@@ -63,6 +68,10 @@ public class StoneController : ObjectBase
     IEnumerator PushStoneCor()
     {
         yield return new WaitForSeconds(5);
+        if(_isCount == true)
+        {
+            Managers.Game.DifficultySettingsInfo.ChallengeScale++;
+        }
         Managers.Pool.Push(this.gameObject);
     }
 

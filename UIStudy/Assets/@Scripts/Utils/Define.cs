@@ -64,7 +64,8 @@ public static class Define
         TakeItem,
         ChangePlayerLife,
         GetLife,
-        LevelStageUp
+        LevelStageUp,
+        ThoughtBubble,
     }
 
     public enum EEquipType
