@@ -9,6 +9,8 @@ public class StoneController : ObjectBase
     private const float CORRECTION_VALUE = 2.9f;
 
     private bool _isCount = true;
+
+    private float _editSpeed = 0;
     private EnemyData _data;
     public EnemyData Data
     {
@@ -39,6 +41,7 @@ public class StoneController : ObjectBase
 
     private void FixedUpdate()
     {
+        _editSpeed = Data.Speed + Managers.Game.DifficultySettingsInfo.AddSpeed;
         Vector3 movement = Vector2.down * Data.Speed * Time.fixedDeltaTime * CORRECTION_VALUE;
         transform.Translate(movement);
     }

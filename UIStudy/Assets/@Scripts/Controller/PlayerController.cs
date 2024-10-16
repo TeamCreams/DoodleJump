@@ -98,7 +98,7 @@ public class PlayerController : CreatureBase
                 break;
         }
 
-        Debug.Log($"count  : {Managers.Game.DifficultySettingsInfo.ChallengeScale}");
+        //Debug.Log($"count  : {Managers.Game.DifficultySettingsInfo.ChallengeScale}");
     }
 
     public override void SetInfo(int templateId)
