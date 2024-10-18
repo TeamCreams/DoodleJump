@@ -278,8 +278,8 @@ namespace Data
     public class ThoughtBubbleData
     {
         public int Id;
-        public string Text;
         public EBehavior Behavior;
+        public string TextId;
     }
 
     [Serializable]
@@ -292,6 +292,30 @@ namespace Data
             Dictionary<int, ThoughtBubbleData> dict = new Dictionary<int, ThoughtBubbleData>();
             foreach (ThoughtBubbleData thoughtBubbleData in thoughtBubbleDatas)
                 dict.Add(thoughtBubbleData.Id, thoughtBubbleData);
+
+            return dict;
+        }
+    }
+
+    [Serializable]
+    public class ThoughtBubbleLanguageData
+    {
+        public int Id;
+        public string TextId;
+        public string KrText;
+        public string EnText;
+    }
+
+    [Serializable]
+    public class ThoughtBubbleLanguageDataLoader : ILoader<int, ThoughtBubbleLanguageData>
+    {
+        public List<ThoughtBubbleLanguageData> thoughtBubbleLanguageDatas = new List<ThoughtBubbleLanguageData>();
+
+        public Dictionary<int, ThoughtBubbleLanguageData> MakeDict()
+        {
+            Dictionary<int, ThoughtBubbleLanguageData> dict = new Dictionary<int, ThoughtBubbleLanguageData>();
+            foreach (ThoughtBubbleLanguageData thoughtBubbleLanguageData in thoughtBubbleLanguageDatas)
+                dict.Add(thoughtBubbleLanguageData.Id, thoughtBubbleLanguageData);
 
             return dict;
         }

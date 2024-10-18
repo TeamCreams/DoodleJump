@@ -1,0 +1,88 @@
+{
+  "thoughtBubbleLanguageDatas": [
+    {
+      "Id": 90001,
+      "TextId": "A10001",
+      "KrText": "아야!",
+      "EnText": "Ouch!"
+    },
+    {
+      "Id": 90002,
+      "TextId": "A10002",
+      "KrText": "아파!",
+      "EnText": "It hurts!"
+    },
+    {
+      "Id": 90003,
+      "TextId": "A10003",
+      "KrText": "돌이 왜 하늘에서 떨어질까?",
+      "EnText": "Why does the stone fall from the sky?"
+    },
+    {
+      "Id": 90004,
+      "TextId": "A10004",
+      "KrText": "왜 때려!",
+      "EnText": "Why are you hitting?"
+    },
+    {
+      "Id": 90005,
+      "TextId": "B10001",
+      "KrText": "나는 춤을 춰도 돌을 맞지 않지",
+      "EnText": "\"Even if I dance"
+    },
+    {
+      "Id": 90006,
+      "TextId": "B10002",
+      "KrText": "가만히 있기엔 심심해서",
+      "EnText": "I'm bored just staying still."
+    },
+    {
+      "Id": 90007,
+      "TextId": "B10003",
+      "KrText": "(노래 부르는 중)",
+      "EnText": "(Singing)"
+    },
+    {
+      "Id": 90008,
+      "TextId": "C10001",
+      "KrText": "깡!",
+      "EnText": "Bang!"
+    },
+    {
+      "Id": 90009,
+      "TextId": "C10002",
+      "KrText": "필요한 게 없어",
+      "EnText": "I don't need anthing."
+    },
+    {
+      "Id": 90010,
+      "TextId": "C10003",
+      "KrText": "필요한 게 있어",
+      "EnText": "I need something."
+    },
+    {
+      "Id": 90011,
+      "TextId": "C10004",
+      "KrText": "더 센 게 필요해",
+      "EnText": "I need something stronger."
+    },
+    {
+      "Id": 90012,
+      "TextId": "D10001",
+      "KrText": "난 운이 좋아",
+      "EnText": "I'm lucky."
+    },
+    {
+      "Id": 90013,
+      "TextId": "D10002",
+      "KrText": "짠",
+      "EnText": "Ta-da!"
+    },
+    {
+      "Id": 90014,
+      "TextId": "D10003",
+      "KrText": "하늘이 도왔어",
+      "EnText": "The heavens helped me."
+    }
+  ]
+}

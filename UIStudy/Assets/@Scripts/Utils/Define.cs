@@ -108,9 +108,10 @@ public static class Define
 
     public enum EBehavior
     {
-        Attack,
+        Attacked,
         Boring,
-        Item
+        Item,
+        Lucky
     }
 
     public enum EErrorCode
@@ -120,6 +121,11 @@ public static class Define
         ERR_ValidationNickname, // 닉네임 사용 Validaiotn 에러
     }
 
+    public enum ELanguage
+    {
+        Kr,
+        En
+    }
 
     public class Constants
 	{

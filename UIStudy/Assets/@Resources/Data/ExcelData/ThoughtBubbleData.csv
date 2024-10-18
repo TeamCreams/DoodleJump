@@ -1,12 +1,15 @@
-Id,Text,Behavior
-80001,아야!,Attack
-80002,아파!,Attack
-80003,돌이 왜 하늘에서 떨어질까?,Attack
-80004,왜 떄려!,Attack
-80005,나는 춤을 춰도 돌을 맞지 않지,Boring
-80006,나는 돌을 피해야 해,Boring
-80007,(노래 부르는 중),Boring
-80008,깡!,Item
-80009,필요한 게 없어,Item
-80010,필요한 게 있어,Item
-80011,더 센 게 필요해,Item
+Id,Behavior,TextId
+80001,Attacked,A10001
+80002,Attacked,A10002
+80003,Attacked,A10003
+80004,Attacked,A10004
+80005,Boring,B10001
+80006,Boring,B10002
+80007,Boring,B10003
+80008,Item,C10001
+80009,Item,C10002
+80010,Item,C10003
+80011,Item,C10004
+80012,Lucky,D10001
+80013,Lucky,D10002
+80014,Lucky,D10003

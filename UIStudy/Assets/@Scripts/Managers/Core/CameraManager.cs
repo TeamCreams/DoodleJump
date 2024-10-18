@@ -10,7 +10,7 @@ using UnityEngine;
 public class CameraManager
 {
 
-    IEnumerator _shakeCo = null;
+    //IEnumerator _shakeCo = null;
 
     public void Shake(float shakePower, float shakeDuration)
     {

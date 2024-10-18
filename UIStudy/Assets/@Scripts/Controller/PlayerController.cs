@@ -179,7 +179,7 @@ public class PlayerController : CreatureBase
     {
         this._stats.Hp -= 1f;
         Managers.Event.TriggerEvent(EEventType.ChangePlayerLife, this, this._stats.Hp);
-        Managers.Event.TriggerEvent(EEventType.ThoughtBubble, this, EBehavior.Attack);
+        Managers.Event.TriggerEvent(EEventType.ThoughtBubble, this, EBehavior.Attacked);
         AudioClip attackedAudio = Managers.Resource.Load<AudioClip>("AttackedSound");
         Managers.Sound.Play(ESound.Effect, attackedAudio, 0.7f);
 

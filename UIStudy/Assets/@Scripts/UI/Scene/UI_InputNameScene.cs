@@ -21,7 +21,6 @@ public class UI_InputNameScene : UI_Scene
     {
         Warning_Text,
     }
-    private string _tempString = "";
     public override bool Init()
     {
         if (base.Init() == false)

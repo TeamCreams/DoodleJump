@@ -16,7 +16,7 @@ public class SuberunkerTimelineScene : BaseScene
         _playableDirector = gameObject.GetOrAddComponent<PlayableDirector>();
         _playableDirector.name = "SuberunkerTimeline";
         _playableDirector.Play();
-        gameObject.GetOrAddComponent<CameraAnimationEvents>().SetInfo(1);
+        gameObject.GetOrAddComponent<SuberunkerTimelineAnimationEvents>().SetInfo(1);
 
 
         return true;

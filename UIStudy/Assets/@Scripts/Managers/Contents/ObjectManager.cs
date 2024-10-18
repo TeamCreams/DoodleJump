@@ -26,7 +26,7 @@ public class ObjectManager
         return root.transform;
     }
 
-    public GameObject Spawn<T>(Vector3 pos) where T : ObjectBase
+    public GameObject Spawn<T>(Vector3 pos, bool option = false) where T : ObjectBase
     {
         if (typeof(T) == typeof(StoneController))
         {
@@ -34,6 +34,7 @@ public class ObjectManager
             int rand = UnityEngine.Random.Range(60001, 60001 + Managers.Data.EnemyDic.Count);
             StoneController stone = go.GetOrAddComponent<StoneController>();
             stone.SetInfo(Managers.Data.EnemyDic[rand]);
+            stone.IsCount = option;
             stone.Teleport(pos);
             return go;
         }

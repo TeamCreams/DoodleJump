@@ -24,6 +24,7 @@ public class UI_Player : UI_Base
     public GameObject _thoughtBubble;
     private TMP_Text _content;
     private string _tempContent;
+    private string _textId;
 
     public override bool Init()
     {
@@ -57,14 +58,30 @@ public class UI_Player : UI_Base
             StopAllCoroutines();
             EBehavior eBehavior = (EBehavior)(int)param;
 
-            var groupTexts = Managers.Data.ThoughtBubbleDataDic
+            var groupTextIds = Managers.Data.ThoughtBubbleDataDic
                 .Where(selectBehavior => selectBehavior.Value.Behavior == eBehavior)
-                .Select(selectText => selectText.Value.Text)
+                .Select(selectTextId => selectTextId.Value.TextId)
                 .ToList();
 
-            int random = Random.Range(0, groupTexts.Count);
-            _content.text = "";
-            _tempContent = groupTexts[random];
+            int random = Random.Range(0, groupTextIds.Count);
+            _textId = groupTextIds[random];
+
+            foreach(var content in Managers.Data.ThoughtBubbleLanguageDataDic)
+            {
+                if(content.Value.TextId.Equals(_textId) == true)
+                {
+                    switch(Managers.Game.ELanguageInfo)
+                    {
+                        case ELanguage.Kr:
+                            _tempContent = content.Value.KrText;
+                            break;
+
+                        case ELanguage.En:
+                            _tempContent = content.Value.EnText;
+                            break;
+                    }
+                }
+            }
             StartCoroutine(ThoughtBubbleText());
         }
     }
@@ -74,6 +91,7 @@ public class UI_Player : UI_Base
         _thoughtBubble.SetActive(true);
 
         int count = 0;
+        _content.text = "";
 
         while (count < _tempContent.Length)
         {

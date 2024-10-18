@@ -9,6 +9,14 @@ public class StoneController : ObjectBase
     private const float CORRECTION_VALUE = 2.9f;
 
     private bool _isCount = true;
+    public bool IsCount
+    {
+        get => _isCount;
+        set
+        {
+            _isCount = value;
+        }
+    }
     Rigidbody _rigidbody;
 
     private float _editSpeed = 0;
@@ -43,8 +51,7 @@ public class StoneController : ObjectBase
     private void FixedUpdate()
     {
         _editSpeed = Data.Speed + Managers.Game.DifficultySettingsInfo.AddSpeed;
-        Vector3 movement = Vector2.down * Data.Speed * Time.fixedDeltaTime * CORRECTION_VALUE;
-        //transform.Translate(movement);
+        Vector3 movement = Vector2.down * _editSpeed * Time.fixedDeltaTime * CORRECTION_VALUE;
 
         _rigidbody.MovePosition(_rigidbody.position + movement);
 
@@ -56,12 +63,6 @@ public class StoneController : ObjectBase
         Data = data;
 
         _rockImage.sprite = Managers.Resource.Load<Sprite>($"{Managers.Data.EnemyDic[Data.Id].SpriteName}.sprite");
-
-        if(140 < this.transform.position.y)
-        {
-            _isCount = false;
-        }
-        //StartCoroutine(PushStoneCor());
     }
 
     public void Teleport(Vector3 pos)
@@ -75,19 +76,13 @@ public class StoneController : ObjectBase
     {
         if(Physics.Raycast(_rigidbody.position, Vector3.down, out _hitInfo, 25f, LayerMask.GetMask("Ground")))
         {
+            if (_isCount == true)
+            {
+                Managers.Game.DifficultySettingsInfo.ChallengeScale++;
+            }
             Managers.Pool.Push(this.gameObject);
         }
        
-    }
-
-    IEnumerator PushStoneCor()
-    {
-        yield return new WaitForSeconds(5);
-        if(_isCount == true)
-        {
-            Managers.Game.DifficultySettingsInfo.ChallengeScale++;
-        }
-        Managers.Pool.Push(this.gameObject);
     }
 
     private void Attack(Collider collision)

@@ -27,19 +27,13 @@ public class Spawner : InitBase
         return true;
     }
 
-    /*
-        1. 일반 돌이 생성되며, 이것은 피한 돌로 카운트 됨
-        2. 돌샤워가 진행될 시간이 되면 일반 돌이 생성되는 함수가 멈춤.
-     */
-
-
     public IEnumerator GenerateItem()
     {
         while (true)
         {
             int time = UnityEngine.Random.Range(7, 12); // 수치화 필요   
             yield return new WaitForSeconds(time);
-            int x = UnityEngine.Random.Range(-90, 91);
+            int x = UnityEngine.Random.Range(-85, 86);
             Managers.Object.Spawn<ItemBase>(new Vector2(x, -110));
         }
     }
@@ -49,7 +43,6 @@ public class Spawner : InitBase
         {
             if (_generateStone == null && _generateStoneShower == null)
             {
-                Debug.Log("hihihihihihihihihi");
                 _generateStone = StartCoroutine(GenerateStone());
                 yield return new WaitForSeconds(_stoneShowerPeriodTime);
             }
@@ -78,8 +71,8 @@ public class Spawner : InitBase
         {
             yield return new WaitForSeconds(_stoneGenerateTime);
 
-            int x = UnityEngine.Random.Range(-90, 91);
-            Managers.Object.Spawn<StoneController>(new Vector2(x, 140));
+            int x = UnityEngine.Random.Range(-85, 86);
+            Managers.Object.Spawn<StoneController>(new Vector2(x, 140), true);
 
             if (Managers.Data.DifficultySettingsDic[_id].ChallengeScale <= Managers.Game.DifficultySettingsInfo.ChallengeScale)
             {
@@ -97,7 +90,7 @@ public class Spawner : InitBase
         int reversDirectionDistance = reversDirection * 7;
         while ((direction == 1 && endX <= startX) || (direction == -1 && startX <= endX))
         {
-            var stoneObject = Managers.Object.Spawn<StoneController>(new Vector2(startX, 150));
+            var stoneObject = Managers.Object.Spawn<StoneController>(new Vector2(startX, 140));
             startX += reversDirectionDistance;
             yield return new WaitForSeconds(0.2f);
         }

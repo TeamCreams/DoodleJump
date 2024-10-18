@@ -102,7 +102,7 @@ MonoBehaviour:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4e18f8472db054cb9832a5a95b20d0a4
-    m_Address: SuberunkerTimeline
+    m_Address: SuberunkerTimeline2
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
@@ -113,8 +113,14 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fbae6c1f22649be42a5a8d428cf2001c
+  - m_GUID: 3b7f2c753d435d647a80f1f047a113e3
     m_Address: TeleportEffect
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 52702ba0367e84914b3b500ba0d025a2
+    m_Address: SuberunkerTimeline
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

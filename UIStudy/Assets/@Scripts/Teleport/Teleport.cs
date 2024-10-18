@@ -23,7 +23,8 @@ public class Teleport : ObjectBase
         }
         CheckDirection();
         _teleportEffect = Managers.Resource.Instantiate("TeleportEffect").GetComponent<ParticleSystem>();
-        _teleportEffect.gameObject.transform.position = this.transform.position;
+        _teleportEffect.gameObject.SetActive(false);
+
         OnTriggerEnter_Event -= OnTriggerEnterPlayer;
         OnTriggerEnter_Event += OnTriggerEnterPlayer;
 
@@ -77,13 +78,13 @@ public class Teleport : ObjectBase
     private void TeleportRight(PlayerController playerController)
     {
         playerController.Teleport(HardCoding.PlayerTeleportPos_Left);
-        StartCoroutine(TeleportEffect());
+        StartCoroutine(TeleportEffect(HardCoding.PlayerTeleportPos_Left));
     }
 
     private void TeleportLeft(PlayerController playerController)
     {
         playerController.Teleport(HardCoding.PlayerTeleportPos_Right);
-        StartCoroutine(TeleportEffect());
+        StartCoroutine(TeleportEffect(HardCoding.PlayerTeleportPos_Right));
     }
     private void OnDrawGizmos()
     {
@@ -91,9 +92,10 @@ public class Teleport : ObjectBase
         Gizmos.DrawSphere(HardCoding.PlayerTeleportPos_Right, 5.5f);
     }
 
-    IEnumerator TeleportEffect()
+    IEnumerator TeleportEffect(Vector2 pos)
     {
         _teleportEffect.gameObject.SetActive(true);
+        _teleportEffect.gameObject.transform.position = pos;
         _teleportEffect.Play();
         yield return new WaitForSeconds(_teleportEffect.main.duration);
         _teleportEffect.gameObject.SetActive(false);
