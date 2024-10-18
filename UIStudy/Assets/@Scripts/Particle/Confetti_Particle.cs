@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Data;
 using UnityEngine;
@@ -12,16 +12,34 @@ public class Confetti_Particle : ObjectBase
             return false;
         }
 
-        StartCoroutine(ConfettiParticle());
         return true;
     }
-
+    public void StartParticle(Vector3 pos)
+    {
+        this.transform.position = pos;
+        StartCoroutine(ConfettiParticle());
+    }
     IEnumerator ConfettiParticle()
     {
-        this.GetComponent<ParticleSystem>().Play();
-        yield return new WaitForSeconds(this.GetComponent<ParticleSystem>().main.duration);
-        Time.timeScale = 0;
+        ParticleSystem particle = this.GetComponent<ParticleSystem>();
+        if (particle == null)
+        {
+            yield break;
+        }
+
+
         Managers.UI.ShowPopupUI<UI_LevelUpPopup>();
+
+
+        // 파티클이 재생되는 동안 기다림
+        while (particle.IsAlive())
+        {
+            particle.Simulate(Time.unscaledDeltaTime, true, false);
+            yield return null; // 다음 프레임까지 대기
+        }
+
+
         Managers.Resource.Destroy(this.gameObject);
     }
+
 }

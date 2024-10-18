@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +32,7 @@ public class UI_LevelUpPopup : UI_Popup
             Time.timeScale = 1;
         }, Define.EUIEvent.Click);
 
-        Time.timeScale = 0f;
+        Time.timeScale = 0;
         return true;
     }
 

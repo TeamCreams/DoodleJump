@@ -97,7 +97,7 @@ public class Spawner : InitBase
         int reversDirectionDistance = reversDirection * 7;
         while ((direction == 1 && endX <= startX) || (direction == -1 && startX <= endX))
         {
-            Managers.Object.Spawn<StoneController>(new Vector2(startX, 150));
+            var stoneObject = Managers.Object.Spawn<StoneController>(new Vector2(startX, 150));
             startX += reversDirectionDistance;
             yield return new WaitForSeconds(0.2f);
         }

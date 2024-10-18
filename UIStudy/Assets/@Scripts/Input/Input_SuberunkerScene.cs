@@ -10,5 +10,10 @@ public class Input_SuberunkerScene : MonoBehaviour //BaseScene
         {
             Managers.Camera.Shake(1.0f, 0.2f);
         }
+
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            Managers.Event.TriggerEvent(Define.EEventType.LevelStageUp);
+        }
     }
 }

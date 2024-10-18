@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +29,7 @@ public class CameraAnimationEvents : ObjectBase
 
     IEnumerator ShakeCo(float shakePower, float shakeDuration)
     {
-        Vector3 cameraPos = _camera.transform.position;
+        Vector3 cameraPos = Camera.main.transform.position;
         float timer = 0.0f;
         while (timer < shakeDuration)
         {
@@ -40,7 +40,7 @@ public class CameraAnimationEvents : ObjectBase
             y *= shakePower;
 
             Vector3 newCameraPos = cameraPos + new Vector3(x, y, 0);
-            _camera.transform.position = newCameraPos;
+            Camera.main.transform.position = newCameraPos;
 
             timer += Time.unscaledDeltaTime;
             yield return null;

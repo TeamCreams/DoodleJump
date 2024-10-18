@@ -113,6 +113,14 @@ public static class Define
         Item
     }
 
+    public enum EErrorCode
+    {
+        ERR_OK,
+        ERR_DuplicateNickname, // 중복된 닉네임입니다.
+        ERR_ValidationNickname, // 닉네임 사용 Validaiotn 에러
+    }
+
+
     public class Constants
 	{
 		public const int PLAYER_ID = 20001;

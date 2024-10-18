@@ -26,14 +26,16 @@ public class ObjectManager
         return root.transform;
     }
 
-    public void Spawn<T>(Vector3 pos) where T : ObjectBase
+    public GameObject Spawn<T>(Vector3 pos) where T : ObjectBase
     {
         if (typeof(T) == typeof(StoneController))
         {
             GameObject go = Managers.Resource.Instantiate("Entity", pooling: true);
             int rand = UnityEngine.Random.Range(60001, 60001 + Managers.Data.EnemyDic.Count);
-            go.transform.position = pos;
-            go.GetOrAddComponent<StoneController>().SetInfo(Managers.Data.EnemyDic[rand]);
+            StoneController stone = go.GetOrAddComponent<StoneController>();
+            stone.SetInfo(Managers.Data.EnemyDic[rand]);
+            stone.Teleport(pos);
+            return go;
         }
         else if (typeof(T) == typeof(PlayerController))
         {
@@ -43,6 +45,8 @@ public class ObjectManager
             player.GetOrAddComponent<PlayerController>().SetInfo(Managers.Game.ChracterStyleInfo.CharacterId);
             player.GetOrAddComponent<PlayerController>().Teleport(pos);
             Managers.Game.Life = player.GetOrAddComponent<PlayerController>().Data.Life;
+
+            return player;
         }
         else if (typeof(T) == typeof(ItemBase))
         {
@@ -51,19 +55,27 @@ public class ObjectManager
             int randId = RandomItem();
             item.GetOrAddComponent<ItemBase>().SetInfo(randId);
             item.transform.position = pos;
+
+            return item;
         }
         else if (typeof(T) == typeof(Teleport))
         {
             GameObject item = Managers.Resource.Instantiate("TeleportController", pooling: false);
 
             item.transform.position = pos;
+
+            return item;
         }
         else if (typeof(T) == typeof(Confetti_Particle))
         {
             GameObject item = Managers.Resource.Instantiate("Confetti_Particle", pooling: true);
+            Confetti_Particle particle = item.GetComponent<Confetti_Particle>();
+            particle.StartParticle(pos);
 
-            item.transform.position = pos;
+            return item;
         }
+
+        return null;
     }
 
     private int RandomItem()

@@ -9,6 +9,7 @@ public class StoneController : ObjectBase
     private const float CORRECTION_VALUE = 2.9f;
 
     private bool _isCount = true;
+    Rigidbody _rigidbody;
 
     private float _editSpeed = 0;
     private EnemyData _data;
@@ -30,7 +31,7 @@ public class StoneController : ObjectBase
 		{
             return false;
 		}
-
+        _rigidbody = this.GetComponent<Rigidbody>();
         _rockImage = this.gameObject.GetOrAddComponent<SpriteRenderer>();
 
         OnTriggerEnter_Event -= Attack;
@@ -43,7 +44,11 @@ public class StoneController : ObjectBase
     {
         _editSpeed = Data.Speed + Managers.Game.DifficultySettingsInfo.AddSpeed;
         Vector3 movement = Vector2.down * Data.Speed * Time.fixedDeltaTime * CORRECTION_VALUE;
-        transform.Translate(movement);
+        //transform.Translate(movement);
+
+        _rigidbody.MovePosition(_rigidbody.position + movement);
+
+        PushStone();
     }
 
     public void SetInfo(EnemyData data)
@@ -56,16 +61,23 @@ public class StoneController : ObjectBase
         {
             _isCount = false;
         }
-        StartCoroutine(PushStoneCor());
+        //StartCoroutine(PushStoneCor());
+    }
+
+    public void Teleport(Vector3 pos)
+    {
+        this.gameObject.SetActive(false);
+        this.transform.position = pos;
+        this.gameObject.SetActive(true);
     }
 
     public void PushStone()
     {
-        Physics.Raycast(transform.position, Vector3.down, out _hitInfo, 3f, LayerMask.GetMask("Ground"));
-        if (_hitInfo.collider != null)
+        if(Physics.Raycast(_rigidbody.position, Vector3.down, out _hitInfo, 25f, LayerMask.GetMask("Ground")))
         {
             Managers.Pool.Push(this.gameObject);
         }
+       
     }
 
     IEnumerator PushStoneCor()

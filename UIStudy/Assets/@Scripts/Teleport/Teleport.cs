@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
@@ -77,11 +77,13 @@ public class Teleport : ObjectBase
     private void TeleportRight(PlayerController playerController)
     {
         playerController.Teleport(HardCoding.PlayerTeleportPos_Left);
+        StartCoroutine(TeleportEffect());
     }
 
     private void TeleportLeft(PlayerController playerController)
     {
         playerController.Teleport(HardCoding.PlayerTeleportPos_Right);
+        StartCoroutine(TeleportEffect());
     }
     private void OnDrawGizmos()
     {
@@ -92,6 +94,7 @@ public class Teleport : ObjectBase
     IEnumerator TeleportEffect()
     {
         _teleportEffect.gameObject.SetActive(true);
+        _teleportEffect.Play();
         yield return new WaitForSeconds(_teleportEffect.main.duration);
         _teleportEffect.gameObject.SetActive(false);
 

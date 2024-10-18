@@ -113,7 +113,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fcb74f28d107e284e80af037bfec14ca
+  - m_GUID: fbae6c1f22649be42a5a8d428cf2001c
     m_Address: TeleportEffect
     m_ReadOnly: 0
     m_SerializedLabels:

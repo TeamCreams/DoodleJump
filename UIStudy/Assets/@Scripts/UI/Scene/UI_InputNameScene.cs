@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -32,7 +32,6 @@ public class UI_InputNameScene : UI_Scene
         BindButtons(typeof(Buttons));
         BindTexts(typeof(Texts));
 
-        GetInputField((int)InputFields.Name_InputField).gameObject.BindEvent(OnClick_InputName, Define.EUIEvent.Click);
         GetButton((int)Buttons.InspectName_Button).gameObject.BindEvent(OnClick_InspectName, Define.EUIEvent.Click);
         GetText((int)Texts.Warning_Text).text = "";
         return true;
@@ -41,37 +40,31 @@ public class UI_InputNameScene : UI_Scene
 
     private void OnClick_InspectName(PointerEventData eventData)
     {
-        if(CheckCorrectNickname(_tempString) == true)
+        EErrorCode errCode = CheckCorrectNickname(GetInputField((int)InputFields.Name_InputField).text);
+
+        if (errCode != EErrorCode.ERR_OK)
         {
-            _tempString = GetInputField((int)InputFields.Name_InputField).text;
-            Managers.Game.ChracterStyleInfo.PlayerName = _tempString;
-            Managers.Scene.LoadScene(Define.EScene.SuberunkerTimelineScene);
-        }
-        else
-        {
-            _tempString = "";
+            //Localization 세계화 번역작업
+            //Managers.Data.Localization[][ko]
             GetText((int)Texts.Warning_Text).text = "사용할 수 없는 닉네임입니다.";
+            return;
         }
+        
+        Managers.Game.ChracterStyleInfo.PlayerName = GetInputField((int)InputFields.Name_InputField).text;
+        Managers.Scene.LoadScene(Define.EScene.SuberunkerTimelineScene);
     }
 
-    private void OnClick_InputName(PointerEventData eventData)
-    {
-        GetText((int)Texts.Warning_Text).text = "";
-        _tempString = GetInputField((int)InputFields.Name_InputField).text;
-        //Debug.Log($"Name_InputField : {GetInputField((int)InputFields.Name_InputField).text}");
-    }
-
-    private bool CheckCorrectNickname(string name)
+    private EErrorCode CheckCorrectNickname(string name)
     {
         if (string.IsNullOrEmpty(name) || char.IsDigit(name[0]))
         {
-            return false;
+            return EErrorCode.ERR_ValidationNickname;
         }
         if (18 <  name.Length)
         {
-            return false;
+            return EErrorCode.ERR_ValidationNickname;
         }
-        return true;
+        return EErrorCode.ERR_OK;
     }
 
 
