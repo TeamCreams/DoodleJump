@@ -101,12 +101,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4e18f8472db054cb9832a5a95b20d0a4
-    m_Address: SuberunkerTimeline2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ed962e35f7fa6f34f8d27aa6d19ea293
     m_Address: Confetti_Particle
     m_ReadOnly: 0
