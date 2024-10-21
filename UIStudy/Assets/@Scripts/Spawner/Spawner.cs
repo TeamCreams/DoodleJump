@@ -76,6 +76,8 @@ public class Spawner : InitBase
 
             if (Managers.Data.DifficultySettingsDic[_id].ChallengeScale <= Managers.Game.DifficultySettingsInfo.ChallengeScale)
             {
+                Managers.Game.DifficultySettingsInfo.StageId++;
+                Managers.Game.DifficultySettingsInfo.StageLevel++; // 함수 호출 순서 때문에 여기서 부름
                 Managers.Event.TriggerEvent(EEventType.LevelStageUp);
             }
         }
@@ -101,12 +103,12 @@ public class Spawner : InitBase
 
     private void OnEvent_LevelStageUp(Component sender, object param)
     {
+        //Debug.Log("OnEvent_LevelStageUp");
+
         Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
-        Managers.Game.DifficultySettingsInfo.StageId++;
         _id = Managers.Game.DifficultySettingsInfo.StageId;
         _stoneGenerateTime = UnityEngine.Random.Range(Managers.Data.DifficultySettingsDic[_id].StoneGenerateStartTime, Managers.Data.DifficultySettingsDic[_id].StoneGenerateFinishTime);
         _stoneShowerPeriodTime = UnityEngine.Random.Range(Managers.Data.DifficultySettingsDic[_id].StoneShowerPeriodStartTime, Managers.Data.DifficultySettingsDic[_id].StoneShowerPeriodFinishTime);
-        Managers.Game.DifficultySettingsInfo.StageLevel++;
         Managers.Game.DifficultySettingsInfo.AddSpeed = 4 * Managers.Game.DifficultySettingsInfo.StageLevel;
         Managers.Object.Spawn<Confetti_Particle>(HardCoding.ConfetiParticlePos);
     }

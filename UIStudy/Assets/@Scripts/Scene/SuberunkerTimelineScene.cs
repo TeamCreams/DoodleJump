@@ -12,6 +12,7 @@ public class SuberunkerTimelineScene : BaseScene
         {
             return false;
         }
+        Managers.UI.ShowSceneUI<UI_SuberunkerTimelineScene>();
         GameObject gameObject = Instantiate(Managers.Resource.Load<GameObject>("SuberunkerTimeline"));
         _playableDirector = gameObject.GetOrAddComponent<PlayableDirector>();
         _playableDirector.name = "SuberunkerTimeline";

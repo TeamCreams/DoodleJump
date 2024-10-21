@@ -46,12 +46,8 @@ public class SuberunkerScene : BaseScene
         _spawner = Instantiate(Managers.Resource.Load<GameObject>("Spawner")).GetOrAddComponent<Spawner>();
         _spawner.name = "Spawner";
 
-        //Instantiate(Managers.Resource.Load<GameObject>("TeleportController")).transform.position = Vector2.zero;
-
         StartCoroutine(_spawner.GenerateItem());
         StartCoroutine(_spawner.GenerateTestCor());
-
-
 
         Managers.Event.AddEvent(EEventType.Attacked_Player, OnEvent_Attacked_Player);
         return true;

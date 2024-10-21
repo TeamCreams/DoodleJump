@@ -13,7 +13,8 @@ public class UI_TopBar : UI_Base
     public enum Texts
     {
         Time_Text,
-        GameOver_Text
+        GameOver_Text,
+        Level_Text
     }
 
     private int _time = 0;
@@ -44,6 +45,10 @@ public class UI_TopBar : UI_Base
         //Managers.Game.OnChangedLife += OnChangedLife;
         Managers.Event.RemoveEvent(Define.EEventType.ChangePlayerLife, OnChangedLife);
         Managers.Event.AddEvent(Define.EEventType.ChangePlayerLife, OnChangedLife);
+        Managers.Event.AddEvent(Define.EEventType.LevelStageUp, OnEvent_LevelUpTextChange);
+
+        string str = "Lv." + Managers.Game.DifficultySettingsInfo.StageLevel.ToString();
+        GetText((int)Texts.Level_Text).text = str;
 
         _lifeTimer = Observable.Interval(new System.TimeSpan(0, 0, 1))
             .Subscribe(_ =>
@@ -61,6 +66,12 @@ public class UI_TopBar : UI_Base
         Managers.Event.RemoveEvent(Define.EEventType.ChangePlayerLife, OnChangedLife);
     }
 
+    void OnEvent_LevelUpTextChange(Component sender, object param)
+    {
+        //Debug.Log("OnEvent_LevelUpTextChange");
+        string str = "Lv." + Managers.Game.DifficultySettingsInfo.StageLevel.ToString();
+        GetText((int)Texts.Level_Text).text = str;
+    }
 	void OnChangedLife(Component sender, object param)
 	{
         int life = (int)((float)param);
