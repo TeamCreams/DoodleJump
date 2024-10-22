@@ -4,31 +4,36 @@
       "Id": 60001,
       "Name": "AncientGuardianStone",
       "SpriteName": "stone_stout decorative lantern",
-      "Speed": 100
+      "Speed": 290,
+      "Damage": 5.0
     },
     {
       "Id": 60002,
       "Name": "ShardofDestiny",
       "SpriteName": "stone_tall decorative lantern",
-      "Speed": 90
+      "Speed": 261,
+      "Damage": 11.0
     },
     {
       "Id": 60003,
       "Name": "CelestialStone",
       "SpriteName": "stone_round boulder",
-      "Speed": 80
+      "Speed": 232,
+      "Damage": 17.0
     },
     {
       "Id": 60004,
       "Name": "Soulstone",
       "SpriteName": "stone_small rock",
-      "Speed": 70
+      "Speed": 203,
+      "Damage": 23.0
     },
     {
       "Id": 60005,
       "Name": "MysticQuartz",
       "SpriteName": "stone_long rock",
-      "Speed": 60
+      "Speed": 174,
+      "Damage": 30.0
     }
   ]
 }

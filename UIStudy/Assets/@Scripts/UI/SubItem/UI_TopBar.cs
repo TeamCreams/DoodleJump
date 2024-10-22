@@ -16,6 +16,10 @@ public class UI_TopBar : UI_Base
         GameOver_Text,
         Level_Text
     }
+    public enum Images
+    {
+        Hp,
+    }
 
     private int _time = 0;
 
@@ -35,11 +39,13 @@ public class UI_TopBar : UI_Base
         {
             return false;
         }
-        BindObjects(typeof(GameObjects));
+        BindImages(typeof(Images));
+
+        //BindObjects(typeof(GameObjects));
         BindTexts(typeof(Texts));
         GetText((int)Texts.GameOver_Text).enabled = false;
 
-        _heartRoot = GetObject((int)GameObjects.UI_HeartRoot).GetComponent<UI_HeartRoot>();
+        //_heartRoot = GetObject((int)GameObjects.UI_HeartRoot).GetComponent<UI_HeartRoot>();
 
         //Managers.Game.OnChangedLife -= OnChangedLife;
         //Managers.Game.OnChangedLife += OnChangedLife;
@@ -74,30 +80,58 @@ public class UI_TopBar : UI_Base
     }
 	void OnChangedLife(Component sender, object param)
 	{
-        int life = (int)((float)param);
+        float life = (float)param;
         Debug.Log($"Life : {life}");
-
-        if (life <= 0)
-        {
-            Managers.Game.PlayTime = _time;
-            _lifeTimer?.Dispose();
-            if (Managers.Game.PlayTimeRecord < _time)
-            {
-                Managers.Game.PlayTimeRecord = _time;
-            }
-            Managers.UI.ShowPopupUI<UI_RetryPopup>();
-        }
-        UpdateLifeImage(life);        
+        StartCoroutine(UpdateLife(life));
+        //UpdateLifeImage(life);        
     }
 
-    private void UpdateLifeImage(int life)
+    IEnumerator UpdateLife(float nextHp)
     {
-        _heartRoot.SetLife(life);
-        if (life == 0)
-		{
-			GetText((int)Texts.GameOver_Text).enabled = true;
-		}
-	}
+        float currentHp = GetImage((int)Images.Hp).fillAmount;
+
+        if (nextHp < currentHp)
+        {
+            while (nextHp < currentHp)
+            {
+                currentHp -= 0.05f; 
+                if (currentHp < nextHp)
+                {
+                    currentHp = nextHp;
+                }
+
+                GetImage((int)Images.Hp).fillAmount = currentHp;
+
+                yield return new WaitForSeconds(0.05f);
+            }
+
+            if (currentHp <= 0)
+            {
+                Managers.Game.PlayTime = _time;
+                _lifeTimer?.Dispose();
+                if (Managers.Game.PlayTimeRecord < _time)
+                {
+                    Managers.Game.PlayTimeRecord = _time;
+                }
+                Managers.UI.ShowPopupUI<UI_RetryPopup>();
+            }
+        }
+        else
+        {
+            while (currentHp < nextHp)
+            {
+                currentHp += 0.05f; 
+                if (nextHp < currentHp) 
+                {
+                    currentHp = nextHp;
+                }
+
+                GetImage((int)Images.Hp).fillAmount = currentHp;
+
+                yield return new WaitForSeconds(0.05f);
+            }
+        }
+    }
 }
 
 // 2가지 방법

@@ -101,7 +101,7 @@ public class Stats
         get => _hp;
         set
         {
-            var newHp = Mathf.Clamp(value, 0, HardCoding.PlayerMaxHp);
+            var newHp = Mathf.Clamp(value, 0, 1);
             _hp = newHp;
         }
     }
@@ -109,7 +109,7 @@ public class Stats
 
     public Stats(PlayerData data)
     {
-        StatDic.Add(EStat.MaxHp, new Stat(data.Life));
+        StatDic.Add(EStat.MaxHp, new Stat(data.Hp));
         StatDic.Add(EStat.Luck, new Stat(data.Luck));
         StatDic.Add(EStat.MoveSpeed, new Stat(data.Speed));
         Hp = StatDic[EStat.MaxHp].Value;

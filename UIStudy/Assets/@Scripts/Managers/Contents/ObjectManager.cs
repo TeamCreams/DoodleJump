@@ -42,10 +42,9 @@ public class ObjectManager
         {
             GameObject player = Managers.Resource.Instantiate("Player", pooling: true);
             player.name = "player";
-            //Debug.Log(Managers.Game.ChracterStyleInfo.CharacterId);
             player.GetOrAddComponent<PlayerController>().SetInfo(Managers.Game.ChracterStyleInfo.CharacterId);
             player.GetOrAddComponent<PlayerController>().Teleport(pos);
-            Managers.Game.Life = player.GetOrAddComponent<PlayerController>().Data.Life;
+            Managers.Game.Life = player.GetOrAddComponent<PlayerController>().Data.Hp;
 
             return player;
         }

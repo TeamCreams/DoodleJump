@@ -4,42 +4,42 @@
       "Id": 20001,
       "Name": "Player1",
       "Speed": 100.0,
-      "Life": 3,
+      "Hp": 100.0,
       "Luck": 0.15
     },
     {
       "Id": 20002,
       "Name": "Player2",
       "Speed": 90.0,
-      "Life": 3,
+      "Hp": 100.0,
       "Luck": 0.18
     },
     {
       "Id": 20003,
       "Name": "Player3",
       "Speed": 110.0,
-      "Life": 3,
+      "Hp": 100.0,
       "Luck": 0.1
     },
     {
       "Id": 20004,
       "Name": "Player4",
       "Speed": 130.0,
-      "Life": 2,
+      "Hp": 80.0,
       "Luck": 0.18
     },
     {
       "Id": 20005,
       "Name": "Player5",
       "Speed": 150.0,
-      "Life": 2,
+      "Hp": 80.0,
       "Luck": 0.13
     },
     {
       "Id": 20006,
       "Name": "Player6",
       "Speed": 80.0,
-      "Life": 2,
+      "Hp": 80.0,
       "Luck": 0.05
     }
   ]

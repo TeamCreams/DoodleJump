@@ -17,12 +17,13 @@ public class GameManager
 		{
 			_moveDir = value;
             OnMoveDirChanged?.Invoke(value);
-		}
+        }
 	}
 
+
     // SuberunkerScene Player Life
-    private int _life;
-    public int Life
+    private float _life;
+    public float Life
     {
         get { return _life; }
         set
@@ -35,7 +36,7 @@ public class GameManager
             }
         }
     }
-    public Action<int> OnChangedLife;
+    public Action<float> OnChangedLife;
 
     private int _playTimeRecord = 0;
     public int PlayTimeRecord

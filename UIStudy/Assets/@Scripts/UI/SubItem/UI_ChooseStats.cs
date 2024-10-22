@@ -64,7 +64,7 @@ public class UI_ChooseStats : UI_Base
         Managers.Game.ChracterStyleInfo.CharacterId = _playerDataId;
         GetText((int)Texts.Stat_Text).text = $"{Managers.Data.PlayerDic[_playerDataId].Name}";
         GetText((int)Texts.Speed_Text).text = $"Default Speed : {Managers.Data.PlayerDic[_playerDataId].Speed}";
-        GetText((int)Texts.Life_Text).text = $"Default Life : {Managers.Data.PlayerDic[_playerDataId].Life}";
+        GetText((int)Texts.Life_Text).text = $"Default Hp : {Managers.Data.PlayerDic[_playerDataId].Hp}";
         GetText((int)Texts.Luck_Text).text = $"Default Luck : {Managers.Data.PlayerDic[_playerDataId].Luck}";
     }
 

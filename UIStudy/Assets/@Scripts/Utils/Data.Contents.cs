@@ -105,6 +105,7 @@ namespace Data
         public string Name;
         public string SpriteName;
         public int Speed;
+        public float Damage;
     }
 
     [Serializable]
@@ -128,7 +129,7 @@ namespace Data
         public int Id;
         public string Name;
         public float Speed;
-        public int Life;
+        public float Hp;
         public float Luck;
 
         public PlayerData()
@@ -141,7 +142,7 @@ namespace Data
             Id = original.Id;
             Name = original.Name;
             Speed = original.Speed;
-            Life = original.Life;
+            Hp = original.Hp;
             Luck = original.Luck;
         }
     }
@@ -179,7 +180,7 @@ namespace Data
         public EStat Option4;
         public EStatModifierType Option4ModifierType;
         public float Option4Param;
-        public int AddLife;
+        public float AddHp;
         public float Duration;
     }
 

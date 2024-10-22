@@ -1,6 +1,6 @@
-Id,Name,SpriteName,Speed
-60001,AncientGuardianStone,stone_stout decorative lantern,100
-60002,ShardofDestiny,stone_tall decorative lantern,90
-60003,CelestialStone,stone_round boulder,80
-60004,Soulstone,stone_small rock,70
-60005,MysticQuartz,stone_long rock,60
+Id,Name,SpriteName,Speed,Damage
+60001,AncientGuardianStone,stone_stout decorative lantern,290,5
+60002,ShardofDestiny,stone_tall decorative lantern,261,11
+60003,CelestialStone,stone_round boulder,232,17
+60004,Soulstone,stone_small rock,203,23
+60005,MysticQuartz,stone_long rock,174,30

@@ -177,7 +177,8 @@ public class PlayerController : CreatureBase
 
     private void OnEvent_DamagedHp(Component sender, object param)
     {
-        this._stats.Hp -= 1f;
+        float damage = (float)param;
+        this._stats.Hp -= damage / 100f;
         Managers.Event.TriggerEvent(EEventType.ChangePlayerLife, this, this._stats.Hp);
         Managers.Event.TriggerEvent(EEventType.ThoughtBubble, this, EBehavior.Attacked);
         AudioClip attackedAudio = Managers.Resource.Load<AudioClip>("AttackedSound");
@@ -241,10 +242,10 @@ public class PlayerController : CreatureBase
         MakeNullSprite();
         ChangeSprite(options);
 
-        if (0 < ItemData.AddLife && this._stats.Hp <= 8)
+        if (0 < ItemData.AddHp && this._stats.Hp <= Data.Hp)
         {
-            this._stats.Hp += ItemData.AddLife;
-            Managers.Event.TriggerEvent(EEventType.GetLife);
+            this._stats.Hp += ItemData.AddHp/100f;
+            Managers.Event.TriggerEvent(Define.EEventType.ChangePlayerLife, this, this._stats.Hp);
         }
 
         yield return new WaitForSeconds(ItemData.Duration);

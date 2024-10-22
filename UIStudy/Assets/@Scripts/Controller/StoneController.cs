@@ -6,8 +6,6 @@ using UnityEngine.UI;
 using static Define;
 public class StoneController : ObjectBase
 {
-    private const float CORRECTION_VALUE = 2.9f;
-
     private bool _isCount = true;
     public bool IsCount
     {
@@ -51,7 +49,7 @@ public class StoneController : ObjectBase
     private void FixedUpdate()
     {
         _editSpeed = Data.Speed + Managers.Game.DifficultySettingsInfo.AddSpeed;
-        Vector3 movement = Vector2.down * _editSpeed * Time.fixedDeltaTime * CORRECTION_VALUE;
+        Vector3 movement = Vector2.down * _editSpeed * Time.fixedDeltaTime;
 
         _rigidbody.MovePosition(_rigidbody.position + movement);
 
@@ -98,7 +96,7 @@ public class StoneController : ObjectBase
             }
             else
             {
-                Managers.Event.TriggerEvent(EEventType.Attacked_Player, this);
+                Managers.Event.TriggerEvent(EEventType.Attacked_Player, this, Data.Damage);
             }
         
 

@@ -9,6 +9,7 @@ public static class Define
 		Unknown,
 		DevLoadingScene,
 		TinyFarmScene,
+        SuberunkerSceneHomeScene,
         SuberunkerTimelineScene,
         ChooseCharacterScene,
         InputNameScene,
@@ -137,7 +138,6 @@ public static class Define
 		public static readonly Vector2 PlayerStartPos = new Vector2(0, -120);
         public static readonly Vector3 PlayerTeleportPos_Left = new Vector3(-70, -120, 0);
         public static readonly Vector3 PlayerTeleportPos_Right = new Vector3(70, -120, 0);
-        public static readonly int PlayerMaxHp = 8;
         public static readonly Vector3 ConfetiParticlePos = new Vector3(0, 0, -100);
     }
 
