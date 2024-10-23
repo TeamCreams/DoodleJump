@@ -22,7 +22,7 @@ public class SkillEffect : InitBase
     {
         _animator.SetTrigger("isSkillEffect");
 
-        AudioClip luckSkillAudio = Managers.Resource.Load<AudioClip>("LuckSkillSound");
-        Managers.Sound.Play(Define.ESound.Effect, luckSkillAudio);
+        //AudioClip luckSkillAudio = Managers.Resource.Load<AudioClip>("LuckSkillSound");
+        Managers.Sound.Play(Define.ESound.Effect, "LuckSkillSound");
     }
 }

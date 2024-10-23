@@ -50,6 +50,10 @@ public class SuberunkerScene : BaseScene
         StartCoroutine(_spawner.GenerateTestCor());
 
         Managers.Event.AddEvent(EEventType.Attacked_Player, OnEvent_Attacked_Player);
+
+        Managers.Sound.Stop(ESound.Bgm);
+        Managers.Sound.Play(Define.ESound.Bgm, "LobbyBGMSound", 0.6f);
+
         return true;
     }
 

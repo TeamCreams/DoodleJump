@@ -1,11 +1,11 @@
-Id,Name,Chance,Option1,Option1ModifierType,Option1Param,Option2,Option2ModifierType,Option2Param,Option3,Option3ModifierType,Option3Param,Option4,Option4ModifierType,Option4Param,AddHp,Duration
-30001,Swift Boots,0.6,MoveSpeed,Percentage,40,,,,,,,,,,,3
-30002,Luck Charm,0.6,Luck,Percentage,20,,,,,,,,,,,3
-30003,Life Ring,0.6,,,,,,,,,,,,,20,
-30004,Speed Cloak,0.85,MoveSpeed,Percentage,60,,,,,,,,,,,5
-30005,Fortune Blade,0.85,Luck,Percentage,30,MoveSpeed,Percentage,30,,,,,,,20,5
-30006,Vital Amulet,0.6,,,,,,,,,,,,,20,
-30007,Lucky Coin,0.85,Luck,Percentage,30,MoveSpeed,Flat,30,,,,,,,,5
-30008,Speed Potion,0.6,MoveSpeed,Flat,50,,,,,,,,,,,3
-30009,Dragon Heart,1,Luck,Percentage,50,MoveSpeed,Percentage,30,,,,,,,50,8
-30010,Lucky Thunder,1,Luck,Percentage,50,MoveSpeed,Flat,20,,,,,,,,8
+Id,Name,Chance,Option1,Option1ModifierType,Option1Param,Option2,Option2ModifierType,Option2Param,Option3,Option3ModifierType,Option3Param,Option4,Option4ModifierType,Option4Param,AddHp,Duration,Gold
+30001,Swift Boots,0.6,MoveSpeed,Percentage,40,,,,,,,,,,,3,10
+30002,Luck Charm,0.6,Luck,Percentage,20,,,,,,,,,,,3,10
+30003,Life Ring,0.6,,,,,,,,,,,,,20,,10
+30004,Speed Cloak,0.85,MoveSpeed,Percentage,60,,,,,,,,,,,5,30
+30005,Fortune Blade,0.85,Luck,Percentage,30,MoveSpeed,Percentage,30,,,,,,,20,5,30
+30006,Vital Amulet,0.6,,,,,,,,,,,,,20,,10
+30007,Lucky Coin,0.85,Luck,Percentage,30,MoveSpeed,Flat,30,,,,,,,,5,30
+30008,Speed Potion,0.6,MoveSpeed,Flat,50,,,,,,,,,,,3,10
+30009,Dragon Heart,1,Luck,Percentage,50,MoveSpeed,Percentage,30,,,,,,,50,8,50
+30010,Lucky Thunder,1,Luck,Percentage,50,MoveSpeed,Flat,20,,,,,,,,8,50

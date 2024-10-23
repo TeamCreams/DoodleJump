@@ -17,7 +17,8 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     enum Texts
     {
         Best_Text,
-        Current_Text
+        Current_Text,
+        TotalGold_Text
     }
 
     enum Buttons
@@ -68,6 +69,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetToggle((int)Toggles.Language_En).gameObject.BindEvent(OnClick_SetLanguage, Define.EUIEvent.Click);
         GetToggle((int)Toggles.Language_Kr).gameObject.BindEvent(OnClick_SetLanguage, Define.EUIEvent.Click);
 
+        GetText((int)Texts.TotalGold_Text).text = Managers.Game.TotalGold.ToString();
 
         return true;
     }

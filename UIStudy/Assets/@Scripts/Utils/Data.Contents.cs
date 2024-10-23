@@ -182,6 +182,7 @@ namespace Data
         public float Option4Param;
         public float AddHp;
         public float Duration;
+        public int Gold;
     }
 
 

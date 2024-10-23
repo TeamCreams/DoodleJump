@@ -62,6 +62,33 @@ public class GameManager
             }
         }
     }
+
+    private int _gold = 0;
+    public int Gold
+    {
+        get { return _gold; }
+        set
+        {
+            if (_gold != value)
+            {
+                _gold = value;
+            }
+        }
+    }
+
+    private int _totalGold = 0;
+    public int TotalGold
+    {
+        get { return _totalGold; }
+        set
+        {
+            if (_totalGold != value)
+            {
+                _totalGold = value;
+            }
+        }
+    }
+
     private ChracterStyleInfo _chracterStyleInfo;
     public ChracterStyleInfo ChracterStyleInfo
     {

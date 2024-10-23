@@ -9,7 +9,8 @@ public class UI_RetryPopup : UI_Popup
     enum Texts
     {
         LifeTime_Text,
-        LifeRecordTime_Text
+        LifeRecordTime_Text,
+        Gold_Text
     }
 
     enum GameObjects
@@ -42,7 +43,11 @@ public class UI_RetryPopup : UI_Popup
             int minutes = Mathf.FloorToInt(Managers.Game.PlayTime / 60);
             float seconds = Managers.Game.PlayTime % 60;
             GetText((int)Texts.LifeTime_Text).text = $"생존 시간 : {minutes}분 {seconds}초";
+
+            GetText((int)Texts.Gold_Text).text = Managers.Game.Gold.ToString();
         }
+
+        Managers.Game.TotalGold += Managers.Game.Gold;
 
         GetButton((int)Buttons.Retry_Button).gameObject.BindEvent((evt) =>
         {

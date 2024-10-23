@@ -181,8 +181,8 @@ public class PlayerController : CreatureBase
         this._stats.Hp -= damage / 100f;
         Managers.Event.TriggerEvent(EEventType.ChangePlayerLife, this, this._stats.Hp);
         Managers.Event.TriggerEvent(EEventType.ThoughtBubble, this, EBehavior.Attacked);
-        AudioClip attackedAudio = Managers.Resource.Load<AudioClip>("AttackedSound");
-        Managers.Sound.Play(ESound.Effect, attackedAudio, 0.7f);
+        //AudioClip attackedAudio = Managers.Resource.Load<AudioClip>("AttackedSound");
+        Managers.Sound.Play(ESound.Effect, "AttackedSound", 0.7f);
 
         Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
 
@@ -247,6 +247,8 @@ public class PlayerController : CreatureBase
             this._stats.Hp += ItemData.AddHp/100f;
             Managers.Event.TriggerEvent(Define.EEventType.ChangePlayerLife, this, this._stats.Hp);
         }
+
+        Managers.Game.Gold += ItemData.Gold;
 
         yield return new WaitForSeconds(ItemData.Duration);
         foreach (var (option, statModifier) in options.Zip(_statModifier, (optionIndex, StatModifierIndex) => (optionIndex, StatModifierIndex)))
