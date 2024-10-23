@@ -67,6 +67,7 @@
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/Equipment.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/AttackingExample.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/Tweens/TweenBase.cs" />
+    <Compile Include="Assets/@Scripts/UI/Scene/UI_SuberunkerSceneHomeScene.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/TestRoom.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/SaveLoadExample.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterSetup.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="Assets/HeroEditor/Common/SimpleColorPicker/Scripts/ColorJoystick.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/ItemWorkspace.cs" />
     <Compile Include="Assets/@Scripts/Managers/Core/CameraManager/ShakeSlave.cs" />
+    <Compile Include="Assets/@Scripts/Scene/SuberunkerSceneHomeScene.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/MovementExample.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Firearms/Enums/FirearmType.cs" />
     <Compile Include="Assets/@Scripts/Controller/CreatureBase.cs" />

@@ -21,6 +21,7 @@ public class UI_RetryPopup : UI_Popup
     enum Buttons
     {
         Retry_Button,
+        Home_Button
     }
 
 
@@ -46,6 +47,13 @@ public class UI_RetryPopup : UI_Popup
         GetButton((int)Buttons.Retry_Button).gameObject.BindEvent((evt) =>
         {
             Managers.Scene.LoadScene(Define.EScene.SuberunkerScene);
+            Managers.UI.ClosePopupUI(this);
+            Time.timeScale = 1;
+        }, Define.EUIEvent.Click);
+
+        GetButton((int)Buttons.Home_Button).gameObject.BindEvent((evt) =>
+        {
+            Managers.Scene.LoadScene(Define.EScene.SuberunkerSceneHomeScene);
             Managers.UI.ClosePopupUI(this);
             Time.timeScale = 1;
         }, Define.EUIEvent.Click);
