@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.XR;
@@ -34,6 +35,8 @@ public class PlayerController : CreatureBase
         }
     }
 
+    public ItemBase Item { get; private set; }
+
     private float _waitTime = 0;
     [SerializeField]
     EPlayerState _state = EPlayerState.Idle;
@@ -49,6 +52,7 @@ public class PlayerController : CreatureBase
     private SpriteRenderer MaskSpriteRenderer;
 
     private List<StatModifier> _statModifier;
+    public HashSet<ItemBase> _haveItems = new HashSet<ItemBase>();
 
    
     public EPlayerState State
@@ -72,6 +76,9 @@ public class PlayerController : CreatureBase
             return false;
         }
 
+        _animator = GetComponentInChildren<Animator>();
+        _characterController = GetComponent<CharacterController>();
+
         Managers.Event.AddEvent(EEventType.Attacked_Player, OnEvent_DamagedHp);
         Managers.Event.AddEvent(EEventType.TakeItem, OnEvent_TakeItem);
 
@@ -81,6 +88,7 @@ public class PlayerController : CreatureBase
     private void OnDestroy()
     {
         Managers.Event.RemoveEvent(EEventType.Attacked_Player, OnEvent_DamagedHp);
+        Managers.Event.RemoveEvent(EEventType.TakeItem, OnEvent_TakeItem);
     }
 
     void Update()
@@ -104,13 +112,12 @@ public class PlayerController : CreatureBase
     public override void SetInfo(int templateId)
     {
         base.SetInfo(templateId);
-        _animator = GetComponentInChildren<Animator>();
 
+        //1. 데이터 세팅 
         Data = Managers.Data.PlayerDic[templateId];
         this._stats = new Stats(Data); 
 
-        _characterController = GetComponent<CharacterController>();
-      
+        //2. 캐릭터 외형 변경에 사용할 Renderer 불러오기
         EyeSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Eyes", recursive: true);
         EyebrowsSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Eyebrows", recursive: true);
         HairSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Hair", recursive: true);
@@ -118,21 +125,11 @@ public class PlayerController : CreatureBase
         ShoseRightSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Shin[Armor][R]", recursive: true);
         MaskSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _animator.gameObject, name: "Mask", recursive: true);
        
-        ShoseLeftSpriteRenderer.sprite = null;
-        ShoseRightSpriteRenderer.sprite = null;
-        MaskSpriteRenderer.sprite = null;
 
-        CommitPlayerCustomization();
+        LoadPlayerCustomization();
     }
 
-    public void CommitPlayerCustomization()
-    {
-        HairSpriteRenderer.sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Hair}.sprite"); // GameManagers 정보로     
-        EyebrowsSpriteRenderer.sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyebrows}.sprite");
-        EyeSpriteRenderer.sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyes}.sprite");
-    }
-
-
+    #region Update
     private void Update_Idle()
     {
         if (Managers.Game.JoystickState == EJoystickState.PointerDown)
@@ -175,20 +172,6 @@ public class PlayerController : CreatureBase
         }
     }
 
-    private void OnEvent_DamagedHp(Component sender, object param)
-    {
-        float damage = (float)param;
-        this._stats.Hp -= damage / 100f;
-        Managers.Event.TriggerEvent(EEventType.ChangePlayerLife, this, this._stats.Hp);
-        Managers.Event.TriggerEvent(EEventType.ThoughtBubble, this, EBehavior.Attacked);
-        //AudioClip attackedAudio = Managers.Resource.Load<AudioClip>("AttackedSound");
-        Managers.Sound.Play(ESound.Effect, "AttackedSound", 0.7f);
-
-        Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
-
-        StartCoroutine(Update_CryingFace());
-    }
-
     IEnumerator Update_CryingFace()
     {
         EyeSpriteRenderer.sprite = Managers.Resource.Load<Sprite>("Crying.sprite");
@@ -205,63 +188,151 @@ public class PlayerController : CreatureBase
         _waitTime = 0;
         _animator.SetBool("Boring", true);
     }
+    #endregion
 
+    #region OnEvent
+    //데미지 처리 이벤트
+    private void OnEvent_DamagedHp(Component sender, object param)
+    {
+        float damage = (float)param;
+        this._stats.Hp -= damage / 100f;
+        Managers.Event.TriggerEvent(EEventType.ChangePlayerLife, this, this._stats.Hp);
+        Managers.Event.TriggerEvent(EEventType.ThoughtBubble, this, EBehavior.Attacked);
+        //AudioClip attackedAudio = Managers.Resource.Load<AudioClip>("AttackedSound");
+        Managers.Sound.Play(ESound.Effect, "AttackedSound", 0.7f);
+
+        Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
+
+        StartCoroutine(Update_CryingFace());
+    }
+
+    //아이템 획득 이벤트
     public void OnEvent_TakeItem(Component sender, object param)
     {
         ItemBase data = sender as ItemBase;
         Debug.Assert(data != null, "is null");
-        _statModifier = data.ModifierList;
-        ItemData = data.Data;
+
+        //1. 확률 계산후 말풍선 띄우기
         Managers.Event.TriggerEvent(EEventType.ThoughtBubble, this, EBehavior.Item);
 
+        //2. 아이템 착용
+        EquipItem(data);
+    }
+    #endregion
 
-        StopCoroutine(ChangeStats());
-        StartCoroutine(ChangeStats());
-        // 스탯의 이상한 스탯을 추가
-        // 스탯중에서 IsFireMode 라는 스탯을 추가해서 
+    #region Actor Interface
+    // 캐릭터 커스텀마이징 정보 불러오기
+    public void LoadPlayerCustomization()
+    {
+        // 1. 아이템 장착해제
+        MakeNullSprite();
+
+        // 2. 커스터마이징 정보로 외형 불러오기
+        HairSpriteRenderer.sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Hair}.sprite"); // GameManagers 정보로     
+        EyebrowsSpriteRenderer.sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyebrows}.sprite");
+        EyeSpriteRenderer.sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyes}.sprite");
     }
 
-
-    IEnumerator ChangeStats()
+    //장비 장착 (EquipItem)
+    public void EquipItem(ItemBase item)
     {
+        //------------------------------------
+        // 0. Validation Check
+        //------------------------------------
+        if(Item != null)
+        {
+            return;
+        }
+
+        //------------------------------------
+        // 1. 변수 선처리
+        //------------------------------------
+        Item = item;
+        _haveItems.Add(Item);
+
+        //------------------------------------
+        // 2. 이미지 적용
+        //------------------------------------
+        SuberunkerItemData itemData = Managers.Data.SuberunkerItemDic[item.Data.Id];
         List<EStat> options = new List<EStat>
         {
-            ItemData.Option1,
-            ItemData.Option2,
-            ItemData.Option3,
-            ItemData.Option4
+            itemData.Option1,
+            itemData.Option2,
+            itemData.Option3,
+            itemData.Option4
         };
 
-        foreach(var (option, statModifier) in options.Zip(_statModifier, (optionIndex, StatModifierIndex) => (optionIndex, StatModifierIndex)))
+        var groupInfo = from option in options
+                        join sprite in Managers.Data.SuberunkerItemSpriteDic
+                        on option equals sprite.Value.StatOption
+                        select new
+                        {
+                            SpriteName = sprite.Value.Name,
+                            EStatOption = option
+                        };
+
+        foreach (var group in groupInfo)
+        {
+            switch (group.EStatOption)
+            {
+                case EStat.MoveSpeed:
+                    {
+                        var sprite = Managers.Resource.Load<Sprite>($"{group.SpriteName}.sprite");
+                        if (sprite != null)
+                        {
+                            ShoseLeftSpriteRenderer.sprite = sprite;
+                            ShoseRightSpriteRenderer.sprite = sprite;
+                        }
+                    }
+                    break;
+                case EStat.Luck:
+                    {
+                        var sprite = Managers.Resource.Load<Sprite>($"{group.SpriteName}.sprite");
+                        if (sprite != null)
+                        {
+                            MaskSpriteRenderer.sprite = sprite;
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        //------------------------------------
+        // 3. 스탯 변경
+        //------------------------------------
+
+        // 1) HP를 제외한 기본스탯 변경
+        _statModifier = item.ModifierList;
+        foreach (var (option, statModifier) in options.Zip(_statModifier, (optionIndex, StatModifierIndex) => (optionIndex, StatModifierIndex)))
         {
             if (option != 0)
             {
                 this._stats.StatDic[option].AddStatModifier(statModifier);
             }
         }
-        MakeNullSprite();
-        ChangeSprite(options);
 
-        if (0 < ItemData.AddHp && this._stats.Hp <= Data.Hp)
+        // 2) HP 변경
+        if (0 < Item.Data.AddHp && this._stats.Hp <= Data.Hp)
         {
-            this._stats.Hp += ItemData.AddHp/100f;
+            this._stats.Hp += Item.Data.AddHp / 100f;
             Managers.Event.TriggerEvent(Define.EEventType.ChangePlayerLife, this, this._stats.Hp);
         }
 
-        Managers.Game.Gold += ItemData.Gold;
+        //------------------------------------
+        // 4. 골드 변경
+        //------------------------------------
+        Managers.Game.Gold += Item.Data.Gold;
 
-        yield return new WaitForSeconds(ItemData.Duration);
-        foreach (var (option, statModifier) in options.Zip(_statModifier, (optionIndex, StatModifierIndex) => (optionIndex, StatModifierIndex)))
-        {
-            if (option != 0)
-            {
-                this._stats.StatDic[option].RemoveStatModifier(statModifier.Id);
-            }
-        }
-        MakeNullSprite();
+        //------------------------------------
+        // 5. UnEquip 예약
+        //------------------------------------
+        StartCoroutine(WaitUnEquipItemCo(Item.Data.Duration, Item));
     }
 
-    public void ChangeSprite(List<EStat> options)
+    //이미지 변경
+    public void XXX_ChangeSprite(List<EStat> options)
     {
         var groupInfo = from option in options
                         join sprite in Managers.Data.SuberunkerItemSpriteDic
@@ -301,18 +372,133 @@ public class PlayerController : CreatureBase
         }
     }
 
+    //아이템에 따른 스탯 변경
+    IEnumerator XXX_ChangeStats(ItemBase data)
+    {
+        ItemData = data.Data;
+        _statModifier = data.ModifierList;
+        List<EStat> options = new List<EStat>
+        {
+            ItemData.Option1,
+            ItemData.Option2,
+            ItemData.Option3,
+            ItemData.Option4
+        };
 
-    public void MakeNullSprite()
+        foreach (var (option, statModifier) in options.Zip(_statModifier, (optionIndex, StatModifierIndex) => (optionIndex, StatModifierIndex)))
+        {
+            if (option != 0)
+            {
+                this._stats.StatDic[option].AddStatModifier(statModifier);
+            }
+        }
+        MakeNullSprite();
+        XXX_ChangeSprite(options);
+
+        if (0 < ItemData.AddHp && this._stats.Hp <= Data.Hp)
+        {
+            this._stats.Hp += ItemData.AddHp / 100f;
+            Managers.Event.TriggerEvent(Define.EEventType.ChangePlayerLife, this, this._stats.Hp);
+        }
+
+        Managers.Game.Gold += ItemData.Gold;
+
+        yield return new WaitForSeconds(ItemData.Duration);
+        foreach (var (option, statModifier) in options.Zip(_statModifier, (optionIndex, StatModifierIndex) => (optionIndex, StatModifierIndex)))
+        {
+            if (option != 0)
+            {
+                this._stats.StatDic[option].RemoveStatModifier(statModifier.Id);
+            }
+        }
+        MakeNullSprite();
+        ItemData = null;
+    }
+
+    //장비 해제 (UnEquipItem)
+    public void UnEquipItem(ItemBase item)
+    {
+        //------------------------------------
+        // 0. Validation Check
+        //------------------------------------
+        if(false == _haveItems.Contains(item))
+        {
+            return;
+        }
+        if (Item != item)
+        {
+            return;
+        }
+
+
+        //------------------------------------
+        // 1. 이미지 변경
+        //------------------------------------
+        MakeNullSprite();
+
+        //------------------------------------
+        // 2. 스탯 변경
+        //------------------------------------
+        List<EStat> options = new List<EStat>
+        {
+            item.Data.Option1,
+            item.Data.Option2,
+            item.Data.Option3,
+            item.Data.Option4
+        };
+
+        foreach (var (option, statModifier) in options.Zip(_statModifier, (optionIndex, StatModifierIndex) => (optionIndex, StatModifierIndex)))
+        {
+            if (option != 0)
+            {
+                this._stats.StatDic[option].RemoveStatModifier(statModifier.Id);
+            }
+        }
+
+
+        //------------------------------------
+        // 3. 변수 후처리
+        //------------------------------------
+        _haveItems.Remove(Item);
+        ItemData = null;
+        Item = null;
+    }
+
+    //텔레포트
+    public void Teleport(Vector3 pos)
+    {
+        _characterController.enabled = false;
+        _characterController.transform.position = pos;
+        _characterController.enabled = true;
+    }
+    #endregion
+
+    #region Private Functions
+    private void MakeNullSprite()
     {
         ShoseLeftSpriteRenderer.sprite = null;
         ShoseRightSpriteRenderer.sprite = null;
         MaskSpriteRenderer.sprite = null;
     }
 
-    public void Teleport(Vector3 pos)
+    private IEnumerator WaitUnEquipItemCo(float duration, ItemBase item)
     {
-        _characterController.enabled = false;
-        _characterController.transform.position = pos;
-        _characterController.enabled = true;
+        yield return new WaitForSeconds(duration);
+        UnEquipItem(item);
+
+        yield return null;
+    }
+    #endregion
+
+    public override string ToString()
+    {
+        StringBuilder str = new StringBuilder();
+        str.Append($"stat : {_stats.StatDic[EStat.MoveSpeed].Value}");
+        str.Append($"stat : {_stats.StatDic[EStat.Luck].Value}");
+        if (ItemData != null)
+        {
+            str.Append($"ItemData.Id : {ItemData.Id}");
+        }
+        return str.ToString();
     }
 }

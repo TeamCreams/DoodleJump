@@ -67,6 +67,7 @@ public static class Define
         GetLife,
         LevelStageUp,
         ThoughtBubble,
+        StoneShower,
     }
 
     public enum EEquipType

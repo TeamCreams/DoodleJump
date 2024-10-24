@@ -37,7 +37,7 @@ public class Spawner : InitBase
             Managers.Object.Spawn<ItemBase>(new Vector2(x, -110));
         }
     }
-    public IEnumerator GenerateTestCor()
+    public IEnumerator GenerateStoneCo()
     {
         while(true)
         {
@@ -103,14 +103,31 @@ public class Spawner : InitBase
 
     private void OnEvent_LevelStageUp(Component sender, object param)
     {
-        //Debug.Log("OnEvent_LevelStageUp");
-
+        //1. 레벨업 조건 초기화
         Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
         _id = Managers.Game.DifficultySettingsInfo.StageId;
+
+        //2. 레벨에 따른 난인도 세팅 
         _stoneGenerateTime = UnityEngine.Random.Range(Managers.Data.DifficultySettingsDic[_id].StoneGenerateStartTime, Managers.Data.DifficultySettingsDic[_id].StoneGenerateFinishTime);
         _stoneShowerPeriodTime = UnityEngine.Random.Range(Managers.Data.DifficultySettingsDic[_id].StoneShowerPeriodStartTime, Managers.Data.DifficultySettingsDic[_id].StoneShowerPeriodFinishTime);
         Managers.Game.DifficultySettingsInfo.AddSpeed = 4 * Managers.Game.DifficultySettingsInfo.StageLevel;
+
+        //3. 레벨업 팝업
         Managers.Object.Spawn<Confetti_Particle>(HardCoding.ConfetiParticlePos);
+
+        //4. 돌 이벤트 관련 세팅
+        if (_generateStoneShower != null)
+        {
+            StopCoroutine(_generateStoneShower);
+            _generateStoneShower = null;
+        }
+        StopCoroutine(GenerateStoneCo());
+        if (_generateStone != null)
+        {
+            StopCoroutine(_generateStone);
+            _generateStone = null;
+        }
+        StartCoroutine(GenerateStoneCo());
     }
 }
 

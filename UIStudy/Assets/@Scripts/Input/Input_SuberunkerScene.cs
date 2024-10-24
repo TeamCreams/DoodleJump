@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Input_SuberunkerScene : MonoBehaviour //BaseScene
 {
+    SuberunkerScene Scene => Managers.Scene.CurrentScene as SuberunkerScene;
+
     public void OnKeyAction()
     {
         if(Input.GetKeyDown(KeyCode.C))
@@ -14,6 +16,11 @@ public class Input_SuberunkerScene : MonoBehaviour //BaseScene
         if(Input.GetKeyDown(KeyCode.K))
         {
             Managers.Event.TriggerEvent(Define.EEventType.LevelStageUp);
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Debug.Log($"{Scene.Player.ToString()}");
         }
     }
 }

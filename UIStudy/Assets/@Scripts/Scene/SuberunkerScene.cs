@@ -17,6 +17,8 @@ public class SuberunkerScene : BaseScene
     Spawner _spawner;
     DifficultySettingsData _difficultySettings;
 
+    public PlayerController Player { get; private set; }
+
     public override bool Init()
     {
         if (base.Init() == false)
@@ -34,7 +36,7 @@ public class SuberunkerScene : BaseScene
 
         _joyStick = Managers.UI.ShowUIBase<UI_Joystick>();
         Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("Entity"), 10);
-        Managers.Object.Spawn<PlayerController>(HardCoding.PlayerStartPos);
+        Player = Managers.Object.Spawn<PlayerController>(HardCoding.PlayerStartPos).GetComponent<PlayerController>();
         Managers.Object.Spawn<Teleport>(Vector2.zero);
 
         Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("ItemBase"), 10);
@@ -47,7 +49,7 @@ public class SuberunkerScene : BaseScene
         _spawner.name = "Spawner";
 
         StartCoroutine(_spawner.GenerateItem());
-        StartCoroutine(_spawner.GenerateTestCor());
+        StartCoroutine(_spawner.GenerateStoneCo());
 
         Managers.Event.AddEvent(EEventType.Attacked_Player, OnEvent_Attacked_Player);
 
