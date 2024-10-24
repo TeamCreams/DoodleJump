@@ -141,7 +141,11 @@ public class PlayerController : CreatureBase
         if (4 <= _waitTime)
         {
             this.State = EPlayerState.Boring;
-            Managers.Event.TriggerEvent(EEventType.ThoughtBubble, this, EBehavior.Boring);
+            int doOrNot = UnityEngine.Random.Range(0, 10);
+            if (doOrNot < 6)
+            {
+                Managers.Event.TriggerEvent(EEventType.ThoughtBubble, this, EBehavior.Boring);
+            }
         }
     }
     
@@ -195,15 +199,8 @@ public class PlayerController : CreatureBase
     private void OnEvent_DamagedHp(Component sender, object param)
     {
         float damage = (float)param;
-        this._stats.Hp -= damage / 100f;
-        Managers.Event.TriggerEvent(EEventType.ChangePlayerLife, this, this._stats.Hp);
-        Managers.Event.TriggerEvent(EEventType.ThoughtBubble, this, EBehavior.Attacked);
-        //AudioClip attackedAudio = Managers.Resource.Load<AudioClip>("AttackedSound");
-        Managers.Sound.Play(ESound.Effect, "AttackedSound", 0.7f);
-
-        Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
-
-        StartCoroutine(Update_CryingFace());
+        // 2. 함수 호출
+        this.DamagedHp(damage);
     }
 
     //아이템 획득 이벤트
@@ -213,7 +210,11 @@ public class PlayerController : CreatureBase
         Debug.Assert(data != null, "is null");
 
         //1. 확률 계산후 말풍선 띄우기
-        Managers.Event.TriggerEvent(EEventType.ThoughtBubble, this, EBehavior.Item);
+        int doOrNot = UnityEngine.Random.Range(0, 10);
+        if (doOrNot < 6)
+        {
+            Managers.Event.TriggerEvent(EEventType.ThoughtBubble, this, EBehavior.Item);
+        }
 
         //2. 아이템 착용
         EquipItem(data);
@@ -221,6 +222,22 @@ public class PlayerController : CreatureBase
     #endregion
 
     #region Actor Interface
+    public void DamagedHp(float damage)
+    {
+        this._stats.Hp -= damage / 100f;
+        Managers.Event.TriggerEvent(EEventType.ChangePlayerLife, this, this._stats.Hp);
+        int doOrNot = UnityEngine.Random.Range(0, 10);
+        if (doOrNot < 6)
+        {
+            Managers.Event.TriggerEvent(EEventType.ThoughtBubble, this, EBehavior.Attacked);
+        }
+        Managers.Sound.Play(ESound.Effect, "AttackedSound", 0.7f);
+
+        Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
+
+        StartCoroutine(Update_CryingFace());
+    }
+
     // 캐릭터 커스텀마이징 정보 불러오기
     public void LoadPlayerCustomization()
     {

@@ -55,35 +55,40 @@ public class UI_Player : UI_Base
 
         if(doOrNot < 6)
         {
-            StopAllCoroutines();
-            EBehavior eBehavior = (EBehavior)(int)param;
+            ThoughtBubble((EBehavior)(int)param);
+        }
+        ThoughtBubble((EBehavior)(int)param);
+    }
 
-            var groupTextIds = Managers.Data.ThoughtBubbleDataDic
-                .Where(selectBehavior => selectBehavior.Value.Behavior == eBehavior)
-                .Select(selectTextId => selectTextId.Value.TextId)
-                .ToList();
+    private void ThoughtBubble(EBehavior eBehavior)
+    {
+        StopAllCoroutines();
 
-            int random = Random.Range(0, groupTextIds.Count);
-            _textId = groupTextIds[random];
+        var groupTextIds = Managers.Data.ThoughtBubbleDataDic
+            .Where(selectBehavior => selectBehavior.Value.Behavior == eBehavior)
+            .Select(selectTextId => selectTextId.Value.TextId)
+            .ToList();
 
-            foreach(var content in Managers.Data.ThoughtBubbleLanguageDataDic)
+        int random = Random.Range(0, groupTextIds.Count);
+        _textId = groupTextIds[random];
+
+        foreach (var content in Managers.Data.ThoughtBubbleLanguageDataDic)
+        {
+            if (content.Value.TextId.Equals(_textId) == true)
             {
-                if(content.Value.TextId.Equals(_textId) == true)
+                switch (Managers.Game.ELanguageInfo)
                 {
-                    switch(Managers.Game.ELanguageInfo)
-                    {
-                        case ELanguage.Kr:
-                            _tempContent = content.Value.KrText;
-                            break;
+                    case ELanguage.Kr:
+                        _tempContent = content.Value.KrText;
+                        break;
 
-                        case ELanguage.En:
-                            _tempContent = content.Value.EnText;
-                            break;
-                    }
+                    case ELanguage.En:
+                        _tempContent = content.Value.EnText;
+                        break;
                 }
             }
-            StartCoroutine(ThoughtBubbleText());
         }
+        StartCoroutine(ThoughtBubbleText());
     }
 
     IEnumerator ThoughtBubbleText()

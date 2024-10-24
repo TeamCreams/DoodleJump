@@ -6,13 +6,13 @@ using UnityEngine.UI;
 using static Define;
 public class StoneController : ObjectBase
 {
-    private bool _isCount = true;
-    public bool IsCount
+    private bool _isNotStoneShower = true;
+    public bool IsNotStoneShower
     {
-        get => _isCount;
+        get => _isNotStoneShower;
         set
         {
-            _isCount = value;
+            _isNotStoneShower = value;
         }
     }
     Rigidbody _rigidbody;
@@ -59,8 +59,45 @@ public class StoneController : ObjectBase
     public void SetInfo(EnemyData data)
     {
         Data = data;
-
         _rockImage.sprite = Managers.Resource.Load<Sprite>($"{Managers.Data.EnemyDic[Data.Id].SpriteName}.sprite");
+    }
+
+    #region Actor Interface
+    // 돌 오브젝트풀링 
+    public void PushStone()
+    {
+        if (Physics.Raycast(_rigidbody.position, Vector3.down, out _hitInfo, 25f, LayerMask.GetMask("Ground")))
+        {
+            // 스톤샤워가 아닐 경우에만 돌 개수 체크
+            if (_isNotStoneShower == true)
+            {
+                Managers.Game.DifficultySettingsInfo.ChallengeScale++;
+            }
+            Managers.Pool.Push(this.gameObject);
+        }
+    }
+
+    // 플레이어와 충돌했을 때
+    private void Attack(Collider collision)
+    {
+        if (collision.gameObject.GetComponent<PlayerController>() != null)
+        {
+            float playerLuck = collision.gameObject.GetComponent<PlayerController>().Data.Luck;
+            float rand = Random.Range(0, 1.0f);
+            //  플레이어가 가진 행운에 따라 무시
+            if (rand <= playerLuck)
+            {
+                Managers.Event.TriggerEvent(EEventType.LuckyTrigger_Player, this);
+            }
+            // 아닐 경우 데미지 감소
+            else
+            {
+                Managers.Event.TriggerEvent(EEventType.Attacked_Player, this, Data.Damage);
+            }
+
+
+            Managers.Pool.Push(this.gameObject);
+        }
     }
 
     public void Teleport(Vector3 pos)
@@ -69,38 +106,5 @@ public class StoneController : ObjectBase
         this.transform.position = pos;
         this.gameObject.SetActive(true);
     }
-
-    public void PushStone()
-    {
-        if(Physics.Raycast(_rigidbody.position, Vector3.down, out _hitInfo, 25f, LayerMask.GetMask("Ground")))
-        {
-            if (_isCount == true)
-            {
-                Managers.Game.DifficultySettingsInfo.ChallengeScale++;
-            }
-            Managers.Pool.Push(this.gameObject);
-        }
-       
-    }
-
-    private void Attack(Collider collision)
-    {
-        if (collision.gameObject.GetComponent<PlayerController>() != null)
-        {
-            //  플레이어가 가진 행운에 따라 무시
-            float playerLuck = collision.gameObject.GetComponent<PlayerController>().Data.Luck;
-            float rand = Random.Range(0, 1.0f);
-            if (rand <= playerLuck)
-            {
-                Managers.Event.TriggerEvent(EEventType.LuckyTrigger_Player, this);
-            }
-            else
-            {
-                Managers.Event.TriggerEvent(EEventType.Attacked_Player, this, Data.Damage);
-            }
-        
-
-            Managers.Pool.Push(this.gameObject);
-        }
-    }
+    #endregion
 }

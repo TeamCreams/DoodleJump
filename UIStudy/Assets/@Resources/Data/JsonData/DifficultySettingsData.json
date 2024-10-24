@@ -4,7 +4,7 @@
       "Id": 70001,
       "Level": 1,
       "ChallengeScale": 10,
-      "StoneGenerateStartTime": 1.5,
+      "StoneGenerateStartTime": 0.5,
       "StoneGenerateFinishTime": 1.8,
       "StoneShowerPeriodStartTime": 1000.0,
       "StoneShowerPeriodFinishTime": 1001.0
@@ -13,7 +13,7 @@
       "Id": 70002,
       "Level": 2,
       "ChallengeScale": 20,
-      "StoneGenerateStartTime": 1.4,
+      "StoneGenerateStartTime": 0.5,
       "StoneGenerateFinishTime": 1.8,
       "StoneShowerPeriodStartTime": 1000.0,
       "StoneShowerPeriodFinishTime": 1001.0
@@ -22,7 +22,7 @@
       "Id": 70003,
       "Level": 3,
       "ChallengeScale": 20,
-      "StoneGenerateStartTime": 1.3,
+      "StoneGenerateStartTime": 0.5,
       "StoneGenerateFinishTime": 1.8,
       "StoneShowerPeriodStartTime": 17.0,
       "StoneShowerPeriodFinishTime": 30.0
@@ -31,7 +31,7 @@
       "Id": 70004,
       "Level": 4,
       "ChallengeScale": 30,
-      "StoneGenerateStartTime": 1.2,
+      "StoneGenerateStartTime": 0.6,
       "StoneGenerateFinishTime": 1.7,
       "StoneShowerPeriodStartTime": 16.0,
       "StoneShowerPeriodFinishTime": 18.0
@@ -40,7 +40,7 @@
       "Id": 70005,
       "Level": 5,
       "ChallengeScale": 40,
-      "StoneGenerateStartTime": 1.2,
+      "StoneGenerateStartTime": 0.6,
       "StoneGenerateFinishTime": 1.6,
       "StoneShowerPeriodStartTime": 15.0,
       "StoneShowerPeriodFinishTime": 17.0
@@ -49,7 +49,7 @@
       "Id": 70006,
       "Level": 6,
       "ChallengeScale": 50,
-      "StoneGenerateStartTime": 1.1,
+      "StoneGenerateStartTime": 0.6,
       "StoneGenerateFinishTime": 1.5,
       "StoneShowerPeriodStartTime": 13.0,
       "StoneShowerPeriodFinishTime": 16.0
@@ -58,7 +58,7 @@
       "Id": 70007,
       "Level": 7,
       "ChallengeScale": 50,
-      "StoneGenerateStartTime": 1.1,
+      "StoneGenerateStartTime": 0.6,
       "StoneGenerateFinishTime": 1.4,
       "StoneShowerPeriodStartTime": 12.0,
       "StoneShowerPeriodFinishTime": 15.0
@@ -67,7 +67,7 @@
       "Id": 70008,
       "Level": 8,
       "ChallengeScale": 60,
-      "StoneGenerateStartTime": 1.0,
+      "StoneGenerateStartTime": 0.5,
       "StoneGenerateFinishTime": 1.2,
       "StoneShowerPeriodStartTime": 12.0,
       "StoneShowerPeriodFinishTime": 14.0
@@ -75,19 +75,64 @@
     {
       "Id": 70009,
       "Level": 9,
-      "ChallengeScale": 70,
-      "StoneGenerateStartTime": 0.9,
+      "ChallengeScale": 60,
+      "StoneGenerateStartTime": 0.5,
       "StoneGenerateFinishTime": 1.3,
-      "StoneShowerPeriodStartTime": 10.0,
+      "StoneShowerPeriodStartTime": 11.0,
       "StoneShowerPeriodFinishTime": 13.0
     },
     {
       "Id": 70010,
       "Level": 10,
-      "ChallengeScale": 10000,
-      "StoneGenerateStartTime": 0.9,
-      "StoneGenerateFinishTime": 1.2,
+      "ChallengeScale": 60,
+      "StoneGenerateStartTime": 0.5,
+      "StoneGenerateFinishTime": 1.3,
+      "StoneShowerPeriodStartTime": 11.0,
+      "StoneShowerPeriodFinishTime": 13.0
+    },
+    {
+      "Id": 70011,
+      "Level": 11,
+      "ChallengeScale": 70,
+      "StoneGenerateStartTime": 0.6,
+      "StoneGenerateFinishTime": 1.3,
       "StoneShowerPeriodStartTime": 10.0,
+      "StoneShowerPeriodFinishTime": 12.0
+    },
+    {
+      "Id": 70012,
+      "Level": 12,
+      "ChallengeScale": 70,
+      "StoneGenerateStartTime": 0.6,
+      "StoneGenerateFinishTime": 1.3,
+      "StoneShowerPeriodStartTime": 9.0,
+      "StoneShowerPeriodFinishTime": 12.0
+    },
+    {
+      "Id": 70013,
+      "Level": 13,
+      "ChallengeScale": 80,
+      "StoneGenerateStartTime": 0.6,
+      "StoneGenerateFinishTime": 1.3,
+      "StoneShowerPeriodStartTime": 9.0,
+      "StoneShowerPeriodFinishTime": 11.0
+    },
+    {
+      "Id": 70014,
+      "Level": 14,
+      "ChallengeScale": 90,
+      "StoneGenerateStartTime": 0.7,
+      "StoneGenerateFinishTime": 1.3,
+      "StoneShowerPeriodStartTime": 8.0,
+      "StoneShowerPeriodFinishTime": 11.0
+    },
+    {
+      "Id": 70015,
+      "Level": 15,
+      "ChallengeScale": 10000,
+      "StoneGenerateStartTime": 0.8,
+      "StoneGenerateFinishTime": 1.2,
+      "StoneShowerPeriodStartTime": 8.0,
       "StoneShowerPeriodFinishTime": 12.0
     }
   ]

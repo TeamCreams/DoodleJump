@@ -27,6 +27,9 @@ public class ItemBase : ObjectBase
 
     }
 
+    private Animator _animator;
+
+
     public override bool Init()
     {
         if (base.Init() == false)
@@ -35,7 +38,7 @@ public class ItemBase : ObjectBase
         }
         OnTriggerEnter_Event -= OnTriggerEnterPlayer;
         OnTriggerEnter_Event += OnTriggerEnterPlayer;
-
+        _animator = GetComponent<Animator>();
         return true;
     }
 
@@ -44,12 +47,12 @@ public class ItemBase : ObjectBase
         // 아이템받아오기
         Data = Managers.Data.SuberunkerItemDic[templateId];
         SetModifierList();
-
+        StartCoroutine(AutoPooling());
         // 1. modifierList 세팅하기
         // _modifierList
     }
 
-    private void SetModifierList()
+    private void SetModifierList()]
     {
         List<(EStat, EStatModifierType, float)> options = new List<(EStat, EStatModifierType, float)>
         {
@@ -69,11 +72,19 @@ public class ItemBase : ObjectBase
         }
     }
 
+    private IEnumerator AutoPooling()
+    {
+        yield return new WaitForSeconds(8);
+        _animator.SetTrigger("isDisappear");
+        float duration = _animator.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(duration);
+        Managers.Pool.Push(this.gameObject);
+    }
+
     private void OnTriggerEnterPlayer(Collider collision)
     {
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
-            //AudioClip getItemAudio = Managers.Resource.Load<AudioClip>("GetItemSound");
             Managers.Sound.Play(Define.ESound.Effect, "GetItemSound");
 
             Managers.Event.TriggerEvent(EEventType.TakeItem, this);
@@ -81,41 +92,4 @@ public class ItemBase : ObjectBase
             Managers.Pool.Push(this.gameObject);
         }
     }
-    /*
-     
-    private void SkillSpeedItem(Collider collision, float param)
-    {
-        SkillSpeed skillSpeedComponent = collision.gameObject.GetComponentInChildren<SkillSpeed>();
-
-        if (skillSpeedComponent != null)
-        {
-            skillSpeedComponent.ResetSpeedSkillEvent(param);
-        }
-        else
-        {
-            var go = Managers.Resource.Instantiate("AddSkill", collision.gameObject.transform);
-            go.GetOrAddComponent<SkillSpeed>().SetSpeedSkillEvent(param);
-        }
-    }
-
-    private void SkillLuckItem(Collider collision, float param)
-    {
-        SkillLuck skillLuckComponent = collision.gameObject.GetComponentInChildren<SkillLuck>();
-
-        if (skillLuckComponent != null)
-        {
-            skillLuckComponent.ResetLuckSkillEvent(param);
-        }
-        else
-        {
-            var go = Managers.Resource.Instantiate("AddSkill", collision.gameObject.transform);
-            go.GetOrAddComponent<SkillLuck>().SetLuckSkillEvent(param);
-        }
-    }
-
-    private void SkillHpItem(Collider collision, float param)
-    {
-        
-    }
-     */
 }

@@ -80,6 +80,7 @@ public class Spawner : InitBase
                 Managers.Game.DifficultySettingsInfo.StageLevel++; // 함수 호출 순서 때문에 여기서 부름
                 Managers.Event.TriggerEvent(EEventType.LevelStageUp);
             }
+            _stoneGenerateTime = UnityEngine.Random.Range(Managers.Data.DifficultySettingsDic[_id].StoneGenerateStartTime, Managers.Data.DifficultySettingsDic[_id].StoneGenerateFinishTime);
         }
     }
 
@@ -103,11 +104,16 @@ public class Spawner : InitBase
 
     private void OnEvent_LevelStageUp(Component sender, object param)
     {
+        this.LevelStageUp();
+    }
+
+    private void LevelStageUp()
+    {
         //1. 레벨업 조건 초기화
         Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
         _id = Managers.Game.DifficultySettingsInfo.StageId;
 
-        //2. 레벨에 따른 난인도 세팅 
+        //2. 레벨에 따른 난이도 세팅 
         _stoneGenerateTime = UnityEngine.Random.Range(Managers.Data.DifficultySettingsDic[_id].StoneGenerateStartTime, Managers.Data.DifficultySettingsDic[_id].StoneGenerateFinishTime);
         _stoneShowerPeriodTime = UnityEngine.Random.Range(Managers.Data.DifficultySettingsDic[_id].StoneShowerPeriodStartTime, Managers.Data.DifficultySettingsDic[_id].StoneShowerPeriodFinishTime);
         Managers.Game.DifficultySettingsInfo.AddSpeed = 4 * Managers.Game.DifficultySettingsInfo.StageLevel;

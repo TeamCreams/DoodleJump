@@ -34,7 +34,7 @@ public class ObjectManager
             int rand = UnityEngine.Random.Range(60001, 60001 + Managers.Data.EnemyDic.Count);
             StoneController stone = go.GetOrAddComponent<StoneController>();
             stone.SetInfo(Managers.Data.EnemyDic[rand]);
-            stone.IsCount = option;
+            stone.IsNotStoneShower = option;
             stone.Teleport(pos);
             return go;
         }
