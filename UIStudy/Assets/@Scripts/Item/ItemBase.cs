@@ -52,7 +52,7 @@ public class ItemBase : ObjectBase
         // _modifierList
     }
 
-    private void SetModifierList()]
+    private void SetModifierList()
     {
         List<(EStat, EStatModifierType, float)> options = new List<(EStat, EStatModifierType, float)>
         {

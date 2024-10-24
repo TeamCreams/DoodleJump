@@ -3,7 +3,7 @@
     {
       "Id": 70001,
       "Level": 1,
-      "ChallengeScale": 10,
+      "ChallengeScale": 20,
       "StoneGenerateStartTime": 0.5,
       "StoneGenerateFinishTime": 1.8,
       "StoneShowerPeriodStartTime": 1000.0,
@@ -12,7 +12,7 @@
     {
       "Id": 70002,
       "Level": 2,
-      "ChallengeScale": 20,
+      "ChallengeScale": 25,
       "StoneGenerateStartTime": 0.5,
       "StoneGenerateFinishTime": 1.8,
       "StoneShowerPeriodStartTime": 1000.0,
@@ -21,7 +21,7 @@
     {
       "Id": 70003,
       "Level": 3,
-      "ChallengeScale": 20,
+      "ChallengeScale": 30,
       "StoneGenerateStartTime": 0.5,
       "StoneGenerateFinishTime": 1.8,
       "StoneShowerPeriodStartTime": 17.0,
@@ -57,7 +57,7 @@
     {
       "Id": 70007,
       "Level": 7,
-      "ChallengeScale": 50,
+      "ChallengeScale": 55,
       "StoneGenerateStartTime": 0.6,
       "StoneGenerateFinishTime": 1.4,
       "StoneShowerPeriodStartTime": 12.0,
@@ -84,7 +84,7 @@
     {
       "Id": 70010,
       "Level": 10,
-      "ChallengeScale": 60,
+      "ChallengeScale": 65,
       "StoneGenerateStartTime": 0.5,
       "StoneGenerateFinishTime": 1.3,
       "StoneShowerPeriodStartTime": 11.0,
