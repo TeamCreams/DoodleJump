@@ -137,6 +137,7 @@
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Firearms/Enums/MagazineType.cs" />
     <Compile Include="Assets/@Scripts/Scene/ChooseCharacterScene.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/AppearanceExample.cs" />
+    <Compile Include="Assets/@Scripts/Managers/Contents/LanguageDataMamager.cs" />
     <Compile Include="Assets/@Scripts/UI/Popup/UI_Popup.cs" />
     <Compile Include="Assets/HeroEditor/Common/SimpleColorPicker/Scripts/ColorMode.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/MonsterState.cs" />

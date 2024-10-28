@@ -322,4 +322,29 @@ namespace Data
             return dict;
         }
     }
+
+
+    [Serializable]
+    public class GameLanguageData
+    {
+        public int Id;
+        public ELocalizableTerms LocalizableTerm;
+        public string KrText;
+        public string EnText;
+    }
+
+    [Serializable]
+    public class GameLanguageDataLoader : ILoader<int, GameLanguageData>
+    {
+        public List<GameLanguageData> gameLanguageDatas = new List<GameLanguageData>();
+
+        public Dictionary<int, GameLanguageData> MakeDict()
+        {
+            Dictionary<int, GameLanguageData> dict = new Dictionary<int, GameLanguageData>();
+            foreach (GameLanguageData gameLanguageData in gameLanguageDatas)
+                dict.Add(gameLanguageData.Id, gameLanguageData);
+
+            return dict;
+        }
+    }
 }

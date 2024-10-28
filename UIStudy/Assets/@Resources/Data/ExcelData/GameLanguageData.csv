@@ -1,0 +1,20 @@
+Id,LocalizableTerm,KrText,EnText
+91001,BestRecord,최고 기록,Best Record
+91002,RecentRecord,최근 기록,Recent Record
+91003,Hours,시간,h
+91004,Minutes,분,m
+91005,Seconds,초,s
+91006,Shop,숍,Shop
+91007,Mission,미션,Mission
+91008,Character,캐릭터,Character
+91009,GameStart,게임 시작,Game Start
+91010,DefaultSpeed,기본 속도,Default Speed
+91011,DefaultHp,기본 Hp,Default Hp
+91012,DefaultLuck,기본 행운,Default Luck
+91013,Name,이름,Name
+91014,Nickname,닉네임,Nickname
+91015,NicknameUnavailable,사용할 수 없는 닉네임입니다.,This nickname is not available.
+91016,Skip,넘기기,Skip
+91017,Home,홈,Home
+91018,Restart,다시 시작,Restart
+91019,LevelUp,레벨 업,Level Up

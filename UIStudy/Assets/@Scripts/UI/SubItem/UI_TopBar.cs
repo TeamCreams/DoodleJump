@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
+using static Define;
 
 public class UI_TopBar : UI_Base
 {
@@ -32,6 +33,8 @@ public class UI_TopBar : UI_Base
     System.IDisposable _lifeTimer;
 
     private UI_HeartRoot _heartRoot;
+    private string _minutes = "분";
+    private string _seconds = "초";
 
     public override bool Init()
     {
@@ -52,9 +55,12 @@ public class UI_TopBar : UI_Base
         Managers.Event.RemoveEvent(Define.EEventType.ChangePlayerLife, OnChangedLife);
         Managers.Event.AddEvent(Define.EEventType.ChangePlayerLife, OnChangedLife);
         Managers.Event.AddEvent(Define.EEventType.LevelStageUp, OnEvent_LevelUpTextChange);
+        Managers.Event.AddEvent(Define.EEventType.SetLanguage, OnEvent_SetLanguage);
 
         string str = "Lv." + Managers.Game.DifficultySettingsInfo.StageLevel.ToString();
         GetText((int)Texts.Level_Text).text = str;
+
+        
 
         _lifeTimer = Observable.Interval(new System.TimeSpan(0, 0, 1))
             .Subscribe(_ =>
@@ -62,7 +68,7 @@ public class UI_TopBar : UI_Base
                 _time++;
                 int minutes = _time / 60;
                 float seconds = _time % 60;
-                GetText((int)Texts.Time_Text).text = string.Format($"{minutes}분 {seconds}초");
+                GetText((int)Texts.Time_Text).text = string.Format($"{minutes}{_minutes} {seconds}{_seconds}");
             }).AddTo(this.gameObject);
         return true;
     }
@@ -71,7 +77,7 @@ public class UI_TopBar : UI_Base
     {
         Managers.Event.RemoveEvent(Define.EEventType.ChangePlayerLife, OnChangedLife);
     }
-
+   
     void OnEvent_LevelUpTextChange(Component sender, object param)
     {
         //Debug.Log("OnEvent_LevelUpTextChange");
@@ -131,6 +137,39 @@ public class UI_TopBar : UI_Base
                 yield return new WaitForSeconds(0.05f);
             }
         }
+    }
+
+    void OnEvent_SetLanguage(Component sender, object param)
+    {
+        _minutes = this.LocalizedString(Define.ELocalizableTerms.Minutes);
+        _seconds = this.LocalizedString(Define.ELocalizableTerms.Seconds);
+    }
+
+    public string LocalizedString(ELocalizableTerms eLocalizableTerm)
+    {
+        int stringId = 0;
+
+        foreach (var gameLanguageData in Managers.Data.GameLanguageDataDic)
+        {
+            if (gameLanguageData.Value.LocalizableTerm == eLocalizableTerm)
+            {
+                stringId = gameLanguageData.Value.Id;
+                break;
+            }
+        }
+
+        var content = Managers.Data.GameLanguageDataDic[stringId];
+
+        switch (Managers.Game.ELanguageInfo)
+        {
+            case ELanguage.Kr:
+                return content.KrText;
+
+            case ELanguage.En:
+                return content.EnText;
+        }
+
+        return "";
     }
 }
 

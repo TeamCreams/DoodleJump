@@ -10,10 +10,6 @@ using Data;
 public class UI_ChooseCharacterScene : UI_Scene
 {
 
-    private List<GameObject> _itemList = new List<GameObject>();
-    private GameObject _itemRoot = null;
-    public UI_ColorPicker ColorPicker { get; private set; }
-
     enum GameObjects
     {
         InventoryItemRoot,
@@ -30,6 +26,10 @@ public class UI_ChooseCharacterScene : UI_Scene
         Next_Button
     }
 
+
+    private List<GameObject> _itemList = new List<GameObject>();
+    private GameObject _itemRoot = null;
+
     public override bool Init()
     {
         if (base.Init() == false)
@@ -42,12 +42,13 @@ public class UI_ChooseCharacterScene : UI_Scene
         BindImages(typeof(Images));
         BindButtons(typeof(Buttons));
  
-        GetImage((int)Images.HairItem).gameObject.BindEvent(OnClick_HairItem, Define.EUIEvent.Click);
-        GetImage((int)Images.EyesItem).gameObject.BindEvent(OnClick_EyesItem, Define.EUIEvent.Click);
-        GetImage((int)Images.EyebrowsItem).gameObject.BindEvent(OnClick_EyebrowsItem, Define.EUIEvent.Click);
+        GetImage((int)Images.HairItem).gameObject.BindEvent(OnClick_HairItem, EUIEvent.Click);
+        GetImage((int)Images.EyesItem).gameObject.BindEvent(OnClick_EyesItem, EUIEvent.Click);
+        GetImage((int)Images.EyebrowsItem).gameObject.BindEvent(OnClick_EyebrowsItem, EUIEvent.Click);
 
-        GetButton((int)Buttons.Next_Button).gameObject.BindEvent(OnClick_NextButton, Define.EUIEvent.Click);
+        GetButton((int)Buttons.Next_Button).gameObject.BindEvent(OnClick_NextButton, EUIEvent.Click);
         _itemRoot = GetObject((int)GameObjects.InventoryItemRoot);
+        Managers.Event.TriggerEvent(EEventType.SetLanguage);
 
         foreach (Transform slotObject in _itemRoot.transform)
         {
@@ -76,7 +77,7 @@ public class UI_ChooseCharacterScene : UI_Scene
 
     private void OnClick_NextButton(PointerEventData eventData)
     {
-        Managers.Scene.LoadScene(Define.EScene.InputNameScene);
+        Managers.Scene.LoadScene(EScene.InputNameScene);
     }
 
     private void SetInventoryItems(EEquipType equipType)

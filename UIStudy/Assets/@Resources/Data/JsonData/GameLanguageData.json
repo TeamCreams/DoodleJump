@@ -1,0 +1,112 @@
+{
+  "gameLanguageDatas": [
+    {
+      "Id": 91001,
+      "LocalizableTerm": 0,
+      "KrText": "최고 기록",
+      "EnText": "Best Record"
+    },
+    {
+      "Id": 91002,
+      "LocalizableTerm": 1,
+      "KrText": "최근 기록",
+      "EnText": "Recent Record"
+    },
+    {
+      "Id": 91003,
+      "LocalizableTerm": 2,
+      "KrText": "시간",
+      "EnText": "h"
+    },
+    {
+      "Id": 91004,
+      "LocalizableTerm": 3,
+      "KrText": "분",
+      "EnText": "m"
+    },
+    {
+      "Id": 91005,
+      "LocalizableTerm": 4,
+      "KrText": "초",
+      "EnText": "s"
+    },
+    {
+      "Id": 91006,
+      "LocalizableTerm": 5,
+      "KrText": "숍",
+      "EnText": "Shop"
+    },
+    {
+      "Id": 91007,
+      "LocalizableTerm": 6,
+      "KrText": "미션",
+      "EnText": "Mission"
+    },
+    {
+      "Id": 91008,
+      "LocalizableTerm": 7,
+      "KrText": "캐릭터",
+      "EnText": "Character"
+    },
+    {
+      "Id": 91009,
+      "LocalizableTerm": 8,
+      "KrText": "게임 시작",
+      "EnText": "Game Start"
+    },
+    {
+      "Id": 91010,
+      "LocalizableTerm": 9,
+      "KrText": "기본 속도",
+      "EnText": "Default Speed"
+    },
+    {
+      "Id": 91011,
+      "LocalizableTerm": 10,
+      "KrText": "기본 Hp",
+      "EnText": "Default Hp"
+    },
+    {
+      "Id": 91012,
+      "LocalizableTerm": 11,
+      "KrText": "기본 행운",
+      "EnText": "Default Luck"
+    },
+    {
+      "Id": 91013,
+      "LocalizableTerm": 12,
+      "KrText": "이름",
+      "EnText": "Name"
+    },
+    {
+      "Id": 91014,
+      "LocalizableTerm": 13,
+      "KrText": "닉네임",
+      "EnText": "Nickname"
+    },
+    {
+      "Id": 91015,
+      "LocalizableTerm": 14,
+      "KrText": "사용할 수 없는 닉네임입니다.",
+      "EnText": "This nickname is not available."
+    },
+    {
+      "Id": 91016,
+      "LocalizableTerm": 15,
+      "KrText": "넘기기",
+      "EnText": "Skip"
+    },
+    {
+      "Id": 91017,
+      "LocalizableTerm": 16,
+      "KrText": "홈",
+      "EnText": "Home"
+    },
+    {
+      "Id": 91018,
+      "LocalizableTerm": 17,
+      "KrText": "다시 시작",
+      "EnText": "Restart"
+    }
+  ]
+}

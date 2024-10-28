@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 694588851899197607}
   - component: {fileID: 1812148241381702360}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Start_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -940,7 +940,7 @@ GameObject:
   - component: {fileID: 1720002456373850566}
   - component: {fileID: 8559504428891403818}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Mission_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2798,7 +2798,7 @@ RectTransform:
   - {fileID: 1896324824947774341}
   - {fileID: 3165577219307414351}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3439,7 +3439,7 @@ GameObject:
   - component: {fileID: 2352588347107329706}
   - component: {fileID: 5765293789469646424}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Shop_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5856,7 +5856,7 @@ GameObject:
   - component: {fileID: 7573911430435461134}
   - component: {fileID: 8967697573429244669}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ChooseCharacter_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6512,7 +6512,7 @@ GameObject:
   - component: {fileID: 3483975428176890554}
   - component: {fileID: 3931337826306147675}
   m_Layer: 5
-  m_Name: Home_Button
+  m_Name: Shop_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

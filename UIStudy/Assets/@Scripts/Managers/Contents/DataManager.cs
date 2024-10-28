@@ -23,6 +23,7 @@ public class DataManager
     public Dictionary<int, Data.DifficultySettingsData> DifficultySettingsDic { get; private set; } = new Dictionary<int, Data.DifficultySettingsData>();
     public Dictionary<int, Data.ThoughtBubbleData> ThoughtBubbleDataDic { get; private set; } = new Dictionary<int, Data.ThoughtBubbleData>();
     public Dictionary<int, Data.ThoughtBubbleLanguageData> ThoughtBubbleLanguageDataDic { get; private set; } = new Dictionary<int, Data.ThoughtBubbleLanguageData>();
+    public Dictionary<int, Data.GameLanguageData> GameLanguageDataDic { get; private set; } = new Dictionary<int, Data.GameLanguageData>();
 
     public void Init()
 	{
@@ -36,13 +37,14 @@ public class DataManager
         DifficultySettingsDic = LoadJson<Data.DifficultySettingsDataLoader, int, Data.DifficultySettingsData>("DifficultySettingsData").MakeDict();
         ThoughtBubbleDataDic = LoadJson<Data.ThoughtBubbleDataLoader, int, Data.ThoughtBubbleData>("ThoughtBubbleData").MakeDict();
         ThoughtBubbleLanguageDataDic = LoadJson<Data.ThoughtBubbleLanguageDataLoader, int, Data.ThoughtBubbleLanguageData>("ThoughtBubbleLanguageData").MakeDict();
+        GameLanguageDataDic = LoadJson<Data.GameLanguageDataLoader, int, Data.GameLanguageData>("GameLanguageData").MakeDict();
 
     }
 
     private Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>
 	{
 		TextAsset textAsset = Managers.Resource.Load<TextAsset>(path);
-		Debug.Log(textAsset.text);
+        Debug.Log(textAsset.text);
 		return JsonConvert.DeserializeObject<Loader>(textAsset.text);
 	}
 }

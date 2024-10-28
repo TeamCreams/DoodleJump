@@ -13,11 +13,13 @@ public class Managers : MonoBehaviour
 	private MessageManager _message = new MessageManager();
 	private DataManager _data = new DataManager();
 	private ObjectManager _object = new ObjectManager();
+	//private LanguageDataMamager _language = new LanguageDataMamager();
 
-	public static GameManager Game { get { return Instance?._game; } }
+    public static GameManager Game { get { return Instance?._game; } }
 	public static MessageManager Message { get { return Instance?._message; } }
 	public static DataManager Data { get { return Instance?._data; } }
 	public static ObjectManager Object {  get { return Instance?._object; } }
+	//public static LanguageDataMamager Language { get { return Instance?._language; } }
     #endregion
 
     #region Core

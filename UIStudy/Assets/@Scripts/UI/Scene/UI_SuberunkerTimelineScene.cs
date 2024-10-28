@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class UI_SuberunkerTimelineScene : UI_Scene
 {
@@ -12,7 +13,7 @@ public class UI_SuberunkerTimelineScene : UI_Scene
 
     enum Texts
     {
-
+        Skip_Text
     }
 
     enum Buttons
@@ -29,10 +30,42 @@ public class UI_SuberunkerTimelineScene : UI_Scene
         BindButtons(typeof(Buttons));
         GetButton((int)Buttons.Skip).gameObject.BindEvent((evt) =>
         {
-            Managers.Scene.LoadScene(Define.EScene.SuberunkerScene);
-        }, Define.EUIEvent.Click);
+            Managers.Scene.LoadScene(EScene.SuberunkerScene);
+        }, EUIEvent.Click);
+        Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+        Managers.Event.TriggerEvent(EEventType.SetLanguage);
+
         return true;
     }
+    void OnEvent_SetLanguage(Component sender, object param)
+    {
+        GetText((int)Texts.Skip_Text).text = this.LocalizedString(ELocalizableTerms.Skip);
+    }
 
+    public string LocalizedString(ELocalizableTerms eLocalizableTerm)
+    {
+        int stringId = 0;
 
+        foreach (var gameLanguageData in Managers.Data.GameLanguageDataDic)
+        {
+            if (gameLanguageData.Value.LocalizableTerm == eLocalizableTerm)
+            {
+                stringId = gameLanguageData.Value.Id;
+                break;
+            }
+        }
+
+        var content = Managers.Data.GameLanguageDataDic[stringId];
+
+        switch (Managers.Game.ELanguageInfo)
+        {
+            case ELanguage.Kr:
+                return content.KrText;
+
+            case ELanguage.En:
+                return content.EnText;
+        }
+
+        return "";
+    }
 }

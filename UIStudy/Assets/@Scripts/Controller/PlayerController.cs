@@ -188,6 +188,7 @@ public class PlayerController : CreatureBase
         if (Managers.Game.JoystickState == EJoystickState.PointerDown)
         {
             this.State = EPlayerState.Move;
+            Managers.Event.TriggerEvent(EEventType.CancelThoughtBubble);
         }
         _waitTime = 0;
         _animator.SetBool("Boring", true);

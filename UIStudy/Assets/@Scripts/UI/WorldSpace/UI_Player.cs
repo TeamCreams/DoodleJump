@@ -8,7 +8,6 @@ using static Define;
 
 public class UI_Player : UI_Base
 {
-    Canvas _worldCanvas;
 
     private enum Texts
     {
@@ -21,6 +20,7 @@ public class UI_Player : UI_Base
         ThoughtBubble
     }
 
+    Canvas _worldCanvas;
     public GameObject _thoughtBubble;
     private TMP_Text _content;
     private string _tempContent;
@@ -45,6 +45,7 @@ public class UI_Player : UI_Base
         _thoughtBubble.SetActive(false);
 
         Managers.Event.AddEvent(EEventType.ThoughtBubble, OnEvent_ThoughtBubble);
+        Managers.Event.AddEvent(EEventType.CancelThoughtBubble, OnEvent_CancelThoughtBubble);
 
         return true;
     }
@@ -58,6 +59,11 @@ public class UI_Player : UI_Base
             ThoughtBubble((EBehavior)(int)param);
         }
         ThoughtBubble((EBehavior)(int)param);
+    }
+
+    private void OnEvent_CancelThoughtBubble(Component sender, object param)
+    {
+        StopAllCoroutines();
     }
 
     private void ThoughtBubble(EBehavior eBehavior)

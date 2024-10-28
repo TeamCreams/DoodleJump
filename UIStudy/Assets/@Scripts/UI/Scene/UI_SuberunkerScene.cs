@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static Define;
 
 public class UI_SuberunkerScene : UI_Scene
 {
@@ -27,6 +28,7 @@ public class UI_SuberunkerScene : UI_Scene
         {
             return false;
         }
+        Managers.Event.TriggerEvent(EEventType.SetLanguage);
 
         //StartLoadAssets();
 

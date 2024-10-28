@@ -28,6 +28,7 @@ public class DataTransfomer : EditorWindow
         ParseExcelDataToJson<DifficultySettingsDataLoader, DifficultySettingsData>("DifficultySettingsData");
         ParseExcelDataToJson<ThoughtBubbleDataLoader, ThoughtBubbleData>("ThoughtBubbleData");
         ParseExcelDataToJson<ThoughtBubbleLanguageDataLoader, ThoughtBubbleLanguageData>("ThoughtBubbleLanguageData");
+        ParseExcelDataToJson<GameLanguageDataLoader, GameLanguageData>("GameLanguageData");
 
         Debug.Log("Complete");
 	}

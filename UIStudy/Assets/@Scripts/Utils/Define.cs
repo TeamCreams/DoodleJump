@@ -67,7 +67,9 @@ public static class Define
         GetLife,
         LevelStageUp,
         ThoughtBubble,
+        CancelThoughtBubble,
         StoneShower,
+        SetLanguage,
     }
 
     public enum EEquipType
@@ -127,6 +129,29 @@ public static class Define
     {
         Kr,
         En
+    }
+
+    public enum ELocalizableTerms
+    {
+        BestRecord,
+        RecentRecord,
+        Hours,  // h
+        Minutes, // m
+        Seconds, // s
+        Shop,
+        Mission,
+        Character,
+        GameStart,
+        DefaultSpeed,
+        DefaultHp,
+        DefaultLuck,
+        Name,
+        Nickname,
+        NicknameUnavailable, // This nickname is not available.
+        Skip,
+        Home,
+        Restart,
+        LevelUp
     }
 
     public class Constants
