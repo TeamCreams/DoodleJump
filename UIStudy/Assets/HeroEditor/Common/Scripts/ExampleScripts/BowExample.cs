@@ -55,7 +55,7 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
 			arrow.transform.localRotation = Quaternion.identity;
 			arrow.transform.SetParent(null);
 			sr.sprite = Character.Bow.Single(j => j.name == "Arrow");
-			rb.velocity = speed * FireTransform.right * Mathf.Sign(Character.transform.lossyScale.x) * Random.Range(0.85f, 1.15f);
+			rb.linearVelocity = speed * FireTransform.right * Mathf.Sign(Character.transform.lossyScale.x) * Random.Range(0.85f, 1.15f);
 
 			var characterCollider = Character.GetComponent<Collider>();
 

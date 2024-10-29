@@ -196,7 +196,7 @@ namespace Assets.HeroEditor.Common.Scripts.CharacterScripts.Firearms
                 bullet.transform.localRotation = Quaternion.identity;
                 bullet.transform.SetParent(null);
                 bullet.GetComponent<SpriteRenderer>().sprite = Character.Firearms.Single(j => j.name == "Bullet");
-                bullet.GetComponent<Rigidbody>().velocity = Firearm.Params.MuzzleVelocity * (Firearm.FireTransform.right + spread)
+                bullet.GetComponent<Rigidbody>().linearVelocity = Firearm.Params.MuzzleVelocity * (Firearm.FireTransform.right + spread)
                     * Mathf.Sign(Character.transform.lossyScale.x) * Random.Range(0.85f, 1.15f);
 
                 var sortingOrder = Character.FirearmsRenderers.Single(j => j.name == "Rifle").sortingOrder;

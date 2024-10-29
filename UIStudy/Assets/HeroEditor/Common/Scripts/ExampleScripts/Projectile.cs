@@ -22,7 +22,7 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
 	    {
 		    if (Rigidbody != null && Rigidbody.useGravity)
 		    {
-			    transform.right = Rigidbody.velocity.normalized;
+			    transform.right = Rigidbody.linearVelocity.normalized;
 		    }
 	    }
 
