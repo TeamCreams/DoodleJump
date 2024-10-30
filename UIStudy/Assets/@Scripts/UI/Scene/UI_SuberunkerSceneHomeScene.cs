@@ -77,6 +77,8 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetImage((int)Images.MyScore_Button).gameObject.BindEvent(OnClick_ShowMyScore, EUIEvent.Click);
         GetImage((int)Images.Ranking_Button).gameObject.BindEvent(OnClick_ShowRanking, EUIEvent.Click);
         GetToggle((int)Toggles.Language_En).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
+        GetToggle((int)Toggles.Language_Kr).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
+
         Managers.Event.TriggerEvent(EEventType.SetLanguage);
 
         GetText((int)Texts.TotalGold_Text).text = Managers.Game.TotalGold.ToString();
@@ -109,52 +111,25 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     {
         if(GetToggle((int)Toggles.Language_En).isOn == true)
         {
-            Managers.Game.ELanguageInfo = ELanguage.En;
+            Managers.Language.ELanguageInfo = ELanguage.En;
         }
         else
         {
-            Managers.Game.ELanguageInfo = ELanguage.Kr;
+            Managers.Language.ELanguageInfo = ELanguage.Kr;
         }
         Managers.Event.TriggerEvent(EEventType.SetLanguage);
-        Debug.Log($"language : {Managers.Game.ELanguageInfo}");
+        Debug.Log($"language : {Managers.Language.ELanguageInfo}");
     }
     void OnEvent_SetLanguage(Component sender, object param)
     {
-        _minutes = this.LocalizedString(ELocalizableTerms.Minutes);
-        _seconds = this.LocalizedString(ELocalizableTerms.Seconds);
-        _bestRecord = this.LocalizedString(ELocalizableTerms.BestRecord);
-        _recentRecord = this.LocalizedString(ELocalizableTerms.RecentRecord);
-        GetText((int)Texts.Shop_Text).text = this.LocalizedString(ELocalizableTerms.Shop);
-        GetText((int)Texts.Mission_Text).text = this.LocalizedString(ELocalizableTerms.Mission);
-        GetText((int)Texts.ChooseCharacter_Text).text = this.LocalizedString(ELocalizableTerms.Character);
-        GetText((int)Texts.Start_Text).text = this.LocalizedString(ELocalizableTerms.GameStart);
+        _bestRecord = Managers.Language.LocalizedString(91001);
+        _recentRecord = Managers.Language.LocalizedString(91002);
+        _minutes = Managers.Language.LocalizedString(91004);
+        _seconds = Managers.Language.LocalizedString(91005);
+        GetText((int)Texts.Shop_Text).text = Managers.Language.LocalizedString(91006);
+        GetText((int)Texts.Mission_Text).text = Managers.Language.LocalizedString(91007);
+        GetText((int)Texts.ChooseCharacter_Text).text = Managers.Language.LocalizedString(91008);
+        GetText((int)Texts.Start_Text).text = Managers.Language.LocalizedString(91009);
     }
 
-
-    public string LocalizedString(ELocalizableTerms eLocalizableTerm)
-    {
-        int stringId = 0;
-
-        foreach (var gameLanguageData in Managers.Data.GameLanguageDataDic)
-        {
-            if (gameLanguageData.Value.LocalizableTerm == eLocalizableTerm)
-            {
-                stringId = gameLanguageData.Value.Id;
-                break;
-            }
-        }
-
-        var content = Managers.Data.GameLanguageDataDic[stringId];
-
-        switch (Managers.Game.ELanguageInfo)
-        {
-            case ELanguage.Kr:
-                return content.KrText;
-
-            case ELanguage.En:
-                return content.EnText;
-        }
-
-        return "XXX";
-    }
 }

@@ -328,7 +328,6 @@ namespace Data
     public class GameLanguageData
     {
         public int Id;
-        public ELocalizableTerms LocalizableTerm;
         public string KrText;
         public string EnText;
     }

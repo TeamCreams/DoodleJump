@@ -79,35 +79,8 @@ public class UI_InputNameScene : UI_Scene
 
     void OnEvent_SetLanguage(Component sender, object param)
     {
-        _nicknameUnavailable = this.LocalizedString(ELocalizableTerms.NicknameUnavailable);
-        GetText((int)Texts.Name_Text).text = this.LocalizedString(ELocalizableTerms.Name);
-        GetText((int)Texts.Placeholder_Nickname_Text).text = this.LocalizedString(ELocalizableTerms.Nickname);
-    }
-
-    public string LocalizedString(ELocalizableTerms eLocalizableTerm)
-    {
-        int stringId = 0;
-
-        foreach (var gameLanguageData in Managers.Data.GameLanguageDataDic)
-        {
-            if (gameLanguageData.Value.LocalizableTerm == eLocalizableTerm)
-            {
-                stringId = gameLanguageData.Value.Id;
-                break;
-            }
-        }
-
-        var content = Managers.Data.GameLanguageDataDic[stringId];
-
-        switch (Managers.Game.ELanguageInfo)
-        {
-            case ELanguage.Kr:
-                return content.KrText;
-
-            case ELanguage.En:
-                return content.EnText;
-        }
-
-        return "";
+        GetText((int)Texts.Name_Text).text = Managers.Language.LocalizedString(91013);
+        GetText((int)Texts.Placeholder_Nickname_Text).text = Managers.Language.LocalizedString(91014);
+        _nicknameUnavailable = Managers.Language.LocalizedString(91015);
     }
 }

@@ -39,33 +39,7 @@ public class UI_SuberunkerTimelineScene : UI_Scene
     }
     void OnEvent_SetLanguage(Component sender, object param)
     {
-        GetText((int)Texts.Skip_Text).text = this.LocalizedString(ELocalizableTerms.Skip);
+        GetText((int)Texts.Skip_Text).text = Managers.Language.LocalizedString(91016);
     }
 
-    public string LocalizedString(ELocalizableTerms eLocalizableTerm)
-    {
-        int stringId = 0;
-
-        foreach (var gameLanguageData in Managers.Data.GameLanguageDataDic)
-        {
-            if (gameLanguageData.Value.LocalizableTerm == eLocalizableTerm)
-            {
-                stringId = gameLanguageData.Value.Id;
-                break;
-            }
-        }
-
-        var content = Managers.Data.GameLanguageDataDic[stringId];
-
-        switch (Managers.Game.ELanguageInfo)
-        {
-            case ELanguage.Kr:
-                return content.KrText;
-
-            case ELanguage.En:
-                return content.EnText;
-        }
-
-        return "";
-    }
 }

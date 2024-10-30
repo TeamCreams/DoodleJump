@@ -8,22 +8,23 @@ using static Define;
 
 public class LanguageDataMamager
 {
-    public string LocalizedString(ELocalizableTerms eLocalizableTerm)
+
+    private Define.ELanguage _eLanguageInfo = Define.ELanguage.Kr;
+    public Define.ELanguage ELanguageInfo
     {
-        int stringId = 0;
+        get { return _eLanguageInfo; }
+        set { _eLanguageInfo = value; }
+    }
 
-        foreach (var gameLanguageData in Managers.Data.GameLanguageDataDic)
+    public string LocalizedString(int id)
+    {
+        var content = Managers.Data.GameLanguageDataDic[id];
+
+        if(content == null)
         {
-            if(gameLanguageData.Value.LocalizableTerm == eLocalizableTerm)
-            {
-                stringId = gameLanguageData.Value.Id;
-                break;
-            }
+            return "XXX";
         }
-
-        var content = Managers.Data.GameLanguageDataDic[stringId];
-
-        switch (Managers.Game.ELanguageInfo)
+        switch (this.ELanguageInfo)
         {
             case ELanguage.Kr:
                 return content.KrText;
@@ -32,6 +33,6 @@ public class LanguageDataMamager
                 return content.EnText;
         }
 
-        return "";
+        return "XXX";
     }
 }

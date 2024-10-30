@@ -86,38 +86,12 @@ public class UI_RetryPopup : UI_Popup
 
     void OnEvent_SetLanguage(Component sender, object param)
     {
-        _minutes = this.LocalizedString(ELocalizableTerms.Minutes);
-        _seconds = this.LocalizedString(ELocalizableTerms.Seconds);
-        _bestRecord = this.LocalizedString(ELocalizableTerms.BestRecord);
-        _recentRecord = this.LocalizedString(ELocalizableTerms.RecentRecord);
-        GetText((int)Texts.Home_Text).text = this.LocalizedString(ELocalizableTerms.Home);
-        GetText((int)Texts.Retry_Text).text = this.LocalizedString(ELocalizableTerms.Restart);
+        _bestRecord = Managers.Language.LocalizedString(91001);
+        _recentRecord = Managers.Language.LocalizedString(91002);
+        _minutes = Managers.Language.LocalizedString(91004);
+        _seconds = Managers.Language.LocalizedString(91005);
+        GetText((int)Texts.Home_Text).text = Managers.Language.LocalizedString(91017);
+        GetText((int)Texts.Retry_Text).text = Managers.Language.LocalizedString(91018);
     }
 
-    public string LocalizedString(ELocalizableTerms eLocalizableTerm)
-    {
-        int stringId = 0;
-
-        foreach (var gameLanguageData in Managers.Data.GameLanguageDataDic)
-        {
-            if (gameLanguageData.Value.LocalizableTerm == eLocalizableTerm)
-            {
-                stringId = gameLanguageData.Value.Id;
-                break;
-            }
-        }
-
-        var content = Managers.Data.GameLanguageDataDic[stringId];
-
-        switch (Managers.Game.ELanguageInfo)
-        {
-            case ELanguage.Kr:
-                return content.KrText;
-
-            case ELanguage.En:
-                return content.EnText;
-        }
-
-        return "";
-    }
 }

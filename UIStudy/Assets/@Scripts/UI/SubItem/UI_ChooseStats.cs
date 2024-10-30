@@ -76,35 +76,9 @@ public class UI_ChooseStats : UI_Base
 
     void OnEvent_SetLanguage(Component sender, object param)
     {
-        _defaultSpeed = this.LocalizedString(Define.ELocalizableTerms.DefaultSpeed);
-        _defaultHp = this.LocalizedString(Define.ELocalizableTerms.DefaultHp);
-        _defaultLuck = this.LocalizedString(Define.ELocalizableTerms.DefaultLuck);
+        _defaultSpeed = Managers.Language.LocalizedString(91010);
+        _defaultHp = Managers.Language.LocalizedString(91011);
+        _defaultLuck = Managers.Language.LocalizedString(91012);
     }
 
-    public string LocalizedString(ELocalizableTerms eLocalizableTerm)
-    {
-        int stringId = 0;
-
-        foreach (var gameLanguageData in Managers.Data.GameLanguageDataDic)
-        {
-            if (gameLanguageData.Value.LocalizableTerm == eLocalizableTerm)
-            {
-                stringId = gameLanguageData.Value.Id;
-                break;
-            }
-        }
-
-        var content = Managers.Data.GameLanguageDataDic[stringId];
-
-        switch (Managers.Game.ELanguageInfo)
-        {
-            case ELanguage.Kr:
-                return content.KrText;
-
-            case ELanguage.En:
-                return content.EnText;
-        }
-
-        return "";
-    }
 }

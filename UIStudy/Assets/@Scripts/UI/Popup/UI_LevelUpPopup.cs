@@ -43,33 +43,7 @@ public class UI_LevelUpPopup : UI_Popup
     }
     void OnEvent_SetLanguage(Component sender, object param)
     {
-        GetText((int)Texts.LevelUp_Text).text = this.LocalizedString(ELocalizableTerms.LevelUp);
+        GetText((int)Texts.LevelUp_Text).text = Managers.Language.LocalizedString(91019);
     }
 
-    public string LocalizedString(ELocalizableTerms eLocalizableTerm)
-    {
-        int stringId = 0;
-
-        foreach (var gameLanguageData in Managers.Data.GameLanguageDataDic)
-        {
-            if (gameLanguageData.Value.LocalizableTerm == eLocalizableTerm)
-            {
-                stringId = gameLanguageData.Value.Id;
-                break;
-            }
-        }
-
-        var content = Managers.Data.GameLanguageDataDic[stringId];
-
-        switch (Managers.Game.ELanguageInfo)
-        {
-            case ELanguage.Kr:
-                return content.KrText;
-
-            case ELanguage.En:
-                return content.EnText;
-        }
-
-        return "";
-    }
 }

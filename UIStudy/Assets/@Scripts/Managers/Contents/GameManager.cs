@@ -133,13 +133,7 @@ public class GameManager
         }
     }
 
-    private Define.ELanguage _eLanguageInfo = Define.ELanguage.Kr;
-    public Define.ELanguage ELanguageInfo
-    {
-        get { return _eLanguageInfo; }
-        set { _eLanguageInfo = value; }
-    }
-
+   
     #endregion
 
     #region Action

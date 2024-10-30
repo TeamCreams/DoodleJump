@@ -82,7 +82,7 @@ public class UI_Player : UI_Base
         {
             if (content.Value.TextId.Equals(_textId) == true)
             {
-                switch (Managers.Game.ELanguageInfo)
+                switch (Managers.Language.ELanguageInfo)
                 {
                     case ELanguage.Kr:
                         _tempContent = content.Value.KrText;

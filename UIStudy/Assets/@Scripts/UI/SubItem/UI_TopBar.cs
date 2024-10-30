@@ -52,10 +52,11 @@ public class UI_TopBar : UI_Base
 
         //Managers.Game.OnChangedLife -= OnChangedLife;
         //Managers.Game.OnChangedLife += OnChangedLife;
-        Managers.Event.RemoveEvent(Define.EEventType.ChangePlayerLife, OnChangedLife);
-        Managers.Event.AddEvent(Define.EEventType.ChangePlayerLife, OnChangedLife);
-        Managers.Event.AddEvent(Define.EEventType.LevelStageUp, OnEvent_LevelUpTextChange);
-        Managers.Event.AddEvent(Define.EEventType.SetLanguage, OnEvent_SetLanguage);
+        Managers.Event.RemoveEvent(EEventType.ChangePlayerLife, OnChangedLife);
+        Managers.Event.AddEvent(EEventType.ChangePlayerLife, OnChangedLife);
+        Managers.Event.AddEvent(EEventType.LevelStageUp, OnEvent_LevelUpTextChange);
+        Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+        Managers.Event.TriggerEvent(EEventType.SetLanguage);
 
         string str = "Lv." + Managers.Game.DifficultySettingsInfo.StageLevel.ToString();
         GetText((int)Texts.Level_Text).text = str;
@@ -141,35 +142,8 @@ public class UI_TopBar : UI_Base
 
     void OnEvent_SetLanguage(Component sender, object param)
     {
-        _minutes = this.LocalizedString(Define.ELocalizableTerms.Minutes);
-        _seconds = this.LocalizedString(Define.ELocalizableTerms.Seconds);
-    }
-
-    public string LocalizedString(ELocalizableTerms eLocalizableTerm)
-    {
-        int stringId = 0;
-
-        foreach (var gameLanguageData in Managers.Data.GameLanguageDataDic)
-        {
-            if (gameLanguageData.Value.LocalizableTerm == eLocalizableTerm)
-            {
-                stringId = gameLanguageData.Value.Id;
-                break;
-            }
-        }
-
-        var content = Managers.Data.GameLanguageDataDic[stringId];
-
-        switch (Managers.Game.ELanguageInfo)
-        {
-            case ELanguage.Kr:
-                return content.KrText;
-
-            case ELanguage.En:
-                return content.EnText;
-        }
-
-        return "";
+        _minutes = Managers.Language.LocalizedString(91004);
+        _seconds = Managers.Language.LocalizedString(91005);
     }
 }
 

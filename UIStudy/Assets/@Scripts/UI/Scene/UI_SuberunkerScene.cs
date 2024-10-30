@@ -28,7 +28,6 @@ public class UI_SuberunkerScene : UI_Scene
         {
             return false;
         }
-        Managers.Event.TriggerEvent(EEventType.SetLanguage);
 
         //StartLoadAssets();
 
