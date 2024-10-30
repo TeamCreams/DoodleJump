@@ -1,10 +1,11 @@
-using GameApi.Dtos;
+﻿using GameApi.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PSY_DB;
 using PSY_DB.Tables;
 using System.Text.Json.Serialization;
+using WebApi.Models.Dto;
 
 namespace GameApi.Controllers
 {
@@ -39,8 +40,8 @@ namespace GameApi.Controllers
             .ToArray();
         }
 
-        [HttpGet("GetWeatherForecast2")]
-        public async Task<string> Get2()
+        [HttpGet("GetUser")]
+        public async Task<string> GetUser()
         {
             var a = await (from userAccount in _context.TblUserAccounts
                     select new
@@ -53,19 +54,56 @@ namespace GameApi.Controllers
 
         //Get - FromQuery
         //Post - FromBody
-        [HttpPost("UserAdd")]
-        public async Task<ResDtoAddUser> UserAdd([FromBody]ReqDtoAddUser requestDto)
+        [HttpPost("AddUser")]
+        public async Task<CommonResult<ResDtoAddUser>> AddUser([FromBody] ReqDtoAddUser requestDto)
         {
-            ResDtoAddUser rv = new ();
+            CommonResult<ResDtoAddUser> rv = new();
 
-            TblUserAccount userAccount = new();
-            userAccount.RegisterDate = DateTime.Now;
-            userAccount.UpdateDate = DateTime.Now;
-            userAccount.UserName = requestDto.UserName;
-            userAccount.Password = requestDto.Password;
+            try{ 
+                var userAccounts = await (from user in _context.TblUserAccounts
+                                          where user.UserName == requestDto.UserName
+                                          select new
+                                          {
+                                              UserName = user.UserName
+                                          }).ToListAsync();
 
-            _context.TblUserAccounts.Add(userAccount);
-            await _context.SaveChangesAsync();
+                if (userAccounts.Count < 1)
+                {
+                    TblUserAccount userAccount = new();
+                    userAccount.RegisterDate = DateTime.Now;
+                    userAccount.UpdateDate = DateTime.Now;
+                    userAccount.UserName = requestDto.UserName;
+                    userAccount.Password = requestDto.Password;
+                    _context.TblUserAccounts.Add(userAccount);
+                }
+                
+                var IsSuccess = await _context.SaveChangesAsync();
+
+                if (IsSuccess == 0)
+                {
+                    throw new CommonException(EStatusCode.NameAlreadyExists, $"Name Already Exists");
+                }
+                else
+                {
+                    rv.IsSuccess = true;
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Data = null;
+                }
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = null;
+            }
             return rv;
         }
     }
