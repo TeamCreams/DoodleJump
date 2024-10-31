@@ -6,7 +6,7 @@ using static Define;
 
 public class UI_RetryPopup : UI_Popup
 {
-    enum Texts
+    private enum Texts
     {
         LifeTime_Text,
         LifeRecordTime_Text,
@@ -15,12 +15,12 @@ public class UI_RetryPopup : UI_Popup
         Home_Text
     }
 
-    enum GameObjects
+    private enum GameObjects
     {
         LifeRecord,
     }
 
-    enum Buttons
+    private enum Buttons
     {
         Retry_Button,
         Home_Button

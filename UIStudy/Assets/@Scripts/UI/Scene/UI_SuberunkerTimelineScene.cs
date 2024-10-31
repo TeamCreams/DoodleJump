@@ -6,17 +6,17 @@ using static Define;
 public class UI_SuberunkerTimelineScene : UI_Scene
 {
 
-    enum GameObjects
+    private enum GameObjects
     {
 
     }
 
-    enum Texts
+    private enum Texts
     {
         Skip_Text
     }
 
-    enum Buttons
+    private enum Buttons
     {
         Skip
     }
@@ -28,6 +28,7 @@ public class UI_SuberunkerTimelineScene : UI_Scene
             return false;
         }
         BindButtons(typeof(Buttons));
+        BindTexts(typeof(Texts));
         GetButton((int)Buttons.Skip).gameObject.BindEvent((evt) =>
         {
             Managers.Scene.LoadScene(EScene.SuberunkerScene);

@@ -6,19 +6,19 @@ using UnityEngine.UI;
 using static Define;
 
 public class UI_InputNameScene : UI_Scene
-{ 
+{
 
-    public enum InputFields
+    private enum InputFields
     {
         Name_InputField,
     }
 
-    public enum Buttons
+    private enum Buttons
     {
         InspectName_Button,
     }
 
-    public enum Texts
+    private enum Texts
     {
         Warning_Text,
         Name_Text,

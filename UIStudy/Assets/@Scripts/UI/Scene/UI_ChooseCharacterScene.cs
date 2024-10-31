@@ -10,18 +10,18 @@ using Data;
 public class UI_ChooseCharacterScene : UI_Scene
 {
 
-    enum GameObjects
+    private enum GameObjects
     {
         InventoryItemRoot,
     }
 
-    enum Images
+    private enum Images
     {
         HairItem,
         EyesItem,
         EyebrowsItem,
     }
-    enum Buttons
+    private enum Buttons
     {
         Next_Button
     }

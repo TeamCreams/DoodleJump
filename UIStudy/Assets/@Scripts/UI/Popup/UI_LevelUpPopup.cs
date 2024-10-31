@@ -6,13 +6,13 @@ using static Define;
 public class UI_LevelUpPopup : UI_Popup
 {
 
-    enum Texts
+    private enum Texts
     {
         Level_Text,
         LevelUp_Text
     }
 
-    enum Buttons
+    private enum Buttons
     {
         Cancle_Button,
     }

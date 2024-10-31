@@ -342,6 +342,7 @@ public class PlayerController : CreatureBase
         // 4. 골드 변경
         //------------------------------------
         Managers.Game.Gold += Item.Data.Gold;
+        Managers.Event.TriggerEvent(EEventType.GetGold);
 
         //------------------------------------
         // 5. UnEquip 예약

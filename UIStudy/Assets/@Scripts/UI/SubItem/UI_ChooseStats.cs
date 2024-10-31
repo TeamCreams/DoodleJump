@@ -7,13 +7,13 @@ using static Define;
 public class UI_ChooseStats : UI_Base
 {
 
-    enum Buttons
+    private enum Buttons
     {
         Back,
         Next
     }
 
-    enum Texts
+    private enum Texts
     {
         Speed_Text,
         Life_Text,

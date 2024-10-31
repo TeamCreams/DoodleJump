@@ -7,7 +7,7 @@ using static Define;
 public class UI_PlayerDesign : UI_Base
 {
 
-    enum Images
+    private enum Images
     {
         Hair,
         Eyes,

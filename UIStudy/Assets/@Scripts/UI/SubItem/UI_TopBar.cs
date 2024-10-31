@@ -2,24 +2,30 @@
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using static Define;
 
 public class UI_TopBar : UI_Base
 {
 
-    public enum GameObjects
+    private enum GameObjects
     {
         UI_HeartRoot,
     }
-    public enum Texts
+    private enum Texts
     {
         Time_Text,
         GameOver_Text,
-        Level_Text
+        Level_Text,
+        Gold_Text
     }
-    public enum Images
+    private enum Images
     {
         Hp,
+    }
+    private enum Buttons
+    {
+        Pause_Button
     }
 
     private int _time = 0;
@@ -42,26 +48,29 @@ public class UI_TopBar : UI_Base
         {
             return false;
         }
-        BindImages(typeof(Images));
 
         //BindObjects(typeof(GameObjects));
         BindTexts(typeof(Texts));
+        BindImages(typeof(Images));
+        BindButtons(typeof(Buttons));
+
         GetText((int)Texts.GameOver_Text).enabled = false;
 
         //_heartRoot = GetObject((int)GameObjects.UI_HeartRoot).GetComponent<UI_HeartRoot>();
 
         //Managers.Game.OnChangedLife -= OnChangedLife;
         //Managers.Game.OnChangedLife += OnChangedLife;
-        Managers.Event.RemoveEvent(EEventType.ChangePlayerLife, OnChangedLife);
-        Managers.Event.AddEvent(EEventType.ChangePlayerLife, OnChangedLife);
+        Managers.Event.RemoveEvent(EEventType.ChangePlayerLife, OnEvent_ChangedLife);
+        Managers.Event.AddEvent(EEventType.ChangePlayerLife, OnEvent_ChangedLife);
         Managers.Event.AddEvent(EEventType.LevelStageUp, OnEvent_LevelUpTextChange);
+        Managers.Event.AddEvent(EEventType.GetGold, OnEvent_GetGold);
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         Managers.Event.TriggerEvent(EEventType.SetLanguage);
 
         string str = "Lv." + Managers.Game.DifficultySettingsInfo.StageLevel.ToString();
         GetText((int)Texts.Level_Text).text = str;
 
-        
+        GetButton((int)Buttons.Pause_Button).gameObject.BindEvent(OnClick_ShowPausePopup, EUIEvent.Click);
 
         _lifeTimer = Observable.Interval(new System.TimeSpan(0, 0, 1))
             .Subscribe(_ =>
@@ -76,7 +85,7 @@ public class UI_TopBar : UI_Base
 
 	private void OnDestroy()
     {
-        Managers.Event.RemoveEvent(Define.EEventType.ChangePlayerLife, OnChangedLife);
+        Managers.Event.RemoveEvent(EEventType.ChangePlayerLife, OnEvent_ChangedLife);
     }
    
     void OnEvent_LevelUpTextChange(Component sender, object param)
@@ -85,7 +94,7 @@ public class UI_TopBar : UI_Base
         string str = "Lv." + Managers.Game.DifficultySettingsInfo.StageLevel.ToString();
         GetText((int)Texts.Level_Text).text = str;
     }
-	void OnChangedLife(Component sender, object param)
+	void OnEvent_ChangedLife(Component sender, object param)
 	{
         float life = (float)param;
         Debug.Log($"Life : {life}");
@@ -93,6 +102,15 @@ public class UI_TopBar : UI_Base
         //UpdateLifeImage(life);        
     }
 
+    void OnEvent_GetGold(Component sender, object param)
+    {
+        GetText((int)Texts.Gold_Text).text = Managers.Game.Gold.ToString();
+    }
+
+    private void OnClick_ShowPausePopup(PointerEventData eventData)
+    {
+
+    }
     IEnumerator UpdateLife(float nextHp)
     {
         float currentHp = GetImage((int)Images.Hp).fillAmount;

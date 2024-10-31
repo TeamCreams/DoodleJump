@@ -65,6 +65,7 @@ public static class Define
         TakeItem,
         ChangePlayerLife,
         GetLife,
+        GetGold,
         LevelStageUp,
         ThoughtBubble,
         CancelThoughtBubble,

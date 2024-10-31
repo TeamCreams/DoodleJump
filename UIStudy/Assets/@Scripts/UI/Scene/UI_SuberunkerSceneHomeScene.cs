@@ -8,13 +8,13 @@ using UnityEngine.EventSystems;
 public class UI_SuberunkerSceneHomeScene : UI_Scene
 {
 
-    enum GameObjects
+    private enum GameObjects
     {
         Ranking,
         MyScore
     }
 
-    enum Texts
+    private enum Texts
     {
         Best_Text,
         Current_Text,
@@ -25,7 +25,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         Start_Text
     }
 
-    enum Buttons
+    private enum Buttons
     {
         Shop_Button,
         Mission_Button,
@@ -33,13 +33,13 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         Start_Button
     }
 
-    enum Images
+    private enum Images
     {
         MyScore_Button,
         Ranking_Button
     }
 
-    enum Toggles
+    private enum Toggles
     {
         Language_En,
         Language_Kr
