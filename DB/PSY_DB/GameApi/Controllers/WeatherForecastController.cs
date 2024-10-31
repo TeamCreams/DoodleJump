@@ -6,6 +6,7 @@ using PSY_DB;
 using PSY_DB.Tables;
 using System.Text.Json.Serialization;
 using WebApi.Models.Dto;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace GameApi.Controllers
 {
@@ -61,7 +62,7 @@ namespace GameApi.Controllers
 
             try{ 
                 var userAccounts = await (from user in _context.TblUserAccounts
-                                          where user.UserName == requestDto.UserName
+                                          where user.UserName == requestDto.UserName 
                                           select new
                                           {
                                               UserName = user.UserName
@@ -104,6 +105,220 @@ namespace GameApi.Controllers
                 rv.Message = ex.Message;
                 rv.Data = null;
             }
+            return rv;
+        }
+
+        [HttpPost("SearchUser")]
+        public async Task<CommonResult<ResDtoSearchUser>> SearchUser([FromBody] ReqDtoSearchUser requestDto)
+        {
+            CommonResult<ResDtoSearchUser> rv = new();
+
+            try
+            {
+                rv.Data = new();
+
+                var select = await (
+                            from user in _context.TblUserAccounts
+                            where (user.UserName == requestDto.UserName && user.Password == requestDto.Password)
+                            select new ResDtoSearchUser                            
+                            {
+                                UserName = user.UserName,
+                                RegisterDate = user.RegisterDate,
+                                UpdateDate = user.UpdateDate,
+                            }).ToListAsync();
+
+
+                if (select.Count < 1)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        "아이디 혹은 비밀번호가 맞지 않습니다."); // try문 밖으로 던짐
+                }
+                var selectUser = select.First();
+
+                rv.StatusCode = EStatusCode.OK;
+                rv.Message = "";
+                rv.IsSuccess = true;
+                rv.Data = selectUser;
+
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = ex.Data as ResDtoSearchUser;
+
+                return rv;
+            }
+            return rv;
+        }
+
+        [HttpPost("FindAccountPassword")]
+        public async Task<CommonResult<ResDtoFindAccountPassword>> 
+            FindAccountPassword([FromBody] ReqDtoFindAccountPassword requestDto)
+        {
+            CommonResult<ResDtoFindAccountPassword> rv = new();
+
+            try
+            {
+                rv.Data = new();
+
+                var select = await (
+                            from user in _context.TblUserAccounts
+                            where (user.UserName == requestDto.UserName)
+                            select new ResDtoFindAccountPassword
+                            {
+                                Password = user.Password
+                            }).ToListAsync();
+
+
+                if (select.Count < 1)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        "아이디가 존재하지 않습니다."); // try문 밖으로 던짐
+                }
+                var selectUser = select.First();
+
+                rv.StatusCode = EStatusCode.OK;
+                rv.Message = "";
+                rv.IsSuccess = true;
+                rv.Data = selectUser;
+
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = ex.Data as ResDtoFindAccountPassword;
+
+                return rv;
+            }
+            return rv;
+        }
+
+        [HttpPost("UpdateAccountPassword")]
+        public async Task<CommonResult<ResDtoUpdateAccountPassword>>
+            UpdateAccountPassword([FromBody] ReqDtoUpdateAccountPassword requestDto)
+        {
+            CommonResult<ResDtoUpdateAccountPassword> rv = new();
+            
+            try
+            {
+                var userAccount = _context.TblUserAccounts.
+                                    Where
+                                    (
+                                    user => user.UserName == requestDto.UserName && user.Password == requestDto.Password
+                                    ).FirstOrDefault();
+
+                if (userAccount == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        $"아이디 혹은 비밀번호가 맞지 않습니다. UserName : {requestDto.UserName} Password : {requestDto.Password}");
+                }
+
+                userAccount.Password = requestDto.UpdatePassword;
+                _context.TblUserAccounts.Update(userAccount);
+
+                var IsSuccess = await _context.SaveChangesAsync();
+
+                if (IsSuccess == 0)
+                {
+                    throw new CommonException(EStatusCode.ChangedRowsIsZero, 
+                        $"UserName : {requestDto.UserName},  UpdatePassword: {requestDto.UpdatePassword}");
+                }
+                else
+                {
+                    rv.IsSuccess = true;
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Data = null;
+                }
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = null;
+
+                return rv;
+            }
+            return rv;
+        }
+
+        [HttpPost("DeleteUserAccount")]
+        public async Task<CommonResult<ResDtoDeleteUserAccount>> DeleteUserAccount([FromBody] ReqDtoDeleteUserAccount requestDto)
+        {
+            CommonResult<ResDtoDeleteUserAccount> rv = new();
+
+            try
+            {
+                var userAccount = _context.TblUserAccounts.
+                    Where
+                    (
+                    user => user.UserName == requestDto.UserName && user.Password == requestDto.Password
+                    ).FirstOrDefault();
+
+                if (userAccount == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity, 
+                        $"아이디 혹은 비밀번호가 맞지 않습니다. UserName : {requestDto.UserName} Password : {requestDto.Password}");
+                }
+
+                _context.TblUserAccounts.Remove(userAccount);
+
+                var IsSuccess = await _context.SaveChangesAsync();
+
+                if (IsSuccess == 0)
+                {
+                    throw new CommonException(EStatusCode.ChangedRowsIsZero, $"UserName : {requestDto.UserName}");
+                }
+                else
+                {
+                    rv.IsSuccess = true;
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Data = null;
+                }
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = null;
+            }
+
             return rv;
         }
     }
