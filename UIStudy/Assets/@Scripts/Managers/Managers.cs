@@ -31,6 +31,7 @@ public class Managers : MonoBehaviour
 	private UIManager _ui = new UIManager(); 
 	private EventManager _event = new EventManager();
 	private CameraManager _camera = new CameraManager();
+	private WebManager _web = new WebManager();
 
 	public static PoolManager Pool { get { return Instance?._pool; } }
 	public static ResourceManager Resource { get { return Instance?._resource; } }
@@ -40,6 +41,7 @@ public class Managers : MonoBehaviour
 	public static UIManager UI { get { return Instance?._ui; } } 
 	public static EventManager Event { get {  return Instance?._event; } }
 	public static CameraManager Camera { get { return Instance?._camera; } }
+	public static WebManager Web { get { return Instance?._web; } }
 	#endregion
 
 
@@ -62,6 +64,7 @@ public class Managers : MonoBehaviour
 			Managers.Event.Init();
 			Managers.Game.Init();
 			Managers.Sound.Init();
+			Managers.Web.Init();
 		}
 	}
 

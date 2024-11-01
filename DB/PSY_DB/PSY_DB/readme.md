@@ -22,3 +22,5 @@ remove-migration
 혹은 외부에서
 dotnet ef migrations remove
 ```
+
+

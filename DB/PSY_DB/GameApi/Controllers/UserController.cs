@@ -12,33 +12,16 @@ namespace GameApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<UserController> _logger;
         private readonly PsyDbContext _context;
 
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, PsyDbContext context)
+        public UserController(ILogger<UserController> logger, PsyDbContext context)
         {
             _logger = logger;
             _context = context;
-        }
-
-        [HttpGet("GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
         }
 
         [HttpGet("GetUser")]
@@ -55,10 +38,10 @@ namespace GameApi.Controllers
 
         //Get - FromQuery
         //Post - FromBody
-        [HttpPost("AddUser")]
-        public async Task<CommonResult<ResDtoAddUser>> AddUser([FromBody] ReqDtoAddUser requestDto)
+        [HttpPost("InsertUser")]
+        public async Task<CommonResult<ResDtoInsertUserAccount>> InsertUser([FromBody] ReqDtoInsertUserAccount requestDto)
         {
-            CommonResult<ResDtoAddUser> rv = new();
+            CommonResult<ResDtoInsertUserAccount> rv = new();
 
             try{ 
                 var userAccounts = await (from user in _context.TblUserAccounts
@@ -108,27 +91,40 @@ namespace GameApi.Controllers
             return rv;
         }
 
-        [HttpPost("SearchUser")]
-        public async Task<CommonResult<ResDtoSearchUser>> SearchUser([FromBody] ReqDtoSearchUser requestDto)
+        [HttpGet("GetUserAccount")]
+        public async Task<CommonResult<ResDtoGetUserAccount>> GetUserAccount([FromQuery] ReqDtoGetUserAccount requestDto)
         {
-            CommonResult<ResDtoSearchUser> rv = new();
+            CommonResult<ResDtoGetUserAccount> rv = new();
 
             try
             {
                 rv.Data = new();
 
                 var select = await (
-                            from user in _context.TblUserAccounts
+                            from user in _context.TblUserAccounts.Include(user => user.TblUserScores)
                             where (user.UserName == requestDto.UserName && user.Password == requestDto.Password)
-                            select new ResDtoSearchUser                            
+                            select new ResDtoGetUserAccount                            
                             {
                                 UserName = user.UserName,
                                 RegisterDate = user.RegisterDate,
                                 UpdateDate = user.UpdateDate,
+                                HighScore = user.TblUserScores
+                                              .OrderByDescending(s => s.History)
+                                              .Select(s => s.History)
+                                              .FirstOrDefault()
                             }).ToListAsync();
+                /*
+                 *  SELECT `t`.`UserName`, `t`.`RegisterDate`, `t`.`UpdateDate`, COALESCE((
+                          SELECT `t0`.`History`
+                          FROM `TblUserScore` AS `t0`
+                          WHERE `t`.`Id` = `t0`.`UserAccountId`
+                          ORDER BY `t0`.`History` DESC
+                          LIMIT 1), 0) AS `HighScore`
+                      FROM `TblUserAccount` AS `t`
+                      WHERE (`t`.`UserName` = @__requestDto_UserName_0) AND (`t`.`Password` = @__requestDto_Password_1)
+                 */
 
-
-                if (select.Count < 1)
+                if (false == select.Any())
                 {
                     throw new CommonException(EStatusCode.NotFoundEntity,
                         "아이디 혹은 비밀번호가 맞지 않습니다."); // try문 밖으로 던짐
@@ -154,18 +150,18 @@ namespace GameApi.Controllers
                 rv.IsSuccess = false;
                 rv.StatusCode = EStatusCode.ServerException;
                 rv.Message = ex.Message;
-                rv.Data = ex.Data as ResDtoSearchUser;
+                rv.Data = ex.Data as ResDtoGetUserAccount;
 
                 return rv;
             }
             return rv;
         }
 
-        [HttpPost("FindAccountPassword")]
-        public async Task<CommonResult<ResDtoFindAccountPassword>> 
-            FindAccountPassword([FromBody] ReqDtoFindAccountPassword requestDto)
+        [HttpPost("GetUserAccountPassword")]
+        public async Task<CommonResult<ResDtoGetUserAccountPassword>>
+            GetUserAccountPassword([FromBody] ReqDtoGetUserAccountPassword requestDto)
         {
-            CommonResult<ResDtoFindAccountPassword> rv = new();
+            CommonResult<ResDtoGetUserAccountPassword> rv = new();
 
             try
             {
@@ -173,14 +169,15 @@ namespace GameApi.Controllers
 
                 var select = await (
                             from user in _context.TblUserAccounts
-                            where (user.UserName == requestDto.UserName)
-                            select new ResDtoFindAccountPassword
+                            where (user.UserName == requestDto.UserName &&
+                                user.DeletedDate != null)
+                            select new ResDtoGetUserAccountPassword
                             {
                                 Password = user.Password
                             }).ToListAsync();
 
 
-                if (select.Count < 1)
+                if (select.Any())
                 {
                     throw new CommonException(EStatusCode.NotFoundEntity,
                         "아이디가 존재하지 않습니다."); // try문 밖으로 던짐
@@ -206,7 +203,7 @@ namespace GameApi.Controllers
                 rv.IsSuccess = false;
                 rv.StatusCode = EStatusCode.ServerException;
                 rv.Message = ex.Message;
-                rv.Data = ex.Data as ResDtoFindAccountPassword;
+                rv.Data = ex.Data as ResDtoGetUserAccountPassword;
 
                 return rv;
             }
@@ -214,17 +211,18 @@ namespace GameApi.Controllers
         }
 
         [HttpPost("UpdateAccountPassword")]
-        public async Task<CommonResult<ResDtoUpdateAccountPassword>>
-            UpdateAccountPassword([FromBody] ReqDtoUpdateAccountPassword requestDto)
+        public async Task<CommonResult<ResDtoUpdateUserAccountPassword>>
+            UpdateAccountPassword([FromBody] ReqDtoUpdateUserAccountPassword requestDto)
         {
-            CommonResult<ResDtoUpdateAccountPassword> rv = new();
+            CommonResult<ResDtoUpdateUserAccountPassword> rv = new();
             
             try
             {
                 var userAccount = _context.TblUserAccounts.
                                     Where
                                     (
-                                    user => user.UserName == requestDto.UserName && user.Password == requestDto.Password
+                                        user => user.UserName == requestDto.UserName && 
+                                            user.Password == requestDto.Password
                                     ).FirstOrDefault();
 
                 if (userAccount == null)
