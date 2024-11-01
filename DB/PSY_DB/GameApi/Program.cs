@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Rewrite;
+﻿using Microsoft.AspNetCore.Rewrite;
 using PSY_DB;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +27,11 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+
+app.UseCors("AllowSpecificOrigin");
+
+app.UseAuthorization();
 
 var option = new RewriteOptions();
 option.AddRedirect("^$", "swagger");
