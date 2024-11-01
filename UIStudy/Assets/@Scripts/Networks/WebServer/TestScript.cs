@@ -8,7 +8,6 @@ public class TestScript : MonoBehaviour
 {
     private void Update()
     {
-        
         if(Input.GetKeyDown(KeyCode.V))
         {
             Run();
@@ -28,7 +27,7 @@ public class TestScript : MonoBehaviour
                     
                 }
 
-                Debug.Log(rv.Data.RegisterDate);
+                Debug.Log(rv.Data.UserName);
             });
         }
     }
@@ -36,7 +35,7 @@ public class TestScript : MonoBehaviour
     public async void Run()
     {
         var client = new HttpClient();
-        var request = new HttpRequestMessage(HttpMethod.Post, "http://13.209.47.47/User/GetUserAccount");
+        var request = new HttpRequestMessage(HttpMethod.Post, "https://dev-single-api.snapism.net:8080/User/GetUserAccount");
         ReqDtoGetUserAccount requestDto = new ReqDtoGetUserAccount();
         requestDto.UserName = "test1";
         requestDto.Password = "test1";

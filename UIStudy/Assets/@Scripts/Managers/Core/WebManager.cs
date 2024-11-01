@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class WebRoute
 {
-    private readonly static string BaseUrl = $"https://localhost:7226/";
+    private readonly static string BaseUrl = $"https://dev-single-api.snapism.net:8080/";
     public readonly static Func<ReqDtoGetUserAccount, string> GetUserAccount = (dto) => $"{BaseUrl}User/GetUserAccount?UserName={dto.UserName}&Password={dto.Password}";
 }
 

@@ -44,14 +44,15 @@ namespace GameApi.Controllers
             CommonResult<ResDtoInsertUserAccount> rv = new();
 
             try{ 
-                var userAccounts = await (from user in _context.TblUserAccounts
-                                          where user.UserName == requestDto.UserName 
-                                          select new
-                                          {
-                                              UserName = user.UserName
-                                          }).ToListAsync();
+                var select = await (
+                            from user in _context.TblUserAccounts
+                            where user.UserName == requestDto.UserName 
+                            select new
+                            {
+                                UserName = user.UserName
+                            }).ToListAsync();
 
-                if (userAccounts.Count < 1)
+                if (select.Any() == false)
                 {
                     TblUserAccount userAccount = new();
                     userAccount.RegisterDate = DateTime.Now;
@@ -157,9 +158,9 @@ namespace GameApi.Controllers
             return rv;
         }
 
-        [HttpPost("GetUserAccountPassword")]
+        [HttpGet("GetUserAccountPassword")]
         public async Task<CommonResult<ResDtoGetUserAccountPassword>>
-            GetUserAccountPassword([FromBody] ReqDtoGetUserAccountPassword requestDto)
+            GetUserAccountPassword([FromQuery] ReqDtoGetUserAccountPassword requestDto)
         {
             CommonResult<ResDtoGetUserAccountPassword> rv = new();
 
@@ -177,7 +178,7 @@ namespace GameApi.Controllers
                             }).ToListAsync();
 
 
-                if (select.Any())
+                if (select.Any() == false)
                 {
                     throw new CommonException(EStatusCode.NotFoundEntity,
                         "아이디가 존재하지 않습니다."); // try문 밖으로 던짐
@@ -276,10 +277,10 @@ namespace GameApi.Controllers
             try
             {
                 var userAccount = _context.TblUserAccounts.
-                    Where
-                    (
-                    user => user.UserName == requestDto.UserName && user.Password == requestDto.Password
-                    ).FirstOrDefault();
+                                    Where
+                                    (
+                                    user => user.UserName == requestDto.UserName && user.Password == requestDto.Password
+                                    ).FirstOrDefault();
 
                 if (userAccount == null)
                 {
