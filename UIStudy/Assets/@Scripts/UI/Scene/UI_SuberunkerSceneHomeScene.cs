@@ -45,10 +45,16 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         Language_Kr
     }
 
-    private string _minutes = "분";
-    private string _seconds = "초";
+    private string _minutesString = "분";
+    private string _secondsString = "초";
     private string _bestRecord = "최고 기록";
     private string _recentRecord = "최근 기록";
+    
+    private int _recordMinutes;
+    private float _recordSeconds;
+    private int _minutes;
+    private float _seconds;
+
 
     public override bool Init()
     {
@@ -92,13 +98,13 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetObject((int)GameObjects.MyScore).SetActive(true);
         GetObject((int)GameObjects.Ranking).SetActive(false);
         
-        int recordMinutes = Mathf.FloorToInt(Managers.Game.PlayTimeRecord / 60);
-        float recordSeconds = Managers.Game.PlayTimeRecord % 60;
-        GetText((int)Texts.Best_Text).text = $"{_bestRecord} : {recordMinutes}{_minutes} {recordSeconds}{_seconds}";
+        _recordMinutes = Managers.Game.PlayTimeRecord / 60;
+        _recordSeconds = Managers.Game.PlayTimeRecord % 60;
+        GetText((int)Texts.Best_Text).text = $"{_bestRecord} : {_recordMinutes}{_minutesString} {_recordSeconds}{_secondsString}";
 
-        int minutes = Mathf.FloorToInt(Managers.Game.PlayTime / 60);
-        float seconds = Managers.Game.PlayTime % 60;
-        GetText((int)Texts.Current_Text).text = $"{_recentRecord} : {minutes}{_minutes} {seconds}{_seconds}";
+        _minutes = Managers.Game.PlayTime / 60;
+        _seconds = Managers.Game.PlayTime % 60;
+        GetText((int)Texts.Current_Text).text = $"{_recentRecord} : {_minutes}{_minutesString} {_seconds}{_secondsString}";
     }
 
     private void OnClick_ShowRanking(PointerEventData eventData)
@@ -124,8 +130,11 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     {
         _bestRecord = Managers.Language.LocalizedString(91001);
         _recentRecord = Managers.Language.LocalizedString(91002);
-        _minutes = Managers.Language.LocalizedString(91004);
-        _seconds = Managers.Language.LocalizedString(91005);
+        _minutesString = Managers.Language.LocalizedString(91004);
+        _secondsString = Managers.Language.LocalizedString(91005);
+        GetText((int)Texts.Best_Text).text = $"{_bestRecord} : {_recordMinutes}{_minutesString} {_recordSeconds}{_secondsString}";
+        GetText((int)Texts.Current_Text).text = $"{_recentRecord} : {_minutes}{_minutesString} {_seconds}{_secondsString}";
+
         GetText((int)Texts.Shop_Text).text = Managers.Language.LocalizedString(91006);
         GetText((int)Texts.Mission_Text).text = Managers.Language.LocalizedString(91007);
         GetText((int)Texts.ChooseCharacter_Text).text = Managers.Language.LocalizedString(91008);

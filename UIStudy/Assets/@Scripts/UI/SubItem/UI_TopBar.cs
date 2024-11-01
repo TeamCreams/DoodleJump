@@ -39,9 +39,10 @@ public class UI_TopBar : UI_Base
     System.IDisposable _lifeTimer;
 
     private UI_HeartRoot _heartRoot;
-    private string _minutes = "분";
-    private string _seconds = "초";
-
+    private string _minutesString = "분";
+    private string _secondsString = "초";
+    private int _minutes;
+    private float _seconds;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -76,9 +77,9 @@ public class UI_TopBar : UI_Base
             .Subscribe(_ =>
             {
                 _time++;
-                int minutes = _time / 60;
-                float seconds = _time % 60;
-                GetText((int)Texts.Time_Text).text = string.Format($"{minutes}{_minutes} {seconds}{_seconds}");
+                _minutes = _time / 60;
+                _seconds = _time % 60;
+                GetText((int)Texts.Time_Text).text = string.Format($"{_minutes}{_minutesString} {_seconds}{_secondsString}");
             }).AddTo(this.gameObject);
         return true;
     }
@@ -160,8 +161,9 @@ public class UI_TopBar : UI_Base
 
     void OnEvent_SetLanguage(Component sender, object param)
     {
-        _minutes = Managers.Language.LocalizedString(91004);
-        _seconds = Managers.Language.LocalizedString(91005);
+        _minutesString = Managers.Language.LocalizedString(91004);
+        _secondsString = Managers.Language.LocalizedString(91005);
+        GetText((int)Texts.Time_Text).text = $"{_minutes}{_minutesString} {_seconds}{_secondsString}";
     }
 }
 

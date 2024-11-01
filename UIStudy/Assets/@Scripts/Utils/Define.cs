@@ -132,29 +132,6 @@ public static class Define
         En
     }
 
-    public enum ELocalizableTerms
-    {
-        BestRecord,
-        RecentRecord,
-        Hours,  // h
-        Minutes, // m
-        Seconds, // s
-        Shop,
-        Mission,
-        Character,
-        GameStart,
-        DefaultSpeed,
-        DefaultHp,
-        DefaultLuck,
-        Name,
-        Nickname,
-        NicknameUnavailable, // This nickname is not available.
-        Skip,
-        Home,
-        Restart,
-        LevelUp
-    }
-
     public class Constants
 	{
 		public const int PLAYER_ID = 20001;
