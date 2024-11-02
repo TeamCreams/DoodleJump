@@ -69,6 +69,7 @@
     <Compile Include="Assets/@Scripts/Managers/Contents/GameManager.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_ChooseCharacterScene.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/AttackingExample.cs" />
+    <Compile Include="Assets/@Scripts/Scene/SingUpScene.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SuberunkerSceneHomeScene.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/StateHandler.cs" />
     <Compile Include="Assets/@Scripts/UI/UI_Button.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/ItemSlot.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/SoloState.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SuberunkerTimelineScene.cs" />
+    <Compile Include="Assets/@Scripts/UI/Scene/UI_SingUpScene.cs" />
     <Compile Include="Assets/@Scripts/Managers/Contents/LanguageDataMamager.cs" />
     <Compile Include="Assets/@Scripts/UI/Popup/UI_Popup.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/MonsterState.cs" />
@@ -495,7 +497,6 @@
     <None Include="Assets/BS2ArtResources/Characters/Enemies/OgreSoldier/OgreSoldier.atlas.txt" />
     <None Include="Assets/BS2ArtResources/Characters/Summons/WanderingReaper/WanderingReaper.atlas.txt" />
     <None Include="Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt" />
-    <None Include="Assets/@Scripts/Plugins/GameApiDto.dll" />
     <None Include="Assets/BS2ArtResources/Characters/Tanks/AddOn/Spear_07/Spear_07.atlas.txt" />
     <None Include="Assets/BS2ArtResources/Characters/Heroes/Dragon/GoldDragon/GoldDragon.atlas.txt" />
     <None Include="Assets/BS2ArtResources/Characters/Heroes/Pilot/Penguin/Penguin.atlas.txt" />
@@ -505,6 +506,7 @@
     <None Include="Assets/BS2ArtResources/Characters/Heroes/Archer/Zebra/Zebra.atlas.txt" />
     <None Include="Assets/BS2ArtResources/Characters/Enemies/DokeviKing/DokeviKing.atlas.txt" />
     <None Include="Assets/BS2ArtResources/Characters/Heroes/IceMage/Quokka/Quokka.atlas.txt" />
+    <None Include="Assets/@Scripts/Plugins/GameApiDto.dll" />
     <None Include="Assets/BS2ArtResources/Characters/Heroes/IceMage/ScottishFold/ScottishFold.atlas.txt" />
     <None Include="Assets/BS2ArtResources/Characters/Heroes/Ninja/Khaomani/Khaomani.atlas.txt" />
     <None Include="Assets/BS2ArtResources/Characters/Pets/Anvil/Anvil.atlas.txt" />

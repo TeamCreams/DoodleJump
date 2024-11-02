@@ -18,3 +18,7 @@ Id,KrText,EnText
 91017,홈,Home
 91018,다시 시작,Restart
 91019,레벨 업,Level Up
+91020,비밀번호,Password
+91021,20자 이내의 비밀번호를 입력해주세요.,Please enter a password within 20 characters.
+91022,비밀번호 확인,Confirm Password
+91023,비밀번호가 일치하지 않습니다.,The passwords do not match.

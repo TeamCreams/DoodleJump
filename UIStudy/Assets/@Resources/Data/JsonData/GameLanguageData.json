@@ -94,6 +94,26 @@
       "Id": 91019,
       "KrText": "레벨 업",
       "EnText": "Level Up"
+    },
+    {
+      "Id": 91020,
+      "KrText": "비밀번호",
+      "EnText": "Password"
+    },
+    {
+      "Id": 91021,
+      "KrText": "20자 이내의 비밀번호를 입력해주세요.",
+      "EnText": "Please enter a password within 20 characters."
+    },
+    {
+      "Id": 91022,
+      "KrText": "비밀번호 확인",
+      "EnText": "Confirm Password"
+    },
+    {
+      "Id": 91023,
+      "KrText": "비밀번호가 일치하지 않습니다.",
+      "EnText": "The passwords do not match."
     }
   ]
 }
