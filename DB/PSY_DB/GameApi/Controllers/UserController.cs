@@ -342,12 +342,13 @@ namespace GameApi.Controllers
                     throw new CommonException(EStatusCode.NameAlreadyExists,
                         "사용할 수 없는 아이디입니다.");
                 }
-                var selectUser = select.First();
-
-                rv.StatusCode = EStatusCode.OK;
-                rv.Message = "";
-                rv.IsSuccess = true;
-                rv.Data = null;
+                else
+                {
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Message = "";
+                    rv.IsSuccess = true;
+                    rv.Data = null;
+                }
             }
             catch (CommonException ex)
             {
