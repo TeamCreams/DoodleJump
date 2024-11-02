@@ -1,5 +1,4 @@
 ﻿using GameApi.Dtos;
-using GameApiDto.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;

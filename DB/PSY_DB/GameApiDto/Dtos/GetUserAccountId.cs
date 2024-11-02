@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameApiDto.Dtos
+namespace GameApi.Dtos
 {
     public class ReqDtoGetUserAccountId
     {
