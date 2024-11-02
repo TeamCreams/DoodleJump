@@ -10,7 +10,22 @@ public class TestScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.V))
         {
-            Run();
+            ReqDtoGetUserAccountId requestDto = new ReqDtoGetUserAccountId();
+            requestDto.UserName = "test1";
+            Managers.Web.SendGetRequest(WebRoute.GetUserAccountId(requestDto), (response) =>
+            {
+                Debug.Log("Response: " + response); 
+                CommonResult<ResDtoGetUserAccountId> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetUserAccountId>>(response);
+                Debug.Log("IsSuccess: " + rv.IsSuccess); 
+                if(rv.IsSuccess == true)
+                {
+                    Debug.Log("success");
+                }
+                else
+                {
+                    Debug.Log("already ID!!");
+                }
+            });
         }
 
         if (Input.GetKeyUp(KeyCode.S))

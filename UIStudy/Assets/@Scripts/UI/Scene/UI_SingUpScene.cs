@@ -72,24 +72,29 @@ public class UI_SingUpScene : UI_Scene
             GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
             return;
         }
-        Managers.Scene.LoadScene(EScene.SuberunkerTimelineScene);
+        else
+        {
+            InsertUser();
+            Managers.Scene.LoadScene(EScene.SuberunkerTimelineScene);
+        }
+    }
+
+      private async void InsertUser()
+    {
+        var client = new HttpClient();
+        var request = new HttpRequestMessage(HttpMethod.Post, "https://dev-single-api.snapism.net:8080/User/InsertUserAccount");
+        ReqDtoInsertUserAccount requestDto = new ReqDtoInsertUserAccount();
+        requestDto.UserName = GetInputField((int)InputFields.Id_InputField).text;
+        requestDto.Password = GetInputField((int)InputFields.Password_InputField).text;
+        string json = JsonConvert.SerializeObject(requestDto);
+        var content = new StringContent(json, null, "application/json");
+        request.Content = content;
+        var response = await client.SendAsync(request);
+        response.EnsureSuccessStatusCode();
     }
 
     private EErrorCode CheckCorrectId(string id)
     {
-        ReqDtoGetUserAccount requestDto = new ReqDtoGetUserAccount();
-            requestDto.UserName = "test1";
-            requestDto.Password = "test1";
-            Managers.Web.SendGetRequest(WebRoute.GetUserAccount(requestDto), (response) =>
-            {
-                CommonResult<ResDtoGetUserAccount> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetUserAccount>>(response);
-
-                if(rv.IsSuccess == true)
-                {
-                    GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
-                }
-            });
-            
         if (string.IsNullOrEmpty(id) || char.IsDigit(id[0]))
         {
             return EErrorCode.ERR_ValidationNickname;
@@ -99,7 +104,24 @@ public class UI_SingUpScene : UI_Scene
             return EErrorCode.ERR_ValidationNickname;
         }
 
-        return EErrorCode.ERR_OK;
+        ReqDtoGetUserAccountId requestDto = new ReqDtoGetUserAccountId();
+        CommonResult<ResDtoGetUserAccountId> rv = null;
+        requestDto.UserName = id;
+        Managers.Web.SendGetRequest(WebRoute.GetUserAccountId(requestDto), (response) =>
+        {
+            Debug.Log("Response: " + response); 
+            rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetUserAccountId>>(response);
+        });
+        if(rv.IsSuccess == true)
+        {
+            Debug.Log("success");
+            return EErrorCode.ERR_OK;
+        }
+        else
+        {
+            GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
+            return EErrorCode.ERR_ValidationNickname;
+        }
     }
 
     private EErrorCode CheckCorrectPassword(string password)
@@ -119,6 +141,8 @@ public class UI_SingUpScene : UI_Scene
             return EErrorCode.ERR_ValidationNickname;
         }
         return EErrorCode.ERR_OK;
+
+        
     }
 
     void OnEvent_SetLanguage(Component sender, object param)
