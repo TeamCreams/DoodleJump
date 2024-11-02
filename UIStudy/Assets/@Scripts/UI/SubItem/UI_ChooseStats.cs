@@ -79,6 +79,10 @@ public class UI_ChooseStats : UI_Base
         _defaultSpeed = Managers.Language.LocalizedString(91010);
         _defaultHp = Managers.Language.LocalizedString(91011);
         _defaultLuck = Managers.Language.LocalizedString(91012);
+
+        GetText((int)Texts.Speed_Text).text = $"{_defaultSpeed} : {Managers.Data.PlayerDic[_playerDataId].Speed}";
+        GetText((int)Texts.Life_Text).text = $"{_defaultHp} : {Managers.Data.PlayerDic[_playerDataId].Hp}";
+        GetText((int)Texts.Luck_Text).text = $"{_defaultLuck} : {Managers.Data.PlayerDic[_playerDataId].Luck}";
     }
 
 }
