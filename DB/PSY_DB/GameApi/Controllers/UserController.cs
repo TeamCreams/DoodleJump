@@ -1,4 +1,5 @@
 ﻿using GameApi.Dtos;
+using GameApiDto.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -318,6 +319,54 @@ namespace GameApi.Controllers
                 rv.Data = null;
             }
 
+            return rv;
+        }
+
+        [HttpGet("GetUserAccountId")]
+        public async Task<CommonResult<ResDtoGetUserAccountId>> GetUserAccountId([FromQuery] ReqDtoGetUserAccountId requestDto)
+        {
+            CommonResult<ResDtoGetUserAccountId> rv = new();
+
+            try
+            {
+                rv.Data = new();
+
+                var select = await (from userAccount in _context.TblUserAccounts
+                            where(userAccount.UserName == requestDto.UserName)
+                            select new
+                            {
+                                UserName = userAccount.UserName,
+                            }).ToListAsync();
+              
+                if (true == select.Any())
+                {
+                    throw new CommonException(EStatusCode.NameAlreadyExists,
+                        "사용할 수 없는 아이디입니다.");
+                }
+                var selectUser = select.First();
+
+                rv.StatusCode = EStatusCode.OK;
+                rv.Message = "";
+                rv.IsSuccess = true;
+                rv.Data = null;
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = ex.Data as ResDtoGetUserAccountId;
+
+                return rv;
+            }
             return rv;
         }
     }
