@@ -82,7 +82,7 @@ public class UI_SingUpScene : UI_Scene
       private async void InsertUser()
     {
         var client = new HttpClient();
-        var request = new HttpRequestMessage(HttpMethod.Post, "https://dev-single-api.snapism.net:8080/User/InsertUserAccount");
+        var request = new HttpRequestMessage(HttpMethod.Post, "https://dev-single-api.snapism.net:8080/User/InsertUser");
         ReqDtoInsertUserAccount requestDto = new ReqDtoInsertUserAccount();
         requestDto.UserName = GetInputField((int)InputFields.Id_InputField).text;
         requestDto.Password = GetInputField((int)InputFields.Password_InputField).text;

@@ -10,6 +10,9 @@ public class TestScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.V))
         {
+            InsertUser();
+
+/*
             ReqDtoGetUserAccountId requestDto = new ReqDtoGetUserAccountId();
             requestDto.UserName = "test1";
             Managers.Web.SendGetRequest(WebRoute.GetUserAccountId(requestDto), (response) =>
@@ -26,6 +29,7 @@ public class TestScript : MonoBehaviour
                     Debug.Log("already ID!!");
                 }
             });
+*/
         }
 
         if (Input.GetKeyUp(KeyCode.S))
@@ -61,5 +65,19 @@ public class TestScript : MonoBehaviour
         response.EnsureSuccessStatusCode();
         Debug.Log(await response.Content.ReadAsStringAsync());
 
+    }
+
+    private async void InsertUser()
+    {
+        var client = new HttpClient();
+        var request = new HttpRequestMessage(HttpMethod.Post, "https://dev-single-api.snapism.net:8080/User/InsertUser");
+        ReqDtoInsertUserAccount requestDto = new ReqDtoInsertUserAccount();
+        requestDto.UserName = "tjdbssy137";
+        requestDto.Password = "akfxlwm";
+        string json = JsonConvert.SerializeObject(requestDto);
+        var content = new StringContent(json, null, "application/json");
+        request.Content = content;
+        var response = await client.SendAsync(request);
+        response.EnsureSuccessStatusCode();
     }
 }
