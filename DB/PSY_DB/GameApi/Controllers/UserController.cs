@@ -171,7 +171,7 @@ namespace GameApi.Controllers
                 var select = await (
                             from user in _context.TblUserAccounts
                             where (user.UserName == requestDto.UserName &&
-                                user.DeletedDate != null)
+                                user.DeletedDate == null) // 삭제 되기 전이 null값
                             select new ResDtoGetUserAccountPassword
                             {
                                 Password = user.Password
@@ -288,7 +288,9 @@ namespace GameApi.Controllers
                         $"아이디 혹은 비밀번호가 맞지 않습니다. UserName : {requestDto.UserName} Password : {requestDto.Password}");
                 }
 
-                _context.TblUserAccounts.Remove(userAccount);
+                userAccount.DeletedDate = DateTime.UtcNow;
+
+                //_context.TblUserAccounts.Remove(userAccount);
 
                 var IsSuccess = await _context.SaveChangesAsync();
 
@@ -331,7 +333,7 @@ namespace GameApi.Controllers
                 rv.Data = new();
 
                 var select = await (from userAccount in _context.TblUserAccounts
-                            where(userAccount.UserName == requestDto.UserName)
+                            where(userAccount.UserName == requestDto.UserName)//&& userAccount.DeletedDate == null)
                             select new
                             {
                                 UserName = userAccount.UserName,
