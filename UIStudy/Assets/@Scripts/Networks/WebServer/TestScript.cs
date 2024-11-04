@@ -36,7 +36,7 @@ public class TestScript : MonoBehaviour
         {
             ReqDtoGetUserAccount requestDto = new ReqDtoGetUserAccount();
             requestDto.UserName = "test1";
-            requestDto.Password = "test1";
+            //requestDto.Password = "test1";
             Managers.Web.SendGetRequest(WebRoute.GetUserAccount(requestDto), (response) =>
             {
                 CommonResult<ResDtoGetUserAccount> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetUserAccount>>(response);
@@ -57,7 +57,7 @@ public class TestScript : MonoBehaviour
         var request = new HttpRequestMessage(HttpMethod.Post, "https://dev-single-api.snapism.net:8080/User/GetUserAccount");
         ReqDtoGetUserAccount requestDto = new ReqDtoGetUserAccount();
         requestDto.UserName = "test1";
-        requestDto.Password = "test1";
+        //requestDto.Password = "test1";
         string json = JsonConvert.SerializeObject(requestDto);
         var content = new StringContent(json, null, "application/json");
         request.Content = content;

@@ -114,6 +114,7 @@
     <Compile Include="Assets/@Scripts/UI/Scene/UI_Scene.cs" />
     <Compile Include="Assets/@Scripts/UI/UI_EventHandler.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Data/Item.cs" />
+    <Compile Include="Assets/@Scripts/Scene/SignInScene.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterSerializer.cs" />
     <Compile Include="Assets/@Scripts/Managers/Core/CameraManager.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/BowExample.cs" />
@@ -207,6 +208,7 @@
     <Compile Include="Assets/@Scripts/UI/TinyFarm/UI_TinyFarmMissionSlot.cs" />
     <Compile Include="Assets/@Scripts/Scene/InputNameScene.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_InventorySlot.cs" />
+    <Compile Include="Assets/@Scripts/UI/Scene/UI_SignInScene.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_InventoryItem.cs" />
     <Compile Include="Assets/@Scripts/UI/Kakao/UI_ChattingRoomScene.cs" />
     <Compile Include="Assets/@Scripts/UI/TinyFarm/UI_TinyFarmMission.cs" />

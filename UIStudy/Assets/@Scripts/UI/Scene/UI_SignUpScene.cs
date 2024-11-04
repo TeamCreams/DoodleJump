@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System;
 using WebApi.Models.Dto;
-using Unity.VisualScripting;
 
 public class UI_SignUpScene : UI_Scene
 {
@@ -24,7 +23,8 @@ public class UI_SignUpScene : UI_Scene
     private enum Buttons
     {
         Next_Button,
-        DuplicateIdCheck_Button
+        DuplicateIdCheck_Button,
+        SignIn_Button
     }
 
     private enum Texts
@@ -37,7 +37,9 @@ public class UI_SignUpScene : UI_Scene
         Placeholder_Password_Text,
         Warning_ConfirmPassword_Text,
         ConfirmPassword_Text,
-        Placeholder_ConfirmPassword_Text
+        Placeholder_ConfirmPassword_Text,
+        SignIn_Text,
+
     }
 
     private string _idUnavailable = "사용할 수 없는 아이디입니다.";
@@ -59,6 +61,8 @@ public class UI_SignUpScene : UI_Scene
 
         GetButton((int)Buttons.Next_Button).gameObject.BindEvent(OnClick_Next, EUIEvent.Click);
         GetButton((int)Buttons.DuplicateIdCheck_Button).gameObject.BindEvent(OnClick_DuplicateIdCheck, EUIEvent.Click);
+        GetButton((int)Buttons.SignIn_Button).gameObject.BindEvent(OnClick_SignIn, EUIEvent.Click);
+
         GetInputField((int)InputFields.ConfirmPassword_InputField).gameObject.BindEvent(OnClick_CheckCorrectPassword, EUIEvent.Click);
         GetText((int)Texts.Warning_Id_Text).text = "";
         GetText((int)Texts.Warning_Password_Text).text = "";
@@ -79,7 +83,7 @@ public class UI_SignUpScene : UI_Scene
         else
         {
             InsertUser();
-            Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+            Managers.Scene.LoadScene(EScene.SignInScene);
         }
     }
 
@@ -97,6 +101,11 @@ public class UI_SignUpScene : UI_Scene
     private void OnClick_CheckCorrectPassword(PointerEventData eventData)
     {
         _errCodePassword = CheckCorrectPassword(GetInputField((int)InputFields.Password_InputField).text);
+    }
+
+    private void OnClick_SignIn(PointerEventData eventData)
+    {
+        Managers.Scene.LoadScene(EScene.SignInScene);
     }
     
       private async void InsertUser()
@@ -183,8 +192,8 @@ public class UI_SignUpScene : UI_Scene
     void OnEvent_SetLanguage(Component sender, object param)
     {
         GetText((int)Texts.Id_Text).text = Managers.Language.LocalizedString(91013);
-        GetText((int)Texts.Placeholder_Id_Text).text = Managers.Language.LocalizedString(91014);
-        _idUnavailable = Managers.Language.LocalizedString(91015);
+        GetText((int)Texts.Placeholder_Id_Text).text = Managers.Language.LocalizedString(91013);
+        _idUnavailable = Managers.Language.LocalizedString(91024);
 
         GetText((int)Texts.Password_Text).text = Managers.Language.LocalizedString(91020);
         GetText((int)Texts.Placeholder_Password_Text).text = Managers.Language.LocalizedString(91020);
@@ -193,5 +202,7 @@ public class UI_SignUpScene : UI_Scene
         GetText((int)Texts.ConfirmPassword_Text).text = Managers.Language.LocalizedString(91022);
         GetText((int)Texts.Placeholder_ConfirmPassword_Text).text = Managers.Language.LocalizedString(91022);
         _confirmPasswordUnavailable = Managers.Language.LocalizedString(91023);
+        
+        GetText((int)Texts.SignIn_Text).text = Managers.Language.LocalizedString(91026);
     }
 }

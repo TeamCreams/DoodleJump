@@ -10,6 +10,7 @@ public static class Define
 		DevLoadingScene,
 		TinyFarmScene,
         SignUpScene,
+        SignInScene,
         SuberunkerSceneHomeScene,
         SuberunkerTimelineScene,
         ChooseCharacterScene,

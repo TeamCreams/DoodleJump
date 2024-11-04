@@ -21,4 +21,8 @@ Id,KrText,EnText
 91020,비밀번호,Password
 91021,20자 이내의 비밀번호를 입력해주세요.,Please enter a password within 20 characters.
 91022,비밀번호 확인,Confirm Password
-91023,비밀번호가 일치하지 않습니다.,The passwords do not match.
+91023,비밀번호가 일치하지 않습니다.,The password does not match.
+91024,사용할 수 없는 아이디입니다.,The username is not available.
+91025,회원가입,Sign Up
+91026,로그인,Sign In
+91027,아이디,Id

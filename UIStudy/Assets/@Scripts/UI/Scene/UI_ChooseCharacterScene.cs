@@ -101,7 +101,7 @@ public class UI_ChooseCharacterScene : UI_Scene
 
     private void SpawnItem(int id)
     {
-        var item = Managers.UI.MakeSubItem<UI_InventoryItem>(parent: GetObject((int)GameObjects.InventoryItemRoot).transform, pooling: true);
+        var item = Managers.UI.MakeSubItem<UI_InventoryItem>(parent: _itemRoot.transform, pooling: true); //GetObject((int)GameObjects.InventoryItemRoot).transform
         item.SetInfo(id);
         _itemList.Add(item.gameObject);
     }
