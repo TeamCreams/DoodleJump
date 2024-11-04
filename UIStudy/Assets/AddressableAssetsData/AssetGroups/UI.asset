@@ -13,30 +13,10 @@ MonoBehaviour:
   m_Name: UI
   m_EditorClassIdentifier: 
   m_GroupName: UI
-  m_Data:
-    m_SerializedData: []
   m_GUID: 42583b06f1124b04b924798d88ccd356
   m_SerializeEntries:
-  - m_GUID: 8f568de498ed2c44ca9a90d8fdb5f6a6
-    m_Address: UI_SuberunkerScene
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: da17864b9d3568e4dbee623ad7a9328b
-    m_Address: UI_Joystick
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8289896ba7766194481f087e3e6de9dc
-    m_Address: UI_RetryPopup
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 63336cde6dc7b4c6296971ce67b13d9b
-    m_Address: UI_ChooseCharacterScene
+  - m_GUID: 3c061595fdb4f4a1fb81caad7c858d3f
+    m_Address: UI_SuberunkerTimelineScene
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
@@ -47,20 +27,44 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b56dfdb3c3412406281823d20a73aa59
-    m_Address: UI_LevelUpPopup
+  - m_GUID: 63336cde6dc7b4c6296971ce67b13d9b
+    m_Address: UI_ChooseCharacterScene
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3c061595fdb4f4a1fb81caad7c858d3f
-    m_Address: UI_SuberunkerTimelineScene
+  - m_GUID: 6697224c9a77845e7b4631235d4a26f2
+    m_Address: UI_SignUpScene
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8289896ba7766194481f087e3e6de9dc
+    m_Address: UI_RetryPopup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f568de498ed2c44ca9a90d8fdb5f6a6
+    m_Address: UI_SuberunkerScene
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: aa814ac862b7f4840865e5bfb4c74a17
     m_Address: UI_SuberunkerSceneHomeScene
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b56dfdb3c3412406281823d20a73aa59
+    m_Address: UI_LevelUpPopup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da17864b9d3568e4dbee623ad7a9328b
+    m_Address: UI_Joystick
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

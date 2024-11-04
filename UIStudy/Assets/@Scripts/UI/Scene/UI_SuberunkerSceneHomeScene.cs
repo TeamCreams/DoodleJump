@@ -85,10 +85,9 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetToggle((int)Toggles.Language_En).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
         GetToggle((int)Toggles.Language_Kr).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
 
-        Managers.Event.TriggerEvent(EEventType.SetLanguage);
-
         GetText((int)Texts.TotalGold_Text).text = Managers.Game.TotalGold.ToString();
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+        Managers.Event.TriggerEvent(EEventType.SetLanguage);
 
         return true;
     }

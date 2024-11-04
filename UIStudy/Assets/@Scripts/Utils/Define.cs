@@ -9,6 +9,7 @@ public static class Define
 		Unknown,
 		DevLoadingScene,
 		TinyFarmScene,
+        SignUpScene,
         SuberunkerSceneHomeScene,
         SuberunkerTimelineScene,
         ChooseCharacterScene,

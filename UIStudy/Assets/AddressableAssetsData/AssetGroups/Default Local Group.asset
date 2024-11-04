@@ -13,17 +13,20 @@ MonoBehaviour:
   m_Name: Default Local Group
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
-  m_Data:
-    m_SerializedData: []
   m_GUID: 1f4d5e14bf776425a9b1fb8649a87b4e
   m_SerializeEntries:
+  - m_GUID: 511a587cb8a1143ea999965b82197936
+    m_Address: Assets/@Resources/UI/Scene/UI_ChooseCharacterScene.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5f4842027b4893b429f7fbaceb4abbd9
     m_Address: explosion_sharp_flat_3x3
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fe629fb308d0f96459c752cf5803d6cd
-    m_Address: UI_Inventory
+  - m_GUID: 8301f267a30fa744ca3e7cecbf633acb
+    m_Address: UI_TinyFarmScene
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
@@ -34,8 +37,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8301f267a30fa744ca3e7cecbf633acb
-    m_Address: UI_TinyFarmScene
+  - m_GUID: a866e239766727f45b0f300e999f88bb
+    m_Address: Hit
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
@@ -46,13 +49,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 511a587cb8a1143ea999965b82197936
-    m_Address: Assets/@Resources/UI/Scene/UI_ChooseCharacterScene.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a866e239766727f45b0f300e999f88bb
-    m_Address: Hit
+  - m_GUID: fe629fb308d0f96459c752cf5803d6cd
+    m_Address: UI_Inventory
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
@@ -61,5 +59,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: 2e346ec8844bb4282b60d1f21fe4423c, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 36c47c6ee9dbe49b8b07f370afcad525, type: 2}
     - {fileID: 11400000, guid: 6ce551861af0b4ea0b7c0d68fd9b083b, type: 2}
+    - {fileID: 11400000, guid: 36c47c6ee9dbe49b8b07f370afcad525, type: 2}

@@ -9,8 +9,8 @@ using static Define;
 public class LanguageDataMamager
 {
 
-    private Define.ELanguage _eLanguageInfo = Define.ELanguage.Kr;
-    public Define.ELanguage ELanguageInfo
+    private ELanguage _eLanguageInfo = ELanguage.En;
+    public ELanguage ELanguageInfo
     {
         get { return _eLanguageInfo; }
         set { _eLanguageInfo = value; }

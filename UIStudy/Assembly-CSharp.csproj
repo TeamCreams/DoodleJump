@@ -69,7 +69,6 @@
     <Compile Include="Assets/@Scripts/Managers/Contents/GameManager.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_ChooseCharacterScene.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/AttackingExample.cs" />
-    <Compile Include="Assets/@Scripts/Scene/SingUpScene.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SuberunkerSceneHomeScene.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/StateHandler.cs" />
     <Compile Include="Assets/@Scripts/UI/UI_Button.cs" />
@@ -83,6 +82,7 @@
     <Compile Include="Assets/@Scripts/Networks/WebServer/TestScript.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/QuickStart.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/SpriteSheetCapture.cs" />
+    <Compile Include="Assets/@Scripts/Scene/SignUpScene.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/ScrollInventoryFilter.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Data/Modifier.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Firearms/Enums/HoldType.cs" />
@@ -95,7 +95,6 @@
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/ItemSlot.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/SoloState.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SuberunkerTimelineScene.cs" />
-    <Compile Include="Assets/@Scripts/UI/Scene/UI_SingUpScene.cs" />
     <Compile Include="Assets/@Scripts/Managers/Contents/LanguageDataMamager.cs" />
     <Compile Include="Assets/@Scripts/UI/Popup/UI_Popup.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/MonsterState.cs" />
@@ -237,6 +236,7 @@
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Firearms/FirearmFire.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Enums/ElementId.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/AnchorManager.cs" />
+    <Compile Include="Assets/@Scripts/UI/Scene/UI_SignUpScene.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_InputNameScene.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/InventoryItem.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/Common/StateHandler.cs" />
