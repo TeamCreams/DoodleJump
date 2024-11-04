@@ -1,4 +1,5 @@
 ﻿using GameApi.Dtos;
+using GameApiDto.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -31,6 +32,7 @@ namespace GameApi.Controllers
                     select new
                     {
                         UserName = userAccount.UserName,
+                        DeletedDate = userAccount.DeletedDate
                     }).ToListAsync();
 
             return JsonConvert.SerializeObject(a);
@@ -46,7 +48,7 @@ namespace GameApi.Controllers
             try{ 
                 var select = await (
                             from user in _context.TblUserAccounts
-                            where user.UserName == requestDto.UserName 
+                            where (user.UserName.ToLower() == requestDto.UserName.ToLower() && user.DeletedDate == null)
                             select new
                             {
                                 UserName = user.UserName
@@ -102,18 +104,25 @@ namespace GameApi.Controllers
                 rv.Data = new();
 
                 var select = await (
-                            from user in _context.TblUserAccounts.Include(user => user.TblUserScores)
-                            where (user.UserName == requestDto.UserName && user.Password == requestDto.Password)
-                            select new ResDtoGetUserAccount                            
-                            {
-                                UserName = user.UserName,
-                                RegisterDate = user.RegisterDate,
-                                UpdateDate = user.UpdateDate,
-                                HighScore = user.TblUserScores
-                                              .OrderByDescending(s => s.History)
-                                              .Select(s => s.History)
-                                              .FirstOrDefault()
-                            }).ToListAsync();
+                    from user in _context.TblUserAccounts.Include(user => user.TblUserScores)
+                    where (user.UserName.ToLower() == requestDto.UserName.ToLower() && user.DeletedDate == null)
+                    //where (user.UserName == requestDto.UserName && user.Password == requestDto.Password && user.DeletedDate == null)
+                    select new ResDtoGetUserAccount
+                    {
+                        UserName = user.UserName,
+                        Password = user.Password,
+                        RegisterDate = user.RegisterDate,
+                        UpdateDate = user.UpdateDate,
+                        HighScore = user.TblUserScores
+                                      .OrderByDescending(s => s.History)
+                                      .Select(s => s.History)
+                                      .FirstOrDefault(),
+                        LatelyScore = user.TblUserScores.Any() ? 
+                                        user.TblUserScores.OrderByDescending(s => s.UpdateDate)
+                                        .FirstOrDefault()
+                                        .History : 0 // 최근 점수
+                    }).ToListAsync();
+
                 /*
                  *  SELECT `t`.`UserName`, `t`.`RegisterDate`, `t`.`UpdateDate`, COALESCE((
                           SELECT `t0`.`History`
@@ -125,7 +134,7 @@ namespace GameApi.Controllers
                       WHERE (`t`.`UserName` = @__requestDto_UserName_0) AND (`t`.`Password` = @__requestDto_Password_1)
                  */
 
-                if (false == select.Any())
+                if (select.Any() == false)
                 {
                     throw new CommonException(EStatusCode.NotFoundEntity,
                         "아이디 혹은 비밀번호가 맞지 않습니다."); // try문 밖으로 던짐
@@ -136,7 +145,6 @@ namespace GameApi.Controllers
                 rv.Message = "";
                 rv.IsSuccess = true;
                 rv.Data = selectUser;
-
             }
             catch (CommonException ex)
             {
@@ -170,12 +178,11 @@ namespace GameApi.Controllers
 
                 var select = await (
                             from user in _context.TblUserAccounts
-                            where (user.UserName == requestDto.UserName &&
-                                user.DeletedDate == null) // 삭제 되기 전이 null값
+                            where (user.UserName.ToLower() == requestDto.UserName.ToLower() && user.DeletedDate == null) // 삭제 되기 전이 null값
                             select new ResDtoGetUserAccountPassword
                             {
                                 Password = user.Password
-                            }).ToListAsync();
+                            }).ToListAsync(); //.FirstOrDefault();가 안됨
 
 
                 if (select.Any() == false)
@@ -222,8 +229,9 @@ namespace GameApi.Controllers
                 var userAccount = _context.TblUserAccounts.
                                     Where
                                     (
-                                        user => user.UserName == requestDto.UserName && 
-                                            user.Password == requestDto.Password
+                                        user => user.UserName.ToLower() == requestDto.UserName.ToLower() && 
+                                                user.Password == requestDto.Password &&
+                                                user.DeletedDate == null
                                     ).FirstOrDefault();
 
                 if (userAccount == null)
@@ -279,7 +287,7 @@ namespace GameApi.Controllers
                 var userAccount = _context.TblUserAccounts.
                                     Where
                                     (
-                                    user => user.UserName == requestDto.UserName && user.Password == requestDto.Password
+                                        user => user.UserName.ToLower() == requestDto.UserName.ToLower() && user.Password == requestDto.Password
                                     ).FirstOrDefault();
 
                 if (userAccount == null)
@@ -288,9 +296,9 @@ namespace GameApi.Controllers
                         $"아이디 혹은 비밀번호가 맞지 않습니다. UserName : {requestDto.UserName} Password : {requestDto.Password}");
                 }
 
-                userAccount.DeletedDate = DateTime.UtcNow;
+                //userAccount.DeletedDate = DateTime.UtcNow;
 
-                //_context.TblUserAccounts.Remove(userAccount);
+                _context.TblUserAccounts.Remove(userAccount);
 
                 var IsSuccess = await _context.SaveChangesAsync();
 
@@ -332,11 +340,11 @@ namespace GameApi.Controllers
             {
                 rv.Data = new();
 
-                var select = await (from userAccount in _context.TblUserAccounts
-                            where(userAccount.UserName == requestDto.UserName)//&& userAccount.DeletedDate == null)
+                var select = await (from user in _context.TblUserAccounts
+                            where(user.UserName.ToLower() == requestDto.UserName.ToLower() && user.DeletedDate == null)
                             select new
                             {
-                                UserName = userAccount.UserName,
+                                UserName = user.UserName,
                             }).ToListAsync();
               
                 if (true == select.Any())
@@ -366,6 +374,71 @@ namespace GameApi.Controllers
                 rv.StatusCode = EStatusCode.ServerException;
                 rv.Message = ex.Message;
                 rv.Data = ex.Data as ResDtoGetUserAccountId;
+
+                return rv;
+            }
+            return rv;
+        }
+
+        [HttpPost("InsertUserAccountScore")]
+        public async Task<CommonResult<ResInsertUserAccountScore>>
+            InsertUserAccountScore([FromBody] ReqInsertUserAccountScore requestDto)
+        {
+            CommonResult<ResInsertUserAccountScore> rv = new();
+
+            try
+            {
+                var select = await (
+                            from user in _context.TblUserAccounts
+                            where (user.UserName.ToLower() == requestDto.UserName.ToLower() && user.DeletedDate == null)
+                            select user.Id
+                            ).ToListAsync();
+
+                if (select.Any() == false)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        $"UserName : {requestDto.UserName}");
+                }
+
+                int userId = select.First();
+
+                TblUserScore userScore = new TblUserScore
+                {
+                    UserAccountId = userId,
+                    History = requestDto.Score,
+                    UpdateDate = DateTime.Now
+                };
+
+                _context.TblUserScores.Add(userScore);
+
+                var IsSuccess = await _context.SaveChangesAsync();
+
+                if (IsSuccess == 0)
+                {
+                    throw new CommonException(EStatusCode.ChangedRowsIsZero,
+                        $"UserName : {requestDto.UserName}");
+                }
+                else
+                {
+                    rv.IsSuccess = true;
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Data = null;
+                }
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = null;
 
                 return rv;
             }
