@@ -39,7 +39,7 @@ public class UI_Player : UI_Base
         BindTexts(typeof(Texts));
         BindObjects(typeof(GameObjects));
 
-        GetText((int)Texts.Nickname_Text).text = Managers.Game.ChracterStyleInfo.PlayerName;
+        GetText((int)Texts.Nickname_Text).text = Managers.Game.ChracterStyleInfo.PlayerName; //Managers.Game.PlayerInfo.PlayerId
         _content = GetText((int)Texts.Content_Text);
         _thoughtBubble = GetObject((int)GameObjects.ThoughtBubble);
         _thoughtBubble.SetActive(false);

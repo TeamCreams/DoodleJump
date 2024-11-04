@@ -145,6 +145,7 @@
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/Scarecrow.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Character.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_Heart.cs" />
+    <Compile Include="Assets/@Scripts/Managers/Contents/ScoreManager.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/Common/SoloState.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/InventoryExample.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/Equipment.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="Assets/@Scripts/Utils/Data.Contents.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/PlayingAnimations.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Firearms/FirearmFire.cs" />
+    <Compile Include="Assets/@Scripts/Managers/Contents/ScoreManager/ScoreManagerSlave.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Enums/ElementId.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/AnchorManager.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SignUpScene.cs" />

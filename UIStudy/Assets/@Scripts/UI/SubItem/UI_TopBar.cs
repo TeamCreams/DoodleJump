@@ -116,6 +116,7 @@ public class UI_TopBar : UI_Base
     {
         float currentHp = GetImage((int)Images.Hp).fillAmount;
 
+        //event로 바꿔야함
         if (nextHp < currentHp)
         {
             while (nextHp < currentHp)
@@ -133,12 +134,14 @@ public class UI_TopBar : UI_Base
 
             if (currentHp <= 0)
             {
-                Managers.Game.PlayTime = _time;
+                Managers.Score.SetScore("Orange", _time);
                 _lifeTimer?.Dispose();
+                /*
                 if (Managers.Game.PlayTimeRecord < _time)
                 {
                     Managers.Game.PlayTimeRecord = _time;
                 }
+                */
                 Managers.UI.ShowPopupUI<UI_RetryPopup>();
             }
         }

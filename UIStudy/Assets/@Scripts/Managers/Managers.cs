@@ -15,11 +15,15 @@ public class Managers : MonoBehaviour
 	private ObjectManager _object = new ObjectManager();
 	private LanguageDataMamager _language = new LanguageDataMamager();
 
+	private ScoreManager _score = new ScoreManager();
+
     public static GameManager Game { get { return Instance?._game; } }
 	public static MessageManager Message { get { return Instance?._message; } }
 	public static DataManager Data { get { return Instance?._data; } }
 	public static ObjectManager Object {  get { return Instance?._object; } }
 	public static LanguageDataMamager Language { get { return Instance?._language; } }
+
+	public static ScoreManager Score { get { return Instance?._score; } }
     #endregion
 
     #region Core
@@ -65,6 +69,7 @@ public class Managers : MonoBehaviour
 			Managers.Game.Init();
 			Managers.Sound.Init();
 			Managers.Web.Init();
+			Managers.Score.Init();
 		}
 	}
 

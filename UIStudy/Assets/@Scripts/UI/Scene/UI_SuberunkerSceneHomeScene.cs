@@ -22,7 +22,8 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         Shop_Text,
         Mission_Text,
         ChooseCharacter_Text,
-        Start_Text
+        Start_Text,
+        Welcome_Text
     }
 
     private enum Buttons
@@ -49,7 +50,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     private string _secondsString = "초";
     private string _bestRecord = "최고 기록";
     private string _recentRecord = "최근 기록";
-    
+    private string _welcome = "환영합니다";
     private int _recordMinutes;
     private float _recordSeconds;
     private int _minutes;
@@ -66,7 +67,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         BindTexts(typeof(Texts));
         BindButtons(typeof(Buttons));
         BindImages(typeof(Images));
-        BindToggles(typeof(Toggles));
+        //BindToggles(typeof(Toggles));
 
         GetButton((int)Buttons.ChooseCharacter_Button).gameObject.BindEvent((evt) =>
         {
@@ -82,8 +83,8 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
 
         GetImage((int)Images.MyScore_Button).gameObject.BindEvent(OnClick_ShowMyScore, EUIEvent.Click);
         GetImage((int)Images.Ranking_Button).gameObject.BindEvent(OnClick_ShowRanking, EUIEvent.Click);
-        GetToggle((int)Toggles.Language_En).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
-        GetToggle((int)Toggles.Language_Kr).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
+        //GetToggle((int)Toggles.Language_En).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
+        //GetToggle((int)Toggles.Language_Kr).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
 
         GetText((int)Texts.TotalGold_Text).text = Managers.Game.TotalGold.ToString();
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
@@ -97,6 +98,17 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetObject((int)GameObjects.MyScore).SetActive(true);
         GetObject((int)GameObjects.Ranking).SetActive(false);
         
+        //Debug.Log(Managers.Game.PlayerInfo.PlayerId);
+        int recordScore = Managers.Score.GetScore("Orange", EScoreType.RecordScore);
+        _recordMinutes = recordScore / 60;
+        _recordSeconds = recordScore % 60;
+        GetText((int)Texts.Best_Text).text = $"{_bestRecord} : {_recordMinutes}{_minutesString} {_recordSeconds}{_secondsString}";
+
+        int latelyScore = Managers.Score.GetScore("Orange", EScoreType.LatelyScore);
+        _minutes = latelyScore / 60;
+        _seconds = latelyScore % 60;
+        GetText((int)Texts.Current_Text).text = $"{_recentRecord} : {_minutes}{_minutesString} {_seconds}{_secondsString}";
+/*
         _recordMinutes = Managers.Game.PlayTimeRecord / 60;
         _recordSeconds = Managers.Game.PlayTimeRecord % 60;
         GetText((int)Texts.Best_Text).text = $"{_bestRecord} : {_recordMinutes}{_minutesString} {_recordSeconds}{_secondsString}";
@@ -104,6 +116,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         _minutes = Managers.Game.PlayTime / 60;
         _seconds = Managers.Game.PlayTime % 60;
         GetText((int)Texts.Current_Text).text = $"{_recentRecord} : {_minutes}{_minutesString} {_seconds}{_secondsString}";
+  */
     }
 
     private void OnClick_ShowRanking(PointerEventData eventData)
@@ -138,6 +151,8 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetText((int)Texts.Mission_Text).text = Managers.Language.LocalizedString(91007);
         GetText((int)Texts.ChooseCharacter_Text).text = Managers.Language.LocalizedString(91008);
         GetText((int)Texts.Start_Text).text = Managers.Language.LocalizedString(91009);
+        _welcome = Managers.Language.LocalizedString(91028);
+        GetText((int)Texts.Welcome_Text).text = $"{_welcome}, {"Orange"}!!";
     }
 
 }

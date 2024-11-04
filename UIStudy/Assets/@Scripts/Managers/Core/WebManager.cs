@@ -12,7 +12,9 @@ public class WebRoute
     public readonly static Func<ReqDtoGetUserAccountId, string> GetUserAccountId = (dto) => $"{BaseUrl}User/GetUserAccountId?UserName={dto.UserName}";
 
     public readonly static string InsertUserAccount =  $"{BaseUrl}User/InsertUser";
-    
+    public readonly static string ReqInsertUserAccountScore = $"{BaseUrl}User/InsertUserAccountScore";
+    //public readonly static Func<ReqInsertUserAccountScore, string> InsertUserAccountScore = (dto) => $"{BaseUrl}User/InsertUserAccountScore?UserName={dto.UserName}&Score{dto.Score}";
+
 }
 
 public class WebManager

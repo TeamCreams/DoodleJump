@@ -134,6 +134,11 @@
       "Id": 91027,
       "KrText": "아이디",
       "EnText": "Id"
+    },
+    {
+      "Id": 91028,
+      "KrText": "환영합니다",
+      "EnText": "Welcome"
     }
   ]
 }

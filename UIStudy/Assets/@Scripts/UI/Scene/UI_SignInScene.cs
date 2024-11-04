@@ -72,6 +72,7 @@ public class UI_SignInScene : UI_Scene
         }
         else
         {
+            Managers.Event.TriggerEvent(EEventType.SignIn); //호출이 안 됨
             Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
         }
     }
@@ -123,6 +124,9 @@ public class UI_SignInScene : UI_Scene
         {
             Debug.Log("Available ID");
             GetText((int)Texts.Warning_Id_Text).text = "";
+
+            Debug.Log($"{"Orange"}, {_rv.Data.UserName}");
+            //Managers.Game.PlayerInfo.PlayerId = _rv.Data.UserName;
             callback(EErrorCode.ERR_OK);
         }
         else

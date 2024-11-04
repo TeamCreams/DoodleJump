@@ -97,7 +97,16 @@ public class GameManager
         {
             _chracterStyleInfo = value;
         }
+    }
 
+    private PlayerInfo _playerInfo;
+    public PlayerInfo PlayerInfo
+    {
+        get { return _playerInfo; }
+        set
+        {
+            _playerInfo = value;
+        }
     }
 
     private DifficultySettingsInfo _difficultySettingsInfo;
@@ -213,6 +222,11 @@ public class ChracterStyleInfo
     public string Eyes { get; set; } = "Dizzy";
     public string Eyebrows { get; set; } = "DizzyEyebrows";
     public string Hair { get; set; } = "ZombieShabby";
+}
+
+public class PlayerInfo
+{
+    public string PlayerId { get; set; } = "Orange";
 }
 
 public class DifficultySettingsInfo // 다시시작할 때마다 초기화 필요 

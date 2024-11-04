@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public static class Define
 {
@@ -73,6 +74,7 @@ public static class Define
         CancelThoughtBubble,
         StoneShower,
         SetLanguage,
+        SignIn,
     }
 
     public enum EEquipType
@@ -138,6 +140,12 @@ public static class Define
 	{
 		public const int PLAYER_ID = 20001;
 	}
+
+    public enum EScoreType
+    {
+        LatelyScore,
+        RecordScore
+    }
 
 	public class HardCoding
 	{
