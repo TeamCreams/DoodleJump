@@ -1,5 +1,4 @@
 ﻿using GameApi.Dtos;
-using GameApiDto.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -389,10 +388,10 @@ namespace GameApi.Controllers
         }
 
         [HttpPost("InsertUserAccountScore")]
-        public async Task<CommonResult<ResInsertUserAccountScore>>
-            InsertUserAccountScore([FromBody] ReqInsertUserAccountScore requestDto)
+        public async Task<CommonResult<ResDtoInsertUserAccountScore>>
+            InsertUserAccountScore([FromBody] ReqDtoInsertUserAccountScore requestDto)
         {
-            CommonResult<ResInsertUserAccountScore> rv = new();
+            CommonResult<ResDtoInsertUserAccountScore> rv = new();
             
             Thread.Sleep(3000);
             try

@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameApiDto.Dtos
+namespace GameApi.Dtos
 {
-    public class ReqInsertUserAccountScore
+    public class ReqDtoInsertUserAccountScore
     {
         public string? UserName { get; set; }
         public int Score { get; set; }
 
     }
 
-    public class ResInsertUserAccountScore
+    public class ResDtoInsertUserAccountScore
     {
     }
 }
