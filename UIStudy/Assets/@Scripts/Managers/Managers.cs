@@ -69,7 +69,7 @@ public class Managers : MonoBehaviour
 			Managers.Game.Init();
 			Managers.Sound.Init();
 			Managers.Web.Init();
-			Managers.Score.Init();
+			//Managers.Score.Init();
 		}
 	}
 	

@@ -23,7 +23,7 @@ public class ScoreManagerSlave : InitBase
         {
             return false;
         }
-        Managers.Event.AddEvent(EEventType.SignIn, OnEvent_GetRv);
+        //Managers.Event.AddEvent(EEventType.SignIn, OnEvent_GetRv);
 
         Debug.Log("ScoreManagerSlave");
         return true;
@@ -105,8 +105,8 @@ public class ScoreManagerSlave : InitBase
     void OnEvent_GetRv(Component sender, object param)
     {
         ReqDtoGetUserAccount requestDto = new ReqDtoGetUserAccount();
-        requestDto.UserName = Managers.Game.PlayerInfo.PlayerId;
-        Debug.Log(Managers.Game.PlayerInfo.PlayerId + " hihihihihihihihihi");
+        requestDto.UserName = Managers.Game.UserInfo.UserId;
+        Debug.Log(Managers.Game.UserInfo.UserId + " hihihihihihihihihi");
         Managers.Web.SendGetRequest(WebRoute.GetUserAccount(requestDto), (response) =>        
         {
             Debug.Log("Response: " + response);

@@ -10,7 +10,7 @@ public class TestScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.V))
         {
-            Managers.Event.TriggerEvent(Define.EEventType.SignIn); //호출됨
+            //Managers.Event.TriggerEvent(Define.EEventType.SignIn); //호출됨
             //InsertUser();
 
 /*

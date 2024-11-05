@@ -1,7 +1,8 @@
 using UnityEngine;
 using Newtonsoft.Json;
 using System.Net.Http;
-using GameApiDto.Dtos;
+using GameApi.Dtos;
+using System;
 
 public class ScoreManager
 {
@@ -12,35 +13,40 @@ public class ScoreManager
         _slave = newObj.GetOrAddComponent<ScoreManagerSlave>();
     }
 
-    public async void InsertScore(string userName, int score)
+    public void GetScore(Action onSuccess = null)
     {
-        var client = new HttpClient();
-        var request = new HttpRequestMessage(HttpMethod.Post, WebRoute.ReqInsertUserAccountScore);
-        ReqInsertUserAccountScore requestDto = new ReqInsertUserAccountScore();
-        requestDto.UserName = userName;
-        requestDto.Score = score;
-        string json = JsonConvert.SerializeObject(requestDto);
-        var content = new StringContent(json, null, "application/json");
-        request.Content = content;
-        var response = await client.SendAsync(request);
-        response.EnsureSuccessStatusCode();
-    }
-
-    public int GetScore(string userName, Define.EScoreType scoreType)
-    {
-/*
-        int score = 0;
-        _slave.GetScore(userName, scoreType, (result) =>
+        Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
         {
-            score = result;
-            Debug.Log($"result : {result} score : {score}");
-        });
-*/
-        return _slave.GetScore(userName, scoreType);
+            UserName = Managers.Game.UserInfo.UserId
+        },
+       (response) =>
+       {
+           Managers.Game.UserInfo.RecordScore = response.HighScore;
+           Managers.Game.UserInfo.LatelyScore = response.LatelyScore;
+           onSuccess?.Invoke();
+       },
+       (errorCode) =>
+       {
+            Managers.UI.ShowPopupUI<UI_ErrorPopup>();           
+       });
     }
     
-    public void SetScore(string userName, int score)
+    public void SetScore(Action onSuccess = null)
     {
-        _slave.SetScore(userName, score);
+        Managers.WebContents.InsertUserAccountScore(new ReqDtoInsertUserAccountScore()
+        {
+            UserName = Managers.Game.UserInfo.UserId,
+            Score = Managers.Game.UserInfo.LatelyScore
+        },
+       (response) =>
+       {
+            Debug.Log("score 입력");
+            onSuccess?.Invoke();
+       },
+       (errorCode) =>
+       {
+            Debug.Log("score 입력 실패");
+            //Managers.UI.ShowPopupUI<UI_ErrorPopup>();           
+       });
     }
 }

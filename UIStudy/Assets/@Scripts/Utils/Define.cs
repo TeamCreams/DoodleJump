@@ -75,6 +75,9 @@ public static class Define
         StoneShower,
         SetLanguage,
         SignIn,
+        ErrorPopupTitle,
+        ErrorPopupNotice,
+        ToastPopupNotice
     }
 
     public enum EEquipType
@@ -128,6 +131,11 @@ public static class Define
         ERR_OK,
         ERR_DuplicateNickname, // 중복된 닉네임입니다.
         ERR_ValidationNickname, // 닉네임 사용 Validaiotn 에러
+        ERR_DuplicateId, // 중복된 Id입니다.
+        ERR_ValidationId, // Id 사용 Validaiotn 에러
+        ERR_ValidationPassword, // Password 사용 Validaiotn 에러
+        ERR_ConfirmPassword,
+        ERR_Nothing
     }
 
     public enum ELanguage

@@ -16,7 +16,7 @@ public class WebRoute
     public readonly static Func<ReqDtoGetUserAccountId, string> GetUserAccountId = (dto) => $"{BaseUrl}User/GetUserAccountId?UserName={dto.UserName}";
 
     public readonly static string InsertUserAccount = $"{BaseUrl}User/InsertUser";
-    public readonly static string ReqInsertUserAccountScore = $"{BaseUrl}User/InsertUserAccountScore";
+    public readonly static string InsertUserAccountScore = $"{BaseUrl}User/InsertUserAccountScore";
     //public readonly static Func<ReqInsertUserAccountScore, string> InsertUserAccountScore = (dto) => $"{BaseUrl}User/InsertUserAccountScore?UserName={dto.UserName}&Score{dto.Score}";
 
 }
@@ -79,6 +79,32 @@ public class WebContentsManager
         Managers.Web.SendPostRequest(WebRoute.InsertUserAccount, body , (response) =>
         {
             CommonResult<ResDtoInsertUserAccount> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertUserAccount>>(response);
+
+            if (rv == null || false == rv.IsSuccess)
+            {
+                onFailed.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                if (rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
+
+    public void InsertUserAccountScore(ReqDtoInsertUserAccountScore requestDto, Action<ResDtoInsertUserAccountScore> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
+
+        Managers.Web.SendPostRequest(WebRoute.InsertUserAccountScore, body , (response) =>
+        {
+            CommonResult<ResDtoInsertUserAccountScore> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertUserAccountScore>>(response); // ResDtoInsertUserAccountScore인데 이름 잘 못 지음 
 
             if (rv == null || false == rv.IsSuccess)
             {

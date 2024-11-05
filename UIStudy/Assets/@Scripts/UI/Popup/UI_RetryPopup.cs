@@ -30,7 +30,6 @@ public class UI_RetryPopup : UI_Popup
     private string _seconds = "초";
     private string _bestRecord = "최고 기록";
     private string _recentRecord = "최근 기록";
-
     public override bool Init()
     {
         if (base.Init() == false)
@@ -55,6 +54,7 @@ public class UI_RetryPopup : UI_Popup
 
         GetButton((int)Buttons.Home_Button).gameObject.BindEvent((evt) =>
         {
+            Managers.Score.GetScore();
             Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
             Managers.UI.ClosePopupUI(this);
             Time.timeScale = 1;
@@ -72,16 +72,15 @@ public class UI_RetryPopup : UI_Popup
     }
 
     public void SetRecord()
-    {
-        int recordScore = Managers.Score.GetScore(Managers.Game.PlayerInfo.PlayerId, EScoreType.RecordScore);
-        int recordMinutes = recordScore / 60;
-        float recordSeconds = recordScore % 60;//Managers.Game.PlayTimeRecord % 60;
+    {        
+        Managers.Score.GetScore();
+
+        int recordMinutes = Managers.Game.UserInfo.RecordScore / 60;
+        float recordSeconds = Managers.Game.UserInfo.RecordScore % 60;
         GetText((int)Texts.LifeRecordTime_Text).text = $"{_bestRecord} : {recordMinutes}{_minutes} {recordSeconds}{_seconds}";
 
-        int latelyScore = Managers.Score.GetScore(Managers.Game.PlayerInfo.PlayerId, EScoreType.LatelyScore);
-
-        int minutes = latelyScore / 60;
-        float seconds = latelyScore % 60;
+        int minutes = Managers.Game.UserInfo.LatelyScore / 60;
+        float seconds = Managers.Game.UserInfo.LatelyScore % 60;
         GetText((int)Texts.LifeTime_Text).text = $"{_recentRecord} : {minutes}{_minutes} {seconds}{_seconds}";
 
         GetText((int)Texts.Gold_Text).text = Managers.Game.Gold.ToString();

@@ -35,7 +35,7 @@ public class UI_LevelUpPopup : UI_Popup
         {
             Managers.UI.ClosePopupUI(this);
             Time.timeScale = 1;
-        }, Define.EUIEvent.Click);
+        }, EUIEvent.Click);
 
         Time.timeScale = 0;
 

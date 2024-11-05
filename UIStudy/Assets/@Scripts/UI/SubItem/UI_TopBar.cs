@@ -134,14 +134,9 @@ public class UI_TopBar : UI_Base
 
             if (currentHp <= 0)
             {
-                Managers.Score.SetScore(Managers.Game.PlayerInfo.PlayerId, _time);
                 _lifeTimer?.Dispose();
-                /*
-                if (Managers.Game.PlayTimeRecord < _time)
-                {
-                    Managers.Game.PlayTimeRecord = _time;
-                }
-                */
+                Managers.Game.UserInfo.LatelyScore = _time;
+                Managers.Score.SetScore();
                 Managers.UI.ShowPopupUI<UI_RetryPopup>();
             }
         }

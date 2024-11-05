@@ -83,9 +83,12 @@ public class UI_SignInScene : UI_Scene
 
         //1. 다른버튼 비활성화
         //2. 로딩 인디케이터
-        Managers.Game.PlayerInfo.PlayerId = GetInputField((int)InputFields.Id_InputField).text;
-        Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
-
+        Managers.UI.ShowPopupUI<UI_ToastPopup>();
+        Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "Login successful");
+        Managers.Game.UserInfo.UserId = GetInputField((int)InputFields.Id_InputField).text;
+        Managers.Score.GetScore(() =>
+            Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene)
+        );
     }
 
     private void OnClick_SignUp(PointerEventData eventData)
@@ -121,7 +124,6 @@ public class UI_SignInScene : UI_Scene
        {
            _isCheckDuplicateId = false;
            GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
-           
        });
     }
 

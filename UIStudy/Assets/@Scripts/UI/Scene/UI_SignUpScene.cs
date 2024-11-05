@@ -22,7 +22,6 @@ public class UI_SignUpScene : UI_Scene
 
     private enum Buttons
     {
-        Next_Button,
         DuplicateIdCheck_Button,
         SignIn_Button
     }
@@ -45,8 +44,8 @@ public class UI_SignUpScene : UI_Scene
     private string _passwordUnavailable = "20자 이내의 비밀번호를 입력해주세요.";
     private string _confirmPasswordUnavailable = "비밀번호가 일치하지 않습니다.";
 
-    private EErrorCode _errCodeId = EErrorCode.ERR_ValidationNickname;
-    private EErrorCode _errCodePassword = EErrorCode.ERR_ValidationNickname;
+    private EErrorCode _errCodeId = EErrorCode.ERR_Nothing;
+    private EErrorCode _errCodePassword = EErrorCode.ERR_ValidationPassword;
 
     public override bool Init()
     {
@@ -59,35 +58,42 @@ public class UI_SignUpScene : UI_Scene
         BindButtons(typeof(Buttons));
         BindTexts(typeof(Texts));
 
-        GetButton((int)Buttons.Next_Button).gameObject.BindEvent(OnClick_Next, EUIEvent.Click);
         GetButton((int)Buttons.DuplicateIdCheck_Button).gameObject.BindEvent(OnClick_DuplicateIdCheck, EUIEvent.Click);
         GetButton((int)Buttons.SignIn_Button).gameObject.BindEvent(OnClick_SignIn, EUIEvent.Click);
 
+        GetInputField((int)InputFields.Id_InputField).gameObject.BindEvent(OnClick_InputId, EUIEvent.Click);
+        GetInputField((int)InputFields.Password_InputField).gameObject.BindEvent(OnClick_IsCheckCorrectId, EUIEvent.Click);
         GetInputField((int)InputFields.ConfirmPassword_InputField).gameObject.BindEvent(OnClick_CheckCorrectPassword, EUIEvent.Click);
+
         GetText((int)Texts.Warning_Id_Text).text = "";
         GetText((int)Texts.Warning_Password_Text).text = "";
         GetText((int)Texts.Warning_ConfirmPassword_Text).text = "";
         //Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         //Managers.Event.TriggerEvent(EEventType.SetLanguage);
-        Debug.Log("hihihihihihihihihihihihihihihihihihihihihihihihih");
 
         return true;
     }
-    private void OnClick_Next(PointerEventData eventData)
-    {
-        EErrorCode errCode = CheckConfirmPassword(GetInputField((int)InputFields.Password_InputField).text);
-        if (errCode != EErrorCode.ERR_OK || _errCodeId != EErrorCode.ERR_OK)
-        {
-            return;
-        }
-
-        InsertUser(() =>
-           Managers.Scene.LoadScene(EScene.SignInScene));
-    }
-
     private void OnClick_DuplicateIdCheck(PointerEventData eventData)
     {
         CheckCorrectId(GetInputField((int)InputFields.Id_InputField).text);
+    }
+
+    private void OnClick_InputId(PointerEventData eventData)
+    {
+        if(_errCodeId == EErrorCode.ERR_OK)
+        {
+            return;
+        }
+        _errCodeId = EErrorCode.ERR_Nothing;
+    }
+    private void OnClick_IsCheckCorrectId(PointerEventData eventData)
+    {
+        if(_errCodeId == EErrorCode.ERR_Nothing)
+        {
+            GetText((int)Texts.Warning_Id_Text).text = "Please check for username availability.";
+            return;
+        }
+        GetText((int)Texts.Warning_Id_Text).text = "";
     }
 
     private void OnClick_CheckCorrectPassword(PointerEventData eventData)
@@ -98,14 +104,18 @@ public class UI_SignUpScene : UI_Scene
     private void OnClick_SignIn(PointerEventData eventData)
     {
         EErrorCode errCode = CheckConfirmPassword(GetInputField((int)InputFields.Password_InputField).text);
-        if (errCode != EErrorCode.ERR_OK || _errCodeId != EErrorCode.ERR_OK)
+        if (string.IsNullOrEmpty(GetInputField((int)InputFields.Id_InputField).text))
         {
             Debug.Log("아이디 안 만들고 그냥 넘어감");
-            // 아이디 생성 안 된다고 말하고 가만히 있기/로그인창으로넘어가기 선택 팝업.
-            Managers.Scene.LoadScene(EScene.SignInScene);
             return; 
         }
-
+        if (errCode != EErrorCode.ERR_OK || _errCodeId != EErrorCode.ERR_OK)
+        {
+            Managers.UI.ShowPopupUI<UI_AccountErrorPopup>();
+            // 아이디 생성 안 된다고 말하고 가만히 있기/로그인창으로넘어가기 선택 팝업.
+            return; 
+        }
+        
         InsertUser(() =>
            Managers.Scene.LoadScene(EScene.SignInScene));
     }
@@ -119,24 +129,20 @@ public class UI_SignUpScene : UI_Scene
         },
        (response) =>
        {
-           Debug.Log("아이디 만들기 성공");
-           onSuccess?.Invoke();
+            Debug.Log("아이디 만들기 성공");
+            Managers.UI.ShowPopupUI<UI_ToastPopup>();
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "Account creation successful.");
+            onSuccess?.Invoke();
        },
        (errorCode) =>
        {
-           Debug.Log("아이디 만들기 실패~");
+            Debug.Log("아이디 만들기 실패~");
+            Managers.UI.ShowPopupUI<UI_ErrorPopup>();
+            Managers.Event.TriggerEvent(EEventType.ErrorPopupTitle, this, "Failed to create account.");
+            Managers.Event.TriggerEvent(EEventType.ErrorPopupNotice, this, "Account creation has failed.\n Please try again.");
+            
            // popUp
        });
-        //var client = new HttpClient();
-        //var request = new HttpRequestMessage(HttpMethod.Post, WebRoute.InsertUserAccount);//"https://dev-single-api.snapism.net:8080/User/InsertUser"
-        //ReqDtoInsertUserAccount requestDto = new ReqDtoInsertUserAccount();
-        //requestDto.UserName = GetInputField((int)InputFields.Id_InputField).text;
-        //requestDto.Password = GetInputField((int)InputFields.Password_InputField).text;
-        //string json = JsonConvert.SerializeObject(requestDto);
-        //var content = new StringContent(json, null, "application/json");
-        //request.Content = content;
-        //var response = await client.SendAsync(request);
-        //response.EnsureSuccessStatusCode();
     }
 
     private void CheckCorrectId(string id)
@@ -144,12 +150,12 @@ public class UI_SignUpScene : UI_Scene
         if (string.IsNullOrEmpty(id) || char.IsDigit(id[0]))
         {
             GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
-            _errCodeId =  EErrorCode.ERR_ValidationNickname;
+            _errCodeId =  EErrorCode.ERR_ValidationId;
         }
         if (16 <  id.Length)
         {
             GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
-            _errCodeId = EErrorCode.ERR_ValidationNickname;
+            _errCodeId = EErrorCode.ERR_ValidationId;
         }
 
         Managers.WebContents.ReqGetUserAccountId(new ReqDtoGetUserAccountId()
@@ -164,7 +170,7 @@ public class UI_SignUpScene : UI_Scene
        (errorCode) =>
        {
            GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
-           _errCodeId = EErrorCode.ERR_ValidationNickname;
+           _errCodeId = EErrorCode.ERR_DuplicateId;
        });
     }
 
@@ -173,7 +179,7 @@ public class UI_SignUpScene : UI_Scene
         if (password.Length < 8 || 20 <  password.Length)
         {
             GetText((int)Texts.Warning_Password_Text).text = _passwordUnavailable;
-            return EErrorCode.ERR_ValidationNickname;
+            return EErrorCode.ERR_ValidationPassword;
         }
         GetText((int)Texts.Warning_Password_Text).text = "";
         return EErrorCode.ERR_OK;
@@ -181,11 +187,12 @@ public class UI_SignUpScene : UI_Scene
 
     private EErrorCode CheckConfirmPassword(string input)
     {
+        GetText((int)Texts.Warning_Id_Text).text = "";
         string confirmPassword = GetInputField((int)InputFields.ConfirmPassword_InputField).text;
         if (String.Equals(input, confirmPassword) != true || _errCodePassword != EErrorCode.ERR_OK)
         {
             GetText((int)Texts.Warning_ConfirmPassword_Text).text = _confirmPasswordUnavailable;
-            return EErrorCode.ERR_ValidationNickname;
+            return EErrorCode.ERR_ConfirmPassword;
         }
         GetText((int)Texts.Warning_ConfirmPassword_Text).text = "";
         return EErrorCode.ERR_OK;

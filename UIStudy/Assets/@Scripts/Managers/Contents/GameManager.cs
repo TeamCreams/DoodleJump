@@ -99,13 +99,13 @@ public class GameManager
         }
     }
 
-    private PlayerInfo _playerInfo;
-    public PlayerInfo PlayerInfo
+    private UserInfo _userInfo;
+    public UserInfo UserInfo
     {
-        get { return _playerInfo; }
+        get { return _userInfo; }
         set
         {
-            _playerInfo = value;
+            _userInfo = value;
         }
     }
 
@@ -156,7 +156,7 @@ public class GameManager
     {
         _chracterStyleInfo = new ChracterStyleInfo();
         _difficultySettingsInfo = new DifficultySettingsInfo();
-        _playerInfo = new PlayerInfo();
+        _userInfo = new UserInfo();
     }
    
 
@@ -225,9 +225,12 @@ public class ChracterStyleInfo
     public string Hair { get; set; } = "ZombieShabby";
 }
 
-public class PlayerInfo
+public class UserInfo
 {
-    public string PlayerId { get; set; } = "Orange";
+    public string UserId { get; set; } = "Orange";
+    public int RecordScore {get; set;} = 0;
+    public int LatelyScore {get; set;} = 0;
+    
 }
 
 public class DifficultySettingsInfo // 다시시작할 때마다 초기화 필요 
