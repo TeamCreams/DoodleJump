@@ -20,7 +20,8 @@ public class UI_DevLoadingScene : UI_Scene
 	enum Buttons
 	{
 		TinyFarmButton,
-        SuberunkerButton
+        SuberunkerButton,
+        SuberunkerTimelineScene
     }
 
     public override bool Init()
@@ -38,6 +39,7 @@ public class UI_DevLoadingScene : UI_Scene
 
 		GetButton((int)Buttons.TinyFarmButton).gameObject.BindEvent(OnClick_TinyFarmScene, Define.EUIEvent.Click);
         GetButton((int)Buttons.SuberunkerButton).gameObject.BindEvent(OnClick_ChooseCharacterScene, Define.EUIEvent.Click);
+        GetButton((int)Buttons.SuberunkerTimelineScene).gameObject.BindEvent(OnClick_SuberunkerTimelineScene, Define.EUIEvent.Click);
 
         StartLoadAssets("PreLoad");
 		return true;
@@ -52,6 +54,12 @@ public class UI_DevLoadingScene : UI_Scene
 		Managers.Scene.LoadScene(Define.EScene.SignInScene);
         //Managers.Scene.LoadScene(Define.EScene.SuberunkerSceneHomeScene);
     }
+
+    private void OnClick_SuberunkerTimelineScene(PointerEventData eventData)
+    {
+        Managers.Scene.LoadScene(Define.EScene.SuberunkerTimelineScene);
+    }
+
     void StartLoadAssets(string label)
 	{
 		Managers.Resource.LoadAllAsync<UnityEngine.Object>(label, (key, count, totalCount) =>

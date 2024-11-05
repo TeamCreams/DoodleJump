@@ -73,12 +73,13 @@ public class UI_RetryPopup : UI_Popup
 
     public void SetRecord()
     {
-        int recordScore = Managers.Score.GetScore("Orange", EScoreType.RecordScore);
+        int recordScore = Managers.Score.GetScore(Managers.Game.PlayerInfo.PlayerId, EScoreType.RecordScore);
         int recordMinutes = recordScore / 60;
         float recordSeconds = recordScore % 60;//Managers.Game.PlayTimeRecord % 60;
         GetText((int)Texts.LifeRecordTime_Text).text = $"{_bestRecord} : {recordMinutes}{_minutes} {recordSeconds}{_seconds}";
 
-        int latelyScore = Managers.Score.GetScore("Orange", EScoreType.LatelyScore);
+        int latelyScore = Managers.Score.GetScore(Managers.Game.PlayerInfo.PlayerId, EScoreType.LatelyScore);
+
         int minutes = latelyScore / 60;
         float seconds = latelyScore % 60;
         GetText((int)Texts.LifeTime_Text).text = $"{_recentRecord} : {minutes}{_minutes} {seconds}{_seconds}";

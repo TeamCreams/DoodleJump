@@ -99,12 +99,12 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetObject((int)GameObjects.Ranking).SetActive(false);
         
         //Debug.Log(Managers.Game.PlayerInfo.PlayerId);
-        int recordScore = Managers.Score.GetScore("Orange", EScoreType.RecordScore);
+        int recordScore = Managers.Score.GetScore(Managers.Game.PlayerInfo.PlayerId, EScoreType.RecordScore);
         _recordMinutes = recordScore / 60;
         _recordSeconds = recordScore % 60;
         GetText((int)Texts.Best_Text).text = $"{_bestRecord} : {_recordMinutes}{_minutesString} {_recordSeconds}{_secondsString}";
 
-        int latelyScore = Managers.Score.GetScore("Orange", EScoreType.LatelyScore);
+        int latelyScore = Managers.Score.GetScore(Managers.Game.PlayerInfo.PlayerId, EScoreType.LatelyScore);
         _minutes = latelyScore / 60;
         _seconds = latelyScore % 60;
         GetText((int)Texts.Current_Text).text = $"{_recentRecord} : {_minutes}{_minutesString} {_seconds}{_secondsString}";
@@ -152,7 +152,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetText((int)Texts.ChooseCharacter_Text).text = Managers.Language.LocalizedString(91008);
         GetText((int)Texts.Start_Text).text = Managers.Language.LocalizedString(91009);
         _welcome = Managers.Language.LocalizedString(91028);
-        GetText((int)Texts.Welcome_Text).text = $"{_welcome}, {"Orange"}!!";
+        GetText((int)Texts.Welcome_Text).text = $"{_welcome}, {Managers.Game.PlayerInfo.PlayerId}!!";
     }
 
 }

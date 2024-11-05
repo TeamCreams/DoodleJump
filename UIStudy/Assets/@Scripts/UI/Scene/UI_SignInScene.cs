@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static Define;
@@ -40,6 +40,8 @@ public class UI_SignInScene : UI_Scene
     private string _idUnavailable = "없는 아이디입니다.";
     private string _passwordUnavailable = "비밀번호가 일치하지 않습니다.";
     private CommonResult<ResDtoGetUserAccount> _rv = null;
+    bool _isCheckDuplicateId = false;
+    private string _password = "";
     public override bool Init()
     {
         if (base.Init() == false)
@@ -65,16 +67,25 @@ public class UI_SignInScene : UI_Scene
 
     private void OnClick_SignIn(PointerEventData eventData)
     {
-        EErrorCode errCode = CheckCorrectPassword();
-        if (errCode != EErrorCode.ERR_OK)
+        //최종 로그인 하는 버튼.
+        if (_isCheckDuplicateId == false)
+        {
+            //에러처리
+            return;
+        }
+
+        EErrorCode error = CheckCorrectPassword();
+        if (error != EErrorCode.ERR_OK)
         {
             return;
         }
-        else
-        {
-            Managers.Event.TriggerEvent(EEventType.SignIn); //호출이 안 됨
-            Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
-        }
+        //Managers.Event.TriggerEvent(EEventType.SignIn); //호출이 안 됨
+
+        //1. 다른버튼 비활성화
+        //2. 로딩 인디케이터
+        Managers.Game.PlayerInfo.PlayerId = GetInputField((int)InputFields.Id_InputField).text;
+        Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+
     }
 
     private void OnClick_SignUp(PointerEventData eventData)
@@ -82,79 +93,52 @@ public class UI_SignInScene : UI_Scene
         Managers.Scene.LoadScene(EScene.SignUpScene);
     }
 
+    /// <summary>
+    /// 패스워드 Input Field 를 눌렀을떄 호출
+    /// </summary>
+    /// <param name="eventData"></param>
     private void OnClick_CheckLogId(PointerEventData eventData)
     {
-        CheckLogIn(GetInputField((int)InputFields.Id_InputField).text, (result) =>
-        {
-            _errCodeId = result;
-            Debug.Log($"_errCodeId : {_errCodeId}");
-        });
-    }
+        // 1. 비밀번호 인풋필드를 누른다.
+        // 2. 아이디를 조회한다.
+        //      - 있음 -> 로그인 가능
+        //      - 없음 -> 불가.
 
-    private EErrorCode CheckLogIn(string id, Action<EErrorCode> callback)
-    {
-        if (string.IsNullOrEmpty(id) || char.IsDigit(id[0]))
+        Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
         {
-            GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
-            return EErrorCode.ERR_ValidationNickname;
-        }
-        if (16 <  id.Length)
-        {
-            GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
-            return EErrorCode.ERR_ValidationNickname;
-        }
+            UserName = GetInputField((int)InputFields.Id_InputField).text,
+        },
+       (response) =>
+       {
+           _isCheckDuplicateId = true;
+           _password = response.Password;
+           GetText((int)Texts.Warning_Id_Text).text = "";
 
-        ReqDtoGetUserAccount requestDto = new ReqDtoGetUserAccount();
-        requestDto.UserName = id;
-        StartCoroutine(ReturnRv(requestDto, callback));
-        return EErrorCode.ERR_ValidationNickname;
-    }
-    private IEnumerator ReturnRv(ReqDtoGetUserAccount requestDto, Action<EErrorCode> callback)
-    {
-        _rv = null;
-        Managers.Web.SendGetRequest(WebRoute.GetUserAccount(requestDto), (response) =>        
-        {
-            Debug.Log("Response: " + response);
-            _rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetUserAccount>>(response);
-        });
-
-        
-        yield return new WaitUntil(() => _rv != null);
-        if (_rv.IsSuccess)
-        {
-            Debug.Log("Available ID");
-            GetText((int)Texts.Warning_Id_Text).text = "";
-
-            Debug.Log($"{"Orange"}, {_rv.Data.UserName}");
-            //Managers.Game.PlayerInfo.PlayerId = _rv.Data.UserName;
-            callback(EErrorCode.ERR_OK);
-        }
-        else
-        {
-            Debug.Log("Disabled ID");            
-            GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
-            callback(EErrorCode.ERR_ValidationNickname);        
-        }
+           //Managers.Game.PlayerInfo = response.UserName;
+           //Managers.Event.TriggerEvent(EEventType.SetUpUser, this, (response.UserName, response.HighScore, response.LatelyScore));
+       },
+       (errorCode) =>
+       {
+           _isCheckDuplicateId = false;
+           GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
+           
+       });
     }
 
     private EErrorCode CheckCorrectPassword()
     {
-        if(_errCodeId != EErrorCode.ERR_OK)
-        {
-            return EErrorCode.ERR_ValidationNickname;
-        }
-        if(_rv == null)
-        {
-            return EErrorCode.ERR_ValidationNickname;
-        }
         string password = GetInputField((int)InputFields.Password_InputField).text;
-        if (Equals(_rv.Data.Password, password) != true)
+
+        if (Equals(_password, password) != true)
         {
             GetText((int)Texts.Warning_Password_Text).text = _passwordUnavailable;
             return EErrorCode.ERR_ValidationNickname;
         }
-        GetText((int)Texts.Warning_Password_Text).text = "";
-        return EErrorCode.ERR_OK;
+        else
+        {
+            GetText((int)Texts.Warning_Password_Text).text = "";
+            return EErrorCode.ERR_OK;
+        }
     }
 
     void OnEvent_SetLanguage(Component sender, object param)

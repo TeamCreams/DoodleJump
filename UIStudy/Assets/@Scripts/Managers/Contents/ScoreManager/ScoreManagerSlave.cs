@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Net.Http;
 using System.Security.Policy;
@@ -14,6 +14,9 @@ public class ScoreManagerSlave : InitBase
 {
     private CommonResult<ResDtoGetUserAccount> _rv = null;
 
+    private int _highScore = 0;
+    private int _lateScore = 0;
+
     public override bool Init()
     {
         if (false == base.Init())
@@ -22,7 +25,6 @@ public class ScoreManagerSlave : InitBase
         }
         Managers.Event.AddEvent(EEventType.SignIn, OnEvent_GetRv);
 
-        DontDestroyOnLoad(this.gameObject);
         Debug.Log("ScoreManagerSlave");
         return true;
     }
@@ -32,9 +34,9 @@ public class ScoreManagerSlave : InitBase
         switch(scoreType)
         {
             case EScoreType.LatelyScore:
-                return _rv.Data.LatelyScore;//callback(_rv.Data.LatelyScore);
+                return _lateScore;//callback(_rv.Data.LatelyScore);
             case EScoreType.RecordScore:
-                return _rv.Data.HighScore;//callback(_rv.Data.HighScore);
+                return _highScore;//callback(_rv.Data.HighScore);
         }
         return 0;
         //StartCoroutine(ReturnRv(requestDto, scoreType, callback));
@@ -103,12 +105,15 @@ public class ScoreManagerSlave : InitBase
     void OnEvent_GetRv(Component sender, object param)
     {
         ReqDtoGetUserAccount requestDto = new ReqDtoGetUserAccount();
-        requestDto.UserName = "Orange";
-        Debug.Log("Orange" + " hihihihihihihihihi");
+        requestDto.UserName = Managers.Game.PlayerInfo.PlayerId;
+        Debug.Log(Managers.Game.PlayerInfo.PlayerId + " hihihihihihihihihi");
         Managers.Web.SendGetRequest(WebRoute.GetUserAccount(requestDto), (response) =>        
         {
             Debug.Log("Response: " + response);
             _rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetUserAccount>>(response);
+
+            _highScore = _rv.Data.HighScore;
+            _lateScore = _rv.Data.LatelyScore;
         });
     }
 

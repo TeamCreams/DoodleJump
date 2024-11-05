@@ -11,6 +11,7 @@ public class ResourceManager
 	private Dictionary<string, UnityEngine.Object> _resources = new Dictionary<string, UnityEngine.Object>();
 	private Dictionary<string, AsyncOperationHandle> _handles = new Dictionary<string, AsyncOperationHandle>();
 
+	private HashSet<string> _loadKeys = new HashSet<string>();
 
 	#region Load Resource
 	public T Load<T>(string key) where T : Object
@@ -72,10 +73,15 @@ public class ResourceManager
 		}
 
 		string loadKey = key;
-		if (key.Contains(".sprite"))
+		if (key.EndsWith(".sprite"))
+		{
 			loadKey = $"{key}[{key.Replace(".sprite", "")}]";
+			Debug.Log($"Load Key Change : {key} => {loadKey}");
+		}
+        _loadKeys.Add(loadKey);
 
-		var asyncOperation = Addressables.LoadAssetAsync<T>(loadKey);
+
+        var asyncOperation = Addressables.LoadAssetAsync<T>(loadKey);
 		asyncOperation.Completed += (op) =>
 		{
 			_resources.Add(key, op.Result);
@@ -93,8 +99,9 @@ public class ResourceManager
 			int totalCount = op.Result.Count;
 
 			foreach (var result in op.Result)
-			{
-				if (result.PrimaryKey.Contains(".sprite"))
+            {
+                Debug.Log($"loadstart {result.PrimaryKey} {loadCount}/{totalCount}");
+                if (result.PrimaryKey.EndsWith(".sprite"))
 				{
 					LoadAsync<Sprite>(result.PrimaryKey, (obj) =>
 					{

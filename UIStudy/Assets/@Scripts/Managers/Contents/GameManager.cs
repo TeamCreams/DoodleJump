@@ -156,6 +156,7 @@ public class GameManager
     {
         _chracterStyleInfo = new ChracterStyleInfo();
         _difficultySettingsInfo = new DifficultySettingsInfo();
+        _playerInfo = new PlayerInfo();
     }
    
 

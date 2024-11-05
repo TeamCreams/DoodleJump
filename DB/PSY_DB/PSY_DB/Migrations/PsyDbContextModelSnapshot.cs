@@ -47,7 +47,7 @@ namespace PSY_DB.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TblUserAccount", t =>
+                    b.ToTable("TblUserAccount", null, t =>
                         {
                             t.HasComment("User 계정 정보");
                         });
@@ -81,7 +81,7 @@ namespace PSY_DB.Migrations
 
                     b.HasIndex("UserAccountId");
 
-                    b.ToTable("TblUserScore", t =>
+                    b.ToTable("TblUserScore", null, t =>
                         {
                             t.HasComment("UserScore 정보");
                         });

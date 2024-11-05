@@ -45,7 +45,9 @@ namespace GameApi.Controllers
         {
             CommonResult<ResDtoInsertUserAccount> rv = new();
 
-            try{ 
+            Thread.Sleep(3000);
+            try
+            { 
                 var select = await (
                             from user in _context.TblUserAccounts
                             where (user.UserName.ToLower() == requestDto.UserName.ToLower() && user.DeletedDate == null)
@@ -99,6 +101,7 @@ namespace GameApi.Controllers
         {
             CommonResult<ResDtoGetUserAccount> rv = new();
 
+            Thread.Sleep(3000);
             try
             {
                 rv.Data = new();
@@ -172,6 +175,7 @@ namespace GameApi.Controllers
         {
             CommonResult<ResDtoGetUserAccountPassword> rv = new();
 
+            Thread.Sleep(3000);
             try
             {
                 rv.Data = new();
@@ -223,7 +227,8 @@ namespace GameApi.Controllers
             UpdateAccountPassword([FromBody] ReqDtoUpdateUserAccountPassword requestDto)
         {
             CommonResult<ResDtoUpdateUserAccountPassword> rv = new();
-            
+
+            Thread.Sleep(3000);
             try
             {
                 var userAccount = _context.TblUserAccounts.
@@ -282,6 +287,7 @@ namespace GameApi.Controllers
         {
             CommonResult<ResDtoDeleteUserAccount> rv = new();
 
+            Thread.Sleep(3000);
             try
             {
                 var userAccount = _context.TblUserAccounts.
@@ -336,6 +342,8 @@ namespace GameApi.Controllers
         {
             CommonResult<ResDtoGetUserAccountId> rv = new();
 
+            Thread.Sleep(3000);
+
             try
             {
                 rv.Data = new();
@@ -385,7 +393,8 @@ namespace GameApi.Controllers
             InsertUserAccountScore([FromBody] ReqInsertUserAccountScore requestDto)
         {
             CommonResult<ResInsertUserAccountScore> rv = new();
-
+            
+            Thread.Sleep(3000);
             try
             {
                 var select = await (

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -39,15 +39,15 @@ public class UI_SignUpScene : UI_Scene
         ConfirmPassword_Text,
         Placeholder_ConfirmPassword_Text,
         SignIn_Text,
-
     }
 
     private string _idUnavailable = "사용할 수 없는 아이디입니다.";
     private string _passwordUnavailable = "20자 이내의 비밀번호를 입력해주세요.";
     private string _confirmPasswordUnavailable = "비밀번호가 일치하지 않습니다.";
 
-    private EErrorCode _errCodeId;
-    private EErrorCode _errCodePassword;
+    private EErrorCode _errCodeId = EErrorCode.ERR_ValidationNickname;
+    private EErrorCode _errCodePassword = EErrorCode.ERR_ValidationNickname;
+
     public override bool Init()
     {
         if (base.Init() == false)
@@ -80,22 +80,14 @@ public class UI_SignUpScene : UI_Scene
         {
             return;
         }
-        else
-        {
-            InsertUser();
-            Managers.Scene.LoadScene(EScene.SignInScene);
-        }
+
+        InsertUser(() =>
+           Managers.Scene.LoadScene(EScene.SignInScene));
     }
 
     private void OnClick_DuplicateIdCheck(PointerEventData eventData)
     {
-        //_errCodeId = CheckCorrectId(GetInputField((int)InputFields.Id_InputField).text);
-
-        CheckCorrectId(GetInputField((int)InputFields.Id_InputField).text, (result) =>
-        {
-            _errCodeId = result;
-            Debug.Log($"_errCodeId : {_errCodeId}");
-        });
+        CheckCorrectId(GetInputField((int)InputFields.Id_InputField).text);
     }
 
     private void OnClick_CheckCorrectPassword(PointerEventData eventData)
@@ -105,66 +97,76 @@ public class UI_SignUpScene : UI_Scene
 
     private void OnClick_SignIn(PointerEventData eventData)
     {
-        Managers.Scene.LoadScene(EScene.SignInScene);
+        EErrorCode errCode = CheckConfirmPassword(GetInputField((int)InputFields.Password_InputField).text);
+        if (errCode != EErrorCode.ERR_OK || _errCodeId != EErrorCode.ERR_OK)
+        {
+            Debug.Log("아이디 안 만들고 그냥 넘어감");
+            // 아이디 생성 안 된다고 말하고 가만히 있기/로그인창으로넘어가기 선택 팝업.
+            Managers.Scene.LoadScene(EScene.SignInScene);
+            return; 
+        }
+
+        InsertUser(() =>
+           Managers.Scene.LoadScene(EScene.SignInScene));
     }
     
-      private async void InsertUser()
+    private void InsertUser(Action onSuccess = null)
     {
-        var client = new HttpClient();
-        var request = new HttpRequestMessage(HttpMethod.Post, WebRoute.InsertUserAccount);//"https://dev-single-api.snapism.net:8080/User/InsertUser"
-        ReqDtoInsertUserAccount requestDto = new ReqDtoInsertUserAccount();
-        requestDto.UserName = GetInputField((int)InputFields.Id_InputField).text;
-        requestDto.Password = GetInputField((int)InputFields.Password_InputField).text;
-        string json = JsonConvert.SerializeObject(requestDto);
-        var content = new StringContent(json, null, "application/json");
-        request.Content = content;
-        var response = await client.SendAsync(request);
-        response.EnsureSuccessStatusCode();
+        Managers.WebContents.InsertUserAccount(new ReqDtoInsertUserAccount()
+        {
+            UserName = GetInputField((int)InputFields.Id_InputField).text,
+            Password = GetInputField((int)InputFields.Password_InputField).text
+        },
+       (response) =>
+       {
+           Debug.Log("아이디 만들기 성공");
+           onSuccess?.Invoke();
+       },
+       (errorCode) =>
+       {
+           Debug.Log("아이디 만들기 실패~");
+           // popUp
+       });
+        //var client = new HttpClient();
+        //var request = new HttpRequestMessage(HttpMethod.Post, WebRoute.InsertUserAccount);//"https://dev-single-api.snapism.net:8080/User/InsertUser"
+        //ReqDtoInsertUserAccount requestDto = new ReqDtoInsertUserAccount();
+        //requestDto.UserName = GetInputField((int)InputFields.Id_InputField).text;
+        //requestDto.Password = GetInputField((int)InputFields.Password_InputField).text;
+        //string json = JsonConvert.SerializeObject(requestDto);
+        //var content = new StringContent(json, null, "application/json");
+        //request.Content = content;
+        //var response = await client.SendAsync(request);
+        //response.EnsureSuccessStatusCode();
     }
 
-    private EErrorCode CheckCorrectId(string id, Action<EErrorCode> callback)
+    private void CheckCorrectId(string id)
     {
         if (string.IsNullOrEmpty(id) || char.IsDigit(id[0]))
         {
             GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
-            return EErrorCode.ERR_ValidationNickname;
+            _errCodeId =  EErrorCode.ERR_ValidationNickname;
         }
         if (16 <  id.Length)
         {
             GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
-            return EErrorCode.ERR_ValidationNickname;
+            _errCodeId = EErrorCode.ERR_ValidationNickname;
         }
 
-        ReqDtoGetUserAccountId requestDto = new ReqDtoGetUserAccountId();
-        requestDto.UserName = id;
-        StartCoroutine(ReturnRv(requestDto, callback));
-        return EErrorCode.ERR_ValidationNickname;
+        Managers.WebContents.ReqGetUserAccountId(new ReqDtoGetUserAccountId()
+        {
+            UserName = GetInputField((int)InputFields.Id_InputField).text,
+        },
+       (response) =>
+       {
+           GetText((int)Texts.Warning_Id_Text).text = "";
+           _errCodeId = EErrorCode.ERR_OK;
+       },
+       (errorCode) =>
+       {
+           GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
+           _errCodeId = EErrorCode.ERR_ValidationNickname;
+       });
     }
-
-    private IEnumerator ReturnRv(ReqDtoGetUserAccountId requestDto, Action<EErrorCode> callback)
-    {
-        CommonResult<ResDtoGetUserAccountId> rv = null;
-        Managers.Web.SendGetRequest(WebRoute.GetUserAccountId(requestDto), (response) =>
-        {
-            Debug.Log("Response: " + response);
-            rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetUserAccountId>>(response);
-        });
-
-        yield return new WaitUntil(() => rv != null);
-        if (rv.IsSuccess)
-        {
-            Debug.Log("Available ID");
-            GetText((int)Texts.Warning_Id_Text).text = "";
-            callback(EErrorCode.ERR_OK);
-        }
-        else
-        {
-            Debug.Log("Disabled ID");            
-            GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
-            callback(EErrorCode.ERR_ValidationNickname);        
-        }
-    }
-
 
     private EErrorCode CheckCorrectPassword(string password)
     {

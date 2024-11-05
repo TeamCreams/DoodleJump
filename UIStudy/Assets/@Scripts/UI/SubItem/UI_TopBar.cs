@@ -134,7 +134,7 @@ public class UI_TopBar : UI_Base
 
             if (currentHp <= 0)
             {
-                Managers.Score.SetScore("Orange", _time);
+                Managers.Score.SetScore(Managers.Game.PlayerInfo.PlayerId, _time);
                 _lifeTimer?.Dispose();
                 /*
                 if (Managers.Game.PlayTimeRecord < _time)

@@ -14,16 +14,16 @@ public class Managers : MonoBehaviour
 	private DataManager _data = new DataManager();
 	private ObjectManager _object = new ObjectManager();
 	private LanguageDataMamager _language = new LanguageDataMamager();
-
-	private ScoreManager _score = new ScoreManager();
+    private ScoreManager _score = new ScoreManager();
+    private WebContentsManager _webContents = new WebContentsManager();
 
     public static GameManager Game { get { return Instance?._game; } }
 	public static MessageManager Message { get { return Instance?._message; } }
 	public static DataManager Data { get { return Instance?._data; } }
 	public static ObjectManager Object {  get { return Instance?._object; } }
 	public static LanguageDataMamager Language { get { return Instance?._language; } }
-
 	public static ScoreManager Score { get { return Instance?._score; } }
+    public static WebContentsManager WebContents { get { return Instance?._webContents; } }
     #endregion
 
     #region Core
@@ -72,7 +72,11 @@ public class Managers : MonoBehaviour
 			Managers.Score.Init();
 		}
 	}
-
+	
+	public static void InitScene()
+    {
+        Managers.Score.Init();
+    }
 
     private void Update()
     {

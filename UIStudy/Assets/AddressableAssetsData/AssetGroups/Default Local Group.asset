@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 1f4d5e14bf776425a9b1fb8649a87b4e
   m_SerializeEntries:
+  - m_GUID: 3c061595fdb4f4a1fb81caad7c858d3f
+    m_Address: UI_SuberunkerTimelineScene
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 511a587cb8a1143ea999965b82197936
     m_Address: Assets/@Resources/UI/Scene/UI_ChooseCharacterScene.prefab
     m_ReadOnly: 0
@@ -39,6 +45,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a866e239766727f45b0f300e999f88bb
     m_Address: Hit
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa814ac862b7f4840865e5bfb4c74a17
+    m_Address: UI_SuberunkerSceneHomeScene
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

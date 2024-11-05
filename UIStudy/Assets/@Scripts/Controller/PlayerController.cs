@@ -9,9 +9,6 @@ using UnityEngine;
 using UnityEngine.XR;
 using static Define;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEditor.PlayerSettings;
-using static UnityEditor.Progress;
 
 public class PlayerController : CreatureBase
 {

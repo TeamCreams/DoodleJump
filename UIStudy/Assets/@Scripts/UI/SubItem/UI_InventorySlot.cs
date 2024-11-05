@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using static UnityEditor.Progress;
 using System.Numerics;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 
 public class UI_InventorySlot : UI_Base
