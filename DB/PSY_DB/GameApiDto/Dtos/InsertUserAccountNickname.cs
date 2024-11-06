@@ -4,12 +4,14 @@ using System.Text;
 
 namespace GameApi.Dtos
 {
-    public class ReqDtoGetUserAccountId
+    public class ReqDtoInsertUserAccountNickname
     {
         public string? UserName { get; set; }
+
+        public string? Nickname { get; set; }
     }
-    public class ResDtoGetUserAccountId
+
+    public class ResDtoInsertUserAccountNickname
     {
-        public string? UserName { get; set; }
     }
 }

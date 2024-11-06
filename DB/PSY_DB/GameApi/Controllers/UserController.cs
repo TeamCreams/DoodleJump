@@ -113,6 +113,7 @@ namespace GameApi.Controllers
                     {
                         UserName = user.UserName,
                         Password = user.Password,
+                        Nickname = user.Nickname,
                         RegisterDate = user.RegisterDate,
                         UpdateDate = user.UpdateDate,
                         HighScore = user.TblUserScores
@@ -336,10 +337,10 @@ namespace GameApi.Controllers
             return rv;
         }
 
-        [HttpGet("GetUserAccountId")]
-        public async Task<CommonResult<ResDtoGetUserAccountId>> GetUserAccountId([FromQuery] ReqDtoGetUserAccountId requestDto)
+        [HttpGet("GetValidateUserAccountId")]
+        public async Task<CommonResult<ResDtoGetValidateUserAccountId>> GetValidateUserAccountId([FromQuery] ReqDtoGetValidateUserAccountId requestDto)
         {
-            CommonResult<ResDtoGetUserAccountId> rv = new();
+            CommonResult<ResDtoGetValidateUserAccountId> rv = new();
 
             Thread.Sleep(3000);
 
@@ -380,7 +381,59 @@ namespace GameApi.Controllers
                 rv.IsSuccess = false;
                 rv.StatusCode = EStatusCode.ServerException;
                 rv.Message = ex.Message;
-                rv.Data = ex.Data as ResDtoGetUserAccountId;
+                rv.Data = ex.Data as ResDtoGetValidateUserAccountId;
+
+                return rv;
+            }
+            return rv;
+        }
+
+        [HttpGet("GetValidateUserAccountNickname")]
+        public async Task<CommonResult<ResDtoGetValidateUserAccountNickname>> 
+            GetValidateUserAccountNickname([FromQuery] ReqDtoGetValidateUserAccountNickname requestDto)
+        {
+            CommonResult<ResDtoGetValidateUserAccountNickname> rv = new();
+
+            Thread.Sleep(3000);
+
+            try
+            {
+                rv.Data = new();
+
+                var select = await (from user in _context.TblUserAccounts
+                                    where (user.Nickname.ToLower() == requestDto.Nickname.ToLower() && user.DeletedDate == null)
+                                    select new
+                                    {
+                                        Nickname = user.Nickname,
+                                    }).ToListAsync();
+
+                if (true == select.Any())
+                {
+                    throw new CommonException(EStatusCode.NameAlreadyExists,
+                        "사용할 수 없는 Nickname입니다.");
+                }
+                else
+                {
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Message = "";
+                    rv.IsSuccess = true;
+                    rv.Data = null;
+                }
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = ex.Data as ResDtoGetValidateUserAccountNickname;
 
                 return rv;
             }
@@ -430,6 +483,80 @@ namespace GameApi.Controllers
                 {
                     rv.IsSuccess = true;
                     rv.StatusCode = EStatusCode.OK;
+                    rv.Data = null;
+                }
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = null;
+
+                return rv;
+            }
+            return rv;
+        }
+
+        [HttpPost("InsertUserAccountNickname")]
+        public async Task<CommonResult<ResDtoInsertUserAccountNickname>>
+            InsertUserAccountNickname([FromBody] ReqDtoInsertUserAccountNickname requestDto)
+        {
+            CommonResult<ResDtoInsertUserAccountNickname> rv = new();
+
+            Thread.Sleep(3000);
+            try
+            {
+
+                var select = await (from user in _context.TblUserAccounts
+                                    where (user.Nickname.ToLower() == requestDto.Nickname.ToLower() && user.DeletedDate == null)
+                                    select new
+                                    {
+                                        Nickname = user.Nickname,
+                                    }).ToListAsync();
+
+                if (true == select.Any())
+                {
+                    throw new CommonException(EStatusCode.NameAlreadyExists,
+                        $"{requestDto.Nickname} : 사용할 수 없는 Nickname");
+                }
+
+                var userAccount = _context.TblUserAccounts.
+                                    Where
+                                    (
+                                        user => user.UserName.ToLower() == requestDto.UserName.ToLower() &&
+                                                user.DeletedDate == null
+                                    ).FirstOrDefault();
+
+                if (userAccount == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                      $"{requestDto.UserName} : 찾을 수 없는 UserName");
+                }
+
+                userAccount.Nickname = requestDto.Nickname;
+                _context.TblUserAccounts.Update(userAccount);
+
+                var IsSuccess = await _context.SaveChangesAsync();
+
+                if (IsSuccess == 0)
+                {
+                    throw new CommonException(EStatusCode.ChangedRowsIsZero, $"Insert Nickname : {requestDto.Nickname}");
+                }
+                
+                else
+                {
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Message = "";
+                    rv.IsSuccess = true;
                     rv.Data = null;
                 }
             }
