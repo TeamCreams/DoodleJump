@@ -150,7 +150,7 @@ public class PlayerController : CreatureBase
     {
         _animator.SetBool("Boring", false);
 
-        if (Managers.Game.JoystickState == Define.EJoystickState.PointerUp)
+        if (Managers.Game.JoystickState == EJoystickState.PointerUp)
         {
             this.State = EPlayerState.Idle;
         }

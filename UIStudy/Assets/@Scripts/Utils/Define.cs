@@ -75,8 +75,8 @@ public static class Define
         StoneShower,
         SetLanguage,
         SignIn,
-        ErrorPopupTitle,
-        ErrorPopupNotice,
+        ErrorPopup,
+        ErrorButtonPopup,
         ToastPopupNotice
     }
 

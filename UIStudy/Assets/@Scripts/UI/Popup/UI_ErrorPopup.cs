@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using static Define;
 
@@ -25,8 +26,7 @@ public class UI_ErrorPopup : UI_Popup
         BindTexts(typeof(Texts));
         BindButtons(typeof(Buttons));
 
-        Managers.Event.AddEvent(EEventType.ErrorPopupTitle, OnEvent_ErrorTitle);
-        Managers.Event.AddEvent(EEventType.ErrorPopupTitle, OnEvent_Notice);
+        Managers.Event.AddEvent(EEventType.ErrorPopup, OnEvent_ErrorPopup);
 
         GetButton((int)Buttons.Close_Button).gameObject.BindEvent((evt) =>
         {
@@ -36,14 +36,12 @@ public class UI_ErrorPopup : UI_Popup
         return true;
     }
 
-    void OnEvent_ErrorTitle(Component sender, object param)
+    void OnEvent_ErrorPopup(Component sender, object param)
     {
-        string str = param as string;
-        GetText((int)Texts.ErrorTitle_Text).text = str;
-    }
-    void OnEvent_Notice(Component sender, object param)
-    {
-        string str = param as string;
-        GetText((int)Texts.Notice_Text).text = str;
+        if(param is ValueTuple<string, string> data)
+        {
+            GetText((int)Texts.ErrorTitle_Text).text = data.Item1;
+            GetText((int)Texts.Notice_Text).text = data.Item2;
+        }
     }
 }

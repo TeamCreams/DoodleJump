@@ -407,7 +407,7 @@ GameObject:
   - component: {fileID: 604670908901033815}
   - component: {fileID: -7064596231849573602}
   m_Layer: 5
-  m_Name: UI_AccountErrorPopup
+  m_Name: UI_ErrorButtonPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

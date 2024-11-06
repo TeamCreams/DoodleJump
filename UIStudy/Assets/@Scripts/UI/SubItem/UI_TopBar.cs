@@ -136,8 +136,7 @@ public class UI_TopBar : UI_Base
             {
                 _lifeTimer?.Dispose();
                 Managers.Game.UserInfo.LatelyScore = _time;
-                Managers.Score.SetScore();
-                Managers.UI.ShowPopupUI<UI_RetryPopup>();
+                Managers.Score.SetScore(this, ProcessErrorFun);
             }
         }
         else
@@ -155,6 +154,11 @@ public class UI_TopBar : UI_Base
                 yield return new WaitForSeconds(0.05f);
             }
         }
+    }
+
+    public void ProcessErrorFun()
+    {
+        Managers.Score.SetScore(this, ProcessErrorFun);
     }
 
     void OnEvent_SetLanguage(Component sender, object param)

@@ -107,11 +107,14 @@ public class UI_SignUpScene : UI_Scene
         if (string.IsNullOrEmpty(GetInputField((int)InputFields.Id_InputField).text))
         {
             Debug.Log("아이디 안 만들고 그냥 넘어감");
+            Managers.Scene.LoadScene(EScene.SignInScene);
             return; 
         }
         if (errCode != EErrorCode.ERR_OK || _errCodeId != EErrorCode.ERR_OK)
         {
-            Managers.UI.ShowPopupUI<UI_AccountErrorPopup>();
+            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, "Do you want to cancel account creation?");
+            popup.AddOnClickAction(ProcessErrorFun);
             // 아이디 생성 안 된다고 말하고 가만히 있기/로그인창으로넘어가기 선택 팝업.
             return; 
         }
@@ -138,10 +141,8 @@ public class UI_SignUpScene : UI_Scene
        {
             Debug.Log("아이디 만들기 실패~");
             Managers.UI.ShowPopupUI<UI_ErrorPopup>();
-            Managers.Event.TriggerEvent(EEventType.ErrorPopupTitle, this, "Failed to create account.");
-            Managers.Event.TriggerEvent(EEventType.ErrorPopupNotice, this, "Account creation has failed.\n Please try again.");
-            
-           // popUp
+            Managers.Event.TriggerEvent(EEventType.ErrorPopup, this, 
+            ("Failed to create account.", "Account creation has failed.\n Please try again."));
        });
     }
 
@@ -196,6 +197,10 @@ public class UI_SignUpScene : UI_Scene
         }
         GetText((int)Texts.Warning_ConfirmPassword_Text).text = "";
         return EErrorCode.ERR_OK;
+    }
+
+    public void ProcessErrorFun()
+    {
     }
 
     void OnEvent_SetLanguage(Component sender, object param)
