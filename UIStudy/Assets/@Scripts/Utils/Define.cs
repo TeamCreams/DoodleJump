@@ -15,7 +15,7 @@ public static class Define
         SuberunkerSceneHomeScene,
         SuberunkerTimelineScene,
         ChooseCharacterScene,
-        InputNameScene,
+        InputNicknameScene,
         SuberunkerScene,
     }
 

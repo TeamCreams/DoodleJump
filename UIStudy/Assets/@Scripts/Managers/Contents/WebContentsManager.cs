@@ -13,10 +13,12 @@ public class WebRoute
     private readonly static string BaseUrl = $"https://dev-single-api.snapism.net:8080/";
     public readonly static Func<ReqDtoGetUserAccount, string> GetUserAccount = (dto) => $"{BaseUrl}User/GetUserAccount?UserName={dto.UserName}";
 
-    public readonly static Func<ReqDtoGetUserAccountId, string> GetUserAccountId = (dto) => $"{BaseUrl}User/GetUserAccountId?UserName={dto.UserName}";
+    public readonly static Func<ReqDtoGetValidateUserAccountId, string> GetValidateUserAccountId = (dto) => $"{BaseUrl}User/GetValidateUserAccountId?UserName={dto.UserName}";
 
     public readonly static string InsertUserAccount = $"{BaseUrl}User/InsertUser";
     public readonly static string InsertUserAccountScore = $"{BaseUrl}User/InsertUserAccountScore";
+
+    public readonly static string InsertUserAccountNickname = $"{BaseUrl}User/InsertUserAccountNickname";
     //public readonly static Func<ReqInsertUserAccountScore, string> InsertUserAccountScore = (dto) => $"{BaseUrl}User/InsertUserAccountScore?UserName={dto.UserName}&Score{dto.Score}";
 
 }
@@ -48,11 +50,11 @@ public class WebContentsManager
     }
 
 
-    public void ReqGetUserAccountId(ReqDtoGetUserAccountId requestDto, Action<ResDtoGetUserAccountId> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void ReqGetValidateUserAccountId(ReqDtoGetValidateUserAccountId requestDto, Action<ResDtoGetValidateUserAccountId> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
-        Managers.Web.SendGetRequest(WebRoute.GetUserAccountId(requestDto), (response) =>
+        Managers.Web.SendGetRequest(WebRoute.GetValidateUserAccountId(requestDto), (response) =>
         {
-            CommonResult<ResDtoGetUserAccountId> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetUserAccountId>>(response);
+            CommonResult<ResDtoGetValidateUserAccountId> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetValidateUserAccountId>>(response);
 
             if (rv == null || false == rv.IsSuccess)
             {
@@ -72,7 +74,7 @@ public class WebContentsManager
         });
     }
 
-    public void InsertUserAccount(ReqDtoInsertUserAccount requestDto, Action<ResDtoInsertUserAccount> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void ReqInsertUserAccount(ReqDtoInsertUserAccount requestDto, Action<ResDtoInsertUserAccount> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
@@ -98,13 +100,38 @@ public class WebContentsManager
         });
     }
 
-    public void InsertUserAccountScore(ReqDtoInsertUserAccountScore requestDto, Action<ResDtoInsertUserAccountScore> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void ReqInsertUserAccountScore(ReqDtoInsertUserAccountScore requestDto, Action<ResDtoInsertUserAccountScore> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
         Managers.Web.SendPostRequest(WebRoute.InsertUserAccountScore, body , (response) =>
         {
-            CommonResult<ResDtoInsertUserAccountScore> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertUserAccountScore>>(response); // ResDtoInsertUserAccountScore인데 이름 잘 못 지음 
+            CommonResult<ResDtoInsertUserAccountScore> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertUserAccountScore>>(response); 
+
+            if (rv == null || false == rv.IsSuccess)
+            {
+                onFailed.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                if (rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
+    public void ReqInsertUserAccountNickname(ReqDtoInsertUserAccountNickname requestDto, Action<ResDtoInsertUserAccountNickname> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
+
+        Managers.Web.SendPostRequest(WebRoute.InsertUserAccountNickname, body , (response) =>
+        {
+            CommonResult<ResDtoInsertUserAccountNickname> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertUserAccountNickname>>(response);
 
             if (rv == null || false == rv.IsSuccess)
             {

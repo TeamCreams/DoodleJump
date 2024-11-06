@@ -1,27 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using GameApi.Dtos;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static Define;
 
-public class UI_InputNameScene : UI_Scene
+public class UI_InputNicknameScene : UI_Scene
 {
 
     private enum InputFields
     {
-        Name_InputField,
+        Nickname_InputField,
     }
 
     private enum Buttons
     {
-        InspectName_Button,
+        Next_Button,
+        Prev_Button
     }
 
     private enum Texts
     {
         Warning_Text,
-        Name_Text,
+        Nickname_Text,
         Placeholder_Nickname_Text
     }
 
@@ -37,7 +39,8 @@ public class UI_InputNameScene : UI_Scene
         BindButtons(typeof(Buttons));
         BindTexts(typeof(Texts));
 
-        GetButton((int)Buttons.InspectName_Button).gameObject.BindEvent(OnClick_InspectName, EUIEvent.Click);
+        GetButton((int)Buttons.Prev_Button).gameObject.BindEvent(OnClick_LoginPage, EUIEvent.Click);
+        GetButton((int)Buttons.Next_Button).gameObject.BindEvent(OnClick_InspectName, EUIEvent.Click);
         GetText((int)Texts.Warning_Text).text = "";
 
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
@@ -46,11 +49,14 @@ public class UI_InputNameScene : UI_Scene
         return true;
     }
 
+    private void OnClick_LoginPage(PointerEventData eventData)
+    {            
+        Managers.Scene.LoadScene(EScene.SignInScene);
+    }
 
     private void OnClick_InspectName(PointerEventData eventData)
     {
-        EErrorCode errCode = CheckCorrectNickname(GetInputField((int)InputFields.Name_InputField).text);
-
+        EErrorCode errCode = CheckCorrectNickname(GetInputField((int)InputFields.Nickname_InputField).text);
         if (errCode != EErrorCode.ERR_OK)
         {
             //Localization 세계화 번역작업
@@ -58,18 +64,34 @@ public class UI_InputNameScene : UI_Scene
             GetText((int)Texts.Warning_Text).text = _nicknameUnavailable;
             return;
         }
+
+        //if(eventData.pointerPressRaycast.gameObject != GetInputField((int)InputFields.Nickname_InputField))
+        // inspection
+        Managers.WebContents.ReqInsertUserAccountNickname(new ReqDtoInsertUserAccountNickname()
+        {
+            UserName = Managers.Game.UserInfo.UserId,
+            Nickname = GetInputField((int)InputFields.Nickname_InputField).text
+        },
+       (response) =>
+       {
+            Managers.Game.UserInfo.UserNickname = GetInputField((int)InputFields.Nickname_InputField).text;
+            Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+       },
+       (errorCode) =>
+       {
+            Managers.UI.ShowPopupUI<UI_ToastPopup>();
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, _nicknameUnavailable);
+       });
         
-        Managers.Game.ChracterStyleInfo.PlayerName = GetInputField((int)InputFields.Name_InputField).text;
-        Managers.Scene.LoadScene(EScene.SuberunkerTimelineScene);
     }
 
-    private EErrorCode CheckCorrectNickname(string name)
+    private EErrorCode CheckCorrectNickname(string nickname)
     {
-        if (string.IsNullOrEmpty(name) || char.IsDigit(name[0]))
+        if (string.IsNullOrEmpty(name))
         {
             return EErrorCode.ERR_ValidationNickname;
         }
-        if (18 <  name.Length)
+        if (20 <  nickname.Length)
         {
             return EErrorCode.ERR_ValidationNickname;
         }
@@ -79,7 +101,7 @@ public class UI_InputNameScene : UI_Scene
 
     void OnEvent_SetLanguage(Component sender, object param)
     {
-        GetText((int)Texts.Name_Text).text = Managers.Language.LocalizedString(91013);
+        GetText((int)Texts.Nickname_Text).text = Managers.Language.LocalizedString(91013);
         GetText((int)Texts.Placeholder_Nickname_Text).text = Managers.Language.LocalizedString(91014);
         _nicknameUnavailable = Managers.Language.LocalizedString(91015);
     }

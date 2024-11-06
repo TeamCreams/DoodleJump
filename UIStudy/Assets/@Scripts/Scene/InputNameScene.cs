@@ -11,7 +11,7 @@ public class InputNameScene : BaseScene
             return false;
         }
 
-        Managers.UI.ShowSceneUI<UI_InputNameScene>();
+        Managers.UI.ShowSceneUI<UI_InputNicknameScene>();
 
         return true;
     }

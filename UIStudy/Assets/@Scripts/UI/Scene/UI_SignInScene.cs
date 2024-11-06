@@ -59,8 +59,8 @@ public class UI_SignInScene : UI_Scene
         GetInputField((int)InputFields.Password_InputField).gameObject.BindEvent(OnClick_CheckLogId, EUIEvent.Click);
         GetText((int)Texts.Warning_Id_Text).text = "";
         GetText((int)Texts.Warning_Password_Text).text = "";
-        //Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        //Managers.Event.TriggerEvent(EEventType.SetLanguage);
+        Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+        Managers.Event.TriggerEvent(EEventType.SetLanguage);
 
         return true;
     }
@@ -91,8 +91,12 @@ public class UI_SignInScene : UI_Scene
         Managers.Score.GetScore((this), null,
             () => 
             {
-                Debug.Log("is SuberunkerSceneHomeScene");
-
+                if(string.IsNullOrEmpty(Managers.Game.UserInfo.UserNickname))
+                {
+                    Debug.Log("InputNicknameScene");
+                    Managers.Scene.LoadScene(EScene.InputNicknameScene);
+                    return;
+                }
                 Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
             },
             () => 
@@ -139,6 +143,7 @@ public class UI_SignInScene : UI_Scene
        {
            _errCodeId = EErrorCode.ERR_OK;
            _password = response.Password;
+           Managers.Game.UserInfo.UserNickname = response.Nickname;
            GetText((int)Texts.Warning_Id_Text).text = "";
        },
        (errorCode) =>

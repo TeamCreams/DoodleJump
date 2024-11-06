@@ -68,8 +68,8 @@ public class UI_SignUpScene : UI_Scene
         GetText((int)Texts.Warning_Id_Text).text = "";
         GetText((int)Texts.Warning_Password_Text).text = "";
         GetText((int)Texts.Warning_ConfirmPassword_Text).text = "";
-        //Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        //Managers.Event.TriggerEvent(EEventType.SetLanguage);
+        Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+        Managers.Event.TriggerEvent(EEventType.SetLanguage);
 
         return true;
     }
@@ -125,7 +125,7 @@ public class UI_SignUpScene : UI_Scene
     
     private void InsertUser(Action onSuccess = null)
     {
-        Managers.WebContents.InsertUserAccount(new ReqDtoInsertUserAccount()
+        Managers.WebContents.ReqInsertUserAccount(new ReqDtoInsertUserAccount()
         {
             UserName = GetInputField((int)InputFields.Id_InputField).text,
             Password = GetInputField((int)InputFields.Password_InputField).text
@@ -141,7 +141,8 @@ public class UI_SignUpScene : UI_Scene
        {
             Debug.Log("아이디 만들기 실패~");
             Managers.UI.ShowPopupUI<UI_ErrorPopup>();
-            Managers.Event.TriggerEvent(EEventType.ErrorPopup, this, 
+            Managers.Event.TriggerEvent(EEventType.ErrorPopup,
+             this, 
             ("Failed to create account.", "Account creation has failed.\n Please try again."));
        });
     }
@@ -159,7 +160,7 @@ public class UI_SignUpScene : UI_Scene
             _errCodeId = EErrorCode.ERR_ValidationId;
         }
 
-        Managers.WebContents.ReqGetUserAccountId(new ReqDtoGetUserAccountId()
+        Managers.WebContents.ReqGetValidateUserAccountId(new ReqDtoGetValidateUserAccountId()
         {
             UserName = GetInputField((int)InputFields.Id_InputField).text,
         },

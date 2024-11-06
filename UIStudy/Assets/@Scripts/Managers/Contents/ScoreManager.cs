@@ -21,13 +21,6 @@ public class ScoreManager
         },
        (response) =>
        {    
-        
-            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, sender, 
-                "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
-            popup.AddOnClickAction(ProcessErrorFun);
-            onFailed?.Invoke();
-/*
             if(response != null)
             {
                 Managers.Game.UserInfo.RecordScore = response.HighScore;
@@ -41,7 +34,6 @@ public class ScoreManager
                 Debug.Log("response is null");
                 onFailed?.Invoke();
             }
-            */
        },
        (errorCode) =>
        {
@@ -56,7 +48,7 @@ public class ScoreManager
     
     public void SetScore(Component sender, Action ProcessErrorFun = null, Action onSuccess = null, Action onFailed = null)
     {
-        Managers.WebContents.InsertUserAccountScore(new ReqDtoInsertUserAccountScore()
+        Managers.WebContents.ReqInsertUserAccountScore(new ReqDtoInsertUserAccountScore()
         {
             UserName = Managers.Game.UserInfo.UserId,
             Score = Managers.Game.UserInfo.LatelyScore

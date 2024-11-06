@@ -28,7 +28,7 @@ MonoBehaviour:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3e57ea7c26afe486fad3ba3adb4ba40b
-    m_Address: UI_InputNameScene
+    m_Address: UI_InputNicknameScene
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
