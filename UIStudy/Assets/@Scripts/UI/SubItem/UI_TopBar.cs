@@ -158,7 +158,21 @@ public class UI_TopBar : UI_Base
 
     public void ProcessErrorFun()
     {
-        Managers.Score.SetScore(this, ProcessErrorFun);
+        Debug.Log("ProcessErrorFun");
+        Managers.Score.SetScore(this, null, null,
+            ()=>
+            {
+                Managers.UI.ShowPopupUI<UI_ToastPopup>();
+                Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "Failed to save...");
+
+                Invoke("ExitGame", 2.5f);
+            }        
+        );
+    }
+
+    private void ExitGame()
+    {
+        Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
     }
 
     void OnEvent_SetLanguage(Component sender, object param)

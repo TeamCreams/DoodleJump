@@ -55,16 +55,24 @@ public class ScoreManager
         },
        (response) =>
        {
+        
+            Managers.UI.ShowPopupUI<UI_RetryPopup>();
+            onSuccess?.Invoke();
+            /*
             if(response != null)
             {
                 Managers.UI.ShowPopupUI<UI_RetryPopup>();
                 onSuccess?.Invoke();
             }
             else
-            {                
-                Debug.Log("response is null");
+            {   
+                UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+                Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, sender, 
+                    "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
+                popup.AddOnClickAction(ProcessErrorFun);
                 onFailed?.Invoke();
             }
+            */
        },
        (errorCode) =>
        {

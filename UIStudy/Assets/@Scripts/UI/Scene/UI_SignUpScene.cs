@@ -65,6 +65,9 @@ public class UI_SignUpScene : UI_Scene
         GetInputField((int)InputFields.Password_InputField).gameObject.BindEvent(OnClick_IsCheckCorrectId, EUIEvent.Click);
         GetInputField((int)InputFields.ConfirmPassword_InputField).gameObject.BindEvent(OnClick_CheckCorrectPassword, EUIEvent.Click);
 
+        GetInputField((int)InputFields.Password_InputField).enabled = false;
+        GetInputField((int)InputFields.ConfirmPassword_InputField).enabled = false;
+
         GetText((int)Texts.Warning_Id_Text).text = "";
         GetText((int)Texts.Warning_Password_Text).text = "";
         GetText((int)Texts.Warning_ConfirmPassword_Text).text = "";
@@ -168,6 +171,7 @@ public class UI_SignUpScene : UI_Scene
        {
            GetText((int)Texts.Warning_Id_Text).text = "";
            _errCodeId = EErrorCode.ERR_OK;
+            GetInputField((int)InputFields.Password_InputField).enabled = true;
        },
        (errorCode) =>
        {
@@ -184,6 +188,7 @@ public class UI_SignUpScene : UI_Scene
             return EErrorCode.ERR_ValidationPassword;
         }
         GetText((int)Texts.Warning_Password_Text).text = "";
+        GetInputField((int)InputFields.ConfirmPassword_InputField).enabled = true;
         return EErrorCode.ERR_OK;
     }
 
@@ -206,8 +211,8 @@ public class UI_SignUpScene : UI_Scene
 
     void OnEvent_SetLanguage(Component sender, object param)
     {
-        GetText((int)Texts.Id_Text).text = Managers.Language.LocalizedString(91013);
-        GetText((int)Texts.Placeholder_Id_Text).text = Managers.Language.LocalizedString(91013);
+        GetText((int)Texts.Id_Text).text = Managers.Language.LocalizedString(91027);
+        GetText((int)Texts.Placeholder_Id_Text).text = Managers.Language.LocalizedString(91027);
         _idUnavailable = Managers.Language.LocalizedString(91024);
 
         GetText((int)Texts.Password_Text).text = Managers.Language.LocalizedString(91020);

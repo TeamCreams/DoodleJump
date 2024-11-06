@@ -101,7 +101,7 @@ public class UI_InputNicknameScene : UI_Scene
 
     void OnEvent_SetLanguage(Component sender, object param)
     {
-        GetText((int)Texts.Nickname_Text).text = Managers.Language.LocalizedString(91013);
+        GetText((int)Texts.Nickname_Text).text = Managers.Language.LocalizedString(91014);
         GetText((int)Texts.Placeholder_Nickname_Text).text = Managers.Language.LocalizedString(91014);
         _nicknameUnavailable = Managers.Language.LocalizedString(91015);
     }

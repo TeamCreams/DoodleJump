@@ -56,6 +56,7 @@ public class UI_SignInScene : UI_Scene
         GetButton((int)Buttons.SignIn_Button).gameObject.BindEvent(OnClick_SignIn, EUIEvent.Click);
         GetButton((int)Buttons.SignUp_Button).gameObject.BindEvent(OnClick_SignUp, EUIEvent.Click);
 
+        GetInputField((int)InputFields.Password_InputField).enabled = false;
         GetInputField((int)InputFields.Password_InputField).gameObject.BindEvent(OnClick_CheckLogId, EUIEvent.Click);
         GetText((int)Texts.Warning_Id_Text).text = "";
         GetText((int)Texts.Warning_Password_Text).text = "";
@@ -141,10 +142,11 @@ public class UI_SignInScene : UI_Scene
         },
        (response) =>
        {
-           _errCodeId = EErrorCode.ERR_OK;
-           _password = response.Password;
-           Managers.Game.UserInfo.UserNickname = response.Nickname;
-           GetText((int)Texts.Warning_Id_Text).text = "";
+            _errCodeId = EErrorCode.ERR_OK;
+            _password = response.Password;
+            Managers.Game.UserInfo.UserNickname = response.Nickname;
+            GetInputField((int)InputFields.Password_InputField).enabled = true;
+            GetText((int)Texts.Warning_Id_Text).text = "";
        },
        (errorCode) =>
        {
