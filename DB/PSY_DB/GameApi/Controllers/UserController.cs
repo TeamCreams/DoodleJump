@@ -44,7 +44,7 @@ namespace GameApi.Controllers
         {
             CommonResult<ResDtoInsertUserAccount> rv = new();
 
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             try
             { 
                 var select = await (
@@ -100,7 +100,7 @@ namespace GameApi.Controllers
         {
             CommonResult<ResDtoGetUserAccount> rv = new();
 
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             try
             {
                 rv.Data = new();
@@ -175,7 +175,7 @@ namespace GameApi.Controllers
         {
             CommonResult<ResDtoGetUserAccountPassword> rv = new();
 
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             try
             {
                 rv.Data = new();
@@ -228,7 +228,7 @@ namespace GameApi.Controllers
         {
             CommonResult<ResDtoUpdateUserAccountPassword> rv = new();
 
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             try
             {
                 var userAccount = _context.TblUserAccounts.
@@ -287,7 +287,7 @@ namespace GameApi.Controllers
         {
             CommonResult<ResDtoDeleteUserAccount> rv = new();
 
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             try
             {
                 var userAccount = _context.TblUserAccounts.
@@ -342,7 +342,7 @@ namespace GameApi.Controllers
         {
             CommonResult<ResDtoGetValidateUserAccountId> rv = new();
 
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
 
             try
             {
@@ -394,7 +394,7 @@ namespace GameApi.Controllers
         {
             CommonResult<ResDtoGetValidateUserAccountNickname> rv = new();
 
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
 
             try
             {
@@ -446,7 +446,7 @@ namespace GameApi.Controllers
         {
             CommonResult<ResDtoInsertUserAccountScore> rv = new();
             
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             try
             {
                 var select = await (
@@ -512,7 +512,7 @@ namespace GameApi.Controllers
         {
             CommonResult<ResDtoInsertUserAccountNickname> rv = new();
 
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             try
             {
 
@@ -586,7 +586,7 @@ namespace GameApi.Controllers
             CommonResult<ResDtoGetOrAddUserAccount> rv = new();
             ReqDtoGetOrAddUserAccount requestDto = new(); 
 
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             try
             {
                 requestDto.UserName = HttpContext.Connection.RemoteIpAddress?.ToString();
