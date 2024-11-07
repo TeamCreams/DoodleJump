@@ -230,6 +230,8 @@ public class UserInfo
     public string UserNickname {get; set;}
     public int RecordScore {get; set;} = 0;
     public int LatelyScore {get; set;} = 0;
+
+    public int Gold {get; set;} = 0;
     
 }
 

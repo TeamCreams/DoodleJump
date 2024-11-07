@@ -136,7 +136,10 @@ public class UI_TopBar : UI_Base
             {
                 _lifeTimer?.Dispose();
                 Managers.Game.UserInfo.LatelyScore = _time;
+                Managers.Resource.Instantiate("UI_Loading", this.transform);
+                Managers.Event.TriggerEvent(EEventType.StartLoading);
                 Managers.Score.SetScore(this, ProcessErrorFun);
+                Managers.Event.TriggerEvent(EEventType.StopLoading);
             }
         }
         else
@@ -159,15 +162,19 @@ public class UI_TopBar : UI_Base
     public void ProcessErrorFun()
     {
         Debug.Log("ProcessErrorFun");
+        Managers.Resource.Instantiate("UI_Loading", this.transform);
+        Managers.Event.TriggerEvent(EEventType.StartLoading);
         Managers.Score.SetScore(this, null, null,
             ()=>
             {
+                Managers.Event.TriggerEvent(EEventType.StopLoading);
                 Managers.UI.ShowPopupUI<UI_ToastPopup>();
                 Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "Failed to save...");
-
                 Invoke("ExitGame", 2.5f);
+                return;
             }        
         );
+        Managers.Event.TriggerEvent(EEventType.StopLoading);
     }
 
     private void ExitGame()

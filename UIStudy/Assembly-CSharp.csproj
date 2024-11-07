@@ -136,10 +136,12 @@
     <Compile Include="Assets/@Scripts/Managers/Contents/ObjectManager.cs" />
     <Compile Include="Assets/@Scripts/Utils/InitBase.cs" />
     <Compile Include="Assets/@Scripts/Animation/BackgroundAnimationEvents.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_Loading.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/Common/Springs/SpringBase.cs" />
     <Compile Include="Assets/@Scripts/Item/SkillEffect.cs" />
     <Compile Include="Assets/@Scripts/UI/Popup/UI_ErrorButtonPopup.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/CharacterEditor.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_RankingItem.cs" />
     <Compile Include="Assets/@Scripts/UI/UI_Base.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/Tweens/ScaleSpring.cs" />
     <Compile Include="Assets/@Scripts/Managers/Core/WebManager.cs" />
@@ -175,6 +177,7 @@
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterExtensions.cs" />
     <Compile Include="Assets/@Scripts/Spawner/Spawner.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/Collections/IconCollection.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_MainPanel.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_ColorSlider.cs" />
     <Compile Include="Assets/@Scripts/Animation/SuberunkerTimelineAnimationEvents.cs" />
     <Compile Include="Assets/@Scripts/Systems/Contents/UserSystem.cs" />

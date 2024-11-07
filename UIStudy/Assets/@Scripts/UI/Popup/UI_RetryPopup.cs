@@ -63,15 +63,19 @@ public class UI_RetryPopup : UI_Popup
     }
     private void OnClick_HomeButton(PointerEventData eventData)
     {
+        // Managers.Resource.Instantiate("UI_Loading", this.transform);
+        // Managers.Event.TriggerEvent(EEventType.StartLoading);
         Managers.Score.GetScore((this), ProcessErrorFun,
             () =>
                 {
+                    Managers.Event.TriggerEvent(EEventType.StopLoading);
                     Managers.UI.ClosePopupUI(this);
                     Time.timeScale = 1;
-                    Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+                    // Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
                 },
             ()=>
             {
+                // Managers.Event.TriggerEvent(EEventType.StopLoading);
                 if(_failCount < HardCoding.MAX_FAIL_COUNT)
                 {
                     Time.timeScale = 1;
@@ -93,9 +97,12 @@ public class UI_RetryPopup : UI_Popup
 
     public void SetRecord()
     {        
+        // Managers.Resource.Instantiate("UI_Loading", this.transform);
+        // Managers.Event.TriggerEvent(EEventType.StartLoading);
         Managers.Score.GetScore(this, ProcessErrorFun, null,
         ()=> // 실패했을경우 
         {
+            // Managers.Event.TriggerEvent(EEventType.StopLoading);
             if(_failCount < HardCoding.MAX_FAIL_COUNT)
             {
                 _failCount++;
@@ -105,6 +112,7 @@ public class UI_RetryPopup : UI_Popup
             Managers.Scene.LoadScene(EScene.SignInScene);
         }
         );
+        // Managers.Event.TriggerEvent(EEventType.StopLoading);
         int recordMinutes = Managers.Game.UserInfo.RecordScore / 60;
         float recordSeconds = Managers.Game.UserInfo.RecordScore % 60;
         GetText((int)Texts.LifeRecordTime_Text).text = $"{_bestRecord} : {recordMinutes}{_minutes} {recordSeconds}{_seconds}";

@@ -33,6 +33,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2188dad607bf54a34af0bd0226342791
+    m_Address: UI_RankingItem
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3b7f2c753d435d647a80f1f047a113e3
     m_Address: TeleportEffect
     m_ReadOnly: 0

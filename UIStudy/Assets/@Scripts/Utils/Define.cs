@@ -78,7 +78,11 @@ public static class Define
         SignIn,
         ErrorPopup,
         ErrorButtonPopup,
-        ToastPopupNotice
+        ToastPopupNotice,
+        GetUserScoreList,
+        GetMyScore,
+        StartLoading,
+        StopLoading,
     }
 
     public enum EEquipType
