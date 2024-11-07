@@ -136,8 +136,7 @@ public class UI_TopBar : UI_Base
             {
                 _lifeTimer?.Dispose();
                 Managers.Game.UserInfo.LatelyScore = _time;
-                Managers.Score.SetScore();
-                Managers.UI.ShowPopupUI<UI_RetryPopup>();
+                Managers.Score.SetScore(this, ProcessErrorFun);
             }
         }
         else
@@ -155,6 +154,25 @@ public class UI_TopBar : UI_Base
                 yield return new WaitForSeconds(0.05f);
             }
         }
+    }
+
+    public void ProcessErrorFun()
+    {
+        Debug.Log("ProcessErrorFun");
+        Managers.Score.SetScore(this, null, null,
+            ()=>
+            {
+                Managers.UI.ShowPopupUI<UI_ToastPopup>();
+                Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "Failed to save...");
+
+                Invoke("ExitGame", 2.5f);
+            }        
+        );
+    }
+
+    private void ExitGame()
+    {
+        Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
     }
 
     void OnEvent_SetLanguage(Component sender, object param)

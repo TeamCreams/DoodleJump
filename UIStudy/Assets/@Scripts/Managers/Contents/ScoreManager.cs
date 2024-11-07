@@ -13,40 +13,74 @@ public class ScoreManager
         _slave = newObj.GetOrAddComponent<ScoreManagerSlave>();
     }
 
-    public void GetScore(Action onSuccess = null)
+    public void GetScore(Component sender, Action ProcessErrorFun = null, Action onSuccess = null, Action onFailed = null)
     {
         Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
         {
             UserName = Managers.Game.UserInfo.UserId
         },
        (response) =>
-       {
-           Managers.Game.UserInfo.RecordScore = response.HighScore;
-           Managers.Game.UserInfo.LatelyScore = response.LatelyScore;
-           onSuccess?.Invoke();
+       {    
+            if(response != null)
+            {
+                Managers.Game.UserInfo.RecordScore = response.HighScore;
+                Managers.Game.UserInfo.LatelyScore = response.LatelyScore;
+                Debug.Log("is success");
+
+                onSuccess?.Invoke();
+            }
+            else
+            {                
+                Debug.Log("response is null");
+                onFailed?.Invoke();
+            }
        },
        (errorCode) =>
        {
-            Managers.UI.ShowPopupUI<UI_ErrorPopup>();           
+            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+            Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, sender, 
+                "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
+                Debug.Log("is failllll");
+            popup.AddOnClickAction(ProcessErrorFun);
+            onFailed?.Invoke();
        });
     }
     
-    public void SetScore(Action onSuccess = null)
+    public void SetScore(Component sender, Action ProcessErrorFun = null, Action onSuccess = null, Action onFailed = null)
     {
-        Managers.WebContents.InsertUserAccountScore(new ReqDtoInsertUserAccountScore()
+        Managers.WebContents.ReqInsertUserAccountScore(new ReqDtoInsertUserAccountScore()
         {
             UserName = Managers.Game.UserInfo.UserId,
             Score = Managers.Game.UserInfo.LatelyScore
         },
        (response) =>
        {
-            Debug.Log("score 입력");
+        
+            Managers.UI.ShowPopupUI<UI_RetryPopup>();
             onSuccess?.Invoke();
+            /*
+            if(response != null)
+            {
+                Managers.UI.ShowPopupUI<UI_RetryPopup>();
+                onSuccess?.Invoke();
+            }
+            else
+            {   
+                UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+                Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, sender, 
+                    "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
+                popup.AddOnClickAction(ProcessErrorFun);
+                onFailed?.Invoke();
+            }
+            */
        },
        (errorCode) =>
        {
-            Debug.Log("score 입력 실패");
-            //Managers.UI.ShowPopupUI<UI_ErrorPopup>();           
+            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+            Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, sender, 
+                "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
+            popup.AddOnClickAction(ProcessErrorFun);
+            onFailed?.Invoke();
        });
     }
 }

@@ -65,11 +65,14 @@ public class UI_SignUpScene : UI_Scene
         GetInputField((int)InputFields.Password_InputField).gameObject.BindEvent(OnClick_IsCheckCorrectId, EUIEvent.Click);
         GetInputField((int)InputFields.ConfirmPassword_InputField).gameObject.BindEvent(OnClick_CheckCorrectPassword, EUIEvent.Click);
 
+        GetInputField((int)InputFields.Password_InputField).enabled = false;
+        GetInputField((int)InputFields.ConfirmPassword_InputField).enabled = false;
+
         GetText((int)Texts.Warning_Id_Text).text = "";
         GetText((int)Texts.Warning_Password_Text).text = "";
         GetText((int)Texts.Warning_ConfirmPassword_Text).text = "";
-        //Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        //Managers.Event.TriggerEvent(EEventType.SetLanguage);
+        Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+        Managers.Event.TriggerEvent(EEventType.SetLanguage);
 
         return true;
     }
@@ -107,11 +110,14 @@ public class UI_SignUpScene : UI_Scene
         if (string.IsNullOrEmpty(GetInputField((int)InputFields.Id_InputField).text))
         {
             Debug.Log("아이디 안 만들고 그냥 넘어감");
+            Managers.Scene.LoadScene(EScene.SignInScene);
             return; 
         }
         if (errCode != EErrorCode.ERR_OK || _errCodeId != EErrorCode.ERR_OK)
         {
-            Managers.UI.ShowPopupUI<UI_AccountErrorPopup>();
+            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, "Do you want to cancel account creation?");
+            popup.AddOnClickAction(ProcessErrorFun);
             // 아이디 생성 안 된다고 말하고 가만히 있기/로그인창으로넘어가기 선택 팝업.
             return; 
         }
@@ -122,7 +128,7 @@ public class UI_SignUpScene : UI_Scene
     
     private void InsertUser(Action onSuccess = null)
     {
-        Managers.WebContents.InsertUserAccount(new ReqDtoInsertUserAccount()
+        Managers.WebContents.ReqInsertUserAccount(new ReqDtoInsertUserAccount()
         {
             UserName = GetInputField((int)InputFields.Id_InputField).text,
             Password = GetInputField((int)InputFields.Password_InputField).text
@@ -138,10 +144,9 @@ public class UI_SignUpScene : UI_Scene
        {
             Debug.Log("아이디 만들기 실패~");
             Managers.UI.ShowPopupUI<UI_ErrorPopup>();
-            Managers.Event.TriggerEvent(EEventType.ErrorPopupTitle, this, "Failed to create account.");
-            Managers.Event.TriggerEvent(EEventType.ErrorPopupNotice, this, "Account creation has failed.\n Please try again.");
-            
-           // popUp
+            Managers.Event.TriggerEvent(EEventType.ErrorPopup,
+             this, 
+            ("Failed to create account.", "Account creation has failed.\n Please try again."));
        });
     }
 
@@ -158,7 +163,7 @@ public class UI_SignUpScene : UI_Scene
             _errCodeId = EErrorCode.ERR_ValidationId;
         }
 
-        Managers.WebContents.ReqGetUserAccountId(new ReqDtoGetUserAccountId()
+        Managers.WebContents.ReqGetValidateUserAccountId(new ReqDtoGetValidateUserAccountId()
         {
             UserName = GetInputField((int)InputFields.Id_InputField).text,
         },
@@ -166,6 +171,7 @@ public class UI_SignUpScene : UI_Scene
        {
            GetText((int)Texts.Warning_Id_Text).text = "";
            _errCodeId = EErrorCode.ERR_OK;
+            GetInputField((int)InputFields.Password_InputField).enabled = true;
        },
        (errorCode) =>
        {
@@ -182,6 +188,7 @@ public class UI_SignUpScene : UI_Scene
             return EErrorCode.ERR_ValidationPassword;
         }
         GetText((int)Texts.Warning_Password_Text).text = "";
+        GetInputField((int)InputFields.ConfirmPassword_InputField).enabled = true;
         return EErrorCode.ERR_OK;
     }
 
@@ -198,10 +205,14 @@ public class UI_SignUpScene : UI_Scene
         return EErrorCode.ERR_OK;
     }
 
+    public void ProcessErrorFun()
+    {
+    }
+
     void OnEvent_SetLanguage(Component sender, object param)
     {
-        GetText((int)Texts.Id_Text).text = Managers.Language.LocalizedString(91013);
-        GetText((int)Texts.Placeholder_Id_Text).text = Managers.Language.LocalizedString(91013);
+        GetText((int)Texts.Id_Text).text = Managers.Language.LocalizedString(91027);
+        GetText((int)Texts.Placeholder_Id_Text).text = Managers.Language.LocalizedString(91027);
         _idUnavailable = Managers.Language.LocalizedString(91024);
 
         GetText((int)Texts.Password_Text).text = Managers.Language.LocalizedString(91020);

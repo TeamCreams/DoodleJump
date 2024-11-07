@@ -219,7 +219,6 @@ public class ItemData
 public class ChracterStyleInfo
 {
     public int CharacterId { get; set; } = 20001;
-    public string PlayerName { get; set; } = "player";
     public string Eyes { get; set; } = "Dizzy";
     public string Eyebrows { get; set; } = "DizzyEyebrows";
     public string Hair { get; set; } = "ZombieShabby";
@@ -228,6 +227,7 @@ public class ChracterStyleInfo
 public class UserInfo
 {
     public string UserId { get; set; } = "Orange";
+    public string UserNickname {get; set;}
     public int RecordScore {get; set;} = 0;
     public int LatelyScore {get; set;} = 0;
     

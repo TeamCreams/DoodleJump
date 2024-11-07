@@ -35,13 +35,13 @@ public class UI_SignInScene : UI_Scene
         SignIn_Text,
         SignUp_Text
     }
-    private EErrorCode _errCodeId;
 
     private string _idUnavailable = "없는 아이디입니다.";
-    private string _passwordUnavailable = "비밀번호가 일치하지 않습니다.";
-    private CommonResult<ResDtoGetUserAccount> _rv = null;
-    bool _isCheckDuplicateId = false;
+    private string _passwordUnavailable = "비밀번호가 일치하지 않습니다.";    
+    private EErrorCode _errCodeId = EErrorCode.ERR_Nothing;
     private string _password = "";
+    //private bool _isFailTwice = false; // for test
+
     public override bool Init()
     {
         if (base.Init() == false)
@@ -56,11 +56,12 @@ public class UI_SignInScene : UI_Scene
         GetButton((int)Buttons.SignIn_Button).gameObject.BindEvent(OnClick_SignIn, EUIEvent.Click);
         GetButton((int)Buttons.SignUp_Button).gameObject.BindEvent(OnClick_SignUp, EUIEvent.Click);
 
+        GetInputField((int)InputFields.Password_InputField).enabled = false;
         GetInputField((int)InputFields.Password_InputField).gameObject.BindEvent(OnClick_CheckLogId, EUIEvent.Click);
         GetText((int)Texts.Warning_Id_Text).text = "";
         GetText((int)Texts.Warning_Password_Text).text = "";
-        //Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        //Managers.Event.TriggerEvent(EEventType.SetLanguage);
+        Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+        Managers.Event.TriggerEvent(EEventType.SetLanguage);
 
         return true;
     }
@@ -68,26 +69,54 @@ public class UI_SignInScene : UI_Scene
     private void OnClick_SignIn(PointerEventData eventData)
     {
         //최종 로그인 하는 버튼.
-        if (_isCheckDuplicateId == false)
+        if (_errCodeId != EErrorCode.ERR_OK)
         {
-            //에러처리
+            Managers.UI.ShowPopupUI<UI_ToastPopup>();
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "Please enter a valid ID.");
             return;
         }
 
         EErrorCode error = CheckCorrectPassword();
         if (error != EErrorCode.ERR_OK)
         {
+            Managers.UI.ShowPopupUI<UI_ToastPopup>();
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, _passwordUnavailable);
             return;
         }
-        //Managers.Event.TriggerEvent(EEventType.SignIn); //호출이 안 됨
 
         //1. 다른버튼 비활성화
         //2. 로딩 인디케이터
         Managers.UI.ShowPopupUI<UI_ToastPopup>();
         Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "Login successful");
         Managers.Game.UserInfo.UserId = GetInputField((int)InputFields.Id_InputField).text;
-        Managers.Score.GetScore(() =>
-            Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene)
+        Managers.Score.GetScore((this), null,
+            () => 
+            {
+                if(string.IsNullOrEmpty(Managers.Game.UserInfo.UserNickname))
+                {
+                    Debug.Log("InputNicknameScene");
+                    Managers.Scene.LoadScene(EScene.InputNicknameScene);
+                    return;
+                }
+                Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+            },
+            () => 
+            {
+/*
+                Debug.Log("is SignInScene");
+                if(_isFailTwice == true)
+                {                
+                    Debug.Log("is second");
+                    _isFailTwice = false;
+                    Managers.Scene.LoadScene(EScene.SignInScene);
+                    return;
+                }
+                Debug.Log("is first");
+                _isFailTwice = true;
+                Managers.Score.GetScore(this);
+*/
+                Managers.Scene.LoadScene(EScene.SignInScene);
+            }
         );
     }
 
@@ -113,16 +142,15 @@ public class UI_SignInScene : UI_Scene
         },
        (response) =>
        {
-           _isCheckDuplicateId = true;
-           _password = response.Password;
-           GetText((int)Texts.Warning_Id_Text).text = "";
-
-           //Managers.Game.PlayerInfo = response.UserName;
-           //Managers.Event.TriggerEvent(EEventType.SetUpUser, this, (response.UserName, response.HighScore, response.LatelyScore));
+            _errCodeId = EErrorCode.ERR_OK;
+            _password = response.Password;
+            Managers.Game.UserInfo.UserNickname = response.Nickname;
+            GetInputField((int)InputFields.Password_InputField).enabled = true;
+            GetText((int)Texts.Warning_Id_Text).text = "";
        },
        (errorCode) =>
        {
-           _isCheckDuplicateId = false;
+           _errCodeId = EErrorCode.ERR_ValidationId;
            GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
        });
     }
@@ -134,7 +162,7 @@ public class UI_SignInScene : UI_Scene
         if (Equals(_password, password) != true)
         {
             GetText((int)Texts.Warning_Password_Text).text = _passwordUnavailable;
-            return EErrorCode.ERR_ValidationNickname;
+            return EErrorCode.ERR_ValidationPassword;
         }
         else
         {

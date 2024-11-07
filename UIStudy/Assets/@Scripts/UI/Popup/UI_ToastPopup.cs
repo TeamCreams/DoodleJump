@@ -32,6 +32,7 @@ public class UI_ToastPopup : UI_Popup
     {
         GetText((int)Texts.Notice_Text).text = notice;
         yield return new WaitForSeconds(2);
+        Managers.Event.RemoveEvent(EEventType.ToastPopupNotice, OnEvent_Notice);
         Managers.UI.ClosePopupUI(this);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static Define;
 
@@ -30,6 +31,8 @@ public class UI_RetryPopup : UI_Popup
     private string _seconds = "초";
     private string _bestRecord = "최고 기록";
     private string _recentRecord = "최근 기록";
+
+    private bool _isFailTwice = false;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -42,29 +45,47 @@ public class UI_RetryPopup : UI_Popup
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         Managers.Event.TriggerEvent(EEventType.SetLanguage);
         SetRecord();
-
+        _isFailTwice = false;
         Managers.Game.TotalGold += Managers.Game.Gold;
 
-        GetButton((int)Buttons.Retry_Button).gameObject.BindEvent((evt) =>
-        {
-            Managers.Scene.LoadScene(EScene.SuberunkerScene);
-            Managers.UI.ClosePopupUI(this);
-            Time.timeScale = 1;
-        }, EUIEvent.Click);
-
-        GetButton((int)Buttons.Home_Button).gameObject.BindEvent((evt) =>
-        {
-            Managers.Score.GetScore();
-            Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
-            Managers.UI.ClosePopupUI(this);
-            Time.timeScale = 1;
-        }, EUIEvent.Click);
+        GetButton((int)Buttons.Retry_Button).gameObject.BindEvent(OnClick_RetryButton, EUIEvent.Click);
+        GetButton((int)Buttons.Home_Button).gameObject.BindEvent(OnClick_HomeButton, EUIEvent.Click);
 
         Time.timeScale = 0f;
         return true;
     }
-
-
+    private void OnClick_RetryButton(PointerEventData eventData)
+    {
+        Managers.Scene.LoadScene(EScene.SuberunkerScene);
+        Managers.UI.ClosePopupUI(this);
+        Time.timeScale = 1;
+    }
+    private void OnClick_HomeButton(PointerEventData eventData)
+    {
+        Managers.Score.GetScore((this), null,
+            () =>
+                {
+                    Managers.UI.ClosePopupUI(this);
+                    Time.timeScale = 1;
+                    Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+                },
+            ()=>
+            {
+                if(_isFailTwice == true)
+                {
+                    Time.timeScale = 1;
+                    _isFailTwice = false;
+                    Managers.UI.ClosePopupUI(this);
+                    Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+                    return;
+                }
+                
+                Time.timeScale = 1;
+                _isFailTwice = true;
+                Managers.Score.GetScore(this);
+            }
+        );
+    }
 
     public override void SetOrder(int sortOrder)
     {
@@ -73,8 +94,19 @@ public class UI_RetryPopup : UI_Popup
 
     public void SetRecord()
     {        
-        Managers.Score.GetScore();
-
+        Managers.Score.GetScore(this, null, null,
+            ()=> // 실패했을경우 
+            {
+                if(_isFailTwice == true)
+                {
+                    _isFailTwice = false;
+                    Managers.Scene.LoadScene(EScene.SignInScene);
+                    return;
+                }
+                _isFailTwice = true;
+                Managers.Score.GetScore(this);
+            }
+        );
         int recordMinutes = Managers.Game.UserInfo.RecordScore / 60;
         float recordSeconds = Managers.Game.UserInfo.RecordScore % 60;
         GetText((int)Texts.LifeRecordTime_Text).text = $"{_bestRecord} : {recordMinutes}{_minutes} {recordSeconds}{_seconds}";
@@ -84,6 +116,10 @@ public class UI_RetryPopup : UI_Popup
         GetText((int)Texts.LifeTime_Text).text = $"{_recentRecord} : {minutes}{_minutes} {seconds}{_seconds}";
 
         GetText((int)Texts.Gold_Text).text = Managers.Game.Gold.ToString();
+    }
+
+    public void ProcessErrorFun()
+    {
     }
 
     void OnEvent_SetLanguage(Component sender, object param)

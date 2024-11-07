@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/@Scenes/ChooseCharacterScene.unity
     guid: 661663cc4ae244ed9818fefb28c794e5
   - enabled: 1
-    path: Assets/@Scenes/InputNameScene.unity
+    path: Assets/@Scenes/InputNicknameScene.unity
     guid: f191a9d1eef4547d28f74dc6ce551705
   - enabled: 1
     path: Assets/@Scenes/SuberunkerScene.unity

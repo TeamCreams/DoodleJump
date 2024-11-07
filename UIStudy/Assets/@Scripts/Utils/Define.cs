@@ -15,7 +15,7 @@ public static class Define
         SuberunkerSceneHomeScene,
         SuberunkerTimelineScene,
         ChooseCharacterScene,
-        InputNameScene,
+        InputNicknameScene,
         SuberunkerScene,
     }
 
@@ -75,8 +75,8 @@ public static class Define
         StoneShower,
         SetLanguage,
         SignIn,
-        ErrorPopupTitle,
-        ErrorPopupNotice,
+        ErrorPopup,
+        ErrorButtonPopup,
         ToastPopupNotice
     }
 

@@ -33,6 +33,9 @@ namespace PSY_DB.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("Nickname")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Password")
                         .HasColumnType("longtext");
 
@@ -47,7 +50,7 @@ namespace PSY_DB.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TblUserAccount", null, t =>
+                    b.ToTable("TblUserAccount", t =>
                         {
                             t.HasComment("User 계정 정보");
                         });
@@ -81,7 +84,7 @@ namespace PSY_DB.Migrations
 
                     b.HasIndex("UserAccountId");
 
-                    b.ToTable("TblUserScore", null, t =>
+                    b.ToTable("TblUserScore", t =>
                         {
                             t.HasComment("UserScore 정보");
                         });

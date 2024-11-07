@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
-using static UI_InputNameScene;
+using static UI_InputNicknameScene;
 using UnityEngine.EventSystems;
 
 public class UI_SuberunkerSceneHomeScene : UI_Scene
@@ -149,7 +149,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetText((int)Texts.ChooseCharacter_Text).text = Managers.Language.LocalizedString(91008);
         GetText((int)Texts.Start_Text).text = Managers.Language.LocalizedString(91009);
         _welcome = Managers.Language.LocalizedString(91028);
-        GetText((int)Texts.Welcome_Text).text = $"{_welcome}, {Managers.Game.UserInfo.UserId}!!";
+        GetText((int)Texts.Welcome_Text).text = $"{_welcome}, {Managers.Game.UserInfo.UserNickname}!!";
     }
 
 }
