@@ -16,6 +16,7 @@ public partial class TblUserScore
     [Comment("TblUserScore FK")]
     public int UserAccountId { get; set; }
     public int History { get; set; }
+    public int Gold { get; set; }
     public DateTime RegisterDate { get; set; }
     public DateTime UpdateDate { get; set; }
     public DateTime? DeletedDate { get; set; }

@@ -20,5 +20,6 @@ namespace GameApi.Dtos
         public DateTime? DeletedDate { get; set; }
         public int HighScore { get; set; }
         public int LatelyScore { get; set; }
+        public int Gold {  get; set; }
     }
 }

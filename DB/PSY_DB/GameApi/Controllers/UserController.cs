@@ -119,10 +119,14 @@ namespace GameApi.Controllers
                                       .OrderByDescending(s => s.History)
                                       .Select(s => s.History)
                                       .FirstOrDefault(),
-                        LatelyScore = user.TblUserScores.Any() ? 
+                        LatelyScore = user.TblUserScores.Any() ?
                                         user.TblUserScores.OrderByDescending(s => s.UpdateDate)
                                         .FirstOrDefault()
-                                        .History : 0 // 최근 점수
+                                        .History : 0, // 최근 점수
+                        Gold = user.TblUserScores.Any() ?
+                                        user.TblUserScores.OrderByDescending(s => s.UpdateDate)
+                                        .FirstOrDefault()
+                                        .Gold : 0
                     }).ToListAsync();
 
                 /*
@@ -466,6 +470,7 @@ namespace GameApi.Controllers
                 {
                     UserAccountId = userId,
                     History = requestDto.Score,
+                    Gold = requestDto.Gold,
                     UpdateDate = DateTime.Now
                 };
 
@@ -608,7 +613,11 @@ namespace GameApi.Controllers
                         LatelyScore = user.TblUserScores.Any() ?
                                         user.TblUserScores.OrderByDescending(s => s.UpdateDate)
                                         .FirstOrDefault()
-                                        .History : 0 // 최근 점수
+                                        .History : 0, // 최근 점수
+                        Gold = user.TblUserScores.Any() ?
+                                        user.TblUserScores.OrderByDescending(s => s.UpdateDate)
+                                        .FirstOrDefault()
+                                        .Gold : 0
                     }).ToListAsync();
 
                 if (select.Any() == false)
@@ -668,7 +677,6 @@ namespace GameApi.Controllers
         public async Task<CommonResult<ResDtoGetUserAccountList>> GetUserAccountList()
         {
             CommonResult<ResDtoGetUserAccountList> rv = new();
-            Thread.Sleep(2000);
 
             try
             {
@@ -683,8 +691,10 @@ namespace GameApi.Controllers
                                             .OrderByDescending(s => s.History)
                                             .Select(s => s.History)
                                             .FirstOrDefault()
-                                }).ToListAsync();
-                if(rv.Data.List.Any() == false)
+                                }).OrderByDescending(u => u.HighScore)
+                                .ToListAsync();
+
+                if (rv.Data.List.Any() == false)
                 {
                     rv.StatusCode = EStatusCode.NotFoundEntity;
                     rv.Message = "rv.Data.List.Any() == false";
