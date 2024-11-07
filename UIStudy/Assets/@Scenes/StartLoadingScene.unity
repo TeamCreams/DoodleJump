@@ -440,9 +440,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2365914607549452931, guid: 212b4947a67aa4d0b9f816a9a6a2b215, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6273142399312532538, guid: 212b4947a67aa4d0b9f816a9a6a2b215, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699485643040162847, guid: 212b4947a67aa4d0b9f816a9a6a2b215, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7300774370839580433, guid: 212b4947a67aa4d0b9f816a9a6a2b215, type: 3}
       propertyPath: m_Name
       value: UI_StartLoadingScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 7300774370839580433, guid: 212b4947a67aa4d0b9f816a9a6a2b215, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838993605389848644, guid: 212b4947a67aa4d0b9f816a9a6a2b215, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

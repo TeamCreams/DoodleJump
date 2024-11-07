@@ -22,6 +22,8 @@ public class WebRoute
     //public readonly static Func<ReqInsertUserAccountScore, string> InsertUserAccountScore = (dto) => $"{BaseUrl}User/InsertUserAccountScore?UserName={dto.UserName}&Score{dto.Score}";
     public readonly static Func<ReqDtoGetOrAddUserAccount, string> GetOrAddUserAccount = (dto) => $"{BaseUrl}User/GetOrAddUserAccount";
 
+    public readonly static Func<ReqDtoGetUserAccountList, string> GetUserAccountList = (dto) => $"{BaseUrl}User/GetUserAccountList";
+
 }
 
 public class WebContentsManager
@@ -173,6 +175,33 @@ public class WebContentsManager
                     Debug.Log($"{rv.Data.UserName}, {rv.Data.Nickname}");
                     Managers.Game.UserInfo.UserId = rv.Data.UserName;
                     Managers.Game.UserInfo.UserNickname = rv.Data.Nickname;
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
+
+    public void ReqGetUserAccountList(ReqDtoGetUserAccountList requestDto, Action<ResDtoGetUserAccountList> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        Managers.Web.SendGetRequest(WebRoute.GetUserAccountList(requestDto), (response) =>
+        {
+            CommonResult<ResDtoGetUserAccountList> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetUserAccountList>>(response);
+            
+            if(rv == null || false == rv.IsSuccess)
+            {
+                Debug.Log("ReqGetUserAccountList fail");
+                onFailed.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                if(rv.StatusCode != EStatusCode.OK)
+                {                    
+                    Debug.Log("ReqGetUserAccountList fail");
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    Debug.Log("ReqGetUserAccountList success");
                     onSuccess.Invoke(rv.Data);
                 }
             }
