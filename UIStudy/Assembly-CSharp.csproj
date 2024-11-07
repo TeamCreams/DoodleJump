@@ -90,6 +90,7 @@
     <Compile Include="Assets/HeroEditor/Common/Scripts/Common/Serializer.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/Common/StandaloneFilePicker.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_SuberunkerButtons.cs" />
+    <Compile Include="Assets/@Scripts/VerticalColorChanger.cs" />
     <Compile Include="Assets/@Scripts/Managers/Contents/MessageManager.cs" />
     <Compile Include="Assets/@Scripts/Item/ItemBase.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Data/ItemParams.cs" />

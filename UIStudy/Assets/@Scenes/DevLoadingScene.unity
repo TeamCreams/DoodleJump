@@ -627,6 +627,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 414597885707041236, guid: 0ab5aff6a92aaed4ca7cb5f4805eb76f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 851803665468800987, guid: 0ab5aff6a92aaed4ca7cb5f4805eb76f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220217196617569227, guid: 0ab5aff6a92aaed4ca7cb5f4805eb76f, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 1337920673676205821, guid: 0ab5aff6a92aaed4ca7cb5f4805eb76f, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 1651336778138865765, guid: 0ab5aff6a92aaed4ca7cb5f4805eb76f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -742,6 +758,14 @@ PrefabInstance:
     - target: {fileID: 3442815860805043453, guid: 0ab5aff6a92aaed4ca7cb5f4805eb76f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591621064967624515, guid: 0ab5aff6a92aaed4ca7cb5f4805eb76f, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 7070210360515789529, guid: 0ab5aff6a92aaed4ca7cb5f4805eb76f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
