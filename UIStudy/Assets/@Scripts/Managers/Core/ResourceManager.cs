@@ -60,68 +60,90 @@ public class ResourceManager
 
 		Object.Destroy(go);
 	}
-	#endregion
+    #endregion
 
-	#region Addressable
-	private void LoadAsync<T>(string key, Action<T> callback = null) where T : UnityEngine.Object
-	{
-		// Cache
-		if (_resources.TryGetValue(key, out Object resource))
-		{
-			callback?.Invoke(resource as T);
-			return;
-		}
+    #region Addressable
+    private void LoadAsync<T>(string key, Action<T> callback = null) where T : UnityEngine.Object
+    {
+        // Cache
+        if (_resources.TryGetValue(key, out Object resource))
+        {
+            callback?.Invoke(resource as T);
+            return;
+        }
 
-		string loadKey = key;
-		if (key.EndsWith(".sprite"))
-		{
-			loadKey = $"{key}[{key.Replace(".sprite", "")}]";
-			Debug.Log($"Load Key Change : {key} => {loadKey}");
-		}
+
+        string loadKey = key;
+        if (key.Contains(".sprite"))
+            loadKey = $"{key}[{key.Replace(".sprite", "")}]";
+
+
+        // Cache
+        if (_resources.TryGetValue(loadKey, out resource))
+        {
+            callback?.Invoke(resource as T);
+            return;
+        }
+
+
+        if (_loadKeys.Contains(loadKey))
+        {
+            Debug.Log($"warning Load : {loadKey}");
+            callback?.Invoke(null);
+            return;
+        }
+
         _loadKeys.Add(loadKey);
 
-
         var asyncOperation = Addressables.LoadAssetAsync<T>(loadKey);
-		asyncOperation.Completed += (op) =>
-		{
-			_resources.Add(key, op.Result);
-			_handles.Add(key, asyncOperation);
-			callback?.Invoke(op.Result);
-		};
-	}
+        asyncOperation.Completed += (op) =>
+        {
+            _resources.Add(key, op.Result);
+            _handles.Add(key, asyncOperation);
+            callback?.Invoke(op.Result);
+        };
+    }
 
-	public void LoadAllAsync<T>(string label, Action<string, int, int> callback) where T : UnityEngine.Object
-	{
-		var opHandle = Addressables.LoadResourceLocationsAsync(label, typeof(T));
-		opHandle.Completed += (op) =>
-		{
-			int loadCount = 0;
-			int totalCount = op.Result.Count;
-
-			foreach (var result in op.Result)
+    public void LoadAllAsync<T>(string label, Action<string, int, int> callback) where T : UnityEngine.Object
+    {
+        var opHandle = Addressables.LoadResourceLocationsAsync(label, typeof(T));
+        opHandle.Completed += (op) =>
+        {
+            if (op.Status == AsyncOperationStatus.Succeeded)
             {
-                Debug.Log($"loadstart {result.PrimaryKey} {loadCount}/{totalCount}");
-                if (result.PrimaryKey.EndsWith(".sprite"))
-				{
-					LoadAsync<Sprite>(result.PrimaryKey, (obj) =>
-					{
-						loadCount++;
-						callback?.Invoke(result.PrimaryKey, loadCount, totalCount);
-					});
-				}
-				else
-				{
-					LoadAsync<T>(result.PrimaryKey, (obj) =>
-					{
-						loadCount++;
-						callback?.Invoke(result.PrimaryKey, loadCount, totalCount);
-					});
-				}
-			}
-		};
-	}
+                int loadCount = 0;
+                int totalCount = op.Result.Count;
 
-	public void Clear()
+                foreach (var result in op.Result)
+                {
+                    Debug.Log($"loadstart {result.PrimaryKey} {loadCount}/{totalCount}");
+                    if (result.PrimaryKey.EndsWith(".sprite"))
+                    {
+                        LoadAsync<Sprite>(result.PrimaryKey, (obj) =>
+                        {
+                            loadCount++;
+                            callback?.Invoke(result.PrimaryKey, loadCount, totalCount);
+                        });
+                    }
+                    else
+                    {
+                        LoadAsync<T>(result.PrimaryKey, (obj) =>
+                        {
+                            loadCount++;
+                            callback?.Invoke(result.PrimaryKey, loadCount, totalCount);
+                        });
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"Failed to load resource locations for label: {label}");
+            }
+        };
+    }
+
+
+    public void Clear()
 	{
 		_resources.Clear();
 
