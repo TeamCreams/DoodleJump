@@ -579,5 +579,90 @@ namespace GameApi.Controllers
             }
             return rv;
         }
+
+        [HttpGet("GetOrAddUserAccount")]
+        public async Task<CommonResult<ResDtoGetOrAddUserAccount>> GetOrAddUserAccount()
+        {
+            CommonResult<ResDtoGetOrAddUserAccount> rv = new();
+            ReqDtoGetOrAddUserAccount requestDto = new(); 
+
+            Thread.Sleep(3000);
+            try
+            {
+                requestDto.UserName = HttpContext.Connection.RemoteIpAddress?.ToString();
+                
+                rv.Data = new();
+
+                var select = await (
+                    from user in _context.TblUserAccounts.Include(user => user.TblUserScores)
+                    where (user.UserName.ToLower() == requestDto.UserName.ToLower() && user.DeletedDate == null)
+                    select new ResDtoGetOrAddUserAccount
+                    {
+                        UserName = user.UserName,
+                        Nickname = user.Nickname,
+                        RegisterDate = user.RegisterDate,
+                        UpdateDate = user.UpdateDate,
+                        HighScore = user.TblUserScores
+                                      .OrderByDescending(s => s.History)
+                                      .Select(s => s.History)
+                                      .FirstOrDefault(),
+                        LatelyScore = user.TblUserScores.Any() ?
+                                        user.TblUserScores.OrderByDescending(s => s.UpdateDate)
+                                        .FirstOrDefault()
+                                        .History : 0 // 최근 점수
+                    }).ToListAsync();
+
+                if (select.Any() == false)
+                {
+                    TblUserAccount userAccount = new()
+                    {
+                        UserName = requestDto.UserName,
+                        RegisterDate = DateTime.Now,
+                        UpdateDate = DateTime.Now
+                    };
+                    _context.TblUserAccounts.Add(userAccount);
+                }
+                else
+                {
+                    var selectUser = select.First();
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Message = $"{requestDto.UserName} 계정 정보";
+                    rv.IsSuccess = true;
+                    rv.Data = selectUser;
+                    return rv;
+                }
+
+                var saveResult = await _context.SaveChangesAsync();
+
+                if (saveResult == 0)
+                {
+                    throw new CommonException(EStatusCode.NameAlreadyExists, $"{requestDto.UserName} : Already Exists");
+                }
+                else
+                {
+                    rv.IsSuccess = true;
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Data = null;
+                }
+
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = null;
+                return rv;
+            }
+            return rv;
+        }
     }
 }
