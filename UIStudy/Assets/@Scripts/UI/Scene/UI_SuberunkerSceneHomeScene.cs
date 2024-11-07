@@ -74,7 +74,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         //GetToggle((int)Toggles.Language_En).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
         //GetToggle((int)Toggles.Language_Kr).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
 
-        GetText((int)Texts.TotalGold_Text).text = Managers.Game.TotalGold.ToString();
+        GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         Managers.Event.TriggerEvent(EEventType.SetLanguage);
 
@@ -84,6 +84,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     private void OnClick_ShowMyScore(PointerEventData eventData)
     {
         Managers.Event.TriggerEvent(EEventType.GetMyScore);
+        GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
         GetObject((int)GameObjects.MyScore).SetActive(true);
         GetObject((int)GameObjects.Ranking).SetActive(false);
     }
@@ -91,6 +92,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     private void OnClick_ShowRanking(PointerEventData eventData)
     {
         Managers.Event.TriggerEvent(EEventType.GetUserScoreList);
+        GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
         GetObject((int)GameObjects.MyScore).SetActive(false);
         GetObject((int)GameObjects.Ranking).SetActive(true);
     }

@@ -25,6 +25,7 @@ public class ScoreManager
             {
                 Managers.Game.UserInfo.RecordScore = response.HighScore;
                 Managers.Game.UserInfo.LatelyScore = response.LatelyScore;
+                Managers.Game.UserInfo.Gold = response.Gold;
                 Debug.Log("is success");
 
                 onSuccess?.Invoke();
@@ -51,11 +52,11 @@ public class ScoreManager
         Managers.WebContents.ReqInsertUserAccountScore(new ReqDtoInsertUserAccountScore()
         {
             UserName = Managers.Game.UserInfo.UserId,
-            Score = Managers.Game.UserInfo.LatelyScore
+            Score = Managers.Game.UserInfo.LatelyScore,
+            Gold = Managers.Game.UserInfo.Gold
         },
        (response) =>
        {
-        
             Managers.UI.ShowPopupUI<UI_RetryPopup>();
             onSuccess?.Invoke();
             /*

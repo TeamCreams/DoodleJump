@@ -136,6 +136,7 @@ public class UI_TopBar : UI_Base
             {
                 _lifeTimer?.Dispose();
                 Managers.Game.UserInfo.LatelyScore = _time;
+                Managers.Game.UserInfo.Gold += Managers.Game.Gold;
                 Managers.Resource.Instantiate("UI_Loading", this.transform);
                 Managers.Event.TriggerEvent(EEventType.StartLoading);
                 Managers.Score.SetScore(this, ProcessErrorFun);

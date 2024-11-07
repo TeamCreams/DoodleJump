@@ -38,30 +38,6 @@ public class GameManager
     }
     public Action<float> OnChangedLife;
 
-    private int _playTimeRecord = 0;
-    public int PlayTimeRecord
-    {
-        get { return _playTimeRecord; }
-        set
-        {
-            if (_playTimeRecord != value)
-            {
-                _playTimeRecord = value;
-            }
-        }
-    }
-    private int _playTime = 0;
-    public int PlayTime
-    {
-        get { return _playTime; }
-        set
-        {
-            if (_playTime != value)
-            {
-                _playTime = value;
-            }
-        }
-    }
 
     private int _gold = 0;
     public int Gold
@@ -72,19 +48,6 @@ public class GameManager
             if (_gold != value)
             {
                 _gold = value;
-            }
-        }
-    }
-
-    private int _totalGold = 0;
-    public int TotalGold
-    {
-        get { return _totalGold; }
-        set
-        {
-            if (_totalGold != value)
-            {
-                _totalGold = value;
             }
         }
     }

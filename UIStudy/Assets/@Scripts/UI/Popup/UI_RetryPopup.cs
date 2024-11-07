@@ -47,8 +47,6 @@ public class UI_RetryPopup : UI_Popup
         Managers.Event.TriggerEvent(EEventType.SetLanguage);
         SetRecord();
         _failCount = 0;        
-        Managers.Game.TotalGold += Managers.Game.Gold;
-
         GetButton((int)Buttons.Retry_Button).gameObject.BindEvent(OnClick_RetryButton, EUIEvent.Click);
         GetButton((int)Buttons.Home_Button).gameObject.BindEvent(OnClick_HomeButton, EUIEvent.Click);
 
@@ -56,7 +54,7 @@ public class UI_RetryPopup : UI_Popup
         return true;
     }
     private void OnClick_RetryButton(PointerEventData eventData)
-    {
+    {        
         Managers.Scene.LoadScene(EScene.SuberunkerScene);
         Managers.UI.ClosePopupUI(this);
         Time.timeScale = 1;
@@ -68,10 +66,10 @@ public class UI_RetryPopup : UI_Popup
         Managers.Score.GetScore((this), ProcessErrorFun,
             () =>
                 {
-                    Managers.Event.TriggerEvent(EEventType.StopLoading);
+                    //Managers.Event.TriggerEvent(EEventType.StopLoading);
                     Managers.UI.ClosePopupUI(this);
                     Time.timeScale = 1;
-                    // Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+                    Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
                 },
             ()=>
             {
@@ -122,6 +120,7 @@ public class UI_RetryPopup : UI_Popup
         GetText((int)Texts.LifeTime_Text).text = $"{_recentRecord} : {minutes}{_minutes} {seconds}{_seconds}";
 
         GetText((int)Texts.Gold_Text).text = Managers.Game.Gold.ToString();
+        Managers.Game.Gold = 0;
     }
 
     public void ProcessErrorFun()
