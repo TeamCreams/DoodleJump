@@ -15,12 +15,6 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 1f4d5e14bf776425a9b1fb8649a87b4e
   m_SerializeEntries:
-  - m_GUID: 212b4947a67aa4d0b9f816a9a6a2b215
-    m_Address: UI_StartLoadingScene
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3c061595fdb4f4a1fb81caad7c858d3f
     m_Address: UI_SuberunkerTimelineScene
     m_ReadOnly: 0

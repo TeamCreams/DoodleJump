@@ -15,6 +15,7 @@ public class UI_StartLoadingScene : UI_Scene
     private int _failCount = 0;
     private EScene _scene = EScene.InputNicknameScene;
 
+    private bool _isSuccess = false;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -38,7 +39,8 @@ public class UI_StartLoadingScene : UI_Scene
                 ()=>
                 {
                     Debug.Log("loadingScene");
-                    Managers.Scene.LoadScene(_scene);
+                    //Managers.Scene.LoadScene(_scene);
+                    _isSuccess = true;
                 }
             );
        },
@@ -100,6 +102,13 @@ public class UI_StartLoadingScene : UI_Scene
         Managers.Score.GetScore(this);
     }
 
+    public void OnEvent_LoadScene()
+    {
+        if(_isSuccess == true)
+        {
+            Managers.Scene.LoadScene(_scene);
+        }
+    }
     void StartLoadAssets(string label)
 	{
 		Managers.Resource.LoadAllAsync<UnityEngine.Object>(label, (key, count, totalCount) =>
