@@ -9,6 +9,7 @@ public static class Define
 	{
 		Unknown,
 		DevLoadingScene,
+        StartLoadingScene,
 		TinyFarmScene,
         SignUpScene,
         SignInScene,
@@ -161,6 +162,8 @@ public static class Define
         public static readonly Vector3 PlayerTeleportPos_Left = new Vector3(-70, -120, 0);
         public static readonly Vector3 PlayerTeleportPos_Right = new Vector3(70, -120, 0);
         public static readonly Vector3 ConfetiParticlePos = new Vector3(0, 0, -100);
+
+        public static readonly int MAX_FAIL_COUNT = 1;
     }
 
 }

@@ -32,7 +32,8 @@ public class UI_RetryPopup : UI_Popup
     private string _bestRecord = "최고 기록";
     private string _recentRecord = "최근 기록";
 
-    private bool _isFailTwice = false;
+    private int _failCount = 0;
+
     public override bool Init()
     {
         if (base.Init() == false)
@@ -45,7 +46,7 @@ public class UI_RetryPopup : UI_Popup
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         Managers.Event.TriggerEvent(EEventType.SetLanguage);
         SetRecord();
-        _isFailTwice = false;
+        _failCount = 0;        
         Managers.Game.TotalGold += Managers.Game.Gold;
 
         GetButton((int)Buttons.Retry_Button).gameObject.BindEvent(OnClick_RetryButton, EUIEvent.Click);
@@ -62,7 +63,7 @@ public class UI_RetryPopup : UI_Popup
     }
     private void OnClick_HomeButton(PointerEventData eventData)
     {
-        Managers.Score.GetScore((this), null,
+        Managers.Score.GetScore((this), ProcessErrorFun,
             () =>
                 {
                     Managers.UI.ClosePopupUI(this);
@@ -71,18 +72,16 @@ public class UI_RetryPopup : UI_Popup
                 },
             ()=>
             {
-                if(_isFailTwice == true)
+                if(_failCount < HardCoding.MAX_FAIL_COUNT)
                 {
                     Time.timeScale = 1;
-                    _isFailTwice = false;
-                    Managers.UI.ClosePopupUI(this);
-                    Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+                    _failCount++;
                     return;
                 }
-                
                 Time.timeScale = 1;
-                _isFailTwice = true;
-                Managers.Score.GetScore(this);
+                _failCount = 0;
+                Managers.UI.ClosePopupUI(this);
+                Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
             }
         );
     }
@@ -94,18 +93,17 @@ public class UI_RetryPopup : UI_Popup
 
     public void SetRecord()
     {        
-        Managers.Score.GetScore(this, null, null,
-            ()=> // 실패했을경우 
+        Managers.Score.GetScore(this, ProcessErrorFun, null,
+        ()=> // 실패했을경우 
+        {
+            if(_failCount < HardCoding.MAX_FAIL_COUNT)
             {
-                if(_isFailTwice == true)
-                {
-                    _isFailTwice = false;
-                    Managers.Scene.LoadScene(EScene.SignInScene);
-                    return;
-                }
-                _isFailTwice = true;
-                Managers.Score.GetScore(this);
+                _failCount++;
+                return;
             }
+            _failCount = 0;
+            Managers.Scene.LoadScene(EScene.SignInScene);
+        }
         );
         int recordMinutes = Managers.Game.UserInfo.RecordScore / 60;
         float recordSeconds = Managers.Game.UserInfo.RecordScore % 60;
@@ -120,6 +118,7 @@ public class UI_RetryPopup : UI_Popup
 
     public void ProcessErrorFun()
     {
+        Managers.Score.GetScore(this);
     }
 
     void OnEvent_SetLanguage(Component sender, object param)

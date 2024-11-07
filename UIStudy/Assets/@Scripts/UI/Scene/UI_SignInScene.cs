@@ -40,7 +40,7 @@ public class UI_SignInScene : UI_Scene
     private string _passwordUnavailable = "비밀번호가 일치하지 않습니다.";    
     private EErrorCode _errCodeId = EErrorCode.ERR_Nothing;
     private string _password = "";
-    //private bool _isFailTwice = false; // for test
+    //private bool _isFailFirst = false; // for test
 
     public override bool Init()
     {
@@ -104,15 +104,15 @@ public class UI_SignInScene : UI_Scene
             {
 /*
                 Debug.Log("is SignInScene");
-                if(_isFailTwice == true)
+                if(_isFailFirst == true)
                 {                
                     Debug.Log("is second");
-                    _isFailTwice = false;
+                    _isFailFirst = false;
                     Managers.Scene.LoadScene(EScene.SignInScene);
                     return;
                 }
                 Debug.Log("is first");
-                _isFailTwice = true;
+                _isFailFirst = true;
                 Managers.Score.GetScore(this);
 */
                 Managers.Scene.LoadScene(EScene.SignInScene);

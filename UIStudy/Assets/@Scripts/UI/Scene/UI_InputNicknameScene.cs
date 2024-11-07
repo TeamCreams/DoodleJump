@@ -17,7 +17,7 @@ public class UI_InputNicknameScene : UI_Scene
     private enum Buttons
     {
         Next_Button,
-        Prev_Button
+        //Prev_Button
     }
 
     private enum Texts
@@ -39,7 +39,7 @@ public class UI_InputNicknameScene : UI_Scene
         BindButtons(typeof(Buttons));
         BindTexts(typeof(Texts));
 
-        GetButton((int)Buttons.Prev_Button).gameObject.BindEvent(OnClick_LoginPage, EUIEvent.Click);
+        //GetButton((int)Buttons.Prev_Button).gameObject.BindEvent(OnClick_LoginPage, EUIEvent.Click);
         GetButton((int)Buttons.Next_Button).gameObject.BindEvent(OnClick_InspectName, EUIEvent.Click);
         GetText((int)Texts.Warning_Text).text = "";
 
@@ -87,7 +87,7 @@ public class UI_InputNicknameScene : UI_Scene
 
     private EErrorCode CheckCorrectNickname(string nickname)
     {
-        if (string.IsNullOrEmpty(name))
+        if (string.IsNullOrEmpty(nickname))
         {
             return EErrorCode.ERR_ValidationNickname;
         }

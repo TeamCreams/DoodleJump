@@ -20,6 +20,7 @@ public class WebRoute
 
     public readonly static string InsertUserAccountNickname = $"{BaseUrl}User/InsertUserAccountNickname";
     //public readonly static Func<ReqInsertUserAccountScore, string> InsertUserAccountScore = (dto) => $"{BaseUrl}User/InsertUserAccountScore?UserName={dto.UserName}&Score{dto.Score}";
+    public readonly static Func<ReqDtoGetOrAddUserAccount, string> GetOrAddUserAccount = (dto) => $"{BaseUrl}User/GetOrAddUserAccount";
 
 }
 
@@ -145,6 +146,33 @@ public class WebContentsManager
                 }
                 else
                 {
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
+
+    public void ReqGetOrAddUserAccount(ReqDtoGetOrAddUserAccount requestDto, Action<ResDtoGetOrAddUserAccount> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        Managers.Web.SendGetRequest(WebRoute.GetOrAddUserAccount(requestDto), (response) =>
+        {
+            CommonResult<ResDtoGetOrAddUserAccount> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetOrAddUserAccount>>(response);
+            
+            if(rv == null || false == rv.IsSuccess)
+            {
+                onFailed.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                if(rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    Debug.Log($"------------------------------{rv.Data.UserName}, {rv.Data.Nickname}");
+                    Managers.Game.UserInfo.UserId = rv.Data.UserName;
+                    Managers.Game.UserInfo.UserNickname = rv.Data.Nickname;
                     onSuccess.Invoke(rv.Data);
                 }
             }

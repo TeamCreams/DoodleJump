@@ -170,6 +170,7 @@
     <Compile Include="Assets/@Scripts/Controller/PlayerController.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Firearms/FirearmReload.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_TopBar.cs" />
+    <Compile Include="Assets/@Scripts/UI/Scene/UI_StartLoadingScene.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/CaptureOptions.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterExtensions.cs" />
     <Compile Include="Assets/@Scripts/Spawner/Spawner.cs" />
@@ -239,6 +240,7 @@
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Enums/ItemRarity.cs" />
     <Compile Include="Assets/@Scripts/UI/Kakao/TextController.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/SortingOrderExample.cs" />
+    <Compile Include="Assets/@Scripts/Scene/StartLoadingScene.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/AnimationManager.cs" />
     <Compile Include="Assets/@Scripts/Utils/Data.Contents.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/PlayingAnimations.cs" />

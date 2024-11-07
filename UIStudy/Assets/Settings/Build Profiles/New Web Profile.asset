@@ -35,8 +35,6 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/@Scenes/ChooseCharacterScene.unity
   - m_enabled: 1
-    m_path: Assets/@Scenes/InputNameScene.unity
-  - m_enabled: 1
     m_path: Assets/@Scenes/SuberunkerScene.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
@@ -1036,6 +1034,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 1925810159555969024
       type: {class: WebGLPlatformSettings, ns: UnityEditor.WebGL, asm: UnityEditor.WebGL.Extensions}
       data:
