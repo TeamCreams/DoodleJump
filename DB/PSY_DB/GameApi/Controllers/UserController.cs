@@ -36,7 +36,6 @@ namespace GameApi.Controllers
 
             return JsonConvert.SerializeObject(a);
         }
-
         //Get - FromQuery
         //Post - FromBody
         [HttpPost("InsertUser")]
@@ -661,6 +660,42 @@ namespace GameApi.Controllers
                 rv.Message = ex.Message;
                 rv.Data = null;
                 return rv;
+            }
+            return rv;
+        }
+
+        [HttpGet("GetUserAccountList")]
+        public async Task<CommonResult<ResDtoGetUserAccountList>> GetUserAccountList()
+        {
+            CommonResult<ResDtoGetUserAccountList> rv = new();
+            try
+            {
+                rv.Data = new();
+                rv.Data.List = await (from user in _context.TblUserAccounts.Include(user => user.TblUserScores)
+                                where (user.Nickname != null && user.DeletedDate == null)
+                                select new ResDtoGetUserAccountListElement
+                                {
+                                    UserName = user.UserName,
+                                    Nickname = user.Nickname,
+                                    HighScore = user.TblUserScores
+                                            .OrderByDescending(s => s.History)
+                                            .Select(s => s.History)
+                                            .FirstOrDefault()
+                                }).ToListAsync();
+            }
+            catch (CommonException ex)
+            {
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.IsSuccess = false;
+                rv.Data.List = null;
+            }
+            catch (Exception ex)
+            {
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.ToString();
+                rv.IsSuccess = false;
+                rv.Data.List = null;
             }
             return rv;
         }
