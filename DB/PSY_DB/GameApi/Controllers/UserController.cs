@@ -668,6 +668,8 @@ namespace GameApi.Controllers
         public async Task<CommonResult<ResDtoGetUserAccountList>> GetUserAccountList()
         {
             CommonResult<ResDtoGetUserAccountList> rv = new();
+            Thread.Sleep(2000);
+
             try
             {
                 rv.Data = new();
@@ -682,6 +684,17 @@ namespace GameApi.Controllers
                                             .Select(s => s.History)
                                             .FirstOrDefault()
                                 }).ToListAsync();
+                if(rv.Data.List.Any() == false)
+                {
+                    rv.StatusCode = EStatusCode.NotFoundEntity;
+                    rv.Message = "rv.Data.List.Any() == false";
+                    rv.IsSuccess = true;
+                    rv.Data.List = null;
+                    return rv;
+                }
+                rv.Message = "success load";
+                rv.IsSuccess = true;
+                return rv;
             }
             catch (CommonException ex)
             {
@@ -689,6 +702,7 @@ namespace GameApi.Controllers
                 rv.Message = ex.Message;
                 rv.IsSuccess = false;
                 rv.Data.List = null;
+                return rv;
             }
             catch (Exception ex)
             {
@@ -696,6 +710,7 @@ namespace GameApi.Controllers
                 rv.Message = ex.ToString();
                 rv.IsSuccess = false;
                 rv.Data.List = null;
+                return rv;
             }
             return rv;
         }
