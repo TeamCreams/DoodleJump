@@ -454,17 +454,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6415297783451071350, guid: 212b4947a67aa4d0b9f816a9a6a2b215, type: 3}
-      propertyPath: m_MatchWidthOrHeight
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7300774370839580433, guid: 212b4947a67aa4d0b9f816a9a6a2b215, type: 3}
       propertyPath: m_Name
       value: UI_StartLoadingScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 7300774370839580433, guid: 212b4947a67aa4d0b9f816a9a6a2b215, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
