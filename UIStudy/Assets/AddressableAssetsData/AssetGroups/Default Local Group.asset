@@ -31,6 +31,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f23ad5e56544594197b6194ad37b266
+    m_Address: UI_SuberunkerSceneHomeScene
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b3664da16fbd87448d82e9c04d57575
+    m_Address: UI_ChooseCharacterScene
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8301f267a30fa744ca3e7cecbf633acb
     m_Address: UI_TinyFarmScene
     m_ReadOnly: 0
@@ -49,12 +61,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: aa814ac862b7f4840865e5bfb4c74a17
-    m_Address: UI_SuberunkerSceneHomeScene
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f06fc6ac58430514cb1265820eb4ce40
     m_Address: EventSystem
     m_ReadOnly: 0
@@ -63,6 +69,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fe629fb308d0f96459c752cf5803d6cd
     m_Address: UI_Inventory
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff7b90ab4e908c9478662a3d619b0f15
+    m_Address: Assets/@Resources/UI/Scene/UI_InputNicknameScene.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

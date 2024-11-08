@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Playables;
 
 public class StartLoadingScene : BaseScene
@@ -10,10 +10,10 @@ public class StartLoadingScene : BaseScene
         {
             return false;
         }
-        UI_StartLoadingScene scene = Managers.UI.ShowSceneUI<UI_StartLoadingScene>();
-        _playableDirector = scene.gameObject.GetOrAddComponent<PlayableDirector>();
-        _playableDirector.name = "UI_StartLoadingScene";
-        _playableDirector.Play();
+        //UI_StartLoadingScene scene = Managers.UI.ShowSceneUI<UI_StartLoadingScene>();
+        //_playableDirector = scene.gameObject.GetOrAddComponent<PlayableDirector>();
+        //_playableDirector.name = "UI_StartLoadingScene";
+        //_playableDirector.Play();
         return true;
     }
 }

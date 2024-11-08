@@ -172,7 +172,7 @@ public class WebContentsManager
                 }
                 else
                 {
-                    Debug.Log($"{rv.Data.UserName}, {rv.Data.Nickname}");
+                    Debug.Log($"{rv.Data.UserName ?? "null"}, {rv.Data.Nickname ?? "null"}");
                     Managers.Game.UserInfo.UserId = rv.Data.UserName;
                     Managers.Game.UserInfo.UserNickname = rv.Data.Nickname;
                     onSuccess.Invoke(rv.Data);

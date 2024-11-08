@@ -222,7 +222,7 @@ public class PlayerController : CreatureBase
     #region Actor Interface
     public void DamagedHp(float damage)
     {
-        this._stats.Hp -= damage / 100f;
+        this._stats.Hp -= damage;
         Managers.Event.TriggerEvent(EEventType.ChangePlayerLife, this, this._stats.Hp);
         int doOrNot = UnityEngine.Random.Range(0, 10);
         if (doOrNot < 6)
@@ -331,7 +331,7 @@ public class PlayerController : CreatureBase
         // 2) HP 변경
         if (0 < Item.Data.AddHp && this._stats.Hp <= Data.Hp)
         {
-            this._stats.Hp += Item.Data.AddHp / 100f;
+            this._stats.Hp += Item.Data.AddHp;
             Managers.Event.TriggerEvent(Define.EEventType.ChangePlayerLife, this, this._stats.Hp);
         }
 
@@ -413,7 +413,7 @@ public class PlayerController : CreatureBase
 
         if (0 < ItemData.AddHp && this._stats.Hp <= Data.Hp)
         {
-            this._stats.Hp += ItemData.AddHp / 100f;
+            this._stats.Hp += ItemData.AddHp;
             Managers.Event.TriggerEvent(Define.EEventType.ChangePlayerLife, this, this._stats.Hp);
         }
 

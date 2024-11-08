@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using static Define;
 
@@ -16,6 +16,12 @@ public class UI_Loading : UI_Base
         return true;
     }
 
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.StartLoading, OnEvent_StartLoading);
+        Managers.Event.RemoveEvent(EEventType.StopLoading, OnEvent_StopLoading);
+    }
+
     private void OnEvent_StartLoading(Component sender, object param)
     {
         Debug.Log("hihihihihihihOnEvent_StartLoading");
@@ -24,15 +30,11 @@ public class UI_Loading : UI_Base
     private void OnEvent_StopLoading(Component sender, object param)
     {
         StopCoroutine(Loading_Co());
-        Managers.Event.RemoveEvent(EEventType.StartLoading, OnEvent_StartLoading);
-        Managers.Event.RemoveEvent(EEventType.StopLoading, OnEvent_StopLoading);
         Managers.Resource.Destroy(this.gameObject);
     }
     private IEnumerator Loading_Co()
     {
-        yield return new WaitForSeconds(100);
-        Managers.Event.RemoveEvent(EEventType.StartLoading, OnEvent_StartLoading);
-        Managers.Event.RemoveEvent(EEventType.StopLoading, OnEvent_StopLoading);        
+        yield return new WaitForSeconds(100);     
         Managers.Resource.Destroy(this.gameObject);
     }
 }

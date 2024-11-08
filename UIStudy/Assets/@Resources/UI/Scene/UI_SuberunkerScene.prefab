@@ -77,7 +77,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -265,6 +265,10 @@ PrefabInstance:
     - target: {fileID: 7933539890253076169, guid: a56cac6acfbc34c23a649d4c90c14ba4, type: 3}
       propertyPath: m_Name
       value: UI_TopBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225762725293163961, guid: a56cac6acfbc34c23a649d4c90c14ba4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8564946120227618719, guid: a56cac6acfbc34c23a649d4c90c14ba4, type: 3}
       propertyPath: m_AnchorMax.y

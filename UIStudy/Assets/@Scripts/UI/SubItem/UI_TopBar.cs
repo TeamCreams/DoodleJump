@@ -100,6 +100,7 @@ public class UI_TopBar : UI_Base
         float life = (float)param;
         Debug.Log($"Life : {life}");
         StartCoroutine(UpdateLife(life));
+        
         //UpdateLifeImage(life);        
     }
 
@@ -114,50 +115,75 @@ public class UI_TopBar : UI_Base
     }
     IEnumerator UpdateLife(float nextHp)
     {
-        float currentHp = GetImage((int)Images.Hp).fillAmount;
-
-        //event로 바꿔야함
-        if (nextHp < currentHp)
+        float toHp = (float)nextHp / Managers.Object.Player.Stats.StatDic[EStat.MaxHp].Value;
+        float fromHp = GetImage((int)Images.Hp).fillAmount;
+        float maxDuration = 0.15f;
+        float duration = maxDuration;
+        while (0 < duration)
         {
-            while (nextHp < currentHp)
-            {
-                currentHp -= 0.05f; 
-                if (currentHp < nextHp)
-                {
-                    currentHp = nextHp;
-                }
+            GetImage((int)Images.Hp).fillAmount = Mathf.Lerp(fromHp, toHp, 1 - duration / maxDuration);
 
-                GetImage((int)Images.Hp).fillAmount = currentHp;
-
-                yield return new WaitForSeconds(0.05f);
-            }
-
-            if (currentHp <= 0)
-            {
-                _lifeTimer?.Dispose();
-                Managers.Game.UserInfo.LatelyScore = _time;
-                Managers.Game.UserInfo.Gold += Managers.Game.Gold;
-                Managers.Resource.Instantiate("UI_Loading", this.transform);
-                Managers.Event.TriggerEvent(EEventType.StartLoading);
-                Managers.Score.SetScore(this, ProcessErrorFun);
-                Managers.Event.TriggerEvent(EEventType.StopLoading);
-            }
+            duration -= UnityEngine.Time.deltaTime;
+            yield return null;
         }
-        else
+
+        if (toHp <= 0)
         {
-            while (currentHp < nextHp)
-            {
-                currentHp += 0.05f; 
-                if (nextHp < currentHp) 
-                {
-                    currentHp = nextHp;
-                }
-
-                GetImage((int)Images.Hp).fillAmount = currentHp;
-
-                yield return new WaitForSeconds(0.05f);
-            }
+            GetImage((int)Images.Hp).fillAmount = 0;
+            _lifeTimer?.Dispose();
+            Managers.Game.UserInfo.LatelyScore = _time;
+            Managers.Game.UserInfo.Gold += Managers.Game.Gold;
+            Managers.Resource.Instantiate("UI_Loading", this.transform);
+            Managers.Event.TriggerEvent(EEventType.StartLoading);
+            Managers.Score.SetScore(this, ProcessErrorFun);
+            Managers.Event.TriggerEvent(EEventType.StopLoading);
         }
+
+
+        //float currentHp = GetImage((int)Images.Hp).fillAmount;
+
+        ////event로 바꿔야함
+        //if (nextHp < currentHp)
+        //{
+        //    while (nextHp < currentHp)
+        //    {
+        //        currentHp -= 0.05f; 
+        //        if (currentHp < nextHp)
+        //        {
+        //            currentHp = nextHp;
+        //        }
+
+        //        GetImage((int)Images.Hp).fillAmount = currentHp;
+
+        //        yield return new WaitForSeconds(0.05f);
+        //    }
+
+        //    if (currentHp <= 0)
+        //    {
+        //        _lifeTimer?.Dispose();
+        //        Managers.Game.UserInfo.LatelyScore = _time;
+        //        Managers.Game.UserInfo.Gold += Managers.Game.Gold;
+        //        Managers.Resource.Instantiate("UI_Loading", this.transform);
+        //        Managers.Event.TriggerEvent(EEventType.StartLoading);
+        //        Managers.Score.SetScore(this, ProcessErrorFun);
+        //        Managers.Event.TriggerEvent(EEventType.StopLoading);
+        //    }
+        //}
+        //else
+        //{
+        //    while (currentHp < nextHp)
+        //    {
+        //        currentHp += 0.05f; 
+        //        if (nextHp < currentHp) 
+        //        {
+        //            currentHp = nextHp;
+        //        }
+
+        //        GetImage((int)Images.Hp).fillAmount = currentHp;
+
+        //        yield return new WaitForSeconds(0.05f);
+        //    }
+        //}
     }
 
     public void ProcessErrorFun()

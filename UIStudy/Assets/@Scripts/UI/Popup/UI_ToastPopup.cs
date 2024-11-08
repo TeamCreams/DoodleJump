@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using static Define;
 
@@ -22,6 +22,10 @@ public class UI_ToastPopup : UI_Popup
         return true;
     }
 
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.ToastPopupNotice, OnEvent_Notice);
+    }
     void OnEvent_Notice(Component sender, object param)
     {
         string str = param as string;
@@ -32,7 +36,6 @@ public class UI_ToastPopup : UI_Popup
     {
         GetText((int)Texts.Notice_Text).text = notice;
         yield return new WaitForSeconds(2);
-        Managers.Event.RemoveEvent(EEventType.ToastPopupNotice, OnEvent_Notice);
         Managers.UI.ClosePopupUI(this);
     }
 }

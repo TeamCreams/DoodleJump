@@ -33,18 +33,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3e57ea7c26afe486fad3ba3adb4ba40b
-    m_Address: UI_InputNicknameScene
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 63336cde6dc7b4c6296971ce67b13d9b
-    m_Address: UI_ChooseCharacterScene
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6697224c9a77845e7b4631235d4a26f2
     m_Address: UI_SignUpScene
     m_ReadOnly: 0

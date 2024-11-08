@@ -101,7 +101,7 @@ public class Stats
         get => _hp;
         set
         {
-            var newHp = Mathf.Clamp(value, 0, 1);
+            var newHp = Mathf.Clamp(value, 0, 1 * StatDic[EStat.MaxHp].Value);
             _hp = newHp;
         }
     }
@@ -115,12 +115,4 @@ public class Stats
         Hp = StatDic[EStat.MaxHp].Value;
     }
 
-
-    public Stats(CreatureInfoData data)
-    {
-        StatDic.Add(EStat.MaxHp, new Stat(0));
-        StatDic.Add(EStat.Luck, new Stat(0));
-        StatDic.Add(EStat.MoveSpeed, new Stat(0));
-        Hp = StatDic[EStat.MaxHp].Value;
-    }
 }

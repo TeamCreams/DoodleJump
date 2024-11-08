@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 public class CreatureBase : ObjectBase
 {
-    protected Stats _stats = new Stats(new CreatureInfoData());
+    protected Stats _stats = null;
+    public Stats Stats => _stats;
 
 
 

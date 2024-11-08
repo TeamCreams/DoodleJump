@@ -55,6 +55,7 @@ public class UI_ChooseCharacterScene : UI_Scene
         }
 
         //StartLoadAssets("PreLoad");
+        SetInventoryItems(EEquipType.Hair);
 
         return true;
     }
@@ -76,6 +77,7 @@ public class UI_ChooseCharacterScene : UI_Scene
 
     private void OnClick_NextButton(PointerEventData eventData)
     {
+        Debug.Log("Click!");
         Managers.Scene.LoadScene(EScene.SuberunkerTimelineScene);
     }
 

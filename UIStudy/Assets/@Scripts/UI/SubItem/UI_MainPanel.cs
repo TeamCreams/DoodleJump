@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using GameApi.Dtos;
 using UnityEngine;
@@ -45,6 +45,9 @@ public class UI_MainPanel : UI_Base
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         Managers.Event.TriggerEvent(EEventType.SetLanguage);
 
+
+        SetMyScore();
+        SetUserScoreList();
         return true;
     }
 
@@ -57,7 +60,7 @@ public class UI_MainPanel : UI_Base
         _itemList.Clear();
     }
 
-    private void SetUserScoreList(Component sender, object param)
+    private void SetUserScoreList(Component sender = null, object param = null)
     {
         AllPush();
         Managers.Resource.Instantiate("UI_Loading", this.transform);
@@ -82,7 +85,7 @@ public class UI_MainPanel : UI_Base
        });
     }
 
-    private void SetMyScore(Component sender, object param)
+    private void SetMyScore(Component sender = null, object param = null)
     {
         _recordMinutes = Managers.Game.UserInfo.RecordScore / 60;
         _recordSeconds = Managers.Game.UserInfo.RecordScore % 60;

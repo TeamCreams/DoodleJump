@@ -17,6 +17,10 @@ public class ObjectManager
     public Transform PlayerRoot => GetRootTransform("@Players");
     public Transform ItemRoot => GetRootTransform("@Item");
 
+    public PlayerController Player => _player;
+    private PlayerController _player;
+
+
     public Transform GetRootTransform(string name)
     {
         GameObject root = GameObject.Find(name);
@@ -42,10 +46,10 @@ public class ObjectManager
         {
             GameObject player = Managers.Resource.Instantiate("Player", pooling: true);
             player.name = "player";
-            player.GetOrAddComponent<PlayerController>().SetInfo(Managers.Game.ChracterStyleInfo.CharacterId);
-            player.GetOrAddComponent<PlayerController>().Teleport(pos);
-            Managers.Game.Life = player.GetOrAddComponent<PlayerController>().Data.Hp;
-
+            _player = player.GetOrAddComponent<PlayerController>();
+            _player.SetInfo(Managers.Game.ChracterStyleInfo.CharacterId);
+            _player.Teleport(pos);
+            Managers.Game.Life = _player.Data.Hp;
             return player;
         }
         else if (typeof(T) == typeof(ItemBase))

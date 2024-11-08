@@ -2,45 +2,45 @@
   "playerDatas": [
     {
       "Id": 20001,
-      "Name": "Player1",
-      "Speed": 100.0,
-      "Hp": 100.0,
+      "Name": "Blaze",
+      "Speed": 105.0,
+      "Hp": 95.0,
       "Luck": 0.15
     },
     {
       "Id": 20002,
-      "Name": "Player2",
-      "Speed": 90.0,
-      "Hp": 100.0,
-      "Luck": 0.18
+      "Name": "Gambit",
+      "Speed": 100.0,
+      "Hp": 45.0,
+      "Luck": 0.5
     },
     {
       "Id": 20003,
-      "Name": "Player3",
-      "Speed": 110.0,
-      "Hp": 100.0,
-      "Luck": 0.1
+      "Name": "Dash",
+      "Speed": 115.0,
+      "Hp": 90.0,
+      "Luck": 0.12
     },
     {
       "Id": 20004,
-      "Name": "Player4",
-      "Speed": 130.0,
-      "Hp": 80.0,
+      "Name": "Ace",
+      "Speed": 125.0,
+      "Hp": 85.0,
       "Luck": 0.18
     },
     {
       "Id": 20005,
-      "Name": "Player5",
-      "Speed": 150.0,
+      "Name": "Flash",
+      "Speed": 145.0,
       "Hp": 80.0,
       "Luck": 0.13
     },
     {
       "Id": 20006,
-      "Name": "Player6",
+      "Name": "Brick",
       "Speed": 80.0,
-      "Hp": 80.0,
-      "Luck": 0.05
+      "Hp": 110.0,
+      "Luck": 0.08
     }
   ]
 }

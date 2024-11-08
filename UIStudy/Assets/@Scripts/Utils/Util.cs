@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 
@@ -44,11 +45,36 @@ public static class Util
 		}
 		else
 		{
-			foreach (T component in go.GetComponentsInChildren<T>())
-			{
-				if (string.IsNullOrEmpty(name) || component.name == name)
-					return component;
+			Stack<Transform> s = new Stack<Transform>();
+            for (int i = 0; i < go.transform.childCount; i++)
+            {
+                Transform transform = go.transform.GetChild(i);
+                s.Push(transform);
 			}
+
+			while(s.Count != 0)
+			{
+                Transform current = s.Peek();
+				s.Pop();
+
+                if (string.IsNullOrEmpty(name) || current.name == name)
+                {
+                    T component = current.GetComponent<T>();
+                    if (component != null)
+                        return component;
+                }
+
+                for (int i = 0; i < current.childCount; i++)
+                {
+                    Transform transform = current.GetChild(i);
+                    s.Push(transform);
+                }
+            }
+   //         foreach (T component in go.GetComponentsInChildren<T>())
+			//{
+			//	if (string.IsNullOrEmpty(name) || component.name == name)
+			//		return component;
+			//}
 		}
 
 		return null;

@@ -78,7 +78,21 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         Managers.Event.TriggerEvent(EEventType.SetLanguage);
 
+        ShowRanking();
+
         return true;
+    }
+
+    public void ShowMyScore()
+    {
+        GetObject((int)GameObjects.MyScore).SetActive(false);
+        GetObject((int)GameObjects.Ranking).SetActive(true);
+    }
+
+    public void ShowRanking()
+    {
+        GetObject((int)GameObjects.MyScore).SetActive(true);
+        GetObject((int)GameObjects.Ranking).SetActive(false);
     }
 
     private void OnClick_ShowMyScore(PointerEventData eventData)
