@@ -1,31 +1,43 @@
 using System;
 using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
 using GameApi.Dtos;
 using UnityEngine;
+using UnityEngine.Playables;
 using static Define;
 
 public class UI_StartLoadingScene : UI_Scene
 {
-    private enum GameObjects
+    private enum Images
     {
-
+        Logo_Image
     }
-
     private int _failCount = 0;
     private EScene _scene = EScene.InputNicknameScene;
+    private bool _isPreLoadSuccess = false;
+    private bool _isLoadSceneCondition = false;
+    private PlayableDirector _playableDirector = null;
 
-    private bool _isSuccess = false;
     public override bool Init()
     {
         if (base.Init() == false)
         {
             return false;
         }
-        _failCount = 0;
+        BindImages(typeof(Images));
+        _playableDirector = this.gameObject.GetOrAddComponent<PlayableDirector>();
         StartLoadAssets("PreLoad");
-
         return true;
+    }
+
+    private void OnPlayableDirectorStopped(PlayableDirector director)
+    {
+        StartCoroutine(LoadUserAccount_Co());
+    }
+
+    private IEnumerator LoadUserAccount_Co()
+    {
+        yield return new WaitWhile(() => _isPreLoadSuccess == false);
+        OnEvent_LoadUserAccount(); 
     }
 
     public void OnEvent_LoadUserAccount()
@@ -33,37 +45,21 @@ public class UI_StartLoadingScene : UI_Scene
         Managers.WebContents.ReqGetOrAddUserAccount(null,
        (response) =>
        {
-                Debug.Log("OnEvent_LoadUserAccount");
-
-            HandleSuccess((response),
-                ()=>
-                {
-                    Debug.Log("loadingScene");
-                    //Managers.Scene.LoadScene(_scene);
-                    _isSuccess = true;
-                }
-            );
+            Debug.Log("OnEvent_LoadUserAccount");
+            HandleSuccess(response, () => 
+            {
+                Debug.Log("loadingScene");
+                _isLoadSceneCondition = true;
+            });
        },
        (errorCode) =>
        {
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
             Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "The settlement could not be processed due to poor network conditions.");
-            if(_failCount < HardCoding.MAX_FAIL_COUNT)
-            {                
-                _failCount++;
-                StartCoroutine(LoadUserAccount_Co());
-                return;
-            }
-            _failCount = 0;
-            _scene = EScene.StartLoadingScene;
-            Managers.Scene.LoadScene(_scene);
+            HandleFailure();
         });
-    }
+        StartCoroutine(LoadScene_Co());
 
-    IEnumerator LoadUserAccount_Co()
-    {
-        yield return new WaitForSeconds(0.5f);
-        OnEvent_LoadUserAccount();
     }
 
     private void HandleSuccess(ResDtoGetOrAddUserAccount response, Action result = null)
@@ -71,14 +67,14 @@ public class UI_StartLoadingScene : UI_Scene
         Debug.Log(Managers.Game.UserInfo.UserNickname);
         Debug.Log("HandleSuccess");
 
-        if(string.IsNullOrEmpty(Managers.Game.UserInfo.UserNickname)) //최초 로그인이라는 뜻
+        if (string.IsNullOrEmpty(Managers.Game.UserInfo.UserNickname)) // 최초 로그인
         {
             _scene = EScene.InputNicknameScene;
             result?.Invoke();
             return;
         }
-        
-        Managers.Score.GetScore((this), ProcessErrorFun,
+
+        Managers.Score.GetScore(this, ProcessErrorFun,
         () => 
         {
             _scene = EScene.SuberunkerSceneHomeScene;    
@@ -86,41 +82,54 @@ public class UI_StartLoadingScene : UI_Scene
         },
         () => 
         {
-            if(_failCount < HardCoding.MAX_FAIL_COUNT)
+            if (_failCount < HardCoding.MAX_FAIL_COUNT)
             {                
                 _failCount++;
                 return;
             }
             _failCount = 0;
             _scene = EScene.StartLoadingScene;
+            _isLoadSceneCondition = true;
             result?.Invoke();
+        });
+    }
+    private void HandleFailure()
+    {
+        if (_failCount < HardCoding.MAX_FAIL_COUNT)
+        {                
+            _failCount++;
+            StartCoroutine(LoadUserAccount_Co());
+            return;
         }
-        );   
+        _failCount = 0;
+        _scene = EScene.StartLoadingScene;
+        Managers.Scene.LoadScene(_scene);
     }
     public void ProcessErrorFun()
     {
         Managers.Score.GetScore(this);
     }
 
-    public void OnEvent_LoadScene()
+    private IEnumerator LoadScene_Co()
     {
-        if(_isSuccess == true)
-        {
-            Managers.Scene.LoadScene(_scene);
-        }
+        yield return new WaitWhile(() => _isLoadSceneCondition == false);
+        Debug.Log("LAST LAST LAST");
+        Managers.Scene.LoadScene(_scene);
     }
-    void StartLoadAssets(string label)
-	{
-		Managers.Resource.LoadAllAsync<UnityEngine.Object>(label, (key, count, totalCount) =>
-		{
-			Debug.Log($"{key} {count}/{totalCount}");
-
-			if (count == totalCount)
-			{
-				//Debug.Log("Load Complete");
-				Managers.Data.Init();
-			}
-		});
-	}
-
+    private void StartLoadAssets(string label)
+    {
+        Managers.Resource.LoadAllAsync<UnityEngine.Object>(label, (key, count, totalCount) =>
+        {
+            GetImage((int)Images.Logo_Image).fillAmount = (float)count / totalCount;
+            if (count == totalCount)
+            {
+                Managers.Data.Init();
+                Debug.Log("Load Complete");
+                _playableDirector.Play();
+                Debug.Log("_playableDirector.Play");
+                _isPreLoadSuccess = true;
+                _playableDirector.stopped += OnPlayableDirectorStopped;
+            }
+        });
+    }
 }

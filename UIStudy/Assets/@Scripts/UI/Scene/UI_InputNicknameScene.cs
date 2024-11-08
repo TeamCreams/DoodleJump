@@ -8,7 +8,6 @@ using static Define;
 
 public class UI_InputNicknameScene : UI_Scene
 {
-
     private enum InputFields
     {
         Nickname_InputField,
