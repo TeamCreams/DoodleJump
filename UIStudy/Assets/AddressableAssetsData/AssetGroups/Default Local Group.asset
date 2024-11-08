@@ -74,10 +74,9 @@ MonoBehaviour:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ff7b90ab4e908c9478662a3d619b0f15
-    m_Address: Assets/@Resources/UI/Scene/UI_InputNicknameScene.prefab
+    m_Address: UI_InputNicknameScene
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2e346ec8844bb4282b60d1f21fe4423c, type: 2}
