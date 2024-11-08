@@ -458,10 +458,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_StartLoadingScene
       objectReference: {fileID: 0}
-    - target: {fileID: 7360189217111456080, guid: 212b4947a67aa4d0b9f816a9a6a2b215, type: 3}
-      propertyPath: m_FillAmount
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
