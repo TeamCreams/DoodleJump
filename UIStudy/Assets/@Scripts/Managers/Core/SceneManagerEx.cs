@@ -11,7 +11,7 @@ public class SceneManagerEx
 	{
 		Managers.Clear();
 		SceneManager.LoadScene(GetSceneName(type));
-        Managers.InitScene();
+        //Managers.InitScene();
     }
 
 	private string GetSceneName(Define.EScene type)

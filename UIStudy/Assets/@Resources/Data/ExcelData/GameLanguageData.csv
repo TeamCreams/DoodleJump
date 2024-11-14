@@ -27,3 +27,11 @@ Id,KrText,EnText
 91026,로그인,Sign In
 91027,아이디,Id
 91028,환영합니다,Welcome
+91029,중복 확인,Id Check
+91030,유효한 아이디를 입력하세요.,Please enter a valid Id.
+91031,로그인 성공.,Login successful.
+91032,아이디 중복 확인을 해주세요.,Please check for Id availability.
+91033,계정 생성을 취소하시겠습니까?,Do you want to cancel account creation?
+91034,계정 만들기 성공.,Account creation successful.
+91035,계정 만들기 실패.,Failed to create account.
+91036,네트워크 상태가 불안정하여 정산을 처리할 수 없습니다.,The settlement could not be processed due to poor network conditions.

@@ -69,14 +69,13 @@ public class Managers : MonoBehaviour
 			Managers.Game.Init();
 			Managers.Sound.Init();
 			Managers.Web.Init();
-			//Managers.Score.Init();
 		}
 	}
 	
-	public static void InitScene()
-    {
-        Managers.Score.Init();
-    }
+	// public static void InitScene()
+    // {
+    //     Managers.Score.Init();
+    // }
 
     private void Update()
     {

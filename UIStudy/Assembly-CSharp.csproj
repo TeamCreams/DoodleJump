@@ -248,7 +248,6 @@
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/AnimationManager.cs" />
     <Compile Include="Assets/@Scripts/Utils/Data.Contents.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/PlayingAnimations.cs" />
-    <Compile Include="Assets/@Scripts/Managers/Contents/ScoreManager/ScoreManagerSlave.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Firearms/FirearmFire.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Enums/ElementId.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/AnchorManager.cs" />

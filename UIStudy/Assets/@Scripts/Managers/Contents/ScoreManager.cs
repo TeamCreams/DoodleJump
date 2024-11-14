@@ -6,12 +6,6 @@ using System;
 
 public class ScoreManager
 {
-    ScoreManagerSlave _slave = null;
-    public void Init()
-    {
-        GameObject newObj = new GameObject("@ScoreManagerSlave");
-        _slave = newObj.GetOrAddComponent<ScoreManagerSlave>();
-    }
 
     public void GetScore(Component sender, Action ProcessErrorFun = null, Action onSuccess = null, Action onFailed = null)
     {

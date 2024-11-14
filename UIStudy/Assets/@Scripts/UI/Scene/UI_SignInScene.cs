@@ -38,6 +38,8 @@ public class UI_SignInScene : UI_Scene
 
     private string _idUnavailable = "없는 아이디입니다.";
     private string _passwordUnavailable = "비밀번호가 일치하지 않습니다.";    
+    private string _loginSuccess = "Login successful.";
+
     private EErrorCode _errCodeId = EErrorCode.ERR_Nothing;
     private string _password = "";
     //private bool _isFailFirst = false; // for test
@@ -87,7 +89,7 @@ public class UI_SignInScene : UI_Scene
         //1. 다른버튼 비활성화
         //2. 로딩 인디케이터
         Managers.UI.ShowPopupUI<UI_ToastPopup>();
-        Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "Login successful");
+        Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "Login successful.");
         Managers.Game.UserInfo.UserId = GetInputField((int)InputFields.Id_InputField).text;
         Managers.Score.GetScore((this), null,
             () => 
@@ -183,5 +185,7 @@ public class UI_SignInScene : UI_Scene
 
         GetText((int)Texts.SignUp_Text).text = Managers.Language.LocalizedString(91025);
         GetText((int)Texts.SignIn_Text).text = Managers.Language.LocalizedString(91026);
+
+        _loginSuccess = Managers.Language.LocalizedString(91031);
     }
 }

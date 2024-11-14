@@ -139,6 +139,46 @@
       "Id": 91028,
       "KrText": "환영합니다",
       "EnText": "Welcome"
+    },
+    {
+      "Id": 91029,
+      "KrText": "중복 확인",
+      "EnText": "Id Check"
+    },
+    {
+      "Id": 91030,
+      "KrText": "유효한 아이디를 입력하세요.",
+      "EnText": "Please enter a valid Id."
+    },
+    {
+      "Id": 91031,
+      "KrText": "로그인 성공.",
+      "EnText": "Login successful."
+    },
+    {
+      "Id": 91032,
+      "KrText": "아이디 중복 확인을 해주세요.",
+      "EnText": "Please check for Id availability."
+    },
+    {
+      "Id": 91033,
+      "KrText": "계정 생성을 취소하시겠습니까?",
+      "EnText": "Do you want to cancel account creation?"
+    },
+    {
+      "Id": 91034,
+      "KrText": "계정 만들기 성공.",
+      "EnText": "Account creation successful."
+    },
+    {
+      "Id": 91035,
+      "KrText": "계정 만들기 실패.",
+      "EnText": "Failed to create account."
+    },
+    {
+      "Id": 91036,
+      "KrText": "네트워크 상태가 불안정하여 정산을 처리할 수 없습니다.",
+      "EnText": "The settlement could not be processed due to poor network conditions."
     }
   ]
 }

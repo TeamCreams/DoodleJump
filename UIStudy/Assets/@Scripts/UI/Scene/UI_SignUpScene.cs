@@ -43,6 +43,11 @@ public class UI_SignUpScene : UI_Scene
     private string _idUnavailable = "사용할 수 없는 아이디입니다.";
     private string _passwordUnavailable = "20자 이내의 비밀번호를 입력해주세요.";
     private string _confirmPasswordUnavailable = "비밀번호가 일치하지 않습니다.";
+    private string _enterValidId = "유효한 아이디를 입력하세요.";
+    private string _createAccountSuccess = "계정 만들기 성공.";
+    private string _createAccountFailed = "계정 만들기 실패.";
+    private string _doYouWantCancle = "계정 생성을 취소하시겠습니까?";
+
 
     private EErrorCode _errCodeId = EErrorCode.ERR_Nothing;
     private EErrorCode _errCodePassword = EErrorCode.ERR_ValidationPassword;
@@ -93,7 +98,7 @@ public class UI_SignUpScene : UI_Scene
     {
         if(_errCodeId == EErrorCode.ERR_Nothing)
         {
-            GetText((int)Texts.Warning_Id_Text).text = "Please check for username availability.";
+            GetText((int)Texts.Warning_Id_Text).text = _enterValidId;
             return;
         }
         GetText((int)Texts.Warning_Id_Text).text = "";
@@ -116,7 +121,7 @@ public class UI_SignUpScene : UI_Scene
         if (errCode != EErrorCode.ERR_OK || _errCodeId != EErrorCode.ERR_OK)
         {
             UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, "Do you want to cancel account creation?");
+            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, _doYouWantCancle);
             popup.AddOnClickAction(ProcessErrorFun);
             // 아이디 생성 안 된다고 말하고 가만히 있기/로그인창으로넘어가기 선택 팝업.
             return; 
@@ -137,7 +142,7 @@ public class UI_SignUpScene : UI_Scene
        {
             Debug.Log("아이디 만들기 성공");
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "Account creation successful.");
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, _createAccountSuccess);
             onSuccess?.Invoke();
        },
        (errorCode) =>
@@ -146,7 +151,7 @@ public class UI_SignUpScene : UI_Scene
             Managers.UI.ShowPopupUI<UI_ErrorPopup>();
             Managers.Event.TriggerEvent(EEventType.ErrorPopup,
              this, 
-            ("Failed to create account.", "Account creation has failed.\n Please try again."));
+            (_createAccountFailed, "Account creation has failed.\n Please try again."));
        });
     }
 
@@ -224,5 +229,9 @@ public class UI_SignUpScene : UI_Scene
         _confirmPasswordUnavailable = Managers.Language.LocalizedString(91023);
         
         GetText((int)Texts.SignIn_Text).text = Managers.Language.LocalizedString(91026);
+        _enterValidId = Managers.Language.LocalizedString(91032);
+        _doYouWantCancle = Managers.Language.LocalizedString(91033);
+        _createAccountSuccess = Managers.Language.LocalizedString(91034);
+        _createAccountFailed = Managers.Language.LocalizedString(91035);
     }
 }
