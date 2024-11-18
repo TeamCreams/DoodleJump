@@ -29,6 +29,7 @@ public class DataTransfomer : EditorWindow
         ParseExcelDataToJson<ThoughtBubbleDataLoader, ThoughtBubbleData>("ThoughtBubbleData");
         ParseExcelDataToJson<ThoughtBubbleLanguageDataLoader, ThoughtBubbleLanguageData>("ThoughtBubbleLanguageData");
         ParseExcelDataToJson<GameLanguageDataLoader, GameLanguageData>("GameLanguageData");
+        ParseExcelDataToJson<MissionDataLoader, MissionData>("MissionData");
 
         Debug.Log("Complete");
 	}

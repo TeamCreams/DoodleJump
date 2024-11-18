@@ -15,6 +15,18 @@ MonoBehaviour:
   m_GroupName: UI
   m_GUID: 42583b06f1124b04b924798d88ccd356
   m_SerializeEntries:
+  - m_GUID: 08c0e218607354a5aa1a0eff1f8c7c5f
+    m_Address: UI_MissionItem
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ab359554959744a0baf670ae5928fbb
+    m_Address: UI_MissionPanel
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1ceded50cf71449dbb2aadccc534ce74
     m_Address: UI_ErrorPopup
     m_ReadOnly: 0

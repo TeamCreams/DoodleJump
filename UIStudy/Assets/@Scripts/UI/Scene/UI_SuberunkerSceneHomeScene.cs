@@ -11,7 +11,8 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     private enum GameObjects
     {
         Ranking,
-        MyScore
+        MyScore,
+        UI_MissionPanel
     }
 
     private enum Texts
@@ -71,9 +72,11 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
 
         GetImage((int)Images.MyScore_Button).gameObject.BindEvent(OnClick_ShowMyScore, EUIEvent.Click);
         GetImage((int)Images.Ranking_Button).gameObject.BindEvent(OnClick_ShowRanking, EUIEvent.Click);
+        GetButton((int)Buttons.Mission_Button).gameObject.BindEvent(OnClick_ShowMission, EUIEvent.Click);
         //GetToggle((int)Toggles.Language_En).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
         //GetToggle((int)Toggles.Language_Kr).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
 
+        GetObject((int)GameObjects.UI_MissionPanel).SetActive(false);
         GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         Managers.Event.TriggerEvent(EEventType.SetLanguage);
@@ -109,6 +112,12 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
         GetObject((int)GameObjects.MyScore).SetActive(false);
         GetObject((int)GameObjects.Ranking).SetActive(true);
+    }
+
+    private void OnClick_ShowMission(PointerEventData eventData)
+    {
+        GetObject((int)GameObjects.UI_MissionPanel).SetActive(true);
+        Managers.Event.TriggerEvent(EEventType.Mission);
     }
 
     private void OnClick_SetLanguage(PointerEventData eventData)

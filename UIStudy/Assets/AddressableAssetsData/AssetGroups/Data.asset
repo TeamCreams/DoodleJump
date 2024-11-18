@@ -13,12 +13,22 @@ MonoBehaviour:
   m_Name: Data
   m_EditorClassIdentifier: 
   m_GroupName: Data
-  m_Data:
-    m_SerializedData: []
   m_GUID: 5bffeec6faae4a74fa16a2725c8608e2
   m_SerializeEntries:
-  - m_GUID: c263c419873302943a5b39e2e0f78e88
-    m_Address: TestData
+  - m_GUID: 180276508cfe04083b6d526142ef1037
+    m_Address: ThoughtBubbleLanguageData
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49e1ec199609e467fb55a28d6b80d67a
+    m_Address: SuberunkerItemSpriteData
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e1462672ae2440d7b85603db1d69f93
+    m_Address: GameLanguageData
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
@@ -35,14 +45,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e76644f0ae49c444286491856bd41cf8
-    m_Address: PlayerData
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a23a4322252074f8696029de52de65a4
-    m_Address: CharacterItemSpriteData
+  - m_GUID: 803be06901a52461cbf6eafb4a2f2bd4
+    m_Address: DifficultySettingsData
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
@@ -53,14 +57,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 49e1ec199609e467fb55a28d6b80d67a
-    m_Address: SuberunkerItemSpriteData
+  - m_GUID: a23a4322252074f8696029de52de65a4
+    m_Address: CharacterItemSpriteData
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 803be06901a52461cbf6eafb4a2f2bd4
-    m_Address: DifficultySettingsData
+  - m_GUID: a7785580d67dc4de09802fe48da2e7d1
+    m_Address: MissionData
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c263c419873302943a5b39e2e0f78e88
+    m_Address: TestData
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
@@ -71,14 +81,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 180276508cfe04083b6d526142ef1037
-    m_Address: ThoughtBubbleLanguageData
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4e1462672ae2440d7b85603db1d69f93
-    m_Address: GameLanguageData
+  - m_GUID: e76644f0ae49c444286491856bd41cf8
+    m_Address: PlayerData
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

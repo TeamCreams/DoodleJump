@@ -80,6 +80,7 @@
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Enums/ModificatorType.cs" />
     <Compile Include="Assets/@Scripts/Controller/ObjectBase.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_Joystick.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_MissionItem.cs" />
     <Compile Include="Assets/@Scripts/Networks/WebServer/TestScript.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/QuickStart.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/SpriteSheetCapture.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Assets/@Scripts/VerticalColorChanger.cs" />
     <Compile Include="Assets/@Scripts/Managers/Contents/MessageManager.cs" />
     <Compile Include="Assets/@Scripts/Item/ItemBase.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_MissionPanel.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Data/ItemParams.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/ItemSlot.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/SoloState.cs" />

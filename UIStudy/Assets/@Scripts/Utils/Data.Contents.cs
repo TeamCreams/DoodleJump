@@ -346,4 +346,35 @@ namespace Data
             return dict;
         }
     }
+
+    [Serializable]
+    public class MissionData
+    {
+        public int Id;
+        public EMission Type;
+        public string Title;
+        public string Explanation;
+        public int Compensation;
+        public int	Level;
+        public int	MissionType;
+        public int	Param1;
+        public int	Param2;
+        public DateTime	StartDate;
+        public DateTime	FinishDate;
+    }
+
+    [Serializable]
+    public class MissionDataLoader : ILoader<int, MissionData>
+    {
+        public List<MissionData> missionDatas = new List<MissionData>();
+
+        public Dictionary<int, MissionData> MakeDict()
+        {
+            Dictionary<int, MissionData> dict = new Dictionary<int, MissionData>();
+            foreach (MissionData missionData in missionDatas)
+                dict.Add(missionData.Id, missionData);
+
+            return dict;
+        }
+    }
 }

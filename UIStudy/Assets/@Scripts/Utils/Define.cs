@@ -83,6 +83,7 @@ public static class Define
         GetMyScore,
         StartLoading,
         StopLoading,
+        Mission,
     }
 
     public enum EEquipType
@@ -158,6 +159,12 @@ public static class Define
     {
         LatelyScore,
         RecordScore
+    }
+
+    public enum EMission
+    {
+        Level,
+        Shop,
     }
 
 	public class HardCoding
