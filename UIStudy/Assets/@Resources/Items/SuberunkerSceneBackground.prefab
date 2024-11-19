@@ -779,6 +779,7 @@ GameObject:
   - component: {fileID: 8691270489191791924}
   - component: {fileID: 1120926818501402807}
   - component: {fileID: 5469068668061695541}
+  - component: {fileID: 6645220297905384414}
   m_Layer: 8
   m_Name: SuberunkerSceneBackground
   m_TagString: Untagged
@@ -934,6 +935,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &6645220297905384414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090899892266281481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b37ce778b3d149bf8386b5b8d2d50f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2141192513257718216
 GameObject:
   m_ObjectHideFlags: 0

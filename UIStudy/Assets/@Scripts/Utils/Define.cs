@@ -73,7 +73,8 @@ public static class Define
         LevelStageUp,
         ThoughtBubble,
         CancelThoughtBubble,
-        StoneShower,
+        StartStoneShower,
+        StopStoneShower,
         SetLanguage,
         SignIn,
         ErrorPopup,
@@ -165,6 +166,25 @@ public static class Define
     {
         Level,
         Shop,
+    }
+
+    public enum EMissionType
+    {
+        Time,
+        CollectItemBoxes,
+        AvoidRocksForMinutes,
+        SurviveToLevel,
+        CollectAllThoughtBubbles,
+        StayStillForMinutes,
+        AchieveLevelWithoutCollectingItems,
+        AvoidRocksCount,
+        MoveOneWayForMinutes,
+        AchieveScoreInGame,
+        ChangeBaseStats,
+        CollectGoldInGame,
+        AchieveLuckInGame,
+        TeleportAccumulatedNTimes,
+        PlayerToLevel24,
     }
 
 	public class HardCoding

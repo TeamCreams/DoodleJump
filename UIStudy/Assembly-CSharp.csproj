@@ -185,6 +185,7 @@
     <Compile Include="Assets/@Scripts/Animation/SuberunkerTimelineAnimationEvents.cs" />
     <Compile Include="Assets/@Scripts/Systems/Contents/UserSystem.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Firearms/Firearm.cs" />
+    <Compile Include="Assets/@Scripts/Controller/SuberunkerSceneBackgroundController.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/ShopBase.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/InventoryBase.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/Monster.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="Assets/@Scripts/UI/WorldSpace/UI_Player.cs" />
     <Compile Include="Assets/@Scripts/Managers/Contents/DataManager.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Enums/ItemTag.cs" />
+    <Compile Include="Assets/@Scripts/Managers/Contents/MissionManager.cs" />
     <Compile Include="Assets/@Scripts/Input/CameraSignal.cs" />
     <Compile Include="Assets/@Scripts/Scene/SuberunkerScene.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_DevLoadingScene.cs" />

@@ -356,9 +356,9 @@ namespace Data
         public string Explanation;
         public int Compensation;
         public int	Level;
-        public int	MissionType;
+        public EMissionType	MissionType;
         public int	Param1;
-        public int	Param2;
+        public string	Param2;
         public DateTime	StartDate;
         public DateTime	FinishDate;
     }

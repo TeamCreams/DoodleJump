@@ -31,7 +31,7 @@ public class Spawner : InitBase
     {
         while (true)
         {
-            int time = UnityEngine.Random.Range(7, 12); // 수치화 필요   
+            int time = UnityEngine.Random.Range(10, 15); // 수치화 필요   
             yield return new WaitForSeconds(time);
             int x = UnityEngine.Random.Range(-85, 86);
             Managers.Object.Spawn<ItemBase>(new Vector2(x, -110));
@@ -86,6 +86,7 @@ public class Spawner : InitBase
 
     public IEnumerator GenerateStoneShower()
     {
+        Managers.Event.TriggerEvent(EEventType.StartStoneShower);
         int direction = UnityEngine.Random.Range(0, 2) * 2 - 1;
         int reversDirection = direction * -1;
         int startX = 90 * direction;
@@ -97,6 +98,7 @@ public class Spawner : InitBase
             startX += reversDirectionDistance;
             yield return new WaitForSeconds(0.2f);
         }
+        Managers.Event.TriggerEvent(EEventType.StopStoneShower);
         _stoneShowerPeriodTime = UnityEngine.Random.Range(Managers.Data.DifficultySettingsDic[_id].StoneShowerPeriodStartTime, Managers.Data.DifficultySettingsDic[_id].StoneShowerPeriodFinishTime);
         _generateStoneShower = null;
     }

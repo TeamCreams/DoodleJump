@@ -30,10 +30,16 @@ public class UI_MissionItem : UI_Base
     {
         GetText((int)Texts.Title_Text).text = Managers.Data.MissionDataDic[id].Title;
         GetText((int)Texts.Explanation_Text).text = Managers.Data.MissionDataDic[id].Explanation;
-        GetText((int)Texts.ProgressPercent).text = $"{0}/{Managers.Data.MissionDataDic[id].Param1}";
-        GetImage((int)Images.Progress).fillAmount = (float)(1.0f / Managers.Data.MissionDataDic[id].Param1);
-        if(GetImage((int)Images.Progress).fillAmount == 0)
+        
+        if((float)(1.0f / Managers.Data.MissionDataDic[id].Param1) < 1.0f)
         {
+            GetText((int)Texts.ProgressPercent).text = $"{0}/{Managers.Data.MissionDataDic[id].Param1}";
+            GetImage((int)Images.Progress).fillAmount = (float)(1.0f / Managers.Data.MissionDataDic[id].Param1);
+        }
+        else if(1.0f <= (float)(1.0f / Managers.Data.MissionDataDic[id].Param1))
+        {
+            GetText((int)Texts.ProgressPercent).text = "달성";
+            GetImage((int)Images.Progress).fillAmount  = 1;
             // 레벨업 조건 달성 
             // 레벨업은 어디서 관리하는지 
         }
