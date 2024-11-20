@@ -1,11 +1,20 @@
-using UnityEngine;
+﻿using UnityEngine;
 using static Define;
 public class MissionManager
 {
     public void Init()
     {
-        
+        Managers.Event.RemoveEvent(EEventType.OnSettlementComplete, Event_OnSettlementComplete);
+        Managers.Event.AddEvent(EEventType.OnSettlementComplete, Event_OnSettlementComplete);
     }
+
+    #region OnEvents
+    void Event_OnSettlementComplete(Component sender, object param)
+    {
+        // Time 계산
+
+    }
+    #endregion
 
     public void KindOfMission(Define.EMissionType missionType, int param1 = 0, string param2 = null)
     {

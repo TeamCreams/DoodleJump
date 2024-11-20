@@ -361,6 +361,7 @@ namespace Data
         public string	Param2;
         public DateTime	StartDate;
         public DateTime	FinishDate;
+        public int PrevMissionId;
     }
 
     [Serializable]

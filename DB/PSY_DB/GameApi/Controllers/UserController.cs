@@ -724,5 +724,53 @@ namespace GameApi.Controllers
             }
             return rv;
         }
+
+    [HttpPost("InsertUserMissions")]
+    public async Task<CommonResult<ResDtoInsertUserMissions>> InsertUserMissions([FromBody] ReqDtoInsertUserMissions requestDto)
+    {
+        CommonResult<ResDtoInsertUserMissions> rv = new();
+
+        //Thread.Sleep(3000);
+        try
+        {
+            var select = await (
+                        from user in _context.TblUserAccounts
+                        where (user.UserName.ToLower() == requestDto.UserName.ToLower() && user.DeletedDate == null)
+                        select new
+                        {
+                            UserName = user.UserName
+                        }).ToListAsync();
+
+
+
+            var IsSuccess = await _context.SaveChangesAsync();
+
+            if (IsSuccess == 0)
+            {
+                throw new CommonException(EStatusCode.NameAlreadyExists, $"Name Already Exists");
+            }
+            else
+            {
+                rv.IsSuccess = true;
+                rv.StatusCode = EStatusCode.OK;
+                rv.Data = null;
+            }
+        }
+        catch (CommonException ex)
+        {
+            rv.IsSuccess = false;
+            rv.StatusCode = (EStatusCode)ex.StatusCode;
+            rv.Message = ex.Message;
+            rv.Data = null;
+        }
+        catch (Exception ex)
+        {
+            rv.IsSuccess = false;
+            rv.StatusCode = EStatusCode.ServerException;
+            rv.Message = ex.Message;
+            rv.Data = null;
+        }
+        return rv;
+        }
     }
 }

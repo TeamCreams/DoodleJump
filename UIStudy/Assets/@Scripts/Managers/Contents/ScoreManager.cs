@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Newtonsoft.Json;
 using System.Net.Http;
 using GameApi.Dtos;
@@ -41,7 +41,7 @@ public class ScoreManager
        });
     }
     
-    public void SetScore(Component sender, Action ProcessErrorFun = null, Action onSuccess = null, Action onFailed = null)
+    public void SetScore(Component sender, Action onSuccess = null, Action onFailed = null)
     {
         Managers.WebContents.ReqInsertUserAccountScore(new ReqDtoInsertUserAccountScore()
         {
@@ -74,8 +74,7 @@ public class ScoreManager
             UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
             Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, sender, 
                 "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
-            popup.AddOnClickAction(ProcessErrorFun);
-            onFailed?.Invoke();
+            popup.AddOnClickAction(onFailed);
        });
     }
 }

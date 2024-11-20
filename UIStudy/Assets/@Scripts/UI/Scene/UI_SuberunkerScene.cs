@@ -33,7 +33,54 @@ public class UI_SuberunkerScene : UI_Scene
 
         //Managers.Game.OnChangedLife -= RefreshUI;
         //Managers.Game.OnChangedLife += RefreshUI;
+
+        Managers.Event.RemoveEvent(EEventType.OnPlayerDead, Event_OnPlayerDead);
+        Managers.Event.RemoveEvent(EEventType.OnSettlementComplete, Event_OnSettlementComplete);
+        Managers.Event.AddEvent(EEventType.OnPlayerDead, Event_OnPlayerDead);
+        Managers.Event.AddEvent(EEventType.OnSettlementComplete, Event_OnSettlementComplete);
+
         return true;
+    }
+
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.OnPlayerDead, Event_OnPlayerDead);
+    }
+
+    #region Events
+    void Event_OnPlayerDead(Component sender, object param)
+    {
+        int tryCount = (int)param;
+        if (tryCount == 2)
+        {
+            Managers.Event.TriggerEvent(EEventType.StopLoading);
+            Managers.UI.ShowPopupUI<UI_ToastPopup>();
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "Failed to save...");
+            Invoke("ExitGame", 2.5f);
+            return;
+        }
+
+
+        Managers.Resource.Instantiate("UI_Loading", this.transform);
+        Managers.Event.TriggerEvent(EEventType.StartLoading);
+        Managers.Score.SetScore(
+            this, 
+            onSuccess: () => Managers.Event.TriggerEvent(EEventType.OnSettlementComplete),
+            onFailed: () => Event_OnPlayerDead(this, tryCount++));
+        Managers.Event.TriggerEvent(EEventType.StopLoading);
+    }
+
+    void Event_OnSettlementComplete(Component sender, object param)
+    {
+
+    }
+
+    #endregion
+
+    #region Interface
+    private void ExitGame()
+    {
+        Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
     }
 
     void StartLoadAssets()
@@ -49,4 +96,5 @@ public class UI_SuberunkerScene : UI_Scene
             }
         });
     }
+    #endregion
 }

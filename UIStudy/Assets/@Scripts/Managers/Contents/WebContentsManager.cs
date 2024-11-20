@@ -10,7 +10,7 @@ using WebApi.Models.Dto;
 using static Define;
 public class WebRoute
 {
-    private readonly static string BaseUrl = $"https://dev-single-api.snapism.net:8080/";
+    private readonly static string BaseUrl = $"https://dev-single-api.snapism.net:8082/";
     public readonly static Func<ReqDtoGetUserAccount, string> GetUserAccount = (dto) => $"{BaseUrl}User/GetUserAccount?UserName={dto.UserName}";
 
     public readonly static Func<ReqDtoGetValidateUserAccountId, string> GetValidateUserAccountId = (dto) => $"{BaseUrl}User/GetValidateUserAccountId?UserName={dto.UserName}";

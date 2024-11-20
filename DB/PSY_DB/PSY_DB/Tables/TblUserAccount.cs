@@ -23,4 +23,6 @@ public partial class TblUserAccount
 
     [InverseProperty("TblUserAccountKeyNavigation")]
     public virtual ICollection<TblUserScore> TblUserScores { get; set; } = new List<TblUserScore>();
+    [InverseProperty("TblUserAccountKeyNavigation")]
+    public virtual ICollection<TblUserMission> TblUserMissions { get; set; } = new List<TblUserMission>();
 }

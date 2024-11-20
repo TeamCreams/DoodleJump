@@ -85,6 +85,8 @@ public static class Define
         StartLoading,
         StopLoading,
         Mission,
+        OnPlayerDead,
+        OnSettlementComplete,
     }
 
     public enum EEquipType
