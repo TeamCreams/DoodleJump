@@ -4,13 +4,13 @@ using System.Text;
 
 namespace GameApi.Dtos
 {
-    public class ReqDtoInsertUserMissions
+    public class ReqDtoInsertUserMission
     {
-        public string? UserName { get; set; }
+        public int UserAccountId { get; set; }
         public int MissionId { get; set; }
     }
 
-    public class ResDtoInsertUserMissions
+    public class ResDtoInsertUserMission
     {
        
     }

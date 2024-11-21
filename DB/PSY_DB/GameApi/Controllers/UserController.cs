@@ -1,9 +1,11 @@
 ﻿using GameApi.Dtos;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PSY_DB;
 using PSY_DB.Tables;
+using System.Reflection;
 using System.Text.Json.Serialization;
 using WebApi.Models.Dto;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -24,6 +26,7 @@ namespace GameApi.Controllers
             _context = context;
         }
 
+        #region UserAccount
         [HttpGet("GetUser")]
         public async Task<string> GetUser()
         {
@@ -724,53 +727,258 @@ namespace GameApi.Controllers
             }
             return rv;
         }
+        #endregion
 
-    [HttpPost("InsertUserMissions")]
-    public async Task<CommonResult<ResDtoInsertUserMissions>> InsertUserMissions([FromBody] ReqDtoInsertUserMissions requestDto)
-    {
-        CommonResult<ResDtoInsertUserMissions> rv = new();
-
-        //Thread.Sleep(3000);
-        try
+        #region Quest
+        //퀘스트 수락
+        [HttpPost("InsertUserMissions")]
+        public async Task<CommonResult<ResDtoInsertUserMission>> InsertUserMissions([FromBody] ReqDtoInsertUserMission requestDto)
         {
-            var select = await (
-                        from user in _context.TblUserAccounts
-                        where (user.UserName.ToLower() == requestDto.UserName.ToLower() && user.DeletedDate == null)
-                        select new
-                        {
-                            UserName = user.UserName
-                        }).ToListAsync();
+            CommonResult<ResDtoInsertUserMission> rv = new();
 
-
-
-            var IsSuccess = await _context.SaveChangesAsync();
-
-            if (IsSuccess == 0)
+            try
             {
-                throw new CommonException(EStatusCode.NameAlreadyExists, $"Name Already Exists");
+                var select = await (
+                                    from user in _context.TblUserAccounts
+                                    where (user.Id == requestDto.UserAccountId && user.DeletedDate == null)
+                                    select user.Id
+                                    ).ToListAsync();
+
+                if (select.Any() == false)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        $"UserAccountId : {requestDto.UserAccountId}");
+                }
+
+                int userId = select.First();
+
+                TblUserMission userMission = new TblUserMission
+                {
+                    UserAccountId = userId,
+                    MissionId = requestDto.MissionId
+                };
+
+                _context.TblUserMissions.Add(userMission);
+
+                var IsSuccess = await _context.SaveChangesAsync();
+
+                if (IsSuccess == 0)
+                {
+                    throw new CommonException(EStatusCode.NameAlreadyExists, $"Name Already Exists");
+                }
+                else
+                {
+                    rv.IsSuccess = true;
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Data = null;
+                }
             }
-            else
+            catch (CommonException ex)
             {
-                rv.IsSuccess = true;
-                rv.StatusCode = EStatusCode.OK;
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
                 rv.Data = null;
             }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = null;
+            }
+            return rv;
         }
-        catch (CommonException ex)
+
+        //퀘스트 완료
+        [HttpPost("CompleteUserMission")]
+        public async Task<CommonResult<ResDtoCompleteUserMission>>
+            CompleteUserMission([FromBody] ReqDtoCompleteUserMission requestDto)
         {
-            rv.IsSuccess = false;
-            rv.StatusCode = (EStatusCode)ex.StatusCode;
-            rv.Message = ex.Message;
-            rv.Data = null;
+            CommonResult<ResDtoCompleteUserMission> rv = new();
+
+            try
+            {
+                var userAccount = _context.TblUserAccounts
+                                    .Where(
+                                        user => user.Id == requestDto.UserAccountId &&
+                                                user.DeletedDate == null
+                                    ).FirstOrDefault();
+
+                if (userAccount == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity, 
+                        $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
+                }
+
+                var userMission = _context.TblUserMissions
+                                    .Where( 
+                                            mission => mission.MissionId == requestDto.MissionId &&
+                                                        mission.UserAccountId == userAccount.Id
+                                    ).FirstOrDefault();
+
+                if (userMission == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity, 
+                        $"미션을 완료하지 못했습니다. MissionId : {requestDto.MissionId} Param1 : {requestDto.Param1}");
+                }
+
+                userMission.MissionStatus = EMissionStatus.Complete;
+
+                _context.TblUserMissions.Update(userMission);
+
+                var IsSuccess = await _context.SaveChangesAsync();
+
+                if (IsSuccess == 0)
+                {
+                    throw new CommonException(EStatusCode.ChangedRowsIsZero,
+                        $"UserAccountId : {requestDto.UserAccountId},  UpdateMission: {requestDto.MissionId}");
+                }
+                else
+                {
+                    rv.IsSuccess = true;
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Data = null;
+                }
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = null;
+
+                return rv;
+            }
+            return rv;
         }
-        catch (Exception ex)
+
+        //퀘스트 리스트 가져오기
+        [HttpGet("GetUserMissionList")]
+        public async Task<CommonResult<ResDtoGetUserMissionList>> GetUserMissionList([FromBody] ReqDtoGetUserMissionList requestDto)
         {
-            rv.IsSuccess = false;
-            rv.StatusCode = EStatusCode.ServerException;
-            rv.Message = ex.Message;
-            rv.Data = null;
+            CommonResult<ResDtoGetUserMissionList> rv = new();
+
+            try
+            {
+                rv.Data = new();
+                rv.Data.List = await (from user in _context.TblUserAccounts.Include(user => user.TblUserMissions)
+                                      where (user.Id == requestDto.UserAccountId && user.DeletedDate == null)
+                                      from mission in user.TblUserMissions
+                                      select new ResDtoGetUserMissionListElement
+                                      {
+                                          MissionId = mission.MissionId,
+                                          MissionStatus = (int)mission.MissionStatus,
+                                          Param1 = mission.Param1
+                                      }).ToListAsync();
+
+                if (rv.Data.List.Any() == false)
+                {
+                    rv.StatusCode = EStatusCode.NotFoundEntity;
+                    rv.Message = "rv.Data.List.Any() == false";
+                    rv.IsSuccess = true;
+                    rv.Data.List = null;
+                    return rv;
+                }
+                rv.Message = "success load";
+                rv.IsSuccess = true;
+                return rv;
+            }
+            catch (CommonException ex)
+            {
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.IsSuccess = false;
+                rv.Data.List = null;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.ToString();
+                rv.IsSuccess = false;
+                rv.Data.List = null;
+                return rv;
+            }
+            return rv;
         }
-        return rv;
+
+        //퀘스트 진척 상황 업데이트
+        [HttpPost("UpdateUserMission")]
+        public async Task<CommonResult<ResDtoUpdateUserMission>>
+            UpdateUserMission([FromBody] ReqDtoUpdateUserMission requestDto)
+        {
+            CommonResult<ResDtoUpdateUserMission> rv = new();
+
+            try
+            {
+                var userAccount = _context.TblUserAccounts
+                                    .Where(
+                                        user => user.Id == requestDto.UserAccountId &&
+                                                user.DeletedDate == null
+                                    ).FirstOrDefault();
+                if (userAccount == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
+                }
+
+                var userMission = _context.TblUserMissions
+                                    .Where(
+                                        mission => mission.MissionId == requestDto.MissionId &&
+                                                   mission.UserAccountId == userAccount.Id                                           
+                                    ).FirstOrDefault();
+                if (userMission == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        $"해당 미션이 없습니다. MissionId : {requestDto.MissionId}");
+                }
+
+                userMission.Param1 = requestDto.Param1;
+
+                _context.TblUserMissions.Update(userMission);
+
+                var IsSuccess = await _context.SaveChangesAsync();
+
+                if (IsSuccess == 0)
+                {
+                    throw new CommonException(EStatusCode.ChangedRowsIsZero,
+                        $"UserAccountId : {requestDto.UserAccountId},  UpdateMission: {requestDto.MissionId}");
+                }
+                else
+                {
+                    rv.IsSuccess = true;
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Data = null;
+                }
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = null;
+
+                return rv;
+            }
+            return rv;
         }
+        #endregion
     }
 }
