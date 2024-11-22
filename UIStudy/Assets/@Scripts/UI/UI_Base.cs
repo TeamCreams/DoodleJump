@@ -55,6 +55,7 @@ public class UI_Base : InitBase
     protected void BindLegacyTexts(Type type) { Bind<Text>(type); }
     protected void BindLegacyInputFields(Type type) { Bind<InputField>(type); }
     protected void BindPlayableDirector(Type type) { Bind<PlayableDirector>(type); }
+    
 
     protected T Get<T>(int idx) where T : UnityEngine.Object
     {

@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: UI
   m_GUID: 42583b06f1124b04b924798d88ccd356
   m_SerializeEntries:
+  - m_GUID: 02bf4f5d1ce7147838ee3b3d359ff5fc
+    m_Address: UI_HpProgressBar
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 08c0e218607354a5aa1a0eff1f8c7c5f
     m_Address: UI_MissionItem
     m_ReadOnly: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using static Define;
 
 public class UI_TopBar : UI_Base
@@ -19,9 +20,9 @@ public class UI_TopBar : UI_Base
         Level_Text,
         Gold_Text
     }
-    private enum Images
+    private enum Sliders
     {
-        Hp,
+        UI_HpProgressBar,
     }
     private enum Buttons
     {
@@ -52,7 +53,7 @@ public class UI_TopBar : UI_Base
 
         //BindObjects(typeof(GameObjects));
         BindTexts(typeof(Texts));
-        BindImages(typeof(Images));
+        BindSliders(typeof(Sliders));
         BindButtons(typeof(Buttons));
 
         GetText((int)Texts.GameOver_Text).enabled = false;
@@ -116,12 +117,12 @@ public class UI_TopBar : UI_Base
     IEnumerator UpdateLife(float nextHp)
     {
         float toHp = (float)nextHp / Managers.Object.Player.Stats.StatDic[EStat.MaxHp].Value;
-        float fromHp = GetImage((int)Images.Hp).fillAmount;
+        float fromHp = GetSlider((int)Sliders.UI_HpProgressBar).value;
         float maxDuration = 0.15f;
         float duration = maxDuration;
         while (0 < duration)
         {
-            GetImage((int)Images.Hp).fillAmount = Mathf.Lerp(fromHp, toHp, 1 - duration / maxDuration);
+            GetSlider((int)Sliders.UI_HpProgressBar).value = Mathf.Lerp(fromHp, toHp, 1 - duration / maxDuration);
 
             duration -= UnityEngine.Time.deltaTime;
             yield return null;
@@ -129,7 +130,7 @@ public class UI_TopBar : UI_Base
 
         if (toHp <= 0)
         {
-            GetImage((int)Images.Hp).fillAmount = 0;
+            GetSlider((int)Sliders.UI_HpProgressBar).value = 0;
             _lifeTimer?.Dispose();
             Managers.Game.UserInfo.LatelyScore = _time;
             Managers.Game.UserInfo.Gold += Managers.Game.Gold;
