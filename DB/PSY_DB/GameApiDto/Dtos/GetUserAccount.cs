@@ -18,5 +18,6 @@
         public int HighScore { get; set; }
         public int LatelyScore { get; set; }
         public int Gold {  get; set; }
+        public int TotalScore { get; set; }
     }
 }
