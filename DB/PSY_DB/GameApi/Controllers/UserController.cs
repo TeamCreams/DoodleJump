@@ -865,7 +865,7 @@ namespace GameApi.Controllers
 
         //퀘스트 리스트 가져오기
         [HttpGet("GetUserMissionList")]
-        public async Task<CommonResult<ResDtoGetUserMissionList>> GetUserMissionList([FromBody] ReqDtoGetUserMissionList requestDto)
+        public async Task<CommonResult<ResDtoGetUserMissionList>> GetUserMissionList([FromQuery] ReqDtoGetUserMissionList requestDto)
         {
             CommonResult<ResDtoGetUserMissionList> rv = new();
 
