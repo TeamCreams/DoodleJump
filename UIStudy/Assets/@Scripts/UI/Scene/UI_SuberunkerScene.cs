@@ -60,7 +60,7 @@ public class UI_SuberunkerScene : UI_Scene
             return;
         }
 
-
+        
         Managers.Resource.Instantiate("UI_Loading", this.transform);
         Managers.Event.TriggerEvent(EEventType.StartLoading);
         Managers.Score.SetScore(

@@ -26,17 +26,18 @@ public class UI_MissionItem : UI_Base
         return true;
     }
 
-    public void SetInfo(int id)
+    public void SetInfo(int missionId, int missionStatus, int param1)
     {
-        GetText((int)Texts.Title_Text).text = Managers.Data.MissionDataDic[id].Title;
-        GetText((int)Texts.Explanation_Text).text = Managers.Data.MissionDataDic[id].Explanation;
+        Debug.Log($"missionId : {missionId}");
+        GetText((int)Texts.Title_Text).text = Managers.Data.MissionDataDic[missionId].Title;
+        GetText((int)Texts.Explanation_Text).text = Managers.Data.MissionDataDic[missionId].Explanation;
         
-        if((float)(1.0f / Managers.Data.MissionDataDic[id].Param1) < 1.0f)
+        if((float)((float)param1 / Managers.Data.MissionDataDic[missionId].Param1) < 1.0f)
         {
-            GetText((int)Texts.ProgressPercent).text = $"{0}/{Managers.Data.MissionDataDic[id].Param1}";
-            GetSlider((int)Sliders.Progress).value = (float)(1.0f / Managers.Data.MissionDataDic[id].Param1);
+            GetText((int)Texts.ProgressPercent).text = $"{param1}/{Managers.Data.MissionDataDic[missionId].Param1}";
+            GetSlider((int)Sliders.Progress).value = (float)((float)param1 / Managers.Data.MissionDataDic[missionId].Param1);
         }
-        else if(1.0f <= (float)(1.0f / Managers.Data.MissionDataDic[id].Param1))
+        else if(1.0f <= (float)((float)param1 / Managers.Data.MissionDataDic[missionId].Param1))
         {
             GetText((int)Texts.ProgressPercent).text = "달성";
             GetSlider((int)Sliders.Progress).value  = 1;

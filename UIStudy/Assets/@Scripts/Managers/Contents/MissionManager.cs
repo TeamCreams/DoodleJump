@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using GameApi.Dtos;
+using UnityEngine;
 using static Define;
 public class MissionManager
 {
@@ -6,106 +9,82 @@ public class MissionManager
     {
         Managers.Event.RemoveEvent(EEventType.OnSettlementComplete, Event_OnSettlementComplete);
         Managers.Event.AddEvent(EEventType.OnSettlementComplete, Event_OnSettlementComplete);
+        Managers.Event.RemoveEvent(EEventType.OnFirstAccept, Event_OnFirstAccept);
+        Managers.Event.AddEvent(EEventType.OnFirstAccept, Event_OnFirstAccept);
     }
 
     #region OnEvents
     void Event_OnSettlementComplete(Component sender, object param)
     {
         // Time 계산
+        //아에 안들어옴  
 
+         SettleScore(sender);
     }
+
+    void Event_OnFirstAccept(Component sender, object param)
+    {
+        AcceptMission(sender);
+    }
+
     #endregion
 
-    public void KindOfMission(Define.EMissionType missionType, int param1 = 0, string param2 = null)
+    public void SettleScore(Component sender, Action onSuccess = null, Action onFailed = null)
     {
-        switch(missionType)
+        Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
         {
-            case EMissionType.Time:
-            break;
-            case EMissionType.AvoidRocksForMinutes:
-            break;
-            case EMissionType.SurviveToLevel:
-            break;
-            case EMissionType.CollectAllThoughtBubbles:
-            break;
-            case EMissionType.StayStillForMinutes:
-            break;
-            case EMissionType.AchieveLevelWithoutCollectingItems:
-            break;
-            case EMissionType.AvoidRocksCount:
-            break;
-            case EMissionType.MoveOneWayForMinutes:
-            break;
-            case EMissionType.AchieveScoreInGame:
-            break;
-            case EMissionType.ChangeBaseStats:
-            break;
-            case EMissionType.CollectGoldInGame:
-            break;
-            case EMissionType.AchieveLuckInGame:
-            break;
-            case EMissionType.TeleportAccumulatedNTimes:
-            break;
-            case EMissionType.PlayerToLevel24:
-            break;
-        }
+            UserName = Managers.Game.UserInfo.UserId
+        },
+       (response) =>
+       {    
+            if(response != null)
+            {
+                Managers.Game.UserInfo.TotalScore = response.TotalScore;
+                Managers.Game.UserInfo.UserAccountId = response.UserAccountId;
+                Debug.Log("is success");
+                onSuccess?.Invoke();
+            }
+            else
+            {                
+                Debug.Log("response is null");
+                onFailed?.Invoke();
+            }
+       },
+       (errorCode) =>
+       {
+            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+            Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, sender, 
+                "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
+            popup.AddOnClickAction(onFailed);
+       });
     }
 
-    private void OnEvent_Time(Component sender, object param)
+    public void AcceptMission(Component sender, Action onSuccess = null, Action onFailed = null)
     {
-        
+        Managers.WebContents.ReqInsertUserMission(new ReqDtoInsertUserMission()
+        {
+            UserAccountId = Managers.Game.UserInfo.UserAccountId,
+            MissionId = 11001
+        },
+       (response) =>
+       {    
+            if(response != null)
+            {
+                Debug.Log("AcceptMission is success");
+                onSuccess?.Invoke();
+            }
+            else
+            {                
+                Debug.Log("AcceptMission response is null");
+                onFailed?.Invoke();
+            }
+       },
+       (errorCode) =>
+       {
+            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+            Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, sender, 
+                "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
+            popup.AddOnClickAction(onFailed);
+       });
     }
-    private void OnEvent_AvoidRocksForMinutes(Component sender, object param)
-    {
-
-    }
-    private void OnEvent_SurviveToLevel(Component sender, object param)
-    {
-
-    }
-    private void OnEvent_CollectAllThoughtBubbles(Component sender, object param)
-    {
-
-    }
-    private void OnEvent_StayStillForMinutes(Component sender, object param)
-    {
-
-    }
-    private void OnEvent_AchieveLevelWithoutCollectingItems(Component sender, object param)
-    {
-
-    }
-    private void OnEvent_AvoidRocksCount(Component sender, object param)
-    {
-
-    }
-    private void OnEvent_MoveOneWayForMinutes(Component sender, object param)
-    {
-
-    }
-    private void OnEvent_AchieveScoreInGame(Component sender, object param)
-    {
-
-    }
-    private void OnEvent_ChangeBaseStats(Component sender, object param)
-    {
-
-    }
-    private void OnEvent_CollectGoldInGame(Component sender, object param)
-    {
-
-    }
-    private void OnEvent_AchieveLuckInGame(Component sender, object param)
-    {
-
-    }
-    private void OnEvent_TeleportAccumulatedNTimes(Component sender, object param)
-    {
-
-    }
-    private void OnEvent_PlayerToLevel24(Component sender, object param)
-    {
-
-    }
-
 }

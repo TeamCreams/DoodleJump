@@ -21,7 +21,6 @@ public class ScoreManager
                 Managers.Game.UserInfo.LatelyScore = response.LatelyScore;
                 Managers.Game.UserInfo.Gold = response.Gold;
                 Debug.Log("is success");
-
                 onSuccess?.Invoke();
             }
             else

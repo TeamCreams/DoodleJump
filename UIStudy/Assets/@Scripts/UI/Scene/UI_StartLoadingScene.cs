@@ -50,6 +50,7 @@ public class UI_StartLoadingScene : UI_Scene
             {
                 Debug.Log("loadingScene");
                 _isLoadSceneCondition = true;
+                Managers.Event.TriggerEvent(EEventType.OnFirstAccept);
             });
        },
        (errorCode) =>

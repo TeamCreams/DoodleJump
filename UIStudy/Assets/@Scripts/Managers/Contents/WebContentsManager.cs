@@ -20,7 +20,7 @@ public class WebRoute
     public readonly static Func<ReqDtoGetOrAddUserAccount, string> GetOrAddUserAccount = (dto) => $"{BaseUrl}User/GetOrAddUserAccount";
     public readonly static Func<ReqDtoGetUserAccountList, string> GetUserAccountList = (dto) => $"{BaseUrl}User/GetUserAccountList";
 
-    public readonly static string InsertUserMission= $"{BaseUrl}User/InsertUserMission";
+    public readonly static string InsertUserMission= $"{BaseUrl}User/InsertUserMissions";
     public readonly static string UpdateUserMission = $"{BaseUrl}User/UpdateUserMission";
     public readonly static string CompleteUserMission = $"{BaseUrl}User/CompleteUserMission";
     public readonly static Func<ReqDtoGetUserMissionList, string> GetUserMissionList = (dto) => $"{BaseUrl}User/GetUserMissionList";

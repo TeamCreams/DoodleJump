@@ -87,6 +87,7 @@ public static class Define
         Mission,
         OnPlayerDead,
         OnSettlementComplete,
+        OnFirstAccept
     }
 
     public enum EEquipType

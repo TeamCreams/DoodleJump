@@ -194,9 +194,9 @@ public class UserInfo
     public int RecordScore {get; set;} = 0;
     public int LatelyScore {get; set;} = 0;
     public int Gold {get; set;} = 0;
-
     public int Level {get; set;} = 1;
-    
+    public int TotalScore {get; set;} = 0;
+    public int UserAccountId { get; set; } = 0;
 }
 
 public class DifficultySettingsInfo // 다시시작할 때마다 초기화 필요 
