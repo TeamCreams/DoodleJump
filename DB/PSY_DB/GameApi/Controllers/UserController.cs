@@ -609,6 +609,7 @@ namespace GameApi.Controllers
                     {
                         UserName = user.UserName,
                         Nickname = user.Nickname,
+                        UserAccountId = user.Id,
                         RegisterDate = user.RegisterDate,
                         UpdateDate = user.UpdateDate,
                         HighScore = user.TblUserScores
