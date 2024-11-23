@@ -777,7 +777,7 @@ namespace GameApi.Controllers
 
                 if (IsSuccess == 0)
                 {
-                    throw new CommonException(EStatusCode.ServerException, "미션 추가에 실패했습니다.");
+                    throw new CommonException(EStatusCode.ChangedRowsIsZero, "미션 추가에 실패했습니다.");
                 }
                 else
                 {
