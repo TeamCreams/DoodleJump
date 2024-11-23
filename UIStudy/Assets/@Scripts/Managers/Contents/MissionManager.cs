@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameApi.Dtos;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using static Define;
 public class MissionManager
@@ -102,17 +104,20 @@ public class MissionManager
             if(response != null)
             {
                 Debug.Log("AcceptMission is success");
+                
                 onSuccess?.Invoke();
             }
             else
             {                
                 Debug.Log("AcceptMission response is null");
+                //Debug.Log($"Message : {response.Message}, StatusCode : {response.statusCode}");
                 onFailed?.Invoke();
             }
        },
        (errorCode) =>
        {                
-            Debug.Log("AcceptMission is Error");
+            Debug.Log($"AcceptMission is Error {errorCode}");
+            
             // UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
             // Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, 
             //     "The settlement could not be processed due to poor network conditions. Would you like to resend it?");

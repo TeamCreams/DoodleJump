@@ -216,12 +216,14 @@ public class WebContentsManager
 
             if (rv == null || false == rv.IsSuccess)
             {
+                Debug.Log("ReqInsertUserMission false == rv.IsSuccess "+ rv.Message);
                 onFailed.Invoke(EStatusCode.ServerException);
             }
             else
             {
                 if (rv.StatusCode != EStatusCode.OK)
                 {
+                    Debug.Log(rv.Message);
                     onFailed.Invoke(rv.StatusCode);
                 }
                 else

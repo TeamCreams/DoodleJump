@@ -50,6 +50,7 @@ public class UI_StartLoadingScene : UI_Scene
             {
                 Debug.Log("loadingScene");
                 _isLoadSceneCondition = true;
+                Managers.Game.UserInfo.UserAccountId = response.UserAccountId;
                 Managers.Event.TriggerEvent(EEventType.OnFirstAccept);
             });
        },
@@ -74,12 +75,11 @@ public class UI_StartLoadingScene : UI_Scene
             result?.Invoke();
             return;
         }
-
+        
         Managers.Score.GetScore(this, ProcessErrorFun,
         () => 
         {
-            _scene = EScene.SuberunkerSceneHomeScene;    
-            Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
+            _scene = EScene.SuberunkerSceneHomeScene;
             result?.Invoke(); 
         },
         () => 
