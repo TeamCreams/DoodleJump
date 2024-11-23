@@ -79,6 +79,7 @@ public class UI_StartLoadingScene : UI_Scene
         () => 
         {
             _scene = EScene.SuberunkerSceneHomeScene;    
+            Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
             result?.Invoke(); 
         },
         () => 

@@ -61,6 +61,7 @@ public class UI_RetryPopup : UI_Popup
     }
     private void OnClick_HomeButton(PointerEventData eventData)
     {
+        // playerDead event 
         // Managers.Resource.Instantiate("UI_Loading", this.transform);
         // Managers.Event.TriggerEvent(EEventType.StartLoading);
         Managers.Score.GetScore((this), ProcessErrorFun,

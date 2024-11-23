@@ -67,6 +67,7 @@ public class UI_SuberunkerScene : UI_Scene
             this, 
             onSuccess: () => Managers.Event.TriggerEvent(EEventType.OnSettlementComplete),
             onFailed: () => Event_OnPlayerDead(this, tryCount++));
+        //Managers.Event.TriggerEvent(EEventType.OnUpdateMission, this, (0, 0));
         Managers.Event.TriggerEvent(EEventType.StopLoading);
     }
 

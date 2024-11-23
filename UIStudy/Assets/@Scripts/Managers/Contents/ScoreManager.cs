@@ -46,7 +46,7 @@ public class ScoreManager
         {
             UserName = Managers.Game.UserInfo.UserId,
             Score = Managers.Game.UserInfo.LatelyScore,
-            Gold = Managers.Game.UserInfo.Gold
+            Gold = Managers.Game.UserInfo.Gold,
         },
        (response) =>
        {
