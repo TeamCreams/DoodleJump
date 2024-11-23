@@ -754,6 +754,17 @@ namespace GameApi.Controllers
 
                 int userId = select.First();
 
+                var existingMission = await (
+                                    from mission in _context.TblUserMissions
+                                    where (mission.UserAccountId == requestDto.UserAccountId && mission.MissionId == requestDto.MissionId)
+                                    select mission.MissionId
+                                    ).ToListAsync();
+
+                if (existingMission.Any() == true)
+                {
+                    throw new CommonException(EStatusCode.NameAlreadyExists, "이미 존재하는 미션입니다.");
+                }
+
                 TblUserMission userMission = new TblUserMission
                 {
                     UserAccountId = userId,
@@ -766,7 +777,7 @@ namespace GameApi.Controllers
 
                 if (IsSuccess == 0)
                 {
-                    throw new CommonException(EStatusCode.NameAlreadyExists, $"Name Already Exists");
+                    throw new CommonException(EStatusCode.ServerException, "미션 추가에 실패했습니다.");
                 }
                 else
                 {
