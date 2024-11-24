@@ -294,16 +294,21 @@ public class WebContentsManager
             
             if(rv == null || false == rv.IsSuccess)
             {
+                Debug.Log("ReqDtoGetUserMissionList fail");
                 onFailed.Invoke(EStatusCode.ServerException);
             }
             else
             {
                 if(rv.StatusCode != EStatusCode.OK)
-                {                    
+                {           
+                    Debug.Log($"ReqDtoGetUserMissionList fail {rv.Message}");   
+                          
+                    // 여기로 들어와 짐
                     onFailed.Invoke(rv.StatusCode);
                 }
                 else
                 {
+                    Debug.Log("ReqDtoGetUserMissionList success");
                     onSuccess.Invoke(rv.Data);
                 }
             }
