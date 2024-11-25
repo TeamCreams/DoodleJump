@@ -741,38 +741,63 @@ namespace GameApi.Controllers
 
             try
             {
-                var select = await (
+                {
+                    var select = await (
                                     from user in _context.TblUserAccounts
                                     where (user.Id == requestDto.UserAccountId && user.DeletedDate == null)
                                     select user.Id
                                     ).ToListAsync();
 
-                if (select.Any() == false)
-                {
-                    throw new CommonException(EStatusCode.NotFoundEntity,
-                        $"UserAccountId : {requestDto.UserAccountId}");
+                    if (select.Any() == false)
+                    {
+                        throw new CommonException(EStatusCode.NotFoundEntity,
+                            $"UserAccountId : {requestDto.UserAccountId}");
+                    }
+
+                    int userId = select.First();
+
+                    var existingMission = await (
+                                        from mission in _context.TblUserMissions
+                                        where (mission.UserAccountId == requestDto.UserAccountId && mission.MissionId == requestDto.MissionId)
+                                        select mission.MissionId
+                                        ).ToListAsync();
+
+                    if (existingMission.Any() == true)
+                    {
+                        throw new CommonException(EStatusCode.NameAlreadyExists, "이미 존재하는 미션입니다.");
+                    }
+
+                    TblUserMission userMission = new TblUserMission
+                    {
+                        UserAccountId = userId,
+                        MissionId = requestDto.MissionId
+                    };
+
+                    _context.TblUserMissions.Add(userMission);
                 }
 
-                int userId = select.First();
-
-                var existingMission = await (
-                                    from mission in _context.TblUserMissions
-                                    where (mission.UserAccountId == requestDto.UserAccountId && mission.MissionId == requestDto.MissionId)
-                                    select mission.MissionId
-                                    ).ToListAsync();
-
-                if (existingMission.Any() == true)
+                // 임시삭제
                 {
-                    throw new CommonException(EStatusCode.NameAlreadyExists, "이미 존재하는 미션입니다.");
+                    //var userMission = _context.TblUserMissions
+                    //                   .Where(
+                    //                            user => user.UserAccountId == requestDto.UserAccountId &&
+                    //                            user.MissionId == requestDto.MissionId
+                    //                   ).FirstOrDefault();
+
+                    //if (userMission == null)
+                    //{
+                    //    throw new CommonException(EStatusCode.NotFoundEntity,
+                    //        $"존재하지 않습니다. UserAccountId : {requestDto.UserAccountId} MissionId : {requestDto.MissionId}");
+                    //}
+                    //_context.TblUserMissions.Remove(userMission);
+
                 }
-
-                TblUserMission userMission = new TblUserMission
+                // 전체 삭제
                 {
-                    UserAccountId = userId,
-                    MissionId = requestDto.MissionId
-                };
-
-                _context.TblUserMissions.Add(userMission);
+                    //var allUserMissions = _context.TblUserMissions.ToList();
+                    //_context.TblUserMissions.RemoveRange(allUserMissions);
+                    //await _context.SaveChangesAsync();
+                }
 
                 var IsSuccess = await _context.SaveChangesAsync();
 
@@ -884,6 +909,7 @@ namespace GameApi.Controllers
             try
             {
                 rv.Data = new();
+
                 rv.Data.List = await (from user in _context.TblUserAccounts.Include(user => user.TblUserMissions)
                                       where (user.Id == requestDto.UserAccountId && user.DeletedDate == null)
                                       from mission in user.TblUserMissions
@@ -892,7 +918,7 @@ namespace GameApi.Controllers
                                           MissionId = mission.MissionId,
                                           MissionStatus = (int)mission.MissionStatus,
                                           Param1 = mission.Param1
-                                      }).ToListAsync();
+                                      }).ToListAsync();            
 
                 if (rv.Data.List.Any() == false)
                 {
@@ -905,6 +931,7 @@ namespace GameApi.Controllers
                 rv.Message = "success load";
                 rv.IsSuccess = true;
                 return rv;
+
             }
             catch (CommonException ex)
             {
@@ -990,6 +1017,77 @@ namespace GameApi.Controllers
                 rv.Data = null;
 
                 return rv;
+            }
+            return rv;
+        }
+
+        //보상 수령
+        [HttpPost("InsertMissionCompensation")]
+        public async Task<CommonResult<ResDtoInsertMissionCompensation>> InsertMissionCompensation([FromBody] ReqDtoInsertMissionCompensation requestDto)
+        {
+            CommonResult<ResDtoInsertMissionCompensation> rv = new();
+
+            try
+            {
+                var userAccount = _context.TblUserAccounts
+                                .Where(
+                                    user => user.Id == requestDto.UserAccountId &&
+                                            user.DeletedDate == null
+                                ).FirstOrDefault();
+                if (userAccount == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
+                }
+
+                var userMission = _context.TblUserMissions
+                                    .Where(
+                                        mission => mission.MissionId == requestDto.MissionId &&
+                                                   mission.UserAccountId == userAccount.Id
+                                    ).FirstOrDefault();
+                if (userMission == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        $"해당 미션이 없습니다. MissionId : {requestDto.MissionId}");
+                }
+
+                var userScore = _context.TblUserScores
+                                .Where(
+                                        score => score.UserAccountId == userAccount.Id
+                                  ).FirstOrDefault();
+                if (userScore == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        $"userScore이 없습니다");
+                }
+                userScore.Gold = requestDto.Gold;
+                _context.TblUserScores.Update(userScore); // 안됨..
+                var IsSuccess = await _context.SaveChangesAsync();
+
+                if (IsSuccess == 0)
+                {
+                    throw new CommonException(EStatusCode.ChangedRowsIsZero, "보상 수령에 실패했습니다.");
+                }
+                else
+                {
+                    rv.IsSuccess = true;
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Data = null;
+                }
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = null;
             }
             return rv;
         }
