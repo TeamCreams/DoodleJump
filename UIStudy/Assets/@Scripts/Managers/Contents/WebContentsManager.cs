@@ -24,6 +24,8 @@ public class WebRoute
     public readonly static string UpdateUserMission = $"{BaseUrl}User/UpdateUserMission";
     public readonly static string CompleteUserMission = $"{BaseUrl}User/CompleteUserMission";
     public readonly static Func<ReqDtoGetUserMissionList, string> GetUserMissionList = (dto) => $"{BaseUrl}User/GetUserMissionList?UserAccountId={dto.UserAccountId}";
+    public readonly static string InsertMissionCompensation = $"{BaseUrl}User/InsertMissionCompensation";
+
 }
 
 public class WebContentsManager
@@ -309,6 +311,34 @@ public class WebContentsManager
                 else
                 {
                     Debug.Log("ReqDtoGetUserMissionList success");
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
+public void ReqDtoInsertMissionCompensation(ReqDtoInsertMissionCompensation requestDto, Action<ResDtoInsertMissionCompensation> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
+
+        Managers.Web.SendPostRequest(WebRoute.InsertUserMission, body , (response) =>
+        {
+            CommonResult<ResDtoInsertMissionCompensation> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertMissionCompensation>>(response);
+
+            if (rv == null || false == rv.IsSuccess)
+            {
+                Debug.Log("ReqDtoInsertMissionCompensation false "+ rv.Message);
+                onFailed.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                if (rv.StatusCode != EStatusCode.OK)
+                {
+                    Debug.Log(rv.Message);
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {                    
+                    Debug.Log("ReqDtoInsertMissionCompensation success");
                     onSuccess.Invoke(rv.Data);
                 }
             }

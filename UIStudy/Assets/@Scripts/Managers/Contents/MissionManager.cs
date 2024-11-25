@@ -42,7 +42,9 @@ public class MissionManager
     {
         Debug.Log("Event_OnMissionComplete");
         int id = (int)param;
-        CompleteMission(sender, id);
+        CompleteMission(sender, id,
+            onSuccess: () => GetMissionCompensation(sender, id),
+            onFailed: () => Debug.Log("Fail"));
     }
 
     void Event_OnUpdateMission(Component sender, object param)
@@ -136,7 +138,7 @@ public class MissionManager
             if(response != null)
             {
                 Debug.Log("CompleteUserMission is success");
-                //Managers.Data.MissionDataDic[missionId].Compensation;
+                Managers.Game.UserInfo.Gold += Managers.Data.MissionDataDic[missionId].Compensation;
                 onSuccess?.Invoke();
             }
             else
@@ -186,4 +188,36 @@ public class MissionManager
        });
     }
 
+    public void GetMissionCompensation(Component sender, int missionId, Action onSuccess = null, Action onFailed = null)
+    {
+        Managers.WebContents.ReqDtoInsertMissionCompensation(new ReqDtoInsertMissionCompensation()
+        {
+            UserAccountId = Managers.Game.UserInfo.UserAccountId,
+            MissionId = missionId,
+            Gold = Managers.Game.UserInfo.Gold
+        },
+       (response) =>
+       {    
+            if(response != null)
+            {
+                Debug.Log("GetMissionCompensation is success");
+                
+                onSuccess?.Invoke();
+            }
+            else
+            {                
+                Debug.Log("GetMissionCompensation response is null");
+                onFailed?.Invoke();
+            }
+       },
+       (errorCode) =>
+       {                
+            Debug.Log($"AcceptMission is Error {errorCode}");
+            
+            // UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+            // Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, 
+            //     "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
+            // popup.AddOnClickAction(onFailed);
+       });
+    }
 }
