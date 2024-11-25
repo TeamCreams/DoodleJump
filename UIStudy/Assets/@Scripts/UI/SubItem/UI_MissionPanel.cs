@@ -59,7 +59,7 @@ public class UI_MissionPanel : UI_Base
                 _userMissionList = response.List;
                 foreach(var mission in _userMissionList)
                 {
-                    SpawnMissionItem(mission.MissionId, mission.MissionStatus, mission.Param1);
+                    SpawnMissionItem(mission.MissionId, mission.MissionStatus);
                 }
                 Debug.Log("is success");
             }
@@ -73,7 +73,7 @@ public class UI_MissionPanel : UI_Base
         // 미션을 분리해서 놓고 싶음. enum, level에 따른 미션, 메인미션 분배하는 법
     }
 
-    private void SpawnMissionItem(int missionId, int missionStatus, int param1)
+    private void SpawnMissionItem(int missionId, int missionStatus)
     {
         // 스폰 조건이 안되면 스폰안되도록 세팅
         MissionData missionData = Managers.Data.MissionDataDic[missionId];
@@ -84,7 +84,7 @@ public class UI_MissionPanel : UI_Base
         }
 
         var item = Managers.UI.MakeSubItem<UI_MissionItem>(parent: _missionRoot, pooling: true);
-        item.SetInfo(missionId, missionStatus, param1);
+        item.SetInfo(missionId, missionStatus);
         _itemList.Add(item.gameObject);
     }
 }

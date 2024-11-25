@@ -176,20 +176,10 @@ public static class Define
     public enum EMissionType
     {
         Time,
-        CollectItemBoxes,
-        AvoidRocksForMinutes,
         SurviveToLevel,
-        CollectAllThoughtBubbles,
-        StayStillForMinutes,
-        AchieveLevelWithoutCollectingItems,
         AvoidRocksCount,
-        MoveOneWayForMinutes,
         AchieveScoreInGame,
-        ChangeBaseStats,
-        CollectGoldInGame,
-        AchieveLuckInGame,
-        TeleportAccumulatedNTimes,
-        PlayerToLevel24,
+        Style,
     }
 
 	public class HardCoding

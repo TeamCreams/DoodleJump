@@ -17,13 +17,13 @@ public class WebRoute
     public readonly static string InsertUserAccountScore = $"{BaseUrl}User/InsertUserAccountScore";
     public readonly static string InsertUserAccountNickname = $"{BaseUrl}User/InsertUserAccountNickname";
     //public readonly static Func<ReqInsertUserAccountScore, string> InsertUserAccountScore = (dto) => $"{BaseUrl}User/InsertUserAccountScore?UserName={dto.UserName}&Score{dto.Score}";
-    public readonly static Func<ReqDtoGetOrAddUserAccount, string> GetOrAddUserAccount = (dto) => $"{BaseUrl}User/GetOrAddUserAccount";
-    public readonly static Func<ReqDtoGetUserAccountList, string> GetUserAccountList = (dto) => $"{BaseUrl}User/GetUserAccountList";
+    public readonly static Func<ReqDtoGetOrAddUserAccount, string> GetOrAddUserAccount = (dto) => $"{BaseUrl}User/GetOrAddUserAccount?UserName={dto.UserName}";
+    public readonly static Func<ReqDtoGetUserAccountList, string> GetUserAccountList = (dto) => $"{BaseUrl}User/GetUserAccountList"; //얘는 param값이 없음
 
     public readonly static string InsertUserMission= $"{BaseUrl}User/InsertUserMissions";
     public readonly static string UpdateUserMission = $"{BaseUrl}User/UpdateUserMission";
     public readonly static string CompleteUserMission = $"{BaseUrl}User/CompleteUserMission";
-    public readonly static Func<ReqDtoGetUserMissionList, string> GetUserMissionList = (dto) => $"{BaseUrl}User/GetUserMissionList";
+    public readonly static Func<ReqDtoGetUserMissionList, string> GetUserMissionList = (dto) => $"{BaseUrl}User/GetUserMissionList?UserAccountId={dto.UserAccountId}";
 }
 
 public class WebContentsManager

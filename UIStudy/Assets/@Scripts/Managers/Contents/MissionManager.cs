@@ -71,7 +71,6 @@ public class MissionManager
             if(response != null)
             {
                 Managers.Game.UserInfo.TotalScore = response.TotalScore;
-                Managers.Game.UserInfo.UserAccountId = response.UserAccountId;
                 Debug.Log($"SettleScore is success, Managers.Game.UserInfo.TotalScore {Managers.Game.UserInfo.TotalScore}");
                 onSuccess?.Invoke();
             }
@@ -137,6 +136,7 @@ public class MissionManager
             if(response != null)
             {
                 Debug.Log("CompleteUserMission is success");
+                //Managers.Data.MissionDataDic[missionId].Compensation;
                 onSuccess?.Invoke();
             }
             else
@@ -185,4 +185,5 @@ public class MissionManager
             // popup.AddOnClickAction(onFailed);
        });
     }
+
 }

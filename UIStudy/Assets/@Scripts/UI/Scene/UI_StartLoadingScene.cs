@@ -42,7 +42,10 @@ public class UI_StartLoadingScene : UI_Scene
 
     public void OnEvent_LoadUserAccount()
     {
-        Managers.WebContents.ReqGetOrAddUserAccount(null,
+        Managers.WebContents.ReqGetOrAddUserAccount(new ReqDtoGetOrAddUserAccount()
+        {
+            UserName = Managers.Game.UserInfo.UserId,
+        },
        (response) =>
        {
             Debug.Log("OnEvent_LoadUserAccount");
@@ -51,6 +54,7 @@ public class UI_StartLoadingScene : UI_Scene
                 Debug.Log("loadingScene");
                 _isLoadSceneCondition = true;
                 Managers.Game.UserInfo.UserAccountId = response.UserAccountId;
+                Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
                 Managers.Event.TriggerEvent(EEventType.OnFirstAccept);
             });
        },
