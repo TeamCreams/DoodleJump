@@ -21,7 +21,6 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<PsyDbContext>();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy /Y $(OutputPath)GameApiDto.dll $(SolutionDir)PSY_DB\..\..\..\UIStudy\Assets\@Scripts\Plugins\&#xD;&#xA;echo &quot;$(SolutionDir)PSY_DB\..\..\..\UIStudy\Assets\@Scripts\Plugins\GameApiDto.dll&quot;" />
+    <Exec Command="copy /Y $(OutputPath)GameApiDto.dll $(SolutionDir)PSY_DB\..\..\..\UIStudy\Assets\@Scripts\Plugins\" />
   </Target>
 
 </Project>

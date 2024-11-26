@@ -1,4 +1,4 @@
-using Assets.HeroEditor.Common.Scripts.Common;
+﻿using Assets.HeroEditor.Common.Scripts.Common;
 using Data;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -49,9 +49,7 @@ public class UI_MissionItem : UI_Base
     }
     private void SetActiveButton()
     {
-        Button completeButton = GetButton((int)Buttons.Complete_Button);
-        //ebug.Log($"SetActiveButton : {!completeButton.IsActive()} ");
-        completeButton.SetActive(!completeButton.IsActive());
+        GetButton((int)Buttons.Complete_Button).SetActive(true);
     }
     public void SetInfo(int missionId, int missionStatus)
     {
@@ -61,7 +59,7 @@ public class UI_MissionItem : UI_Base
         GetText((int)Texts.Title_Text).text = missionData.Title;
         GetText((int)Texts.Explanation_Text).text = missionData.Explanation;
         
-        int missionValue = GetMissionValueByType(missionData.MissionType);
+        int missionValue = missionData.MissionType.GetMissionValueByType();
         float value = (float)missionValue / (float)missionData.Param1;
         Debug.Log($"---------------------------------------------≈value : {missionValue} / {missionData.Param1} = {(float)missionValue / (float)missionData.Param1}");
         if(value < 1.0f)
@@ -72,6 +70,7 @@ public class UI_MissionItem : UI_Base
         else if(1.0f <= value)
         {
             GetSlider((int)Sliders.Progress).value  = 1;
+            GetText((int)Texts.ProgressPercent).text = $"{missionValue}/{missionData.Param1}";
             SetActiveButton();
             // GetText((int)Texts.ProgressPercent).text = "달성";
             // 레벨업 조건 달성 
@@ -85,26 +84,5 @@ public class UI_MissionItem : UI_Base
         //GetText((int)Texts.Explanation_Text).text = Managers.Language.LocalizedString();
         //GetText((int)Texts.ProgressPercent).text = Managers.Language.LocalizedString();
         //GetText((int)Texts.Complete_Text).text = Managers.Language.LocalizedString();
-    }
-
-
-    private int GetMissionValueByType(EMissionType type)
-    {
-        //미션에 맞게 value 값 가져오기
-        
-        switch(type)
-        {
-            case EMissionType.Time:
-                return Managers.Game.UserInfo.TotalScore;
-            case EMissionType.SurviveToLevel:
-                return 1;
-            case EMissionType.AvoidRocksCount:
-                return 1;
-            case EMissionType.AchieveScoreInGame:
-                return Managers.Game.UserInfo.LatelyScore;
-            case EMissionType.Style:
-            return 1;
-        }
-        return 1;
     }
 }

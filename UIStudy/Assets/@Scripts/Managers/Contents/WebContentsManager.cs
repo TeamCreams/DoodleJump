@@ -171,7 +171,6 @@ public class WebContentsManager
                 }
                 else
                 {
-                    Debug.Log($"{rv.Data.UserName ?? "null"}, {rv.Data.Nickname ?? "null"}");
                     Managers.Game.UserInfo.UserId = rv.Data.UserName;
                     Managers.Game.UserInfo.UserNickname = rv.Data.Nickname;
                     onSuccess.Invoke(rv.Data);
@@ -187,19 +186,16 @@ public class WebContentsManager
             
             if(rv == null || false == rv.IsSuccess)
             {
-                Debug.Log("ReqGetUserAccountList fail");
                 onFailed.Invoke(EStatusCode.ServerException);
             }
             else
             {
                 if(rv.StatusCode != EStatusCode.OK)
                 {                    
-                    Debug.Log("ReqGetUserAccountList fail");
                     onFailed.Invoke(rv.StatusCode);
                 }
                 else
                 {
-                    Debug.Log("ReqGetUserAccountList success");
                     onSuccess.Invoke(rv.Data);
                 }
             }
@@ -216,16 +212,14 @@ public class WebContentsManager
         {
             CommonResult<ResDtoInsertUserMission> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertUserMission>>(response);
 
-            if (rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                Debug.Log("ReqInsertUserMission false == rv.IsSuccess "+ rv.Message);
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed.Invoke(EStatusCode.UnknownError);
             }
             else
             {
                 if (rv.StatusCode != EStatusCode.OK)
                 {
-                    Debug.Log(rv.Message);
                     onFailed.Invoke(rv.StatusCode);
                 }
                 else
@@ -240,7 +234,7 @@ public class WebContentsManager
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
-        Managers.Web.SendPostRequest(WebRoute.InsertUserMission, body , (response) =>
+        Managers.Web.SendPostRequest(WebRoute.CompleteUserMission, body , (response) =>
         {
             CommonResult<ResDtoCompleteUserMission> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoCompleteUserMission>>(response);
 
@@ -266,7 +260,7 @@ public class WebContentsManager
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
-        Managers.Web.SendPostRequest(WebRoute.InsertUserMission, body , (response) =>
+        Managers.Web.SendPostRequest(WebRoute.UpdateUserMission, body , (response) =>
         {
             CommonResult<ResDtoUpdateUserMission> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoUpdateUserMission>>(response);
 
@@ -296,21 +290,17 @@ public class WebContentsManager
             
             if(rv == null || false == rv.IsSuccess)
             {
-                Debug.Log("ReqDtoGetUserMissionList fail");
                 onFailed.Invoke(EStatusCode.ServerException);
             }
             else
             {
                 if(rv.StatusCode != EStatusCode.OK)
                 {           
-                    Debug.Log($"ReqDtoGetUserMissionList fail {rv.Message}");   
-                          
                     // 여기로 들어와 짐
                     onFailed.Invoke(rv.StatusCode);
                 }
                 else
                 {
-                    Debug.Log("ReqDtoGetUserMissionList success");
                     onSuccess.Invoke(rv.Data);
                 }
             }
@@ -320,25 +310,22 @@ public void ReqDtoInsertMissionCompensation(ReqDtoInsertMissionCompensation requ
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
-        Managers.Web.SendPostRequest(WebRoute.InsertUserMission, body , (response) =>
+        Managers.Web.SendPostRequest(WebRoute.InsertMissionCompensation, body , (response) =>
         {
             CommonResult<ResDtoInsertMissionCompensation> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertMissionCompensation>>(response);
 
             if (rv == null || false == rv.IsSuccess)
             {
-                Debug.Log("ReqDtoInsertMissionCompensation false "+ rv.Message);
                 onFailed.Invoke(EStatusCode.ServerException);
             }
             else
             {
                 if (rv.StatusCode != EStatusCode.OK)
                 {
-                    Debug.Log(rv.Message);
                     onFailed.Invoke(rv.StatusCode);
                 }
                 else
                 {                    
-                    Debug.Log("ReqDtoInsertMissionCompensation success");
                     onSuccess.Invoke(rv.Data);
                 }
             }

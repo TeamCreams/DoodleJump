@@ -61,7 +61,6 @@ public class UI_MissionPanel : UI_Base
                 {
                     SpawnMissionItem(mission.MissionId, mission.MissionStatus);
                 }
-                Debug.Log("is success");
             }
        },
        (errorCode) =>

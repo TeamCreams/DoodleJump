@@ -11,6 +11,8 @@
     public enum EStatusCode
     { 
         OK,
+        UnknownError,           // 서버에서 결과를 못줬을때.
+        MissionAlreadyExists,   // 이미 있는 미션
         NotFoundEntity,
         ServerException,
         NameAlreadyExists,

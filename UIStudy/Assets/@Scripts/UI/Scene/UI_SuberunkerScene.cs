@@ -46,6 +46,7 @@ public class UI_SuberunkerScene : UI_Scene
     private void OnDestroy()
     {
         Managers.Event.RemoveEvent(EEventType.OnPlayerDead, Event_OnPlayerDead);
+        Managers.Event.RemoveEvent(EEventType.OnSettlementComplete, Event_OnSettlementComplete);
     }
 
     #region Events
@@ -70,57 +71,15 @@ public class UI_SuberunkerScene : UI_Scene
             onFailed: () => Event_OnPlayerDead(this, tryCount++));
         Managers.Event.TriggerEvent(EEventType.StopLoading);
     }
-
+    
     void Event_OnSettlementComplete(Component sender, object param)
     {
-        /*
-        Managers.WebContents.ReqDtoGetUserMissionList(new ReqDtoGetUserMissionList()
-        {
-            UserAccountId = Managers.Game.UserInfo.UserAccountId
-        },
-       (response) =>
-       {    
-            if(response != null)
-            {
-                foreach(var mission in response.List)
-                {
-                    EMissionType type = Managers.Data.MissionDataDic[mission.MissionId].MissionType;
-                    int missionValue = GetMissionValueByType(type);
-                    Managers.Event.TriggerEvent(EEventType.OnUpdateMission, this, (0, missionValue));
-                }
-                Debug.Log("is success");
-            }
-       },
-       (errorCode) =>
-       {
-            Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "The settlement could not be processed due to poor network conditions.");
-       });
-        */
-
+        
     }
 
     #endregion
 
-    private int GetMissionValueByType(EMissionType type)
-    {
-        //미션에 맞게 value 값 가져오기
-        
-        switch(type)
-        {
-            case EMissionType.Time:
-                return Managers.Game.UserInfo.TotalScore;
-            case EMissionType.SurviveToLevel:
-                return 1;
-            case EMissionType.AvoidRocksCount:
-                return 1;
-            case EMissionType.AchieveScoreInGame:
-                return Managers.Game.UserInfo.LatelyScore;
-            case EMissionType.Style:
-            return 1;
-        }
-        return 1;
-    }
+    
     #region Interface
     private void ExitGame()
     {

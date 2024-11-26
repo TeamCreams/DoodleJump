@@ -764,7 +764,7 @@ namespace GameApi.Controllers
 
                     if (existingMission.Any() == true)
                     {
-                        throw new CommonException(EStatusCode.NameAlreadyExists, "이미 존재하는 미션입니다.");
+                        throw new CommonException(EStatusCode.MissionAlreadyExists, "이미 존재하는 미션입니다.");
                     }
 
                     TblUserMission userMission = new TblUserMission

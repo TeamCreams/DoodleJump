@@ -20,7 +20,7 @@ public class WebManager
     public void SendGetRequest(string url, Action<string> callback = null)
     {
         StringBuilder builder = new StringBuilder();
-        builder.AppendLine("Web Log Start : ");
+        builder.AppendLine("<color=green><b>Web Log Start : </b></color>");
         builder.AppendLine($" url : {url}");
         Debug.Log(builder.ToString());
         _slave.SendGetRequest(url, callback);
@@ -29,7 +29,7 @@ public class WebManager
     public void SendPostRequest(string url, string body, Action<string> callback = null)
     {
         StringBuilder builder = new StringBuilder();
-        builder.AppendLine("Web Log Start : ");
+        builder.AppendLine("<color=green><b>Web Log Start : </b></color>");
         builder.AppendLine($" url : {url}");
         builder.AppendLine($" body : {body}");
         Debug.Log(builder.ToString());

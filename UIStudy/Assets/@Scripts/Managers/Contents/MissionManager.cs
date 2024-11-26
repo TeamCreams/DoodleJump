@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameApi.Dtos;
+using NUnit.Framework;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor.VersionControl;
 using UnityEngine;
@@ -9,8 +10,6 @@ public class MissionManager
 {
     public void Init()
     {
-        Debug.Log("MissionManager Init");
-
         Managers.Event.RemoveEvent(EEventType.OnSettlementComplete, Event_OnSettlementComplete);
         Managers.Event.RemoveEvent(EEventType.OnFirstAccept, Event_OnFirstAccept);
         Managers.Event.RemoveEvent(EEventType.OnMissionComplete, Event_OnMissionComplete);
@@ -27,7 +26,9 @@ public class MissionManager
     {
         // Time 계산
         Debug.Log("Event_OnSettlementComplete");
-         SettleScore(sender);
+        SettleScore(sender);
+        ProcessUserMissionList();
+
     }
 
     void Event_OnFirstAccept(Component sender, object param)
@@ -69,22 +70,15 @@ public class MissionManager
             UserName = Managers.Game.UserInfo.UserId
         },
        (response) =>
-       {    
-            if(response != null)
-            {
-                Managers.Game.UserInfo.TotalScore = response.TotalScore;
-                Debug.Log($"SettleScore is success, Managers.Game.UserInfo.TotalScore {Managers.Game.UserInfo.TotalScore}");
-                onSuccess?.Invoke();
-            }
-            else
-            {                
-                Debug.Log("SettleScore response is null");
-                onFailed?.Invoke();
-            }
+       {
+           Managers.Game.UserInfo.TotalScore = response.TotalScore;
+           Debug.Log($"SettleScore is success, Managers.Game.UserInfo.TotalScore {Managers.Game.UserInfo.TotalScore}");
+           onSuccess?.Invoke();
        },
        (errorCode) =>
        {
-            Debug.Log("SettleScore is error");
+           onFailed?.Invoke();
+           Debug.Log("SettleScore is error");
 
             UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
             Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, 
@@ -102,27 +96,24 @@ public class MissionManager
         },
        (response) =>
        {    
-            if(response != null)
-            {
-                Debug.Log("AcceptMission is success");
-                
-                onSuccess?.Invoke();
-            }
-            else
-            {                
-                Debug.Log("AcceptMission response is null");
-                //Debug.Log($"Message : {response.Message}, StatusCode : {response.statusCode}");
-                onFailed?.Invoke();
-            }
+            onSuccess?.Invoke();
        },
        (errorCode) =>
-       {                
-            Debug.Log($"AcceptMission is Error {errorCode}");
-            
-            // UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            // Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, 
-            //     "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
-            // popup.AddOnClickAction(onFailed);
+       {
+           onFailed?.Invoke();
+           if (errorCode == WebApi.Models.Dto.EStatusCode.MissionAlreadyExists)
+           {
+               // 정상 동작
+               return;
+           }
+
+           Debug.Log($"AcceptMission is Error {errorCode.ToString()}");
+
+           UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+           Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender,
+               "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
+           popup.AddOnClickAction(onFailed);
+
        });
     }
 
@@ -134,22 +125,15 @@ public class MissionManager
             MissionId = missionId
         },
        (response) =>
-       {    
-            if(response != null)
-            {
-                Debug.Log("CompleteUserMission is success");
-                Managers.Game.UserInfo.Gold += Managers.Data.MissionDataDic[missionId].Compensation;
-                onSuccess?.Invoke();
-            }
-            else
-            {                
-                Debug.Log("CompleteUserMission response is null");
-                onFailed?.Invoke();
-            }
+       {
+           Debug.Log("CompleteUserMission is success");
+           Managers.Game.UserInfo.Gold += Managers.Data.MissionDataDic[missionId].Compensation;
+           onSuccess?.Invoke();
        },
        (errorCode) =>
        {                
             Debug.Log("CompleteUserMission is Error");
+           onFailed?.Invoke();
             // UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
             // Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, 
             //     "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
@@ -166,25 +150,16 @@ public class MissionManager
             Param1 = param1
         },
        (response) =>
-       {    
-            if(response != null)
-            {
-                Debug.Log("UpdateUserMission is success");
-                onSuccess?.Invoke();
-            }
-            else
-            {                
-                Debug.Log("UpdateUserMission response is null");
-                onFailed?.Invoke();
-            }
+       {
+           onSuccess?.Invoke();
        },
        (errorCode) =>
-       {                
-            Debug.Log("UpdateUserMission is Error");
-            // UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            // Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, 
-            //     "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
-            // popup.AddOnClickAction(onFailed);
+       {
+             onFailed?.Invoke();
+           // UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+           // Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, 
+           //     "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
+           // popup.AddOnClickAction(onFailed);
        });
     }
 
@@ -197,22 +172,13 @@ public class MissionManager
             Gold = Managers.Game.UserInfo.Gold
         },
        (response) =>
-       {    
-            if(response != null)
-            {
-                Debug.Log("GetMissionCompensation is success");
-                
-                onSuccess?.Invoke();
-            }
-            else
-            {                
-                Debug.Log("GetMissionCompensation response is null");
-                onFailed?.Invoke();
-            }
+       {
+           onSuccess?.Invoke();
        },
        (errorCode) =>
-       {                
-            Debug.Log($"AcceptMission is Error {errorCode}");
+       {
+           onFailed?.Invoke();
+           Debug.Log($"AcceptMission is Error {errorCode}");
             
             // UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
             // Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, 
@@ -220,4 +186,31 @@ public class MissionManager
             // popup.AddOnClickAction(onFailed);
        });
     }
+
+    public void ProcessUserMissionList()
+    {
+        Managers.WebContents.ReqDtoGetUserMissionList(new ReqDtoGetUserMissionList()
+        {
+            UserAccountId = Managers.Game.UserInfo.UserAccountId
+        },
+       (response) =>
+       {
+           if (response != null)
+           {
+               foreach (var mission in response.List)
+               {
+                   EMissionType type = Managers.Data.MissionDataDic[mission.MissionId].MissionType;
+                   int missionValue = type.GetMissionValueByType();
+                   Managers.Event.TriggerEvent(EEventType.OnUpdateMission, null, (mission.MissionId, missionValue));
+               }
+           }
+       },
+       (errorCode) =>
+       {
+           Managers.UI.ShowPopupUI<UI_ToastPopup>();
+           Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, null, "The settlement could not be processed due to poor network conditions.");
+       });
+    }
+
+
 }

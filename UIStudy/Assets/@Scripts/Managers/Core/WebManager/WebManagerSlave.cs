@@ -41,9 +41,8 @@ public class WebManagerSlave : InitBase
             yield return webRequest.SendWebRequest();
 
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine("Web Log End : ");
+            builder.AppendLine("<color=red><b>Web Log End : </b></color>");
             builder.AppendLine($" url : {url}");
-            Debug.Log(builder.ToString());
 
             string[] pages = url.Split('/');
             int page = pages.Length - 1;
@@ -52,17 +51,18 @@ public class WebManagerSlave : InitBase
             {
                 case UnityWebRequest.Result.ConnectionError:
                 case UnityWebRequest.Result.DataProcessingError:
-                    Debug.LogError(pages[page] + ": Error: " + webRequest.error);
+                    builder.AppendLine($" {pages[page]} : Error: {webRequest.error}");
                     callback?.Invoke(null);
                     break;
                 case UnityWebRequest.Result.ProtocolError:
-                    Debug.LogError(pages[page] + ": HTTP Error: " + webRequest.error);
+                    builder.AppendLine($" {pages[page]} : HTTP Error: {webRequest.error}");
                     callback?.Invoke(null);
                     break;
                 case UnityWebRequest.Result.Success:
                     callback?.Invoke(webRequest.downloadHandler.text);
                     break;
             }
+            Debug.Log(builder.ToString());
         }
     }
 
@@ -74,20 +74,21 @@ public class WebManagerSlave : InitBase
             yield return www.SendWebRequest();
 
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine("Web Log End : ");
+            builder.AppendLine("<color=red><b>Web Log End : </b></color>");
             builder.AppendLine($" url : {url}");
             builder.AppendLine($" body : {body}");
-            Debug.Log(builder.ToString());
 
             if (www.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError(www.error);
+                builder.AppendLine($" error : {www.error}");
                 callback?.Invoke(null);
             }
             else
             {
+                builder.AppendLine($" response : {www.downloadHandler.text}");
                 callback?.Invoke(www.downloadHandler.text);
             }
+            Debug.Log(builder.ToString());
         }
     }
 }

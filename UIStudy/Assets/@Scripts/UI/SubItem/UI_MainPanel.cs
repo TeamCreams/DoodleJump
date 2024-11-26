@@ -62,6 +62,7 @@ public class UI_MainPanel : UI_Base
 
     private void SetUserScoreList(Component sender = null, object param = null)
     {
+        Debug.Log("SetUserScoreList");
         AllPush();
         Managers.Resource.Instantiate("UI_Loading", this.transform);
         Managers.Event.TriggerEvent(EEventType.StartLoading);
