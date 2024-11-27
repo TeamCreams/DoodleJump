@@ -864,25 +864,24 @@ namespace GameApi.Controllers
 
                 userMission.MissionStatus = EMissionStatus.Complete;
 
-                var userScore = _context.TblUserScores
-                                .Where(
-                                        score => score.UserAccountId == userAccount.Id
-                                  ).FirstOrDefault();
-                if (userScore == null)
+                
+                TblUserScore userScore = new TblUserScore
                 {
-                    throw new CommonException(EStatusCode.NotFoundEntity, $"userScore이 없습니다");
-                }
-                userScore.Gold = requestDto.Gold;
+                    UserAccountId = requestDto.UserAccountId,
+                    History = -1,
+                    Gold = requestDto.Gold,
+                    UpdateDate = DateTime.Now
+                };
 
                 _context.TblUserMissions.Update(userMission);
-                _context.TblUserScores.Update(userScore);
+                _context.TblUserScores.Add(userScore);
 
                 var IsSuccess = await _context.SaveChangesAsync();
 
                 if (IsSuccess == 0)
                 {
                     throw new CommonException(EStatusCode.ChangedRowsIsZero,
-                        $"UserAccountId : {requestDto.UserAccountId},  UpdateMission: {requestDto.MissionId}");
+                        $"UserAccountId : {requestDto.UserAccountId},  UpdateMission: {requestDto.MissionId} 아무것도 달라지지 않았음");
                 }
                 else
                 {
