@@ -109,7 +109,7 @@ namespace GameApi.Controllers
 
                 var select = await (
                     from user in _context.TblUserAccounts.Include(user => user.TblUserScores)
-                    where (user.Id == requestDto.UserAccountId && user.DeletedDate == null)
+                    where (user.UserName.ToLower() == requestDto.UserName.ToLower() && user.DeletedDate == null)
                     //where (user.UserName == requestDto.UserName && user.Password == requestDto.Password && user.DeletedDate == null)
                     select new ResDtoGetUserAccount
                     {

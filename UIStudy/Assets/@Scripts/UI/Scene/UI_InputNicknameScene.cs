@@ -68,7 +68,7 @@ public class UI_InputNicknameScene : UI_Scene
         // inspection
         Managers.WebContents.ReqInsertUserAccountNickname(new ReqDtoInsertUserAccountNickname()
         {
-            UserName = Managers.Game.UserInfo.UserId,
+            UserAccountId = Managers.Game.UserInfo.UserAccountId,
             Nickname = GetInputField((int)InputFields.Nickname_InputField).text
         },
        (response) =>

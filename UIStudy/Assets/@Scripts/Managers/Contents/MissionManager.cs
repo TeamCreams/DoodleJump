@@ -67,7 +67,7 @@ public class MissionManager
     {
         Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
         {
-            UserName = Managers.Game.UserInfo.UserId
+            UserAccountId = Managers.Game.UserInfo.UserAccountId
         },
        (response) =>
        {

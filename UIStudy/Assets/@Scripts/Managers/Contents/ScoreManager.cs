@@ -11,7 +11,7 @@ public class ScoreManager
     {
         Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
         {
-            UserName = Managers.Game.UserInfo.UserId
+            UserAccountId = Managers.Game.UserInfo.UserAccountId
         },
        (response) =>
        {    
@@ -44,7 +44,7 @@ public class ScoreManager
     {
         Managers.WebContents.ReqInsertUserAccountScore(new ReqDtoInsertUserAccountScore()
         {
-            UserName = Managers.Game.UserInfo.UserId,
+            UserAccountId = Managers.Game.UserInfo.UserAccountId,
             Score = Managers.Game.UserInfo.LatelyScore,
             Gold = Managers.Game.UserInfo.Gold,
         },
