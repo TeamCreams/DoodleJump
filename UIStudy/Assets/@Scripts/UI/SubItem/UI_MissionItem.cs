@@ -1,5 +1,6 @@
 ﻿using Assets.HeroEditor.Common.Scripts.Common;
 using Data;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -26,6 +27,7 @@ public class UI_MissionItem : UI_Base
     }
 
     private int _missionId = 0;
+    private Animator _animator = null;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -38,6 +40,8 @@ public class UI_MissionItem : UI_Base
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         Managers.Event.TriggerEvent(EEventType.SetLanguage);
         GetButton((int)Buttons.Complete_Button).gameObject.BindEvent(OnClick_CompleteButton, EUIEvent.Click);
+
+        _animator = this.GetOrAddComponent<Animator>();
         return true;
     }
 
@@ -46,13 +50,16 @@ public class UI_MissionItem : UI_Base
         //보상
         Debug.Log($"보상 지급");
         Managers.Event.TriggerEvent(EEventType.OnMissionComplete, this, _missionId);
+        _animator.SetTrigger("CompleteMission");
     }
     private void SetActiveButton()
     {
         GetButton((int)Buttons.Complete_Button).SetActive(true);
+        GetSlider((int)Sliders.Progress).SetActive(false);
     }
     public void SetInfo(int missionId, int missionStatus)
     {
+        _animator.SetTrigger("NewMission");
         Debug.Log($"missionId : {missionId}");
         _missionId = missionId;
         MissionData missionData = Managers.Data.MissionDataDic[_missionId];
@@ -69,7 +76,7 @@ public class UI_MissionItem : UI_Base
         }
         else if(1.0f <= value)
         {
-            GetSlider((int)Sliders.Progress).value  = 1;
+            GetSlider((int)Sliders.Progress).value = 1;
             GetText((int)Texts.ProgressPercent).text = $"{missionValue}/{missionData.Param1}";
             SetActiveButton();
             // GetText((int)Texts.ProgressPercent).text = "달성";

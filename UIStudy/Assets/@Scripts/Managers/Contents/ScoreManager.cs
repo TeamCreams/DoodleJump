@@ -11,7 +11,7 @@ public class ScoreManager
     {
         Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
         {
-            UserAccountId = Managers.Game.UserInfo.UserAccountId
+            UserName = Managers.Game.UserInfo.UserId
         },
        (response) =>
        {    

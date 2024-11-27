@@ -36,7 +36,7 @@ public class TestScript : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.S))
         {
             ReqDtoGetUserAccount requestDto = new ReqDtoGetUserAccount();
-            requestDto.UserAccountId = 123456789;
+            requestDto.UserName = "test";
             //requestDto.Password = "test1";
             Managers.Web.SendGetRequest(WebRoute.GetUserAccount(requestDto), (response) =>
             {
@@ -55,9 +55,9 @@ public class TestScript : MonoBehaviour
     public async void Run()
     {
         var client = new HttpClient();
-        var request = new HttpRequestMessage(HttpMethod.Post, "https://dev-single-api.snapism.net:8080/User/GetUserAccount");
+        var request = new HttpRequestMessage(HttpMethod.Post, "https://dev-single-api.snapism.net:8082/User/GetUserAccount");
         ReqDtoGetUserAccount requestDto = new ReqDtoGetUserAccount();
-        requestDto.UserAccountId = 1234567890;
+        requestDto.UserName = "test";
         //requestDto.Password = "test1";
         string json = JsonConvert.SerializeObject(requestDto);
         var content = new StringContent(json, null, "application/json");
@@ -71,7 +71,7 @@ public class TestScript : MonoBehaviour
     private async void InsertUser()
     {
         var client = new HttpClient();
-        var request = new HttpRequestMessage(HttpMethod.Post, "https://dev-single-api.snapism.net:8080/User/InsertUser");
+        var request = new HttpRequestMessage(HttpMethod.Post, "https://dev-single-api.snapism.net:8082/User/InsertUser");
         ReqDtoInsertUserAccount requestDto = new ReqDtoInsertUserAccount();
         requestDto.UserName = "tjdbssy137";
         requestDto.Password = "akfxlwm";

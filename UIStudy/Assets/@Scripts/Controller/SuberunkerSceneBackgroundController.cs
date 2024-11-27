@@ -27,7 +27,7 @@ public class SuberunkerSceneBackgroundController : ObjectBase
         StartCoroutine(SetColor(_defalt, _stoneShower));
     }
 
-        private void OnEvent_StopStoneShower(Component sender, object param)
+    private void OnEvent_StopStoneShower(Component sender, object param)
     {
         StartCoroutine(SetColor(_stoneShower, _defalt));
     }

@@ -18,6 +18,7 @@ public class UI_MissionPanel : UI_Base
     private Transform _missionRoot = null;
     private List<GameObject> _itemList = new List<GameObject>();
     private List<ResDtoGetUserMissionListElement> _userMissionList = null;
+    private Dictionary<int, int> _missionDic = new Dictionary<int, int>();
 
     public override bool Init()
     {
@@ -42,11 +43,11 @@ public class UI_MissionPanel : UI_Base
             Managers.Resource.Destroy(item.gameObject);
         }
         _itemList.Clear();
+        //_missionDic.Clear();
     }
     private void SetMissionList(Component sender = null, object param = null)
     {
         AllPush();
-
 
         Managers.WebContents.ReqDtoGetUserMissionList(new ReqDtoGetUserMissionList()
         {
@@ -60,6 +61,14 @@ public class UI_MissionPanel : UI_Base
                 foreach(var mission in _userMissionList)
                 {
                     SpawnMissionItem(mission.MissionId, mission.MissionStatus);
+                        if (_missionDic.ContainsKey(mission.MissionId))
+                        {
+                            _missionDic[mission.MissionId] = mission.MissionStatus; // 상태 업데이트
+                        }
+                        else
+                        {
+                            _missionDic.Add(mission.MissionId, mission.MissionStatus); // 새 미션 추가
+                        }
                 }
             }
        },
@@ -76,12 +85,22 @@ public class UI_MissionPanel : UI_Base
     {
         // 스폰 조건이 안되면 스폰안되도록 세팅
         MissionData missionData = Managers.Data.MissionDataDic[missionId];
-        if (missionData.PrevMissionId != 0)
+
+        if(missionStatus == 2) // 2 == MissionComplete
         {
-            // 내가가지고있는 미션들중에 그 아이디가 없으면
+            // 미션이 이미 완료 상태라면
             return;
         }
-
+        if (missionData.PrevMissionId != 0 && !_missionDic.ContainsKey(missionData.PrevMissionId))
+        {
+            // 이전 미션 ID가 Dictionary에 없으면 처리
+            return;
+        }
+        if (missionData.PrevMissionId != 0 && _missionDic[missionData.PrevMissionId] != 2)
+        {
+            // 이전 미션이 완료되지 않았다면 처리
+            return;
+        }
         var item = Managers.UI.MakeSubItem<UI_MissionItem>(parent: _missionRoot, pooling: true);
         item.SetInfo(missionId, missionStatus);
         _itemList.Add(item.gameObject);

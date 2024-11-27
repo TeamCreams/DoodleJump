@@ -89,7 +89,8 @@ public static class Define
         OnSettlementComplete,
         OnFirstAccept,
         OnMissionComplete,
-        OnUpdateMission
+        OnUpdateMission,
+        UIRefresh,
     }
 
     public enum EEquipType

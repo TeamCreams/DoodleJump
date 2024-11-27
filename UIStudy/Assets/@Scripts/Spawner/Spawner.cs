@@ -86,7 +86,7 @@ public class Spawner : InitBase
 
     public IEnumerator GenerateStoneShower()
     {
-        Managers.Event.TriggerEvent(EEventType.StartStoneShower);
+        //Managers.Event.TriggerEvent(EEventType.StartStoneShower);
         int direction = UnityEngine.Random.Range(0, 2) * 2 - 1;
         int reversDirection = direction * -1;
         int startX = 90 * direction;
@@ -98,7 +98,7 @@ public class Spawner : InitBase
             startX += reversDirectionDistance;
             yield return new WaitForSeconds(0.2f);
         }
-        Managers.Event.TriggerEvent(EEventType.StopStoneShower);
+        //Managers.Event.TriggerEvent(EEventType.StopStoneShower);
         _stoneShowerPeriodTime = UnityEngine.Random.Range(Managers.Data.DifficultySettingsDic[_id].StoneShowerPeriodStartTime, Managers.Data.DifficultySettingsDic[_id].StoneShowerPeriodFinishTime);
         _generateStoneShower = null;
     }

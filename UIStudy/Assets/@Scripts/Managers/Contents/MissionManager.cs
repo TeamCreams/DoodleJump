@@ -43,9 +43,7 @@ public class MissionManager
     {
         Debug.Log("Event_OnMissionComplete");
         int id = (int)param;
-        CompleteMission(sender, id,
-            onSuccess: () => GetMissionCompensation(sender, id),
-            onFailed: () => Debug.Log("Fail"));
+        CompleteMission(sender, id);
     }
 
     void Event_OnUpdateMission(Component sender, object param)
@@ -67,7 +65,7 @@ public class MissionManager
     {
         Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
         {
-            UserAccountId = Managers.Game.UserInfo.UserAccountId
+            UserName = Managers.Game.UserInfo.UserId
         },
        (response) =>
        {
@@ -92,7 +90,7 @@ public class MissionManager
         Managers.WebContents.ReqInsertUserMission(new ReqDtoInsertUserMission()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
-            MissionId = missionId
+            MissionId = missionId,
         },
        (response) =>
        {    
@@ -122,12 +120,14 @@ public class MissionManager
         Managers.WebContents.CompleteUserMission(new ReqDtoCompleteUserMission()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
-            MissionId = missionId
-        },
+            MissionId = missionId,
+            Gold = Managers.Game.UserInfo.Gold + Managers.Data.MissionDataDic[missionId].Compensation
+         },
        (response) =>
        {
            Debug.Log("CompleteUserMission is success");
            Managers.Game.UserInfo.Gold += Managers.Data.MissionDataDic[missionId].Compensation;
+           Managers.Event.TriggerEvent(EEventType.UIRefresh);
            onSuccess?.Invoke();
        },
        (errorCode) =>
@@ -156,34 +156,11 @@ public class MissionManager
        (errorCode) =>
        {
              onFailed?.Invoke();
+             Debug.Log($"AcceptMission is Error {errorCode}");
            // UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
            // Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, 
            //     "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
            // popup.AddOnClickAction(onFailed);
-       });
-    }
-
-    public void GetMissionCompensation(Component sender, int missionId, Action onSuccess = null, Action onFailed = null)
-    {
-        Managers.WebContents.ReqDtoInsertMissionCompensation(new ReqDtoInsertMissionCompensation()
-        {
-            UserAccountId = Managers.Game.UserInfo.UserAccountId,
-            MissionId = missionId,
-            Gold = Managers.Game.UserInfo.Gold
-        },
-       (response) =>
-       {
-           onSuccess?.Invoke();
-       },
-       (errorCode) =>
-       {
-           onFailed?.Invoke();
-           Debug.Log($"AcceptMission is Error {errorCode}");
-            
-            // UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            // Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, 
-            //     "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
-            // popup.AddOnClickAction(onFailed);
        });
     }
 

@@ -14,13 +14,13 @@ public static partial class Extension
             case EMissionType.Time:
                 return Managers.Game.UserInfo.TotalScore;
             case EMissionType.SurviveToLevel:
-                return 1;
+                return 0;
             case EMissionType.AvoidRocksCount:
                 return 1;
             case EMissionType.AchieveScoreInGame:
                 return Managers.Game.UserInfo.LatelyScore;
             case EMissionType.Style:
-                return 1;
+                return 0;
         }
         return 1;
     }
