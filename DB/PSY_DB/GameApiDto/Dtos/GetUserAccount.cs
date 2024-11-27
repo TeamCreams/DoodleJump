@@ -3,7 +3,7 @@
 
     public class ReqDtoGetUserAccount
     {
-        public string? UserName { get; set; }
+        public int UserAccountId { get; set; }
     }
 
     public class ResDtoGetUserAccount

@@ -109,7 +109,7 @@ namespace GameApi.Controllers
 
                 var select = await (
                     from user in _context.TblUserAccounts.Include(user => user.TblUserScores)
-                    where (user.UserName.ToLower() == requestDto.UserName.ToLower() && user.DeletedDate == null)
+                    where (user.Id == requestDto.UserAccountId && user.DeletedDate == null)
                     //where (user.UserName == requestDto.UserName && user.Password == requestDto.Password && user.DeletedDate == null)
                     select new ResDtoGetUserAccount
                     {
@@ -459,14 +459,14 @@ namespace GameApi.Controllers
             {
                 var select = await (
                             from user in _context.TblUserAccounts
-                            where (user.UserName.ToLower() == requestDto.UserName.ToLower() && user.DeletedDate == null)
+                            where (user.Id == requestDto.UserAccountId && user.DeletedDate == null)
                             select user.Id
                             ).ToListAsync();
 
                 if (select.Any() == false)
                 {
                     throw new CommonException(EStatusCode.NotFoundEntity,
-                        $"UserName : {requestDto.UserName}");
+                        $"UserId : {requestDto.UserAccountId}");
                 }
 
                 int userId = select.First();
@@ -486,7 +486,7 @@ namespace GameApi.Controllers
                 if (IsSuccess == 0)
                 {
                     throw new CommonException(EStatusCode.ChangedRowsIsZero,
-                        $"UserName : {requestDto.UserName}");
+                        $"UserId : {requestDto.UserAccountId}");
                 }
                 else
                 {
@@ -526,7 +526,7 @@ namespace GameApi.Controllers
             {
 
                 var select = await (from user in _context.TblUserAccounts
-                                    where (user.Nickname.ToLower() == requestDto.Nickname.ToLower() && user.DeletedDate == null)
+                                    where (user.Id == requestDto.UserAccountId && user.DeletedDate == null)
                                     select new
                                     {
                                         Nickname = user.Nickname,
@@ -541,14 +541,14 @@ namespace GameApi.Controllers
                 var userAccount = _context.TblUserAccounts.
                                     Where
                                     (
-                                        user => user.UserName.ToLower() == requestDto.UserName.ToLower() &&
+                                        user => user.Id == requestDto.UserAccountId &&
                                                 user.DeletedDate == null
                                     ).FirstOrDefault();
 
                 if (userAccount == null)
                 {
                     throw new CommonException(EStatusCode.NotFoundEntity,
-                      $"{requestDto.UserName} : 찾을 수 없는 UserName");
+                      $"{requestDto.UserAccountId} : 찾을 수 없는 UserId");
                 }
 
                 userAccount.Nickname = requestDto.Nickname;

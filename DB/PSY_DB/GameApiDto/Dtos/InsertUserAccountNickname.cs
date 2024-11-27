@@ -6,7 +6,7 @@ namespace GameApi.Dtos
 {
     public class ReqDtoInsertUserAccountNickname
     {
-        public string? UserName { get; set; }
+        public int UserAccountId { get; set; }
 
         public string? Nickname { get; set; }
     }
