@@ -123,10 +123,11 @@ namespace GameApi.Controllers
                                       .OrderByDescending(s => s.History)
                                       .Select(s => s.History)
                                       .FirstOrDefault(),
-                        LatelyScore = user.TblUserScores.Any() ?
-                                        user.TblUserScores.OrderByDescending(s => s.UpdateDate)
-                                        .FirstOrDefault()
-                                        .History : 0, // 최근 점수
+                        LatelyScore = user.TblUserScores
+                                        .Where(s => s.History != -1) // -1이 아닌 점수만 ( -1은 Gold만 받았을 때 들어가는 점수)
+                                        .OrderByDescending(s => s.UpdateDate) // 최신 점수 순으로 정렬
+                                        .Select(s => s.History) // History 선택
+                                        .FirstOrDefault(), // 가장 최근 점수
                         Gold = user.TblUserScores.Any() ?
                                         user.TblUserScores.OrderByDescending(s => s.UpdateDate)
                                         .FirstOrDefault()
@@ -151,6 +152,11 @@ namespace GameApi.Controllers
                         "아이디 혹은 비밀번호가 맞지 않습니다."); // try문 밖으로 던짐
                 }
                 var selectUser = select.First();
+                
+                if (selectUser.LatelyScore == -1)
+                {
+                    selectUser.LatelyScore = 0; // -1일 경우 0으로 설정
+                }
 
                 rv.StatusCode = EStatusCode.OK;
                 rv.Message = "";
@@ -616,10 +622,11 @@ namespace GameApi.Controllers
                                       .OrderByDescending(s => s.History)
                                       .Select(s => s.History)
                                       .FirstOrDefault(),
-                        LatelyScore = user.TblUserScores.Any() ?
-                                        user.TblUserScores.OrderByDescending(s => s.UpdateDate)
-                                        .FirstOrDefault()
-                                        .History : 0, // 최근 점수
+                        LatelyScore = user.TblUserScores
+                                        .Where(s => s.History != -1) // -1이 아닌 점수만 ( -1은 Gold만 받았을 때 들어가는 점수)
+                                        .OrderByDescending(s => s.UpdateDate) // 최신 점수 순으로 정렬
+                                        .Select(s => s.History) // History 선택
+                                        .FirstOrDefault(), // 가장 최근 점수
                         Gold = user.TblUserScores.Any() ?
                                         user.TblUserScores.OrderByDescending(s => s.UpdateDate)
                                         .FirstOrDefault()
@@ -639,6 +646,12 @@ namespace GameApi.Controllers
                 else
                 {
                     var selectUser = select.First();
+
+                    if (selectUser.LatelyScore == -1)
+                    {
+                        selectUser.LatelyScore = 0; // -1일 경우 0으로 설정
+                    }
+
                     rv.StatusCode = EStatusCode.OK;
                     rv.Message = $"{requestDto.UserName} 계정 정보";
                     rv.IsSuccess = true;
