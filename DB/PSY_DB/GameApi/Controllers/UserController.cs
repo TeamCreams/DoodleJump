@@ -864,7 +864,18 @@ namespace GameApi.Controllers
 
                 userMission.MissionStatus = EMissionStatus.Complete;
 
+                var userScore = _context.TblUserScores
+                                .Where(
+                                        score => score.UserAccountId == userAccount.Id
+                                  ).FirstOrDefault();
+                if (userScore == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity, $"userScore이 없습니다");
+                }
+                userScore.Gold = requestDto.Gold;
+
                 _context.TblUserMissions.Update(userMission);
+                _context.TblUserScores.Update(userScore);
 
                 var IsSuccess = await _context.SaveChangesAsync();
 
@@ -908,17 +919,37 @@ namespace GameApi.Controllers
 
             try
             {
+                var userAccount = await _context.TblUserAccounts
+                                    .Where(user => user.Id == requestDto.UserAccountId && user.DeletedDate == null)
+                                    .FirstOrDefaultAsync();
+
+                if (userAccount == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        $"없는 아이디 UserAccountId : {requestDto.UserAccountId}");
+                }
+
                 rv.Data = new();
 
-                rv.Data.List = await (from user in _context.TblUserAccounts.Include(user => user.TblUserMissions)
-                                      where (user.Id == requestDto.UserAccountId && user.DeletedDate == null)
-                                      from mission in user.TblUserMissions
-                                      select new ResDtoGetUserMissionListElement
-                                      {
-                                          MissionId = mission.MissionId,
-                                          MissionStatus = (int)mission.MissionStatus,
-                                          Param1 = mission.Param1
-                                      }).ToListAsync();            
+                rv.Data.List = await _context.TblUserMissions
+                                .Where(mission => mission.UserAccountId == requestDto.UserAccountId)
+                                .Select(mission => new ResDtoGetUserMissionListElement
+                                {
+                                    MissionId = mission.MissionId,
+                                    MissionStatus = (int)mission.MissionStatus,
+                                    Param1 = mission.Param1
+                                })
+                                .ToListAsync();
+
+                //rv.Data.List = await (from user in _context.TblUserAccounts.Include(user => user.TblUserMissions)
+                //                      from mission in user.TblUserMissions
+                //                      where (user.Id == requestDto.UserAccountId && user.DeletedDate == null)
+                //                      select new ResDtoGetUserMissionListElement
+                //                      {
+                //                          MissionId = mission.MissionId,
+                //                          MissionStatus = (int)mission.MissionStatus,
+                //                          Param1 = mission.Param1
+                //                      }).ToListAsync();
 
                 if (rv.Data.List.Any() == false)
                 {
@@ -1021,76 +1052,76 @@ namespace GameApi.Controllers
             return rv;
         }
 
-        //보상 수령
-        [HttpPost("InsertMissionCompensation")]
-        public async Task<CommonResult<ResDtoInsertMissionCompensation>> InsertMissionCompensation([FromBody] ReqDtoInsertMissionCompensation requestDto)
-        {
-            CommonResult<ResDtoInsertMissionCompensation> rv = new();
+        ////보상 수령
+        //[HttpPost("InsertMissionCompensation")]
+        //public async Task<CommonResult<ResDtoInsertMissionCompensation>> InsertMissionCompensation([FromBody] ReqDtoInsertMissionCompensation requestDto)
+        //{
+        //    CommonResult<ResDtoInsertMissionCompensation> rv = new();
 
-            try
-            {
-                var userAccount = _context.TblUserAccounts
-                                .Where(
-                                    user => user.Id == requestDto.UserAccountId &&
-                                            user.DeletedDate == null
-                                ).FirstOrDefault();
-                if (userAccount == null)
-                {
-                    throw new CommonException(EStatusCode.NotFoundEntity,
-                        $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
-                }
+        //    try
+        //    {
+        //        var userAccount = _context.TblUserAccounts
+        //                        .Where(
+        //                            user => user.Id == requestDto.UserAccountId &&
+        //                                    user.DeletedDate == null
+        //                        ).FirstOrDefault();
+        //        if (userAccount == null)
+        //        {
+        //            throw new CommonException(EStatusCode.NotFoundEntity,
+        //                $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
+        //        }
 
-                var userMission = _context.TblUserMissions
-                                    .Where(
-                                        mission => mission.MissionId == requestDto.MissionId &&
-                                                   mission.UserAccountId == userAccount.Id
-                                    ).FirstOrDefault();
-                if (userMission == null)
-                {
-                    throw new CommonException(EStatusCode.NotFoundEntity,
-                        $"해당 미션이 없습니다. MissionId : {requestDto.MissionId}");
-                }
+        //        var userMission = _context.TblUserMissions
+        //                            .Where(
+        //                                mission => mission.MissionId == requestDto.MissionId &&
+        //                                           mission.UserAccountId == userAccount.Id
+        //                            ).FirstOrDefault();
+        //        if (userMission == null)
+        //        {
+        //            throw new CommonException(EStatusCode.NotFoundEntity,
+        //                $"해당 미션이 없습니다. MissionId : {requestDto.MissionId}");
+        //        }
 
-                var userScore = _context.TblUserScores
-                                .Where(
-                                        score => score.UserAccountId == userAccount.Id
-                                  ).FirstOrDefault();
-                if (userScore == null)
-                {
-                    throw new CommonException(EStatusCode.NotFoundEntity,
-                        $"userScore이 없습니다");
-                }
-                userScore.Gold = requestDto.Gold;
-                _context.TblUserScores.Update(userScore); // 안됨..
-                var IsSuccess = await _context.SaveChangesAsync();
+        //        var userScore = _context.TblUserScores
+        //                        .Where(
+        //                                score => score.UserAccountId == userAccount.Id
+        //                          ).FirstOrDefault();
+        //        if (userScore == null)
+        //        {
+        //            throw new CommonException(EStatusCode.NotFoundEntity,
+        //                $"userScore이 없습니다");
+        //        }
+        //        userScore.Gold = requestDto.Gold;
+        //        _context.TblUserScores.Update(userScore); // 안됨..
+        //        var IsSuccess = await _context.SaveChangesAsync();
 
-                if (IsSuccess == 0)
-                {
-                    throw new CommonException(EStatusCode.ChangedRowsIsZero, "보상 수령에 실패했습니다.");
-                }
-                else
-                {
-                    rv.IsSuccess = true;
-                    rv.StatusCode = EStatusCode.OK;
-                    rv.Data = null;
-                }
-            }
-            catch (CommonException ex)
-            {
-                rv.IsSuccess = false;
-                rv.StatusCode = (EStatusCode)ex.StatusCode;
-                rv.Message = ex.Message;
-                rv.Data = null;
-            }
-            catch (Exception ex)
-            {
-                rv.IsSuccess = false;
-                rv.StatusCode = EStatusCode.ServerException;
-                rv.Message = ex.Message;
-                rv.Data = null;
-            }
-            return rv;
-        }
+        //        if (IsSuccess == 0)
+        //        {
+        //            throw new CommonException(EStatusCode.ChangedRowsIsZero, "보상 수령에 실패했습니다.");
+        //        }
+        //        else
+        //        {
+        //            rv.IsSuccess = true;
+        //            rv.StatusCode = EStatusCode.OK;
+        //            rv.Data = null;
+        //        }
+        //    }
+        //    catch (CommonException ex)
+        //    {
+        //        rv.IsSuccess = false;
+        //        rv.StatusCode = (EStatusCode)ex.StatusCode;
+        //        rv.Message = ex.Message;
+        //        rv.Data = null;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        rv.IsSuccess = false;
+        //        rv.StatusCode = EStatusCode.ServerException;
+        //        rv.Message = ex.Message;
+        //        rv.Data = null;
+        //    }
+        //    return rv;
+        //}
         #endregion
     }
 }
