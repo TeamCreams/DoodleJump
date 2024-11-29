@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DamageNumbersPro", "DamageNumbersPro.csproj", "{580D0D94-408D-554A-F5A1-A95BE9009866}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{12CD00D1-E099-4206-734F-E040D6551282}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniRx", "UniRx.csproj", "{959E518A-5255-144B-83C8-074F90B6D471}"
@@ -15,6 +17,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{580D0D94-408D-554A-F5A1-A95BE9009866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{580D0D94-408D-554A-F5A1-A95BE9009866}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{580D0D94-408D-554A-F5A1-A95BE9009866}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{580D0D94-408D-554A-F5A1-A95BE9009866}.Release|Any CPU.Build.0 = Release|Any CPU
 		{12CD00D1-E099-4206-734F-E040D6551282}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{12CD00D1-E099-4206-734F-E040D6551282}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12CD00D1-E099-4206-734F-E040D6551282}.Release|Any CPU.ActiveCfg = Release|Any CPU
