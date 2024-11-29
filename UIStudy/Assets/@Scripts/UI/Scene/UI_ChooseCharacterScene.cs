@@ -8,7 +8,55 @@ using Data;
 
 public class UI_ChooseCharacterScene : UI_Scene
 {
+    private enum GameObjects
+    {
+        UI_ChooseCharacterPanel,
+        UI_EvolutionPanel
+    }
 
+    private enum Buttons
+    {
+        Custom_Button,
+        Home_Button,
+        Evolution_Button
+    }
+
+    public override bool Init()
+    {
+        if (base.Init() == false)
+        {
+            return false;
+        }
+        BindObjects(typeof(GameObjects));
+        BindButtons(typeof(Buttons));
+
+        GetButton((int)Buttons.Custom_Button).gameObject.BindEvent(OnClick_CustomButton, EUIEvent.Click);
+        GetButton((int)Buttons.Home_Button).gameObject.BindEvent(OnClick_HomeButton, EUIEvent.Click);
+        GetButton((int)Buttons.Evolution_Button).gameObject.BindEvent(OnClick_EvolutionButton, EUIEvent.Click);
+
+        return true;
+    }
+
+    private void OnClick_CustomButton(PointerEventData eventData)
+    {
+        Debug.Log("OnClick_CustomButton!");
+        GetObject((int)GameObjects.UI_ChooseCharacterPanel).SetActive(true);
+        GetObject((int)GameObjects.UI_EvolutionPanel).SetActive(false);
+    }
+        private void OnClick_HomeButton(PointerEventData eventData)
+    {
+        Debug.Log("OnClick_HomeButton!");
+        Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+    }
+        private void OnClick_EvolutionButton(PointerEventData eventData)
+    {
+        Debug.Log("OnClick_EvolutionButton!");
+        GetObject((int)GameObjects.UI_ChooseCharacterPanel).SetActive(false);
+        GetObject((int)GameObjects.UI_EvolutionPanel).SetActive(true);
+        Managers.Event.TriggerEvent(EEventType.Evolution);
+    }
+
+/*
     private enum GameObjects
     {
         InventoryItemRoot,
@@ -22,7 +70,9 @@ public class UI_ChooseCharacterScene : UI_Scene
     }
     private enum Buttons
     {
-        Next_Button
+        Custom_Button,
+        Home_Button,
+        Evolution_Button
     }
 
 
@@ -45,7 +95,9 @@ public class UI_ChooseCharacterScene : UI_Scene
         GetImage((int)Images.EyesItem).gameObject.BindEvent(OnClick_EyesItem, EUIEvent.Click);
         GetImage((int)Images.EyebrowsItem).gameObject.BindEvent(OnClick_EyebrowsItem, EUIEvent.Click);
 
-        GetButton((int)Buttons.Next_Button).gameObject.BindEvent(OnClick_NextButton, EUIEvent.Click);
+        GetButton((int)Buttons.Custom_Button).gameObject.BindEvent(OnClick_CustomButton, EUIEvent.Click);
+        GetButton((int)Buttons.Home_Button).gameObject.BindEvent(OnClick_HomeButton, EUIEvent.Click);
+        GetButton((int)Buttons.Evolution_Button).gameObject.BindEvent(OnClick_EvolutionButton, EUIEvent.Click);
         _itemRoot = GetObject((int)GameObjects.InventoryItemRoot);
         Managers.Event.TriggerEvent(EEventType.SetLanguage);
 
@@ -75,10 +127,20 @@ public class UI_ChooseCharacterScene : UI_Scene
         SetInventoryItems(EEquipType.Eyebrows);
     }
 
-    private void OnClick_NextButton(PointerEventData eventData)
+    private void OnClick_CustomButton(PointerEventData eventData)
     {
-        Debug.Log("Click!");
-        Managers.Scene.LoadScene(EScene.SuberunkerTimelineScene);
+        Debug.Log("OnClick_CustomButton!");
+        Managers.UI.ShowPopupUI<>();
+    }
+        private void OnClick_HomeButton(PointerEventData eventData)
+    {
+        Debug.Log("OnClick_HomeButton!");
+        Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+    }
+        private void OnClick_EvolutionButton(PointerEventData eventData)
+    {
+        Debug.Log("OnClick_EvolutionButton!");
+        Managers.UI.ShowPopupUI<>();
     }
 
     private void SetInventoryItems(EEquipType equipType)
@@ -120,5 +182,5 @@ public class UI_ChooseCharacterScene : UI_Scene
             
         });
     }
-
+*/
 }

@@ -63,6 +63,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 938dce7912c3e4824bf77bb4390149ee
+    m_Address: UI_ChooseCharacterScene
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9c234e6c73b664d2a929433d5dfce4ea
     m_Address: UI_SignUpScene
     m_ReadOnly: 0
@@ -71,6 +77,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b56dfdb3c3412406281823d20a73aa59
     m_Address: UI_LevelUpPopup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b7101f949dad74f9aa684029f5bc0826
+    m_Address: UI_EvolutionItemSet
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

@@ -91,6 +91,7 @@ public static class Define
         OnMissionComplete,
         OnUpdateMission,
         UIRefresh,
+        Evolution
     }
 
     public enum EEquipType

@@ -25,6 +25,7 @@ public class DataManager
     public Dictionary<int, Data.ThoughtBubbleLanguageData> ThoughtBubbleLanguageDataDic { get; private set; } = new Dictionary<int, Data.ThoughtBubbleLanguageData>();
     public Dictionary<int, Data.GameLanguageData> GameLanguageDataDic { get; private set; } = new Dictionary<int, Data.GameLanguageData>();
     public Dictionary<int, Data.MissionData> MissionDataDic { get; private set; } = new Dictionary<int, Data.MissionData>();
+    public Dictionary<int, Data.EvolutionData> EvolutionDataDic { get; private set; } = new Dictionary<int, Data.EvolutionData>();
 
     public void Init()
 	{
@@ -40,6 +41,7 @@ public class DataManager
         ThoughtBubbleLanguageDataDic = LoadJson<Data.ThoughtBubbleLanguageDataLoader, int, Data.ThoughtBubbleLanguageData>("ThoughtBubbleLanguageData").MakeDict();
         GameLanguageDataDic = LoadJson<Data.GameLanguageDataLoader, int, Data.GameLanguageData>("GameLanguageData").MakeDict();
         MissionDataDic = LoadJson<Data.MissionDataLoader, int, Data.MissionData>("MissionData").MakeDict();
+        EvolutionDataDic = LoadJson<Data.EvolutionDataLoader, int, Data.EvolutionData>("EvolutionData").MakeDict();
 
     }
 

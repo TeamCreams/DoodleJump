@@ -378,4 +378,25 @@ namespace Data
             return dict;
         }
     }
+
+    public class EvolutionData
+    {
+        public int Id;
+        public int	Level;
+    }
+
+    [Serializable]
+    public class EvolutionDataLoader : ILoader<int, EvolutionData>
+    {
+        public List<EvolutionData> evolutionDatas = new List<EvolutionData>();
+
+        public Dictionary<int, EvolutionData> MakeDict()
+        {
+            Dictionary<int, EvolutionData> dict = new Dictionary<int, EvolutionData>();
+            foreach (EvolutionData evolutionData in evolutionDatas)
+                dict.Add(evolutionData.Id, evolutionData);
+
+            return dict;
+        }
+    }
 }

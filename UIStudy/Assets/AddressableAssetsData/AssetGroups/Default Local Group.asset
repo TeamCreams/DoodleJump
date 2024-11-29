@@ -37,12 +37,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7b3664da16fbd87448d82e9c04d57575
-    m_Address: UI_ChooseCharacterScene
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8301f267a30fa744ca3e7cecbf633acb
     m_Address: UI_TinyFarmScene
     m_ReadOnly: 0

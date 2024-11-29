@@ -48,10 +48,8 @@ public class UI_StartLoadingScene : UI_Scene
         },
        (response) =>
        {
-            Debug.Log("OnEvent_LoadUserAccount");
             HandleSuccess(response, () => 
             {
-                Debug.Log("loadingScene");
                 _isLoadSceneCondition = true;
                 Managers.Game.UserInfo.UserAccountId = response.UserAccountId;
                 Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
@@ -71,7 +69,6 @@ public class UI_StartLoadingScene : UI_Scene
     private void HandleSuccess(ResDtoGetOrAddUserAccount response, Action result = null)
     {        
         Debug.Log(Managers.Game.UserInfo.UserNickname);
-        Debug.Log("HandleSuccess");
 
         if (string.IsNullOrEmpty(Managers.Game.UserInfo.UserNickname)) // 최초 로그인
         {
@@ -130,9 +127,7 @@ public class UI_StartLoadingScene : UI_Scene
             if (count == totalCount)
             {
                 Managers.Data.Init();
-                Debug.Log("Load Complete");
                 _playableDirector.Play();
-                Debug.Log("_playableDirector.Play");
                 _isPreLoadSuccess = true;
                 _playableDirector.stopped += OnPlayableDirectorStopped;
             }

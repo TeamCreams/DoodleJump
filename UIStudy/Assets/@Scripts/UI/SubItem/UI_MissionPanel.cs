@@ -61,14 +61,14 @@ public class UI_MissionPanel : UI_Base
                 foreach(var mission in _userMissionList)
                 {
                     SpawnMissionItem(mission.MissionId, mission.MissionStatus);
-                        if (_missionDic.ContainsKey(mission.MissionId))
-                        {
-                            _missionDic[mission.MissionId] = mission.MissionStatus; // 상태 업데이트
-                        }
-                        else
-                        {
-                            _missionDic.Add(mission.MissionId, mission.MissionStatus); // 새 미션 추가
-                        }
+                    if (_missionDic.ContainsKey(mission.MissionId))
+                    {
+                        _missionDic[mission.MissionId] = mission.MissionStatus; // 상태 업데이트
+                    }
+                    else
+                    {
+                        _missionDic.Add(mission.MissionId, mission.MissionStatus); // 새 미션 추가
+                    }
                 }
             }
        },

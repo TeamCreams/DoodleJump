@@ -221,6 +221,7 @@
     <Compile Include="Assets/@Scripts/Utils/Define.cs" />
     <Compile Include="Assets/@Scripts/UI/TinyFarm/UI_TinyFarmMissionSlot.cs" />
     <Compile Include="Assets/@Scripts/Scene/InputNameScene.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_EvolutionItemSet.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_InventorySlot.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SignInScene.cs" />
     <Compile Include="Assets/@Scripts/UI/Popup/UI_ErrorPopup.cs" />
@@ -228,11 +229,13 @@
     <Compile Include="Assets/@Scripts/UI/Kakao/UI_ChattingRoomScene.cs" />
     <Compile Include="Assets/@Scripts/UI/TinyFarm/UI_TinyFarmMission.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/NavigateButton.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_EvolutionPanel.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/ItemWorkspace.cs" />
     <Compile Include="Assets/@Scripts/Managers/Core/CameraManager/ShakeSlave.cs" />
     <Compile Include="Assets/@Scripts/Scene/SuberunkerSceneHomeScene.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/MovementExample.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Firearms/Enums/FirearmType.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_ChooseCharacterPanel.cs" />
     <Compile Include="Assets/@Scripts/Controller/CreatureBase.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Firearms/Enums/FirearmLoadType.cs" />
     <Compile Include="Assets/@Scripts/UI/WorldSpace/UI_Player.cs" />
@@ -241,6 +244,7 @@
     <Compile Include="Assets/@Scripts/Managers/Contents/MissionManager.cs" />
     <Compile Include="Assets/@Scripts/Input/CameraSignal.cs" />
     <Compile Include="Assets/@Scripts/Scene/SuberunkerScene.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_EvolutionItem.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_DevLoadingScene.cs" />
     <Compile Include="Assets/@Scripts/Managers/Core/EventManager.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/ItemContainer.cs" />
