@@ -16,7 +16,6 @@ public class UI_TopBar : UI_Base
     private enum Texts
     {
         Time_Text,
-        GameOver_Text,
         Level_Text,
         Gold_Text
     }
@@ -56,8 +55,6 @@ public class UI_TopBar : UI_Base
         BindSliders(typeof(Sliders));
         BindButtons(typeof(Buttons));
 
-        GetText((int)Texts.GameOver_Text).enabled = false;
-
         //_heartRoot = GetObject((int)GameObjects.UI_HeartRoot).GetComponent<UI_HeartRoot>();
 
         //Managers.Game.OnChangedLife -= OnChangedLife;
@@ -69,7 +66,7 @@ public class UI_TopBar : UI_Base
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         Managers.Event.TriggerEvent(EEventType.SetLanguage);
 
-        string str = "Lv." + Managers.Game.DifficultySettingsInfo.StageLevel.ToString();
+        string str = Managers.Game.DifficultySettingsInfo.StageLevel.ToString();
         GetText((int)Texts.Level_Text).text = str;
 
         GetButton((int)Buttons.Pause_Button).gameObject.BindEvent(OnClick_ShowPausePopup, EUIEvent.Click);
@@ -93,7 +90,7 @@ public class UI_TopBar : UI_Base
     void OnEvent_LevelUpTextChange(Component sender, object param)
     {
         //Debug.Log("OnEvent_LevelUpTextChange");
-        string str = "Lv." + Managers.Game.DifficultySettingsInfo.StageLevel.ToString();
+        string str = Managers.Game.DifficultySettingsInfo.StageLevel.ToString();
         GetText((int)Texts.Level_Text).text = str;
     }
 	void OnEvent_ChangedLife(Component sender, object param)
@@ -112,7 +109,7 @@ public class UI_TopBar : UI_Base
 
     private void OnClick_ShowPausePopup(PointerEventData eventData)
     {
-
+        Managers.UI.ShowPopupUI<UI_PausePopup>();
     }
     IEnumerator UpdateLife(float nextHp)
     {

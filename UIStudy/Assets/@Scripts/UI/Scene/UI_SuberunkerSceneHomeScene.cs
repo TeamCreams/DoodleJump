@@ -30,7 +30,8 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         Shop_Button,
         Mission_Button,
         ChooseCharacter_Button,
-        Start_Button
+        Start_Button,
+        Setting_Button
     }
 
     private enum Images
@@ -73,9 +74,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetImage((int)Images.MyScore_Button).gameObject.BindEvent(OnClick_ShowMyScore, EUIEvent.Click);
         GetImage((int)Images.Ranking_Button).gameObject.BindEvent(OnClick_ShowRanking, EUIEvent.Click);
         GetButton((int)Buttons.Mission_Button).gameObject.BindEvent(OnClick_ShowMission, EUIEvent.Click);
-        
-        //GetToggle((int)Toggles.Language_En).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
-        //GetToggle((int)Toggles.Language_Kr).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
+        GetButton((int)Buttons.Setting_Button).gameObject.BindEvent(OnClick_SettingButton, EUIEvent.Click);
 
         GetObject((int)GameObjects.UI_MissionPanel).SetActive(false);
         GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
@@ -122,23 +121,14 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         Managers.Event.TriggerEvent(EEventType.Mission);
     }
 
+    private void OnClick_SettingButton(PointerEventData eventData)
+    {
+        Managers.UI.ShowPopupUI<UI_SettingPopup>();
+    }
+
     private void OnEvent_RefreshGold(Component sender, object param)
     {
         GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
-    }
-
-    private void OnClick_SetLanguage(PointerEventData eventData)
-    {
-        if(GetToggle((int)Toggles.Language_En).isOn == true)
-        {
-            Managers.Language.ELanguageInfo = ELanguage.En;
-        }
-        else
-        {
-            Managers.Language.ELanguageInfo = ELanguage.Kr;
-        }
-        Managers.Event.TriggerEvent(EEventType.SetLanguage);
-        Debug.Log($"language : {Managers.Language.ELanguageInfo}");
     }
     void OnEvent_SetLanguage(Component sender, object param)
     {

@@ -17,7 +17,6 @@ public class UI_LevelUpPopup : UI_Popup
         Cancle_Button,
     }
 
-
     public override bool Init()
     {
         if (base.Init() == false)
@@ -30,7 +29,7 @@ public class UI_LevelUpPopup : UI_Popup
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         Managers.Event.TriggerEvent(EEventType.SetLanguage);
 
-        GetText((int)Texts.Level_Text).text = Managers.Game.DifficultySettingsInfo.StageLevel.ToString();
+        GetText((int)Texts.Level_Text).text = "Lv." + Managers.Game.DifficultySettingsInfo.StageLevel.ToString();
         GetButton((int)Buttons.Cancle_Button).gameObject.BindEvent((evt) =>
         {
             Managers.UI.ClosePopupUI(this);

@@ -59,7 +59,7 @@
     <UnityVersion>6000.0.24f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="/Users/seoyoon/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.0.4/Analyzers/Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="/Users/seoyoon/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.0.5/Analyzers/Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="/Volumes/imation i9/E_Unity/6000.0.24f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll" />
     <Analyzer Include="/Volumes/imation i9/E_Unity/6000.0.24f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="/Volumes/imation i9/E_Unity/6000.0.24f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll" />
@@ -102,6 +102,7 @@
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/ItemSlot.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/SoloState.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SuberunkerTimelineScene.cs" />
+    <Compile Include="Assets/@Scripts/UI/Popup/UI_PausePopup.cs" />
     <Compile Include="Assets/@Scripts/Managers/Contents/LanguageDataMamager.cs" />
     <Compile Include="Assets/@Scripts/UI/Popup/UI_Popup.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/MonsterState.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Assets/@Scripts/Utils/Extension.cs" />
     <Compile Include="Assets/@Scripts/Utils/Util.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/LayerManager.cs" />
+    <Compile Include="Assets/@Scripts/UI/Popup/UI_SettingPopup.cs" />
     <Compile Include="Assets/@Scripts/Scene/BaseScene.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/RuntimeSetup.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_HeartRoot.cs" />
