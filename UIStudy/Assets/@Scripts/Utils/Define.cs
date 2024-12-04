@@ -94,6 +94,14 @@ public static class Define
         Evolution
     }
 
+    // 서버와 값 공유중, 함부로 수정 금지.
+    public enum EMissionStatus
+    {
+        None,
+        Progress,
+        Complete,
+    }
+
     public enum EEquipType
     {
 		None = 0,

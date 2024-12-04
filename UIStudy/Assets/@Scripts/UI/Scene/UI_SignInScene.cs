@@ -67,7 +67,10 @@ public class UI_SignInScene : UI_Scene
 
         return true;
     }
-
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+    }
     private void OnClick_SignIn(PointerEventData eventData)
     {
         //최종 로그인 하는 버튼.

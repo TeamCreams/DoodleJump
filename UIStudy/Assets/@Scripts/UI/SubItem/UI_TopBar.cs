@@ -85,6 +85,9 @@ public class UI_TopBar : UI_Base
 	private void OnDestroy()
     {
         Managers.Event.RemoveEvent(EEventType.ChangePlayerLife, OnEvent_ChangedLife);
+        Managers.Event.RemoveEvent(EEventType.LevelStageUp, OnEvent_LevelUpTextChange);
+        Managers.Event.RemoveEvent(EEventType.GetGold, OnEvent_GetGold);
+        Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
     }
    
     void OnEvent_LevelUpTextChange(Component sender, object param)

@@ -50,6 +50,11 @@ public class UI_Player : UI_Base
         return true;
     }
 
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.ThoughtBubble, OnEvent_ThoughtBubble);
+        Managers.Event.RemoveEvent(EEventType.CancelThoughtBubble, OnEvent_CancelThoughtBubble);
+    }
     private void OnEvent_ThoughtBubble(Component sender, object param)
     {
        int doOrNot = Random.Range(0, 10);

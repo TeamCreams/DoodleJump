@@ -53,6 +53,10 @@ public class UI_RetryPopup : UI_Popup
         Time.timeScale = 0f;
         return true;
     }
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+    }
     private void OnClick_RetryButton(PointerEventData eventData)
     {        
         Managers.Scene.LoadScene(EScene.SuberunkerScene);

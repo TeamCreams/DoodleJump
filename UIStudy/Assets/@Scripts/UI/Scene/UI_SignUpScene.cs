@@ -81,6 +81,10 @@ public class UI_SignUpScene : UI_Scene
 
         return true;
     }
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+    }
     private void OnClick_DuplicateIdCheck(PointerEventData eventData)
     {
         CheckCorrectId(GetInputField((int)InputFields.Id_InputField).text);

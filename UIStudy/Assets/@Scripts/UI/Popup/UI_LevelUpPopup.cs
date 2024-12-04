@@ -27,7 +27,8 @@ public class UI_LevelUpPopup : UI_Popup
         BindButtons(typeof(Buttons));
 
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        Managers.Event.TriggerEvent(EEventType.SetLanguage);
+        //Managers.Event.TriggerEvent(EEventType.SetLanguage);
+        OnEvent_SetLanguage(null, null);
 
         GetText((int)Texts.Level_Text).text = "Lv." + Managers.Game.DifficultySettingsInfo.StageLevel.ToString();
         GetButton((int)Buttons.Cancle_Button).gameObject.BindEvent((evt) =>
@@ -39,6 +40,10 @@ public class UI_LevelUpPopup : UI_Popup
         Time.timeScale = 0;
 
         return true;
+    }
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
     }
     void OnEvent_SetLanguage(Component sender, object param)
     {

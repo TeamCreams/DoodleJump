@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+﻿using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -31,7 +31,10 @@ public class UI_EvolutionItem : UI_Base
         Managers.Event.AddEvent(EEventType.Evolution, OnEvent_SetToggle);
         return true;
     }
-
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.Evolution, OnEvent_SetToggle);
+    }
     private void OnEvent_SetToggle(Component sender = null, object param = null)
     {
         _toggle.group = this.transform.parent.parent.gameObject.GetComponent<ToggleGroup>();

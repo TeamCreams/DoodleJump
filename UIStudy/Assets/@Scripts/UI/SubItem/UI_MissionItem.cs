@@ -44,7 +44,10 @@ public class UI_MissionItem : UI_Base
         _animator = this.GetOrAddComponent<Animator>();
         return true;
     }
-
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+    }
     private void OnClick_CompleteButton(PointerEventData eventData)
     {        
         //보상
@@ -52,7 +55,12 @@ public class UI_MissionItem : UI_Base
         Managers.Event.TriggerEvent(EEventType.OnMissionComplete, this, _missionId);
         _animator.SetTrigger("CompleteMission");
     }
-    private void SetActiveButton()
+    private void SetActiveProgressState()
+    {
+        GetButton((int)Buttons.Complete_Button).SetActive(false);
+        GetSlider((int)Sliders.Progress).SetActive(true);
+    }
+    private void SetActiveCompleteButton()
     {
         GetButton((int)Buttons.Complete_Button).SetActive(true);
         GetSlider((int)Sliders.Progress).SetActive(false);
@@ -73,12 +81,13 @@ public class UI_MissionItem : UI_Base
         {
             GetText((int)Texts.ProgressPercent).text = $"{missionValue}/{missionData.Param1}";
             GetSlider((int)Sliders.Progress).value = value;
+            SetActiveProgressState();
         }
         else if(1.0f <= value)
         {
             GetSlider((int)Sliders.Progress).value = 1;
             GetText((int)Texts.ProgressPercent).text = $"{missionValue}/{missionData.Param1}";
-            SetActiveButton();
+            SetActiveCompleteButton();
             // GetText((int)Texts.ProgressPercent).text = "달성";
             // 레벨업 조건 달성 
             // 레벨업은 어디서 관리하는지 

@@ -26,7 +26,10 @@ public class Spawner : InitBase
 
         return true;
     }
-
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.LevelStageUp, OnEvent_LevelStageUp);
+    }
     public IEnumerator GenerateItem()
     {
         while (true)

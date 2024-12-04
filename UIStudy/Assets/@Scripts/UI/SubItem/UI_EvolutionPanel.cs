@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
@@ -23,7 +23,10 @@ public class UI_EvolutionPanel : UI_Base
         Managers.Event.AddEvent(EEventType.Evolution, SetInventoryItems);
         return true;
     }
-
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.Evolution, SetInventoryItems);
+    }
     private void SetInventoryItems(Component sender = null, object param = null)
     {
         AllPush();

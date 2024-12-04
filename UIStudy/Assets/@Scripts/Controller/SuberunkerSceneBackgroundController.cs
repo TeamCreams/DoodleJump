@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class SuberunkerSceneBackgroundController : ObjectBase
@@ -21,7 +21,11 @@ public class SuberunkerSceneBackgroundController : ObjectBase
         Managers.Event.AddEvent(Define.EEventType.StopStoneShower, OnEvent_StopStoneShower);
         return true;
 	}
-
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(Define.EEventType.StartStoneShower, OnEvent_StartStoneShower);
+        Managers.Event.RemoveEvent(Define.EEventType.StopStoneShower, OnEvent_StopStoneShower);
+    }
     private void OnEvent_StartStoneShower(Component sender, object param)
     {
         StartCoroutine(SetColor(_defalt, _stoneShower));

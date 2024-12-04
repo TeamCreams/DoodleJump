@@ -58,6 +58,11 @@ public class SuberunkerScene : BaseScene
         return true;
     }
 
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.Attacked_Player, OnEvent_Attacked_Player);
+    }
+
     private void OnEvent_Attacked_Player(Component sender, object param)
     {
         Managers.Camera.Shake(1.0f, 0.2f);

@@ -48,6 +48,10 @@ public class UI_InputNicknameScene : UI_Scene
         return true;
     }
 
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+    }
     private void OnClick_LoginPage(PointerEventData eventData)
     {            
         Managers.Scene.LoadScene(EScene.SignInScene);

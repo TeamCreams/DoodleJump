@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using static Define;
 
@@ -37,8 +37,13 @@ public class UI_PausePopup : UI_Popup
 
         return true;
     }
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+    }
     private void OnClick_RestartButton(PointerEventData eventData)
     {
+        Time.timeScale = 1;
         Managers.UI.ClosePopupUI(this);
         Managers.Scene.LoadScene(EScene.SuberunkerScene);
     }
@@ -49,6 +54,7 @@ public class UI_PausePopup : UI_Popup
     }
     private void OnClick_GiveUpButton(PointerEventData eventData)
     {
+        Time.timeScale = 1;
         Managers.UI.ClosePopupUI(this);
         Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
     }

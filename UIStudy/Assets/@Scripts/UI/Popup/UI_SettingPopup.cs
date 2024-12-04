@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using static Define;
 
@@ -49,6 +49,11 @@ public class UI_SettingPopup : UI_Popup
 
         return true;
     }
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+    }
+
     private void OnClick_CloseButton(PointerEventData eventData)
     {
         Managers.UI.ClosePopupUI(this);

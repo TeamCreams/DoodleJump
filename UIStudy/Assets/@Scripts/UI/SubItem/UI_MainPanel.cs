@@ -50,7 +50,12 @@ public class UI_MainPanel : UI_Base
         SetUserScoreList();
         return true;
     }
-
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.GetUserScoreList, SetUserScoreList);
+        Managers.Event.RemoveEvent(EEventType.GetMyScore, SetMyScore);
+        Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+    }
     private void AllPush()
     {
         foreach(var _item in _itemList)

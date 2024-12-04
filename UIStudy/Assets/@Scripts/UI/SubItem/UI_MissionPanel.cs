@@ -31,10 +31,14 @@ public class UI_MissionPanel : UI_Base
         GetButton((int)Buttons.Cancle_Button).gameObject.BindEvent((evt) =>
         {
             this.gameObject.SetActive(false);
-        }, Define.EUIEvent.Click);
+        }, EUIEvent.Click);
         _missionRoot = GetObject((int)GameObjects.MissionRoot).transform;
-        Managers.Event.AddEvent(Define.EEventType.Mission, SetMissionList);
+        Managers.Event.AddEvent(EEventType.Mission, SetMissionList);
         return true;
+    }
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.Mission, SetMissionList);
     }
     private void AllPush()
     {
@@ -61,6 +65,9 @@ public class UI_MissionPanel : UI_Base
                 foreach(var mission in _userMissionList)
                 {
                     SpawnMissionItem(mission.MissionId, mission.MissionStatus);
+
+                   //TODO : 이부분 수정필요
+                   // 퀘스트 완료와 동시에 신규퀘스트를 수락하도록.
                     if (_missionDic.ContainsKey(mission.MissionId))
                     {
                         _missionDic[mission.MissionId] = mission.MissionStatus; // 상태 업데이트
@@ -86,7 +93,7 @@ public class UI_MissionPanel : UI_Base
         // 스폰 조건이 안되면 스폰안되도록 세팅
         MissionData missionData = Managers.Data.MissionDataDic[missionId];
 
-        if(missionStatus == 2) // 2 == MissionComplete
+        if(missionStatus == (int)EMissionStatus.Complete) // 2 == MissionComplete
         {
             // 미션이 이미 완료 상태라면
             return;

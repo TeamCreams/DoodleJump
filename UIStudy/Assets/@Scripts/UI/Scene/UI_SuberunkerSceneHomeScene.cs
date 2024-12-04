@@ -86,6 +86,11 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
 
         return true;
     }
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+        Managers.Event.RemoveEvent(EEventType.UIRefresh, OnEvent_RefreshGold);
+    }
 
     public void ShowMyScore()
     {

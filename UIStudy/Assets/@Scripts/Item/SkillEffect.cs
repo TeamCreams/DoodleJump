@@ -18,6 +18,11 @@ public class SkillEffect : InitBase
         return true;
     }
 
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.LuckyTrigger_Player, OnEvent_LuckyTrigger);
+    }
+
     private void OnEvent_LuckyTrigger(Component sender, object param)
     {
         _animator.SetTrigger("isSkillEffect");

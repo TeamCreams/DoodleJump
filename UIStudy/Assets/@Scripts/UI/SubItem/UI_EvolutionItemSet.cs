@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using static Define;
 
@@ -23,7 +23,7 @@ public class UI_EvolutionItemSet : UI_Base
     public void SetInfo(int id)
     {
         GetText((int)Texts.Level_Text).text = Managers.Data.EvolutionDataDic[id].Level.ToString();
-        Managers.Event.TriggerEvent(EEventType.Evolution);
+        //Managers.Event.TriggerEvent(EEventType.Evolution);
 
     }
 }
