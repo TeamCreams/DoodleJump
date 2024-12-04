@@ -27,7 +27,7 @@ public class UI_PausePopup : UI_Popup
         BindButtons(typeof(Buttons));
 
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        //Managers.Event.TriggerEvent(EEventType.SetLanguage);
+        //OnEvent_SetLanguage(null, null);
 
         GetButton((int)Buttons.Restart_Button).gameObject.BindEvent(OnClick_RestartButton, EUIEvent.Click);
         GetButton((int)Buttons.Continue_Button).gameObject.BindEvent(OnClick_ContinueButton, EUIEvent.Click);

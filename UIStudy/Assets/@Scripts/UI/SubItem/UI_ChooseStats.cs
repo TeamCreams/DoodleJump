@@ -38,10 +38,11 @@ public class UI_ChooseStats : UI_Base
         BindButtons(typeof(Buttons));
         BindTexts(typeof(Texts));
         
-        GetButton((int)Buttons.Back).gameObject.BindEvent(OnClick_BackButton, Define.EUIEvent.Click);
-        GetButton((int)Buttons.Next).gameObject.BindEvent(OnClick_NextButton, Define.EUIEvent.Click);
-        Managers.Event.AddEvent(Define.EEventType.SetLanguage, OnEvent_SetLanguage);
-
+        GetButton((int)Buttons.Back).gameObject.BindEvent(OnClick_BackButton, EUIEvent.Click);
+        GetButton((int)Buttons.Next).gameObject.BindEvent(OnClick_NextButton, EUIEvent.Click);
+        Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+        OnEvent_SetLanguage(null, null);
+        
         DisplayInfo();
         return true;
     }

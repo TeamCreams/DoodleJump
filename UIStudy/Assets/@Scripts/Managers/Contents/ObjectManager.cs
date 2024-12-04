@@ -70,14 +70,14 @@ public class ObjectManager
 
             return item;
         }
-        else if (typeof(T) == typeof(Confetti_Particle))
-        {
-            GameObject item = Managers.Resource.Instantiate("Confetti_Particle", pooling: true);
-            Confetti_Particle particle = item.GetComponent<Confetti_Particle>();
-            particle.StartParticle(pos);
+        // else if (typeof(T) == typeof(Confetti_Particle))
+        // {
+        //     GameObject item = Managers.Resource.Instantiate("Confetti_Particle", pooling: true);
+        //     Confetti_Particle particle = item.GetComponent<Confetti_Particle>();
+        //     particle.StartParticle(pos);
 
-            return item;
-        }
+        //     return item;
+        // }
 
         return null;
     }

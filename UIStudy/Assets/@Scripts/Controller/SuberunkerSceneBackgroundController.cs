@@ -17,13 +17,13 @@ public class SuberunkerSceneBackgroundController : ObjectBase
             return false;
 		}
         _spriteRenderer = this.GetComponent<SpriteRenderer>();
-        Managers.Event.AddEvent(Define.EEventType.StartStoneShower, OnEvent_StartStoneShower);
-        Managers.Event.AddEvent(Define.EEventType.StopStoneShower, OnEvent_StopStoneShower);
+        //Managers.Event.AddEvent(Define.EEventType.StartStoneShower, OnEvent_StartStoneShower);
+        //Managers.Event.AddEvent(Define.EEventType.StopStoneShower, OnEvent_StopStoneShower);
         return true;
 	}
     private void OnDestroy()
     {
-        Managers.Event.RemoveEvent(Define.EEventType.StartStoneShower, OnEvent_StartStoneShower);
+        Managers.Event.RemoveEvent(Define.EEventType.IsStoneShower, OnEvent_StartStoneShower);
         Managers.Event.RemoveEvent(Define.EEventType.StopStoneShower, OnEvent_StopStoneShower);
     }
     private void OnEvent_StartStoneShower(Component sender, object param)

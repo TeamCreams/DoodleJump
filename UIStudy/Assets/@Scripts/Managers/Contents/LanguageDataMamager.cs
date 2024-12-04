@@ -22,7 +22,7 @@ public class LanguageDataMamager
 
         if(content == null)
         {
-            return "XXX";
+            return String.Empty;
         }
         switch (this.ELanguageInfo)
         {
@@ -33,6 +33,6 @@ public class LanguageDataMamager
                 return content.EnText;
         }
 
-        return "XXX";
+        return String.Empty;
     }
 }

@@ -44,7 +44,7 @@ public class UI_RetryPopup : UI_Popup
         BindButtons(typeof(Buttons));
         BindObjects(typeof(GameObjects));
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        Managers.Event.TriggerEvent(EEventType.SetLanguage);
+        OnEvent_SetLanguage(null, null);
         SetRecord();
         _failCount = 0;        
         GetButton((int)Buttons.Retry_Button).gameObject.BindEvent(OnClick_RetryButton, EUIEvent.Click);

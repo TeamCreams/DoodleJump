@@ -77,7 +77,7 @@ public class UI_SignUpScene : UI_Scene
         GetText((int)Texts.Warning_Password_Text).text = "";
         GetText((int)Texts.Warning_ConfirmPassword_Text).text = "";
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        Managers.Event.TriggerEvent(EEventType.SetLanguage);
+        OnEvent_SetLanguage(null, null);
 
         return true;
     }

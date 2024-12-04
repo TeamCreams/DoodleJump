@@ -64,7 +64,7 @@ public class UI_TopBar : UI_Base
         Managers.Event.AddEvent(EEventType.LevelStageUp, OnEvent_LevelUpTextChange);
         Managers.Event.AddEvent(EEventType.GetGold, OnEvent_GetGold);
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        Managers.Event.TriggerEvent(EEventType.SetLanguage);
+        OnEvent_SetLanguage(null, null);
 
         string str = Managers.Game.DifficultySettingsInfo.StageLevel.ToString();
         GetText((int)Texts.Level_Text).text = str;

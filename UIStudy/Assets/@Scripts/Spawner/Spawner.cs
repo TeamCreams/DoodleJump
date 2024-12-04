@@ -5,7 +5,6 @@ using System;
 
 public class Spawner : InitBase
 {
-
     private int _id;
     private float _stoneGenerateTime = 0;
     private float _stoneShowerPeriodTime = 0;
@@ -42,6 +41,7 @@ public class Spawner : InitBase
     }
     public IEnumerator GenerateStoneCo()
     {
+        Managers.Event.TriggerEvent(EEventType.IsStoneShower);
         while(true)
         {
             if (_generateStone == null && _generateStoneShower == null)
@@ -89,7 +89,7 @@ public class Spawner : InitBase
 
     public IEnumerator GenerateStoneShower()
     {
-        //Managers.Event.TriggerEvent(EEventType.StartStoneShower);
+        Managers.Event.TriggerEvent(EEventType.IsStoneShower);
         int direction = UnityEngine.Random.Range(0, 2) * 2 - 1;
         int reversDirection = direction * -1;
         int startX = 90 * direction;
@@ -101,7 +101,6 @@ public class Spawner : InitBase
             startX += reversDirectionDistance;
             yield return new WaitForSeconds(0.2f);
         }
-        //Managers.Event.TriggerEvent(EEventType.StopStoneShower);
         _stoneShowerPeriodTime = UnityEngine.Random.Range(Managers.Data.DifficultySettingsDic[_id].StoneShowerPeriodStartTime, Managers.Data.DifficultySettingsDic[_id].StoneShowerPeriodFinishTime);
         _generateStoneShower = null;
     }
@@ -124,8 +123,9 @@ public class Spawner : InitBase
         Managers.Game.DifficultySettingsInfo.AddSpeed = 4 * Managers.Game.DifficultySettingsInfo.StageLevel;
 
         //3. 레벨업 팝업
-        Managers.Object.Spawn<Confetti_Particle>(HardCoding.ConfetiParticlePos);
-
+        //Managers.Object.Spawn<Confetti_Particle>(HardCoding.ConfetiParticlePos);
+        Managers.UI.ShowPopupUI<UI_LevelUpPopup>();
+        
         //4. 돌 이벤트 관련 세팅
         if (_generateStoneShower != null)
         {
@@ -140,5 +140,6 @@ public class Spawner : InitBase
         }
         StartCoroutine(GenerateStoneCo());
     }
+
 }
 

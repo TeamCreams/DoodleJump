@@ -15,8 +15,9 @@ public class UI_InputNicknameScene : UI_Scene
 
     private enum Buttons
     {
-        Next_Button,
+        //Next_Button,
         //Prev_Button
+        Confirm_Button
     }
 
     private enum Texts
@@ -39,11 +40,11 @@ public class UI_InputNicknameScene : UI_Scene
         BindTexts(typeof(Texts));
 
         //GetButton((int)Buttons.Prev_Button).gameObject.BindEvent(OnClick_LoginPage, EUIEvent.Click);
-        GetButton((int)Buttons.Next_Button).gameObject.BindEvent(OnClick_InspectName, EUIEvent.Click);
+        GetButton((int)Buttons.Confirm_Button).gameObject.BindEvent(OnClick_InspectName, EUIEvent.Click);
         GetText((int)Texts.Warning_Text).text = "";
 
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        Managers.Event.TriggerEvent(EEventType.SetLanguage);
+        OnEvent_SetLanguage(null, null);
 
         return true;
     }

@@ -39,7 +39,7 @@ public class UI_SettingPopup : UI_Popup
         BindToggles(typeof(Toggles));
 
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        //Managers.Event.TriggerEvent(EEventType.SetLanguage);
+        //OnEvent_SetLanguage(null, null);
 
         GetButton((int)Buttons.Close_Button).gameObject.BindEvent(OnClick_CloseButton, EUIEvent.Click);
         GetToggle((int)Toggles.Language_En).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);

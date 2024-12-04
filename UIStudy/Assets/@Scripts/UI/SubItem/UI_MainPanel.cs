@@ -43,7 +43,7 @@ public class UI_MainPanel : UI_Base
         Managers.Event.AddEvent(EEventType.GetUserScoreList, SetUserScoreList);
         Managers.Event.AddEvent(EEventType.GetMyScore, SetMyScore);
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        Managers.Event.TriggerEvent(EEventType.SetLanguage);
+        OnEvent_SetLanguage(null, null);
 
 
         SetMyScore();

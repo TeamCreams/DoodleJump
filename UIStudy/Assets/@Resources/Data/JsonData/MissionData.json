@@ -12,7 +12,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 0
+      "PrevMissionId": [
+        0
+      ]
     },
     {
       "Id": 110002,
@@ -26,7 +28,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110001
+      "PrevMissionId": [
+        110001
+      ]
     },
     {
       "Id": 110003,
@@ -40,7 +44,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110002
+      "PrevMissionId": [
+        110002
+      ]
     },
     {
       "Id": 110004,
@@ -54,7 +60,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110003
+      "PrevMissionId": [
+        110003
+      ]
     },
     {
       "Id": 110005,
@@ -68,7 +76,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110004
+      "PrevMissionId": [
+        110004
+      ]
     },
     {
       "Id": 110006,
@@ -82,7 +92,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110005
+      "PrevMissionId": [
+        110005
+      ]
     },
     {
       "Id": 110007,
@@ -96,7 +108,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110006
+      "PrevMissionId": [
+        110005
+      ]
     },
     {
       "Id": 110008,
@@ -110,7 +124,10 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110007
+      "PrevMissionId": [
+        110006,
+        110007
+      ]
     },
     {
       "Id": 110009,
@@ -124,7 +141,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110008
+      "PrevMissionId": [
+        110008
+      ]
     },
     {
       "Id": 110010,
@@ -138,7 +157,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110008
+      "PrevMissionId": [
+        110008
+      ]
     },
     {
       "Id": 110011,
@@ -152,7 +173,10 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110010
+      "PrevMissionId": [
+        110009,
+        110010
+      ]
     },
     {
       "Id": 110012,
@@ -166,7 +190,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110011
+      "PrevMissionId": [
+        110011
+      ]
     },
     {
       "Id": 110013,
@@ -180,7 +206,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110011
+      "PrevMissionId": [
+        110012
+      ]
     },
     {
       "Id": 110014,
@@ -194,7 +222,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110013
+      "PrevMissionId": [
+        110013
+      ]
     },
     {
       "Id": 110015,
@@ -208,7 +238,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110014
+      "PrevMissionId": [
+        110014
+      ]
     },
     {
       "Id": 110016,
@@ -222,7 +254,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110015
+      "PrevMissionId": [
+        110015
+      ]
     },
     {
       "Id": 110017,
@@ -236,7 +270,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110015
+      "PrevMissionId": [
+        110015
+      ]
     },
     {
       "Id": 110018,
@@ -250,7 +286,10 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110017
+      "PrevMissionId": [
+        110016,
+        110017
+      ]
     },
     {
       "Id": 110019,
@@ -264,7 +303,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110018
+      "PrevMissionId": [
+        110018
+      ]
     },
     {
       "Id": 110020,
@@ -278,7 +319,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110019
+      "PrevMissionId": [
+        110019
+      ]
     },
     {
       "Id": 110021,
@@ -292,7 +335,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110020
+      "PrevMissionId": [
+        110020
+      ]
     },
     {
       "Id": 110022,
@@ -306,7 +351,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110021
+      "PrevMissionId": [
+        110021
+      ]
     },
     {
       "Id": 110023,
@@ -320,7 +367,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110022
+      "PrevMissionId": [
+        110022
+      ]
     },
     {
       "Id": 110024,
@@ -334,7 +383,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110022
+      "PrevMissionId": [
+        110022
+      ]
     },
     {
       "Id": 110025,
@@ -348,7 +399,10 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110024
+      "PrevMissionId": [
+        110023,
+        110024
+      ]
     },
     {
       "Id": 110026,
@@ -362,7 +416,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110025
+      "PrevMissionId": [
+        110025
+      ]
     },
     {
       "Id": 110027,
@@ -376,7 +432,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110026
+      "PrevMissionId": [
+        110026
+      ]
     },
     {
       "Id": 110028,
@@ -390,7 +448,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110027
+      "PrevMissionId": [
+        110027
+      ]
     },
     {
       "Id": 110029,
@@ -404,7 +464,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110027
+      "PrevMissionId": [
+        110027
+      ]
     },
     {
       "Id": 110030,
@@ -418,7 +480,10 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110029
+      "PrevMissionId": [
+        110028,
+        110029
+      ]
     },
     {
       "Id": 110031,
@@ -432,7 +497,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110030
+      "PrevMissionId": [
+        110030
+      ]
     },
     {
       "Id": 110032,
@@ -446,7 +513,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110031
+      "PrevMissionId": [
+        110031
+      ]
     },
     {
       "Id": 110033,
@@ -460,7 +529,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110032
+      "PrevMissionId": [
+        110032
+      ]
     },
     {
       "Id": 110034,
@@ -474,7 +545,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110033
+      "PrevMissionId": [
+        110033
+      ]
     },
     {
       "Id": 110035,
@@ -488,7 +561,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110034
+      "PrevMissionId": [
+        110034
+      ]
     },
     {
       "Id": 110036,
@@ -502,7 +577,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110035
+      "PrevMissionId": [
+        110035
+      ]
     },
     {
       "Id": 110037,
@@ -516,7 +593,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110036
+      "PrevMissionId": [
+        110036
+      ]
     },
     {
       "Id": 110038,
@@ -530,7 +609,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110037
+      "PrevMissionId": [
+        110037
+      ]
     },
     {
       "Id": 110039,
@@ -544,7 +625,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110038
+      "PrevMissionId": [
+        110038
+      ]
     },
     {
       "Id": 110040,
@@ -558,7 +641,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110039
+      "PrevMissionId": [
+        110039
+      ]
     },
     {
       "Id": 110041,
@@ -572,7 +657,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110039
+      "PrevMissionId": [
+        110039
+      ]
     },
     {
       "Id": 110042,
@@ -586,7 +673,10 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110041
+      "PrevMissionId": [
+        110040,
+        110041
+      ]
     },
     {
       "Id": 110043,
@@ -600,7 +690,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110042
+      "PrevMissionId": [
+        110042
+      ]
     },
     {
       "Id": 110044,
@@ -614,7 +706,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110043
+      "PrevMissionId": [
+        110043
+      ]
     },
     {
       "Id": 110045,
@@ -628,7 +722,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110044
+      "PrevMissionId": [
+        110044
+      ]
     },
     {
       "Id": 110046,
@@ -642,7 +738,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110044
+      "PrevMissionId": [
+        110044
+      ]
     },
     {
       "Id": 110047,
@@ -656,7 +754,10 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110046
+      "PrevMissionId": [
+        110045,
+        110046
+      ]
     },
     {
       "Id": 110048,
@@ -670,7 +771,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110047
+      "PrevMissionId": [
+        110047
+      ]
     },
     {
       "Id": 110049,
@@ -684,7 +787,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110048
+      "PrevMissionId": [
+        110048
+      ]
     },
     {
       "Id": 110050,
@@ -698,7 +803,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110049
+      "PrevMissionId": [
+        110049
+      ]
     },
     {
       "Id": 110051,
@@ -712,7 +819,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110050
+      "PrevMissionId": [
+        110050
+      ]
     },
     {
       "Id": 110052,
@@ -726,7 +835,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110050
+      "PrevMissionId": [
+        110050
+      ]
     },
     {
       "Id": 110053,
@@ -740,7 +851,10 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110052
+      "PrevMissionId": [
+        110051,
+        110052
+      ]
     },
     {
       "Id": 110054,
@@ -754,7 +868,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110053
+      "PrevMissionId": [
+        110053
+      ]
     },
     {
       "Id": 110055,
@@ -768,7 +884,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110054
+      "PrevMissionId": [
+        110054
+      ]
     },
     {
       "Id": 110056,
@@ -782,7 +900,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110055
+      "PrevMissionId": [
+        110055
+      ]
     },
     {
       "Id": 110057,
@@ -796,7 +916,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110056
+      "PrevMissionId": [
+        110056
+      ]
     },
     {
       "Id": 110058,
@@ -810,7 +932,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110057
+      "PrevMissionId": [
+        110057
+      ]
     },
     {
       "Id": 110059,
@@ -824,7 +948,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 0
+      "PrevMissionId": [
+        0
+      ]
     },
     {
       "Id": 110060,
@@ -838,7 +964,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110059
+      "PrevMissionId": [
+        110059
+      ]
     },
     {
       "Id": 110061,
@@ -852,7 +980,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110060
+      "PrevMissionId": [
+        110060
+      ]
     },
     {
       "Id": 110062,
@@ -866,7 +996,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110061
+      "PrevMissionId": [
+        110061
+      ]
     },
     {
       "Id": 110063,
@@ -880,7 +1012,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110062
+      "PrevMissionId": [
+        110062
+      ]
     },
     {
       "Id": 110064,
@@ -894,7 +1028,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110063
+      "PrevMissionId": [
+        110063
+      ]
     },
     {
       "Id": 110065,
@@ -908,7 +1044,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110064
+      "PrevMissionId": [
+        110064
+      ]
     },
     {
       "Id": 110066,
@@ -922,7 +1060,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110065
+      "PrevMissionId": [
+        110065
+      ]
     },
     {
       "Id": 110067,
@@ -936,7 +1076,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110066
+      "PrevMissionId": [
+        110066
+      ]
     },
     {
       "Id": 110068,
@@ -950,7 +1092,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110067
+      "PrevMissionId": [
+        110067
+      ]
     },
     {
       "Id": 110069,
@@ -964,7 +1108,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110068
+      "PrevMissionId": [
+        110068
+      ]
     },
     {
       "Id": 110070,
@@ -978,7 +1124,9 @@
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
-      "PrevMissionId": 110069
+      "PrevMissionId": [
+        110069
+      ]
     }
   ]
 }

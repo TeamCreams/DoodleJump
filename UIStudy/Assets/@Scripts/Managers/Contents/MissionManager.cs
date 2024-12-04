@@ -28,7 +28,6 @@ public class MissionManager
         Debug.Log("Event_OnSettlementComplete");
         SettleScore(sender);
         ProcessUserMissionList();
-
     }
 
     void Event_OnFirstAccept(Component sender, object param)

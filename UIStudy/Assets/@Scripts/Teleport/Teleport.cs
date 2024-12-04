@@ -13,7 +13,7 @@ public class Teleport : ObjectBase
         Right
     }
     private DirectionPosition _directionPosition = DirectionPosition.Left;
-
+    private bool _isStoneShower = false;
 
     public override bool Init()
     {
@@ -22,6 +22,7 @@ public class Teleport : ObjectBase
             return false;
         }
         CheckDirection();
+        Managers.Event.AddEvent(EEventType.IsStoneShower, OnEvent_StoneShower);
         _teleportEffect = Managers.Resource.Instantiate("TeleportEffect").GetComponent<ParticleSystem>();
         _teleportEffect.gameObject.SetActive(false);
 
@@ -29,6 +30,11 @@ public class Teleport : ObjectBase
         OnTriggerEnter_Event += OnTriggerEnterPlayer;
 
         return true;
+    }
+
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.IsStoneShower, OnEvent_StoneShower);
     }
 
     private void CheckDirection()
@@ -45,9 +51,12 @@ public class Teleport : ObjectBase
 
     private void OnTriggerEnterPlayer(Collider collision)
     {
+        if(_isStoneShower == true)
+        {
+            return;
+        }
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
-
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
 
             if (playerController.transform.position.x < HardCoding.PlayerTeleportPos_Left.x)
@@ -74,7 +83,6 @@ public class Teleport : ObjectBase
         }
     }
 
-
     private void TeleportRight(PlayerController playerController)
     {
         playerController.Teleport(HardCoding.PlayerTeleportPos_Left);
@@ -100,5 +108,10 @@ public class Teleport : ObjectBase
         yield return new WaitForSeconds(_teleportEffect.main.duration);
         _teleportEffect.gameObject.SetActive(false);
 
+    }
+
+    private void OnEvent_StoneShower(Component sender, object param)
+    {
+        _isStoneShower = !_isStoneShower;
     }
 }

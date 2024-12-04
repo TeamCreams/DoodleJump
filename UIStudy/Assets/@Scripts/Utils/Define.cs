@@ -73,7 +73,7 @@ public static class Define
         LevelStageUp,
         ThoughtBubble,
         CancelThoughtBubble,
-        StartStoneShower,
+        IsStoneShower,
         StopStoneShower,
         SetLanguage,
         SignIn,

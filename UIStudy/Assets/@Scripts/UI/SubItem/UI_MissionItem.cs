@@ -38,7 +38,7 @@ public class UI_MissionItem : UI_Base
         BindSliders(typeof(Sliders));
         BindButtons(typeof(Buttons));
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        Managers.Event.TriggerEvent(EEventType.SetLanguage);
+        //OnEvent_SetLanguage(null, null);
         GetButton((int)Buttons.Complete_Button).gameObject.BindEvent(OnClick_CompleteButton, EUIEvent.Click);
 
         _animator = this.GetOrAddComponent<Animator>();
@@ -53,7 +53,9 @@ public class UI_MissionItem : UI_Base
         //보상
         Debug.Log($"보상 지급");
         Managers.Event.TriggerEvent(EEventType.OnMissionComplete, this, _missionId);
-        _animator.SetTrigger("CompleteMission");
+        //_animator.SetTrigger("CompleteMission");
+        Managers.Event.TriggerEvent(EEventType.OnUpdateMission);
+        //Managers.Event.TriggerEvent(EEventType.Mission);
     }
     private void SetActiveProgressState()
     {
@@ -67,7 +69,7 @@ public class UI_MissionItem : UI_Base
     }
     public void SetInfo(int missionId, int missionStatus)
     {
-        _animator.SetTrigger("NewMission");
+        //_animator.SetTrigger("NewMission");
         Debug.Log($"missionId : {missionId}");
         _missionId = missionId;
         MissionData missionData = Managers.Data.MissionDataDic[_missionId];

@@ -67,7 +67,10 @@ public class UI_SuberunkerScene : UI_Scene
         Managers.Event.TriggerEvent(EEventType.StartLoading);
         Managers.Score.SetScore(
             this, 
-            onSuccess: () => Managers.Event.TriggerEvent(EEventType.OnSettlementComplete),
+            onSuccess: () => {
+                    Managers.Event.TriggerEvent(EEventType.OnSettlementComplete); 
+                    Managers.Event.TriggerEvent(EEventType.OnUpdateMission);
+                },
             onFailed: () => Event_OnPlayerDead(this, tryCount++));
         Managers.Event.TriggerEvent(EEventType.StopLoading);
     }

@@ -79,7 +79,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetObject((int)GameObjects.UI_MissionPanel).SetActive(false);
         GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        Managers.Event.TriggerEvent(EEventType.SetLanguage);
+        OnEvent_SetLanguage(null, null);
         Managers.Event.AddEvent(EEventType.UIRefresh, OnEvent_RefreshGold);
 
         ShowRanking();

@@ -34,7 +34,7 @@ public class UI_SuberunkerTimelineScene : UI_Scene
             Managers.Scene.LoadScene(EScene.SuberunkerScene);
         }, EUIEvent.Click);
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        Managers.Event.TriggerEvent(EEventType.SetLanguage);
+        OnEvent_SetLanguage(null, null);
 
         return true;
     }

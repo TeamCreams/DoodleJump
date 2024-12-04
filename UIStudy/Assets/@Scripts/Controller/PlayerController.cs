@@ -171,6 +171,15 @@ public class PlayerController : CreatureBase
             _animator.gameObject.transform.localScale
                     = new Vector3(Mathf.Abs(animationTransform.localScale.x), animationTransform.localScale.y, animationTransform.localScale.z);
         }
+
+        if(this._characterController.transform.position.x <= HardCoding.PlayerTeleportPos_Left.x)
+        {
+            Teleport(HardCoding.PlayerTeleportPos_Left);
+        }
+        else if(HardCoding.PlayerTeleportPos_Right.x <= this._characterController.transform.position.x)
+        {
+            Teleport(HardCoding.PlayerTeleportPos_Right);
+        }
     }
 
     IEnumerator Update_CryingFace()

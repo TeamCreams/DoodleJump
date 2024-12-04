@@ -68,6 +68,7 @@ public class UI_MissionPanel : UI_Base
 
                    //TODO : 이부분 수정필요
                    // 퀘스트 완료와 동시에 신규퀘스트를 수락하도록.
+                   // prevId가 업데이트가 안 되어있음.
                     if (_missionDic.ContainsKey(mission.MissionId))
                     {
                         _missionDic[mission.MissionId] = mission.MissionStatus; // 상태 업데이트
@@ -98,15 +99,18 @@ public class UI_MissionPanel : UI_Base
             // 미션이 이미 완료 상태라면
             return;
         }
-        if (missionData.PrevMissionId != 0 && !_missionDic.ContainsKey(missionData.PrevMissionId))
+        foreach(var prevId in missionData.PrevMissionId)
         {
-            // 이전 미션 ID가 Dictionary에 없으면 처리
-            return;
-        }
-        if (missionData.PrevMissionId != 0 && _missionDic[missionData.PrevMissionId] != 2)
-        {
-            // 이전 미션이 완료되지 않았다면 처리
-            return;
+            if (prevId != 0 && !_missionDic.ContainsKey(prevId))
+            {
+                // 이전 미션 ID가 Dictionary에 없으면 처리
+                return;
+            }
+            if (prevId != 0 && _missionDic[prevId] != (int)EMissionStatus.Complete)
+            {
+                // 이전 미션이 완료되지 않았다면 처리
+                return;
+            }
         }
         var item = Managers.UI.MakeSubItem<UI_MissionItem>(parent: _missionRoot, pooling: true);
         item.SetInfo(missionId, missionStatus);
