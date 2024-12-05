@@ -132,7 +132,9 @@ namespace GameApi.Controllers
                                         user.TblUserScores.OrderByDescending(s => s.UpdateDate)
                                         .FirstOrDefault()
                                         .Gold : 0,
-                        TotalScore = user.TblUserScores.Sum(s => s.History)
+                        TotalScore = user.TblUserScores.Sum(s => s.History),
+                        CharacterStyle = user.CharacterStyle,
+                        Evolution = user.Evolution 
                     }).ToListAsync();
 
                 /*

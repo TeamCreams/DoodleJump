@@ -20,5 +20,9 @@
         public int LatelyScore { get; set; }
         public int Gold {  get; set; }
         public int TotalScore { get; set; }
+        // 디자인
+        public List<int> CharacterStyle { get; set; } = new List<int>();
+        // 업데이트 스택
+        public int Evolution { get; set; }
     }
 }
