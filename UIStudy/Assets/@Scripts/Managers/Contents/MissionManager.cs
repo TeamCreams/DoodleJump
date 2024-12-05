@@ -32,10 +32,15 @@ public class MissionManager
 
     void Event_OnFirstAccept(Component sender, object param)
     {
+        List<ReqDtoInsertUserMission> list = new();
         foreach(var mission in Managers.Data.MissionDataDic)
         {
-            AcceptMission(sender, mission.Value.Id);
+            ReqDtoInsertUserMission tempMission = new ReqDtoInsertUserMission();
+            tempMission.UserAccountId = Managers.Game.UserInfo.UserAccountId;
+            tempMission.MissionId = mission.Value.Id;
+            list.Add(tempMission);
         }
+        AcceptMission(sender, list);
     }
 
     void Event_OnMissionComplete(Component sender, object param)
@@ -84,12 +89,12 @@ public class MissionManager
        });
     }
 
-    public void AcceptMission(Component sender, int missionId, Action onSuccess = null, Action onFailed = null)
+    public void AcceptMission(Component sender, List<ReqDtoInsertUserMission> missionList, Action onSuccess = null, Action onFailed = null)
     {
-        Managers.WebContents.ReqInsertUserMission(new ReqDtoInsertUserMission()
+        Managers.WebContents.ReqInsertUserMission(new ReqDtoInsertUserMissions()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
-            MissionId = missionId,
+            List = missionList
         },
        (response) =>
        {    

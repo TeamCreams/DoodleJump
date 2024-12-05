@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -25,29 +26,13 @@ public class UI_EvolutionItem : UI_Base
         BindObjects(typeof(GameObjects));
         BindImages(typeof(Images));
 
-        GetImage((int)Images.isClick).gameObject.BindEvent(OnClick_IsClickItem, EUIEvent.Click);
-        GetImage((int)Images.isClick).gameObject.BindEvent(OnPointerUp_IsClickItem, EUIEvent.PointerUp); //OnPointerUp
         _toggle = this.gameObject.GetComponent<Toggle>();
-        Managers.Event.AddEvent(EEventType.Evolution, OnEvent_SetToggle);
+        _toggle.onValueChanged.AddListener(OnClick_IsClickItem);
         return true;
     }
-    private void OnDestroy()
-    {
-        Managers.Event.RemoveEvent(EEventType.Evolution, OnEvent_SetToggle);
-    }
-    private void OnEvent_SetToggle(Component sender = null, object param = null)
-    {
-        _toggle.group = this.transform.parent.parent.gameObject.GetComponent<ToggleGroup>();
-    }
 
-    private void OnClick_IsClickItem(PointerEventData eventData)
+    private void OnClick_IsClickItem(bool isOn)
     {
-        GetObject((int)GameObjects.Selected).SetActive(true);
-        
-    }
-    private void OnPointerUp_IsClickItem(PointerEventData eventData)
-    {
-        Debug.Log("OnPointerUp_IsClickItem");
-        GetObject((int)GameObjects.Selected).SetActive(false);
+        GetObject((int)GameObjects.Selected).SetActive(isOn);
     }
 }

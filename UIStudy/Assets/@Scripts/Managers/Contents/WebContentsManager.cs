@@ -204,7 +204,7 @@ public class WebContentsManager
 
 
 
-    public void ReqInsertUserMission(ReqDtoInsertUserMission requestDto, Action<ResDtoInsertUserMission> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void ReqInsertUserMission(ReqDtoInsertUserMissions requestDto, Action<ResDtoInsertUserMission> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
@@ -306,29 +306,29 @@ public class WebContentsManager
             }
         });
     }
-public void ReqDtoInsertMissionCompensation(ReqDtoInsertMissionCompensation requestDto, Action<ResDtoInsertMissionCompensation> onSuccess = null, Action<EStatusCode> onFailed = null)
-    {
-        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
+//     public void ReqDtoInsertMissionCompensation(ReqDtoInsertMissionCompensation requestDto, Action<ResDtoInsertMissionCompensation> onSuccess = null, Action<EStatusCode> onFailed = null)
+//     {
+//         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
-        Managers.Web.SendPostRequest(WebRoute.InsertMissionCompensation, body , (response) =>
-        {
-            CommonResult<ResDtoInsertMissionCompensation> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertMissionCompensation>>(response);
+//         Managers.Web.SendPostRequest(WebRoute.InsertMissionCompensation, body , (response) =>
+//         {
+//             CommonResult<ResDtoInsertMissionCompensation> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertMissionCompensation>>(response);
 
-            if (rv == null || false == rv.IsSuccess)
-            {
-                onFailed.Invoke(EStatusCode.ServerException);
-            }
-            else
-            {
-                if (rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {                    
-                    onSuccess.Invoke(rv.Data);
-                }
-            }
-        });
-    }
+//             if (rv == null || false == rv.IsSuccess)
+//             {
+//                 onFailed.Invoke(EStatusCode.ServerException);
+//             }
+//             else
+//             {
+//                 if (rv.StatusCode != EStatusCode.OK)
+//                 {
+//                     onFailed.Invoke(rv.StatusCode);
+//                 }
+//                 else
+//                 {                    
+//                     onSuccess.Invoke(rv.Data);
+//                 }
+//             }
+//         });
+//     }
 }
