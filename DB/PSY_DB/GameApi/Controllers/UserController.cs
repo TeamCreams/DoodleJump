@@ -748,18 +748,20 @@ namespace GameApi.Controllers
         #region Quest
         //퀘스트 수락
         [HttpPost("InsertUserMissions")]
-        public async Task<CommonResult<ResDtoInsertUserMission>> InsertUserMissions([FromBody] ReqDtoInsertUserMission requestDto)
+        public async Task<CommonResult<ResDtoInsertUserMission>> InsertUserMissions([FromBody] ReqDtoInsertUserMissions requestDto)
         {
             CommonResult<ResDtoInsertUserMission> rv = new();
 
             try
             {
                 {
+                    List<ReqDtoInsertUserMission> list = new();
+                    
                     var select = await (
-                                    from user in _context.TblUserAccounts
-                                    where (user.Id == requestDto.UserAccountId && user.DeletedDate == null)
-                                    select user.Id
-                                    ).ToListAsync();
+                                from user in _context.TblUserAccounts
+                                where (user.Id == requestDto.UserAccountId && user.DeletedDate == null)
+                                select user.Id
+                                ).ToListAsync();
 
                     if (select.Any() == false)
                     {
@@ -769,24 +771,32 @@ namespace GameApi.Controllers
 
                     int userId = select.First();
 
-                    var existingMission = await (
-                                        from mission in _context.TblUserMissions
-                                        where (mission.UserAccountId == requestDto.UserAccountId && mission.MissionId == requestDto.MissionId)
-                                        select mission.MissionId
-                                        ).ToListAsync();
-
+                    List<int> existingMission = await (
+                                                from mission in _context.TblUserMissions
+                                                where mission.UserAccountId == requestDto.UserAccountId
+                                                        && requestDto.List.Select(req => req.MissionId).Contains(mission.MissionId)
+                                                select mission.MissionId
+                                            ).ToListAsync();
+                    /*
                     if (existingMission.Any() == true)
                     {
                         throw new CommonException(EStatusCode.MissionAlreadyExists, "이미 존재하는 미션입니다.");
                     }
-
-                    TblUserMission userMission = new TblUserMission
+                    */
+                    foreach (var req in requestDto.List)
                     {
-                        UserAccountId = userId,
-                        MissionId = requestDto.MissionId
-                    };
-
-                    _context.TblUserMissions.Add(userMission);
+                        // 없는 것만 추가할 수 있도록
+                        if (existingMission.Contains(req.MissionId))
+                        {
+                            continue;
+                        }
+                        TblUserMission userMission = new TblUserMission
+                        {
+                            UserAccountId = userId,
+                            MissionId = req.MissionId
+                        };
+                        _context.TblUserMissions.Add(userMission);
+                    }
                 }
 
                 // 임시삭제
@@ -806,11 +816,10 @@ namespace GameApi.Controllers
 
                 }
                 // 전체 삭제
-                {
-                    //var allUserMissions = _context.TblUserMissions.ToList();
-                    //_context.TblUserMissions.RemoveRange(allUserMissions);
-                    //await _context.SaveChangesAsync();
-                }
+                //{
+                //    var allUserMissions = _context.TblUserMissions.ToList();
+                //    _context.TblUserMissions.RemoveRange(allUserMissions);
+                //}
 
                 var IsSuccess = await _context.SaveChangesAsync();
 
@@ -1063,77 +1072,6 @@ namespace GameApi.Controllers
             }
             return rv;
         }
-
-        ////보상 수령
-        //[HttpPost("InsertMissionCompensation")]
-        //public async Task<CommonResult<ResDtoInsertMissionCompensation>> InsertMissionCompensation([FromBody] ReqDtoInsertMissionCompensation requestDto)
-        //{
-        //    CommonResult<ResDtoInsertMissionCompensation> rv = new();
-
-        //    try
-        //    {
-        //        var userAccount = _context.TblUserAccounts
-        //                        .Where(
-        //                            user => user.Id == requestDto.UserAccountId &&
-        //                                    user.DeletedDate == null
-        //                        ).FirstOrDefault();
-        //        if (userAccount == null)
-        //        {
-        //            throw new CommonException(EStatusCode.NotFoundEntity,
-        //                $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
-        //        }
-
-        //        var userMission = _context.TblUserMissions
-        //                            .Where(
-        //                                mission => mission.MissionId == requestDto.MissionId &&
-        //                                           mission.UserAccountId == userAccount.Id
-        //                            ).FirstOrDefault();
-        //        if (userMission == null)
-        //        {
-        //            throw new CommonException(EStatusCode.NotFoundEntity,
-        //                $"해당 미션이 없습니다. MissionId : {requestDto.MissionId}");
-        //        }
-
-        //        var userScore = _context.TblUserScores
-        //                        .Where(
-        //                                score => score.UserAccountId == userAccount.Id
-        //                          ).FirstOrDefault();
-        //        if (userScore == null)
-        //        {
-        //            throw new CommonException(EStatusCode.NotFoundEntity,
-        //                $"userScore이 없습니다");
-        //        }
-        //        userScore.Gold = requestDto.Gold;
-        //        _context.TblUserScores.Update(userScore); // 안됨..
-        //        var IsSuccess = await _context.SaveChangesAsync();
-
-        //        if (IsSuccess == 0)
-        //        {
-        //            throw new CommonException(EStatusCode.ChangedRowsIsZero, "보상 수령에 실패했습니다.");
-        //        }
-        //        else
-        //        {
-        //            rv.IsSuccess = true;
-        //            rv.StatusCode = EStatusCode.OK;
-        //            rv.Data = null;
-        //        }
-        //    }
-        //    catch (CommonException ex)
-        //    {
-        //        rv.IsSuccess = false;
-        //        rv.StatusCode = (EStatusCode)ex.StatusCode;
-        //        rv.Message = ex.Message;
-        //        rv.Data = null;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        rv.IsSuccess = false;
-        //        rv.StatusCode = EStatusCode.ServerException;
-        //        rv.Message = ex.Message;
-        //        rv.Data = null;
-        //    }
-        //    return rv;
-        //}
         #endregion
     }
 }
