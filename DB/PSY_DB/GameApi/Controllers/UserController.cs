@@ -632,7 +632,10 @@ namespace GameApi.Controllers
                         Gold = user.TblUserScores.Any() ?
                                         user.TblUserScores.OrderByDescending(s => s.UpdateDate)
                                         .FirstOrDefault()
-                                        .Gold : 0
+                                        .Gold : 0,
+                        TotalScore = user.TblUserScores.Sum(s => s.History),
+                        CharacterStyle = user.CharacterStyle,
+                        Evolution = user.Evolution
                     }).ToListAsync();
 
                 if (select.Any() == false)
@@ -1047,6 +1050,65 @@ namespace GameApi.Controllers
                 {
                     throw new CommonException(EStatusCode.ChangedRowsIsZero,
                         $"UserAccountId : {requestDto.UserAccountId},  UpdateMission: {requestDto.MissionId}");
+                }
+                else
+                {
+                    rv.IsSuccess = true;
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Data = null;
+                }
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = null;
+
+                return rv;
+            }
+            return rv;
+        }
+        #endregion
+        #region Style
+        [HttpPost("InsertUserStyle")]
+        public async Task<CommonResult<ResDtoInsertUserStyle>>
+            InsertUserStyle([FromBody] ReqDtoInsertUserStyle requestDto)
+        {
+            CommonResult<ResDtoInsertUserStyle> rv = new();
+
+            try
+            {
+                var userAccount = _context.TblUserAccounts
+                                    .Where(
+                                        user => user.Id == requestDto.UserAccountId &&
+                                                user.DeletedDate == null
+                                    ).FirstOrDefault();
+                if (userAccount == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
+                }
+
+                userAccount.CharacterStyle = requestDto.CharacterStyle;
+                userAccount.Evolution = requestDto.Evolution;
+
+                _context.TblUserAccounts.Update(userAccount);
+
+                var IsSuccess = await _context.SaveChangesAsync();
+
+                if (IsSuccess == 0)
+                {
+                    throw new CommonException(EStatusCode.ChangedRowsIsZero,
+                        $"UserAccountId : {requestDto.UserAccountId}");
                 }
                 else
                 {
