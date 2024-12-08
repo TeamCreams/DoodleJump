@@ -8,7 +8,9 @@ namespace GameApi.Dtos
     {
         public int UserAccountId { get; set; }
         // 디자인
-        public List<int> CharacterStyle { get; set; } = new List<int>();
+        public int HairStyle { get; set; }
+        public int EyebrowStyle { get; set; }
+        public int EyesStyle { get; set; }
         // 업데이트 스택
         public int Evolution { get; set; }
     }

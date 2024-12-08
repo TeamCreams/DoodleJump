@@ -133,7 +133,9 @@ namespace GameApi.Controllers
                                         .FirstOrDefault()
                                         .Gold : 0,
                         TotalScore = user.TblUserScores.Sum(s => s.History),
-                        CharacterStyle = user.CharacterStyle,
+                        HairStyle = user.HairStyle,
+                        EyesStyle = user.EyesStyle,
+                        EyebrowStyle = user.EyebrowStyle,
                         Evolution = user.Evolution 
                     }).ToListAsync();
 
@@ -634,7 +636,9 @@ namespace GameApi.Controllers
                                         .FirstOrDefault()
                                         .Gold : 0,
                         TotalScore = user.TblUserScores.Sum(s => s.History),
-                        CharacterStyle = user.CharacterStyle,
+                        HairStyle = user.HairStyle,
+                        EyesStyle = user.EyesStyle,
+                        EyebrowStyle = user.EyebrowStyle,
                         Evolution = user.Evolution
                     }).ToListAsync();
 
@@ -1098,7 +1102,9 @@ namespace GameApi.Controllers
                         $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
                 }
 
-                userAccount.CharacterStyle = requestDto.CharacterStyle;
+                userAccount.HairStyle = requestDto.HairStyle;
+                userAccount.EyesStyle = requestDto.EyesStyle;
+                userAccount.EyebrowStyle = requestDto.EyebrowStyle;
                 userAccount.Evolution = requestDto.Evolution;
 
                 _context.TblUserAccounts.Update(userAccount);

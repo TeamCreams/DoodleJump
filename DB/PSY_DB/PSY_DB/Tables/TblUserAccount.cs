@@ -25,9 +25,12 @@ public partial class TblUserAccount
     public int Gold { get; set; }
 
     [Comment("디자인")]
-    [SqlDefaultValue("[]")]
-    public List<int> CharacterStyle { get; set; } = new List<int>();
-
+    [SqlDefaultValue("0")]
+    public int HairStyle { get; set; }
+    [SqlDefaultValue("0")]
+    public int EyebrowStyle { get; set; }
+    [SqlDefaultValue("0")]
+    public int EyesStyle { get; set; }
     [Comment("업데이트 스택")]
     [SqlDefaultValue("0")]
     public int Evolution { get; set; }
