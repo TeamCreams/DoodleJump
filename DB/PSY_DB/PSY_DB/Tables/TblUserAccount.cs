@@ -20,10 +20,16 @@ public partial class TblUserAccount
     public DateTime RegisterDate { get; set; }
     public DateTime UpdateDate { get; set; }
     public DateTime? DeletedDate { get; set; }
+
+    [SqlDefaultValue("0")]
     public int Gold { get; set; }
-    // 디자인
+
+    [Comment("디자인")]
+    [SqlDefaultValue("[]")]
     public List<int> CharacterStyle { get; set; } = new List<int>();
-    // 업데이트 스택
+
+    [Comment("업데이트 스택")]
+    [SqlDefaultValue("0")]
     public int Evolution { get; set; }
 
     [InverseProperty("TblUserAccountKeyNavigation")]

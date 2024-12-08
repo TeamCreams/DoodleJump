@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PSY_DB.Tables;
 
@@ -14,6 +16,13 @@ public class PsyDbContext : DbContext
     static readonly ILoggerFactory _logger = LoggerFactory.Create(builder => { builder.AddConsole(); });
     public static string ConnectionString = "server=121.190.138.117; port=3306; database=PSY_DB_0002; user=yena94; password=dldPsk123!;";
 
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        configurationBuilder.Conventions.Add(services =>
+            new SqlDefaultValueConvention(
+                services.GetRequiredService<ProviderConventionSetBuilderDependencies>()));
+    }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
