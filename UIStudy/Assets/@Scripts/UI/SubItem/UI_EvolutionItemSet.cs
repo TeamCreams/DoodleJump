@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Data;
+using UnityEngine;
 using UnityEngine.UI;
 using static Define;
 
@@ -15,6 +16,12 @@ public class UI_EvolutionItemSet : UI_Base
         EvolutionItem_Armor,
         EvolutionItem_Boots
     }
+    private enum GameObjects
+    {
+        EvolutionItem_Mask,
+        EvolutionItem_Armor,
+        EvolutionItem_Boots
+    }
     public override bool Init()
     {
         if (base.Init() == false)
@@ -23,15 +30,20 @@ public class UI_EvolutionItemSet : UI_Base
         }
         BindTexts(typeof(Texts));
         BindToggles(typeof(Toggles));
+        BindObjects(typeof(GameObjects));
         return true;
     }
     
     public void SetInfo(int id)
     {
-        GetText((int)Texts.Level_Text).text = Managers.Data.EvolutionDataDic[id].Level.ToString();
+        EvolutionItemData item = Managers.Data.EvolutionItemDataDic[id];
+        GetText((int)Texts.Level_Text).text = item.Level.ToString();
         ToggleGroup parent = this.transform.parent.gameObject.GetComponent<ToggleGroup>();
         GetToggle((int)Toggles.EvolutionItem_Mask).group = parent;
         GetToggle((int)Toggles.EvolutionItem_Armor).group = parent;
         GetToggle((int)Toggles.EvolutionItem_Boots).group = parent;
+        GetObject((int)GameObjects.EvolutionItem_Boots).GetComponent<UI_EvolutionItem>().SetIcon($"{item.Boots}BootsIcon");
+        GetObject((int)GameObjects.EvolutionItem_Armor).GetComponent<UI_EvolutionItem>().SetIcon($"{item.Armor}Icon");
+        GetObject((int)GameObjects.EvolutionItem_Mask).GetComponent<UI_EvolutionItem>().SetIcon($"{item.Mask}Icon");
     }
 }

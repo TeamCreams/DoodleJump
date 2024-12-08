@@ -25,6 +25,7 @@ public class WebRoute
     public readonly static string CompleteUserMission = $"{BaseUrl}User/CompleteUserMission";
     public readonly static Func<ReqDtoGetUserMissionList, string> GetUserMissionList = (dto) => $"{BaseUrl}User/GetUserMissionList?UserAccountId={dto.UserAccountId}";
     public readonly static string InsertMissionCompensation = $"{BaseUrl}User/InsertMissionCompensation";
+    public readonly static string InsertUserStyle = $"{BaseUrl}User/InsertUserStyle";
 
 }
 
@@ -229,7 +230,6 @@ public class WebContentsManager
             }
         });
     }
-
     public void CompleteUserMission(ReqDtoCompleteUserMission requestDto, Action<ResDtoCompleteUserMission> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
@@ -255,7 +255,6 @@ public class WebContentsManager
             }
         });
     }
-
     public void UpdateUserMission(ReqDtoUpdateUserMission requestDto, Action<ResDtoUpdateUserMission> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
@@ -281,7 +280,6 @@ public class WebContentsManager
             }
         });
     }
-
     public void ReqDtoGetUserMissionList(ReqDtoGetUserMissionList requestDto, Action<ResDtoGetUserMissionList> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         Managers.Web.SendGetRequest(WebRoute.GetUserMissionList(requestDto), (response) =>
@@ -297,6 +295,32 @@ public class WebContentsManager
                 if(rv.StatusCode != EStatusCode.OK)
                 {           
                     // 여기로 들어와 짐
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
+
+    public void ReqDtoInsertUserStyle(ReqDtoInsertUserStyle requestDto, Action<ResDtoInsertUserStyle> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
+
+        Managers.Web.SendPostRequest(WebRoute.InsertUserStyle, body , (response) =>
+        {
+            CommonResult<ResDtoInsertUserStyle> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertUserStyle>>(response);
+
+            if (rv == null)
+            {
+                onFailed.Invoke(EStatusCode.UnknownError);
+            }
+            else
+            {
+                if (rv.StatusCode != EStatusCode.OK)
+                {
                     onFailed.Invoke(rv.StatusCode);
                 }
                 else

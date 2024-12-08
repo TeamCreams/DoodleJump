@@ -31,6 +31,7 @@ public class DataTransfomer : EditorWindow
         ParseExcelDataToJson<GameLanguageDataLoader, GameLanguageData>("GameLanguageData");
         ParseExcelDataToJson<MissionDataLoader, MissionData>("MissionData");
         ParseExcelDataToJson<EvolutionDataLoader, EvolutionData>("EvolutionData");
+        ParseExcelDataToJson<EvolutionItemDataLoader, EvolutionItemData>("EvolutionItemData");
 
         Debug.Log("Complete");
 	}

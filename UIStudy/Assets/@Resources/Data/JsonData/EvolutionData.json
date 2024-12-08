@@ -1,204 +1,904 @@
 {
   "evolutionDatas": [
     {
-      "Id": 130001,
-      "Level": 1
+      "Id": 140001,
+      "EvolutionLevel": 1,
+      "Stats": [
+        0.1,
+        0.0,
+        0.0
+      ],
+      "Gold": 250
     },
     {
-      "Id": 130002,
-      "Level": 2
+      "Id": 140002,
+      "EvolutionLevel": 2,
+      "Stats": [
+        0.1,
+        1.0,
+        0.0
+      ],
+      "Gold": 500
     },
     {
-      "Id": 130003,
-      "Level": 3
+      "Id": 140003,
+      "EvolutionLevel": 3,
+      "Stats": [
+        0.1,
+        1.0,
+        0.03
+      ],
+      "Gold": 750
     },
     {
-      "Id": 130004,
-      "Level": 4
+      "Id": 140004,
+      "EvolutionLevel": 4,
+      "Stats": [
+        0.2,
+        1.0,
+        0.03
+      ],
+      "Gold": 1000
     },
     {
-      "Id": 130005,
-      "Level": 5
+      "Id": 140005,
+      "EvolutionLevel": 5,
+      "Stats": [
+        0.2,
+        2.0,
+        0.03
+      ],
+      "Gold": 1250
     },
     {
-      "Id": 130006,
-      "Level": 6
+      "Id": 140006,
+      "EvolutionLevel": 6,
+      "Stats": [
+        0.2,
+        2.0,
+        0.06
+      ],
+      "Gold": 1500
     },
     {
-      "Id": 130007,
-      "Level": 7
+      "Id": 140007,
+      "EvolutionLevel": 7,
+      "Stats": [
+        0.3,
+        2.0,
+        0.06
+      ],
+      "Gold": 1750
     },
     {
-      "Id": 130008,
-      "Level": 8
+      "Id": 140008,
+      "EvolutionLevel": 8,
+      "Stats": [
+        0.3,
+        3.0,
+        0.06
+      ],
+      "Gold": 2000
     },
     {
-      "Id": 130009,
-      "Level": 9
+      "Id": 140009,
+      "EvolutionLevel": 9,
+      "Stats": [
+        0.3,
+        3.0,
+        0.09
+      ],
+      "Gold": 2250
     },
     {
-      "Id": 130010,
-      "Level": 10
+      "Id": 140010,
+      "EvolutionLevel": 10,
+      "Stats": [
+        0.4,
+        3.0,
+        0.09
+      ],
+      "Gold": 2500
     },
     {
-      "Id": 130011,
-      "Level": 11
+      "Id": 140011,
+      "EvolutionLevel": 11,
+      "Stats": [
+        0.4,
+        4.0,
+        0.09
+      ],
+      "Gold": 2750
     },
     {
-      "Id": 130012,
-      "Level": 12
+      "Id": 140012,
+      "EvolutionLevel": 12,
+      "Stats": [
+        0.4,
+        4.0,
+        0.12
+      ],
+      "Gold": 3000
     },
     {
-      "Id": 130013,
-      "Level": 13
+      "Id": 140013,
+      "EvolutionLevel": 13,
+      "Stats": [
+        0.5,
+        4.0,
+        0.12
+      ],
+      "Gold": 3250
     },
     {
-      "Id": 130014,
-      "Level": 14
+      "Id": 140014,
+      "EvolutionLevel": 14,
+      "Stats": [
+        0.5,
+        5.0,
+        0.12
+      ],
+      "Gold": 3500
     },
     {
-      "Id": 130015,
-      "Level": 15
+      "Id": 140015,
+      "EvolutionLevel": 15,
+      "Stats": [
+        0.5,
+        5.0,
+        0.15
+      ],
+      "Gold": 3750
     },
     {
-      "Id": 130016,
-      "Level": 16
+      "Id": 140016,
+      "EvolutionLevel": 16,
+      "Stats": [
+        0.6,
+        5.0,
+        0.15
+      ],
+      "Gold": 4000
     },
     {
-      "Id": 130017,
-      "Level": 17
+      "Id": 140017,
+      "EvolutionLevel": 17,
+      "Stats": [
+        0.6,
+        6.0,
+        0.15
+      ],
+      "Gold": 4250
     },
     {
-      "Id": 130018,
-      "Level": 18
+      "Id": 140018,
+      "EvolutionLevel": 18,
+      "Stats": [
+        0.6,
+        6.0,
+        0.18
+      ],
+      "Gold": 4500
     },
     {
-      "Id": 130019,
-      "Level": 19
+      "Id": 140019,
+      "EvolutionLevel": 19,
+      "Stats": [
+        0.7,
+        6.0,
+        0.18
+      ],
+      "Gold": 4750
     },
     {
-      "Id": 130020,
-      "Level": 20
+      "Id": 140020,
+      "EvolutionLevel": 20,
+      "Stats": [
+        0.7,
+        7.0,
+        0.18
+      ],
+      "Gold": 5000
     },
     {
-      "Id": 130021,
-      "Level": 21
+      "Id": 140021,
+      "EvolutionLevel": 21,
+      "Stats": [
+        0.7,
+        7.0,
+        0.21
+      ],
+      "Gold": 5250
     },
     {
-      "Id": 130022,
-      "Level": 22
+      "Id": 140022,
+      "EvolutionLevel": 22,
+      "Stats": [
+        0.8,
+        7.0,
+        0.21
+      ],
+      "Gold": 5500
     },
     {
-      "Id": 130023,
-      "Level": 23
+      "Id": 140023,
+      "EvolutionLevel": 23,
+      "Stats": [
+        0.8,
+        8.0,
+        0.21
+      ],
+      "Gold": 5750
     },
     {
-      "Id": 130024,
-      "Level": 24
+      "Id": 140024,
+      "EvolutionLevel": 24,
+      "Stats": [
+        0.8,
+        8.0,
+        0.24
+      ],
+      "Gold": 6000
     },
     {
-      "Id": 130025,
-      "Level": 25
+      "Id": 140025,
+      "EvolutionLevel": 25,
+      "Stats": [
+        0.9,
+        8.0,
+        0.24
+      ],
+      "Gold": 6250
     },
     {
-      "Id": 130026,
-      "Level": 26
+      "Id": 140026,
+      "EvolutionLevel": 26,
+      "Stats": [
+        0.9,
+        9.0,
+        0.24
+      ],
+      "Gold": 6500
     },
     {
-      "Id": 130027,
-      "Level": 27
+      "Id": 140027,
+      "EvolutionLevel": 27,
+      "Stats": [
+        0.9,
+        9.0,
+        0.27
+      ],
+      "Gold": 6750
     },
     {
-      "Id": 130028,
-      "Level": 28
+      "Id": 140028,
+      "EvolutionLevel": 28,
+      "Stats": [
+        1.0,
+        9.0,
+        0.27
+      ],
+      "Gold": 7000
     },
     {
-      "Id": 130029,
-      "Level": 29
+      "Id": 140029,
+      "EvolutionLevel": 29,
+      "Stats": [
+        1.0,
+        10.0,
+        0.27
+      ],
+      "Gold": 7250
     },
     {
-      "Id": 130030,
-      "Level": 30
+      "Id": 140030,
+      "EvolutionLevel": 30,
+      "Stats": [
+        1.0,
+        10.0,
+        0.3
+      ],
+      "Gold": 7500
     },
     {
-      "Id": 130031,
-      "Level": 31
+      "Id": 140031,
+      "EvolutionLevel": 31,
+      "Stats": [
+        1.1,
+        10.0,
+        0.3
+      ],
+      "Gold": 7750
     },
     {
-      "Id": 130032,
-      "Level": 32
+      "Id": 140032,
+      "EvolutionLevel": 32,
+      "Stats": [
+        1.1,
+        11.0,
+        0.3
+      ],
+      "Gold": 8000
     },
     {
-      "Id": 130033,
-      "Level": 33
+      "Id": 140033,
+      "EvolutionLevel": 33,
+      "Stats": [
+        1.1,
+        11.0,
+        0.33
+      ],
+      "Gold": 8250
     },
     {
-      "Id": 130034,
-      "Level": 34
+      "Id": 140034,
+      "EvolutionLevel": 34,
+      "Stats": [
+        1.2,
+        11.0,
+        0.33
+      ],
+      "Gold": 8500
     },
     {
-      "Id": 130035,
-      "Level": 35
+      "Id": 140035,
+      "EvolutionLevel": 35,
+      "Stats": [
+        1.2,
+        12.0,
+        0.33
+      ],
+      "Gold": 8750
     },
     {
-      "Id": 130036,
-      "Level": 36
+      "Id": 140036,
+      "EvolutionLevel": 36,
+      "Stats": [
+        1.2,
+        12.0,
+        0.36
+      ],
+      "Gold": 9000
     },
     {
-      "Id": 130037,
-      "Level": 37
+      "Id": 140037,
+      "EvolutionLevel": 37,
+      "Stats": [
+        1.3,
+        12.0,
+        0.36
+      ],
+      "Gold": 9250
     },
     {
-      "Id": 130038,
-      "Level": 38
+      "Id": 140038,
+      "EvolutionLevel": 38,
+      "Stats": [
+        1.3,
+        13.0,
+        0.36
+      ],
+      "Gold": 9500
     },
     {
-      "Id": 130039,
-      "Level": 39
+      "Id": 140039,
+      "EvolutionLevel": 39,
+      "Stats": [
+        1.3,
+        13.0,
+        0.39
+      ],
+      "Gold": 9750
     },
     {
-      "Id": 130040,
-      "Level": 40
+      "Id": 140040,
+      "EvolutionLevel": 40,
+      "Stats": [
+        1.4,
+        13.0,
+        0.39
+      ],
+      "Gold": 10000
     },
     {
-      "Id": 130041,
-      "Level": 41
+      "Id": 140041,
+      "EvolutionLevel": 41,
+      "Stats": [
+        1.4,
+        14.0,
+        0.39
+      ],
+      "Gold": 10250
     },
     {
-      "Id": 130042,
-      "Level": 42
+      "Id": 140042,
+      "EvolutionLevel": 42,
+      "Stats": [
+        1.4,
+        14.0,
+        0.42
+      ],
+      "Gold": 10500
     },
     {
-      "Id": 130043,
-      "Level": 43
+      "Id": 140043,
+      "EvolutionLevel": 43,
+      "Stats": [
+        1.5,
+        14.0,
+        0.42
+      ],
+      "Gold": 10750
     },
     {
-      "Id": 130044,
-      "Level": 44
+      "Id": 140044,
+      "EvolutionLevel": 44,
+      "Stats": [
+        1.5,
+        15.0,
+        0.42
+      ],
+      "Gold": 11000
     },
     {
-      "Id": 130045,
-      "Level": 45
+      "Id": 140045,
+      "EvolutionLevel": 45,
+      "Stats": [
+        1.5,
+        15.0,
+        0.45
+      ],
+      "Gold": 11250
     },
     {
-      "Id": 130046,
-      "Level": 46
+      "Id": 140046,
+      "EvolutionLevel": 46,
+      "Stats": [
+        1.6,
+        15.0,
+        0.45
+      ],
+      "Gold": 11500
     },
     {
-      "Id": 130047,
-      "Level": 47
+      "Id": 140047,
+      "EvolutionLevel": 47,
+      "Stats": [
+        1.6,
+        16.0,
+        0.45
+      ],
+      "Gold": 11750
     },
     {
-      "Id": 130048,
-      "Level": 48
+      "Id": 140048,
+      "EvolutionLevel": 48,
+      "Stats": [
+        1.6,
+        16.0,
+        0.48
+      ],
+      "Gold": 12000
     },
     {
-      "Id": 130049,
-      "Level": 49
+      "Id": 140049,
+      "EvolutionLevel": 49,
+      "Stats": [
+        1.7,
+        16.0,
+        0.48
+      ],
+      "Gold": 12250
     },
     {
-      "Id": 130050,
-      "Level": 50
+      "Id": 140050,
+      "EvolutionLevel": 50,
+      "Stats": [
+        1.7,
+        17.0,
+        0.48
+      ],
+      "Gold": 12500
+    },
+    {
+      "Id": 140051,
+      "EvolutionLevel": 51,
+      "Stats": [
+        1.7,
+        17.0,
+        0.51
+      ],
+      "Gold": 12750
+    },
+    {
+      "Id": 140052,
+      "EvolutionLevel": 52,
+      "Stats": [
+        1.8,
+        17.0,
+        0.51
+      ],
+      "Gold": 13000
+    },
+    {
+      "Id": 140053,
+      "EvolutionLevel": 53,
+      "Stats": [
+        1.8,
+        18.0,
+        0.51
+      ],
+      "Gold": 13250
+    },
+    {
+      "Id": 140054,
+      "EvolutionLevel": 54,
+      "Stats": [
+        1.8,
+        18.0,
+        0.54
+      ],
+      "Gold": 13500
+    },
+    {
+      "Id": 140055,
+      "EvolutionLevel": 55,
+      "Stats": [
+        1.9,
+        18.0,
+        0.54
+      ],
+      "Gold": 13750
+    },
+    {
+      "Id": 140056,
+      "EvolutionLevel": 56,
+      "Stats": [
+        1.9,
+        19.0,
+        0.54
+      ],
+      "Gold": 14000
+    },
+    {
+      "Id": 140057,
+      "EvolutionLevel": 57,
+      "Stats": [
+        1.9,
+        19.0,
+        0.57
+      ],
+      "Gold": 14250
+    },
+    {
+      "Id": 140058,
+      "EvolutionLevel": 58,
+      "Stats": [
+        2.0,
+        19.0,
+        0.57
+      ],
+      "Gold": 14500
+    },
+    {
+      "Id": 140059,
+      "EvolutionLevel": 59,
+      "Stats": [
+        2.0,
+        20.0,
+        0.57
+      ],
+      "Gold": 14750
+    },
+    {
+      "Id": 140060,
+      "EvolutionLevel": 60,
+      "Stats": [
+        2.0,
+        20.0,
+        0.6
+      ],
+      "Gold": 15000
+    },
+    {
+      "Id": 140061,
+      "EvolutionLevel": 61,
+      "Stats": [
+        2.1,
+        20.0,
+        0.6
+      ],
+      "Gold": 15250
+    },
+    {
+      "Id": 140062,
+      "EvolutionLevel": 62,
+      "Stats": [
+        2.1,
+        21.0,
+        0.6
+      ],
+      "Gold": 15500
+    },
+    {
+      "Id": 140063,
+      "EvolutionLevel": 63,
+      "Stats": [
+        2.1,
+        21.0,
+        0.63
+      ],
+      "Gold": 15750
+    },
+    {
+      "Id": 140064,
+      "EvolutionLevel": 64,
+      "Stats": [
+        2.2,
+        21.0,
+        0.63
+      ],
+      "Gold": 16000
+    },
+    {
+      "Id": 140065,
+      "EvolutionLevel": 65,
+      "Stats": [
+        2.2,
+        22.0,
+        0.63
+      ],
+      "Gold": 16250
+    },
+    {
+      "Id": 140066,
+      "EvolutionLevel": 66,
+      "Stats": [
+        2.2,
+        22.0,
+        0.66
+      ],
+      "Gold": 16500
+    },
+    {
+      "Id": 140067,
+      "EvolutionLevel": 67,
+      "Stats": [
+        2.3,
+        22.0,
+        0.66
+      ],
+      "Gold": 16750
+    },
+    {
+      "Id": 140068,
+      "EvolutionLevel": 68,
+      "Stats": [
+        2.3,
+        23.0,
+        0.66
+      ],
+      "Gold": 17000
+    },
+    {
+      "Id": 140069,
+      "EvolutionLevel": 69,
+      "Stats": [
+        2.3,
+        23.0,
+        0.69
+      ],
+      "Gold": 17250
+    },
+    {
+      "Id": 140070,
+      "EvolutionLevel": 70,
+      "Stats": [
+        2.4,
+        23.0,
+        0.69
+      ],
+      "Gold": 17500
+    },
+    {
+      "Id": 140071,
+      "EvolutionLevel": 71,
+      "Stats": [
+        2.4,
+        24.0,
+        0.69
+      ],
+      "Gold": 17750
+    },
+    {
+      "Id": 140072,
+      "EvolutionLevel": 72,
+      "Stats": [
+        2.4,
+        24.0,
+        0.72
+      ],
+      "Gold": 18000
+    },
+    {
+      "Id": 140073,
+      "EvolutionLevel": 73,
+      "Stats": [
+        2.5,
+        24.0,
+        0.72
+      ],
+      "Gold": 18250
+    },
+    {
+      "Id": 140074,
+      "EvolutionLevel": 74,
+      "Stats": [
+        2.5,
+        25.0,
+        0.72
+      ],
+      "Gold": 18500
+    },
+    {
+      "Id": 140075,
+      "EvolutionLevel": 75,
+      "Stats": [
+        2.5,
+        25.0,
+        0.75
+      ],
+      "Gold": 18750
+    },
+    {
+      "Id": 140076,
+      "EvolutionLevel": 76,
+      "Stats": [
+        2.6,
+        25.0,
+        0.75
+      ],
+      "Gold": 19000
+    },
+    {
+      "Id": 140077,
+      "EvolutionLevel": 77,
+      "Stats": [
+        2.6,
+        26.0,
+        0.75
+      ],
+      "Gold": 19250
+    },
+    {
+      "Id": 140078,
+      "EvolutionLevel": 78,
+      "Stats": [
+        2.6,
+        26.0,
+        0.78
+      ],
+      "Gold": 19500
+    },
+    {
+      "Id": 140079,
+      "EvolutionLevel": 79,
+      "Stats": [
+        2.7,
+        26.0,
+        0.78
+      ],
+      "Gold": 19750
+    },
+    {
+      "Id": 140080,
+      "EvolutionLevel": 80,
+      "Stats": [
+        2.7,
+        27.0,
+        0.78
+      ],
+      "Gold": 20000
+    },
+    {
+      "Id": 140081,
+      "EvolutionLevel": 81,
+      "Stats": [
+        2.7,
+        27.0,
+        0.81
+      ],
+      "Gold": 20250
+    },
+    {
+      "Id": 140082,
+      "EvolutionLevel": 82,
+      "Stats": [
+        2.8,
+        27.0,
+        0.81
+      ],
+      "Gold": 20500
+    },
+    {
+      "Id": 140083,
+      "EvolutionLevel": 83,
+      "Stats": [
+        2.8,
+        28.0,
+        0.81
+      ],
+      "Gold": 20750
+    },
+    {
+      "Id": 140084,
+      "EvolutionLevel": 84,
+      "Stats": [
+        2.8,
+        28.0,
+        0.84
+      ],
+      "Gold": 21000
+    },
+    {
+      "Id": 140085,
+      "EvolutionLevel": 85,
+      "Stats": [
+        2.9,
+        28.0,
+        0.84
+      ],
+      "Gold": 21250
+    },
+    {
+      "Id": 140086,
+      "EvolutionLevel": 86,
+      "Stats": [
+        2.9,
+        29.0,
+        0.84
+      ],
+      "Gold": 21500
+    },
+    {
+      "Id": 140087,
+      "EvolutionLevel": 87,
+      "Stats": [
+        2.9,
+        29.0,
+        0.87
+      ],
+      "Gold": 21750
+    },
+    {
+      "Id": 140088,
+      "EvolutionLevel": 88,
+      "Stats": [
+        3.0,
+        29.0,
+        0.87
+      ],
+      "Gold": 22000
+    },
+    {
+      "Id": 140089,
+      "EvolutionLevel": 89,
+      "Stats": [
+        3.0,
+        30.0,
+        0.87
+      ],
+      "Gold": 22250
+    },
+    {
+      "Id": 140090,
+      "EvolutionLevel": 90,
+      "Stats": [
+        3.0,
+        30.0,
+        0.9
+      ],
+      "Gold": 22500
     }
   ]
 }

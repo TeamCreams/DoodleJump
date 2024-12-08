@@ -155,6 +155,7 @@
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/Projectile.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/Screenshot.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterAnimation.cs" />
+    <Compile Include="Assets/@Scripts/UI/Popup/UI_PurchasePopup.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/Scarecrow.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Character.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_Heart.cs" />

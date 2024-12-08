@@ -1,0 +1,413 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: EvolutionItemSprite
+  m_EditorClassIdentifier: 
+  m_GroupName: EvolutionItemSprite
+  m_GUID: 7237baa6498d54500bce4d399900f839
+  m_SerializeEntries:
+  - m_GUID: 008c5abf7634c2b47965ba281527b184
+    m_Address: BaseballOutfitIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 03cdc7052e61d334aa565478a7317842
+    m_Address: HalberdierArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 04632f95f0ffc034fb48b494c46dd60c
+    m_Address: FireKnightArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0578ff2509eb47c7a86d27bc1e546ae8
+    m_Address: ClericIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0cb4628c185ac39408496a2ab6bb1ab8
+    m_Address: ArielDressBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 125702f9a233b17459e8cfc0b59db530
+    m_Address: BerserkArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 164e6a596a00446cb46cdf8b37569423
+    m_Address: BishopArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 17fe4660aed04f408fcc860fbfe16abb
+    m_Address: FarmerClothesIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ebff2f7a6dc1d54a960b928f1b0277f
+    m_Address: BlacksmithCostumeIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 21ab0b0676da458290547a6e259c412b
+    m_Address: HunterIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 26de664c6a05edd4ea65144d7e0529f4
+    m_Address: AssassinArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 29cab9d10e9b4ae6a0c50476082d7c19
+    m_Address: BanditArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2eedf4a4de94454d861afbc3aa7cafe4
+    m_Address: FireWarriorArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 32d01399bad24c1398c08181a063808f
+    m_Address: DruidArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ae2c2f9541f95648aad560ac12477e7
+    m_Address: FarmerClothesBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b29d026bc954b878b63b639ec902458
+    m_Address: CarnivalMaskIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3f0f2e3492354847b269fb550db647b8
+    m_Address: CataphractArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44e56a6f46dd4ebdaaca10e032890dd8
+    m_Address: GladiatorArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 454c2870930554b4d8113b510b91dfcb
+    m_Address: FireWizardArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e44568a046156a4d8347e377ab87e95
+    m_Address: ChampionArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ebb7f3d9ea54825b8d98fa3ae2c468e
+    m_Address: GuardArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f2ac92591d0466b92caae7acf0f9bb4
+    m_Address: DwellerArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 53eb7cc514664b1eb0154aad1e874fbe
+    m_Address: FireKnightArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 59bc4a26f72541e49c317554c122ce30
+    m_Address: DarkKnightIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 605f65a62b6b12e40910df445c96f99d
+    m_Address: DruidArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 635c93a6f3ed402e872920e987043b02
+    m_Address: HalberdierArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65666644c8924888a14f9c0eb0f0b964
+    m_Address: GreyKnightIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65fac0910b3046ca8058e14e4abd48b2
+    m_Address: Mask1Icon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a4c202e48026a44dbc247c60c3d6def
+    m_Address: ClericBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 74e5ecf1b96e81349bf3556b7b50755d
+    m_Address: BlacksmithCostumeBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 75e2d3c64c0c4464990d0977b2c3b493
+    m_Address: HeavyArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b0b7c1ef31e46a468e81b98aff10477
+    m_Address: DwellerArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7f35460b66280f14c9aaa1ff52360fc7
+    m_Address: FireWarriorArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 81b34a41f7ac2974d911100896efaf63
+    m_Address: ChainmailLightArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 82562702d91a2294b8ba8ac5dfe0909a
+    m_Address: GuardArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8468f4f10db844369891b926b6d2d612
+    m_Address: BerserkArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b16a10cd5204efda24bf35af2e02b3d
+    m_Address: Mask2Icon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c4ea040c75244a4ba93e67e54b08cce
+    m_Address: ShamanMaskIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8cd56c8b0c0444dc9e7699d1a4019bd8
+    m_Address: HeavyArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90935eae96cb86443b1fa6dea35033c6
+    m_Address: BanditArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 91eec7f45e6746e295e5adf139a50418
+    m_Address: CardinalArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 938fac165a038d441a3f421fc8f49f3c
+    m_Address: BaseballOutfitBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9541ef1cf3814a2a97f9fde9220bd84e
+    m_Address: ArielDressIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 957fb2fa1359bfe4f95d22b2179cbac2
+    m_Address: CataphractArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 98abbc5ebe85fe14cb37b28182b9bf93
+    m_Address: DestroyerArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d7fd34c0abee764f881c8cf1f1e215a
+    m_Address: HermitBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a48a77f29362479458e62d18a74961a9
+    m_Address: ClothMaskIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a591cd606edc48a4bb1a0ec2c4e8129d
+    m_Address: FireAdeptBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b38838e034344768bdfa5fb343db2b9d
+    m_Address: DeserterIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b67df06b557326d41a54558f7f33ac65
+    m_Address: DeserterBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd3a13a6c98dadd4d88d2d48d916e321
+    m_Address: GreyKnightBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: beb535662fc9412d80c082c49168f073
+    m_Address: HermitIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c29085eece97f9841b9a0fbee4f0ab22
+    m_Address: GladiatorArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c5abc956e2c34ee1b8a6bfd1a53f7d85
+    m_Address: ChainmailLightArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: caec4831c1764d7cb8d1d3a488d2997c
+    m_Address: FireAdeptIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cdba2931522b49ccb7219176fc7b277c
+    m_Address: BanditMaskIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d37752e6b2a818543b1fb03d7740d4ac
+    m_Address: BishopArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d8cb806d863a039419e511bb56fbb138
+    m_Address: DarkKnightBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d92dc600a5b4405ba6a2a54677e15b40
+    m_Address: FireWizardArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dbd003e899d54ca3b1486d49205d729c
+    m_Address: DestroyerArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dbe33b48676142f69478afab8e359919
+    m_Address: BanditLightArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e97739eedeb60884596e54f47c19b494
+    m_Address: CardinalArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f9bc4a85170c457caaa8e583c3beee2e
+    m_Address: ChampionArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc68d5a2a88ff264e81c5d287f483003
+    m_Address: BanditLightArmorBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fdbc4e24d41673444bf66b31a755b5f8
+    m_Address: HunterBootsIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 2e346ec8844bb4282b60d1f21fe4423c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 7712785587d054bcf91b47a98a67494b, type: 2}
+    - {fileID: 11400000, guid: fab1fb04b062b4b49bc50ee2afde7f94, type: 2}

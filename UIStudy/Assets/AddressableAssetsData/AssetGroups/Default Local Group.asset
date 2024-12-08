@@ -55,6 +55,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e83128d56b334879b705cc4e6b056d32
+    m_Address: AssassinArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f06fc6ac58430514cb1265820eb4ce40
     m_Address: EventSystem
     m_ReadOnly: 0

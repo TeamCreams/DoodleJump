@@ -382,7 +382,9 @@ namespace Data
     public class EvolutionData
     {
         public int Id;
-        public int	Level;
+        public int EvolutionLevel;
+        public List<float >Stats = new();
+        public int Gold;
     }
 
     [Serializable]
@@ -395,6 +397,30 @@ namespace Data
             Dictionary<int, EvolutionData> dict = new Dictionary<int, EvolutionData>();
             foreach (EvolutionData evolutionData in evolutionDatas)
                 dict.Add(evolutionData.Id, evolutionData);
+
+            return dict;
+        }
+    }
+
+    public class EvolutionItemData
+    {
+        public int Id;
+        public int	Level;
+        public string Boots;
+        public string Armor;
+        public string Mask;
+    }
+
+    [Serializable]
+    public class EvolutionItemDataLoader : ILoader<int, EvolutionItemData>
+    {
+        public List<EvolutionItemData> evolutionItemDatas = new List<EvolutionItemData>();
+
+        public Dictionary<int, EvolutionItemData> MakeDict()
+        {
+            Dictionary<int, EvolutionItemData> dict = new Dictionary<int, EvolutionItemData>();
+            foreach (EvolutionItemData evolutionItemData in evolutionItemDatas)
+                dict.Add(evolutionItemData.Id, evolutionItemData);
 
             return dict;
         }

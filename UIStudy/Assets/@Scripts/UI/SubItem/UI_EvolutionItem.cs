@@ -13,7 +13,8 @@ public class UI_EvolutionItem : UI_Base
     }
     private enum Images
     {
-        isClick
+        isClick,
+        Icon
     }
         private Toggle _toggle = null;
 
@@ -34,5 +35,11 @@ public class UI_EvolutionItem : UI_Base
     private void OnClick_IsClickItem(bool isOn)
     {
         GetObject((int)GameObjects.Selected).SetActive(isOn);
+        Managers.UI.ShowPopupUI<UI_PurchasePopup>();
+    }
+    public void SetIcon(string str)
+    {
+        var sprite = Managers.Resource.Load<Sprite>($"{str}.sprite");
+        GetImage((int)Images.Icon).sprite = sprite;
     }
 }
