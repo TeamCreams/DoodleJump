@@ -42,8 +42,8 @@ public class UI_EvolutionItemSet : UI_Base
         GetToggle((int)Toggles.EvolutionItem_Mask).group = parent;
         GetToggle((int)Toggles.EvolutionItem_Armor).group = parent;
         GetToggle((int)Toggles.EvolutionItem_Boots).group = parent;
-        GetObject((int)GameObjects.EvolutionItem_Boots).GetComponent<UI_EvolutionItem>().SetIcon($"{item.Boots}BootsIcon");
-        GetObject((int)GameObjects.EvolutionItem_Armor).GetComponent<UI_EvolutionItem>().SetIcon($"{item.Armor}Icon");
-        GetObject((int)GameObjects.EvolutionItem_Mask).GetComponent<UI_EvolutionItem>().SetIcon($"{item.Mask}Icon");
+        GetObject((int)GameObjects.EvolutionItem_Boots).GetComponent<UI_EvolutionItem>().SetIcon(item.EvolutionDataId[0]);
+        GetObject((int)GameObjects.EvolutionItem_Armor).GetComponent<UI_EvolutionItem>().SetIcon(item.EvolutionDataId[1]);
+        GetObject((int)GameObjects.EvolutionItem_Mask).GetComponent<UI_EvolutionItem>().SetIcon(item.EvolutionDataId[2]);
     }
 }

@@ -52,7 +52,7 @@ public class UI_InventoryItem : UI_Base
             return false;
         }
         BindImages(typeof(Images));
-        this.gameObject.BindEvent(OnClick_SetCharacter, Define.EUIEvent.Click);
+        this.gameObject.BindEvent(OnClick_SetCharacter, EUIEvent.Click);
         _toggle = this.gameObject.GetComponent<Toggle>();
         return true;
     }
@@ -86,9 +86,5 @@ public class UI_InventoryItem : UI_Base
         }
 
         Managers.Event.TriggerEvent(EEventType.SetStyle_Player, this);
-
     }
-
-
-
 }

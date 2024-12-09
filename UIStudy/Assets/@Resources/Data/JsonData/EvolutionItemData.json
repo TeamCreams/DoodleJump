@@ -5,210 +5,360 @@
       "Level": 1,
       "Boots": "ArielDress",
       "Armor": "ArielDress",
-      "Mask": "ClothMask"
+      "Mask": "ClothMask",
+      "EvolutionDataId": [
+        140001,
+        140002,
+        140003
+      ]
     },
     {
       "Id": 130002,
       "Level": 2,
       "Boots": "AssassinArmor",
       "Armor": "AssassinArmor",
-      "Mask": "ClothMask"
+      "Mask": "ClothMask",
+      "EvolutionDataId": [
+        140004,
+        140005,
+        140006
+      ]
     },
     {
       "Id": 130003,
       "Level": 3,
       "Boots": "BanditArmor",
       "Armor": "BanditArmor",
-      "Mask": "ClothMask"
+      "Mask": "ClothMask",
+      "EvolutionDataId": [
+        140007,
+        140008,
+        140009
+      ]
     },
     {
       "Id": 130004,
       "Level": 4,
       "Boots": "BanditLightArmor",
       "Armor": "BanditLightArmor",
-      "Mask": "ClothMask"
+      "Mask": "ClothMask",
+      "EvolutionDataId": [
+        140010,
+        140011,
+        140012
+      ]
     },
     {
       "Id": 130005,
       "Level": 5,
       "Boots": "BaseballOutfit",
       "Armor": "BaseballOutfit",
-      "Mask": "ClothMask"
+      "Mask": "ClothMask",
+      "EvolutionDataId": [
+        140013,
+        140014,
+        140015
+      ]
     },
     {
       "Id": 130006,
       "Level": 6,
       "Boots": "BerserkArmor",
       "Armor": "BerserkArmor",
-      "Mask": "BanditMask"
+      "Mask": "BanditMask",
+      "EvolutionDataId": [
+        140016,
+        140017,
+        140018
+      ]
     },
     {
       "Id": 130007,
       "Level": 7,
       "Boots": "BishopArmor",
       "Armor": "BishopArmor",
-      "Mask": "BanditMask"
+      "Mask": "BanditMask",
+      "EvolutionDataId": [
+        140019,
+        140020,
+        140021
+      ]
     },
     {
       "Id": 130008,
       "Level": 8,
       "Boots": "BlacksmithCostume",
       "Armor": "BlacksmithCostume",
-      "Mask": "BanditMask"
+      "Mask": "BanditMask",
+      "EvolutionDataId": [
+        140022,
+        140023,
+        140024
+      ]
     },
     {
       "Id": 130009,
       "Level": 9,
       "Boots": "CardinalArmor",
       "Armor": "CardinalArmor",
-      "Mask": "BanditMask"
+      "Mask": "BanditMask",
+      "EvolutionDataId": [
+        140025,
+        140026,
+        140027
+      ]
     },
     {
       "Id": 130010,
       "Level": 10,
       "Boots": "CataphractArmor",
       "Armor": "CataphractArmor",
-      "Mask": "BanditMask"
+      "Mask": "BanditMask",
+      "EvolutionDataId": [
+        140028,
+        140029,
+        140030
+      ]
     },
     {
       "Id": 130011,
       "Level": 11,
       "Boots": "ChainmailLightArmor",
       "Armor": "ChainmailLightArmor",
-      "Mask": "Mask1"
+      "Mask": "Mask1",
+      "EvolutionDataId": [
+        140031,
+        140032,
+        140033
+      ]
     },
     {
       "Id": 130012,
       "Level": 12,
       "Boots": "ChampionArmor",
       "Armor": "ChampionArmor",
-      "Mask": "Mask1"
+      "Mask": "Mask1",
+      "EvolutionDataId": [
+        140034,
+        140035,
+        140036
+      ]
     },
     {
       "Id": 130013,
       "Level": 13,
       "Boots": "Cleric",
       "Armor": "Cleric",
-      "Mask": "Mask1"
+      "Mask": "Mask1",
+      "EvolutionDataId": [
+        140037,
+        140038,
+        140039
+      ]
     },
     {
       "Id": 130014,
       "Level": 14,
       "Boots": "DarkKnight",
       "Armor": "DarkKnight",
-      "Mask": "Mask1"
+      "Mask": "Mask1",
+      "EvolutionDataId": [
+        140040,
+        140041,
+        140042
+      ]
     },
     {
       "Id": 130015,
       "Level": 15,
       "Boots": "Deserter",
       "Armor": "Deserter",
-      "Mask": "Mask1"
+      "Mask": "Mask1",
+      "EvolutionDataId": [
+        140043,
+        140044,
+        140045
+      ]
     },
     {
       "Id": 130016,
       "Level": 16,
       "Boots": "DestroyerArmor",
       "Armor": "DestroyerArmor",
-      "Mask": "Mask2"
+      "Mask": "Mask2",
+      "EvolutionDataId": [
+        140046,
+        140047,
+        140048
+      ]
     },
     {
       "Id": 130017,
       "Level": 17,
       "Boots": "DruidArmor",
       "Armor": "DruidArmor",
-      "Mask": "Mask2"
+      "Mask": "Mask2",
+      "EvolutionDataId": [
+        140049,
+        140050,
+        140051
+      ]
     },
     {
       "Id": 130018,
       "Level": 18,
       "Boots": "DwellerArmor",
       "Armor": "DwellerArmor",
-      "Mask": "Mask2"
+      "Mask": "Mask2",
+      "EvolutionDataId": [
+        140052,
+        140053,
+        140054
+      ]
     },
     {
       "Id": 130019,
       "Level": 19,
       "Boots": "FarmerClothes",
       "Armor": "FarmerClothes",
-      "Mask": "Mask2"
+      "Mask": "Mask2",
+      "EvolutionDataId": [
+        140055,
+        140056,
+        140057
+      ]
     },
     {
       "Id": 130020,
       "Level": 20,
       "Boots": "FireAdept",
       "Armor": "FireAdept",
-      "Mask": "Mask2"
+      "Mask": "Mask2",
+      "EvolutionDataId": [
+        140058,
+        140059,
+        140060
+      ]
     },
     {
       "Id": 130021,
       "Level": 21,
       "Boots": "FireKnightArmor",
       "Armor": "FireKnightArmor",
-      "Mask": "CarnivalMask"
+      "Mask": "CarnivalMask",
+      "EvolutionDataId": [
+        140061,
+        140062,
+        140063
+      ]
     },
     {
       "Id": 130022,
       "Level": 22,
       "Boots": "FireWarriorArmor",
       "Armor": "FireWarriorArmor",
-      "Mask": "CarnivalMask"
+      "Mask": "CarnivalMask",
+      "EvolutionDataId": [
+        140064,
+        140065,
+        140066
+      ]
     },
     {
       "Id": 130023,
       "Level": 23,
       "Boots": "FireWizardArmor",
       "Armor": "FireWizardArmor",
-      "Mask": "CarnivalMask"
+      "Mask": "CarnivalMask",
+      "EvolutionDataId": [
+        140067,
+        140068,
+        140069
+      ]
     },
     {
       "Id": 130024,
       "Level": 24,
       "Boots": "GladiatorArmor",
       "Armor": "GladiatorArmor",
-      "Mask": "CarnivalMask"
+      "Mask": "CarnivalMask",
+      "EvolutionDataId": [
+        140070,
+        140071,
+        140072
+      ]
     },
     {
       "Id": 130025,
       "Level": 25,
       "Boots": "GreyKnight",
       "Armor": "GreyKnight",
-      "Mask": "CarnivalMask"
+      "Mask": "CarnivalMask",
+      "EvolutionDataId": [
+        140073,
+        140074,
+        140075
+      ]
     },
     {
       "Id": 130026,
       "Level": 26,
       "Boots": "GuardArmor",
       "Armor": "GuardArmor",
-      "Mask": "ShamanMask"
+      "Mask": "ShamanMask",
+      "EvolutionDataId": [
+        140076,
+        140077,
+        140078
+      ]
     },
     {
       "Id": 130027,
       "Level": 27,
       "Boots": "HalberdierArmor",
       "Armor": "HalberdierArmor",
-      "Mask": "ShamanMask"
+      "Mask": "ShamanMask",
+      "EvolutionDataId": [
+        140079,
+        140080,
+        140081
+      ]
     },
     {
       "Id": 130028,
       "Level": 28,
       "Boots": "HeavyArmor",
       "Armor": "HeavyArmor",
-      "Mask": "ShamanMask"
+      "Mask": "ShamanMask",
+      "EvolutionDataId": [
+        140082,
+        140083,
+        140084
+      ]
     },
     {
       "Id": 130029,
       "Level": 29,
       "Boots": "Hermit",
       "Armor": "Hermit",
-      "Mask": "ShamanMask"
+      "Mask": "ShamanMask",
+      "EvolutionDataId": [
+        140085,
+        140086,
+        140087
+      ]
     },
     {
       "Id": 130030,
       "Level": 30,
       "Boots": "Hunter",
       "Armor": "Hunter",
-      "Mask": "ShamanMask"
+      "Mask": "ShamanMask",
+      "EvolutionDataId": [
+        140088,
+        140089,
+        140090
+      ]
     }
   ]
 }

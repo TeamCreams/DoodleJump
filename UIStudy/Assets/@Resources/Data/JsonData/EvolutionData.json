@@ -2,903 +2,1083 @@
   "evolutionDatas": [
     {
       "Id": 140001,
-      "EvolutionLevel": 1,
       "Stats": [
         0.1,
         0.0,
         0.0
       ],
-      "Gold": 250
+      "Gold": 250,
+      "Item": 0,
+      "ItemSprite": "ArielDress",
+      "PrevEvolutionId": 0
     },
     {
       "Id": 140002,
-      "EvolutionLevel": 2,
       "Stats": [
         0.1,
         1.0,
         0.0
       ],
-      "Gold": 500
+      "Gold": 500,
+      "Item": 1,
+      "ItemSprite": "ArielDress",
+      "PrevEvolutionId": 140001
     },
     {
       "Id": 140003,
-      "EvolutionLevel": 3,
       "Stats": [
         0.1,
         1.0,
         0.03
       ],
-      "Gold": 750
+      "Gold": 750,
+      "Item": 2,
+      "ItemSprite": "ClothMask",
+      "PrevEvolutionId": 140002
     },
     {
       "Id": 140004,
-      "EvolutionLevel": 4,
       "Stats": [
         0.2,
         1.0,
         0.03
       ],
-      "Gold": 1000
+      "Gold": 1000,
+      "Item": 0,
+      "ItemSprite": "AssassinArmor",
+      "PrevEvolutionId": 140003
     },
     {
       "Id": 140005,
-      "EvolutionLevel": 5,
       "Stats": [
         0.2,
         2.0,
         0.03
       ],
-      "Gold": 1250
+      "Gold": 1250,
+      "Item": 1,
+      "ItemSprite": "AssassinArmor",
+      "PrevEvolutionId": 140004
     },
     {
       "Id": 140006,
-      "EvolutionLevel": 6,
       "Stats": [
         0.2,
         2.0,
         0.06
       ],
-      "Gold": 1500
+      "Gold": 1500,
+      "Item": 2,
+      "ItemSprite": "ClothMask",
+      "PrevEvolutionId": 140005
     },
     {
       "Id": 140007,
-      "EvolutionLevel": 7,
       "Stats": [
         0.3,
         2.0,
         0.06
       ],
-      "Gold": 1750
+      "Gold": 1750,
+      "Item": 0,
+      "ItemSprite": "BanditArmor",
+      "PrevEvolutionId": 140006
     },
     {
       "Id": 140008,
-      "EvolutionLevel": 8,
       "Stats": [
         0.3,
         3.0,
         0.06
       ],
-      "Gold": 2000
+      "Gold": 2000,
+      "Item": 1,
+      "ItemSprite": "BanditArmor",
+      "PrevEvolutionId": 140007
     },
     {
       "Id": 140009,
-      "EvolutionLevel": 9,
       "Stats": [
         0.3,
         3.0,
         0.09
       ],
-      "Gold": 2250
+      "Gold": 2250,
+      "Item": 2,
+      "ItemSprite": "ClothMask",
+      "PrevEvolutionId": 140008
     },
     {
       "Id": 140010,
-      "EvolutionLevel": 10,
       "Stats": [
         0.4,
         3.0,
         0.09
       ],
-      "Gold": 2500
+      "Gold": 2500,
+      "Item": 0,
+      "ItemSprite": "BanditLightArmor",
+      "PrevEvolutionId": 140009
     },
     {
       "Id": 140011,
-      "EvolutionLevel": 11,
       "Stats": [
         0.4,
         4.0,
         0.09
       ],
-      "Gold": 2750
+      "Gold": 2750,
+      "Item": 1,
+      "ItemSprite": "BanditLightArmor",
+      "PrevEvolutionId": 140010
     },
     {
       "Id": 140012,
-      "EvolutionLevel": 12,
       "Stats": [
         0.4,
         4.0,
         0.12
       ],
-      "Gold": 3000
+      "Gold": 3000,
+      "Item": 2,
+      "ItemSprite": "ClothMask",
+      "PrevEvolutionId": 140011
     },
     {
       "Id": 140013,
-      "EvolutionLevel": 13,
       "Stats": [
         0.5,
         4.0,
         0.12
       ],
-      "Gold": 3250
+      "Gold": 3250,
+      "Item": 0,
+      "ItemSprite": "BaseballOutfit",
+      "PrevEvolutionId": 140012
     },
     {
       "Id": 140014,
-      "EvolutionLevel": 14,
       "Stats": [
         0.5,
         5.0,
         0.12
       ],
-      "Gold": 3500
+      "Gold": 3500,
+      "Item": 1,
+      "ItemSprite": "BaseballOutfit",
+      "PrevEvolutionId": 140013
     },
     {
       "Id": 140015,
-      "EvolutionLevel": 15,
       "Stats": [
         0.5,
         5.0,
         0.15
       ],
-      "Gold": 3750
+      "Gold": 3750,
+      "Item": 2,
+      "ItemSprite": "ClothMask",
+      "PrevEvolutionId": 140014
     },
     {
       "Id": 140016,
-      "EvolutionLevel": 16,
       "Stats": [
         0.6,
         5.0,
         0.15
       ],
-      "Gold": 4000
+      "Gold": 4000,
+      "Item": 0,
+      "ItemSprite": "BerserkArmor",
+      "PrevEvolutionId": 140015
     },
     {
       "Id": 140017,
-      "EvolutionLevel": 17,
       "Stats": [
         0.6,
         6.0,
         0.15
       ],
-      "Gold": 4250
+      "Gold": 4250,
+      "Item": 1,
+      "ItemSprite": "BerserkArmor",
+      "PrevEvolutionId": 140016
     },
     {
       "Id": 140018,
-      "EvolutionLevel": 18,
       "Stats": [
         0.6,
         6.0,
         0.18
       ],
-      "Gold": 4500
+      "Gold": 4500,
+      "Item": 2,
+      "ItemSprite": "BanditMask",
+      "PrevEvolutionId": 140017
     },
     {
       "Id": 140019,
-      "EvolutionLevel": 19,
       "Stats": [
         0.7,
         6.0,
         0.18
       ],
-      "Gold": 4750
+      "Gold": 4750,
+      "Item": 0,
+      "ItemSprite": "BishopArmor",
+      "PrevEvolutionId": 140018
     },
     {
       "Id": 140020,
-      "EvolutionLevel": 20,
       "Stats": [
         0.7,
         7.0,
         0.18
       ],
-      "Gold": 5000
+      "Gold": 5000,
+      "Item": 1,
+      "ItemSprite": "BishopArmor",
+      "PrevEvolutionId": 140019
     },
     {
       "Id": 140021,
-      "EvolutionLevel": 21,
       "Stats": [
         0.7,
         7.0,
         0.21
       ],
-      "Gold": 5250
+      "Gold": 5250,
+      "Item": 2,
+      "ItemSprite": "BanditMask",
+      "PrevEvolutionId": 140020
     },
     {
       "Id": 140022,
-      "EvolutionLevel": 22,
       "Stats": [
         0.8,
         7.0,
         0.21
       ],
-      "Gold": 5500
+      "Gold": 5500,
+      "Item": 0,
+      "ItemSprite": "BlacksmithCostume",
+      "PrevEvolutionId": 140021
     },
     {
       "Id": 140023,
-      "EvolutionLevel": 23,
       "Stats": [
         0.8,
         8.0,
         0.21
       ],
-      "Gold": 5750
+      "Gold": 5750,
+      "Item": 1,
+      "ItemSprite": "BlacksmithCostume",
+      "PrevEvolutionId": 140022
     },
     {
       "Id": 140024,
-      "EvolutionLevel": 24,
       "Stats": [
         0.8,
         8.0,
         0.24
       ],
-      "Gold": 6000
+      "Gold": 6000,
+      "Item": 2,
+      "ItemSprite": "BanditMask",
+      "PrevEvolutionId": 140023
     },
     {
       "Id": 140025,
-      "EvolutionLevel": 25,
       "Stats": [
         0.9,
         8.0,
         0.24
       ],
-      "Gold": 6250
+      "Gold": 6250,
+      "Item": 0,
+      "ItemSprite": "CardinalArmor",
+      "PrevEvolutionId": 140024
     },
     {
       "Id": 140026,
-      "EvolutionLevel": 26,
       "Stats": [
         0.9,
         9.0,
         0.24
       ],
-      "Gold": 6500
+      "Gold": 6500,
+      "Item": 1,
+      "ItemSprite": "CardinalArmor",
+      "PrevEvolutionId": 140025
     },
     {
       "Id": 140027,
-      "EvolutionLevel": 27,
       "Stats": [
         0.9,
         9.0,
         0.27
       ],
-      "Gold": 6750
+      "Gold": 6750,
+      "Item": 2,
+      "ItemSprite": "BanditMask",
+      "PrevEvolutionId": 140026
     },
     {
       "Id": 140028,
-      "EvolutionLevel": 28,
       "Stats": [
         1.0,
         9.0,
         0.27
       ],
-      "Gold": 7000
+      "Gold": 7000,
+      "Item": 0,
+      "ItemSprite": "CataphractArmor",
+      "PrevEvolutionId": 140027
     },
     {
       "Id": 140029,
-      "EvolutionLevel": 29,
       "Stats": [
         1.0,
         10.0,
         0.27
       ],
-      "Gold": 7250
+      "Gold": 7250,
+      "Item": 1,
+      "ItemSprite": "CataphractArmor",
+      "PrevEvolutionId": 140028
     },
     {
       "Id": 140030,
-      "EvolutionLevel": 30,
       "Stats": [
         1.0,
         10.0,
         0.3
       ],
-      "Gold": 7500
+      "Gold": 7500,
+      "Item": 2,
+      "ItemSprite": "BanditMask",
+      "PrevEvolutionId": 140029
     },
     {
       "Id": 140031,
-      "EvolutionLevel": 31,
       "Stats": [
         1.1,
         10.0,
         0.3
       ],
-      "Gold": 7750
+      "Gold": 7750,
+      "Item": 0,
+      "ItemSprite": "ChainmailLightArmor",
+      "PrevEvolutionId": 140030
     },
     {
       "Id": 140032,
-      "EvolutionLevel": 32,
       "Stats": [
         1.1,
         11.0,
         0.3
       ],
-      "Gold": 8000
+      "Gold": 8000,
+      "Item": 1,
+      "ItemSprite": "ChainmailLightArmor",
+      "PrevEvolutionId": 140031
     },
     {
       "Id": 140033,
-      "EvolutionLevel": 33,
       "Stats": [
         1.1,
         11.0,
         0.33
       ],
-      "Gold": 8250
+      "Gold": 8250,
+      "Item": 2,
+      "ItemSprite": "Mask1",
+      "PrevEvolutionId": 140032
     },
     {
       "Id": 140034,
-      "EvolutionLevel": 34,
       "Stats": [
         1.2,
         11.0,
         0.33
       ],
-      "Gold": 8500
+      "Gold": 8500,
+      "Item": 0,
+      "ItemSprite": "ChampionArmor",
+      "PrevEvolutionId": 140033
     },
     {
       "Id": 140035,
-      "EvolutionLevel": 35,
       "Stats": [
         1.2,
         12.0,
         0.33
       ],
-      "Gold": 8750
+      "Gold": 8750,
+      "Item": 1,
+      "ItemSprite": "ChampionArmor",
+      "PrevEvolutionId": 140034
     },
     {
       "Id": 140036,
-      "EvolutionLevel": 36,
       "Stats": [
         1.2,
         12.0,
         0.36
       ],
-      "Gold": 9000
+      "Gold": 9000,
+      "Item": 2,
+      "ItemSprite": "Mask1",
+      "PrevEvolutionId": 140035
     },
     {
       "Id": 140037,
-      "EvolutionLevel": 37,
       "Stats": [
         1.3,
         12.0,
         0.36
       ],
-      "Gold": 9250
+      "Gold": 9250,
+      "Item": 0,
+      "ItemSprite": "Cleric",
+      "PrevEvolutionId": 140036
     },
     {
       "Id": 140038,
-      "EvolutionLevel": 38,
       "Stats": [
         1.3,
         13.0,
         0.36
       ],
-      "Gold": 9500
+      "Gold": 9500,
+      "Item": 1,
+      "ItemSprite": "Cleric",
+      "PrevEvolutionId": 140037
     },
     {
       "Id": 140039,
-      "EvolutionLevel": 39,
       "Stats": [
         1.3,
         13.0,
         0.39
       ],
-      "Gold": 9750
+      "Gold": 9750,
+      "Item": 2,
+      "ItemSprite": "Mask1",
+      "PrevEvolutionId": 140038
     },
     {
       "Id": 140040,
-      "EvolutionLevel": 40,
       "Stats": [
         1.4,
         13.0,
         0.39
       ],
-      "Gold": 10000
+      "Gold": 10000,
+      "Item": 0,
+      "ItemSprite": "DarkKnight",
+      "PrevEvolutionId": 140039
     },
     {
       "Id": 140041,
-      "EvolutionLevel": 41,
       "Stats": [
         1.4,
         14.0,
         0.39
       ],
-      "Gold": 10250
+      "Gold": 10250,
+      "Item": 1,
+      "ItemSprite": "DarkKnight",
+      "PrevEvolutionId": 140040
     },
     {
       "Id": 140042,
-      "EvolutionLevel": 42,
       "Stats": [
         1.4,
         14.0,
         0.42
       ],
-      "Gold": 10500
+      "Gold": 10500,
+      "Item": 2,
+      "ItemSprite": "Mask1",
+      "PrevEvolutionId": 140041
     },
     {
       "Id": 140043,
-      "EvolutionLevel": 43,
       "Stats": [
         1.5,
         14.0,
         0.42
       ],
-      "Gold": 10750
+      "Gold": 10750,
+      "Item": 0,
+      "ItemSprite": "Deserter",
+      "PrevEvolutionId": 140042
     },
     {
       "Id": 140044,
-      "EvolutionLevel": 44,
       "Stats": [
         1.5,
         15.0,
         0.42
       ],
-      "Gold": 11000
+      "Gold": 11000,
+      "Item": 1,
+      "ItemSprite": "Deserter",
+      "PrevEvolutionId": 140043
     },
     {
       "Id": 140045,
-      "EvolutionLevel": 45,
       "Stats": [
         1.5,
         15.0,
         0.45
       ],
-      "Gold": 11250
+      "Gold": 11250,
+      "Item": 2,
+      "ItemSprite": "Mask1",
+      "PrevEvolutionId": 140044
     },
     {
       "Id": 140046,
-      "EvolutionLevel": 46,
       "Stats": [
         1.6,
         15.0,
         0.45
       ],
-      "Gold": 11500
+      "Gold": 11500,
+      "Item": 0,
+      "ItemSprite": "DestroyerArmor",
+      "PrevEvolutionId": 140045
     },
     {
       "Id": 140047,
-      "EvolutionLevel": 47,
       "Stats": [
         1.6,
         16.0,
         0.45
       ],
-      "Gold": 11750
+      "Gold": 11750,
+      "Item": 1,
+      "ItemSprite": "DestroyerArmor",
+      "PrevEvolutionId": 140046
     },
     {
       "Id": 140048,
-      "EvolutionLevel": 48,
       "Stats": [
         1.6,
         16.0,
         0.48
       ],
-      "Gold": 12000
+      "Gold": 12000,
+      "Item": 2,
+      "ItemSprite": "Mask2",
+      "PrevEvolutionId": 140047
     },
     {
       "Id": 140049,
-      "EvolutionLevel": 49,
       "Stats": [
         1.7,
         16.0,
         0.48
       ],
-      "Gold": 12250
+      "Gold": 12250,
+      "Item": 0,
+      "ItemSprite": "DruidArmor",
+      "PrevEvolutionId": 140048
     },
     {
       "Id": 140050,
-      "EvolutionLevel": 50,
       "Stats": [
         1.7,
         17.0,
         0.48
       ],
-      "Gold": 12500
+      "Gold": 12500,
+      "Item": 1,
+      "ItemSprite": "DruidArmor",
+      "PrevEvolutionId": 140049
     },
     {
       "Id": 140051,
-      "EvolutionLevel": 51,
       "Stats": [
         1.7,
         17.0,
         0.51
       ],
-      "Gold": 12750
+      "Gold": 12750,
+      "Item": 2,
+      "ItemSprite": "Mask2",
+      "PrevEvolutionId": 140050
     },
     {
       "Id": 140052,
-      "EvolutionLevel": 52,
       "Stats": [
         1.8,
         17.0,
         0.51
       ],
-      "Gold": 13000
+      "Gold": 13000,
+      "Item": 0,
+      "ItemSprite": "DwellerArmor",
+      "PrevEvolutionId": 140051
     },
     {
       "Id": 140053,
-      "EvolutionLevel": 53,
       "Stats": [
         1.8,
         18.0,
         0.51
       ],
-      "Gold": 13250
+      "Gold": 13250,
+      "Item": 1,
+      "ItemSprite": "DwellerArmor",
+      "PrevEvolutionId": 140052
     },
     {
       "Id": 140054,
-      "EvolutionLevel": 54,
       "Stats": [
         1.8,
         18.0,
         0.54
       ],
-      "Gold": 13500
+      "Gold": 13500,
+      "Item": 2,
+      "ItemSprite": "Mask2",
+      "PrevEvolutionId": 140053
     },
     {
       "Id": 140055,
-      "EvolutionLevel": 55,
       "Stats": [
         1.9,
         18.0,
         0.54
       ],
-      "Gold": 13750
+      "Gold": 13750,
+      "Item": 0,
+      "ItemSprite": "FarmerClothes",
+      "PrevEvolutionId": 140054
     },
     {
       "Id": 140056,
-      "EvolutionLevel": 56,
       "Stats": [
         1.9,
         19.0,
         0.54
       ],
-      "Gold": 14000
+      "Gold": 14000,
+      "Item": 1,
+      "ItemSprite": "FarmerClothes",
+      "PrevEvolutionId": 140055
     },
     {
       "Id": 140057,
-      "EvolutionLevel": 57,
       "Stats": [
         1.9,
         19.0,
         0.57
       ],
-      "Gold": 14250
+      "Gold": 14250,
+      "Item": 2,
+      "ItemSprite": "Mask2",
+      "PrevEvolutionId": 140056
     },
     {
       "Id": 140058,
-      "EvolutionLevel": 58,
       "Stats": [
         2.0,
         19.0,
         0.57
       ],
-      "Gold": 14500
+      "Gold": 14500,
+      "Item": 0,
+      "ItemSprite": "FireAdept",
+      "PrevEvolutionId": 140057
     },
     {
       "Id": 140059,
-      "EvolutionLevel": 59,
       "Stats": [
         2.0,
         20.0,
         0.57
       ],
-      "Gold": 14750
+      "Gold": 14750,
+      "Item": 1,
+      "ItemSprite": "FireAdept",
+      "PrevEvolutionId": 140058
     },
     {
       "Id": 140060,
-      "EvolutionLevel": 60,
       "Stats": [
         2.0,
         20.0,
         0.6
       ],
-      "Gold": 15000
+      "Gold": 15000,
+      "Item": 2,
+      "ItemSprite": "Mask2",
+      "PrevEvolutionId": 140059
     },
     {
       "Id": 140061,
-      "EvolutionLevel": 61,
       "Stats": [
         2.1,
         20.0,
         0.6
       ],
-      "Gold": 15250
+      "Gold": 15250,
+      "Item": 0,
+      "ItemSprite": "FireKnightArmor",
+      "PrevEvolutionId": 140060
     },
     {
       "Id": 140062,
-      "EvolutionLevel": 62,
       "Stats": [
         2.1,
         21.0,
         0.6
       ],
-      "Gold": 15500
+      "Gold": 15500,
+      "Item": 1,
+      "ItemSprite": "FireKnightArmor",
+      "PrevEvolutionId": 140061
     },
     {
       "Id": 140063,
-      "EvolutionLevel": 63,
       "Stats": [
         2.1,
         21.0,
         0.63
       ],
-      "Gold": 15750
+      "Gold": 15750,
+      "Item": 2,
+      "ItemSprite": "CarnivalMask",
+      "PrevEvolutionId": 140062
     },
     {
       "Id": 140064,
-      "EvolutionLevel": 64,
       "Stats": [
         2.2,
         21.0,
         0.63
       ],
-      "Gold": 16000
+      "Gold": 16000,
+      "Item": 0,
+      "ItemSprite": "FireWarriorArmor",
+      "PrevEvolutionId": 140063
     },
     {
       "Id": 140065,
-      "EvolutionLevel": 65,
       "Stats": [
         2.2,
         22.0,
         0.63
       ],
-      "Gold": 16250
+      "Gold": 16250,
+      "Item": 1,
+      "ItemSprite": "FireWarriorArmor",
+      "PrevEvolutionId": 140064
     },
     {
       "Id": 140066,
-      "EvolutionLevel": 66,
       "Stats": [
         2.2,
         22.0,
         0.66
       ],
-      "Gold": 16500
+      "Gold": 16500,
+      "Item": 2,
+      "ItemSprite": "CarnivalMask",
+      "PrevEvolutionId": 140065
     },
     {
       "Id": 140067,
-      "EvolutionLevel": 67,
       "Stats": [
         2.3,
         22.0,
         0.66
       ],
-      "Gold": 16750
+      "Gold": 16750,
+      "Item": 0,
+      "ItemSprite": "FireWizardArmor",
+      "PrevEvolutionId": 140066
     },
     {
       "Id": 140068,
-      "EvolutionLevel": 68,
       "Stats": [
         2.3,
         23.0,
         0.66
       ],
-      "Gold": 17000
+      "Gold": 17000,
+      "Item": 1,
+      "ItemSprite": "FireWizardArmor",
+      "PrevEvolutionId": 140067
     },
     {
       "Id": 140069,
-      "EvolutionLevel": 69,
       "Stats": [
         2.3,
         23.0,
         0.69
       ],
-      "Gold": 17250
+      "Gold": 17250,
+      "Item": 2,
+      "ItemSprite": "CarnivalMask",
+      "PrevEvolutionId": 140068
     },
     {
       "Id": 140070,
-      "EvolutionLevel": 70,
       "Stats": [
         2.4,
         23.0,
         0.69
       ],
-      "Gold": 17500
+      "Gold": 17500,
+      "Item": 0,
+      "ItemSprite": "GladiatorArmor",
+      "PrevEvolutionId": 140069
     },
     {
       "Id": 140071,
-      "EvolutionLevel": 71,
       "Stats": [
         2.4,
         24.0,
         0.69
       ],
-      "Gold": 17750
+      "Gold": 17750,
+      "Item": 1,
+      "ItemSprite": "GladiatorArmor",
+      "PrevEvolutionId": 140070
     },
     {
       "Id": 140072,
-      "EvolutionLevel": 72,
       "Stats": [
         2.4,
         24.0,
         0.72
       ],
-      "Gold": 18000
+      "Gold": 18000,
+      "Item": 2,
+      "ItemSprite": "CarnivalMask",
+      "PrevEvolutionId": 140071
     },
     {
       "Id": 140073,
-      "EvolutionLevel": 73,
       "Stats": [
         2.5,
         24.0,
         0.72
       ],
-      "Gold": 18250
+      "Gold": 18250,
+      "Item": 0,
+      "ItemSprite": "GreyKnight",
+      "PrevEvolutionId": 140072
     },
     {
       "Id": 140074,
-      "EvolutionLevel": 74,
       "Stats": [
         2.5,
         25.0,
         0.72
       ],
-      "Gold": 18500
+      "Gold": 18500,
+      "Item": 1,
+      "ItemSprite": "GreyKnight",
+      "PrevEvolutionId": 140073
     },
     {
       "Id": 140075,
-      "EvolutionLevel": 75,
       "Stats": [
         2.5,
         25.0,
         0.75
       ],
-      "Gold": 18750
+      "Gold": 18750,
+      "Item": 2,
+      "ItemSprite": "CarnivalMask",
+      "PrevEvolutionId": 140074
     },
     {
       "Id": 140076,
-      "EvolutionLevel": 76,
       "Stats": [
         2.6,
         25.0,
         0.75
       ],
-      "Gold": 19000
+      "Gold": 19000,
+      "Item": 0,
+      "ItemSprite": "GuardArmor",
+      "PrevEvolutionId": 140075
     },
     {
       "Id": 140077,
-      "EvolutionLevel": 77,
       "Stats": [
         2.6,
         26.0,
         0.75
       ],
-      "Gold": 19250
+      "Gold": 19250,
+      "Item": 1,
+      "ItemSprite": "GuardArmor",
+      "PrevEvolutionId": 140076
     },
     {
       "Id": 140078,
-      "EvolutionLevel": 78,
       "Stats": [
         2.6,
         26.0,
         0.78
       ],
-      "Gold": 19500
+      "Gold": 19500,
+      "Item": 2,
+      "ItemSprite": "ShamanMask",
+      "PrevEvolutionId": 140077
     },
     {
       "Id": 140079,
-      "EvolutionLevel": 79,
       "Stats": [
         2.7,
         26.0,
         0.78
       ],
-      "Gold": 19750
+      "Gold": 19750,
+      "Item": 0,
+      "ItemSprite": "HalberdierArmor",
+      "PrevEvolutionId": 140078
     },
     {
       "Id": 140080,
-      "EvolutionLevel": 80,
       "Stats": [
         2.7,
         27.0,
         0.78
       ],
-      "Gold": 20000
+      "Gold": 20000,
+      "Item": 1,
+      "ItemSprite": "HalberdierArmor",
+      "PrevEvolutionId": 140079
     },
     {
       "Id": 140081,
-      "EvolutionLevel": 81,
       "Stats": [
         2.7,
         27.0,
         0.81
       ],
-      "Gold": 20250
+      "Gold": 20250,
+      "Item": 2,
+      "ItemSprite": "ShamanMask",
+      "PrevEvolutionId": 140080
     },
     {
       "Id": 140082,
-      "EvolutionLevel": 82,
       "Stats": [
         2.8,
         27.0,
         0.81
       ],
-      "Gold": 20500
+      "Gold": 20500,
+      "Item": 0,
+      "ItemSprite": "HeavyArmor",
+      "PrevEvolutionId": 140081
     },
     {
       "Id": 140083,
-      "EvolutionLevel": 83,
       "Stats": [
         2.8,
         28.0,
         0.81
       ],
-      "Gold": 20750
+      "Gold": 20750,
+      "Item": 1,
+      "ItemSprite": "HeavyArmor",
+      "PrevEvolutionId": 140082
     },
     {
       "Id": 140084,
-      "EvolutionLevel": 84,
       "Stats": [
         2.8,
         28.0,
         0.84
       ],
-      "Gold": 21000
+      "Gold": 21000,
+      "Item": 2,
+      "ItemSprite": "ShamanMask",
+      "PrevEvolutionId": 140083
     },
     {
       "Id": 140085,
-      "EvolutionLevel": 85,
       "Stats": [
         2.9,
         28.0,
         0.84
       ],
-      "Gold": 21250
+      "Gold": 21250,
+      "Item": 0,
+      "ItemSprite": "Hermit",
+      "PrevEvolutionId": 140084
     },
     {
       "Id": 140086,
-      "EvolutionLevel": 86,
       "Stats": [
         2.9,
         29.0,
         0.84
       ],
-      "Gold": 21500
+      "Gold": 21500,
+      "Item": 1,
+      "ItemSprite": "Hermit",
+      "PrevEvolutionId": 140085
     },
     {
       "Id": 140087,
-      "EvolutionLevel": 87,
       "Stats": [
         2.9,
         29.0,
         0.87
       ],
-      "Gold": 21750
+      "Gold": 21750,
+      "Item": 2,
+      "ItemSprite": "ShamanMask",
+      "PrevEvolutionId": 140086
     },
     {
       "Id": 140088,
-      "EvolutionLevel": 88,
       "Stats": [
         3.0,
         29.0,
         0.87
       ],
-      "Gold": 22000
+      "Gold": 22000,
+      "Item": 0,
+      "ItemSprite": "Hunter",
+      "PrevEvolutionId": 140087
     },
     {
       "Id": 140089,
-      "EvolutionLevel": 89,
       "Stats": [
         3.0,
         30.0,
         0.87
       ],
-      "Gold": 22250
+      "Gold": 22250,
+      "Item": 1,
+      "ItemSprite": "Hunter",
+      "PrevEvolutionId": 140088
     },
     {
       "Id": 140090,
-      "EvolutionLevel": 90,
       "Stats": [
         3.0,
         30.0,
         0.9
       ],
-      "Gold": 22500
+      "Gold": 22500,
+      "Item": 2,
+      "ItemSprite": "ShamanMask",
+      "PrevEvolutionId": 140089
     }
   ]
 }

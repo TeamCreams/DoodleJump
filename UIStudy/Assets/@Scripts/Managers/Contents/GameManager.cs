@@ -197,6 +197,7 @@ public class UserInfo
     public int Level {get; set;} = 1;
     public int TotalScore {get; set;} = 0;
     public int UserAccountId { get; set; } = 0;
+    public int EvolutionId {get; set;} = 0;
 }
 
 public class DifficultySettingsInfo // 다시시작할 때마다 초기화 필요 

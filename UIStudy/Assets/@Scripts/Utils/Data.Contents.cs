@@ -382,9 +382,11 @@ namespace Data
     public class EvolutionData
     {
         public int Id;
-        public int EvolutionLevel;
         public List<float >Stats = new();
         public int Gold;
+        public EItemType Item;
+        public string ItemSprite;
+        public int PrevEvolutionId;
     }
 
     [Serializable]
@@ -409,6 +411,7 @@ namespace Data
         public string Boots;
         public string Armor;
         public string Mask;
+        public List<int> EvolutionDataId;
     }
 
     [Serializable]

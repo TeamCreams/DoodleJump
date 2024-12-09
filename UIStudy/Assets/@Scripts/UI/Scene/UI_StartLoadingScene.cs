@@ -60,10 +60,10 @@ public class UI_StartLoadingScene : UI_Scene
        {
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
             Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "The settlement could not be processed due to poor network conditions.");
+            Debug.Log($"[Error Code : {errorCode}] error message");
             HandleFailure();
         });
         StartCoroutine(LoadScene_Co());
-
     }
 
     private void HandleSuccess(ResDtoGetOrAddUserAccount response, Action result = null)

@@ -1,3 +1,4 @@
+using Assets.HeroEditor.InventorySystem.Scripts.Data;
 using Data;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -19,8 +20,7 @@ public class UI_PurchasePopup : UI_Popup
         Notice_Text,
         Gold_Text
     }
-
-
+    private EvolutionData item;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -37,7 +37,7 @@ public class UI_PurchasePopup : UI_Popup
     }
     public void SetInfo(int id)
     {
-        EvolutionData item = Managers.Data.EvolutionDataDic[id];
+        item = Managers.Data.EvolutionDataDic[id];
         GetText((int)Texts.Gold_Text).text = item.Gold.ToString();
     }
 
@@ -48,6 +48,17 @@ public class UI_PurchasePopup : UI_Popup
 
     private void OnEvent_ClickOk(PointerEventData eventData)
     {
-        
-    } 
+        // 서버랑 연결해서 돈 빼기 ->   UI_EvolutionItemd에서 한 번에
+        int afterGold = Managers.Game.UserInfo.Gold - item.Gold;
+        if(0 <= afterGold)
+        {
+            Managers.Game.UserInfo.Gold -= item.Gold;
+            Managers.Game.UserInfo.EvolutionId = item.Id;
+        }
+        else
+        {
+            // 골드부족
+        }
+        Managers.UI.ClosePopupUI(this);
+    }
 }

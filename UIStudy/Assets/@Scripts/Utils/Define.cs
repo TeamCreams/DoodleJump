@@ -91,7 +91,8 @@ public static class Define
         OnMissionComplete,
         OnUpdateMission,
         UIRefresh,
-        Evolution
+        Evolution,
+        Purchase
     }
 
     // 서버와 값 공유중, 함부로 수정 금지.
@@ -190,6 +191,13 @@ public static class Define
         AvoidRocksCount,
         AchieveScoreInGame,
         Style,
+    }
+
+    public enum EItemType
+    {
+        Boots,
+        Armor,
+        Mask
     }
 
 	public class HardCoding
