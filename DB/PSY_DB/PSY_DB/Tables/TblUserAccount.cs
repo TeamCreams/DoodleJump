@@ -24,6 +24,10 @@ public partial class TblUserAccount
     [SqlDefaultValue("0")]
     public int Gold { get; set; }
 
+    [Comment("캐릭터 아이디")]
+    [SqlDefaultValue("20001")]
+    public int CharacterId { get; set; }
+
     [Comment("디자인")]
     [SqlDefaultValue("0")]
     public int HairStyle { get; set; }
@@ -34,7 +38,6 @@ public partial class TblUserAccount
     [Comment("업데이트 스택")]
     [SqlDefaultValue("0")]
     public int Evolution { get; set; }
-
     [InverseProperty("TblUserAccountKeyNavigation")]
     public virtual ICollection<TblUserScore> TblUserScores { get; set; } = new List<TblUserScore>();
     [InverseProperty("TblUserAccountKeyNavigation")]

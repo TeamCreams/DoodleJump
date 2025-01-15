@@ -149,6 +149,24 @@ public static class Define
         Lucky
     }
 
+    public enum EErrorCode2
+    {
+        NetworkSettlementError,
+        NetworkIDError,
+        NetworkLoginSuccess,
+        NetworkIDNotFound,
+        NetworkPasswordMismatch,
+        NetworkSaveError,
+        AccountCreationFailed,
+        AccountIDUnavailable,
+        AccountPasswordRequirement,
+        AccountCreationSuccess,
+        AccountCreationCancellation,
+        AccountNicknameUnavailable,
+        GoldInsufficientError
+    }
+
+
     public enum EErrorCode
     {
         ERR_OK,

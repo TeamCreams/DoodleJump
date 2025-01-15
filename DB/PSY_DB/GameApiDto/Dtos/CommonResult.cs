@@ -15,7 +15,7 @@
         MissionAlreadyExists,   // 이미 있는 미션
         NotFoundEntity,
         ServerException,
-        NameAlreadyExiƒsts,
+        NameAlreadyExists,
         ChangedRowsIsZero // 변경된 DB 줄 수 0
     }
 

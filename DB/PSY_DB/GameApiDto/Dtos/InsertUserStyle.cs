@@ -4,9 +4,10 @@ using System.Text;
 
 namespace GameApi.Dtos
 {
-    public class ReqDtoInsertUserStyle
+    public class ReqDtoUpdateUserStyle
     {
         public int UserAccountId { get; set; }
+        public int CharacterId { get; set; }
         // 디자인
         public int HairStyle { get; set; }
         public int EyebrowStyle { get; set; }
@@ -15,7 +16,7 @@ namespace GameApi.Dtos
         public int Evolution { get; set; }
     }
 
-    public class ResDtoInsertUserStyle
+    public class ResDtoUpdateUserStyle
     {
 
     }

@@ -27,7 +27,7 @@ public class DataManager
     public Dictionary<int, Data.MissionData> MissionDataDic { get; private set; } = new Dictionary<int, Data.MissionData>();
     public Dictionary<int, Data.EvolutionData> EvolutionDataDic { get; private set; } = new Dictionary<int, Data.EvolutionData>();
     public Dictionary<int, Data.EvolutionItemData> EvolutionItemDataDic { get; private set; } = new Dictionary<int, Data.EvolutionItemData>();
-
+    public Dictionary<int, Data.ErrorData> ErrorDataDic { get; private set; } = new Dictionary<int, Data.ErrorData>();
     public void Init()
 	{
 		TestDic = LoadJson<Data.TestDataLoader, int, Data.TestData>("TestData").MakeDict();
@@ -44,7 +44,7 @@ public class DataManager
         MissionDataDic = LoadJson<Data.MissionDataLoader, int, Data.MissionData>("MissionData").MakeDict();
         EvolutionDataDic = LoadJson<Data.EvolutionDataLoader, int, Data.EvolutionData>("EvolutionData").MakeDict();
         EvolutionItemDataDic = LoadJson<Data.EvolutionItemDataLoader, int, Data.EvolutionItemData>("EvolutionItemData").MakeDict();
-
+        ErrorDataDic = LoadJson<Data.ErrorDataLoader, int, Data.ErrorData>("ErrorData").MakeDict();
     }
 
     private Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>

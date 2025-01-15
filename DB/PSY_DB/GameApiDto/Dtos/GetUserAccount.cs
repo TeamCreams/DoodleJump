@@ -20,6 +20,7 @@
         public int LatelyScore { get; set; }
         public int Gold {  get; set; }
         public int TotalScore { get; set; }
+        public int CharacterId { get; set; }
         // 디자인
         public int HairStyle { get; set; }
         public int EyebrowStyle { get; set; }

@@ -428,4 +428,29 @@ namespace Data
             return dict;
         }
     }
+
+    public class ErrorData
+    {
+       public int Id;
+        public ErrorType Type;
+        public string TitleEn;
+        public string NoticeEn;
+        public string TitleKr;
+        public string NoticeKr; 
+    }
+
+    [Serializable]
+    public class ErrorDataLoader : ILoader<int, ErrorData>
+    {
+        public List<ErrorData> errorDatas = new List<ErrorData>();
+
+        public Dictionary<int, ErrorData> MakeDict()
+        {
+            Dictionary<int, ErrorData> dict = new Dictionary<int, ErrorData>();
+            foreach (ErrorData errorData in errorDatas)
+                dict.Add(errorData.Id, errorData);
+
+            return dict;
+        }
+    }
 }

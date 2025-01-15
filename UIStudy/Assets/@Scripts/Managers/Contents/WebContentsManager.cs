@@ -25,7 +25,8 @@ public class WebRoute
     public readonly static string CompleteUserMission = $"{BaseUrl}User/CompleteUserMission";
     public readonly static Func<ReqDtoGetUserMissionList, string> GetUserMissionList = (dto) => $"{BaseUrl}User/GetUserMissionList?UserAccountId={dto.UserAccountId}";
     public readonly static string InsertMissionCompensation = $"{BaseUrl}User/InsertMissionCompensation";
-    public readonly static string InsertUserStyle = $"{BaseUrl}User/InsertUserStyle";
+    public readonly static string UpdateUserStyle = $"{BaseUrl}User/UpdateUserStyle";
+    public readonly static string UpdateUserGold = $"{BaseUrl}User/UpdateUserGold";
 
 }
 
@@ -305,13 +306,40 @@ public class WebContentsManager
         });
     }
 
-    public void ReqDtoInsertUserStyle(ReqDtoInsertUserStyle requestDto, Action<ResDtoInsertUserStyle> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void ReqDtoUpdateUserStyle(ReqDtoUpdateUserStyle requestDto, Action<ResDtoUpdateUserStyle> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
-        Managers.Web.SendPostRequest(WebRoute.InsertUserStyle, body , (response) =>
+        Managers.Web.SendPostRequest(WebRoute.UpdateUserStyle, body , (response) =>
         {
-            CommonResult<ResDtoInsertUserStyle> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertUserStyle>>(response);
+            CommonResult<ResDtoUpdateUserStyle> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoUpdateUserStyle>>(response);
+
+            if (rv == null)
+            {
+                onFailed.Invoke(EStatusCode.UnknownError);
+            }
+            else
+            {
+                if (rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess.Invoke(rv.Data);
+                    Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+                }
+            }
+        });
+    }
+
+    public void ReqDtoUpdateUserGold(ReqDtoUpdateUserGold requestDto, Action<ResDtoUpdateUserGold> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
+
+        Managers.Web.SendPostRequest(WebRoute.UpdateUserGold, body , (response) =>
+        {
+            CommonResult<ResDtoUpdateUserGold> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoUpdateUserGold>>(response);
 
             if (rv == null)
             {

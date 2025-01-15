@@ -53,12 +53,35 @@ public class UI_PurchasePopup : UI_Popup
         if(0 <= afterGold)
         {
             Managers.Game.UserInfo.Gold -= item.Gold;
-            Managers.Game.UserInfo.EvolutionId = item.Id;
+            Managers.Game.UserInfo.EvolutionId = item.Id;    
+            UpdateUserGold();
         }
         else
         {
-            // 골드부족
+            Managers.UI.ShowPopupUI<UI_ToastPopup>();
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, null, 
+            "You do not have enough Gold.");
         }
-        Managers.UI.ClosePopupUI(this);
+    }
+
+    private void UpdateUserGold()
+    {
+        Managers.WebContents.ReqDtoUpdateUserStyleGold(new ReqDtoUpdateUserStyleGold()
+        {
+            UserAccountId = Managers.Game.UserInfo.UserAccountId,
+            Gold = Managers.Game.UserInfo.Gold
+        },
+       (response) =>
+       {
+            onSuccess?.Invoke();
+            Managers.UI.ClosePopupUI(this);
+       },
+       (errorCode) =>
+       {
+            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+            Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, sender, 
+                "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
+            popup.AddOnClickAction(onFailed);
+       });
     }
 }

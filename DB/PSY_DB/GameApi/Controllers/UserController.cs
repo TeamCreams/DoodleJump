@@ -133,6 +133,7 @@ namespace GameApi.Controllers
                                         .FirstOrDefault()
                                         .Gold : 0,
                         TotalScore = user.TblUserScores.Sum(s => s.History),
+                        CharacterId = user.CharacterId,
                         HairStyle = user.HairStyle,
                         EyesStyle = user.EyesStyle,
                         EyebrowStyle = user.EyebrowStyle,
@@ -636,6 +637,7 @@ namespace GameApi.Controllers
                                         .FirstOrDefault()
                                         .Gold : 0,
                         TotalScore = user.TblUserScores.Sum(s => s.History),
+                        CharacterId = user.CharacterId,
                         HairStyle = user.HairStyle,
                         EyesStyle = user.EyesStyle,
                         EyebrowStyle = user.EyebrowStyle,
@@ -748,6 +750,65 @@ namespace GameApi.Controllers
                 rv.Message = ex.ToString();
                 rv.IsSuccess = false;
                 rv.Data.List = null;
+                return rv;
+            }
+            return rv;
+        }
+
+        //Gold 업데이트
+        [HttpPost("UpdateUserGold")]
+        public async Task<CommonResult<ResDtoUpdateUserGold>>
+            UpdateUserMission([FromBody] ReqDtoUpdateUserGold requestDto)
+        {
+            CommonResult<ResDtoUpdateUserGold> rv = new();
+
+            try
+            {
+                var userAccount = _context.TblUserAccounts
+                                    .Where(
+                                        user => user.Id == requestDto.UserAccountId &&
+                                                user.DeletedDate == null
+                                    ).FirstOrDefault();
+                if (userAccount == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
+                }
+
+                userAccount.Gold = requestDto.Gold;
+                userAccount.UpdateDate = DateTime.Now;
+
+                _context.TblUserAccounts.Update(userAccount);
+
+                var IsSuccess = await _context.SaveChangesAsync();
+
+                if (IsSuccess == 0)
+                {
+                    throw new CommonException(EStatusCode.ChangedRowsIsZero,
+                        $"UserAccountId : {requestDto.UserAccountId}");
+                }
+                else
+                {
+                    rv.IsSuccess = true;
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Data = null;
+                }
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = null;
+
                 return rv;
             }
             return rv;
@@ -1083,11 +1144,11 @@ namespace GameApi.Controllers
         }
         #endregion
         #region Style
-        [HttpPost("InsertUserStyle")]
-        public async Task<CommonResult<ResDtoInsertUserStyle>>
-            InsertUserStyle([FromBody] ReqDtoInsertUserStyle requestDto)
+        [HttpPost("UpdateUserStyle")]
+        public async Task<CommonResult<ResDtoUpdateUserStyle>>
+            InsertUserStyle([FromBody] ReqDtoUpdateUserStyle requestDto)
         {
-            CommonResult<ResDtoInsertUserStyle> rv = new();
+            CommonResult<ResDtoUpdateUserStyle> rv = new();
 
             try
             {
@@ -1102,6 +1163,7 @@ namespace GameApi.Controllers
                         $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
                 }
 
+                userAccount.CharacterId = requestDto.CharacterId;
                 userAccount.HairStyle = requestDto.HairStyle;
                 userAccount.EyesStyle = requestDto.EyesStyle;
                 userAccount.EyebrowStyle = requestDto.EyebrowStyle;

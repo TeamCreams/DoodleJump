@@ -6,9 +6,8 @@ using System.Linq;
 using UnityEngine;
 using static Define;
 
-public class LanguageDataMamager
+public class LanguageDataManager
 {
-
     private ELanguage _eLanguageInfo = ELanguage.En;
     public ELanguage ELanguageInfo
     {

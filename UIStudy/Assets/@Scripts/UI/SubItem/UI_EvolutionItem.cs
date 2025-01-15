@@ -42,6 +42,7 @@ public class UI_EvolutionItem : UI_Base
             return;
         }
         // 서버연결    
+        
         Debug.Log($"Item Id : {_itemId}");
         if(Managers.Data.EvolutionDataDic[_itemId].PrevEvolutionId != Managers.Game.UserInfo.EvolutionId)
         {

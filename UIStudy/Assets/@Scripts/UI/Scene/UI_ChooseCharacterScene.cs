@@ -34,7 +34,7 @@ public class UI_ChooseCharacterScene : UI_Scene
         GetButton((int)Buttons.Home_Button).gameObject.BindEvent(OnClick_HomeButton, EUIEvent.Click);
         GetButton((int)Buttons.Evolution_Button).gameObject.BindEvent(OnClick_EvolutionButton, EUIEvent.Click);
 
-        return true;
+        return true;>
     }
 
     private void OnClick_CustomButton(PointerEventData eventData)
@@ -46,7 +46,7 @@ public class UI_ChooseCharacterScene : UI_Scene
         private void OnClick_HomeButton(PointerEventData eventData)
     {
         Debug.Log("OnClick_HomeButton!");
-        Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+        SaveData();
     }
         private void OnClick_EvolutionButton(PointerEventData eventData)
     {
@@ -54,6 +54,30 @@ public class UI_ChooseCharacterScene : UI_Scene
         GetObject((int)GameObjects.UI_ChooseCharacterPanel).SetActive(false);
         GetObject((int)GameObjects.UI_EvolutionPanel).SetActive(true);
         Managers.Event.TriggerEvent(EEventType.Evolution);
+    }
+
+    private void SaveData()
+    {Managers.WebContents.ReqDtoUpdateUserStyle(new ReqDtoUpdateUserStyle()
+        {
+            UserAccountId = Managers.Game.UserInfo.UserAccountId,
+            CharaterId = Managers.Game.ChracterStyleInfo.CharacterId,
+            HairStyle = Managers.Game.ChracterStyleInfo.Hair,
+            EyebrowStyle = Managers.Game.ChracterStyleInfo.Eyebrows,
+            EyeStyle = Managers.Game.ChracterStyleInfo.Eyes,
+            Evolution = Managers.Game.UserInfo.Evolution
+        },
+       (response) =>
+       {
+            onSuccess?.Invoke();// 얘 안에서 씬 전환
+       },
+       (errorCode) =>
+       {
+            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+            Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, sender, 
+                "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
+            popup.AddOnClickAction(onFailed);
+       });
+        
     }
 
 /*

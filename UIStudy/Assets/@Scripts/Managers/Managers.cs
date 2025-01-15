@@ -13,7 +13,7 @@ public class Managers : MonoBehaviour
 	private MessageManager _message = new MessageManager();
 	private DataManager _data = new DataManager();
 	private ObjectManager _object = new ObjectManager();
-	private LanguageDataMamager _language = new LanguageDataMamager();
+	private LanguageDataManager _language = new LanguageDataManager();
     private ScoreManager _score = new ScoreManager();
     private WebContentsManager _webContents = new WebContentsManager();
 	private MissionManager _mission = new MissionManager();
@@ -22,7 +22,7 @@ public class Managers : MonoBehaviour
 	public static MessageManager Message { get { return Instance?._message; } }
 	public static DataManager Data { get { return Instance?._data; } }
 	public static ObjectManager Object {  get { return Instance?._object; } }
-	public static LanguageDataMamager Language { get { return Instance?._language; } }
+	public static LanguageDataManager Language { get { return Instance?._language; } }
 	public static ScoreManager Score { get { return Instance?._score; } }
     public static WebContentsManager WebContents { get { return Instance?._webContents; } }
     public static MissionManager Mission { get { return Instance?._mission; } }
