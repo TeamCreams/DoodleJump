@@ -3,21 +3,21 @@ using System.Collections;
 using UnityEngine;
 using static Define;
 
-public class ErrorMamager
+public class ErrorManager
 {
-    static (string title, string notice) GetError(NoticeType searchType)
+    static (string title, string notice) GetError(EErrorCode2 searchType)
     {
         foreach (var item in Managers.Data.ErrorDataDic)
         {
-            if (searchType == item.Type)
+            if (searchType == item.Value.Type)
             {
                 switch (Managers.Language.ELanguageInfo)
                 {
                     case ELanguage.Kr:
-                        return (item.TitleKr, item.NoticeKr);
+                        return (item.Value.TitleKr, item.Value.NoticeKr);
 
                     case ELanguage.En:
-                        return (item.TitleEn, item.NoticeEn);
+                        return (item.Value.TitleEn, item.Value.NoticeEn);
                 }
             }
         }

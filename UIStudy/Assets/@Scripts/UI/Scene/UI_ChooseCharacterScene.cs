@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using GameApi.Dtos;
 using static Define;
 using System.Linq;
 using Data;
+using System;
 
 public class UI_ChooseCharacterScene : UI_Scene
 {
@@ -34,7 +36,7 @@ public class UI_ChooseCharacterScene : UI_Scene
         GetButton((int)Buttons.Home_Button).gameObject.BindEvent(OnClick_HomeButton, EUIEvent.Click);
         GetButton((int)Buttons.Evolution_Button).gameObject.BindEvent(OnClick_EvolutionButton, EUIEvent.Click);
 
-        return true;>
+        return true;
     }
 
     private void OnClick_CustomButton(PointerEventData eventData)
@@ -43,7 +45,7 @@ public class UI_ChooseCharacterScene : UI_Scene
         GetObject((int)GameObjects.UI_ChooseCharacterPanel).SetActive(true);
         GetObject((int)GameObjects.UI_EvolutionPanel).SetActive(false);
     }
-        private void OnClick_HomeButton(PointerEventData eventData)
+    private void OnClick_HomeButton(PointerEventData eventData)
     {
         Debug.Log("OnClick_HomeButton!");
         SaveData();
@@ -56,15 +58,20 @@ public class UI_ChooseCharacterScene : UI_Scene
         Managers.Event.TriggerEvent(EEventType.Evolution);
     }
 
-    private void SaveData()
-    {Managers.WebContents.ReqDtoUpdateUserStyle(new ReqDtoUpdateUserStyle()
+    public void SaveData(Action onSuccess = null, Action onFailed = null)
+    {
+        int hair = StringToInt(EEquipType.Hair);
+        int eyebrows = StringToInt(EEquipType.Eyebrows);
+        int eyes = StringToInt(EEquipType.Eyes);
+
+        Managers.WebContents.ReqDtoUpdateUserStyle(new ReqDtoUpdateUserStyle()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
-            CharaterId = Managers.Game.ChracterStyleInfo.CharacterId,
-            HairStyle = Managers.Game.ChracterStyleInfo.Hair,
-            EyebrowStyle = Managers.Game.ChracterStyleInfo.Eyebrows,
-            EyeStyle = Managers.Game.ChracterStyleInfo.Eyes,
-            Evolution = Managers.Game.UserInfo.Evolution
+            CharacterId = Managers.Game.ChracterStyleInfo.CharacterId,
+            HairStyle = hair,
+            EyebrowStyle = eyebrows,
+            EyesStyle = eyes,
+            Evolution = Managers.Game.UserInfo.EvolutionId
         },
        (response) =>
        {
@@ -73,11 +80,25 @@ public class UI_ChooseCharacterScene : UI_Scene
        (errorCode) =>
        {
             UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, sender, 
+            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, 
                 "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
             popup.AddOnClickAction(onFailed);
        });
-        
+    }
+
+    private int StringToInt(EEquipType eEquipType)
+    {
+        int answer = 0;
+        var equipList = Managers.Data.CharacterItemSpriteDic.Where(cis => cis.Value.EquipType == eEquipType);
+        foreach (var characterItemSprite in equipList)
+        { 
+            if(characterItemSprite.Value.SpriteName != Managers.Game.ChracterStyleInfo.Hair)
+            {
+                continue;
+            }
+            answer = characterItemSprite.Key;
+        }
+        return answer;
     }
 
 /*

@@ -1,5 +1,7 @@
+using System;
 using Assets.HeroEditor.InventorySystem.Scripts.Data;
 using Data;
+using GameApi.Dtos;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -64,9 +66,9 @@ public class UI_PurchasePopup : UI_Popup
         }
     }
 
-    private void UpdateUserGold()
+    private void UpdateUserGold(Action onSuccess = null, Action onFailed = null)
     {
-        Managers.WebContents.ReqDtoUpdateUserStyleGold(new ReqDtoUpdateUserStyleGold()
+        Managers.WebContents.ReqDtoUpdateUserGold(new ReqDtoUpdateUserGold()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
             Gold = Managers.Game.UserInfo.Gold
@@ -79,7 +81,7 @@ public class UI_PurchasePopup : UI_Popup
        (errorCode) =>
        {
             UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, sender, 
+            Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, this, 
                 "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
             popup.AddOnClickAction(onFailed);
        });

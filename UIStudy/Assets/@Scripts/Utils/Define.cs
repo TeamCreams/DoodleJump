@@ -179,6 +179,7 @@ public static class Define
         ERR_Nothing
     }
 
+
     public enum ELanguage
     {
         Kr,

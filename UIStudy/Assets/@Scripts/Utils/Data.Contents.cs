@@ -432,7 +432,7 @@ namespace Data
     public class ErrorData
     {
        public int Id;
-        public ErrorType Type;
+        public EErrorCode2 Type;
         public string TitleEn;
         public string NoticeEn;
         public string TitleKr;
