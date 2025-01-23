@@ -22,6 +22,7 @@ public class UI_PlayerDesign : UI_Base
         }
         BindImages(typeof(Images));
         Managers.Event.AddEvent(EEventType.SetStyle_Player, OnEvent_SetStyle);
+        Managers.Event.TriggerEvent(EEventType.SetStyle_Player);
         return true;
     }
     private void OnDestroy()
