@@ -865,7 +865,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 535434797}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 145d91e61cf204d1cb5c68046d553a48, type: 3}
   m_Name: 
@@ -9815,6 +9815,26 @@ PrefabInstance:
     - target: {fileID: 117293443749762186, guid: 212b4947a67aa4d0b9f816a9a6a2b215, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992449274011428263, guid: 212b4947a67aa4d0b9f816a9a6a2b215, type: 3}
+      propertyPath: m_Events.m_Events.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992449274011428263, guid: 212b4947a67aa4d0b9f816a9a6a2b215, type: 3}
+      propertyPath: m_Events.m_Signals.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992449274011428263, guid: 212b4947a67aa4d0b9f816a9a6a2b215, type: 3}
+      propertyPath: 'm_Events.m_Signals.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 3b9b87c8ea1bb406eb98728b933fcd2f, type: 2}
+    - target: {fileID: 1992449274011428263, guid: 212b4947a67aa4d0b9f816a9a6a2b215, type: 3}
+      propertyPath: m_Events.m_Events.Array.data[0].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992449274011428263, guid: 212b4947a67aa4d0b9f816a9a6a2b215, type: 3}
+      propertyPath: m_Events.m_Events.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnEvent_LoadUserAccount
       objectReference: {fileID: 0}
     - target: {fileID: 7300774370839580433, guid: 212b4947a67aa4d0b9f816a9a6a2b215, type: 3}
       propertyPath: m_Name

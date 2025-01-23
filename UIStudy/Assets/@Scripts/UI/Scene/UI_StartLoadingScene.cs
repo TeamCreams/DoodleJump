@@ -25,6 +25,7 @@ public class UI_StartLoadingScene : UI_Scene
         }
         BindImages(typeof(Images));
         _playableDirector = this.gameObject.GetOrAddComponent<PlayableDirector>();
+        _playableDirector.stopped += OnPlayableDirectorStopped;
         StartLoadAssets("PreLoad");
         return true;
     }
@@ -129,7 +130,7 @@ public class UI_StartLoadingScene : UI_Scene
                 Managers.Data.Init();
                 _playableDirector.Play();
                 _isPreLoadSuccess = true;
-                _playableDirector.stopped += OnPlayableDirectorStopped;
+             //_playableDirector.stopped += OnPlayableDirectorStopped;   
             }
         });
     }

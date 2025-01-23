@@ -60,17 +60,17 @@ public class UI_ChooseCharacterScene : UI_Scene
 
     public void SaveData(Action onSuccess = null, Action onFailed = null)
     {
-        int hair = StringToInt(EEquipType.Hair);
-        int eyebrows = StringToInt(EEquipType.Eyebrows);
-        int eyes = StringToInt(EEquipType.Eyes);
+        // int hair = StringToInt(EEquipType.Hair);
+        // int eyebrows = StringToInt(EEquipType.Eyebrows);
+        // int eyes = StringToInt(EEquipType.Eyes);
 
         Managers.WebContents.ReqDtoUpdateUserStyle(new ReqDtoUpdateUserStyle()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
             CharacterId = Managers.Game.ChracterStyleInfo.CharacterId,
-            HairStyle = hair,
-            EyebrowStyle = eyebrows,
-            EyesStyle = eyes,
+            HairStyle = Managers.Game.ChracterStyleInfo.Hair,
+            EyebrowStyle = Managers.Game.ChracterStyleInfo.Eyebrows,
+            EyesStyle = Managers.Game.ChracterStyleInfo.Eyes,
             Evolution = Managers.Game.UserInfo.EvolutionId
         },
        (response) =>

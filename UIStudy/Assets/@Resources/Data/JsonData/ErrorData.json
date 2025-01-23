@@ -1,0 +1,108 @@
+{
+  "errorDatas": [
+    {
+      "Id": 150001,
+      "Type": 0,
+      "TitleEn": null,
+      "NoticeEn": "The settlement could not be processed due to poor network conditions. Would you like to resend it?",
+      "TitleKr": null,
+      "NoticeKr": "정산을 처리할 수 없습니다. 네트워크 상태가 좋지 않습니다. 다시 전송하시겠습니까?"
+    },
+    {
+      "Id": 150002,
+      "Type": 1,
+      "TitleEn": null,
+      "NoticeEn": "Please enter a valid ID.",
+      "TitleKr": null,
+      "NoticeKr": "유효한 ID를 입력해 주세요."
+    },
+    {
+      "Id": 150003,
+      "Type": 2,
+      "TitleEn": null,
+      "NoticeEn": "Login successful.",
+      "TitleKr": null,
+      "NoticeKr": "로그인에 성공했습니다."
+    },
+    {
+      "Id": 150004,
+      "Type": 3,
+      "TitleEn": null,
+      "NoticeEn": "The ID does not exist.",
+      "TitleKr": null,
+      "NoticeKr": "해당 ID는 존재하지 않습니다."
+    },
+    {
+      "Id": 150005,
+      "Type": 4,
+      "TitleEn": null,
+      "NoticeEn": "The password does not match.",
+      "TitleKr": null,
+      "NoticeKr": "비밀번호가 일치하지 않습니다."
+    },
+    {
+      "Id": 150006,
+      "Type": 5,
+      "TitleEn": null,
+      "NoticeEn": "Failed to save...",
+      "TitleKr": null,
+      "NoticeKr": "저장에 실패했습니다..."
+    },
+    {
+      "Id": 150007,
+      "Type": 6,
+      "TitleEn": "Account creation has failed. ",
+      "NoticeEn": "Please try again.",
+      "TitleKr": "계정 생성에 실패했습니다.",
+      "NoticeKr": "다시 시도해 주세요."
+    },
+    {
+      "Id": 150008,
+      "Type": 7,
+      "TitleEn": null,
+      "NoticeEn": "The ID is not available.",
+      "TitleKr": null,
+      "NoticeKr": "해당 ID는 사용할 수 없습니다."
+    },
+    {
+      "Id": 150009,
+      "Type": 8,
+      "TitleEn": null,
+      "NoticeEn": "Please enter a password within 20 characters.",
+      "TitleKr": null,
+      "NoticeKr": "20자 이내의 비밀번호를 입력해 주세요."
+    },
+    {
+      "Id": 150010,
+      "Type": 9,
+      "TitleEn": null,
+      "NoticeEn": "Account creation successful.",
+      "TitleKr": null,
+      "NoticeKr": "계정 생성에 성공했습니다."
+    },
+    {
+      "Id": 150011,
+      "Type": 10,
+      "TitleEn": null,
+      "NoticeEn": "Do you want to cancel account creation?",
+      "TitleKr": null,
+      "NoticeKr": "계정 생성을 취소하시겠습니까?"
+    },
+    {
+      "Id": 150012,
+      "Type": 11,
+      "TitleEn": null,
+      "NoticeEn": "The nickname is not available.",
+      "TitleKr": null,
+      "NoticeKr": "해당 닉네임은 사용할 수 없습니다."
+    },
+    {
+      "Id": 150013,
+      "Type": 12,
+      "TitleEn": null,
+      "NoticeEn": "You do not have enough Gold.",
+      "TitleKr": null,
+      "NoticeKr": "골드가 부족합니다."
+    }
+  ]
+}
