@@ -9,9 +9,9 @@ namespace GameApi.Dtos
         public int UserAccountId { get; set; }
         public int CharacterId { get; set; }
         // 디자인
-        public int HairStyle { get; set; }
-        public int EyebrowStyle { get; set; }
-        public int EyesStyle { get; set; }
+        public string? HairStyle { get; set; }
+        public string? EyebrowStyle { get; set; }
+        public string? EyesStyle { get; set; }
         // 업데이트 스택
         public int Evolution { get; set; }
     }

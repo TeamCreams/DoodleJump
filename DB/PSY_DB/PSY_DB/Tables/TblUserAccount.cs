@@ -29,12 +29,12 @@ public partial class TblUserAccount
     public int CharacterId { get; set; }
 
     [Comment("디자인")]
-    [SqlDefaultValue("0")]
-    public int HairStyle { get; set; }
-    [SqlDefaultValue("0")]
-    public int EyebrowStyle { get; set; }
-    [SqlDefaultValue("0")]
-    public int EyesStyle { get; set; }
+    [SqlDefaultValue("Afro")]
+    public string? HairStyle { get; set; }
+    [SqlDefaultValue("AnnoyedEyebrows")]
+    public string? EyebrowStyle { get; set; }
+    [SqlDefaultValue("Annoyed")]
+    public string? EyesStyle { get; set; }
     [Comment("업데이트 스택")]
     [SqlDefaultValue("0")]
     public int Evolution { get; set; }
