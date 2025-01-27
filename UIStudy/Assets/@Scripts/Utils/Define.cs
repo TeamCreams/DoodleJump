@@ -149,25 +149,30 @@ public static class Define
         Lucky
     }
 
-    public enum EErrorCode2
+    public enum EErrorCode
     {
-        NetworkSettlementError,
-        NetworkIDError,
-        NetworkLoginSuccess,
-        NetworkIDNotFound,
-        NetworkPasswordMismatch,
-        NetworkSaveError,
-        AccountCreationFailed,
-        AccountIDUnavailable,
-        AccountPasswordRequirement,
-        AccountCreationSuccess,
-        AccountCreationCancellation,
-        AccountNicknameUnavailable,
-        GoldInsufficientError
+        ERR_OK,
+        ERR_NetworkSettlementErrorResend,
+        ERR_NetworkSettlementError, 
+        ERR_NetworkIDError, 
+        ERR_NetworkLoginSuccess, 
+        ERR_NetworkIDNotFound, 
+        ERR_NetworkPasswordMismatch, 
+        ERR_NetworkSaveError, 
+        ERR_AccountCreationFailed, 
+        ERR_ValidationId, 
+        ERR_AccountPasswordRequirement, 
+        ERR_AccountCreationSuccess, 
+        ERR_AccountCreationCancellation, 
+        ERR_ValidationNickname, 
+        ERR_GoldInsufficient, 
+        ERR_ValidationPassword, 
+        ERR_ConfirmPassword, 
+        ERR_Nothing
     }
 
 
-    public enum EErrorCode
+    public enum EErrorCode2
     {
         ERR_OK,
         ERR_DuplicateNickname, // 중복된 닉네임입니다.

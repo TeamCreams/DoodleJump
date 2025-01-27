@@ -80,7 +80,8 @@ public class UI_MissionPanel : UI_Base
        (errorCode) =>
        {
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "The settlement could not be processed due to poor network conditions.");
+            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, notice);
        });
         // 미션 진행을 저장하는 변수가 있어야하는가?
         // 미션을 분리해서 놓고 싶음. enum, level에 따른 미션, 메인미션 분배하는 법

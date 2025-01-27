@@ -61,8 +61,8 @@ public class UI_PurchasePopup : UI_Popup
         else
         {
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, null, 
-            "You do not have enough Gold.");
+            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_GoldInsufficient);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, null, notice);
         }
     }
 
@@ -81,8 +81,8 @@ public class UI_PurchasePopup : UI_Popup
        (errorCode) =>
        {
             UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, this, 
-                "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
+            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
+            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, notice);
             popup.AddOnClickAction(onFailed);
        });
     }

@@ -86,7 +86,8 @@ public class UI_MainPanel : UI_Base
        (errorCode) =>
        {
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "The settlement could not be processed due to poor network conditions.");
+            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, notice);
             StartCoroutine(LoadScene_Co());
        });
     }

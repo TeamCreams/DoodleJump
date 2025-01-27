@@ -5,7 +5,7 @@ using static Define;
 
 public class ErrorManager
 {
-    static (string title, string notice) GetError(EErrorCode2 searchType)
+    public (string title, string notice) GetError(EErrorCode searchType)
     {
         foreach (var item in Managers.Data.ErrorDataDic)
         {

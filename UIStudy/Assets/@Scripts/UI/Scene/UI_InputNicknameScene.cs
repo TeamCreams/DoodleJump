@@ -84,7 +84,8 @@ public class UI_InputNicknameScene : UI_Scene
        (errorCode) =>
        {
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, _nicknameUnavailable);
+            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_ValidationNickname);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, notice);
        });
         
     }
@@ -107,6 +108,6 @@ public class UI_InputNicknameScene : UI_Scene
     {
         GetText((int)Texts.Nickname_Text).text = Managers.Language.LocalizedString(91014);
         GetText((int)Texts.Placeholder_Nickname_Text).text = Managers.Language.LocalizedString(91014);
-        _nicknameUnavailable = Managers.Language.LocalizedString(91015);
+        //_nicknameUnavailable = Managers.Language.LocalizedString(91015);
     }
 }

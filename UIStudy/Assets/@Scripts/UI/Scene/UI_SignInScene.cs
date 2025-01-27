@@ -76,8 +76,9 @@ public class UI_SignInScene : UI_Scene
         //최종 로그인 하는 버튼.
         if (_errCodeId != EErrorCode.ERR_OK)
         {
-            Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "Please enter a valid ID.");
+            Managers.UI.ShowPopupUI<UI_ToastPopup>();        
+            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkIDError);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, notice);
             return;
         }
 
@@ -91,10 +92,12 @@ public class UI_SignInScene : UI_Scene
 
         //1. 다른버튼 비활성화
         //2. 로딩 인디케이터
-        Managers.UI.ShowPopupUI<UI_ToastPopup>();
-        Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, "Login successful.");
-        Managers.Game.UserInfo.UserId = GetInputField((int)InputFields.Id_InputField).text;
-        Managers.Score.GetScore((this), null,
+        {
+            Managers.UI.ShowPopupUI<UI_ToastPopup>();
+            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkLoginSuccess);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, notice);
+            Managers.Game.UserInfo.UserId = GetInputField((int)InputFields.Id_InputField).text;
+            Managers.Score.GetScore((this), null,
             () => 
             {
                 if(string.IsNullOrEmpty(Managers.Game.UserInfo.UserNickname))
@@ -122,7 +125,8 @@ public class UI_SignInScene : UI_Scene
 */
                 Managers.Scene.LoadScene(EScene.SignInScene);
             }
-        );
+            );
+        }
     }
 
     private void OnClick_SignUp(PointerEventData eventData)

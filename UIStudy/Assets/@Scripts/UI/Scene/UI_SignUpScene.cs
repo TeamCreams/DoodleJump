@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System;
 using WebApi.Models.Dto;
+using UnityEditor.PackageManager;
 
 public class UI_SignUpScene : UI_Scene
 {
@@ -44,6 +45,7 @@ public class UI_SignUpScene : UI_Scene
     private string _passwordUnavailable = "20자 이내의 비밀번호를 입력해주세요.";
     private string _confirmPasswordUnavailable = "비밀번호가 일치하지 않습니다.";
     private string _enterValidId = "유효한 아이디를 입력하세요.";
+  
     private string _createAccountSuccess = "계정 만들기 성공.";
     private string _createAccountFailed = "계정 만들기 실패.";
     private string _doYouWantCancle = "계정 생성을 취소하시겠습니까?";
@@ -125,7 +127,8 @@ public class UI_SignUpScene : UI_Scene
         if (errCode != EErrorCode.ERR_OK || _errCodeId != EErrorCode.ERR_OK)
         {
             UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, _doYouWantCancle);
+            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_AccountCreationCancellation);
+            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, notice);
             popup.AddOnClickAction(ProcessErrorFun);
             // 아이디 생성 안 된다고 말하고 가만히 있기/로그인창으로넘어가기 선택 팝업.
             return; 
@@ -146,16 +149,16 @@ public class UI_SignUpScene : UI_Scene
        {
             Debug.Log("아이디 만들기 성공");
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, _createAccountSuccess);
+            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, notice);
             onSuccess?.Invoke();
        },
        (errorCode) =>
        {
             Debug.Log("아이디 만들기 실패~");
             Managers.UI.ShowPopupUI<UI_ErrorPopup>();
-            Managers.Event.TriggerEvent(EEventType.ErrorPopup,
-             this, 
-            (_createAccountFailed, "Account creation has failed.\n Please try again."));
+            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_AccountCreationFailed);
+            Managers.Event.TriggerEvent(EEventType.ErrorPopup, this, (title, notice));
        });
     }
 
@@ -185,7 +188,7 @@ public class UI_SignUpScene : UI_Scene
        (errorCode) =>
        {
            GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
-           _errCodeId = EErrorCode.ERR_DuplicateId;
+           _errCodeId = EErrorCode.ERR_ValidationId;
        });
     }
 
@@ -234,8 +237,8 @@ public class UI_SignUpScene : UI_Scene
         
         GetText((int)Texts.SignIn_Text).text = Managers.Language.LocalizedString(91026);
         _enterValidId = Managers.Language.LocalizedString(91032);
-        _doYouWantCancle = Managers.Language.LocalizedString(91033);
-        _createAccountSuccess = Managers.Language.LocalizedString(91034);
-        _createAccountFailed = Managers.Language.LocalizedString(91035);
+        // _doYouWantCancle = Managers.Language.LocalizedString(91033);
+        // _createAccountSuccess = Managers.Language.LocalizedString(91034);
+        // _createAccountFailed = Managers.Language.LocalizedString(91035);
     }
 }

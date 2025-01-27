@@ -83,8 +83,8 @@ public class MissionManager
            Debug.Log("SettleScore is error");
 
             UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, 
-                "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
+            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
+            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, notice);
             popup.AddOnClickAction(onFailed);
        });
     }
@@ -112,8 +112,8 @@ public class MissionManager
            Debug.Log($"AcceptMission is Error {errorCode.ToString()}");
 
            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-           Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender,
-               "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
+           (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
+            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, notice);
            popup.AddOnClickAction(onFailed);
 
        });
@@ -188,8 +188,9 @@ public class MissionManager
        },
        (errorCode) =>
        {
-           Managers.UI.ShowPopupUI<UI_ToastPopup>();
-           Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, null, "The settlement could not be processed due to poor network conditions.");
+            Managers.UI.ShowPopupUI<UI_ToastPopup>();
+            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, null, notice);
        });
     }
 

@@ -80,8 +80,8 @@ public class UI_ChooseCharacterScene : UI_Scene
        (errorCode) =>
        {
             UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, 
-                "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
+            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
+            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, notice);
             popup.AddOnClickAction(onFailed);
        });
     }

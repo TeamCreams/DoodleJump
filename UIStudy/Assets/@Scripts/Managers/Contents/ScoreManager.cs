@@ -32,9 +32,9 @@ public class ScoreManager
        (errorCode) =>
        {
             UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, sender, 
-                "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
-                Debug.Log("is failllll");
+            (string title, string notice) = Managers.Error.GetError(Define.EErrorCode.ERR_NetworkSettlementErrorResend);
+            Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, sender, notice);
+            Debug.Log("is failllll");
             popup.AddOnClickAction(ProcessErrorFun);
             onFailed?.Invoke();
        });
@@ -71,8 +71,8 @@ public class ScoreManager
        (errorCode) =>
        {
             UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, sender, 
-                "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
+            (string title, string notice) = Managers.Error.GetError(Define.EErrorCode.ERR_NetworkSettlementErrorResend);
+            Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, sender, notice);
             popup.AddOnClickAction(onFailed);
        });
     }
