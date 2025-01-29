@@ -8,7 +8,7 @@ using static Define;
 
 public class LanguageDataManager
 {
-    private ELanguage _eLanguageInfo = ELanguage.En;
+    private ELanguage _eLanguageInfo = ELanguage.Kr;
     public ELanguage ELanguageInfo
     {
         get { return _eLanguageInfo; }

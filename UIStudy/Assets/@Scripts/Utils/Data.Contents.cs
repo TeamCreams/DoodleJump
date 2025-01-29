@@ -352,8 +352,9 @@ namespace Data
     {
         public int Id;
         public EMission Type;
-        public string Title;
-        public string Explanation;
+        public int LanguageId;
+        // public string Title;
+        // public string Explanation;
         public int Compensation;
         public int	Level;
         public EMissionType	MissionType;
@@ -374,6 +375,31 @@ namespace Data
             Dictionary<int, MissionData> dict = new Dictionary<int, MissionData>();
             foreach (MissionData missionData in missionDatas)
                 dict.Add(missionData.Id, missionData);
+
+            return dict;
+        }
+    }
+
+    [Serializable]
+    public class MissionLanguageData
+    {
+        public int Id;
+        public string KrTitle;
+        public string KrExplanation;
+        public string EnTitle;
+        public string EnExplanation;
+    }
+
+    [Serializable]
+    public class MissionLanguageDataLoader : ILoader<int, MissionLanguageData>
+    {
+        public List<MissionLanguageData> missionLanguageDatas = new List<MissionLanguageData>();
+
+        public Dictionary<int, MissionLanguageData> MakeDict()
+        {
+            Dictionary<int, MissionLanguageData> dict = new Dictionary<int, MissionLanguageData>();
+            foreach (MissionLanguageData missionLanguageData in missionLanguageDatas)
+                dict.Add(missionLanguageData.Id, missionLanguageData);
 
             return dict;
         }
@@ -431,7 +457,7 @@ namespace Data
 
     public class ErrorData
     {
-       public int Id;
+        public int Id;
         public EErrorCode Type;
         public string TitleEn;
         public string NoticeEn;
@@ -449,6 +475,30 @@ namespace Data
             Dictionary<int, ErrorData> dict = new Dictionary<int, ErrorData>();
             foreach (ErrorData errorData in errorDatas)
                 dict.Add(errorData.Id, errorData);
+
+            return dict;
+        }
+    }
+
+    public class SettingData
+    {
+        public int Id;
+        public float MusicVolume;
+        public float SoundFxVolume;
+        public bool IsOnVibration;
+        public bool IsOnKr;
+    }
+
+    [Serializable]
+    public class SettingDataLoader : ILoader<int, SettingData>
+    {
+        public List<SettingData> settingDatas = new List<SettingData>();
+
+        public Dictionary<int, SettingData> MakeDict()
+        {
+            Dictionary<int, SettingData> dict = new Dictionary<int, SettingData>();
+            foreach (SettingData settingData in settingDatas)
+                dict.Add(settingData.Id, settingData);
 
             return dict;
         }

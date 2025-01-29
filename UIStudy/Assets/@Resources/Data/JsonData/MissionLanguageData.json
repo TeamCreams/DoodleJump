@@ -1,0 +1,494 @@
+{
+  "missionLanguageDatas": [
+    {
+      "Id": 160001,
+      "KrTitle": "2레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 5분.",
+      "EnTitle": "Preparing for level 2...",
+      "EnExplanation": "Cumulative playtime: 5 minutes."
+    },
+    {
+      "Id": 160002,
+      "KrTitle": "3레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 10분.",
+      "EnTitle": "Preparing for level 3...",
+      "EnExplanation": "Cumulative playtime: 10 minutes."
+    },
+    {
+      "Id": 160003,
+      "KrTitle": "4레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 30분.",
+      "EnTitle": "Preparing for level 4...",
+      "EnExplanation": "Cumulative playtime: 30 minutes."
+    },
+    {
+      "Id": 160004,
+      "KrTitle": "5레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 1시간.",
+      "EnTitle": "Preparing for level 5...",
+      "EnExplanation": "Cumulative playtime: 1 hour."
+    },
+    {
+      "Id": 160005,
+      "KrTitle": "6레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 1시간 30분.",
+      "EnTitle": "Preparing for level 6...",
+      "EnExplanation": "Cumulative playtime: 1 hour 30 minutes."
+    },
+    {
+      "Id": 160006,
+      "KrTitle": "7레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 2시간",
+      "EnTitle": "Preparing for level 7...",
+      "EnExplanation": "Cumulative playtime: 2 hours."
+    },
+    {
+      "Id": 160007,
+      "KrTitle": "7레벨을 준비하며...",
+      "KrExplanation": "10단계까지 살아남기.",
+      "EnTitle": "Preparing for level 7...",
+      "EnExplanation": "Survive up to level 10."
+    },
+    {
+      "Id": 160008,
+      "KrTitle": "8레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 2시간 30분.",
+      "EnTitle": "Preparing for level 8...",
+      "EnExplanation": "Cumulative playtime: 2 hours 30 minutes."
+    },
+    {
+      "Id": 160009,
+      "KrTitle": "9레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 3시간.",
+      "EnTitle": "Preparing for level 9...",
+      "EnExplanation": "Cumulative playtime: 3 hours."
+    },
+    {
+      "Id": 160010,
+      "KrTitle": "9레벨을 준비하며...",
+      "KrExplanation": "돌 500개 피하기.",
+      "EnTitle": "Preparing for level 9...",
+      "EnExplanation": "Avoid 500 stones."
+    },
+    {
+      "Id": 160011,
+      "KrTitle": "10레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 3시간 30분.",
+      "EnTitle": "Preparing for level 10...",
+      "EnExplanation": "Cumulative playtime: 3 hours 30 minutes."
+    },
+    {
+      "Id": 160012,
+      "KrTitle": "11레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 4시간.",
+      "EnTitle": "Preparing for level 11...",
+      "EnExplanation": "Cumulative playtime: 4 hours."
+    },
+    {
+      "Id": 160013,
+      "KrTitle": "11레벨을 준비하며...",
+      "KrExplanation": "20단계까지 살아남기.",
+      "EnTitle": "Preparing for level 11...",
+      "EnExplanation": "Survive up to level 20."
+    },
+    {
+      "Id": 160014,
+      "KrTitle": "12레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 4시간 30분.",
+      "EnTitle": "Preparing for level 12...",
+      "EnExplanation": "Cumulative playtime: 4 hours 30 minutes."
+    },
+    {
+      "Id": 160015,
+      "KrTitle": "13레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 5시간.",
+      "EnTitle": "Preparing for level 13...",
+      "EnExplanation": "Cumulative playtime: 5 hours."
+    },
+    {
+      "Id": 160016,
+      "KrTitle": "14레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 5시간 30분.",
+      "EnTitle": "Preparing for level 14...",
+      "EnExplanation": "Cumulative playtime: 5 hours 30 minutes."
+    },
+    {
+      "Id": 160017,
+      "KrTitle": "14레벨을 준비하며...",
+      "KrExplanation": "한 게임에서 5분 기록 달성하기.",
+      "EnTitle": "Preparing for level 14...",
+      "EnExplanation": "Achieve a record of 5 minutes in one game."
+    },
+    {
+      "Id": 160018,
+      "KrTitle": "15레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 6시간.",
+      "EnTitle": "Preparing for level 15...",
+      "EnExplanation": "Cumulative playtime: 6 hours."
+    },
+    {
+      "Id": 160019,
+      "KrTitle": "16레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 6시간 30본.",
+      "EnTitle": "Preparing for level 16...",
+      "EnExplanation": "Cumulative playtime: 6 hours 30 minutes."
+    },
+    {
+      "Id": 160020,
+      "KrTitle": "17레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 7시간.",
+      "EnTitle": "Preparing for level 17...",
+      "EnExplanation": "Cumulative playtime: 7 hours."
+    },
+    {
+      "Id": 160021,
+      "KrTitle": "18레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 7시간 30본.",
+      "EnTitle": "Preparing for level 18...",
+      "EnExplanation": "Cumulative playtime: 7 hours 30 minutes."
+    },
+    {
+      "Id": 160022,
+      "KrTitle": "19레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 8시간.",
+      "EnTitle": "Preparing for level 19...",
+      "EnExplanation": "Cumulative playtime: 8 hours."
+    },
+    {
+      "Id": 160023,
+      "KrTitle": "20레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 8시간 30본.",
+      "EnTitle": "Preparing for level 20...",
+      "EnExplanation": "Cumulative playtime: 8 hours 30 minutes."
+    },
+    {
+      "Id": 160024,
+      "KrTitle": "20레벨을 준비하며...",
+      "KrExplanation": "돌 1000개 피하기.",
+      "EnTitle": "Preparing for level 20...",
+      "EnExplanation": "Avoid 1000 stones."
+    },
+    {
+      "Id": 160025,
+      "KrTitle": "21레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 9시간.",
+      "EnTitle": "Preparing for level 21...",
+      "EnExplanation": "Cumulative playtime: 9 hours."
+    },
+    {
+      "Id": 160026,
+      "KrTitle": "22레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 9시간 30본.",
+      "EnTitle": "Preparing for level 22...",
+      "EnExplanation": "Cumulative playtime: 9 hours 30 minutes."
+    },
+    {
+      "Id": 160027,
+      "KrTitle": "23레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 10시간.",
+      "EnTitle": "Preparing for level 23...",
+      "EnExplanation": "Cumulative playtime: 10 hours."
+    },
+    {
+      "Id": 160028,
+      "KrTitle": "24레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 10시간 30본.",
+      "EnTitle": "Preparing for level 24...",
+      "EnExplanation": "Cumulative playtime: 10 hours 30 minutes."
+    },
+    {
+      "Id": 160029,
+      "KrTitle": "24레벨을 준비하며...",
+      "KrExplanation": "24단계까지 살아남기.",
+      "EnTitle": "Preparing for level 24...",
+      "EnExplanation": "Survive up to level 24."
+    },
+    {
+      "Id": 160030,
+      "KrTitle": "25레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 11시간.",
+      "EnTitle": "Preparing for level 25...",
+      "EnExplanation": "Cumulative playtime: 11 hours."
+    },
+    {
+      "Id": 160031,
+      "KrTitle": "26레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 11시간 30본.",
+      "EnTitle": "Preparing for level 26...",
+      "EnExplanation": "Cumulative playtime: 11 hours 30 minutes."
+    },
+    {
+      "Id": 160032,
+      "KrTitle": "27레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 12시간.",
+      "EnTitle": "Preparing for level 27...",
+      "EnExplanation": "Cumulative playtime: 12 hours."
+    },
+    {
+      "Id": 160033,
+      "KrTitle": "28레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 12시간 30본.",
+      "EnTitle": "Preparing for level 28...",
+      "EnExplanation": "Cumulative playtime: 12 hours 30 minutes."
+    },
+    {
+      "Id": 160034,
+      "KrTitle": "29레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 13시간.",
+      "EnTitle": "Preparing for level 29...",
+      "EnExplanation": "Cumulative playtime: 13 hours."
+    },
+    {
+      "Id": 160035,
+      "KrTitle": "30레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 13시간 30본.",
+      "EnTitle": "Preparing for level 30...",
+      "EnExplanation": "Cumulative playtime: 13 hours 30 minutes."
+    },
+    {
+      "Id": 160036,
+      "KrTitle": "31레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 14시간.",
+      "EnTitle": "Preparing for level 31...",
+      "EnExplanation": "Cumulative playtime: 14 hours."
+    },
+    {
+      "Id": 160037,
+      "KrTitle": "32레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 14시간 30본.",
+      "EnTitle": "Preparing for level 32...",
+      "EnExplanation": "Cumulative playtime: 14 hours 30 minutes."
+    },
+    {
+      "Id": 160038,
+      "KrTitle": "33레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 15시간.",
+      "EnTitle": "Preparing for level 33...",
+      "EnExplanation": "Cumulative playtime: 15 hours."
+    },
+    {
+      "Id": 160039,
+      "KrTitle": "34레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 15시간 30본.",
+      "EnTitle": "Preparing for level 34...",
+      "EnExplanation": "Cumulative playtime: 15 hours 30 minutes."
+    },
+    {
+      "Id": 160040,
+      "KrTitle": "35레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 16시간.",
+      "EnTitle": "Preparing for level 35...",
+      "EnExplanation": "Cumulative playtime: 16 hours."
+    },
+    {
+      "Id": 160041,
+      "KrTitle": "35레벨을 준비하며...",
+      "KrExplanation": "돌 1500개 피하기.",
+      "EnTitle": "Preparing for level 35...",
+      "EnExplanation": "Avoid 1500 stones."
+    },
+    {
+      "Id": 160042,
+      "KrTitle": "36레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 16시간 30본.",
+      "EnTitle": "Preparing for level 36...",
+      "EnExplanation": "Cumulative playtime: 16 hours 30 minutes."
+    },
+    {
+      "Id": 160043,
+      "KrTitle": "37레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 17시간.",
+      "EnTitle": "Preparing for level 37...",
+      "EnExplanation": "Cumulative playtime: 17 hours."
+    },
+    {
+      "Id": 160044,
+      "KrTitle": "38레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 17시간 30본.",
+      "EnTitle": "Preparing for level 38...",
+      "EnExplanation": "Cumulative playtime: 17 hours 30 minutes."
+    },
+    {
+      "Id": 160045,
+      "KrTitle": "39레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 18시간.",
+      "EnTitle": "Preparing for level 39...",
+      "EnExplanation": "Cumulative playtime: 18 hours."
+    },
+    {
+      "Id": 160046,
+      "KrTitle": "39레벨을 준비하며...",
+      "KrExplanation": "한 게임에서 15분 기록 달성하기.",
+      "EnTitle": "Preparing for level 39...",
+      "EnExplanation": "Achieve a record of 15 minutes in one game."
+    },
+    {
+      "Id": 160047,
+      "KrTitle": "40레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 19시간 30본.",
+      "EnTitle": "Preparing for level 40...",
+      "EnExplanation": "Cumulative playtime: 19 hours 30 minutes."
+    },
+    {
+      "Id": 160048,
+      "KrTitle": "41레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 20시간.",
+      "EnTitle": "Preparing for level 41...",
+      "EnExplanation": "Cumulative playtime: 20 hours."
+    },
+    {
+      "Id": 160049,
+      "KrTitle": "42레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 20시간 30본.",
+      "EnTitle": "Preparing for level 42...",
+      "EnExplanation": "Cumulative playtime: 20 hours 30 minutes."
+    },
+    {
+      "Id": 160050,
+      "KrTitle": "43레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 21시간.",
+      "EnTitle": "Preparing for level 43...",
+      "EnExplanation": "Cumulative playtime: 21 hours."
+    },
+    {
+      "Id": 160051,
+      "KrTitle": "44레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 21시간 30본.",
+      "EnTitle": "Preparing for level 44...",
+      "EnExplanation": "Cumulative playtime: 21 hours 30 minutes."
+    },
+    {
+      "Id": 160052,
+      "KrTitle": "44레벨을 준비하며...",
+      "KrExplanation": "돌 2000개 피하기.",
+      "EnTitle": "Preparing for level 44...",
+      "EnExplanation": "Avoid 2000 stones."
+    },
+    {
+      "Id": 160053,
+      "KrTitle": "45레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 22시간.",
+      "EnTitle": "Preparing for level 45...",
+      "EnExplanation": "Cumulative playtime: 22 hours."
+    },
+    {
+      "Id": 160054,
+      "KrTitle": "46레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 22시간 30본.",
+      "EnTitle": "Preparing for level 46...",
+      "EnExplanation": "Cumulative playtime: 22 hours 30 minutes."
+    },
+    {
+      "Id": 160055,
+      "KrTitle": "47레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 23시간.",
+      "EnTitle": "Preparing for level 47...",
+      "EnExplanation": "Cumulative playtime: 23 hours."
+    },
+    {
+      "Id": 160056,
+      "KrTitle": "48레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 23시간 30본.",
+      "EnTitle": "Preparing for level 48...",
+      "EnExplanation": "Cumulative playtime: 23 hours 30 minutes."
+    },
+    {
+      "Id": 160057,
+      "KrTitle": "49레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 24시간.",
+      "EnTitle": "Preparing for level 49...",
+      "EnExplanation": "Cumulative playtime: 24 hours."
+    },
+    {
+      "Id": 160058,
+      "KrTitle": "50레벨을 준비하며...",
+      "KrExplanation": "누적 플레이 시간 100시간.",
+      "EnTitle": "Preparing for level 50...",
+      "EnExplanation": "Cumulative playtime: 100 hours."
+    },
+    {
+      "Id": 160059,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "캐릭터 스타일 1번 변경하기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Change character style 1 time."
+    },
+    {
+      "Id": 160060,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "코스튬 구매 1번 하기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Purchase a costume 1 time."
+    },
+    {
+      "Id": 160061,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "머리 종류 3가지 모으기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Collect 3 types of hairstyles."
+    },
+    {
+      "Id": 160062,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "눈 모양 3가지 모으기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Collect 3 types of eye shapes."
+    },
+    {
+      "Id": 160063,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "눈썹 모양 3가지 모으기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Collect 3 types of eyebrow shapes."
+    },
+    {
+      "Id": 160064,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "캐릭터 1번 변경하기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Change character 1 time."
+    },
+    {
+      "Id": 160065,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "머리 종류 5가지 모으기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Collect 5 types of hairstyles."
+    },
+    {
+      "Id": 160066,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "눈 모양 5가지 모으기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Collect 5 types of eye shapes."
+    },
+    {
+      "Id": 160067,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "눈썹 모양 5가지 모으기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Collect 5 types of eyebrow shapes."
+    },
+    {
+      "Id": 160068,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "머리 종류 10가지 모으기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Collect 10 types of hairstyles."
+    },
+    {
+      "Id": 160069,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "눈 모양 10가지 모으기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Collect 10 types of eye shapes."
+    },
+    {
+      "Id": 160070,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "눈썹 모양 10가지 모으기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Collect 10 types of eyebrow shapes."
+    }
+  ]
+}

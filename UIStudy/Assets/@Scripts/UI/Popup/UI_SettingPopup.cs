@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Data;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using static Define;
 
@@ -27,6 +28,8 @@ public class UI_SettingPopup : UI_Popup
         Language_En,
         Language_Kr
     }
+
+    private SettingData _settingData;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -39,13 +42,16 @@ public class UI_SettingPopup : UI_Popup
         BindToggles(typeof(Toggles));
 
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        //OnEvent_SetLanguage(null, null);
 
         GetButton((int)Buttons.Close_Button).gameObject.BindEvent(OnClick_CloseButton, EUIEvent.Click);
         GetToggle((int)Toggles.Language_En).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
         GetToggle((int)Toggles.Language_Kr).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
         GetSlider((int)Sliders.Music_Slider).gameObject.BindEvent(OnDrag_MusicSlider, EUIEvent.Drag);
+        //GetSlider((int)Sliders.Music_Slider).gameObject.BindEvent(EndDrag_MusicSlider, EUIEvent.EndDrag);
+        
         GetSlider((int)Sliders.SoundFx_Slider).gameObject.BindEvent(OnDrag_SoundFxSlider, EUIEvent.Drag);
+        //GetSlider((int)Sliders.SoundFx_Slider).gameObject.BindEvent(EndDrag_SoundFxSlider, EUIEvent.EndDrag);
+        _settingData = Managers.Data.SettingDataDic[1];
 
         return true;
     }
@@ -54,20 +60,47 @@ public class UI_SettingPopup : UI_Popup
         Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
     }
 
+    public void ActiveInfo()
+    {
+        OnEvent_SetLanguage(null, null);
+        GetSlider((int)Sliders.Music_Slider).value = _settingData.MusicVolume;
+        GetSlider((int)Sliders.SoundFx_Slider).value = _settingData.SoundFxVolume;
+        if(_settingData.IsOnVibration)
+        {
+            GetToggle((int)Toggles.Language_Kr).isOn = _settingData.IsOnVibration;
+        }
+        else
+        {
+            GetToggle((int)Toggles.Language_En).isOn = _settingData.IsOnVibration;
+        }
+
+        if(_settingData.IsOnKr)
+        {
+            GetToggle((int)Toggles.Language_Kr).isOn = _settingData.IsOnKr;
+        }
+        else
+        {
+            GetToggle((int)Toggles.Language_En).isOn = _settingData.IsOnKr;
+        }
+    }
+
     private void OnClick_CloseButton(PointerEventData eventData)
     {
         Managers.UI.ClosePopupUI(this);
+        // save json file 
     }
 
     private void OnClick_SetLanguage(PointerEventData eventData)
     {
-        if(GetToggle((int)Toggles.Language_En).isOn == true)
+        if(GetToggle((int)Toggles.Language_Kr).isOn == true)
         {
-            Managers.Language.ELanguageInfo = ELanguage.En;
+            Managers.Language.ELanguageInfo = ELanguage.Kr;
+            _settingData.IsOnKr = true;
         }
         else
         {
-            Managers.Language.ELanguageInfo = ELanguage.Kr;
+            Managers.Language.ELanguageInfo = ELanguage.En;
+            _settingData.IsOnKr = false;
         }
         Managers.Event.TriggerEvent(EEventType.SetLanguage);
         Debug.Log($"language : {Managers.Language.ELanguageInfo}");
@@ -75,24 +108,22 @@ public class UI_SettingPopup : UI_Popup
 
     private void OnDrag_MusicSlider(PointerEventData eventData)
     {
-        float f = 0;
-        f = GetSlider((int)Sliders.Music_Slider).value;
-        Debug.Log($"Music : {f}");
+        _settingData.MusicVolume = GetSlider((int)Sliders.Music_Slider).value;
+        //Debug.Log($"Music : {_musicVolume}");
     }
 
     private void OnDrag_SoundFxSlider(PointerEventData eventData)
     {
-        float f = 0;
-        f = GetSlider((int)Sliders.SoundFx_Slider).value;
-        Debug.Log($"SoundFx : {f}");
+        _settingData.SoundFxVolume = GetSlider((int)Sliders.SoundFx_Slider).value;
+        //Debug.Log($"SoundFx : {_soundFxVolume}");
     }
-    
+
     void OnEvent_SetLanguage(Component sender, object param)
     {
-        GetText((int)Texts.Setting_Text).text = Managers.Language.LocalizedString(91019);
-        GetText((int)Texts.Music_Text).text = Managers.Language.LocalizedString(91019);
-        GetText((int)Texts.SoundFx_Text).text = Managers.Language.LocalizedString(91019);
-        GetText((int)Texts.Vibration_Text).text = Managers.Language.LocalizedString(91019);
-        GetText((int)Texts.Language_Text).text = Managers.Language.LocalizedString(91019);
+        GetText((int)Texts.Setting_Text).text = Managers.Language.LocalizedString(91037);
+        GetText((int)Texts.Music_Text).text = Managers.Language.LocalizedString(91038);
+        GetText((int)Texts.SoundFx_Text).text = Managers.Language.LocalizedString(91039);
+        GetText((int)Texts.Vibration_Text).text = Managers.Language.LocalizedString(91040);
+        GetText((int)Texts.Language_Text).text = Managers.Language.LocalizedString(91041);
     }
 }

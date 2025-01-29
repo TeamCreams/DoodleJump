@@ -179,6 +179,31 @@
       "Id": 91036,
       "KrText": "네트워크 상태가 불안정하여 정산을 처리할 수 없습니다.",
       "EnText": "The settlement could not be processed due to poor network conditions."
+    },
+    {
+      "Id": 91037,
+      "KrText": "설정",
+      "EnText": "Settings"
+    },
+    {
+      "Id": 91038,
+      "KrText": "음악",
+      "EnText": "Music"
+    },
+    {
+      "Id": 91039,
+      "KrText": "효과음",
+      "EnText": "SoundFx"
+    },
+    {
+      "Id": 91040,
+      "KrText": "진동",
+      "EnText": "Vibration"
+    },
+    {
+      "Id": 91041,
+      "KrText": "언어",
+      "EnText": "Language"
     }
   ]
 }

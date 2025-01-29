@@ -33,6 +33,8 @@ public class DataTransfomer : EditorWindow
         ParseExcelDataToJson<EvolutionDataLoader, EvolutionData>("EvolutionData");
         ParseExcelDataToJson<EvolutionItemDataLoader, EvolutionItemData>("EvolutionItemData");
         ParseExcelDataToJson<ErrorDataLoader, ErrorData>("ErrorData");
+        ParseExcelDataToJson<MissionLanguageDataLoader, MissionLanguageData>("MissionLanguageData");
+        ParseExcelDataToJson<SettingDataLoader, SettingData>("SettingData");
 
         Debug.Log("Complete");
 	}

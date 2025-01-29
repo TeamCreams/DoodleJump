@@ -1,0 +1,11 @@
+{
+  "settingDatas": [
+    {
+      "Id": 1,
+      "MusicVolume": 1.0,
+      "SoundFxVolume": 1.0,
+      "IsOnVibration": true,
+      "IsOnKr": true
+    }
+  ]
+}

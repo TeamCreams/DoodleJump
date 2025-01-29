@@ -63,6 +63,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88ec2339d1d7148d18da10fdcdc059ce
+    m_Address: MissionLanguageData
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 96619377f9d16694987a29307dfa17ef
     m_Address: SuberunkerItemData
     m_ReadOnly: 0
@@ -89,6 +95,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c6148a229d8b04c66b20db9729e1bff7
     m_Address: ThoughtBubbleData
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d4abb094ec8964020bf5846beeadf10c
+    m_Address: SettingData
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

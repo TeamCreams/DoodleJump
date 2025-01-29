@@ -128,7 +128,8 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
 
     private void OnClick_SettingButton(PointerEventData eventData)
     {
-        Managers.UI.ShowPopupUI<UI_SettingPopup>();
+        UI_SettingPopup settingPopup = Managers.UI.ShowPopupUI<UI_SettingPopup>();
+        settingPopup.ActiveInfo();
     }
 
     private void OnEvent_RefreshGold(Component sender, object param)

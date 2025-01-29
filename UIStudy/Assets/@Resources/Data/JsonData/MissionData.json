@@ -3,8 +3,7 @@
     {
       "Id": 110001,
       "Type": 0,
-      "Title": "2레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 5분.",
+      "LanguageId": 160001,
       "Compensation": 100,
       "Level": 1,
       "MissionType": 0,
@@ -19,8 +18,7 @@
     {
       "Id": 110002,
       "Type": 0,
-      "Title": "3레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 10분.",
+      "LanguageId": 160002,
       "Compensation": 100,
       "Level": 2,
       "MissionType": 0,
@@ -35,8 +33,7 @@
     {
       "Id": 110003,
       "Type": 0,
-      "Title": "4레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 30분.",
+      "LanguageId": 160003,
       "Compensation": 100,
       "Level": 3,
       "MissionType": 0,
@@ -51,8 +48,7 @@
     {
       "Id": 110004,
       "Type": 0,
-      "Title": "5레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 1시간.",
+      "LanguageId": 160004,
       "Compensation": 100,
       "Level": 4,
       "MissionType": 0,
@@ -67,8 +63,7 @@
     {
       "Id": 110005,
       "Type": 0,
-      "Title": "6레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 1시간 30분.",
+      "LanguageId": 160005,
       "Compensation": 100,
       "Level": 5,
       "MissionType": 0,
@@ -83,8 +78,7 @@
     {
       "Id": 110006,
       "Type": 0,
-      "Title": "7레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 2시간",
+      "LanguageId": 160006,
       "Compensation": 100,
       "Level": 6,
       "MissionType": 0,
@@ -99,8 +93,7 @@
     {
       "Id": 110007,
       "Type": 0,
-      "Title": "7레벨을 준비하며...",
-      "Explanation": "10단계까지 살아남기.",
+      "LanguageId": 160007,
       "Compensation": 100,
       "Level": 6,
       "MissionType": 1,
@@ -115,8 +108,7 @@
     {
       "Id": 110008,
       "Type": 0,
-      "Title": "8레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 2시간 30분.",
+      "LanguageId": 160008,
       "Compensation": 100,
       "Level": 7,
       "MissionType": 0,
@@ -132,8 +124,7 @@
     {
       "Id": 110009,
       "Type": 0,
-      "Title": "9레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 3시간.",
+      "LanguageId": 160009,
       "Compensation": 100,
       "Level": 8,
       "MissionType": 0,
@@ -148,8 +139,7 @@
     {
       "Id": 110010,
       "Type": 0,
-      "Title": "9레벨을 준비하며...",
-      "Explanation": "돌 500개 피하기.",
+      "LanguageId": 160010,
       "Compensation": 100,
       "Level": 8,
       "MissionType": 2,
@@ -164,8 +154,7 @@
     {
       "Id": 110011,
       "Type": 0,
-      "Title": "10레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 3시간 30분.",
+      "LanguageId": 160011,
       "Compensation": 100,
       "Level": 9,
       "MissionType": 0,
@@ -181,8 +170,7 @@
     {
       "Id": 110012,
       "Type": 0,
-      "Title": "11레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 4시간.",
+      "LanguageId": 160012,
       "Compensation": 100,
       "Level": 10,
       "MissionType": 0,
@@ -197,8 +185,7 @@
     {
       "Id": 110013,
       "Type": 0,
-      "Title": "11레벨을 준비하며...",
-      "Explanation": "20단계까지 살아남기.",
+      "LanguageId": 160013,
       "Compensation": 100,
       "Level": 10,
       "MissionType": 1,
@@ -213,8 +200,7 @@
     {
       "Id": 110014,
       "Type": 0,
-      "Title": "12레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 4시간 30분.",
+      "LanguageId": 160014,
       "Compensation": 100,
       "Level": 11,
       "MissionType": 0,
@@ -229,8 +215,7 @@
     {
       "Id": 110015,
       "Type": 0,
-      "Title": "13레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 5시간.",
+      "LanguageId": 160015,
       "Compensation": 100,
       "Level": 12,
       "MissionType": 0,
@@ -245,8 +230,7 @@
     {
       "Id": 110016,
       "Type": 0,
-      "Title": "14레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 5시간 30분.",
+      "LanguageId": 160016,
       "Compensation": 100,
       "Level": 13,
       "MissionType": 0,
@@ -261,8 +245,7 @@
     {
       "Id": 110017,
       "Type": 0,
-      "Title": "14레벨을 준비하며...",
-      "Explanation": "한 게임에서 5분 기록 달성하기.",
+      "LanguageId": 160017,
       "Compensation": 100,
       "Level": 13,
       "MissionType": 3,
@@ -277,8 +260,7 @@
     {
       "Id": 110018,
       "Type": 0,
-      "Title": "15레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 6시간.",
+      "LanguageId": 160018,
       "Compensation": 100,
       "Level": 14,
       "MissionType": 0,
@@ -294,8 +276,7 @@
     {
       "Id": 110019,
       "Type": 0,
-      "Title": "16레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 6시간 30본.",
+      "LanguageId": 160019,
       "Compensation": 100,
       "Level": 15,
       "MissionType": 0,
@@ -310,8 +291,7 @@
     {
       "Id": 110020,
       "Type": 0,
-      "Title": "17레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 7시간.",
+      "LanguageId": 160020,
       "Compensation": 100,
       "Level": 16,
       "MissionType": 0,
@@ -326,8 +306,7 @@
     {
       "Id": 110021,
       "Type": 0,
-      "Title": "18레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 7시간 30본.",
+      "LanguageId": 160021,
       "Compensation": 100,
       "Level": 17,
       "MissionType": 0,
@@ -342,8 +321,7 @@
     {
       "Id": 110022,
       "Type": 0,
-      "Title": "19레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 8시간.",
+      "LanguageId": 160022,
       "Compensation": 100,
       "Level": 18,
       "MissionType": 0,
@@ -358,8 +336,7 @@
     {
       "Id": 110023,
       "Type": 0,
-      "Title": "20레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 8시간 30본.",
+      "LanguageId": 160023,
       "Compensation": 100,
       "Level": 19,
       "MissionType": 0,
@@ -374,8 +351,7 @@
     {
       "Id": 110024,
       "Type": 0,
-      "Title": "20레벨을 준비하며...",
-      "Explanation": "돌 1000개 피하기.",
+      "LanguageId": 160024,
       "Compensation": 100,
       "Level": 19,
       "MissionType": 2,
@@ -390,8 +366,7 @@
     {
       "Id": 110025,
       "Type": 0,
-      "Title": "21레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 9시간.",
+      "LanguageId": 160025,
       "Compensation": 100,
       "Level": 20,
       "MissionType": 0,
@@ -407,8 +382,7 @@
     {
       "Id": 110026,
       "Type": 0,
-      "Title": "22레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 9시간 30본.",
+      "LanguageId": 160026,
       "Compensation": 100,
       "Level": 21,
       "MissionType": 0,
@@ -423,8 +397,7 @@
     {
       "Id": 110027,
       "Type": 0,
-      "Title": "23레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 10시간.",
+      "LanguageId": 160027,
       "Compensation": 100,
       "Level": 22,
       "MissionType": 0,
@@ -439,8 +412,7 @@
     {
       "Id": 110028,
       "Type": 0,
-      "Title": "24레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 10시간 30본.",
+      "LanguageId": 160028,
       "Compensation": 100,
       "Level": 23,
       "MissionType": 0,
@@ -455,8 +427,7 @@
     {
       "Id": 110029,
       "Type": 0,
-      "Title": "24레벨을 준비하며...",
-      "Explanation": "24단계까지 살아남기.",
+      "LanguageId": 160029,
       "Compensation": 100,
       "Level": 23,
       "MissionType": 1,
@@ -471,8 +442,7 @@
     {
       "Id": 110030,
       "Type": 0,
-      "Title": "25레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 11시간.",
+      "LanguageId": 160030,
       "Compensation": 100,
       "Level": 24,
       "MissionType": 0,
@@ -488,8 +458,7 @@
     {
       "Id": 110031,
       "Type": 0,
-      "Title": "26레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 11시간 30본.",
+      "LanguageId": 160031,
       "Compensation": 100,
       "Level": 25,
       "MissionType": 0,
@@ -504,8 +473,7 @@
     {
       "Id": 110032,
       "Type": 0,
-      "Title": "27레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 12시간.",
+      "LanguageId": 160032,
       "Compensation": 100,
       "Level": 26,
       "MissionType": 0,
@@ -520,8 +488,7 @@
     {
       "Id": 110033,
       "Type": 0,
-      "Title": "28레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 12시간 30본.",
+      "LanguageId": 160033,
       "Compensation": 100,
       "Level": 27,
       "MissionType": 0,
@@ -536,8 +503,7 @@
     {
       "Id": 110034,
       "Type": 0,
-      "Title": "29레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 13시간.",
+      "LanguageId": 160034,
       "Compensation": 100,
       "Level": 28,
       "MissionType": 0,
@@ -552,8 +518,7 @@
     {
       "Id": 110035,
       "Type": 0,
-      "Title": "30레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 13시간 30본.",
+      "LanguageId": 160035,
       "Compensation": 100,
       "Level": 29,
       "MissionType": 0,
@@ -568,8 +533,7 @@
     {
       "Id": 110036,
       "Type": 0,
-      "Title": "31레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 14시간.",
+      "LanguageId": 160036,
       "Compensation": 100,
       "Level": 30,
       "MissionType": 0,
@@ -584,8 +548,7 @@
     {
       "Id": 110037,
       "Type": 0,
-      "Title": "32레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 14시간 30본.",
+      "LanguageId": 160037,
       "Compensation": 100,
       "Level": 31,
       "MissionType": 0,
@@ -600,8 +563,7 @@
     {
       "Id": 110038,
       "Type": 0,
-      "Title": "33레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 15시간.",
+      "LanguageId": 160038,
       "Compensation": 100,
       "Level": 32,
       "MissionType": 0,
@@ -616,8 +578,7 @@
     {
       "Id": 110039,
       "Type": 0,
-      "Title": "34레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 15시간 30본.",
+      "LanguageId": 160039,
       "Compensation": 100,
       "Level": 33,
       "MissionType": 0,
@@ -632,8 +593,7 @@
     {
       "Id": 110040,
       "Type": 0,
-      "Title": "35레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 16시간.",
+      "LanguageId": 160040,
       "Compensation": 100,
       "Level": 34,
       "MissionType": 0,
@@ -648,8 +608,7 @@
     {
       "Id": 110041,
       "Type": 0,
-      "Title": "35레벨을 준비하며...",
-      "Explanation": "돌 1500개 피하기.",
+      "LanguageId": 160041,
       "Compensation": 100,
       "Level": 34,
       "MissionType": 2,
@@ -664,8 +623,7 @@
     {
       "Id": 110042,
       "Type": 0,
-      "Title": "36레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 16시간 30본.",
+      "LanguageId": 160042,
       "Compensation": 100,
       "Level": 35,
       "MissionType": 0,
@@ -681,8 +639,7 @@
     {
       "Id": 110043,
       "Type": 0,
-      "Title": "37레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 17시간.",
+      "LanguageId": 160043,
       "Compensation": 100,
       "Level": 36,
       "MissionType": 0,
@@ -697,8 +654,7 @@
     {
       "Id": 110044,
       "Type": 0,
-      "Title": "38레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 17시간 30본.",
+      "LanguageId": 160044,
       "Compensation": 100,
       "Level": 37,
       "MissionType": 0,
@@ -713,8 +669,7 @@
     {
       "Id": 110045,
       "Type": 0,
-      "Title": "39레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 18시간.",
+      "LanguageId": 160045,
       "Compensation": 100,
       "Level": 38,
       "MissionType": 0,
@@ -729,8 +684,7 @@
     {
       "Id": 110046,
       "Type": 0,
-      "Title": "39레벨을 준비하며...",
-      "Explanation": "한 게임에서 15분 기록 달성하기.",
+      "LanguageId": 160046,
       "Compensation": 100,
       "Level": 38,
       "MissionType": 3,
@@ -745,8 +699,7 @@
     {
       "Id": 110047,
       "Type": 0,
-      "Title": "40레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 19시간 30본.",
+      "LanguageId": 160047,
       "Compensation": 100,
       "Level": 39,
       "MissionType": 0,
@@ -762,8 +715,7 @@
     {
       "Id": 110048,
       "Type": 0,
-      "Title": "41레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 20시간.",
+      "LanguageId": 160048,
       "Compensation": 100,
       "Level": 40,
       "MissionType": 0,
@@ -778,8 +730,7 @@
     {
       "Id": 110049,
       "Type": 0,
-      "Title": "42레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 20시간 30본.",
+      "LanguageId": 160049,
       "Compensation": 100,
       "Level": 41,
       "MissionType": 0,
@@ -794,8 +745,7 @@
     {
       "Id": 110050,
       "Type": 0,
-      "Title": "43레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 21시간.",
+      "LanguageId": 160050,
       "Compensation": 100,
       "Level": 42,
       "MissionType": 0,
@@ -810,8 +760,7 @@
     {
       "Id": 110051,
       "Type": 0,
-      "Title": "44레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 21시간 30본.",
+      "LanguageId": 160051,
       "Compensation": 100,
       "Level": 43,
       "MissionType": 0,
@@ -826,8 +775,7 @@
     {
       "Id": 110052,
       "Type": 0,
-      "Title": "44레벨을 준비하며...",
-      "Explanation": "돌 2000개 피하기.",
+      "LanguageId": 160052,
       "Compensation": 100,
       "Level": 43,
       "MissionType": 2,
@@ -842,8 +790,7 @@
     {
       "Id": 110053,
       "Type": 0,
-      "Title": "45레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 22시간.",
+      "LanguageId": 160053,
       "Compensation": 100,
       "Level": 44,
       "MissionType": 0,
@@ -859,8 +806,7 @@
     {
       "Id": 110054,
       "Type": 0,
-      "Title": "46레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 22시간 30본.",
+      "LanguageId": 160054,
       "Compensation": 100,
       "Level": 45,
       "MissionType": 0,
@@ -875,8 +821,7 @@
     {
       "Id": 110055,
       "Type": 0,
-      "Title": "47레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 23시간.",
+      "LanguageId": 160055,
       "Compensation": 100,
       "Level": 46,
       "MissionType": 0,
@@ -891,8 +836,7 @@
     {
       "Id": 110056,
       "Type": 0,
-      "Title": "48레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 23시간 30본.",
+      "LanguageId": 160056,
       "Compensation": 100,
       "Level": 47,
       "MissionType": 0,
@@ -907,8 +851,7 @@
     {
       "Id": 110057,
       "Type": 0,
-      "Title": "49레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 24시간.",
+      "LanguageId": 160057,
       "Compensation": 100,
       "Level": 48,
       "MissionType": 0,
@@ -923,8 +866,7 @@
     {
       "Id": 110058,
       "Type": 0,
-      "Title": "50레벨을 준비하며...",
-      "Explanation": "누적 플레이 시간 100시간.",
+      "LanguageId": 160058,
       "Compensation": 100,
       "Level": 49,
       "MissionType": 0,
@@ -939,8 +881,7 @@
     {
       "Id": 110059,
       "Type": 1,
-      "Title": "캐릭터를 꾸며보자!",
-      "Explanation": "캐릭터 스타일 1번 변경하기.",
+      "LanguageId": 160059,
       "Compensation": 50,
       "Level": 0,
       "MissionType": 4,
@@ -955,8 +896,7 @@
     {
       "Id": 110060,
       "Type": 1,
-      "Title": "캐릭터를 꾸며보자!",
-      "Explanation": "코스튬 구매 1번 하기.",
+      "LanguageId": 160060,
       "Compensation": 50,
       "Level": 0,
       "MissionType": 4,
@@ -971,8 +911,7 @@
     {
       "Id": 110061,
       "Type": 1,
-      "Title": "캐릭터를 꾸며보자!",
-      "Explanation": "머리 종류 3가지 모으기.",
+      "LanguageId": 160061,
       "Compensation": 50,
       "Level": 0,
       "MissionType": 4,
@@ -987,8 +926,7 @@
     {
       "Id": 110062,
       "Type": 1,
-      "Title": "캐릭터를 꾸며보자!",
-      "Explanation": "눈 모양 3가지 모으기.",
+      "LanguageId": 160062,
       "Compensation": 50,
       "Level": 0,
       "MissionType": 4,
@@ -1003,8 +941,7 @@
     {
       "Id": 110063,
       "Type": 1,
-      "Title": "캐릭터를 꾸며보자!",
-      "Explanation": "눈썹 모양 3가지 모으기.",
+      "LanguageId": 160063,
       "Compensation": 50,
       "Level": 0,
       "MissionType": 4,
@@ -1019,8 +956,7 @@
     {
       "Id": 110064,
       "Type": 1,
-      "Title": "캐릭터를 꾸며보자!",
-      "Explanation": "캐릭터 1번 변경하기.",
+      "LanguageId": 160064,
       "Compensation": 50,
       "Level": 0,
       "MissionType": 4,
@@ -1035,8 +971,7 @@
     {
       "Id": 110065,
       "Type": 1,
-      "Title": "캐릭터를 꾸며보자!",
-      "Explanation": "머리 종류 5가지 모으기.",
+      "LanguageId": 160065,
       "Compensation": 50,
       "Level": 0,
       "MissionType": 4,
@@ -1051,8 +986,7 @@
     {
       "Id": 110066,
       "Type": 1,
-      "Title": "캐릭터를 꾸며보자!",
-      "Explanation": "눈 모양 5가지 모으기.",
+      "LanguageId": 160066,
       "Compensation": 50,
       "Level": 0,
       "MissionType": 4,
@@ -1067,8 +1001,7 @@
     {
       "Id": 110067,
       "Type": 1,
-      "Title": "캐릭터를 꾸며보자!",
-      "Explanation": "눈썹 모양 5가지 모으기.",
+      "LanguageId": 160067,
       "Compensation": 50,
       "Level": 0,
       "MissionType": 4,
@@ -1083,8 +1016,7 @@
     {
       "Id": 110068,
       "Type": 1,
-      "Title": "캐릭터를 꾸며보자!",
-      "Explanation": "머리 종류 10가지 모으기.",
+      "LanguageId": 160068,
       "Compensation": 50,
       "Level": 0,
       "MissionType": 4,
@@ -1099,8 +1031,7 @@
     {
       "Id": 110069,
       "Type": 1,
-      "Title": "캐릭터를 꾸며보자!",
-      "Explanation": "눈 모양 10가지 모으기.",
+      "LanguageId": 160069,
       "Compensation": 50,
       "Level": 0,
       "MissionType": 4,
@@ -1115,8 +1046,7 @@
     {
       "Id": 110070,
       "Type": 1,
-      "Title": "캐릭터를 꾸며보자!",
-      "Explanation": "눈썹 모양 10가지 모으기.",
+      "LanguageId": 160070,
       "Compensation": 50,
       "Level": 0,
       "MissionType": 4,

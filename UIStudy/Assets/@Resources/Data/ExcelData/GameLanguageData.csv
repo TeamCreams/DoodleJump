@@ -35,3 +35,8 @@ Id,KrText,EnText
 91034,계정 만들기 성공.,Account creation successful.
 91035,계정 만들기 실패.,Failed to create account.
 91036,네트워크 상태가 불안정하여 정산을 처리할 수 없습니다.,The settlement could not be processed due to poor network conditions.
+91037,설정,Settings
+91038,음악,Music
+91039,효과음,SoundFx
+91040,진동,Vibration
+91041,언어,Language

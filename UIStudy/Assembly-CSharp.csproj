@@ -167,6 +167,7 @@
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/SaveLoadExample.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterSetup.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_ColorPicker.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_Vibration.cs" />
     <Compile Include="Assets/@Scripts/UI/UI_Inventory.cs" />
     <Compile Include="Assets/@Scripts/UI/Popup/UI_LevelUpPopup.cs" />
     <Compile Include="Assets/@Scripts/UI/Kakao/UI_KakaoScene.cs" />

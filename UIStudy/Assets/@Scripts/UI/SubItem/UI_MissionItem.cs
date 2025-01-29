@@ -73,9 +73,7 @@ public class UI_MissionItem : UI_Base
         Debug.Log($"missionId : {missionId}");
         _missionId = missionId;
         MissionData missionData = Managers.Data.MissionDataDic[_missionId];
-        GetText((int)Texts.Title_Text).text = missionData.Title;
-        GetText((int)Texts.Explanation_Text).text = missionData.Explanation;
-        
+        SetLanguage(missionData);
         int missionValue = missionData.MissionType.GetMissionValueByType();
         float value = (float)missionValue / (float)missionData.Param1;
         Debug.Log($"---------------------------------------------≈value : {missionValue} / {missionData.Param1} = {(float)missionValue / (float)missionData.Param1}");
@@ -96,11 +94,55 @@ public class UI_MissionItem : UI_Base
         }
     }
 
+    // 처음 언어 설정을 할 때
+    void SetLanguage(MissionData missionData)
+    {
+        MissionLanguageData missionLanguageData = Managers.Data.MissionLanguageDataDic[missionData.LanguageId];
+
+        switch(Managers.Language.ELanguageInfo)
+        {
+            case ELanguage.Kr:
+            {
+                GetText((int)Texts.Title_Text).text = missionLanguageData.KrTitle;
+                GetText((int)Texts.Explanation_Text).text = missionLanguageData.KrExplanation;
+            }
+            break;
+            case ELanguage.En:
+            {
+                GetText((int)Texts.Title_Text).text = missionLanguageData.EnTitle;
+                GetText((int)Texts.Explanation_Text).text = missionLanguageData.EnExplanation;
+            }
+            break;
+            default:
+            break;
+        }
+    }
+
+    // 나중에 언어가 바뀔 때
     void OnEvent_SetLanguage(Component sender, object param)
     {
+        MissionData missionData = Managers.Data.MissionDataDic[_missionId];
+        MissionLanguageData missionLanguageData = Managers.Data.MissionLanguageDataDic[missionData.LanguageId];
+
+        switch(Managers.Language.ELanguageInfo)
+        {
+            case ELanguage.Kr:
+            {
+                GetText((int)Texts.Title_Text).text = missionLanguageData.KrTitle;
+                GetText((int)Texts.Explanation_Text).text = missionLanguageData.KrExplanation;
+            }
+            break;
+            case ELanguage.En:
+            {
+                GetText((int)Texts.Title_Text).text = missionLanguageData.EnTitle;
+                GetText((int)Texts.Explanation_Text).text = missionLanguageData.EnExplanation;
+            }
+            break;
+            default:
+            break;
+        }
         //GetText((int)Texts.Title_Text).text = Managers.Language.LocalizedString();
         //GetText((int)Texts.Explanation_Text).text = Managers.Language.LocalizedString();
-        //GetText((int)Texts.ProgressPercent).text = Managers.Language.LocalizedString();
         //GetText((int)Texts.Complete_Text).text = Managers.Language.LocalizedString();
     }
 }
