@@ -40,7 +40,7 @@ public class UI_SettingPopup : UI_Popup
         BindButtons(typeof(Buttons));
         BindSliders(typeof(Sliders));
         BindToggles(typeof(Toggles));
-
+        
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
 
         GetButton((int)Buttons.Close_Button).gameObject.BindEvent(OnClick_CloseButton, EUIEvent.Click);
@@ -52,7 +52,7 @@ public class UI_SettingPopup : UI_Popup
         GetSlider((int)Sliders.SoundFx_Slider).gameObject.BindEvent(OnDrag_SoundFxSlider, EUIEvent.Drag);
         //GetSlider((int)Sliders.SoundFx_Slider).gameObject.BindEvent(EndDrag_SoundFxSlider, EUIEvent.EndDrag);
         _settingData = Managers.Data.SettingDataDic[1];
-
+        
         return true;
     }
     private void OnDestroy()
@@ -65,14 +65,8 @@ public class UI_SettingPopup : UI_Popup
         OnEvent_SetLanguage(null, null);
         GetSlider((int)Sliders.Music_Slider).value = _settingData.MusicVolume;
         GetSlider((int)Sliders.SoundFx_Slider).value = _settingData.SoundFxVolume;
-        if(_settingData.IsOnVibration)
-        {
-            GetToggle((int)Toggles.Language_Kr).isOn = _settingData.IsOnVibration;
-        }
-        else
-        {
-            GetToggle((int)Toggles.Language_En).isOn = _settingData.IsOnVibration;
-        }
+        Managers.Game.SettingInfo.VibrationIsOn = _settingData.IsOnVibration;
+        Debug.Log($"///ActiveInfo(_settingData.IsOnVibration) : {_settingData.IsOnVibration}");
 
         if(_settingData.IsOnKr)
         {
@@ -86,6 +80,8 @@ public class UI_SettingPopup : UI_Popup
 
     private void OnClick_CloseButton(PointerEventData eventData)
     {
+        _settingData.IsOnVibration = Managers.Game.SettingInfo.VibrationIsOn;
+        Debug.Log($"///OnClick_CloseButton(_settingData.IsOnVibration) : {_settingData.IsOnVibration}");
         Managers.UI.ClosePopupUI(this);
         // save json file 
     }
@@ -109,13 +105,15 @@ public class UI_SettingPopup : UI_Popup
     private void OnDrag_MusicSlider(PointerEventData eventData)
     {
         _settingData.MusicVolume = GetSlider((int)Sliders.Music_Slider).value;
+        //SetSoundVolume(ESound.Bgm, _settingData.MusicVolume);
+
         //Debug.Log($"Music : {_musicVolume}");
     }
 
     private void OnDrag_SoundFxSlider(PointerEventData eventData)
     {
         _settingData.SoundFxVolume = GetSlider((int)Sliders.SoundFx_Slider).value;
-        //Debug.Log($"SoundFx : {_soundFxVolume}");
+        //SetSoundVolume(ESound.Effect, _settingData.SoundFxVolume);
     }
 
     void OnEvent_SetLanguage(Component sender, object param)
@@ -125,5 +123,16 @@ public class UI_SettingPopup : UI_Popup
         GetText((int)Texts.SoundFx_Text).text = Managers.Language.LocalizedString(91039);
         GetText((int)Texts.Vibration_Text).text = Managers.Language.LocalizedString(91040);
         GetText((int)Texts.Language_Text).text = Managers.Language.LocalizedString(91041);
+    }
+
+    private void SetSoundVolume(ESound type, float volume)
+    {
+        foreach(GameSoundData data in Managers.Data.GameSoundDataDic.Values)
+        {
+            if(data.Type == type)
+            {
+                Managers.Sound.Play(data.Type, data.SoundName, volume);
+            }
+        }
     }
 }

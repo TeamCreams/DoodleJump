@@ -1,0 +1,10 @@
+Id,Type,SoundName,DefaultVolume
+170001,Bgm,LobbyBGMSound,0.6
+170002,Effect,AddLifeSound,1
+170003,Effect,AttackedSound,0.7
+170004,Effect,BoringSound,1
+170005,Effect,Craft,1
+170006,Effect,GetItemSound,1
+170007,Effect,LuckSkillSound,1
+170008,Effect,NextSound,1
+170009,Effect,SelectSound,0.7

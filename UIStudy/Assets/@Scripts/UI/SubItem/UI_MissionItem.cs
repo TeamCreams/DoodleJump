@@ -143,6 +143,6 @@ public class UI_MissionItem : UI_Base
         }
         //GetText((int)Texts.Title_Text).text = Managers.Language.LocalizedString();
         //GetText((int)Texts.Explanation_Text).text = Managers.Language.LocalizedString();
-        //GetText((int)Texts.Complete_Text).text = Managers.Language.LocalizedString();
+        GetText((int)Texts.Complete_Text).text = Managers.Language.LocalizedString(91042);
     }
 }

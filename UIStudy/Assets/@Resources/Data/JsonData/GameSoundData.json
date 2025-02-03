@@ -1,0 +1,58 @@
+{
+  "gameSoundDatas": [
+    {
+      "Id": 170001,
+      "Type": 0,
+      "SoundName": "LobbyBGMSound",
+      "DefaultVolume": 0.6
+    },
+    {
+      "Id": 170002,
+      "Type": 1,
+      "SoundName": "AddLifeSound",
+      "DefaultVolume": 1.0
+    },
+    {
+      "Id": 170003,
+      "Type": 1,
+      "SoundName": "AttackedSound",
+      "DefaultVolume": 0.7
+    },
+    {
+      "Id": 170004,
+      "Type": 1,
+      "SoundName": "BoringSound",
+      "DefaultVolume": 1.0
+    },
+    {
+      "Id": 170005,
+      "Type": 1,
+      "SoundName": "Craft",
+      "DefaultVolume": 1.0
+    },
+    {
+      "Id": 170006,
+      "Type": 1,
+      "SoundName": "GetItemSound",
+      "DefaultVolume": 1.0
+    },
+    {
+      "Id": 170007,
+      "Type": 1,
+      "SoundName": "LuckSkillSound",
+      "DefaultVolume": 1.0
+    },
+    {
+      "Id": 170008,
+      "Type": 1,
+      "SoundName": "NextSound",
+      "DefaultVolume": 1.0
+    },
+    {
+      "Id": 170009,
+      "Type": 1,
+      "SoundName": "SelectSound",
+      "DefaultVolume": 0.7
+    }
+  ]
+}

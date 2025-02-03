@@ -72,6 +72,16 @@ public class GameManager
         }
     }
 
+    private SettingInfo _settingInfo;
+    public SettingInfo SettingInfo
+    {
+        get { return _settingInfo; }
+        set
+        {
+            _settingInfo = value;
+        }
+    }
+
     private DifficultySettingsInfo _difficultySettingsInfo;
     public DifficultySettingsInfo DifficultySettingsInfo
     {
@@ -120,6 +130,7 @@ public class GameManager
         _chracterStyleInfo = new ChracterStyleInfo();
         _difficultySettingsInfo = new DifficultySettingsInfo();
         _userInfo = new UserInfo();
+        _settingInfo = new SettingInfo();
     }
    
 
@@ -198,6 +209,12 @@ public class UserInfo
     public int TotalScore {get; set;} = 0;
     public int UserAccountId { get; set; } = 0;
     public int EvolutionId {get; set;} = 0;
+}
+public class SettingInfo
+{
+    public float MusicVolume {get; set;} = 1.0f;
+    public float SoundFxVolume {get; set;} = 1.0f;
+    public bool VibrationIsOn {get; set;} = true;
 }
 
 public class DifficultySettingsInfo // 다시시작할 때마다 초기화 필요 

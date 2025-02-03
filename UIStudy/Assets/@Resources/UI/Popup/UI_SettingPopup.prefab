@@ -3213,7 +3213,7 @@ GameObject:
   - component: {fileID: 6650883296129404078}
   - component: {fileID: 8397151548598738532}
   m_Layer: 5
-  m_Name: Vibration
+  m_Name: UI_Vibration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

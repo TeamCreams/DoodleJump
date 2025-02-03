@@ -503,4 +503,27 @@ namespace Data
             return dict;
         }
     }
+
+    public class GameSoundData
+    {
+        public int Id;
+        public ESound Type;
+        public string SoundName;
+        public float DefaultVolume;
+    }
+
+    [Serializable]
+    public class GameSoundDataLoader : ILoader<int, GameSoundData>
+    {
+        public List<GameSoundData> gameSoundDatas = new List<GameSoundData>();
+
+        public Dictionary<int, GameSoundData> MakeDict()
+        {
+            Dictionary<int, GameSoundData> dict = new Dictionary<int, GameSoundData>();
+            foreach (GameSoundData gameSoundData in gameSoundDatas)
+                dict.Add(gameSoundData.Id, gameSoundData);
+
+            return dict;
+        }
+    }
 }

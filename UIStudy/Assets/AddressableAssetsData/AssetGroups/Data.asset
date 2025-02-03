@@ -69,6 +69,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b3cce5bc0edf44bca6934d995789186
+    m_Address: GameSoundData
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 96619377f9d16694987a29307dfa17ef
     m_Address: SuberunkerItemData
     m_ReadOnly: 0

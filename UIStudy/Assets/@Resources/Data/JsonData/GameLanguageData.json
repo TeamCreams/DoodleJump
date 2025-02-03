@@ -204,6 +204,11 @@
       "Id": 91041,
       "KrText": "언어",
       "EnText": "Language"
+    },
+    {
+      "Id": 91042,
+      "KrText": "완료",
+      "EnText": "Complete"
     }
   ]
 }

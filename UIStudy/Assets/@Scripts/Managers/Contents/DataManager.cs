@@ -30,6 +30,8 @@ public class DataManager
     public Dictionary<int, Data.ErrorData> ErrorDataDic { get; private set; } = new Dictionary<int, Data.ErrorData>();
     public Dictionary<int, Data.MissionLanguageData> MissionLanguageDataDic { get; private set; } = new Dictionary<int, Data.MissionLanguageData>();
     public Dictionary<int, Data.SettingData> SettingDataDic { get; private set; } = new Dictionary<int, Data.SettingData>();
+    public Dictionary<int, Data.GameSoundData> GameSoundDataDic { get; private set; } = new Dictionary<int, Data.GameSoundData>();
+
     public void Init()
 	{
 		TestDic = LoadJson<Data.TestDataLoader, int, Data.TestData>("TestData").MakeDict();
@@ -49,6 +51,7 @@ public class DataManager
         ErrorDataDic = LoadJson<Data.ErrorDataLoader, int, Data.ErrorData>("ErrorData").MakeDict();
         MissionLanguageDataDic = LoadJson<Data.MissionLanguageDataLoader, int, Data.MissionLanguageData>("MissionLanguageData").MakeDict();
         SettingDataDic = LoadJson<Data.SettingDataLoader, int, Data.SettingData>("SettingData").MakeDict();
+        GameSoundDataDic = LoadJson<Data.GameSoundDataLoader, int, Data.GameSoundData>("GameSoundData").MakeDict();
     }
 
     private Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>
