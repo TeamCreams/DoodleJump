@@ -57,6 +57,7 @@ public class UI_StartLoadingScene : UI_Scene
                 Managers.Game.ChracterStyleInfo.Hair = response.HairStyle;
                 Managers.Game.ChracterStyleInfo.Eyebrows = response.EyebrowStyle;
                 Managers.Game.ChracterStyleInfo.Eyes = response.EyesStyle;
+                Managers.Game.UserInfo.EvolutionId = response.Evolution;
                 //
                 Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
                 Managers.Event.TriggerEvent(EEventType.OnFirstAccept);

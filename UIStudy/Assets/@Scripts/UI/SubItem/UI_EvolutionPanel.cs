@@ -21,7 +21,7 @@ public class UI_EvolutionPanel : UI_Base
         BindObjects(typeof(GameObjects));
         _evolutionRoot = GetObject((int)GameObjects.EvolutionRoot).transform;
         Managers.Event.AddEvent(EEventType.Evolution, SetInventoryItems);
-                Managers.Event.AddEvent(EEventType.Purchase, OnEvent_ShowPurchasePopup);
+        Managers.Event.AddEvent(EEventType.Purchase, OnEvent_ShowPurchasePopup);
 
         return true;
     }

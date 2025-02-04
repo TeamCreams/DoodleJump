@@ -19,8 +19,6 @@ public class GameManager
             OnMoveDirChanged?.Invoke(value);
         }
 	}
-
-
     // SuberunkerScene Player Life
     private float _life;
     public float Life
@@ -38,7 +36,6 @@ public class GameManager
     }
     public Action<float> OnChangedLife;
 
-
     private int _gold = 0;
     public int Gold
     {
@@ -51,7 +48,6 @@ public class GameManager
             }
         }
     }
-
     private ChracterStyleInfo _chracterStyleInfo;
     public ChracterStyleInfo ChracterStyleInfo
     {
@@ -61,7 +57,6 @@ public class GameManager
             _chracterStyleInfo = value;
         }
     }
-
     private UserInfo _userInfo;
     public UserInfo UserInfo
     {
@@ -71,7 +66,6 @@ public class GameManager
             _userInfo = value;
         }
     }
-
     private SettingInfo _settingInfo;
     public SettingInfo SettingInfo
     {
@@ -81,7 +75,6 @@ public class GameManager
             _settingInfo = value;
         }
     }
-
     private DifficultySettingsInfo _difficultySettingsInfo;
     public DifficultySettingsInfo DifficultySettingsInfo
     {
@@ -92,7 +85,6 @@ public class GameManager
         }
 
     }
-
     private Define.EJoystickState _joystickState;
 	public Define.EJoystickState JoystickState
 	{
@@ -103,7 +95,6 @@ public class GameManager
 			OnJoystickStateChanged?.Invoke(_joystickState);
 		}
 	}
-
     private Vector2 _joystickAmount;
     public Vector2 JoystickAmount 
     {
@@ -115,7 +106,6 @@ public class GameManager
         }
     }
 
-   
     #endregion
 
     #region Action
@@ -124,7 +114,6 @@ public class GameManager
     public event Action<Vector2> Joystickstate;
     #endregion
 
-
     public void Init()
     {
         _chracterStyleInfo = new ChracterStyleInfo();
@@ -132,8 +121,6 @@ public class GameManager
         _userInfo = new UserInfo();
         _settingInfo = new SettingInfo();
     }
-   
-
     private List<ItemData> items = new List<ItemData>()
         {
             new ItemData() { Icon = "Shoese1", Rare = 1, Parts = 1, Level = 1 },
@@ -189,7 +176,6 @@ public class ItemData
     //public ClothType ClothType { get; set; }
     //public string ClothPrefab { get; set; }
 }
-
 public class ChracterStyleInfo
 {
     public int CharacterId { get; set; } = 20001;
@@ -197,7 +183,6 @@ public class ChracterStyleInfo
     public string Eyebrows { get; set; } = "DizzyEyebrows";
     public string Hair { get; set; } = "ZombieShabby";
 }
-
 public class UserInfo
 {
     public string UserId { get; set; } = "Orange";
@@ -216,7 +201,6 @@ public class SettingInfo
     public float SoundFxVolume {get; set;} = 1.0f;
     public bool VibrationIsOn {get; set;} = true;
 }
-
 public class DifficultySettingsInfo // 다시시작할 때마다 초기화 필요 
 {
     public int StageId { get; set; } = 70001;
