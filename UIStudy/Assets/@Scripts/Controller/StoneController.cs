@@ -1,6 +1,7 @@
 ﻿using Data;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static Define;
@@ -72,6 +73,7 @@ public class StoneController : ObjectBase
             if (_isNotStoneShower == true)
             {
                 Managers.Game.DifficultySettingsInfo.ChallengeScale++;
+                Managers.Game.GetScore.Total += 5;
             }
             Managers.Pool.Push(this.gameObject);
         }
@@ -82,6 +84,7 @@ public class StoneController : ObjectBase
     {
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
+            Managers.Game.GetScore.Total = ScorePenalty(Managers.Game.GetScore.Total);
             float playerLuck = collision.gameObject.GetComponent<PlayerController>().Data.Luck;
             float rand = Random.Range(0, 1.0f);
             //  플레이어가 가진 행운에 따라 무시
@@ -94,17 +97,23 @@ public class StoneController : ObjectBase
             {
                 Managers.Event.TriggerEvent(EEventType.Attacked_Player, this, Data.Damage);
             }
-
-
             Managers.Pool.Push(this.gameObject);
         }
     }
+
 
     public void Teleport(Vector3 pos)
     {
         this.gameObject.SetActive(false);
         this.transform.position = pos;
         this.gameObject.SetActive(true);
+    }
+
+    public int ScorePenalty(int score)
+    {
+        float tempScore = score;
+        tempScore -= 0.2f * score;
+        return (int)tempScore;
     }
     #endregion
 }

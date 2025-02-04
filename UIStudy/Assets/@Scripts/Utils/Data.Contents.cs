@@ -259,6 +259,7 @@ namespace Data
         //public float StoneShowerFinishTime;
         public float StoneShowerPeriodStartTime;
         public float StoneShowerPeriodFinishTime;
+        public int Benefit;
     }
 
     [Serializable]

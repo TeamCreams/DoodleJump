@@ -113,6 +113,9 @@ public class Spawner : InitBase
 
     private void LevelStageUp()
     {
+        //0. 베네핏 점수
+        Managers.Game.GetScore.Total += Managers.Data.DifficultySettingsDic[_id].Benefit;
+
         //1. 레벨업 조건 초기화
         Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
         _id = Managers.Game.DifficultySettingsInfo.StageId;

@@ -7,7 +7,8 @@
       "StoneGenerateStartTime": 0.5,
       "StoneGenerateFinishTime": 1.8,
       "StoneShowerPeriodStartTime": 1000.0,
-      "StoneShowerPeriodFinishTime": 1001.0
+      "StoneShowerPeriodFinishTime": 1001.0,
+      "Benefit": 10
     },
     {
       "Id": 70002,
@@ -16,7 +17,8 @@
       "StoneGenerateStartTime": 0.5,
       "StoneGenerateFinishTime": 1.8,
       "StoneShowerPeriodStartTime": 1000.0,
-      "StoneShowerPeriodFinishTime": 1001.0
+      "StoneShowerPeriodFinishTime": 1001.0,
+      "Benefit": 15
     },
     {
       "Id": 70003,
@@ -25,7 +27,8 @@
       "StoneGenerateStartTime": 0.5,
       "StoneGenerateFinishTime": 1.8,
       "StoneShowerPeriodStartTime": 17.0,
-      "StoneShowerPeriodFinishTime": 30.0
+      "StoneShowerPeriodFinishTime": 30.0,
+      "Benefit": 20
     },
     {
       "Id": 70004,
@@ -34,7 +37,8 @@
       "StoneGenerateStartTime": 0.5,
       "StoneGenerateFinishTime": 1.8,
       "StoneShowerPeriodStartTime": 16.6,
-      "StoneShowerPeriodFinishTime": 29.1
+      "StoneShowerPeriodFinishTime": 29.1,
+      "Benefit": 25
     },
     {
       "Id": 70005,
@@ -43,7 +47,8 @@
       "StoneGenerateStartTime": 0.5,
       "StoneGenerateFinishTime": 1.7,
       "StoneShowerPeriodStartTime": 16.2,
-      "StoneShowerPeriodFinishTime": 28.3
+      "StoneShowerPeriodFinishTime": 28.3,
+      "Benefit": 30
     },
     {
       "Id": 70006,
@@ -52,7 +57,8 @@
       "StoneGenerateStartTime": 0.5,
       "StoneGenerateFinishTime": 1.7,
       "StoneShowerPeriodStartTime": 15.8,
-      "StoneShowerPeriodFinishTime": 27.4
+      "StoneShowerPeriodFinishTime": 27.4,
+      "Benefit": 35
     },
     {
       "Id": 70007,
@@ -61,7 +67,8 @@
       "StoneGenerateStartTime": 0.6,
       "StoneGenerateFinishTime": 1.7,
       "StoneShowerPeriodStartTime": 15.4,
-      "StoneShowerPeriodFinishTime": 26.5
+      "StoneShowerPeriodFinishTime": 26.5,
+      "Benefit": 40
     },
     {
       "Id": 70008,
@@ -70,7 +77,8 @@
       "StoneGenerateStartTime": 0.6,
       "StoneGenerateFinishTime": 1.7,
       "StoneShowerPeriodStartTime": 15.0,
-      "StoneShowerPeriodFinishTime": 25.7
+      "StoneShowerPeriodFinishTime": 25.7,
+      "Benefit": 45
     },
     {
       "Id": 70009,
@@ -79,7 +87,8 @@
       "StoneGenerateStartTime": 0.6,
       "StoneGenerateFinishTime": 1.6,
       "StoneShowerPeriodStartTime": 14.5,
-      "StoneShowerPeriodFinishTime": 24.8
+      "StoneShowerPeriodFinishTime": 24.8,
+      "Benefit": 50
     },
     {
       "Id": 70010,
@@ -88,7 +97,8 @@
       "StoneGenerateStartTime": 0.6,
       "StoneGenerateFinishTime": 1.6,
       "StoneShowerPeriodStartTime": 14.1,
-      "StoneShowerPeriodFinishTime": 24.0
+      "StoneShowerPeriodFinishTime": 24.0,
+      "Benefit": 55
     },
     {
       "Id": 70011,
@@ -97,7 +107,8 @@
       "StoneGenerateStartTime": 0.6,
       "StoneGenerateFinishTime": 1.6,
       "StoneShowerPeriodStartTime": 13.7,
-      "StoneShowerPeriodFinishTime": 23.1
+      "StoneShowerPeriodFinishTime": 23.1,
+      "Benefit": 60
     },
     {
       "Id": 70012,
@@ -106,7 +117,8 @@
       "StoneGenerateStartTime": 0.6,
       "StoneGenerateFinishTime": 1.6,
       "StoneShowerPeriodStartTime": 13.4,
-      "StoneShowerPeriodFinishTime": 22.2
+      "StoneShowerPeriodFinishTime": 22.2,
+      "Benefit": 65
     },
     {
       "Id": 70013,
@@ -115,7 +127,8 @@
       "StoneGenerateStartTime": 0.6,
       "StoneGenerateFinishTime": 1.5,
       "StoneShowerPeriodStartTime": 12.9,
-      "StoneShowerPeriodFinishTime": 21.4
+      "StoneShowerPeriodFinishTime": 21.4,
+      "Benefit": 70
     },
     {
       "Id": 70014,
@@ -124,7 +137,8 @@
       "StoneGenerateStartTime": 0.7,
       "StoneGenerateFinishTime": 1.5,
       "StoneShowerPeriodStartTime": 12.5,
-      "StoneShowerPeriodFinishTime": 20.5
+      "StoneShowerPeriodFinishTime": 20.5,
+      "Benefit": 75
     },
     {
       "Id": 70015,
@@ -133,7 +147,8 @@
       "StoneGenerateStartTime": 0.7,
       "StoneGenerateFinishTime": 1.5,
       "StoneShowerPeriodStartTime": 12.1,
-      "StoneShowerPeriodFinishTime": 19.6
+      "StoneShowerPeriodFinishTime": 19.6,
+      "Benefit": 80
     },
     {
       "Id": 70016,
@@ -142,7 +157,8 @@
       "StoneGenerateStartTime": 0.7,
       "StoneGenerateFinishTime": 1.4,
       "StoneShowerPeriodStartTime": 11.7,
-      "StoneShowerPeriodFinishTime": 18.8
+      "StoneShowerPeriodFinishTime": 18.8,
+      "Benefit": 85
     },
     {
       "Id": 70017,
@@ -151,7 +167,8 @@
       "StoneGenerateStartTime": 0.7,
       "StoneGenerateFinishTime": 1.4,
       "StoneShowerPeriodStartTime": 11.3,
-      "StoneShowerPeriodFinishTime": 17.9
+      "StoneShowerPeriodFinishTime": 17.9,
+      "Benefit": 90
     },
     {
       "Id": 70018,
@@ -160,7 +177,8 @@
       "StoneGenerateStartTime": 0.7,
       "StoneGenerateFinishTime": 1.4,
       "StoneShowerPeriodStartTime": 10.9,
-      "StoneShowerPeriodFinishTime": 17.0
+      "StoneShowerPeriodFinishTime": 17.0,
+      "Benefit": 95
     },
     {
       "Id": 70019,
@@ -169,7 +187,8 @@
       "StoneGenerateStartTime": 0.7,
       "StoneGenerateFinishTime": 1.3,
       "StoneShowerPeriodStartTime": 10.5,
-      "StoneShowerPeriodFinishTime": 16.2
+      "StoneShowerPeriodFinishTime": 16.2,
+      "Benefit": 100
     },
     {
       "Id": 70020,
@@ -178,7 +197,8 @@
       "StoneGenerateStartTime": 0.7,
       "StoneGenerateFinishTime": 1.3,
       "StoneShowerPeriodStartTime": 10.0,
-      "StoneShowerPeriodFinishTime": 15.2
+      "StoneShowerPeriodFinishTime": 15.2,
+      "Benefit": 105
     },
     {
       "Id": 70021,
@@ -187,7 +207,8 @@
       "StoneGenerateStartTime": 0.7,
       "StoneGenerateFinishTime": 1.2,
       "StoneShowerPeriodStartTime": 9.6,
-      "StoneShowerPeriodFinishTime": 14.4
+      "StoneShowerPeriodFinishTime": 14.4,
+      "Benefit": 110
     },
     {
       "Id": 70022,
@@ -196,7 +217,8 @@
       "StoneGenerateStartTime": 0.8,
       "StoneGenerateFinishTime": 1.2,
       "StoneShowerPeriodStartTime": 9.2,
-      "StoneShowerPeriodFinishTime": 13.5
+      "StoneShowerPeriodFinishTime": 13.5,
+      "Benefit": 115
     },
     {
       "Id": 70023,
@@ -205,7 +227,8 @@
       "StoneGenerateStartTime": 0.8,
       "StoneGenerateFinishTime": 1.2,
       "StoneShowerPeriodStartTime": 8.8,
-      "StoneShowerPeriodFinishTime": 12.6
+      "StoneShowerPeriodFinishTime": 12.6,
+      "Benefit": 120
     },
     {
       "Id": 70024,
@@ -214,7 +237,8 @@
       "StoneGenerateStartTime": 0.8,
       "StoneGenerateFinishTime": 1.1,
       "StoneShowerPeriodStartTime": 8.4,
-      "StoneShowerPeriodFinishTime": 11.8
+      "StoneShowerPeriodFinishTime": 11.8,
+      "Benefit": 125
     },
     {
       "Id": 70025,
@@ -223,7 +247,8 @@
       "StoneGenerateStartTime": 0.8,
       "StoneGenerateFinishTime": 1.0,
       "StoneShowerPeriodStartTime": 8.0,
-      "StoneShowerPeriodFinishTime": 11.0
+      "StoneShowerPeriodFinishTime": 11.0,
+      "Benefit": 130
     }
   ]
 }

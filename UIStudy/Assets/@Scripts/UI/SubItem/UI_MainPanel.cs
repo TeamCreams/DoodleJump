@@ -94,13 +94,15 @@ public class UI_MainPanel : UI_Base
 
     private void SetMyScore(Component sender = null, object param = null)
     {
-        _recordMinutes = Managers.Game.UserInfo.RecordScore / 60;
-        _recordSeconds = Managers.Game.UserInfo.RecordScore % 60;
-        GetText((int)Texts.Best_Text).text = $"{_bestRecord} : {_recordMinutes}{_minutesString} {_recordSeconds}{_secondsString}";
+        // _recordMinutes = Managers.Game.UserInfo.RecordScore / 60;
+        // _recordSeconds = Managers.Game.UserInfo.RecordScore % 60;
+        // GetText((int)Texts.Best_Text).text = $"{_bestRecord} : {_recordMinutes}{_minutesString} {_recordSeconds}{_secondsString}";
+        GetText((int)Texts.Best_Text).text = $"{_bestRecord} : {Managers.Game.UserInfo.RecordScore:N0}";
 
-        _minutes = Managers.Game.UserInfo.LatelyScore / 60;
-        _seconds = Managers.Game.UserInfo.LatelyScore % 60;
-        GetText((int)Texts.Current_Text).text = $"{_recentRecord} : {_minutes}{_minutesString} {_seconds}{_secondsString}";
+        // _minutes = Managers.Game.UserInfo.LatelyScore / 60;
+        // _seconds = Managers.Game.UserInfo.LatelyScore % 60;
+        // GetText((int)Texts.Current_Text).text = $"{_recentRecord} : {_minutes}{_minutesString} {_seconds}{_secondsString}";
+        GetText((int)Texts.Current_Text).text = $"{_recentRecord} : {Managers.Game.UserInfo.LatelyScore:N0}";
     }
     private void SpawnRankingItem(ResDtoGetUserAccountListElement element, int rank)
     {
@@ -119,9 +121,11 @@ public class UI_MainPanel : UI_Base
     {
         _bestRecord = Managers.Language.LocalizedString(91001);
         _recentRecord = Managers.Language.LocalizedString(91002);
-        _minutesString = Managers.Language.LocalizedString(91004);
-        _secondsString = Managers.Language.LocalizedString(91005);
-        GetText((int)Texts.Best_Text).text = $"{_bestRecord} : {_recordMinutes}{_minutesString} {_recordSeconds}{_secondsString}";
-        GetText((int)Texts.Current_Text).text = $"{_recentRecord} : {_minutes}{_minutesString} {_seconds}{_secondsString}";
+        // _minutesString = Managers.Language.LocalizedString(91004);
+        // _secondsString = Managers.Language.LocalizedString(91005);
+        // GetText((int)Texts.Best_Text).text = $"{_bestRecord} : {_recordMinutes}{_minutesString} {_recordSeconds}{_secondsString}";
+        // GetText((int)Texts.Current_Text).text = $"{_recentRecord} : {_minutes}{_minutesString} {_seconds}{_secondsString}";
+        GetText((int)Texts.Best_Text).text = $"{_bestRecord} : {Managers.Game.UserInfo.RecordScore:N0}";
+        GetText((int)Texts.Current_Text).text = $"{_recentRecord} : {Managers.Game.UserInfo.LatelyScore:N0}";
     }
 }

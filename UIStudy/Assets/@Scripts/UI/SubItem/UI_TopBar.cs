@@ -75,6 +75,7 @@ public class UI_TopBar : UI_Base
             .Subscribe(_ =>
             {
                 _time++;
+                Managers.Game.GetScore.Total ++;
                 _minutes = _time / 60;
                 _seconds = _time % 60;
                 GetText((int)Texts.Time_Text).text = string.Format($"{_minutes}{_minutesString} {_seconds}{_secondsString}");
@@ -132,7 +133,7 @@ public class UI_TopBar : UI_Base
         {
             GetSlider((int)Sliders.UI_HpProgressBar).value = 0;
             _lifeTimer?.Dispose();
-            Managers.Game.UserInfo.LatelyScore = _time;
+            Managers.Game.UserInfo.LatelyScore = Managers.Game.GetScore.Total;
             Managers.Game.UserInfo.Gold += Managers.Game.Gold;
 
             Managers.Event.TriggerEvent(EEventType.OnPlayerDead, this, 0);

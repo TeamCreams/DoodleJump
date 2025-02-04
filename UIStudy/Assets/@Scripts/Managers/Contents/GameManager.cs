@@ -105,6 +105,15 @@ public class GameManager
             Joystickstate?.Invoke(value);
         }
     }
+    private GetScore _getScore;
+    public GetScore GetScore
+    {
+        get { return _getScore; }
+        set
+        {
+            _getScore = value;
+        }
+    }
 
     #endregion
 
@@ -120,6 +129,7 @@ public class GameManager
         _difficultySettingsInfo = new DifficultySettingsInfo();
         _userInfo = new UserInfo();
         _settingInfo = new SettingInfo();
+        _getScore = new GetScore();
     }
     private List<ItemData> items = new List<ItemData>()
         {
@@ -209,7 +219,12 @@ public class DifficultySettingsInfo // 다시시작할 때마다 초기화 필�
     public int StageLevel { get; set; } = 1;
     public float AddSpeed { get; set; } = 0;
 }
-
+public class GetScore
+{
+    public int Total { get; set; } = 0;
+    public int TimeScore { get; set; } = 0;
+    public int StoneScore { get; set; } = 0;
+}
 
 [System.Serializable] //얘가 있어야 직렬화 가능
 public class MessageData
