@@ -92,7 +92,8 @@ public static class Define
         OnUpdateMission,
         UIRefresh,
         Evolution,
-        Purchase
+        Purchase,
+        SoundAdjust
     }
 
     // 서버와 값 공유중, 함부로 수정 금지.
