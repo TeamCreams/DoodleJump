@@ -12,14 +12,16 @@ public static partial class Extension
         switch (type)
         {
             case EMissionType.Time:
-                return Managers.Game.UserInfo.TotalScore;
+                return Managers.Game.UserInfo.PlayTime;
             case EMissionType.SurviveToLevel:
                 return 0;
             case EMissionType.AvoidRocksCount:
-                return 1;
+                return Managers.Game.UserInfo.AccumulatedStone;
             case EMissionType.AchieveScoreInGame:
                 return Managers.Game.UserInfo.LatelyScore;
             case EMissionType.Style:
+                return 0;
+            case EMissionType.RecordScore:
                 return 0;
         }
         return 1;

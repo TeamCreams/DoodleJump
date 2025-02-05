@@ -201,7 +201,9 @@ public class UserInfo
     public int LatelyScore {get; set;} = 0;
     public int Gold {get; set;} = 0;
     public int Level {get; set;} = 1;
-    public int TotalScore {get; set;} = 0;
+    public int PlayTime {get; set;} = 0;
+    public int ScoreBoard {get; set;} = 0;
+    public int AccumulatedStone {get; set;} = 0;
     public int UserAccountId { get; set; } = 0;
     public int EvolutionId {get; set;} = 0;
 }

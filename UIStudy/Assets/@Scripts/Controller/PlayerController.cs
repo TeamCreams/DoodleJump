@@ -232,6 +232,7 @@ public class PlayerController : CreatureBase
     public void DamagedHp(float damage)
     {
         this._stats.Hp -= damage;
+        Debug.Log($"HP : {this._stats.Hp}");
         Managers.Event.TriggerEvent(EEventType.ChangePlayerLife, this, this._stats.Hp);
         int doOrNot = UnityEngine.Random.Range(0, 10);
         if (doOrNot < 6)

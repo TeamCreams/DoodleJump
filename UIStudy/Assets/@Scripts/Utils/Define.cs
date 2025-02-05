@@ -215,6 +215,7 @@ public static class Define
         AvoidRocksCount,
         AchieveScoreInGame,
         Style,
+        RecordScore
     }
 
     public enum EItemType

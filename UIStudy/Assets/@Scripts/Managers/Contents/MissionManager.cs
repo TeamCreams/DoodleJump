@@ -73,9 +73,10 @@ public class MissionManager
         },
        (response) =>
        {
-           Managers.Game.UserInfo.TotalScore = response.TotalScore;
-           Debug.Log($"SettleScore is success, Managers.Game.UserInfo.TotalScore {Managers.Game.UserInfo.TotalScore}");
-           onSuccess?.Invoke();
+            Managers.Game.UserInfo.PlayTime = response.PlayTime;
+            Managers.Game.UserInfo.AccumulatedStone = response.AccumulatedStone;
+            Debug.Log($"SettleScore is success, Managers.Game.UserInfo.TotalScore {Managers.Game.UserInfo.PlayTime}");
+            onSuccess?.Invoke();
        },
        (errorCode) =>
        {

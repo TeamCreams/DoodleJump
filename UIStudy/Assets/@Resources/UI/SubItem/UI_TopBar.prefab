@@ -1722,6 +1722,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6566963422967966414, guid: 02bf4f5d1ce7147838ee3b3d359ff5fc, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -35.0311
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566963422967966414, guid: 02bf4f5d1ce7147838ee3b3d359ff5fc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 9.515503
+      objectReference: {fileID: 0}
     - target: {fileID: 7357336938863840412, guid: 02bf4f5d1ce7147838ee3b3d359ff5fc, type: 3}
       propertyPath: m_Name
       value: UI_HpProgressBar
