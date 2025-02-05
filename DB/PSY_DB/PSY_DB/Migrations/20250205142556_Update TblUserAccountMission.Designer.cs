@@ -12,8 +12,8 @@ using PSY_DB;
 namespace PSY_DB.Migrations
 {
     [DbContext(typeof(PsyDbContext))]
-    [Migration("20241205154914_TblUserAccount")]
-    partial class TblUserAccount
+    [Migration("20250205142556_Update TblUserAccountMission")]
+    partial class UpdateTblUserAccountMission
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,18 +33,41 @@ namespace PSY_DB.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CharacterStyle")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<int>("CharacterId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("20001")
+                        .HasComment("캐릭터 아이디");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("Evolution")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("0")
+                        .HasComment("업데이트 스택");
+
+                    b.Property<string>("EyebrowStyle")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("longtext")
+                        .HasDefaultValueSql("AnnoyedEyebrows");
+
+                    b.Property<string>("EyesStyle")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("longtext")
+                        .HasDefaultValueSql("Annoyed");
 
                     b.Property<int>("Gold")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("0");
+
+                    b.Property<string>("HairStyle")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("longtext")
+                        .HasDefaultValueSql("Afro")
+                        .HasComment("디자인");
 
                     b.Property<string>("Nickname")
                         .HasColumnType("longtext");
@@ -108,6 +131,9 @@ namespace PSY_DB.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AccumulatedStone")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime(6)");
 
@@ -119,6 +145,9 @@ namespace PSY_DB.Migrations
 
                     b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Scoreboard")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime(6)");

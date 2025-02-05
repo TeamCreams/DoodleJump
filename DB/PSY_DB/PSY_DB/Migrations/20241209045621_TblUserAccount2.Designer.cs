@@ -131,7 +131,7 @@ namespace PSY_DB.Migrations
                     b.Property<int>("Gold")
                         .HasColumnType("int");
 
-                    b.Property<int>("History")
+                    b.Property<int>("PlayTime")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("RegisterDate")

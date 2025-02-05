@@ -8,6 +8,9 @@ namespace GameApi.Dtos
     {
         public int UserAccountId { get; set; }
         public int Score { get; set; }
+        public int Time {  get; set; }
+        public int AccumulatedStone { get; set; }
+
         public int Gold { get; set; }
     }
 

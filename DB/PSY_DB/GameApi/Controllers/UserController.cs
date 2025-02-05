@@ -120,19 +120,24 @@ namespace GameApi.Controllers
                         RegisterDate = user.RegisterDate,
                         UpdateDate = user.UpdateDate,
                         HighScore = user.TblUserScores
-                                      .OrderByDescending(s => s.History)
-                                      .Select(s => s.History)
+                                      .OrderByDescending(s => s.Scoreboard)
+                                      .Select(s => s.Scoreboard)
                                       .FirstOrDefault(),
                         LatelyScore = user.TblUserScores
-                                        .Where(s => s.History != -1) // -1이 아닌 점수만 ( -1은 Gold만 받았을 때 들어가는 점수)
+                                        .Where(s => s.Scoreboard != -1) // -1이 아닌 점수만 ( -1은 Gold만 받았을 때 들어가는 점수)
                                         .OrderByDescending(s => s.UpdateDate) // 최신 점수 순으로 정렬
-                                        .Select(s => s.History) // History 선택
+                                        .Select(s => s.Scoreboard) // History 선택
                                         .FirstOrDefault(), // 가장 최근 점수
                         Gold = user.TblUserScores.Any() ?
                                         user.TblUserScores.OrderByDescending(s => s.UpdateDate)
                                         .FirstOrDefault()
                                         .Gold : 0,
-                        TotalScore = user.TblUserScores.Sum(s => s.History),
+                        PlayTime = user.TblUserScores
+                                    .Where(s => s.PlayTime != -1)
+                                    .Sum(s => s.PlayTime),
+                        AccumulatedStone = user.TblUserScores
+                                    .Where(s => s.AccumulatedStone != -1)
+                                    .Sum(s => s.AccumulatedStone),
                         CharacterId = user.CharacterId,
                         HairStyle = user.HairStyle,
                         EyesStyle = user.EyesStyle,
@@ -485,7 +490,7 @@ namespace GameApi.Controllers
                 TblUserScore userScore = new TblUserScore
                 {
                     UserAccountId = userId,
-                    History = requestDto.Score,
+                    Scoreboard = requestDto.Score,
                     Gold = requestDto.Gold,
                     UpdateDate = DateTime.Now
                 };
@@ -624,19 +629,24 @@ namespace GameApi.Controllers
                         RegisterDate = user.RegisterDate,
                         UpdateDate = user.UpdateDate,
                         HighScore = user.TblUserScores
-                                      .OrderByDescending(s => s.History)
-                                      .Select(s => s.History)
+                                      .OrderByDescending(s => s.Scoreboard)
+                                      .Select(s => s.PlayTime)
                                       .FirstOrDefault(),
                         LatelyScore = user.TblUserScores
-                                        .Where(s => s.History != -1) // -1이 아닌 점수만 ( -1은 Gold만 받았을 때 들어가는 점수)
+                                        .Where(s => s.Scoreboard != -1) // -1이 아닌 점수만 ( -1은 Gold만 받았을 때 들어가는 점수)
                                         .OrderByDescending(s => s.UpdateDate) // 최신 점수 순으로 정렬
-                                        .Select(s => s.History) // History 선택
+                                        .Select(s => s.Scoreboard) // History 선택
                                         .FirstOrDefault(), // 가장 최근 점수
                         Gold = user.TblUserScores.Any() ?
                                         user.TblUserScores.OrderByDescending(s => s.UpdateDate)
                                         .FirstOrDefault()
                                         .Gold : 0,
-                        TotalScore = user.TblUserScores.Sum(s => s.History),
+                        PlayTime = user.TblUserScores
+                                    .Where(s => s.PlayTime != -1)
+                                    .Sum(s => s.PlayTime),
+                        AccumulatedStone = user.TblUserScores
+                                    .Where(s => s.AccumulatedStone != -1)
+                                    .Sum(s => s.AccumulatedStone),
                         CharacterId = user.CharacterId,
                         HairStyle = user.HairStyle,
                         EyesStyle = user.EyesStyle,
@@ -718,8 +728,8 @@ namespace GameApi.Controllers
                                     UserName = user.UserName,
                                     Nickname = user.Nickname,
                                     HighScore = user.TblUserScores
-                                            .OrderByDescending(s => s.History)
-                                            .Select(s => s.History)
+                                            .OrderByDescending(s => s.Scoreboard)
+                                            .Select(s => s.Scoreboard)
                                             .FirstOrDefault()
                                 }).OrderByDescending(u => u.HighScore)
                                 .ToListAsync();
@@ -956,11 +966,13 @@ namespace GameApi.Controllers
 
                 userMission.MissionStatus = EMissionStatus.Complete;
 
-                
+
                 TblUserScore userScore = new TblUserScore
                 {
                     UserAccountId = requestDto.UserAccountId,
-                    History = -1,
+                    PlayTime = -1,
+                    Scoreboard = -1,
+                    AccumulatedStone = -1,
                     Gold = requestDto.Gold,
                     UpdateDate = DateTime.Now
                 };

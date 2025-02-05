@@ -55,7 +55,7 @@ namespace PSY_DB.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("History")
+                    b.Property<int>("PlayTime")
                         .HasColumnType("int");
 
                     b.Property<int>("PlayerId")

@@ -21,8 +21,9 @@ namespace GameApi.Dtos
         public int HighScore { get; set; }
         public int LatelyScore { get; set; }
         public int Gold {  get; set; }
-        public int TotalScore { get; set; }
+        public int PlayTime { get; set; }
         public int CharacterId { get; set; }
+        public int AccumulatedStone { get; set; }
         // 디자인
         public string? HairStyle { get; set; }
         public string? EyebrowStyle { get; set; }

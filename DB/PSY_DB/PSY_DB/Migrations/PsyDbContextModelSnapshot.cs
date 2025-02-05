@@ -128,17 +128,23 @@ namespace PSY_DB.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AccumulatedStone")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("Gold")
                         .HasColumnType("int");
 
-                    b.Property<int>("History")
+                    b.Property<int>("PlayTime")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Scoreboard")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime(6)");
