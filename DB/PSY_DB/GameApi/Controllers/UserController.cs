@@ -491,6 +491,8 @@ namespace GameApi.Controllers
                 {
                     UserAccountId = userId,
                     Scoreboard = requestDto.Score,
+                    PlayTime = requestDto.Time,
+                    AccumulatedStone = requestDto.AccumulatedStone,
                     Gold = requestDto.Gold,
                     UpdateDate = DateTime.Now
                 };
