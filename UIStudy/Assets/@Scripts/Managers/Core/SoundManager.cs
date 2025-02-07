@@ -7,7 +7,7 @@ public class SoundManager
 	private AudioSource[] _audioSources = new AudioSource[(int)Define.ESound.Max];
 	private Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
 	private GameObject _soundRoot = null;
-
+	private float SoundValue { get; set; } = 1;
 	public void Init()
 	{
 		if (_soundRoot == null)
@@ -65,7 +65,7 @@ public class SoundManager
 		{
 			LoadAudioClip(key, (audioClip) =>
 			{
-				audioSource.pitch = pitch;
+				audioSource.pitch = pitch * SoundValue;
 				audioSource.PlayOneShot(audioClip);
 			});
 		}

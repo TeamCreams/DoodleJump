@@ -54,7 +54,7 @@ public class UI_MissionItem : UI_Base
         Debug.Log($"보상 지급");
         Managers.Event.TriggerEvent(EEventType.OnMissionComplete, this, _missionId);
         //_animator.SetTrigger("CompleteMission");
-        Managers.Event.TriggerEvent(EEventType.OnUpdateMission);
+        //Managers.Event.TriggerEvent(EEventType.OnUpdateMission);
         //Managers.Event.TriggerEvent(EEventType.Mission);
     }
     private void SetActiveProgressState()

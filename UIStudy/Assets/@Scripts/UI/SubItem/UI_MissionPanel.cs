@@ -16,7 +16,6 @@ public class UI_MissionPanel : UI_Base
     }
     private Transform _missionRoot = null;
     private List<GameObject> _itemList = new List<GameObject>();
-    private List<ResDtoGetUserMissionListElement> _userMissionList = null;
     private Dictionary<int, int> _missionDic = new Dictionary<int, int>();
     public override bool Init()
     {
@@ -51,38 +50,26 @@ public class UI_MissionPanel : UI_Base
     {
         AllPush();
 
-        Managers.WebContents.ReqDtoGetUserMissionList(new ReqDtoGetUserMissionList()
+        foreach (var missionKeyValue in Managers.Mission.Dicts)
         {
-            UserAccountId = Managers.Game.UserInfo.UserAccountId
-        },
-       (response) =>
-       {    
-            if(response != null)
+            int missionId = missionKeyValue.Key;
+            ResDtoGetUserMissionListElement mission = missionKeyValue.Value;
+
+            //TODO : 이부분 수정필요
+            // 퀘스트 완료와 동시에 신규퀘스트를 수락하도록.
+            // prevId가 업데이트가 안 되어있음.
+            if (_missionDic.ContainsKey(mission.MissionId))
             {
-                _userMissionList = response.List;
-                foreach(var mission in _userMissionList)
-                {
-                   //TODO : 이부분 수정필요
-                   // 퀘스트 완료와 동시에 신규퀘스트를 수락하도록.
-                   // prevId가 업데이트가 안 되어있음.
-                    if (_missionDic.ContainsKey(mission.MissionId))
-                    {
-                        _missionDic[mission.MissionId] = mission.MissionStatus; // 상태 업데이트
-                    }
-                    else
-                    {
-                        _missionDic.Add(mission.MissionId, mission.MissionStatus); // 새 미션 추가
-                    }
-                    SpawnMissionItem(mission.MissionId, mission.MissionStatus);
-                }
+                _missionDic[mission.MissionId] = mission.MissionStatus; // 상태 업데이트
             }
-       },
-       (errorCode) =>
-       {
-            Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, notice);
-       });
+            else
+            {
+                _missionDic.Add(mission.MissionId, mission.MissionStatus); // 새 미션 추가
+            }
+            SpawnMissionItem(mission.MissionId, mission.MissionStatus);
+        }
+
+
         // 미션 진행을 저장하는 변수가 있어야하는가?
         // 미션을 분리해서 놓고 싶음. enum, level에 따른 미션, 메인미션 분배하는 법
     }

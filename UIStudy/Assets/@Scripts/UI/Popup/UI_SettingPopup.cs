@@ -52,7 +52,6 @@ public class UI_SettingPopup : UI_Popup
         GetSlider((int)Sliders.SoundFx_Slider).gameObject.BindEvent(OnDrag_SoundFxSlider, EUIEvent.Drag);
         //GetSlider((int)Sliders.SoundFx_Slider).gameObject.BindEvent(EndDrag_SoundFxSlider, EUIEvent.EndDrag);
         _settingData = Managers.Data.SettingDataDic[1];
-        
         return true;
     }
     private void OnDestroy()

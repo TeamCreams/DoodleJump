@@ -8,6 +8,11 @@ using UnityEngine;
 using static Define;
 public class MissionManager
 {
+    //<MissionId, >
+    private Dictionary<int, ResDtoGetUserMissionListElement> _dicts = new Dictionary<int, ResDtoGetUserMissionListElement>();
+    public IReadOnlyDictionary<int, ResDtoGetUserMissionListElement> Dicts => _dicts;
+
+
     public void Init()
     {
         Managers.Event.RemoveEvent(EEventType.OnSettlementComplete, Event_OnSettlementComplete);
@@ -27,67 +32,49 @@ public class MissionManager
         // Time 계산
         Debug.Log("Event_OnSettlementComplete");
         SettleScore(sender);
-        ProcessUserMissionList();
     }
 
     void Event_OnFirstAccept(Component sender, object param)
     {
-        List<ReqDtoInsertUserMission> list = new();
-        foreach(var mission in Managers.Data.MissionDataDic)
-        {
-            ReqDtoInsertUserMission tempMission = new ReqDtoInsertUserMission();
-            tempMission.UserAccountId = Managers.Game.UserInfo.UserAccountId;
-            tempMission.MissionId = mission.Value.Id;
-            list.Add(tempMission);
-        }
-        AcceptMission(sender, list);
+        ProcessUserMissionList();
     }
 
     void Event_OnMissionComplete(Component sender, object param)
     {
-        Debug.Log("Event_OnMissionComplete");
-        int id = (int)param;
-        CompleteMission(sender, id);
     }
 
     void Event_OnUpdateMission(Component sender, object param)
     {
-        Debug.Log("Event_OnUpdateMission");
-        int missionId = 0;
-        int param1 = 0;
-        if(param is ValueTuple<int, int> data)
-        {
-            missionId = data.Item1;
-            param1 = data.Item2;
-        }
-        UpdateMission(sender, missionId, param1);
     }
 
     #endregion
 
+
+
     public void SettleScore(Component sender, Action onSuccess = null, Action onFailed = null)
     {
-        Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
+        // 1. _dicts 업데이트
+        List<int> changedMissionList = new List<int>();
+        foreach(var missionKeyValue in _dicts)
         {
-            UserName = Managers.Game.UserInfo.UserId
-        },
-       (response) =>
-       {
-            Managers.Game.UserInfo.PlayTime = response.PlayTime;
-            Managers.Game.UserInfo.AccumulatedStone = response.AccumulatedStone;
-            Debug.Log($"SettleScore is success, Managers.Game.UserInfo.TotalScore {Managers.Game.UserInfo.PlayTime}");
-            onSuccess?.Invoke();
-       },
-       (errorCode) =>
-       {
-           onFailed?.Invoke();
-           Debug.Log("SettleScore is error");
+            int missionId = missionKeyValue.Key;
+            ResDtoGetUserMissionListElement mission = missionKeyValue.Value;
+            EMissionType type = Managers.Data.MissionDataDic[missionId].MissionType;
 
-            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
-            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, notice);
-            popup.AddOnClickAction(onFailed);
-       });
+            int beforeParam1 = mission.Param1;
+            mission.Param1 = type.GetMissionValueByType();
+
+            if(beforeParam1 != mission.Param1)
+            {
+                // 변경된것 저장.
+                changedMissionList.Add(missionId);
+            }
+        }
+
+        // 2. 변경된 _dicts를 서버에 변경 요청을 보낸다.
+
+        // 3. onsuccess에서  UI 업데이트 요청
+
     }
 
     public void AcceptMission(Component sender, List<ReqDtoInsertUserMission> missionList, Action onSuccess = null, Action onFailed = null)
@@ -183,7 +170,7 @@ public class MissionManager
                {
                    EMissionType type = Managers.Data.MissionDataDic[mission.MissionId].MissionType;
                    int missionValue = type.GetMissionValueByType();
-                   Managers.Event.TriggerEvent(EEventType.OnUpdateMission, null, (mission.MissionId, missionValue));
+                   _dicts[mission.MissionId] = mission;
                }
            }
        },

@@ -18,11 +18,11 @@ public static partial class Extension
             case EMissionType.AvoidRocksCount:
                 return Managers.Game.UserInfo.AccumulatedStone;
             case EMissionType.AchieveScoreInGame:
-                return Managers.Game.UserInfo.LatelyScore;
+                return 0;
             case EMissionType.Style:
                 return 0;
             case EMissionType.RecordScore:
-                return 0;
+                return Managers.Game.UserInfo.RecordScore;
         }
         return 1;
     }

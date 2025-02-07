@@ -86,10 +86,10 @@ public static class Define
         StopLoading,
         Mission,
         OnPlayerDead,
-        OnSettlementComplete,
-        OnFirstAccept,
-        OnMissionComplete,
-        OnUpdateMission,
+        OnSettlementComplete,   // 플레이 끝나고 정산 (플레이타임 등)
+        OnFirstAccept,          // 로그인할떄 미션 리스트 체크
+        OnMissionComplete,      // 미션 완료 체크
+        OnUpdateMission,        // 진행중 업데이트
         UIRefresh,
         Evolution,
         Purchase,
@@ -214,7 +214,9 @@ public static class Define
         Time,
         SurviveToLevel,
         AvoidRocksCount,
-        AchieveScoreInGame,
+        // XXX : 더이상 사용하지 않는 TYPE
+        // TODO : 삭제필요.
+        AchieveScoreInGame, 
         Style,
         RecordScore
     }
