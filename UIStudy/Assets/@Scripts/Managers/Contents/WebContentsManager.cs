@@ -21,7 +21,7 @@ public class WebRoute
     public readonly static Func<ReqDtoGetUserAccountList, string> GetUserAccountList = (dto) => $"{BaseUrl}User/GetUserAccountList"; //얘는 param값이 없음
 
     public readonly static string InsertUserMission= $"{BaseUrl}User/InsertUserMissions";
-    public readonly static string UpdateUserMission = $"{BaseUrl}User/UpdateUserMission";
+    public readonly static Func<ReqDtoGetOrUpdateUserMissionList, string> GetOrUpdateUserMission = (dto) => $"{BaseUrl}User/GetOrUpdateUserMission?UserAccountId={dto.UserAccountId}";
     public readonly static string CompleteUserMission = $"{BaseUrl}User/CompleteUserMission";
     public readonly static Func<ReqDtoGetUserMissionList, string> GetUserMissionList = (dto) => $"{BaseUrl}User/GetUserMissionList?UserAccountId={dto.UserAccountId}";
     public readonly static string InsertMissionCompensation = $"{BaseUrl}User/InsertMissionCompensation";
@@ -206,13 +206,13 @@ public class WebContentsManager
 
 
 
-    public void ReqInsertUserMission(ReqDtoInsertUserMissions requestDto, Action<ResDtoInsertUserMission> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void ReqInsertUserMission(ReqDtoInsertUserMissionList requestDto, Action<ResDtoInsertUserMissionList> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
         Managers.Web.SendPostRequest(WebRoute.InsertUserMission, body , (response) =>
         {
-            CommonResult<ResDtoInsertUserMission> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertUserMission>>(response);
+            CommonResult<ResDtoInsertUserMissionList> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertUserMissionList>>(response);
 
             if (rv == null)
             {
@@ -256,13 +256,11 @@ public class WebContentsManager
             }
         });
     }
-    public void UpdateUserMission(ReqDtoUpdateUserMission requestDto, Action<ResDtoUpdateUserMission> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void UpdateUserMission(ReqDtoGetOrUpdateUserMissionList requestDto, Action<ResDtoGetOrUpdateUserMissionList> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
-        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
-
-        Managers.Web.SendPostRequest(WebRoute.UpdateUserMission, body , (response) =>
+        Managers.Web.SendGetRequest(WebRoute.GetOrUpdateUserMission(requestDto) , (response) =>
         {
-            CommonResult<ResDtoUpdateUserMission> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoUpdateUserMission>>(response);
+            CommonResult<ResDtoGetOrUpdateUserMissionList> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetOrUpdateUserMissionList>>(response);
 
             if (rv == null || false == rv.IsSuccess)
             {
@@ -283,6 +281,7 @@ public class WebContentsManager
     }
     public void ReqDtoGetUserMissionList(ReqDtoGetUserMissionList requestDto, Action<ResDtoGetUserMissionList> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
+        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
         Managers.Web.SendGetRequest(WebRoute.GetUserMissionList(requestDto), (response) =>
         {
             CommonResult<ResDtoGetUserMissionList> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetUserMissionList>>(response);

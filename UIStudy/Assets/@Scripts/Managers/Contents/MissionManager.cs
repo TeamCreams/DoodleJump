@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using GameApi.Dtos;
 using NUnit.Framework;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor.VersionControl;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class MissionManager
     //<MissionId, >
     private Dictionary<int, ResDtoGetUserMissionListElement> _dicts = new Dictionary<int, ResDtoGetUserMissionListElement>();
     public IReadOnlyDictionary<int, ResDtoGetUserMissionListElement> Dicts => _dicts;
+    public   List<ReqDtoGetOrUpdateUserMissionElement> _changedMissionList = new List<ReqDtoGetOrUpdateUserMissionElement>();
 
 
     public void Init()
@@ -36,7 +38,10 @@ public class MissionManager
 
     void Event_OnFirstAccept(Component sender, object param)
     {
-        ProcessUserMissionList();
+        //ProcessUserMissionList();
+    
+
+        AcceptMission(sender);
     }
 
     void Event_OnMissionComplete(Component sender, object param)
@@ -54,7 +59,7 @@ public class MissionManager
     public void SettleScore(Component sender, Action onSuccess = null, Action onFailed = null)
     {
         // 1. _dicts 업데이트
-        List<int> changedMissionList = new List<int>();
+        ReqDtoGetOrUpdateUserMissionElement a = new ReqDtoGetOrUpdateUserMissionElement(); 
         foreach(var missionKeyValue in _dicts)
         {
             int missionId = missionKeyValue.Key;
@@ -67,26 +72,42 @@ public class MissionManager
             if(beforeParam1 != mission.Param1)
             {
                 // 변경된것 저장.
-                changedMissionList.Add(missionId);
+                a.MissionId = mission.MissionId;
+                a.Param1 = mission.Param1;
+                _changedMissionList.Add(a);
             }
         }
 
         // 2. 변경된 _dicts를 서버에 변경 요청을 보낸다.
+        GetOrUpdateMission(sender);
 
         // 3. onsuccess에서  UI 업데이트 요청
 
     }
 
-    public void AcceptMission(Component sender, List<ReqDtoInsertUserMission> missionList, Action onSuccess = null, Action onFailed = null)
+    public void AcceptMission(Component sender, Action onSuccess = null, Action onFailed = null)
     {
-        Managers.WebContents.ReqInsertUserMission(new ReqDtoInsertUserMissions()
+        // 새로운 미션 추가
+        // 새로운 업데이트가 되어 있을 수도 있으니까
+        // 리스트를 보내면 서버에서 없는 것만 추가하도록 짜여져 있음.
+        List<ReqDtoInsertUserMissionElement> list = new List<ReqDtoInsertUserMissionElement>();
+        foreach (var mission in Managers.Data.MissionDataDic)
+        {
+            ReqDtoInsertUserMissionElement tempMission = new ReqDtoInsertUserMissionElement();
+            tempMission.UserAccountId = Managers.Game.UserInfo.UserAccountId;
+            tempMission.MissionId = mission.Value.Id;
+            list.Add(tempMission);
+        }
+    
+        Managers.WebContents.ReqInsertUserMission(new ReqDtoInsertUserMissionList()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
-            List = missionList
+            List = list
         },
        (response) =>
-       {    
+       { 
             onSuccess?.Invoke();
+            // 추가 되면 로딩창 끝내도록.
        },
        (errorCode) =>
        {
@@ -133,17 +154,23 @@ public class MissionManager
        });
     }
 
-    public void UpdateMission(Component sender, int missionId, int param1, Action onSuccess = null, Action onFailed = null)
+    public void GetOrUpdateMission(Component sender, Action onSuccess = null, Action onFailed = null)
     {
-        Managers.WebContents.UpdateUserMission(new ReqDtoUpdateUserMission()
+        Managers.WebContents.UpdateUserMission(new ReqDtoGetOrUpdateUserMissionList()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
-            MissionId = missionId,
-            Param1 = param1
+            List = _changedMissionList
         },
        (response) =>
        {
-           onSuccess?.Invoke();
+            onSuccess?.Invoke();
+            foreach (var mission in response.List)
+            {
+                _dicts[mission.MissionId].MissionStatus = mission.MissionStatus;
+                _dicts[mission.MissionId].Param1 = mission.Param1;
+            }
+            //초기화
+            _changedMissionList.Clear();
        },
        (errorCode) =>
        {
@@ -168,8 +195,8 @@ public class MissionManager
            {
                foreach (var mission in response.List)
                {
-                   EMissionType type = Managers.Data.MissionDataDic[mission.MissionId].MissionType;
-                   int missionValue = type.GetMissionValueByType();
+                   //EMissionType type = Managers.Data.MissionDataDic[mission.MissionId].MissionType;
+                   //int missionValue = type.GetMissionValueByType();
                    _dicts[mission.MissionId] = mission;
                }
            }
