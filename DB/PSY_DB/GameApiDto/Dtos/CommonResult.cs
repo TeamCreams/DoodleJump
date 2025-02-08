@@ -16,6 +16,7 @@
         NotFoundEntity,
         ServerException,
         NameAlreadyExists,
+        RequestError,
         ChangedRowsIsZero // 변경된 DB 줄 수 0
     }
 
