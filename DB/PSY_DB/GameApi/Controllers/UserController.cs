@@ -1119,7 +1119,7 @@ namespace GameApi.Controllers
                         .Where(mission => missionIdsToUpdate.Contains(mission.MissionId))
                         .ToListAsync();
 
-                    foreach (ReqDtoGetOrUpdateUserMissionElement missionElement in requestDto.List)
+                    foreach (ReqDtoGetOrUpdateUserMissionListElement missionElement in requestDto.List)
                     {
                         var userMission = userMissions.FirstOrDefault(m => m.MissionId == missionElement.MissionId);
 
@@ -1149,7 +1149,7 @@ namespace GameApi.Controllers
                 rv.StatusCode = EStatusCode.OK;
                 rv.Data.List = await _context.TblUserMissions
                     .Where(mission => mission.UserAccountId == userAccount.Id)
-                    .Select(mission => new ResDtoGetOrUpdateUserMissionElement
+                    .Select(mission => new ResDtoGetOrUpdateUserMissionListElement
                     {
                         MissionId = mission.MissionId,
                         MissionStatus = (int)mission.MissionStatus,

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GameApi.Dtos
 {
-    public class ReqDtoGetOrUpdateUserMissionElement
+    public class ReqDtoGetOrUpdateUserMissionListElement
     {
         public int MissionId { get; set; }
         public int MissionStatus { get; set; }
@@ -15,15 +15,15 @@ namespace GameApi.Dtos
     {
         public int UserAccountId { get; set; }
 
-        public List<ReqDtoGetOrUpdateUserMissionElement> List { get; set; }
+        public List<ReqDtoGetOrUpdateUserMissionListElement> List { get; set; }
     }
 
     public class ResDtoGetOrUpdateUserMissionList
     {
-        public List<ResDtoGetOrUpdateUserMissionElement> List { get; set; }
+        public List<ResDtoGetOrUpdateUserMissionListElement> List { get; set; }
     }
 
-    public class ResDtoGetOrUpdateUserMissionElement
+    public class ResDtoGetOrUpdateUserMissionListElement
     {
         public int MissionId { get; set; }
         public int MissionStatus { get; set; }

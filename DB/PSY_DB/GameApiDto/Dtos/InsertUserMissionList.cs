@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GameApi.Dtos
 {
-    public class ReqDtoInsertUserMissionElement
+    public class ReqDtoInsertUserMissionListElement
     {
         public int UserAccountId { get; set; }
         public int MissionId { get; set; }
@@ -14,7 +14,7 @@ namespace GameApi.Dtos
     {
         public int UserAccountId { get; set; }
 
-        public List<ReqDtoInsertUserMissionElement> List { get; set; }
+        public List<ReqDtoInsertUserMissionListElement> List { get; set; }
     }
 
     public class ResDtoInsertUserMissionList
