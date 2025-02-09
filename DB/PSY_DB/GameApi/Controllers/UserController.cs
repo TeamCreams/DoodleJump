@@ -829,7 +829,7 @@ namespace GameApi.Controllers
 
         #region Quest
         //퀘스트 수락
-        [HttpPost("InsertUserMissions")]
+        [HttpPost("InsertUserMissionList")]
         public async Task<CommonResult<ResDtoInsertUserMissionList>> InsertUserMissions([FromBody] ReqDtoInsertUserMissionList requestDto)
         {
             CommonResult<ResDtoInsertUserMissionList> rv = new();
@@ -1089,8 +1089,8 @@ namespace GameApi.Controllers
         }
 
         //퀘스트 진척 상황 업데이트
-        [HttpGet("GetOrUpdateUserMission")]
-        public async Task<CommonResult<ResDtoGetOrUpdateUserMissionList>> GetOrUpdateUserMission([FromQuery] ReqDtoGetOrUpdateUserMissionList requestDto = null)
+        [HttpGet("GetOrUpdateUserMissionList")]
+        public async Task<CommonResult<ResDtoGetOrUpdateUserMissionList>> GetOrUpdateUserMission([FromQuery] ReqDtoGetOrUpdateUserMissionList requestDto)
         {
             CommonResult<ResDtoGetOrUpdateUserMissionList> rv = new()
             {
@@ -1099,12 +1099,6 @@ namespace GameApi.Controllers
 
             try
             {
-                //requestDto가 null일 경우
-                if (requestDto == null)
-                {
-                    throw new CommonException(EStatusCode.RequestError, "Request DTO가 필요합니다.");
-                }
-
                 //사용자 계정 검증
                 var userAccount = await _context.TblUserAccounts
                     .FirstOrDefaultAsync(user => user.Id == requestDto.UserAccountId && user.DeletedDate == null);
