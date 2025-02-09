@@ -17,8 +17,8 @@ public class MissionManager
     //<MissionId, >
     private Dictionary<int, ResDtoGetUserMissionListElement> _dicts = new Dictionary<int, ResDtoGetUserMissionListElement>();
     public IReadOnlyDictionary<int, ResDtoGetUserMissionListElement> Dicts => _dicts;
-    public   List<ReqDtoGetOrUpdateUserMissionListElement> _changedMissionList = new List<ReqDtoGetOrUpdateUserMissionListElement>();
-
+    private List<ReqDtoUpdateUserMissionListElement> _changedMissionList = new List<ReqDtoUpdateUserMissionListElement>(); //프로퍼티로 수정
+    public IReadOnlyList<ReqDtoUpdateUserMissionListElement> ChangedMissionList => _changedMissionList;
 
     public void Init()
     {
@@ -44,7 +44,7 @@ public class MissionManager
     void Event_OnFirstAccept(Component sender, object param)
     {
         //ProcessUserMissionList();
-        AcceptMission(sender);
+        AcceptMissionList(sender);
     }
 
     void Event_OnMissionComplete(Component sender, object param)
@@ -74,7 +74,7 @@ public class MissionManager
             if(beforeParam1 != mission.Param1)
             {
                 // 변경된것 저장.
-                ReqDtoGetOrUpdateUserMissionListElement element = new ReqDtoGetOrUpdateUserMissionListElement(); 
+                ReqDtoUpdateUserMissionListElement element = new ReqDtoUpdateUserMissionListElement(); 
                 element.MissionId = mission.MissionId;
                 element.Param1 = mission.Param1;
                 _changedMissionList.Add(element);
@@ -82,13 +82,13 @@ public class MissionManager
         }
 
         // 2. 변경된 _dicts를 서버에 변경 요청을 보낸다.
-        GetOrUpdateMission(sender);
+        UpdateMissionList(sender);
 
         // 3. onsuccess에서  UI 업데이트 요청
 
     }
 
-    public void AcceptMission(Component sender, Action onSuccess = null, Action onFailed = null)
+    public void AcceptMissionList(Component sender, Action onSuccess = null, Action onFailed = null)
     {
         // 새로운 미션 추가
         // 새로운 업데이트가 되어 있을 수도 있으니까
@@ -110,6 +110,11 @@ public class MissionManager
        (response) =>
        { 
             onSuccess?.Invoke();
+            foreach (var mission in response.List)
+            {
+                _dicts[mission.MissionId].MissionStatus = mission.MissionStatus;
+                _dicts[mission.MissionId].Param1 = mission.Param1;
+            }
             // 추가 되면 로딩창 끝내도록.
        },
        (errorCode) =>
@@ -157,13 +162,13 @@ public class MissionManager
        });
     }
 
-    public void GetOrUpdateMission(Component sender, Action onSuccess = null, Action onFailed = null)
+    public void UpdateMissionList(Component sender, Action onSuccess = null, Action onFailed = null) // 이름 다시 수정
     {
         if(_changedMissionList.Count < 1)
         {
             return;
         }
-        Managers.WebContents.GetOrUpdateUserMissionList(new ReqDtoGetOrUpdateUserMissionList()
+        Managers.WebContents.UpdateUserMissionList(new ReqDtoUpdateUserMissionList()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
             List = _changedMissionList
