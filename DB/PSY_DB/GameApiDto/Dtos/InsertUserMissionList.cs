@@ -19,6 +19,13 @@ namespace GameApi.Dtos
 
     public class ResDtoInsertUserMissionList
     {
-       
+        public List<ResDtoInsertUserMissionListElement> List { get; set; }
+
+    }
+    public class ResDtoInsertUserMissionListElement
+    {
+        public int MissionId { get; set; }
+        public int MissionStatus { get; set; }
+        public int Param1 { get; set; }
     }
 }
