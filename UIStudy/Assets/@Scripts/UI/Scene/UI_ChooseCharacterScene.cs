@@ -80,8 +80,8 @@ public class UI_ChooseCharacterScene : UI_Scene
        (errorCode) =>
        {
             UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
-            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, notice);
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
+            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, errorStruct.Notice);
             popup.AddOnClickAction(onFailed);
        });
     }

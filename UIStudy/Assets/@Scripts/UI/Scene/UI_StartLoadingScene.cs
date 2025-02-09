@@ -66,9 +66,8 @@ public class UI_StartLoadingScene : UI_Scene
        (errorCode) =>
        {
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
-
-            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, notice);                 
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);          
             Debug.Log($"[Error Code : {errorCode}] error message");
             HandleFailure();
         });

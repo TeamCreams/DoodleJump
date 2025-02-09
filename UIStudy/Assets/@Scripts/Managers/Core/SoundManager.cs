@@ -7,7 +7,19 @@ public class SoundManager
 	private AudioSource[] _audioSources = new AudioSource[(int)Define.ESound.Max];
 	private Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
 	private GameObject _soundRoot = null;
-	private float SoundValue { get; set; } = 1;
+	private float _soundValue = 1;
+	public float SoundValue
+	{
+		get { return _soundValue; }
+		set { _soundValue = value; }
+	}
+
+	private float _soundFxValue = 1;
+	public float SoundFxValue
+	{
+		get { return _soundFxValue; }
+		set { _soundFxValue = value; }
+	}
 	public void Init()
 	{
 		if (_soundRoot == null)
@@ -58,6 +70,7 @@ public class SoundManager
 					audioSource.Stop();
 
 				audioSource.clip = audioClip;
+				audioSource.pitch = pitch * SoundValue;
 				audioSource.Play();
 			});
 		}
@@ -65,7 +78,7 @@ public class SoundManager
 		{
 			LoadAudioClip(key, (audioClip) =>
 			{
-				audioSource.pitch = pitch * SoundValue;
+				audioSource.pitch = pitch * SoundFxValue;
 				audioSource.PlayOneShot(audioClip);
 			});
 		}

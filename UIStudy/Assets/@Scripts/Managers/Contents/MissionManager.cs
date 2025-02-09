@@ -7,12 +7,17 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using static Define;
+
+// 1. element 간의 호환성이 떨어짐
+// 2-1. insertUserMission 뒤에 processUserMisionList를 접근한다
+// 2-2. insertUserMission와 processUserMisionList가 하는 일을 하나로 합친다
+
 public class MissionManager
 {
     //<MissionId, >
     private Dictionary<int, ResDtoGetUserMissionListElement> _dicts = new Dictionary<int, ResDtoGetUserMissionListElement>();
     public IReadOnlyDictionary<int, ResDtoGetUserMissionListElement> Dicts => _dicts;
-    public   List<ReqDtoGetOrUpdateUserMissionElement> _changedMissionList = new List<ReqDtoGetOrUpdateUserMissionElement>();
+    public   List<ReqDtoGetOrUpdateUserMissionListElement> _changedMissionList = new List<ReqDtoGetOrUpdateUserMissionListElement>();
 
 
     public void Init()
@@ -39,8 +44,6 @@ public class MissionManager
     void Event_OnFirstAccept(Component sender, object param)
     {
         //ProcessUserMissionList();
-    
-
         AcceptMission(sender);
     }
 
@@ -59,7 +62,6 @@ public class MissionManager
     public void SettleScore(Component sender, Action onSuccess = null, Action onFailed = null)
     {
         // 1. _dicts 업데이트
-        ReqDtoGetOrUpdateUserMissionElement a = new ReqDtoGetOrUpdateUserMissionElement(); 
         foreach(var missionKeyValue in _dicts)
         {
             int missionId = missionKeyValue.Key;
@@ -72,9 +74,10 @@ public class MissionManager
             if(beforeParam1 != mission.Param1)
             {
                 // 변경된것 저장.
-                a.MissionId = mission.MissionId;
-                a.Param1 = mission.Param1;
-                _changedMissionList.Add(a);
+                ReqDtoGetOrUpdateUserMissionListElement element = new ReqDtoGetOrUpdateUserMissionListElement(); 
+                element.MissionId = mission.MissionId;
+                element.Param1 = mission.Param1;
+                _changedMissionList.Add(element);
             }
         }
 
@@ -90,13 +93,13 @@ public class MissionManager
         // 새로운 미션 추가
         // 새로운 업데이트가 되어 있을 수도 있으니까
         // 리스트를 보내면 서버에서 없는 것만 추가하도록 짜여져 있음.
-        List<ReqDtoInsertUserMissionElement> list = new List<ReqDtoInsertUserMissionElement>();
+        List<ReqDtoInsertUserMissionListElement> list = new List<ReqDtoInsertUserMissionListElement>();
         foreach (var mission in Managers.Data.MissionDataDic)
         {
-            ReqDtoInsertUserMissionElement tempMission = new ReqDtoInsertUserMissionElement();
-            tempMission.UserAccountId = Managers.Game.UserInfo.UserAccountId;
-            tempMission.MissionId = mission.Value.Id;
-            list.Add(tempMission);
+            ReqDtoInsertUserMissionListElement element = new ReqDtoInsertUserMissionListElement();
+            element.UserAccountId = Managers.Game.UserInfo.UserAccountId;
+            element.MissionId = mission.Value.Id;
+            list.Add(element);
         }
     
         Managers.WebContents.ReqInsertUserMission(new ReqDtoInsertUserMissionList()
@@ -121,8 +124,8 @@ public class MissionManager
            Debug.Log($"AcceptMission is Error {errorCode.ToString()}");
 
            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-           (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
-            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, notice);
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
+            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, errorStruct.Notice);
            popup.AddOnClickAction(onFailed);
 
        });
@@ -156,7 +159,11 @@ public class MissionManager
 
     public void GetOrUpdateMission(Component sender, Action onSuccess = null, Action onFailed = null)
     {
-        Managers.WebContents.UpdateUserMission(new ReqDtoGetOrUpdateUserMissionList()
+        if(_changedMissionList.Count < 1)
+        {
+            return;
+        }
+        Managers.WebContents.GetOrUpdateUserMissionList(new ReqDtoGetOrUpdateUserMissionList()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
             List = _changedMissionList
@@ -204,10 +211,8 @@ public class MissionManager
        (errorCode) =>
        {
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, null, notice);
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, null, errorStruct.Notice);
        });
     }
-
-
 }

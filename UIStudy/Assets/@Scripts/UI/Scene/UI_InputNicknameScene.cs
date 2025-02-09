@@ -84,8 +84,8 @@ public class UI_InputNicknameScene : UI_Scene
        (errorCode) =>
        {
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_ValidationNickname);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, notice);
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_ValidationNickname);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
        });
         
     }

@@ -236,6 +236,9 @@ public static class Define
         public static readonly Vector3 ConfetiParticlePos = new Vector3(0, 0, -100);
 
         public static readonly int MAX_FAIL_COUNT = 1;
+
+        public static readonly string PersonlSetting = "personalSetting";
+
     }
 
 }

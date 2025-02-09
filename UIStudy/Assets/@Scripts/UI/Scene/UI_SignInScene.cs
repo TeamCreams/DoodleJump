@@ -77,8 +77,8 @@ public class UI_SignInScene : UI_Scene
         if (_errCodeId != EErrorCode.ERR_OK)
         {
             Managers.UI.ShowPopupUI<UI_ToastPopup>();        
-            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkIDError);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, notice);
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkIDError);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
             return;
         }
 
@@ -94,8 +94,8 @@ public class UI_SignInScene : UI_Scene
         //2. 로딩 인디케이터
         {
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkLoginSuccess);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, notice);
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkLoginSuccess);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
             Managers.Game.UserInfo.UserId = GetInputField((int)InputFields.Id_InputField).text;
             Managers.Score.GetScore((this), null,
             () => 

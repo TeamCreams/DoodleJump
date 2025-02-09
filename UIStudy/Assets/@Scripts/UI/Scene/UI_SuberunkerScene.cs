@@ -57,8 +57,8 @@ public class UI_SuberunkerScene : UI_Scene
         {
             Managers.Event.TriggerEvent(EEventType.StopLoading);
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, notice);
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
             Invoke("ExitGame", 2.5f);
             return;
         }

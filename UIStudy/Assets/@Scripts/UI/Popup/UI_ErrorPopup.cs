@@ -38,10 +38,10 @@ public class UI_ErrorPopup : UI_Popup
 
     void OnEvent_ErrorPopup(Component sender, object param)
     {
-        if(param is ValueTuple<string, string> data)
+        if(param is ErrorStruct data)
         {
-            GetText((int)Texts.ErrorTitle_Text).text = data.Item1;
-            GetText((int)Texts.Notice_Text).text = data.Item2;
+            GetText((int)Texts.ErrorTitle_Text).text = data.Title;
+            GetText((int)Texts.Notice_Text).text = data.Notice;
         }
     }
 }

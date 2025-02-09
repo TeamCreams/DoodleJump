@@ -209,8 +209,6 @@ public class UserInfo
 }
 public class SettingInfo
 {
-    public float MusicVolume {get; set;} = 1.0f;
-    public float SoundFxVolume {get; set;} = 1.0f;
     public bool VibrationIsOn {get; set;} = true;
 }
 public class DifficultySettingsInfo // 다시시작할 때마다 초기화 필요 
@@ -227,6 +225,45 @@ public class GetScore
     public int TimeScore { get; set; } = 0;
     public int StoneScore { get; set; } = 0;
 }
+public struct ErrorStruct
+{
+    public string Title;
+    public string Notice;
+    public ErrorStruct(string title, string notice)
+    {
+        this.Title = title;
+        this.Notice = notice;
+    }
+}
+
+public struct PersonalSetting
+{
+    public float MusicVolume;
+    public float SoundFxVolume;
+    public bool IsOnVibration;
+    public bool IsOnKr;
+    
+    public PersonalSetting(float musicVolume, float soundFxVolume, bool isOnVibration, bool isOnKr)
+    {
+        this.MusicVolume = musicVolume;
+        this.SoundFxVolume = soundFxVolume;
+        this.IsOnVibration = isOnVibration;
+        this.IsOnKr = isOnKr;
+    }
+    public string Serialize()
+    {
+        return MusicVolume + "," + SoundFxVolume + "," + IsOnVibration + "," + IsOnKr.ToString();
+    }
+    public static PersonalSetting Deserialize(string data)
+    {
+        string[] parts = data.Split(',');
+        return new PersonalSetting(int.Parse(parts[0]), int.Parse(parts[1]), bool.Parse(parts[2]), bool.Parse(parts[3]));
+    }
+}
+
+
+
+
 
 [System.Serializable] //얘가 있어야 직렬화 가능
 public class MessageData

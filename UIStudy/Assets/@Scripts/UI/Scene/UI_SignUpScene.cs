@@ -127,8 +127,8 @@ public class UI_SignUpScene : UI_Scene
         if (errCode != EErrorCode.ERR_OK || _errCodeId != EErrorCode.ERR_OK)
         {
             UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_AccountCreationCancellation);
-            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, notice);
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationCancellation);
+            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, errorStruct.Notice);
             popup.AddOnClickAction(ProcessErrorFun);
             // 아이디 생성 안 된다고 말하고 가만히 있기/로그인창으로넘어가기 선택 팝업.
             return; 
@@ -149,16 +149,17 @@ public class UI_SignUpScene : UI_Scene
        {
             Debug.Log("아이디 만들기 성공");
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, notice);
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
+
             onSuccess?.Invoke();
        },
        (errorCode) =>
        {
             Debug.Log("아이디 만들기 실패~");
             Managers.UI.ShowPopupUI<UI_ErrorPopup>();
-            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_AccountCreationFailed);
-            Managers.Event.TriggerEvent(EEventType.ErrorPopup, this, (title, notice));
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationFailed);
+            Managers.Event.TriggerEvent(EEventType.ErrorPopup, this, errorStruct);
        });
     }
 

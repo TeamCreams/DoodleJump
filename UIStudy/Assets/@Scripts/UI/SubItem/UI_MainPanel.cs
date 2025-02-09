@@ -86,8 +86,8 @@ public class UI_MainPanel : UI_Base
        (errorCode) =>
        {
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            (string title, string notice) = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, notice);
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
             StartCoroutine(LoadScene_Co());
        });
     }
