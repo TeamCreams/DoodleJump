@@ -49,10 +49,13 @@ public class MissionManager
 
     void Event_OnMissionComplete(Component sender, object param)
     {
+        CompleteMission(sender, (int)param);
+        // 새로운 미션으로 refresh
     }
 
     void Event_OnUpdateMission(Component sender, object param)
     {
+        //UpdateMissionList(sender);
     }
 
     #endregion
@@ -85,7 +88,7 @@ public class MissionManager
         UpdateMissionList(sender);
 
         // 3. onsuccess에서  UI 업데이트 요청
-
+        // 완료 버튼으로 수정
     }
 
     public void AcceptMissionList(Component sender, Action onSuccess = null, Action onFailed = null)
@@ -112,8 +115,21 @@ public class MissionManager
             onSuccess?.Invoke();
             foreach (var mission in response.List)
             {
-                _dicts[mission.MissionId].MissionStatus = mission.MissionStatus;
-                _dicts[mission.MissionId].Param1 = mission.Param1;
+                if (!_dicts.TryGetValue(mission.MissionId, out var existingElement))
+                {
+                    var newElement = new ResDtoGetUserMissionListElement
+                    {
+                        MissionId = mission.MissionId,
+                        MissionStatus = mission.MissionStatus,
+                        Param1 = mission.Param1
+                    };
+                    _dicts[mission.MissionId] = newElement;
+                }
+                else
+                {
+                    existingElement.MissionStatus = mission.MissionStatus;
+                    existingElement.Param1 = mission.Param1;
+                }
             }
             // 추가 되면 로딩창 끝내도록.
        },
@@ -154,7 +170,7 @@ public class MissionManager
        (errorCode) =>
        {                
             Debug.Log("CompleteUserMission is Error");
-           onFailed?.Invoke();
+            onFailed?.Invoke();
             // UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
             // Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, 
             //     "The settlement could not be processed due to poor network conditions. Would you like to resend it?");

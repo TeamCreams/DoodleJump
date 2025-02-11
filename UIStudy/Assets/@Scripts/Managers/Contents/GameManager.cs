@@ -257,7 +257,7 @@ public struct PersonalSetting
     public static PersonalSetting Deserialize(string data)
     {
         string[] parts = data.Split(',');
-        return new PersonalSetting(int.Parse(parts[0]), int.Parse(parts[1]), bool.Parse(parts[2]), bool.Parse(parts[3]));
+        return new PersonalSetting(float.Parse(parts[0]), float.Parse(parts[1]), bool.Parse(parts[2]), bool.Parse(parts[3]));
     }
 }
 

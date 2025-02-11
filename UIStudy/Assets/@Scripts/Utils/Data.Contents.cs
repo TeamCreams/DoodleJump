@@ -481,30 +481,6 @@ namespace Data
         }
     }
 
-    public class SettingData
-    {
-        public int Id;
-        public float MusicVolume;
-        public float SoundFxVolume;
-        public bool IsOnVibration;
-        public bool IsOnKr;
-    }
-
-    [Serializable]
-    public class SettingDataLoader : ILoader<int, SettingData>
-    {
-        public List<SettingData> settingDatas = new List<SettingData>();
-
-        public Dictionary<int, SettingData> MakeDict()
-        {
-            Dictionary<int, SettingData> dict = new Dictionary<int, SettingData>();
-            foreach (SettingData settingData in settingDatas)
-                dict.Add(settingData.Id, settingData);
-
-            return dict;
-        }
-    }
-
     public class GameSoundData
     {
         public int Id;

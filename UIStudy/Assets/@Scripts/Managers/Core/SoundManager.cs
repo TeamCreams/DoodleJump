@@ -13,7 +13,6 @@ public class SoundManager
 		get { return _soundValue; }
 		set { _soundValue = value; }
 	}
-
 	private float _soundFxValue = 1;
 	public float SoundFxValue
 	{
@@ -70,7 +69,7 @@ public class SoundManager
 					audioSource.Stop();
 
 				audioSource.clip = audioClip;
-				audioSource.pitch = pitch * SoundValue;
+				audioSource.volume = pitch * SoundValue; // 여기를 추가했어요.
 				audioSource.Play();
 			});
 		}
@@ -78,7 +77,7 @@ public class SoundManager
 		{
 			LoadAudioClip(key, (audioClip) =>
 			{
-				audioSource.pitch = pitch * SoundFxValue;
+				audioSource.volume = pitch * SoundFxValue;
 				audioSource.PlayOneShot(audioClip);
 			});
 		}
@@ -94,11 +93,12 @@ public class SoundManager
 				audioSource.Stop();
 
 			audioSource.clip = audioClip;
+			audioSource.volume = pitch * SoundValue;
 			audioSource.Play();
 		}
 		else
 		{
-			audioSource.pitch = pitch;
+			audioSource.volume = pitch * SoundFxValue;
 			audioSource.PlayOneShot(audioClip);
 		}
 	}

@@ -29,7 +29,6 @@ public class DataManager
     public Dictionary<int, Data.EvolutionItemData> EvolutionItemDataDic { get; private set; } = new Dictionary<int, Data.EvolutionItemData>();
     public Dictionary<int, Data.ErrorData> ErrorDataDic { get; private set; } = new Dictionary<int, Data.ErrorData>();
     public Dictionary<int, Data.MissionLanguageData> MissionLanguageDataDic { get; private set; } = new Dictionary<int, Data.MissionLanguageData>();
-    public Dictionary<int, Data.SettingData> SettingDataDic { get; private set; } = new Dictionary<int, Data.SettingData>();
     public Dictionary<int, Data.GameSoundData> GameSoundDataDic { get; private set; } = new Dictionary<int, Data.GameSoundData>();
 
     public void Init()
@@ -50,7 +49,6 @@ public class DataManager
         EvolutionItemDataDic = LoadJson<Data.EvolutionItemDataLoader, int, Data.EvolutionItemData>("EvolutionItemData").MakeDict();
         ErrorDataDic = LoadJson<Data.ErrorDataLoader, int, Data.ErrorData>("ErrorData").MakeDict();
         MissionLanguageDataDic = LoadJson<Data.MissionLanguageDataLoader, int, Data.MissionLanguageData>("MissionLanguageData").MakeDict();
-        SettingDataDic = LoadJson<Data.SettingDataLoader, int, Data.SettingData>("SettingData").MakeDict();
         GameSoundDataDic = LoadJson<Data.GameSoundDataLoader, int, Data.GameSoundData>("GameSoundData").MakeDict();
     }
 

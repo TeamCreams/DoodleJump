@@ -46,11 +46,7 @@ public class UI_SettingPopup : UI_Popup
         GetToggle((int)Toggles.Language_En).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
         GetToggle((int)Toggles.Language_Kr).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
         GetSlider((int)Sliders.Music_Slider).gameObject.BindEvent(OnDrag_MusicSlider, EUIEvent.Drag);
-        //GetSlider((int)Sliders.Music_Slider).gameObject.BindEvent(EndDrag_MusicSlider, EUIEvent.EndDrag);
-        
         GetSlider((int)Sliders.SoundFx_Slider).gameObject.BindEvent(OnDrag_SoundFxSlider, EUIEvent.Drag);
-        //GetSlider((int)Sliders.SoundFx_Slider).gameObject.BindEvent(EndDrag_SoundFxSlider, EUIEvent.EndDrag);
-        //_settingData = Managers.Data.SettingDataDic[1];
         return true;
     }
     private void OnDestroy()
@@ -67,7 +63,6 @@ public class UI_SettingPopup : UI_Popup
         GetSlider((int)Sliders.Music_Slider).value = _personalSettingData.MusicVolume;
         GetSlider((int)Sliders.SoundFx_Slider).value = _personalSettingData.SoundFxVolume;
         Managers.Game.SettingInfo.VibrationIsOn = _personalSettingData.IsOnVibration;
-        //Debug.Log($"///ActiveInfo(_personalSettingData.IsOnVibration) : {_personalSettingData.IsOnVibration}");
 
         if(_personalSettingData.IsOnKr)
         {
@@ -87,7 +82,6 @@ public class UI_SettingPopup : UI_Popup
         PlayerPrefs.Save();
 
         _personalSettingData.IsOnVibration = Managers.Game.SettingInfo.VibrationIsOn;
-        Debug.Log($"///OnClick_CloseButton(_settingData.IsOnVibration) : {_personalSettingData.IsOnVibration}");
         Managers.UI.ClosePopupUI(this);
     }
 
@@ -111,8 +105,6 @@ public class UI_SettingPopup : UI_Popup
     {
         _personalSettingData.MusicVolume = GetSlider((int)Sliders.Music_Slider).value;
         Managers.Sound.SoundValue = _personalSettingData.MusicVolume;
-
-        //Debug.Log($"Music : {_musicVolume}");
     }
 
     private void OnDrag_SoundFxSlider(PointerEventData eventData)
