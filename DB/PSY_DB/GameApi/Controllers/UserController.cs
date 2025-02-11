@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using PSY_DB;
 using PSY_DB.Tables;
 using System.Reflection;
+using System.Security;
 using System.Text.Json.Serialization;
 using WebApi.Models.Dto;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -829,8 +830,8 @@ namespace GameApi.Controllers
 
         #region Quest
         //퀘스트 수락
-        [HttpGet("InsertUserMissionList")]
-        public async Task<CommonResult<ResDtoInsertUserMissionList>> InsertUserMissions([FromQuery] ReqDtoInsertUserMissionList requestDto)
+        [HttpPost("InsertUserMissionList")]
+        public async Task<CommonResult<ResDtoInsertUserMissionList>> InsertUserMissions([FromBody] ReqDtoInsertUserMissionList requestDto)
         {
             CommonResult<ResDtoInsertUserMissionList> rv = new();
 
@@ -913,9 +914,8 @@ namespace GameApi.Controllers
 
 
         //퀘스트 완료
-        //퀘스트 완료
-        [HttpGet("CompleteUserMission")]
-        public async Task<CommonResult<ResDtoCompleteUserMissionList>> CompleteUserMission([FromQuery] ReqDtoCompleteUserMission requestDto)
+        [HttpPost("CompleteUserMission")]
+        public async Task<CommonResult<ResDtoCompleteUserMissionList>> CompleteUserMission([FromBody] ReqDtoCompleteUserMission requestDto)
         {
             CommonResult<ResDtoCompleteUserMissionList> rv = new();
 
@@ -939,6 +939,7 @@ namespace GameApi.Controllers
                         $"미션을 완료하지 못했습니다. MissionId : {requestDto.MissionId} Param1 : {requestDto.Param1}");
                 }
 
+                userMission.Param1 = requestDto.Param1;
                 userMission.MissionStatus = EMissionStatus.Complete;
 
                 TblUserScore userScore = new TblUserScore
@@ -995,7 +996,6 @@ namespace GameApi.Controllers
 
             return rv;
         }
-
 
         //퀘스트 리스트 가져오기
         [HttpGet("GetUserMissionList")]
@@ -1071,73 +1071,75 @@ namespace GameApi.Controllers
         }
 
         //퀘스트 진척 상황 업데이트
-        [HttpGet("UpdateUserMissionList")]
-        public async Task<CommonResult<ResDtoUpdateUserMissionList>> UpdateUserMission([FromQuery] ReqDtoUpdateUserMissionList requestDto)
+        [HttpPost("UpdateUserMissionList")]
+        public async Task<CommonResult<ResDtoUpdateUserMissionList>> UpdateUserMission([FromBody] ReqDtoUpdateUserMissionList requestDto)
         {
-            CommonResult<ResDtoUpdateUserMissionList> rv = new()
-            {
-                Data = new ResDtoUpdateUserMissionList() // rv.Data 초기화
-            };
+            CommonResult<ResDtoUpdateUserMissionList> rv = new();
 
             try
             {
-                //사용자 계정 검증
                 var userAccount = await _context.TblUserAccounts
-                    .FirstOrDefaultAsync(user => user.Id == requestDto.UserAccountId && user.DeletedDate == null);
-
+                                    .FirstOrDefaultAsync(user => user.Id == requestDto.UserAccountId && user.DeletedDate == null);
                 if (userAccount == null)
                 {
-                    throw new CommonException(EStatusCode.NotFoundEntity, $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
                 }
 
-                //업데이트할 미션 ID가 있는 경우에만 업데이트 수행
-                if (requestDto.List != null && requestDto.List.Any())
+                //업데이트할 미션 Id가 있는 경우에만 업데이트
+                if (requestDto.List != null)
                 {
-                    //업데이트할 미션 ID 리스트
-                    List<int> missionIdsToUpdate = requestDto.List.Select(m => m.MissionId).ToList();
-
                     //사용자 미션을 가져옴
                     var userMissions = await _context.TblUserMissions
-                        .Where(mission => missionIdsToUpdate.Contains(mission.MissionId))
+                        .Where(m => m.UserAccountId == userAccount.Id)
                         .ToListAsync();
 
-                    foreach (ReqDtoUpdateUserMissionListElement missionElement in requestDto.List)
+                    foreach (var missionElement in requestDto.List)
                     {
+                        if (missionElement == null)
+                        {
+                            Console.WriteLine("missionElement는 null.");
+                            continue;
+                        }
+
                         var userMission = userMissions.FirstOrDefault(m => m.MissionId == missionElement.MissionId);
 
                         //해당 미션이 없으면 계속 진행
                         if (userMission == null)
                         {
+                            Console.WriteLine($"userMission Id is X: {userMission.MissionId}");
                             continue;
                         }
 
-                        try
-                        {
-                            //업데이트
-                            userMission.Param1 = missionElement.Param1;
-                            _context.TblUserMissions.Update(userMission);
-                        }
-                        catch (Exception ex)
-                        {
-                            //미션 업데이트 실패 시 에러를 남기고 계속 진행
-                            Console.WriteLine($"MissionId: {missionElement.MissionId} 업데이트 실패: {ex.Message}");
-                        }
+                        userMission.MissionStatus = (EMissionStatus)missionElement.MissionStatus;
+                        userMission.Param1 = missionElement.Param1;
+                        _context.TblUserMissions.Update(userMission);
                     }
-                    await _context.SaveChangesAsync();
+
+                    var isSuccess = await _context.SaveChangesAsync();
+                    if (isSuccess == 0)
+                    {
+                        throw new CommonException(EStatusCode.ChangedRowsIsZero, "미션 상태 변경에 실패했습니다.");
+                        // 계속 여기로 들어옴
+                    }
                 }
 
                 //미션 반환
+                rv.Data = new ResDtoUpdateUserMissionList
+                {
+                    List = await _context.TblUserMissions
+                        .Where(mission => mission.UserAccountId == userAccount.Id)
+                        .Select(mission => new ResDtoUpdateUserMissionListElement
+                        {
+                            MissionId = mission.MissionId,
+                            MissionStatus = (int)mission.MissionStatus,
+                            Param1 = mission.Param1
+                        }).ToListAsync()
+                };
+
                 rv.IsSuccess = true;
                 rv.StatusCode = EStatusCode.OK;
-                rv.Data.List = await _context.TblUserMissions
-                    .Where(mission => mission.UserAccountId == userAccount.Id)
-                    .Select(mission => new ResDtoUpdateUserMissionListElement
-                    {
-                        MissionId = mission.MissionId,
-                        MissionStatus = (int)mission.MissionStatus,
-                        Param1 = mission.Param1
-                    })
-                    .ToListAsync();
+                rv.Message = "Success return Missions";
             }
             catch (CommonException ex)
             {
@@ -1145,6 +1147,7 @@ namespace GameApi.Controllers
                 rv.StatusCode = (EStatusCode)ex.StatusCode;
                 rv.Message = ex.Message;
                 rv.Data = null;
+                Console.WriteLine($"CommonException: {ex.Message}");
             }
             catch (Exception ex)
             {
@@ -1152,8 +1155,8 @@ namespace GameApi.Controllers
                 rv.StatusCode = EStatusCode.ServerException;
                 rv.Message = ex.Message;
                 rv.Data = null;
+                Console.WriteLine($"Exception: {ex.Message}");
             }
-
             return rv;
         }
 
