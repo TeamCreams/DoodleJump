@@ -12,7 +12,14 @@ namespace GameApi.Dtos
         public int Gold { get; set; }
     }
 
-    public class ResDtoCompleteUserMission
+    public class ResDtoCompleteUserMissionListElement
     {
+        public int MissionId { get; set; }
+        public int MissionStatus { get; set; }
+        public int Param1 { get; set; }
+    }
+    public class ResDtoCompleteUserMissionList
+    {
+        public List<ResDtoCompleteUserMissionListElement> List { get; set; }
     }
 }

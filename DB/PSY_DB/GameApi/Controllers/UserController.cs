@@ -913,40 +913,33 @@ namespace GameApi.Controllers
 
 
         //퀘스트 완료
-        [HttpPost("CompleteUserMission")]
-        public async Task<CommonResult<ResDtoCompleteUserMission>>
-            CompleteUserMission([FromBody] ReqDtoCompleteUserMission requestDto)
+        //퀘스트 완료
+        [HttpGet("CompleteUserMission")]
+        public async Task<CommonResult<ResDtoCompleteUserMissionList>> CompleteUserMission([FromQuery] ReqDtoCompleteUserMission requestDto)
         {
-            CommonResult<ResDtoCompleteUserMission> rv = new();
+            CommonResult<ResDtoCompleteUserMissionList> rv = new();
 
             try
             {
-                var userAccount = _context.TblUserAccounts
-                                    .Where(
-                                        user => user.Id == requestDto.UserAccountId &&
-                                                user.DeletedDate == null
-                                    ).FirstOrDefault();
+                var userAccount = await _context.TblUserAccounts
+                                    .FirstOrDefaultAsync(user => user.Id == requestDto.UserAccountId && user.DeletedDate == null);
 
                 if (userAccount == null)
                 {
-                    throw new CommonException(EStatusCode.NotFoundEntity, 
+                    throw new CommonException(EStatusCode.NotFoundEntity,
                         $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
                 }
 
-                var userMission = _context.TblUserMissions
-                                    .Where( 
-                                            mission => mission.MissionId == requestDto.MissionId &&
-                                                        mission.UserAccountId == userAccount.Id
-                                    ).FirstOrDefault();
+                var userMission = await _context.TblUserMissions
+                                    .FirstOrDefaultAsync(mission => mission.MissionId == requestDto.MissionId && mission.UserAccountId == userAccount.Id);
 
                 if (userMission == null)
                 {
-                    throw new CommonException(EStatusCode.NotFoundEntity, 
+                    throw new CommonException(EStatusCode.NotFoundEntity,
                         $"미션을 완료하지 못했습니다. MissionId : {requestDto.MissionId} Param1 : {requestDto.Param1}");
                 }
 
                 userMission.MissionStatus = EMissionStatus.Complete;
-
 
                 TblUserScore userScore = new TblUserScore
                 {
@@ -961,19 +954,29 @@ namespace GameApi.Controllers
                 _context.TblUserMissions.Update(userMission);
                 _context.TblUserScores.Add(userScore);
 
-                var IsSuccess = await _context.SaveChangesAsync();
+                var isSuccess = await _context.SaveChangesAsync();
 
-                if (IsSuccess == 0)
+                if (isSuccess == 0)
                 {
                     throw new CommonException(EStatusCode.ChangedRowsIsZero,
-                        $"UserAccountId : {requestDto.UserAccountId},  UpdateMission: {requestDto.MissionId} 아무것도 달라지지 않았음");
+                        $"UserAccountId : {requestDto.UserAccountId}, UpdateMission: {requestDto.MissionId} 아무것도 달라지지 않았음");
                 }
-                else
+
+                rv.Data = new ResDtoCompleteUserMissionList
                 {
-                    rv.IsSuccess = true;
-                    rv.StatusCode = EStatusCode.OK;
-                    rv.Data = null;
-                }
+                    List = await _context.TblUserMissions
+                        .Where(mission => mission.UserAccountId == requestDto.UserAccountId)
+                        .Select(mission => new ResDtoCompleteUserMissionListElement
+                        {
+                            MissionId = mission.MissionId,
+                            MissionStatus = (int)mission.MissionStatus,
+                            Param1 = mission.Param1
+                        }).ToListAsync()
+                };
+
+                rv.IsSuccess = true;
+                rv.StatusCode = EStatusCode.OK;
+                rv.Message = "Success Complete Mission";
             }
             catch (CommonException ex)
             {
@@ -981,7 +984,6 @@ namespace GameApi.Controllers
                 rv.StatusCode = (EStatusCode)ex.StatusCode;
                 rv.Message = ex.Message;
                 rv.Data = null;
-                return rv;
             }
             catch (Exception ex)
             {
@@ -989,11 +991,11 @@ namespace GameApi.Controllers
                 rv.StatusCode = EStatusCode.ServerException;
                 rv.Message = ex.Message;
                 rv.Data = null;
-
-                return rv;
             }
+
             return rv;
         }
+
 
         //퀘스트 리스트 가져오기
         [HttpGet("GetUserMissionList")]
