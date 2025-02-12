@@ -827,7 +827,6 @@ namespace GameApi.Controllers
             return rv;
         }
         #endregion
-
         #region Quest
         //퀘스트 수락
         [HttpPost("InsertUserMissionList")]
@@ -850,13 +849,13 @@ namespace GameApi.Controllers
 
                 var requestedMissionIds = requestDto.List.Select(req => req.MissionId).ToList();
                 var existingMissionIds = await _context.TblUserMissions
-                    .Where(mission => requestedMissionIds.Contains(mission.MissionId))
-                    .Select(mission => mission.MissionId)
-                    .ToListAsync();
+                        .Where(mission => requestedMissionIds.Contains(mission.MissionId))
+                        .Select(mission => mission.MissionId)
+                        .ToListAsync();
 
                 foreach (var req in requestDto.List)
                 {
-                    // 없는 것만 추가할 수 있도록
+                    //없는 것만 추가할 수 있도록
                     if (!existingMissionIds.Contains(req.MissionId))
                     {
                         var userMission = new TblUserMission
@@ -867,10 +866,11 @@ namespace GameApi.Controllers
                         _context.TblUserMissions.Add(userMission);
                     }
                 }
-
-                var isSuccess = await _context.SaveChangesAsync();
-                if(1 < existingMissionIds.Count)
+                // 이전과 변한게 없다면 패스
+                if (requestDto.List.Any(req => !existingMissionIds.Contains(req.MissionId)))
                 {
+                    var isSuccess = await _context.SaveChangesAsync();
+
                     if (isSuccess == 0)
                     {
                         throw new CommonException(EStatusCode.ChangedRowsIsZero, "미션 추가에 실패했습니다.");
@@ -1111,9 +1111,12 @@ namespace GameApi.Controllers
                             continue;
                         }
 
-                        userMission.MissionStatus = (EMissionStatus)missionElement.MissionStatus;
-                        userMission.Param1 = missionElement.Param1;
-                        _context.TblUserMissions.Update(userMission);
+                        if (userMission.Param1 != missionElement.Param1)
+                        {
+                            userMission.MissionStatus = (EMissionStatus)missionElement.MissionStatus;
+                            userMission.Param1 = missionElement.Param1;
+                            _context.TblUserMissions.Update(userMission);
+                        }
                     }
 
                     var isSuccess = await _context.SaveChangesAsync();
