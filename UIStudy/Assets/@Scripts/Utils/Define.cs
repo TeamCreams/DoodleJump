@@ -102,6 +102,7 @@ public static class Define
         None,
         Progress,
         Complete,
+        Rewarded
     }
 
     public enum EEquipType

@@ -40,6 +40,12 @@ public class UI_SuberunkerScene : UI_Scene
         Managers.Event.AddEvent(EEventType.OnPlayerDead, Event_OnPlayerDead);
         Managers.Event.AddEvent(EEventType.OnSettlementComplete, Event_OnSettlementComplete);
 
+        
+        // 게임 난이도 초기화
+        Managers.Game.DifficultySettingsInfo.StageId = 70001;
+        Managers.Game.DifficultySettingsInfo.StageLevel = 0; // 이 값을 미션 달성에 사용할 때가 있기 떄문에. 그런데 게임을 새로 시작하면 미션 진행도도 초기화가 되기 때문에 이걸 따로 저장해놔야함.
+        Managers.Game.DifficultySettingsInfo.AddSpeed = 0;
+        Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
         return true;
     }
 
@@ -63,7 +69,6 @@ public class UI_SuberunkerScene : UI_Scene
             return;
         }
 
-        
         Managers.Resource.Instantiate("UI_Loading", this.transform);
         Managers.Event.TriggerEvent(EEventType.StartLoading);
         Managers.Score.SetScore(
@@ -74,6 +79,12 @@ public class UI_SuberunkerScene : UI_Scene
                 },
             onFailed: () => Event_OnPlayerDead(this, tryCount++));
         Managers.Event.TriggerEvent(EEventType.StopLoading);
+
+        // 게임 난이도 초기화
+        // Managers.Game.DifficultySettingsInfo.StageId = 70001;
+        // Managers.Game.DifficultySettingsInfo.StageLevel = 0;
+        // Managers.Game.DifficultySettingsInfo.AddSpeed = 0;
+        // Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
     }
     
     void Event_OnSettlementComplete(Component sender, object param)

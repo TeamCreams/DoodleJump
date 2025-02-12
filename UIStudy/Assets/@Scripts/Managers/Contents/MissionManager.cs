@@ -73,6 +73,20 @@ public class MissionManager
 
             int beforeParam1 = mission.Param1;
             mission.Param1 = type.GetMissionValueByType();
+            
+            if(Managers.Mission.Dicts[missionId].MissionStatus != (int)EMissionStatus.Rewarded)
+            {
+                float value = beforeParam1 / (float)Managers.Data.MissionDataDic[missionId].Param1;
+                if(value < 1.0f)
+                {
+                    Managers.Mission.Dicts[missionId].MissionStatus = (int)EMissionStatus.Complete;
+                }
+                else
+                {
+                    Managers.Mission.Dicts[missionId].MissionStatus = (int)EMissionStatus.Progress;
+                }
+            }
+            mission.MissionStatus = Managers.Mission.Dicts[missionId].MissionStatus;
 
             if(beforeParam1 != mission.Param1)
             {
@@ -80,6 +94,7 @@ public class MissionManager
                 ReqDtoUpdateUserMissionListElement element = new ReqDtoUpdateUserMissionListElement(); 
                 element.MissionId = mission.MissionId;
                 element.Param1 = mission.Param1;
+                element.MissionStatus = mission.MissionStatus;
                 _changedMissionList.Add(element);
             }
         }
@@ -88,7 +103,7 @@ public class MissionManager
         UpdateMissionList(sender);
 
         // 3. onsuccess에서  UI 업데이트 요청
-        // 완료 버튼으로 수정
+        
     }
 
     public void AcceptMissionList(Component sender, Action onSuccess = null, Action onFailed = null)
@@ -96,6 +111,8 @@ public class MissionManager
         // 새로운 미션 추가
         // 새로운 업데이트가 되어 있을 수도 있으니까
         // 리스트를 보내면 서버에서 없는 것만 추가하도록 짜여져 있음.
+        Debug.Log($"AcceptMissionList");
+
         List<ReqDtoInsertUserMissionListElement> list = new List<ReqDtoInsertUserMissionListElement>();
         foreach (var mission in Managers.Data.MissionDataDic)
         {
@@ -117,6 +134,7 @@ public class MissionManager
             {
                 if (!_dicts.TryGetValue(mission.MissionId, out var existingElement))
                 {
+                    //Debug.Log($"{mission.MissionId} Param1 : {mission.Param1}");
                     var newElement = new ResDtoGetUserMissionListElement
                     {
                         MissionId = mission.MissionId,
@@ -127,8 +145,9 @@ public class MissionManager
                 }
                 else
                 {
-                    existingElement.MissionStatus = mission.MissionStatus;
-                    existingElement.Param1 = mission.Param1;
+                    //Debug.Log($"existingElement.MissionStatus : {existingElement.MissionStatus}, mission.Param1 : {mission.Param1}");
+                    _dicts[mission.MissionId].MissionStatus = mission.MissionStatus;
+                    _dicts[mission.MissionId].Param1 = mission.Param1;
                 }
             }
             // 추가 되면 로딩창 끝내도록.
@@ -154,18 +173,27 @@ public class MissionManager
 
     public void CompleteMission(Component sender, int missionId, Action onSuccess = null, Action onFailed = null)
     {
+    //     EMissionType type = Managers.Data.MissionDataDic[missionId].MissionType;
+    //     int missionValue = type.GetMissionValueByType();
+
         Managers.WebContents.CompleteUserMission(new ReqDtoCompleteUserMission()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
             MissionId = missionId,
+            Param1 = _dicts[missionId].Param1,
             Gold = Managers.Game.UserInfo.Gold + Managers.Data.MissionDataDic[missionId].Compensation
          },
        (response) =>
        {
-           Debug.Log("CompleteUserMission is success");
-           Managers.Game.UserInfo.Gold += Managers.Data.MissionDataDic[missionId].Compensation;
-           Managers.Event.TriggerEvent(EEventType.UIRefresh);
-           onSuccess?.Invoke();
+            onSuccess?.Invoke();
+            Debug.Log("CompleteUserMission is success");
+            Managers.Game.UserInfo.Gold += Managers.Data.MissionDataDic[missionId].Compensation;
+            foreach (var mission in response.List)
+            {
+                _dicts[mission.MissionId].MissionStatus = mission.MissionStatus;
+                _dicts[mission.MissionId].Param1 = mission.Param1;
+            }
+            Managers.Event.TriggerEvent(EEventType.UIRefresh);
        },
        (errorCode) =>
        {                
@@ -176,6 +204,7 @@ public class MissionManager
             //     "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
             // popup.AddOnClickAction(onFailed);
        });
+        Managers.Event.TriggerEvent(EEventType.Mission);
     }
 
     public void UpdateMissionList(Component sender, Action onSuccess = null, Action onFailed = null) // 이름 다시 수정
@@ -194,7 +223,7 @@ public class MissionManager
             onSuccess?.Invoke();
             foreach (var mission in response.List)
             {
-                _dicts[mission.MissionId].MissionStatus = mission.MissionStatus;
+                Debug.Log($"_dicts[{mission.MissionId}].Param1 : {_dicts[mission.MissionId].Param1}, mission.Param1 : {mission.Param1}");
                 _dicts[mission.MissionId].Param1 = mission.Param1;
             }
             //초기화

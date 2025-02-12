@@ -54,7 +54,6 @@ public class UI_EvolutionItem : UI_Base
     {
         _itemId = id;
         EvolutionData evolutionData = Managers.Data.EvolutionDataDic[_itemId];
-        //_itemId = Managers.Game.UserInfo.EvolutionId;
         string str = "";
         switch(evolutionData.Item)
         {

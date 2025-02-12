@@ -14,7 +14,7 @@ public static partial class Extension
             case EMissionType.Time:
                 return Managers.Game.UserInfo.PlayTime;
             case EMissionType.SurviveToLevel:
-                return 0;
+                return Managers.Game.DifficultySettingsInfo.StageLevel;
             case EMissionType.AvoidRocksCount:
                 return Managers.Game.UserInfo.AccumulatedStone;
             case EMissionType.AchieveScoreInGame:

@@ -68,28 +68,26 @@ public class UI_MissionItem : UI_Base
         GetButton((int)Buttons.Complete_Button).SetActive(true);
         GetSlider((int)Sliders.Progress).SetActive(false);
     }
-    public void SetInfo(int missionId, int missionStatus)
+    public void SetInfo(int missionId)
     {
         //_animator.SetTrigger("NewMission");
-        Debug.Log($"missionId : {missionId}");
+        //Debug.Log($"missionId : {missionId}");
         _missionId = missionId;
+        float param1 = Managers.Mission.Dicts[_missionId].Param1;
         MissionData missionData = Managers.Data.MissionDataDic[_missionId];
         SetLanguage(missionData);
-        int missionValue = missionData.MissionType.GetMissionValueByType();
-        float value = (float)missionValue / (float)missionData.Param1;
-        Debug.Log($"---------------------------------------------≈value : {missionValue} / {missionData.Param1} = {(float)missionValue / (float)missionData.Param1}");
+        float value = param1 / (float)missionData.Param1;
         if(value < 1.0f)
         {
-            GetText((int)Texts.ProgressPercent).text = $"{missionValue}/{missionData.Param1}";
+            GetText((int)Texts.ProgressPercent).text = $"{param1}/{missionData.Param1}";
             GetSlider((int)Sliders.Progress).value = value;
             SetActiveProgressState();
         }
         else if(1.0f <= value)
         {
             GetSlider((int)Sliders.Progress).value = 1;
-            GetText((int)Texts.ProgressPercent).text = $"{missionValue}/{missionData.Param1}";
+            GetText((int)Texts.ProgressPercent).text = $"{param1}/{missionData.Param1}";
             SetActiveCompleteButton();
-            // GetText((int)Texts.ProgressPercent).text = "달성";
             // 레벨업 조건 달성 
             // 레벨업은 어디서 관리하는지 
         }
