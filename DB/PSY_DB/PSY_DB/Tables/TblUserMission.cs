@@ -13,6 +13,7 @@ public enum EMissionStatus
     None,
     Progress,
     Complete,
+    Rewarded // 보상까지 이미 받은 상태 추가
 }
 
 [Comment("UserScore 정보")]

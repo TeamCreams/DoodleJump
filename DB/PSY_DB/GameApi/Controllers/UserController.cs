@@ -146,6 +146,8 @@ namespace GameApi.Controllers
                         Evolution = user.Evolution 
                     }).ToListAsync();
 
+
+
                 /*
                  *  SELECT `t`.`UserName`, `t`.`RegisterDate`, `t`.`UpdateDate`, COALESCE((
                           SELECT `t0`.`History`
@@ -940,7 +942,7 @@ namespace GameApi.Controllers
                 }
 
                 userMission.Param1 = requestDto.Param1;
-                userMission.MissionStatus = EMissionStatus.Complete;
+                userMission.MissionStatus = EMissionStatus.Rewarded;
 
                 TblUserScore userScore = new TblUserScore
                 {
@@ -1113,7 +1115,7 @@ namespace GameApi.Controllers
 
                         if (userMission.Param1 != missionElement.Param1)
                         {
-                            userMission.MissionStatus = (EMissionStatus)missionElement.MissionStatus;
+                            userMission.MissionStatus = EMissionStatus.Progress;
                             userMission.Param1 = missionElement.Param1;
                             _context.TblUserMissions.Update(userMission);
                         }
