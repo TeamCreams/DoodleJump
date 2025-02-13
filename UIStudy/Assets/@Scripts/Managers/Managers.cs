@@ -19,6 +19,7 @@ public class Managers : MonoBehaviour
     private WebContentsManager _webContents = new WebContentsManager();
 	private MissionManager _mission = new MissionManager();
 	private ErrorManager _error = new ErrorManager();
+	private EvolutionManager _evolution = new EvolutionManager();
 
     public static GameManager Game { get { return Instance?._game; } }
 	public static MessageManager Message { get { return Instance?._message; } }
@@ -29,6 +30,7 @@ public class Managers : MonoBehaviour
     public static WebContentsManager WebContents { get { return Instance?._webContents; } }
     public static MissionManager Mission { get { return Instance?._mission; } }
 	public static ErrorManager Error { get { return Instance?._error; } }
+	public static EvolutionManager Evolution { get { return Instance?._evolution; } }
 
     #endregion
 

@@ -50,7 +50,7 @@ public class UI_PurchasePopup : UI_Popup
 
     private void OnEvent_ClickOk(PointerEventData eventData)
     {
-        // 서버랑 연결해서 돈 빼기 ->   UI_EvolutionItemd에서 한 번에
+        // 서버랑 연결해서 돈 빼기 ->   UI_EvolutionItem에서 한 번에
         int afterGold = Managers.Game.UserInfo.Gold - item.Gold;
         if(0 <= afterGold)
         {

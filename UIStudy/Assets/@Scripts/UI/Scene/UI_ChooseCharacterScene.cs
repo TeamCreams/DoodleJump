@@ -60,10 +60,6 @@ public class UI_ChooseCharacterScene : UI_Scene
 
     public void SaveData(Action onSuccess = null, Action onFailed = null)
     {
-        // int hair = StringToInt(EEquipType.Hair);
-        // int eyebrows = StringToInt(EEquipType.Eyebrows);
-        // int eyes = StringToInt(EEquipType.Eyes);
-
         Managers.WebContents.ReqDtoUpdateUserStyle(new ReqDtoUpdateUserStyle()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
@@ -73,17 +69,18 @@ public class UI_ChooseCharacterScene : UI_Scene
             EyesStyle = Managers.Game.ChracterStyleInfo.Eyes,
             Evolution = Managers.Game.UserInfo.EvolutionId
         },
-       (response) =>
-       {
-            onSuccess?.Invoke();// 얘 안에서 씬 전환
-       },
-       (errorCode) =>
-       {
-            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
-            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, errorStruct.Notice);
-            popup.AddOnClickAction(onFailed);
-       });
+        (response) =>
+        {
+                onSuccess?.Invoke();// 얘 안에서 씬 전환
+                //Managers.Evolution.EvolutionDict();
+        },
+        (errorCode) =>
+        {
+                UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+                ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
+                Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, errorStruct.Notice);
+                popup.AddOnClickAction(onFailed);
+        });
     }
 
     private int StringToInt(EEquipType eEquipType)

@@ -124,6 +124,7 @@ public class PlayerController : CreatureBase
        
 
         LoadPlayerCustomization();
+        AddEvolutionStats();// 추가한 스탯만큼 변경
     }
 
     #region Update
@@ -287,14 +288,21 @@ public class PlayerController : CreatureBase
             itemData.Option4
         };
 
-        var groupInfo = from option in options
-                        join sprite in Managers.Data.SuberunkerItemSpriteDic
+
+        int id = Managers.Game.UserInfo.EvolutionId;
+        var groupInfo = (from option in options
+                        join sprite in Managers.Data.EvolutionDataDic
                         on option equals sprite.Value.StatOption
                         select new
                         {
-                            SpriteName = sprite.Value.Name,
+                            Id = sprite.Value.Id,
+                            SpriteName = sprite.Value.ItemSprite,
                             EStatOption = option
-                        };
+                        })
+                        .Where(item => item.Id <= id)
+                        .OrderByDescending(item => item.Id)
+                        .Take(3)
+                        .ToList(); 
 
         foreach (var group in groupInfo)
         {
@@ -488,6 +496,22 @@ public class PlayerController : CreatureBase
         _haveItems.Remove(Item);
         ItemData = null;
         Item = null;
+    }
+    public void AddEvolutionStats()
+    {
+        // 능력치 추가 구매를 통해 늘어난 것이므로 다시 remove를 할 필요가 없음
+        Managers.Evolution.EvolutionDict();
+        Managers.Evolution.SetModifierList();
+        List<EStat> options = new List<EStat>
+        {
+            EStat.MoveSpeed,
+            EStat.MaxHp,
+            EStat.Luck
+        };
+        foreach (var (option, statModifier) in options.Zip(Managers.Evolution.ModifierList, (optionIndex, StatModifierIndex) => (optionIndex, StatModifierIndex)))
+        {
+            this._stats.StatDic[option].AddStatModifier(statModifier);
+        }
     }
 
     //텔레포트

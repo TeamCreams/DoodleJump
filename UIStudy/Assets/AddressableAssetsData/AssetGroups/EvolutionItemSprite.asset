@@ -381,6 +381,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e83128d56b334879b705cc4e6b056d32
+    m_Address: AssassinArmorIcon.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e97739eedeb60884596e54f47c19b494
     m_Address: CardinalArmorBootsIcon.sprite
     m_ReadOnly: 0

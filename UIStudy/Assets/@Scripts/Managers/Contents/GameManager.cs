@@ -205,7 +205,7 @@ public class UserInfo
     public int ScoreBoard {get; set;} = 0;
     public int AccumulatedStone {get; set;} = 0;
     public int UserAccountId { get; set; } = 0;
-    public int EvolutionId {get; set;} = 0;
+    public int EvolutionId {get; set;} = 140003;
 }
 public class SettingInfo
 {

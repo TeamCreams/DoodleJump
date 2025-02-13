@@ -219,6 +219,7 @@
     <Compile Include="Assets/HeroEditor/Common/SimpleColorPicker/Scripts/ColorMode.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SampleScene.cs" />
     <Compile Include="Assets/@Scripts/Managers/Core/ResourceManager.cs" />
+    <Compile Include="Assets/@Scripts/Managers/Contents/EvolutionManager.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Helpers/CharacterInventorySetup.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/Data/FirearmParams.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/ItemInfo.cs" />

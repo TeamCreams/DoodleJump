@@ -6,7 +6,7 @@ Sprite:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shin
+  m_Name: ShinBoots
   m_Rect:
     serializedVersion: 2
     x: 235
@@ -223,4 +223,5 @@ Sprite:
     - {x: -0.0012161254, y: -0.36644104}
     - {x: -0.031216124, y: -0.35644102}
   m_Bones: []
+  m_ScriptableObjects: []
   m_SpriteID: e2305410000000000800000000000000
