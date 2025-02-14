@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PSY_DB;
 using PSY_DB.Tables;
+using System.Linq;
 using System.Reflection;
 using System.Security;
 using System.Text.Json.Serialization;
@@ -135,7 +136,9 @@ namespace GameApi.Controllers
                                         .Gold : 0,
                         PlayTime = user.TblUserScores
                                     .Where(s => s.PlayTime != -1)
-                                    .Sum(s => s.PlayTime),
+                                    .OrderByDescending(s => s.UpdateDate) // 최근 시간 순으로 정렬
+                                    .Select(s => s.PlayTime)
+                                    .FirstOrDefault(),
                         AccumulatedStone = user.TblUserScores
                                     .Where(s => s.AccumulatedStone != -1)
                                     .Sum(s => s.AccumulatedStone),
@@ -648,7 +651,9 @@ namespace GameApi.Controllers
                                         .Gold : 0,
                         PlayTime = user.TblUserScores
                                     .Where(s => s.PlayTime != -1)
-                                    .Sum(s => s.PlayTime),
+                                    .OrderByDescending(s => s.UpdateDate) // 최근 시간 순으로 정렬
+                                    .Select(s => s.PlayTime) 
+                                    .FirstOrDefault(),
                         AccumulatedStone = user.TblUserScores
                                     .Where(s => s.AccumulatedStone != -1)
                                     .Sum(s => s.AccumulatedStone),
@@ -1115,7 +1120,7 @@ namespace GameApi.Controllers
 
                         if (userMission.Param1 != missionElement.Param1)
                         {
-                            userMission.MissionStatus = EMissionStatus.Progress;
+                            userMission.MissionStatus = (EMissionStatus)missionElement.MissionStatus;
                             userMission.Param1 = missionElement.Param1;
                             _context.TblUserMissions.Update(userMission);
                         }
