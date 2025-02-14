@@ -15,12 +15,6 @@ MonoBehaviour:
   m_GroupName: Sprites
   m_GUID: 17ac5b666a9ca2b4985a852d0d3704e9
   m_SerializeEntries:
-  - m_GUID: 0b5056e8de494ce88f303a8c40f6dfa1
-    m_Address: CarnivalMask.sprite
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1e37ba6f0ebe9a549b2fdaed9f0fc6de
     m_Address: Sprite_Icon_Weapon_Stone_02.sprite
     m_ReadOnly: 0
@@ -29,12 +23,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4b40b7e9b987d764fb6c2cf114a2edc9
     m_Address: Sprite_Loading.sprite
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 684028ca576f24347b397a56913f6072
-    m_Address: ShinBoots.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
