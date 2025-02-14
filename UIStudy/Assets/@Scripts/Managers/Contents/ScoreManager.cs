@@ -50,7 +50,7 @@ public class ScoreManager
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
             Score = Managers.Game.UserInfo.LatelyScore,
             Time = Managers.Game.UserInfo.PlayTime,
-            AccumulatedStone = Managers.Game.UserInfo.AccumulatedStone,
+            AccumulatedStone = Managers.Game.DifficultySettingsInfo.StoneCount,
             Gold = Managers.Game.UserInfo.Gold,
         },
        (response) =>

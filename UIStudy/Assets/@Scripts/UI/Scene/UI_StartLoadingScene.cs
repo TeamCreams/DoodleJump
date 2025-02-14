@@ -54,6 +54,7 @@ public class UI_StartLoadingScene : UI_Scene
                 _isLoadSceneCondition = true;
                 Managers.Game.UserInfo.UserAccountId = response.UserAccountId;
                 //캐릭터 스타일 
+                Managers.Game.ChracterStyleInfo.CharacterId = response.CharacterId;
                 Managers.Game.ChracterStyleInfo.Hair = response.HairStyle;
                 Managers.Game.ChracterStyleInfo.Eyebrows = response.EyebrowStyle;
                 Managers.Game.ChracterStyleInfo.Eyes = response.EyesStyle;

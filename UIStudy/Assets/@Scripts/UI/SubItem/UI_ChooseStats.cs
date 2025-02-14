@@ -42,7 +42,7 @@ public class UI_ChooseStats : UI_Base
         GetButton((int)Buttons.Next).gameObject.BindEvent(OnClick_NextButton, EUIEvent.Click);
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         OnEvent_SetLanguage(null, null);
-        
+        _playerDataId = Managers.Game.ChracterStyleInfo.CharacterId;
         DisplayInfo();
         return true;
     }
@@ -66,7 +66,7 @@ public class UI_ChooseStats : UI_Base
         this.DisplayInfo();
     }
 
-    private void DisplayInfo()
+    public void DisplayInfo()
     {
         Managers.Game.ChracterStyleInfo.CharacterId = _playerDataId;
         GetText((int)Texts.Stat_Text).text = $"{Managers.Data.PlayerDic[_playerDataId].Name}";

@@ -76,7 +76,6 @@ public class Spawner : InitBase
 
             int x = UnityEngine.Random.Range(-85, 86);
             Managers.Object.Spawn<StoneController>(new Vector2(x, 140), true);
-            Managers.Game.UserInfo.AccumulatedStone++;
             if (Managers.Data.DifficultySettingsDic[_id].ChallengeScale <= Managers.Game.DifficultySettingsInfo.ChallengeScale)
             {
                 Managers.Game.DifficultySettingsInfo.StageId++;
@@ -98,7 +97,6 @@ public class Spawner : InitBase
         while ((direction == 1 && endX <= startX) || (direction == -1 && startX <= endX))
         {
             var stoneObject = Managers.Object.Spawn<StoneController>(new Vector2(startX, 140));
-            Managers.Game.UserInfo.AccumulatedStone++;
             startX += reversDirectionDistance;
             yield return new WaitForSeconds(0.2f);
         }
