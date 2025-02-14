@@ -3,1082 +3,1118 @@
     {
       "Id": 140001,
       "Stats": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Gold": 0,
+      "StatOption": 1,
+      "ItemSprite": "DefaultBoots",
+      "PrevEvolutionId": 0
+    },
+    {
+      "Id": 140002,
+      "Stats": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Gold": 0,
+      "StatOption": 0,
+      "ItemSprite": "ArielDress",
+      "PrevEvolutionId": 0
+    },
+    {
+      "Id": 140003,
+      "Stats": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Gold": 0,
+      "StatOption": 2,
+      "ItemSprite": "ClothMask",
+      "PrevEvolutionId": 0
+    },
+    {
+      "Id": 140004,
+      "Stats": [
         0.1,
         0.0,
         0.0
       ],
       "Gold": 250,
-      "Item": 0,
-      "ItemSprite": "ArielDress",
-      "PrevEvolutionId": 0
+      "StatOption": 1,
+      "ItemSprite": "ChampionArmorBoots",
+      "PrevEvolutionId": 140003
     },
     {
-      "Id": 140002,
+      "Id": 140005,
       "Stats": [
         0.1,
         1.0,
         0.0
       ],
       "Gold": 500,
-      "Item": 1,
-      "ItemSprite": "ArielDress",
-      "PrevEvolutionId": 140001
+      "StatOption": 0,
+      "ItemSprite": "ChampionArmor",
+      "PrevEvolutionId": 140004
     },
     {
-      "Id": 140003,
+      "Id": 140006,
       "Stats": [
         0.1,
         1.0,
         0.03
       ],
       "Gold": 750,
-      "Item": 2,
-      "ItemSprite": "ClothMask",
-      "PrevEvolutionId": 140002
-    },
-    {
-      "Id": 140004,
-      "Stats": [
-        0.2,
-        1.0,
-        0.03
-      ],
-      "Gold": 1000,
-      "Item": 0,
-      "ItemSprite": "AssassinArmor",
-      "PrevEvolutionId": 140003
-    },
-    {
-      "Id": 140005,
-      "Stats": [
-        0.2,
-        2.0,
-        0.03
-      ],
-      "Gold": 1250,
-      "Item": 1,
-      "ItemSprite": "AssassinArmor",
-      "PrevEvolutionId": 140004
-    },
-    {
-      "Id": 140006,
-      "Stats": [
-        0.2,
-        2.0,
-        0.06
-      ],
-      "Gold": 1500,
-      "Item": 2,
+      "StatOption": 2,
       "ItemSprite": "ClothMask",
       "PrevEvolutionId": 140005
     },
     {
       "Id": 140007,
       "Stats": [
-        0.3,
-        2.0,
-        0.06
+        0.2,
+        1.0,
+        0.03
       ],
-      "Gold": 1750,
-      "Item": 0,
-      "ItemSprite": "BanditArmor",
+      "Gold": 1000,
+      "StatOption": 1,
+      "ItemSprite": "BlacksmithCostumeBoots",
       "PrevEvolutionId": 140006
     },
     {
       "Id": 140008,
       "Stats": [
-        0.3,
-        3.0,
-        0.06
+        0.2,
+        2.0,
+        0.03
       ],
-      "Gold": 2000,
-      "Item": 1,
-      "ItemSprite": "BanditArmor",
+      "Gold": 1250,
+      "StatOption": 0,
+      "ItemSprite": "BlacksmithCostume",
       "PrevEvolutionId": 140007
     },
     {
       "Id": 140009,
       "Stats": [
-        0.3,
-        3.0,
-        0.09
+        0.2,
+        2.0,
+        0.06
       ],
-      "Gold": 2250,
-      "Item": 2,
+      "Gold": 1500,
+      "StatOption": 2,
       "ItemSprite": "ClothMask",
       "PrevEvolutionId": 140008
     },
     {
       "Id": 140010,
       "Stats": [
-        0.4,
-        3.0,
-        0.09
+        0.3,
+        2.0,
+        0.06
       ],
-      "Gold": 2500,
-      "Item": 0,
-      "ItemSprite": "BanditLightArmor",
+      "Gold": 1750,
+      "StatOption": 1,
+      "ItemSprite": "FarmerClothesBoots",
       "PrevEvolutionId": 140009
     },
     {
       "Id": 140011,
       "Stats": [
-        0.4,
-        4.0,
-        0.09
+        0.3,
+        3.0,
+        0.06
       ],
-      "Gold": 2750,
-      "Item": 1,
-      "ItemSprite": "BanditLightArmor",
+      "Gold": 2000,
+      "StatOption": 0,
+      "ItemSprite": "FarmerClothes",
       "PrevEvolutionId": 140010
     },
     {
       "Id": 140012,
       "Stats": [
-        0.4,
-        4.0,
-        0.12
+        0.3,
+        3.0,
+        0.09
       ],
-      "Gold": 3000,
-      "Item": 2,
+      "Gold": 2250,
+      "StatOption": 2,
       "ItemSprite": "ClothMask",
       "PrevEvolutionId": 140011
     },
     {
       "Id": 140013,
       "Stats": [
-        0.5,
-        4.0,
-        0.12
+        0.4,
+        3.0,
+        0.09
       ],
-      "Gold": 3250,
-      "Item": 0,
-      "ItemSprite": "BaseballOutfit",
+      "Gold": 2500,
+      "StatOption": 1,
+      "ItemSprite": "HermitBoots",
       "PrevEvolutionId": 140012
     },
     {
       "Id": 140014,
       "Stats": [
-        0.5,
-        5.0,
-        0.12
+        0.4,
+        4.0,
+        0.09
       ],
-      "Gold": 3500,
-      "Item": 1,
-      "ItemSprite": "BaseballOutfit",
+      "Gold": 2750,
+      "StatOption": 0,
+      "ItemSprite": "Hermit",
       "PrevEvolutionId": 140013
     },
     {
       "Id": 140015,
       "Stats": [
-        0.5,
-        5.0,
-        0.15
+        0.4,
+        4.0,
+        0.12
       ],
-      "Gold": 3750,
-      "Item": 2,
+      "Gold": 3000,
+      "StatOption": 2,
       "ItemSprite": "ClothMask",
       "PrevEvolutionId": 140014
     },
     {
       "Id": 140016,
       "Stats": [
-        0.6,
-        5.0,
-        0.15
+        0.5,
+        4.0,
+        0.12
       ],
-      "Gold": 4000,
-      "Item": 0,
-      "ItemSprite": "BerserkArmor",
+      "Gold": 3250,
+      "StatOption": 1,
+      "ItemSprite": "BanditLightArmorBoots",
       "PrevEvolutionId": 140015
     },
     {
       "Id": 140017,
       "Stats": [
-        0.6,
-        6.0,
-        0.15
+        0.5,
+        5.0,
+        0.12
       ],
-      "Gold": 4250,
-      "Item": 1,
-      "ItemSprite": "BerserkArmor",
+      "Gold": 3500,
+      "StatOption": 0,
+      "ItemSprite": "BanditLightArmor",
       "PrevEvolutionId": 140016
     },
     {
       "Id": 140018,
       "Stats": [
-        0.6,
-        6.0,
-        0.18
+        0.5,
+        5.0,
+        0.15
       ],
-      "Gold": 4500,
-      "Item": 2,
+      "Gold": 3750,
+      "StatOption": 2,
       "ItemSprite": "BanditMask",
       "PrevEvolutionId": 140017
     },
     {
       "Id": 140019,
       "Stats": [
-        0.7,
-        6.0,
-        0.18
+        0.6,
+        5.0,
+        0.15
       ],
-      "Gold": 4750,
-      "Item": 0,
-      "ItemSprite": "BishopArmor",
+      "Gold": 4000,
+      "StatOption": 1,
+      "ItemSprite": "BanditArmorBoots",
       "PrevEvolutionId": 140018
     },
     {
       "Id": 140020,
       "Stats": [
-        0.7,
-        7.0,
-        0.18
+        0.6,
+        6.0,
+        0.15
       ],
-      "Gold": 5000,
-      "Item": 1,
-      "ItemSprite": "BishopArmor",
+      "Gold": 4250,
+      "StatOption": 0,
+      "ItemSprite": "BanditArmor",
       "PrevEvolutionId": 140019
     },
     {
       "Id": 140021,
       "Stats": [
-        0.7,
-        7.0,
-        0.21
+        0.6,
+        6.0,
+        0.18
       ],
-      "Gold": 5250,
-      "Item": 2,
+      "Gold": 4500,
+      "StatOption": 2,
       "ItemSprite": "BanditMask",
       "PrevEvolutionId": 140020
     },
     {
       "Id": 140022,
       "Stats": [
-        0.8,
-        7.0,
-        0.21
+        0.7,
+        6.0,
+        0.18
       ],
-      "Gold": 5500,
-      "Item": 0,
-      "ItemSprite": "BlacksmithCostume",
+      "Gold": 4750,
+      "StatOption": 1,
+      "ItemSprite": "DeserterBoots",
       "PrevEvolutionId": 140021
     },
     {
       "Id": 140023,
       "Stats": [
-        0.8,
-        8.0,
-        0.21
+        0.7,
+        7.0,
+        0.18
       ],
-      "Gold": 5750,
-      "Item": 1,
-      "ItemSprite": "BlacksmithCostume",
+      "Gold": 5000,
+      "StatOption": 0,
+      "ItemSprite": "Deserter",
       "PrevEvolutionId": 140022
     },
     {
       "Id": 140024,
       "Stats": [
-        0.8,
-        8.0,
-        0.24
+        0.7,
+        7.0,
+        0.21
       ],
-      "Gold": 6000,
-      "Item": 2,
+      "Gold": 5250,
+      "StatOption": 2,
       "ItemSprite": "BanditMask",
       "PrevEvolutionId": 140023
     },
     {
       "Id": 140025,
       "Stats": [
-        0.9,
-        8.0,
-        0.24
+        0.8,
+        7.0,
+        0.21
       ],
-      "Gold": 6250,
-      "Item": 0,
-      "ItemSprite": "CardinalArmor",
+      "Gold": 5500,
+      "StatOption": 1,
+      "ItemSprite": "HalberdierArmorBoots",
       "PrevEvolutionId": 140024
     },
     {
       "Id": 140026,
       "Stats": [
-        0.9,
-        9.0,
-        0.24
+        0.8,
+        8.0,
+        0.21
       ],
-      "Gold": 6500,
-      "Item": 1,
-      "ItemSprite": "CardinalArmor",
+      "Gold": 5750,
+      "StatOption": 0,
+      "ItemSprite": "HalberdierArmor",
       "PrevEvolutionId": 140025
     },
     {
       "Id": 140027,
       "Stats": [
-        0.9,
-        9.0,
-        0.27
+        0.8,
+        8.0,
+        0.24
       ],
-      "Gold": 6750,
-      "Item": 2,
+      "Gold": 6000,
+      "StatOption": 2,
       "ItemSprite": "BanditMask",
       "PrevEvolutionId": 140026
     },
     {
       "Id": 140028,
       "Stats": [
-        1.0,
-        9.0,
-        0.27
+        0.9,
+        8.0,
+        0.24
       ],
-      "Gold": 7000,
-      "Item": 0,
-      "ItemSprite": "CataphractArmor",
+      "Gold": 6250,
+      "StatOption": 1,
+      "ItemSprite": "ChainmailLightArmorBoots",
       "PrevEvolutionId": 140027
     },
     {
       "Id": 140029,
       "Stats": [
-        1.0,
-        10.0,
-        0.27
+        0.9,
+        9.0,
+        0.24
       ],
-      "Gold": 7250,
-      "Item": 1,
-      "ItemSprite": "CataphractArmor",
+      "Gold": 6500,
+      "StatOption": 0,
+      "ItemSprite": "ChainmailLightArmor",
       "PrevEvolutionId": 140028
     },
     {
       "Id": 140030,
       "Stats": [
-        1.0,
-        10.0,
-        0.3
+        0.9,
+        9.0,
+        0.27
       ],
-      "Gold": 7500,
-      "Item": 2,
+      "Gold": 6750,
+      "StatOption": 2,
       "ItemSprite": "BanditMask",
       "PrevEvolutionId": 140029
     },
     {
       "Id": 140031,
       "Stats": [
-        1.1,
-        10.0,
-        0.3
+        1.0,
+        9.0,
+        0.27
       ],
-      "Gold": 7750,
-      "Item": 0,
-      "ItemSprite": "ChainmailLightArmor",
+      "Gold": 7000,
+      "StatOption": 1,
+      "ItemSprite": "DwellerArmorBoots",
       "PrevEvolutionId": 140030
     },
     {
       "Id": 140032,
       "Stats": [
-        1.1,
-        11.0,
-        0.3
+        1.0,
+        10.0,
+        0.27
       ],
-      "Gold": 8000,
-      "Item": 1,
-      "ItemSprite": "ChainmailLightArmor",
+      "Gold": 7250,
+      "StatOption": 0,
+      "ItemSprite": "DwellerArmor",
       "PrevEvolutionId": 140031
     },
     {
       "Id": 140033,
       "Stats": [
-        1.1,
-        11.0,
-        0.33
+        1.0,
+        10.0,
+        0.3
       ],
-      "Gold": 8250,
-      "Item": 2,
+      "Gold": 7500,
+      "StatOption": 2,
       "ItemSprite": "Mask1",
       "PrevEvolutionId": 140032
     },
     {
       "Id": 140034,
       "Stats": [
-        1.2,
-        11.0,
-        0.33
+        1.1,
+        10.0,
+        0.3
       ],
-      "Gold": 8500,
-      "Item": 0,
-      "ItemSprite": "ChampionArmor",
+      "Gold": 7750,
+      "StatOption": 1,
+      "ItemSprite": "BerserkArmorBoots",
       "PrevEvolutionId": 140033
     },
     {
       "Id": 140035,
       "Stats": [
-        1.2,
-        12.0,
-        0.33
+        1.1,
+        11.0,
+        0.3
       ],
-      "Gold": 8750,
-      "Item": 1,
-      "ItemSprite": "ChampionArmor",
+      "Gold": 8000,
+      "StatOption": 0,
+      "ItemSprite": "BerserkArmor",
       "PrevEvolutionId": 140034
     },
     {
       "Id": 140036,
       "Stats": [
-        1.2,
-        12.0,
-        0.36
+        1.1,
+        11.0,
+        0.33
       ],
-      "Gold": 9000,
-      "Item": 2,
+      "Gold": 8250,
+      "StatOption": 2,
       "ItemSprite": "Mask1",
       "PrevEvolutionId": 140035
     },
     {
       "Id": 140037,
       "Stats": [
-        1.3,
-        12.0,
-        0.36
+        1.2,
+        11.0,
+        0.33
       ],
-      "Gold": 9250,
-      "Item": 0,
-      "ItemSprite": "Cleric",
+      "Gold": 8500,
+      "StatOption": 1,
+      "ItemSprite": "DruidArmorBoots",
       "PrevEvolutionId": 140036
     },
     {
       "Id": 140038,
       "Stats": [
-        1.3,
-        13.0,
-        0.36
+        1.2,
+        12.0,
+        0.33
       ],
-      "Gold": 9500,
-      "Item": 1,
-      "ItemSprite": "Cleric",
+      "Gold": 8750,
+      "StatOption": 0,
+      "ItemSprite": "DruidArmor",
       "PrevEvolutionId": 140037
     },
     {
       "Id": 140039,
       "Stats": [
-        1.3,
-        13.0,
-        0.39
+        1.2,
+        12.0,
+        0.36
       ],
-      "Gold": 9750,
-      "Item": 2,
+      "Gold": 9000,
+      "StatOption": 2,
       "ItemSprite": "Mask1",
       "PrevEvolutionId": 140038
     },
     {
       "Id": 140040,
       "Stats": [
-        1.4,
-        13.0,
-        0.39
+        1.3,
+        12.0,
+        0.36
       ],
-      "Gold": 10000,
-      "Item": 0,
-      "ItemSprite": "DarkKnight",
+      "Gold": 9250,
+      "StatOption": 1,
+      "ItemSprite": "HunterBoots",
       "PrevEvolutionId": 140039
     },
     {
       "Id": 140041,
       "Stats": [
-        1.4,
-        14.0,
-        0.39
+        1.3,
+        13.0,
+        0.36
       ],
-      "Gold": 10250,
-      "Item": 1,
-      "ItemSprite": "DarkKnight",
+      "Gold": 9500,
+      "StatOption": 0,
+      "ItemSprite": "Hunter",
       "PrevEvolutionId": 140040
     },
     {
       "Id": 140042,
       "Stats": [
-        1.4,
-        14.0,
-        0.42
+        1.3,
+        13.0,
+        0.39
       ],
-      "Gold": 10500,
-      "Item": 2,
+      "Gold": 9750,
+      "StatOption": 2,
       "ItemSprite": "Mask1",
       "PrevEvolutionId": 140041
     },
     {
       "Id": 140043,
       "Stats": [
-        1.5,
-        14.0,
-        0.42
+        1.4,
+        13.0,
+        0.39
       ],
-      "Gold": 10750,
-      "Item": 0,
-      "ItemSprite": "Deserter",
+      "Gold": 10000,
+      "StatOption": 1,
+      "ItemSprite": "GuardArmorBoots",
       "PrevEvolutionId": 140042
     },
     {
       "Id": 140044,
       "Stats": [
-        1.5,
-        15.0,
-        0.42
+        1.4,
+        14.0,
+        0.39
       ],
-      "Gold": 11000,
-      "Item": 1,
-      "ItemSprite": "Deserter",
+      "Gold": 10250,
+      "StatOption": 0,
+      "ItemSprite": "GuardArmor",
       "PrevEvolutionId": 140043
     },
     {
       "Id": 140045,
       "Stats": [
-        1.5,
-        15.0,
-        0.45
+        1.4,
+        14.0,
+        0.42
       ],
-      "Gold": 11250,
-      "Item": 2,
+      "Gold": 10500,
+      "StatOption": 2,
       "ItemSprite": "Mask1",
       "PrevEvolutionId": 140044
     },
     {
       "Id": 140046,
       "Stats": [
-        1.6,
-        15.0,
-        0.45
+        1.5,
+        14.0,
+        0.42
       ],
-      "Gold": 11500,
-      "Item": 0,
-      "ItemSprite": "DestroyerArmor",
+      "Gold": 10750,
+      "StatOption": 1,
+      "ItemSprite": "DestroyerArmorBoots",
       "PrevEvolutionId": 140045
     },
     {
       "Id": 140047,
       "Stats": [
-        1.6,
-        16.0,
-        0.45
+        1.5,
+        15.0,
+        0.42
       ],
-      "Gold": 11750,
-      "Item": 1,
+      "Gold": 11000,
+      "StatOption": 0,
       "ItemSprite": "DestroyerArmor",
       "PrevEvolutionId": 140046
     },
     {
       "Id": 140048,
       "Stats": [
-        1.6,
-        16.0,
-        0.48
+        1.5,
+        15.0,
+        0.45
       ],
-      "Gold": 12000,
-      "Item": 2,
+      "Gold": 11250,
+      "StatOption": 2,
       "ItemSprite": "Mask2",
       "PrevEvolutionId": 140047
     },
     {
       "Id": 140049,
       "Stats": [
-        1.7,
-        16.0,
-        0.48
+        1.6,
+        15.0,
+        0.45
       ],
-      "Gold": 12250,
-      "Item": 0,
-      "ItemSprite": "DruidArmor",
+      "Gold": 11500,
+      "StatOption": 1,
+      "ItemSprite": "ArielDressBoots",
       "PrevEvolutionId": 140048
     },
     {
       "Id": 140050,
       "Stats": [
-        1.7,
-        17.0,
-        0.48
+        1.6,
+        16.0,
+        0.45
       ],
-      "Gold": 12500,
-      "Item": 1,
-      "ItemSprite": "DruidArmor",
+      "Gold": 11750,
+      "StatOption": 0,
+      "ItemSprite": "ArielDress",
       "PrevEvolutionId": 140049
     },
     {
       "Id": 140051,
       "Stats": [
-        1.7,
-        17.0,
-        0.51
+        1.6,
+        16.0,
+        0.48
       ],
-      "Gold": 12750,
-      "Item": 2,
+      "Gold": 12000,
+      "StatOption": 2,
       "ItemSprite": "Mask2",
       "PrevEvolutionId": 140050
     },
     {
       "Id": 140052,
       "Stats": [
-        1.8,
-        17.0,
-        0.51
+        1.7,
+        16.0,
+        0.48
       ],
-      "Gold": 13000,
-      "Item": 0,
-      "ItemSprite": "DwellerArmor",
+      "Gold": 12250,
+      "StatOption": 1,
+      "ItemSprite": "BaseballOutfitBoots",
       "PrevEvolutionId": 140051
     },
     {
       "Id": 140053,
       "Stats": [
-        1.8,
-        18.0,
-        0.51
+        1.7,
+        17.0,
+        0.48
       ],
-      "Gold": 13250,
-      "Item": 1,
-      "ItemSprite": "DwellerArmor",
+      "Gold": 12500,
+      "StatOption": 0,
+      "ItemSprite": "BaseballOutfit",
       "PrevEvolutionId": 140052
     },
     {
       "Id": 140054,
       "Stats": [
-        1.8,
-        18.0,
-        0.54
+        1.7,
+        17.0,
+        0.51
       ],
-      "Gold": 13500,
-      "Item": 2,
+      "Gold": 12750,
+      "StatOption": 2,
       "ItemSprite": "Mask2",
       "PrevEvolutionId": 140053
     },
     {
       "Id": 140055,
       "Stats": [
-        1.9,
-        18.0,
-        0.54
+        1.8,
+        17.0,
+        0.51
       ],
-      "Gold": 13750,
-      "Item": 0,
-      "ItemSprite": "FarmerClothes",
+      "Gold": 13000,
+      "StatOption": 1,
+      "ItemSprite": "AssassinArmorBoots",
       "PrevEvolutionId": 140054
     },
     {
       "Id": 140056,
       "Stats": [
-        1.9,
-        19.0,
-        0.54
+        1.8,
+        18.0,
+        0.51
       ],
-      "Gold": 14000,
-      "Item": 1,
-      "ItemSprite": "FarmerClothes",
+      "Gold": 13250,
+      "StatOption": 0,
+      "ItemSprite": "AssassinArmor",
       "PrevEvolutionId": 140055
     },
     {
       "Id": 140057,
       "Stats": [
-        1.9,
-        19.0,
-        0.57
+        1.8,
+        18.0,
+        0.54
       ],
-      "Gold": 14250,
-      "Item": 2,
+      "Gold": 13500,
+      "StatOption": 2,
       "ItemSprite": "Mask2",
       "PrevEvolutionId": 140056
     },
     {
       "Id": 140058,
       "Stats": [
-        2.0,
-        19.0,
-        0.57
+        1.9,
+        18.0,
+        0.54
       ],
-      "Gold": 14500,
-      "Item": 0,
-      "ItemSprite": "FireAdept",
+      "Gold": 13750,
+      "StatOption": 1,
+      "ItemSprite": "CardinalArmorBoots",
       "PrevEvolutionId": 140057
     },
     {
       "Id": 140059,
       "Stats": [
-        2.0,
-        20.0,
-        0.57
+        1.9,
+        19.0,
+        0.54
       ],
-      "Gold": 14750,
-      "Item": 1,
-      "ItemSprite": "FireAdept",
+      "Gold": 14000,
+      "StatOption": 0,
+      "ItemSprite": "CardinalArmor",
       "PrevEvolutionId": 140058
     },
     {
       "Id": 140060,
       "Stats": [
-        2.0,
-        20.0,
-        0.6
+        1.9,
+        19.0,
+        0.57
       ],
-      "Gold": 15000,
-      "Item": 2,
+      "Gold": 14250,
+      "StatOption": 2,
       "ItemSprite": "Mask2",
       "PrevEvolutionId": 140059
     },
     {
       "Id": 140061,
       "Stats": [
-        2.1,
-        20.0,
-        0.6
+        2.0,
+        19.0,
+        0.57
       ],
-      "Gold": 15250,
-      "Item": 0,
-      "ItemSprite": "FireKnightArmor",
+      "Gold": 14500,
+      "StatOption": 1,
+      "ItemSprite": "BishopArmorBoots",
       "PrevEvolutionId": 140060
     },
     {
       "Id": 140062,
       "Stats": [
-        2.1,
-        21.0,
-        0.6
+        2.0,
+        20.0,
+        0.57
       ],
-      "Gold": 15500,
-      "Item": 1,
-      "ItemSprite": "FireKnightArmor",
+      "Gold": 14750,
+      "StatOption": 0,
+      "ItemSprite": "BishopArmor",
       "PrevEvolutionId": 140061
     },
     {
       "Id": 140063,
       "Stats": [
-        2.1,
-        21.0,
-        0.63
+        2.0,
+        20.0,
+        0.6
       ],
-      "Gold": 15750,
-      "Item": 2,
+      "Gold": 15000,
+      "StatOption": 2,
       "ItemSprite": "CarnivalMask",
       "PrevEvolutionId": 140062
     },
     {
       "Id": 140064,
       "Stats": [
-        2.2,
-        21.0,
-        0.63
+        2.1,
+        20.0,
+        0.6
       ],
-      "Gold": 16000,
-      "Item": 0,
-      "ItemSprite": "FireWarriorArmor",
+      "Gold": 15250,
+      "StatOption": 1,
+      "ItemSprite": "CataphractArmorBoots",
       "PrevEvolutionId": 140063
     },
     {
       "Id": 140065,
       "Stats": [
-        2.2,
-        22.0,
-        0.63
+        2.1,
+        21.0,
+        0.6
       ],
-      "Gold": 16250,
-      "Item": 1,
-      "ItemSprite": "FireWarriorArmor",
+      "Gold": 15500,
+      "StatOption": 0,
+      "ItemSprite": "CataphractArmor",
       "PrevEvolutionId": 140064
     },
     {
       "Id": 140066,
       "Stats": [
-        2.2,
-        22.0,
-        0.66
+        2.1,
+        21.0,
+        0.63
       ],
-      "Gold": 16500,
-      "Item": 2,
+      "Gold": 15750,
+      "StatOption": 2,
       "ItemSprite": "CarnivalMask",
       "PrevEvolutionId": 140065
     },
     {
       "Id": 140067,
       "Stats": [
-        2.3,
-        22.0,
-        0.66
+        2.2,
+        21.0,
+        0.63
       ],
-      "Gold": 16750,
-      "Item": 0,
-      "ItemSprite": "FireWizardArmor",
+      "Gold": 16000,
+      "StatOption": 1,
+      "ItemSprite": "DarkKnightBoots",
       "PrevEvolutionId": 140066
     },
     {
       "Id": 140068,
       "Stats": [
-        2.3,
-        23.0,
-        0.66
+        2.2,
+        22.0,
+        0.63
       ],
-      "Gold": 17000,
-      "Item": 1,
-      "ItemSprite": "FireWizardArmor",
+      "Gold": 16250,
+      "StatOption": 0,
+      "ItemSprite": "DarkKnight",
       "PrevEvolutionId": 140067
     },
     {
       "Id": 140069,
       "Stats": [
-        2.3,
-        23.0,
-        0.69
+        2.2,
+        22.0,
+        0.66
       ],
-      "Gold": 17250,
-      "Item": 2,
+      "Gold": 16500,
+      "StatOption": 2,
       "ItemSprite": "CarnivalMask",
       "PrevEvolutionId": 140068
     },
     {
       "Id": 140070,
       "Stats": [
-        2.4,
-        23.0,
-        0.69
+        2.3,
+        22.0,
+        0.66
       ],
-      "Gold": 17500,
-      "Item": 0,
-      "ItemSprite": "GladiatorArmor",
+      "Gold": 16750,
+      "StatOption": 1,
+      "ItemSprite": "FireAdeptBoots",
       "PrevEvolutionId": 140069
     },
     {
       "Id": 140071,
       "Stats": [
-        2.4,
-        24.0,
-        0.69
+        2.3,
+        23.0,
+        0.66
       ],
-      "Gold": 17750,
-      "Item": 1,
-      "ItemSprite": "GladiatorArmor",
+      "Gold": 17000,
+      "StatOption": 0,
+      "ItemSprite": "FireAdept",
       "PrevEvolutionId": 140070
     },
     {
       "Id": 140072,
       "Stats": [
-        2.4,
-        24.0,
-        0.72
+        2.3,
+        23.0,
+        0.69
       ],
-      "Gold": 18000,
-      "Item": 2,
+      "Gold": 17250,
+      "StatOption": 2,
       "ItemSprite": "CarnivalMask",
       "PrevEvolutionId": 140071
     },
     {
       "Id": 140073,
       "Stats": [
-        2.5,
-        24.0,
-        0.72
+        2.4,
+        23.0,
+        0.69
       ],
-      "Gold": 18250,
-      "Item": 0,
-      "ItemSprite": "GreyKnight",
+      "Gold": 17500,
+      "StatOption": 1,
+      "ItemSprite": "ClericBoots",
       "PrevEvolutionId": 140072
     },
     {
       "Id": 140074,
       "Stats": [
-        2.5,
-        25.0,
-        0.72
+        2.4,
+        24.0,
+        0.69
       ],
-      "Gold": 18500,
-      "Item": 1,
-      "ItemSprite": "GreyKnight",
+      "Gold": 17750,
+      "StatOption": 0,
+      "ItemSprite": "Cleric",
       "PrevEvolutionId": 140073
     },
     {
       "Id": 140075,
       "Stats": [
-        2.5,
-        25.0,
-        0.75
+        2.4,
+        24.0,
+        0.72
       ],
-      "Gold": 18750,
-      "Item": 2,
+      "Gold": 18000,
+      "StatOption": 2,
       "ItemSprite": "CarnivalMask",
       "PrevEvolutionId": 140074
     },
     {
       "Id": 140076,
       "Stats": [
+        2.5,
+        24.0,
+        0.72
+      ],
+      "Gold": 18250,
+      "StatOption": 1,
+      "ItemSprite": "HeavyArmorBoots",
+      "PrevEvolutionId": 140075
+    },
+    {
+      "Id": 140077,
+      "Stats": [
+        2.5,
+        25.0,
+        0.72
+      ],
+      "Gold": 18500,
+      "StatOption": 0,
+      "ItemSprite": "HeavyArmor",
+      "PrevEvolutionId": 140076
+    },
+    {
+      "Id": 140078,
+      "Stats": [
+        2.5,
+        25.0,
+        0.75
+      ],
+      "Gold": 18750,
+      "StatOption": 2,
+      "ItemSprite": "CarnivalMask",
+      "PrevEvolutionId": 140077
+    },
+    {
+      "Id": 140079,
+      "Stats": [
         2.6,
         25.0,
         0.75
       ],
       "Gold": 19000,
-      "Item": 0,
-      "ItemSprite": "GuardArmor",
-      "PrevEvolutionId": 140075
+      "StatOption": 1,
+      "ItemSprite": "SpikedArmorBoots",
+      "PrevEvolutionId": 140078
     },
     {
-      "Id": 140077,
+      "Id": 140080,
       "Stats": [
         2.6,
         26.0,
         0.75
       ],
       "Gold": 19250,
-      "Item": 1,
-      "ItemSprite": "GuardArmor",
-      "PrevEvolutionId": 140076
+      "StatOption": 0,
+      "ItemSprite": "SpikedArmor",
+      "PrevEvolutionId": 140079
     },
     {
-      "Id": 140078,
+      "Id": 140081,
       "Stats": [
         2.6,
         26.0,
         0.78
       ],
       "Gold": 19500,
-      "Item": 2,
-      "ItemSprite": "ShamanMask",
-      "PrevEvolutionId": 140077
-    },
-    {
-      "Id": 140079,
-      "Stats": [
-        2.7,
-        26.0,
-        0.78
-      ],
-      "Gold": 19750,
-      "Item": 0,
-      "ItemSprite": "HalberdierArmor",
-      "PrevEvolutionId": 140078
-    },
-    {
-      "Id": 140080,
-      "Stats": [
-        2.7,
-        27.0,
-        0.78
-      ],
-      "Gold": 20000,
-      "Item": 1,
-      "ItemSprite": "HalberdierArmor",
-      "PrevEvolutionId": 140079
-    },
-    {
-      "Id": 140081,
-      "Stats": [
-        2.7,
-        27.0,
-        0.81
-      ],
-      "Gold": 20250,
-      "Item": 2,
+      "StatOption": 2,
       "ItemSprite": "ShamanMask",
       "PrevEvolutionId": 140080
     },
     {
       "Id": 140082,
       "Stats": [
-        2.8,
-        27.0,
-        0.81
+        2.7,
+        26.0,
+        0.78
       ],
-      "Gold": 20500,
-      "Item": 0,
-      "ItemSprite": "HeavyArmor",
+      "Gold": 19750,
+      "StatOption": 1,
+      "ItemSprite": "FireKnightArmorBoots",
       "PrevEvolutionId": 140081
     },
     {
       "Id": 140083,
       "Stats": [
-        2.8,
-        28.0,
-        0.81
+        2.7,
+        27.0,
+        0.78
       ],
-      "Gold": 20750,
-      "Item": 1,
-      "ItemSprite": "HeavyArmor",
+      "Gold": 20000,
+      "StatOption": 0,
+      "ItemSprite": "FireKnightArmor",
       "PrevEvolutionId": 140082
     },
     {
       "Id": 140084,
       "Stats": [
-        2.8,
-        28.0,
-        0.84
+        2.7,
+        27.0,
+        0.81
       ],
-      "Gold": 21000,
-      "Item": 2,
+      "Gold": 20250,
+      "StatOption": 2,
       "ItemSprite": "ShamanMask",
       "PrevEvolutionId": 140083
     },
     {
       "Id": 140085,
       "Stats": [
-        2.9,
-        28.0,
-        0.84
+        2.8,
+        27.0,
+        0.81
       ],
-      "Gold": 21250,
-      "Item": 0,
-      "ItemSprite": "Hermit",
+      "Gold": 20500,
+      "StatOption": 1,
+      "ItemSprite": "FireWarriorArmorBoots",
       "PrevEvolutionId": 140084
     },
     {
       "Id": 140086,
       "Stats": [
-        2.9,
-        29.0,
-        0.84
+        2.8,
+        28.0,
+        0.81
       ],
-      "Gold": 21500,
-      "Item": 1,
-      "ItemSprite": "Hermit",
+      "Gold": 20750,
+      "StatOption": 0,
+      "ItemSprite": "FireWarriorArmor",
       "PrevEvolutionId": 140085
     },
     {
       "Id": 140087,
       "Stats": [
-        2.9,
-        29.0,
-        0.87
+        2.8,
+        28.0,
+        0.84
       ],
-      "Gold": 21750,
-      "Item": 2,
+      "Gold": 21000,
+      "StatOption": 2,
       "ItemSprite": "ShamanMask",
       "PrevEvolutionId": 140086
     },
     {
       "Id": 140088,
       "Stats": [
+        2.9,
+        28.0,
+        0.84
+      ],
+      "Gold": 21250,
+      "StatOption": 1,
+      "ItemSprite": "FireWizardArmorBoots",
+      "PrevEvolutionId": 140087
+    },
+    {
+      "Id": 140089,
+      "Stats": [
+        2.9,
+        29.0,
+        0.84
+      ],
+      "Gold": 21500,
+      "StatOption": 0,
+      "ItemSprite": "FireWizardArmor",
+      "PrevEvolutionId": 140088
+    },
+    {
+      "Id": 140090,
+      "Stats": [
+        2.9,
+        29.0,
+        0.87
+      ],
+      "Gold": 21750,
+      "StatOption": 2,
+      "ItemSprite": "ShamanMask",
+      "PrevEvolutionId": 140089
+    },
+    {
+      "Id": 140091,
+      "Stats": [
         3.0,
         29.0,
         0.87
       ],
       "Gold": 22000,
-      "Item": 0,
-      "ItemSprite": "Hunter",
-      "PrevEvolutionId": 140087
+      "StatOption": 1,
+      "ItemSprite": "GreyKnightBoots",
+      "PrevEvolutionId": 140090
     },
     {
-      "Id": 140089,
+      "Id": 140092,
       "Stats": [
         3.0,
         30.0,
         0.87
       ],
       "Gold": 22250,
-      "Item": 1,
-      "ItemSprite": "Hunter",
-      "PrevEvolutionId": 140088
+      "StatOption": 0,
+      "ItemSprite": "GreyKnight",
+      "PrevEvolutionId": 140091
     },
     {
-      "Id": 140090,
+      "Id": 140093,
       "Stats": [
         3.0,
         30.0,
         0.9
       ],
       "Gold": 22500,
-      "Item": 2,
+      "StatOption": 2,
       "ItemSprite": "ShamanMask",
-      "PrevEvolutionId": 140089
+      "PrevEvolutionId": 140092
     }
   ]
 }

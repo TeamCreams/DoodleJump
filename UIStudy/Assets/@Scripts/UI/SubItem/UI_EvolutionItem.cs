@@ -54,17 +54,16 @@ public class UI_EvolutionItem : UI_Base
     {
         _itemId = id;
         EvolutionData evolutionData = Managers.Data.EvolutionDataDic[_itemId];
-        //_itemId = Managers.Game.UserInfo.EvolutionId;
         string str = "";
-        switch(evolutionData.Item)
+        switch(evolutionData.StatOption)
         {
-            case EItemType.Boots:
-                str = $"{evolutionData.ItemSprite}BootsIcon.sprite";
-            break;
-            case EItemType.Armor:
+            case EStat.MoveSpeed:
                 str = $"{evolutionData.ItemSprite}Icon.sprite";
             break;
-            case EItemType.Mask:
+            case EStat.MaxHp:
+                str = $"{evolutionData.ItemSprite}Icon.sprite";
+            break;
+            case EStat.Luck:
                 str = $"{evolutionData.ItemSprite}Icon.sprite";
             break;
         }

@@ -44,20 +44,18 @@ public class UI_MissionPanel : UI_Base
             Managers.Resource.Destroy(item.gameObject);
         }
         _itemList.Clear();
-        //_missionDic.Clear();
     }
     private void SetMissionList(Component sender = null, object param = null)
     {
+        Debug.Log("SetMissionList");
         AllPush();
 
         foreach (var missionKeyValue in Managers.Mission.Dicts)
         {
-            int missionId = missionKeyValue.Key;
             ResDtoGetUserMissionListElement mission = missionKeyValue.Value;
 
             //TODO : 이부분 수정필요
-            // 퀘스트 완료와 동시에 신규퀘스트를 수락하도록.
-            // prevId가 업데이트가 안 되어있음.
+            // 퀘스트 완료와 동시에  신규퀘스트를 수락하도록.
             if (_missionDic.ContainsKey(mission.MissionId))
             {
                 _missionDic[mission.MissionId] = mission.MissionStatus; // 상태 업데이트
@@ -77,9 +75,9 @@ public class UI_MissionPanel : UI_Base
         // 스폰 조건이 안되면 스폰안되도록 세팅
         MissionData missionData = Managers.Data.MissionDataDic[missionId];
 
-        if(missionStatus == (int)EMissionStatus.Complete) // 2 == MissionComplete
+        if(missionStatus == (int)EMissionStatus.Rewarded)
         {
-            // 미션이 이미 완료 상태라면
+            // 미션 보상까지 이미 수령한 상태라면
             return;
         }
         foreach(var prevId in missionData.PrevMissionId)
@@ -89,14 +87,14 @@ public class UI_MissionPanel : UI_Base
                 // 이전 미션 ID가 Dictionary에 없으면 처리
                 return;
             }
-            if (prevId != 0 && _missionDic[prevId] != (int)EMissionStatus.Complete)
+            if (prevId != 0 && _missionDic[prevId] != (int)EMissionStatus.Rewarded)
             {
                 // 이전 미션이 완료되지 않았다면 처리
                 return;
             }
         }
         var item = Managers.UI.MakeSubItem<UI_MissionItem>(parent: _missionRoot, pooling: true);
-        item.SetInfo(missionId, missionStatus);
+        item.SetInfo(missionId);
         _itemList.Add(item.gameObject);
     }
 }

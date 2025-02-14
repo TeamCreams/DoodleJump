@@ -22,7 +22,7 @@ public class UI_PurchasePopup : UI_Popup
         Notice_Text,
         Gold_Text
     }
-    private EvolutionData item;
+    private EvolutionData _item;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -37,10 +37,19 @@ public class UI_PurchasePopup : UI_Popup
         
         return true;
     }
-    public void SetInfo(int id)
+    public void SetInfo(int id, EProductType productType)
     {
-        item = Managers.Data.EvolutionDataDic[id];
-        GetText((int)Texts.Gold_Text).text = item.Gold.ToString();
+        switch(productType)
+        {
+            case EProductType.Custom:
+            break;
+            case EProductType.Evolution:
+                _item = Managers.Data.EvolutionDataDic[id];
+            break;
+            default:
+            break;
+        }
+        GetText((int)Texts.Gold_Text).text = _item.Gold.ToString();
     }
 
     private void OnEvent_ClickClose(PointerEventData eventData)
@@ -50,13 +59,13 @@ public class UI_PurchasePopup : UI_Popup
 
     private void OnEvent_ClickOk(PointerEventData eventData)
     {
-        // 서버랑 연결해서 돈 빼기 ->   UI_EvolutionItemd에서 한 번에
-        int afterGold = Managers.Game.UserInfo.Gold - item.Gold;
-        if(0 <= afterGold)
+        // 서버랑 연결해서 돈 빼기 ->   UI_EvolutionItem에서 한 번에
+        int remainingChange = Managers.Game.UserInfo.Gold - _item.Gold;
+        if(0 <= remainingChange)
         {
-            Managers.Game.UserInfo.Gold -= item.Gold;
-            Managers.Game.UserInfo.EvolutionId = item.Id;    
-            UpdateUserGold();
+            Managers.Game.UserInfo.Gold -= _item.Gold;
+            Managers.Game.UserInfo.EvolutionId = _item.Id;    
+            UpdateUserGold(remainingChange);
         }
         else
         {
@@ -66,12 +75,12 @@ public class UI_PurchasePopup : UI_Popup
         }
     }
 
-    private void UpdateUserGold(Action onSuccess = null, Action onFailed = null)
+    private void UpdateUserGold(int remainingChange, Action onSuccess = null, Action onFailed = null)
     {
         Managers.WebContents.ReqDtoUpdateUserGold(new ReqDtoUpdateUserGold()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
-            Gold = Managers.Game.UserInfo.Gold
+            Gold = remainingChange
         },
        (response) =>
        {

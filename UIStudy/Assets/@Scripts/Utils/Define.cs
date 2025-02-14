@@ -102,6 +102,7 @@ public static class Define
         None,
         Progress,
         Complete,
+        Rewarded
     }
 
     public enum EEquipType
@@ -172,7 +173,12 @@ public static class Define
         ERR_Nothing
     }
 
-
+    public enum EProductType
+    {
+        Evolution,
+        Custom,
+        None,
+    }
     public enum EErrorCode2
     {
         ERR_OK,

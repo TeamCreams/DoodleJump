@@ -13,48 +13,16 @@ MonoBehaviour:
   m_Name: Sprites
   m_EditorClassIdentifier: 
   m_GroupName: Sprites
-  m_Data:
-    m_SerializedData: []
   m_GUID: 17ac5b666a9ca2b4985a852d0d3704e9
   m_SerializeEntries:
-  - m_GUID: 4b40b7e9b987d764fb6c2cf114a2edc9
-    m_Address: Sprite_Loading.sprite
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1e37ba6f0ebe9a549b2fdaed9f0fc6de
     m_Address: Sprite_Icon_Weapon_Stone_02.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d9b977d5878e8b84391726c635db83c0
-    m_Address: Sprite_Summon_Pet_On.sprite
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 684028ca576f24347b397a56913f6072
-    m_Address: Shin.sprite
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0b5056e8de494ce88f303a8c40f6dfa1
-    m_Address: CarnivalMask.sprite
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d5971442bf1444947a3a32613df37d9a
-    m_Address: stone_long rock.sprite
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f9a677256becfbc45ae51b8fa3c8108e
-    m_Address: stone_round boulder.sprite
+  - m_GUID: 4b40b7e9b987d764fb6c2cf114a2edc9
+    m_Address: Sprite_Loading.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
@@ -65,14 +33,32 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9efe1370d12a9c24daeda07f9ded90ac
+    m_Address: stone_tall decorative lantern.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cf445805659491e408f4095fe10ef49c
     m_Address: stone_stout decorative lantern.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9efe1370d12a9c24daeda07f9ded90ac
-    m_Address: stone_tall decorative lantern.sprite
+  - m_GUID: d5971442bf1444947a3a32613df37d9a
+    m_Address: stone_long rock.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d9b977d5878e8b84391726c635db83c0
+    m_Address: Sprite_Summon_Pet_On.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f9a677256becfbc45ae51b8fa3c8108e
+    m_Address: stone_round boulder.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

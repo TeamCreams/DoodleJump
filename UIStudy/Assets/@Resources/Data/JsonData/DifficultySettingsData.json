@@ -3,252 +3,252 @@
     {
       "Id": 70001,
       "Level": 1,
-      "ChallengeScale": 20,
-      "StoneGenerateStartTime": 0.65,
-      "StoneGenerateFinishTime": 1.1,
+      "ChallengeScale": 30,
+      "StoneGenerateStartTime": 0.45,
+      "StoneGenerateFinishTime": 0.9,
       "StoneShowerPeriodStartTime": 1000.0,
       "StoneShowerPeriodFinishTime": 1001.0,
-      "Benefit": 20
+      "Benefit": 30
     },
     {
       "Id": 70002,
       "Level": 2,
-      "ChallengeScale": 25,
-      "StoneGenerateStartTime": 0.65,
-      "StoneGenerateFinishTime": 1.1,
+      "ChallengeScale": 35,
+      "StoneGenerateStartTime": 0.45,
+      "StoneGenerateFinishTime": 0.9,
       "StoneShowerPeriodStartTime": 1000.0,
       "StoneShowerPeriodFinishTime": 1001.0,
-      "Benefit": 25
+      "Benefit": 35
     },
     {
       "Id": 70003,
       "Level": 3,
-      "ChallengeScale": 30,
-      "StoneGenerateStartTime": 0.65,
-      "StoneGenerateFinishTime": 1.1,
+      "ChallengeScale": 40,
+      "StoneGenerateStartTime": 0.45,
+      "StoneGenerateFinishTime": 0.9,
       "StoneShowerPeriodStartTime": 17.0,
       "StoneShowerPeriodFinishTime": 30.0,
-      "Benefit": 30
+      "Benefit": 40
     },
     {
       "Id": 70004,
       "Level": 4,
-      "ChallengeScale": 30,
-      "StoneGenerateStartTime": 0.6,
-      "StoneGenerateFinishTime": 1.1,
+      "ChallengeScale": 40,
+      "StoneGenerateStartTime": 0.4,
+      "StoneGenerateFinishTime": 0.9,
       "StoneShowerPeriodStartTime": 16.6,
       "StoneShowerPeriodFinishTime": 29.1,
-      "Benefit": 35
+      "Benefit": 45
     },
     {
       "Id": 70005,
       "Level": 5,
-      "ChallengeScale": 40,
-      "StoneGenerateStartTime": 0.6,
-      "StoneGenerateFinishTime": 1.1,
+      "ChallengeScale": 50,
+      "StoneGenerateStartTime": 0.4,
+      "StoneGenerateFinishTime": 0.9,
       "StoneShowerPeriodStartTime": 16.2,
       "StoneShowerPeriodFinishTime": 28.3,
-      "Benefit": 40
+      "Benefit": 50
     },
     {
       "Id": 70006,
       "Level": 6,
-      "ChallengeScale": 50,
-      "StoneGenerateStartTime": 0.6,
-      "StoneGenerateFinishTime": 1.0,
+      "ChallengeScale": 60,
+      "StoneGenerateStartTime": 0.4,
+      "StoneGenerateFinishTime": 0.8,
       "StoneShowerPeriodStartTime": 15.8,
       "StoneShowerPeriodFinishTime": 27.4,
-      "Benefit": 45
+      "Benefit": 55
     },
     {
       "Id": 70007,
       "Level": 7,
-      "ChallengeScale": 55,
-      "StoneGenerateStartTime": 0.6,
-      "StoneGenerateFinishTime": 1.0,
+      "ChallengeScale": 65,
+      "StoneGenerateStartTime": 0.4,
+      "StoneGenerateFinishTime": 0.8,
       "StoneShowerPeriodStartTime": 15.4,
       "StoneShowerPeriodFinishTime": 26.5,
-      "Benefit": 50
+      "Benefit": 60
     },
     {
       "Id": 70008,
       "Level": 8,
-      "ChallengeScale": 60,
-      "StoneGenerateStartTime": 0.6,
-      "StoneGenerateFinishTime": 1.0,
+      "ChallengeScale": 70,
+      "StoneGenerateStartTime": 0.4,
+      "StoneGenerateFinishTime": 0.8,
       "StoneShowerPeriodStartTime": 15.0,
       "StoneShowerPeriodFinishTime": 25.7,
-      "Benefit": 55
+      "Benefit": 65
     },
     {
       "Id": 70009,
       "Level": 9,
-      "ChallengeScale": 60,
-      "StoneGenerateStartTime": 0.55,
-      "StoneGenerateFinishTime": 1.0,
+      "ChallengeScale": 70,
+      "StoneGenerateStartTime": 0.35,
+      "StoneGenerateFinishTime": 0.8,
       "StoneShowerPeriodStartTime": 14.5,
       "StoneShowerPeriodFinishTime": 24.8,
-      "Benefit": 60
+      "Benefit": 70
     },
     {
       "Id": 70010,
       "Level": 10,
-      "ChallengeScale": 65,
-      "StoneGenerateStartTime": 0.55,
-      "StoneGenerateFinishTime": 1.0,
+      "ChallengeScale": 75,
+      "StoneGenerateStartTime": 0.35,
+      "StoneGenerateFinishTime": 0.8,
       "StoneShowerPeriodStartTime": 14.1,
       "StoneShowerPeriodFinishTime": 24.0,
-      "Benefit": 65
+      "Benefit": 75
     },
     {
       "Id": 70011,
       "Level": 11,
-      "ChallengeScale": 70,
-      "StoneGenerateStartTime": 0.55,
-      "StoneGenerateFinishTime": 0.9,
+      "ChallengeScale": 80,
+      "StoneGenerateStartTime": 0.35,
+      "StoneGenerateFinishTime": 0.7,
       "StoneShowerPeriodStartTime": 13.7,
       "StoneShowerPeriodFinishTime": 23.1,
-      "Benefit": 70
+      "Benefit": 80
     },
     {
       "Id": 70012,
       "Level": 12,
-      "ChallengeScale": 70,
-      "StoneGenerateStartTime": 0.55,
-      "StoneGenerateFinishTime": 0.9,
+      "ChallengeScale": 80,
+      "StoneGenerateStartTime": 0.35,
+      "StoneGenerateFinishTime": 0.7,
       "StoneShowerPeriodStartTime": 13.4,
       "StoneShowerPeriodFinishTime": 22.2,
-      "Benefit": 75
+      "Benefit": 85
     },
     {
       "Id": 70013,
       "Level": 13,
-      "ChallengeScale": 80,
-      "StoneGenerateStartTime": 0.55,
-      "StoneGenerateFinishTime": 0.9,
+      "ChallengeScale": 90,
+      "StoneGenerateStartTime": 0.35,
+      "StoneGenerateFinishTime": 0.7,
       "StoneShowerPeriodStartTime": 12.9,
       "StoneShowerPeriodFinishTime": 21.4,
-      "Benefit": 80
+      "Benefit": 90
     },
     {
       "Id": 70014,
       "Level": 14,
-      "ChallengeScale": 90,
-      "StoneGenerateStartTime": 0.5,
-      "StoneGenerateFinishTime": 0.9,
+      "ChallengeScale": 100,
+      "StoneGenerateStartTime": 0.3,
+      "StoneGenerateFinishTime": 0.7,
       "StoneShowerPeriodStartTime": 12.5,
       "StoneShowerPeriodFinishTime": 20.5,
-      "Benefit": 85
+      "Benefit": 95
     },
     {
       "Id": 70015,
       "Level": 15,
-      "ChallengeScale": 90,
-      "StoneGenerateStartTime": 0.5,
-      "StoneGenerateFinishTime": 0.9,
+      "ChallengeScale": 100,
+      "StoneGenerateStartTime": 0.3,
+      "StoneGenerateFinishTime": 0.7,
       "StoneShowerPeriodStartTime": 12.1,
       "StoneShowerPeriodFinishTime": 19.6,
-      "Benefit": 90
+      "Benefit": 100
     },
     {
       "Id": 70016,
       "Level": 16,
-      "ChallengeScale": 90,
-      "StoneGenerateStartTime": 0.5,
-      "StoneGenerateFinishTime": 0.8,
+      "ChallengeScale": 100,
+      "StoneGenerateStartTime": 0.3,
+      "StoneGenerateFinishTime": 0.6,
       "StoneShowerPeriodStartTime": 11.7,
       "StoneShowerPeriodFinishTime": 18.8,
-      "Benefit": 95
+      "Benefit": 105
     },
     {
       "Id": 70017,
       "Level": 17,
-      "ChallengeScale": 100,
-      "StoneGenerateStartTime": 0.5,
-      "StoneGenerateFinishTime": 0.8,
+      "ChallengeScale": 110,
+      "StoneGenerateStartTime": 0.3,
+      "StoneGenerateFinishTime": 0.6,
       "StoneShowerPeriodStartTime": 11.3,
       "StoneShowerPeriodFinishTime": 17.9,
-      "Benefit": 100
+      "Benefit": 110
     },
     {
       "Id": 70018,
       "Level": 18,
-      "ChallengeScale": 100,
-      "StoneGenerateStartTime": 0.5,
-      "StoneGenerateFinishTime": 0.8,
+      "ChallengeScale": 110,
+      "StoneGenerateStartTime": 0.3,
+      "StoneGenerateFinishTime": 0.6,
       "StoneShowerPeriodStartTime": 10.9,
       "StoneShowerPeriodFinishTime": 17.0,
-      "Benefit": 105
+      "Benefit": 115
     },
     {
       "Id": 70019,
       "Level": 19,
-      "ChallengeScale": 110,
-      "StoneGenerateStartTime": 0.45,
-      "StoneGenerateFinishTime": 0.8,
+      "ChallengeScale": 120,
+      "StoneGenerateStartTime": 0.25,
+      "StoneGenerateFinishTime": 0.6,
       "StoneShowerPeriodStartTime": 10.5,
       "StoneShowerPeriodFinishTime": 16.2,
-      "Benefit": 110
+      "Benefit": 120
     },
     {
       "Id": 70020,
       "Level": 20,
-      "ChallengeScale": 110,
-      "StoneGenerateStartTime": 0.45,
-      "StoneGenerateFinishTime": 0.8,
+      "ChallengeScale": 120,
+      "StoneGenerateStartTime": 0.25,
+      "StoneGenerateFinishTime": 0.6,
       "StoneShowerPeriodStartTime": 10.0,
       "StoneShowerPeriodFinishTime": 15.2,
-      "Benefit": 115
+      "Benefit": 125
     },
     {
       "Id": 70021,
       "Level": 21,
-      "ChallengeScale": 120,
-      "StoneGenerateStartTime": 0.45,
-      "StoneGenerateFinishTime": 0.7,
+      "ChallengeScale": 130,
+      "StoneGenerateStartTime": 0.25,
+      "StoneGenerateFinishTime": 0.5,
       "StoneShowerPeriodStartTime": 9.6,
       "StoneShowerPeriodFinishTime": 14.4,
-      "Benefit": 120
+      "Benefit": 130
     },
     {
       "Id": 70022,
       "Level": 22,
-      "ChallengeScale": 120,
-      "StoneGenerateStartTime": 0.45,
-      "StoneGenerateFinishTime": 0.7,
+      "ChallengeScale": 130,
+      "StoneGenerateStartTime": 0.25,
+      "StoneGenerateFinishTime": 0.5,
       "StoneShowerPeriodStartTime": 9.2,
       "StoneShowerPeriodFinishTime": 13.5,
-      "Benefit": 125
+      "Benefit": 135
     },
     {
       "Id": 70023,
       "Level": 23,
-      "ChallengeScale": 130,
-      "StoneGenerateStartTime": 0.45,
-      "StoneGenerateFinishTime": 0.7,
+      "ChallengeScale": 140,
+      "StoneGenerateStartTime": 0.25,
+      "StoneGenerateFinishTime": 0.5,
       "StoneShowerPeriodStartTime": 8.8,
       "StoneShowerPeriodFinishTime": 12.6,
-      "Benefit": 130
+      "Benefit": 140
     },
     {
       "Id": 70024,
       "Level": 24,
-      "ChallengeScale": 130,
-      "StoneGenerateStartTime": 0.44,
-      "StoneGenerateFinishTime": 0.7,
+      "ChallengeScale": 140,
+      "StoneGenerateStartTime": 0.24,
+      "StoneGenerateFinishTime": 0.5,
       "StoneShowerPeriodStartTime": 8.4,
       "StoneShowerPeriodFinishTime": 11.8,
-      "Benefit": 140
+      "Benefit": 145
     },
     {
       "Id": 70025,
       "Level": 25,
       "ChallengeScale": 100000,
-      "StoneGenerateStartTime": 0.44,
-      "StoneGenerateFinishTime": 0.7,
+      "StoneGenerateStartTime": 0.24,
+      "StoneGenerateFinishTime": 0.5,
       "StoneShowerPeriodStartTime": 8.0,
       "StoneShowerPeriodFinishTime": 11.0,
-      "Benefit": 145
+      "Benefit": 150
     }
   ]
 }

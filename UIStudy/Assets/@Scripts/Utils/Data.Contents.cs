@@ -411,7 +411,7 @@ namespace Data
         public int Id;
         public List<float >Stats = new();
         public int Gold;
-        public EItemType Item;
+        public EStat StatOption;
         public string ItemSprite;
         public int PrevEvolutionId;
     }
@@ -435,9 +435,6 @@ namespace Data
     {
         public int Id;
         public int	Level;
-        public string Boots;
-        public string Armor;
-        public string Mask;
         public List<int> EvolutionDataId;
     }
 

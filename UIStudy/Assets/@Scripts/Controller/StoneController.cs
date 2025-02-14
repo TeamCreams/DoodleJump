@@ -72,6 +72,7 @@ public class StoneController : ObjectBase
             // 스톤샤워가 아닐 경우에만 돌 개수 체크
             if (_isNotStoneShower == true)
             {
+                Managers.Game.DifficultySettingsInfo.StoneCount++;
                 Managers.Game.DifficultySettingsInfo.ChallengeScale++;
                 Managers.Game.GetScore.Total += 5;
             }

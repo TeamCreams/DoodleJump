@@ -193,7 +193,7 @@ public class ChracterStyleInfo
     public string Eyebrows { get; set; } = "DizzyEyebrows";
     public string Hair { get; set; } = "ZombieShabby";
 }
-public class UserInfo
+public class UserInfo // 서버로 전달될 데이터
 {
     public string UserId { get; set; } = "Orange";
     public string UserNickname {get; set;}
@@ -205,7 +205,7 @@ public class UserInfo
     public int ScoreBoard {get; set;} = 0;
     public int AccumulatedStone {get; set;} = 0;
     public int UserAccountId { get; set; } = 0;
-    public int EvolutionId {get; set;} = 0;
+    public int EvolutionId {get; set;} = 140003;
 }
 public class SettingInfo
 {
@@ -215,9 +215,9 @@ public class DifficultySettingsInfo // 다시시작할 때마다 초기화 필�
 {
     public int StageId { get; set; } = 70001;
     public int ChallengeScale { get; set; } = 0;
-    public int StoneShower { get; set; } = 0;
     public int StageLevel { get; set; } = 1;
     public float AddSpeed { get; set; } = 0;
+    public int StoneCount {get; set;} = 0;
 }
 public class GetScore
 {

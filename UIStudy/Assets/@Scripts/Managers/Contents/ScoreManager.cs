@@ -20,6 +20,8 @@ public class ScoreManager
                 Managers.Game.UserInfo.RecordScore = response.HighScore;
                 Managers.Game.UserInfo.LatelyScore = response.LatelyScore;
                 Managers.Game.UserInfo.Gold = response.Gold;
+                Managers.Game.UserInfo.PlayTime = response.PlayTime;
+                Managers.Game.UserInfo.AccumulatedStone = response.AccumulatedStone;
                 Debug.Log("is success");
                 onSuccess?.Invoke();
             }
@@ -48,7 +50,7 @@ public class ScoreManager
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
             Score = Managers.Game.UserInfo.LatelyScore,
             Time = Managers.Game.UserInfo.PlayTime,
-            AccumulatedStone = Managers.Game.UserInfo.AccumulatedStone,
+            AccumulatedStone = Managers.Game.DifficultySettingsInfo.StoneCount,
             Gold = Managers.Game.UserInfo.Gold,
         },
        (response) =>
