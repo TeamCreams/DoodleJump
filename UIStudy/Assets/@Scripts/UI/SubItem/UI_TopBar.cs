@@ -17,7 +17,8 @@ public class UI_TopBar : UI_Base
     {
         Time_Text,
         Level_Text,
-        Gold_Text
+        Gold_Text,
+        Stone_Text
     }
     private enum Sliders
     {
@@ -64,8 +65,9 @@ public class UI_TopBar : UI_Base
         Managers.Event.AddEvent(EEventType.LevelStageUp, OnEvent_LevelUpTextChange);
         Managers.Event.AddEvent(EEventType.GetGold, OnEvent_GetGold);
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+        Managers.Event.AddEvent(EEventType.UIStoneCountRefresh, OnEvent_ChallengeScaleCount);
         OnEvent_SetLanguage(null, null);
-
+        
         string str = Managers.Game.DifficultySettingsInfo.StageLevel.ToString();
         GetText((int)Texts.Level_Text).text = str;
 
@@ -89,6 +91,7 @@ public class UI_TopBar : UI_Base
         Managers.Event.RemoveEvent(EEventType.LevelStageUp, OnEvent_LevelUpTextChange);
         Managers.Event.RemoveEvent(EEventType.GetGold, OnEvent_GetGold);
         Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+        Managers.Event.RemoveEvent(EEventType.UIStoneCountRefresh, OnEvent_ChallengeScaleCount);
     }
    
     void OnEvent_LevelUpTextChange(Component sender, object param)
@@ -110,7 +113,10 @@ public class UI_TopBar : UI_Base
     {
         GetText((int)Texts.Gold_Text).text = Managers.Game.Gold.ToString();
     }
-
+    void OnEvent_ChallengeScaleCount(Component sender, object param)
+    {
+        GetText((int)Texts.Stone_Text).text = Managers.Game.DifficultySettingsInfo.ChallengeScaleCount.ToString();
+    }
     private void OnClick_ShowPausePopup(PointerEventData eventData)
     {
         Managers.UI.ShowPopupUI<UI_PausePopup>();

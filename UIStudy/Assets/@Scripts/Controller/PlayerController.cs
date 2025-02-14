@@ -243,7 +243,8 @@ public class PlayerController : CreatureBase
         Managers.Sound.Play(ESound.Effect, "AttackedSound", 0.7f);
 
         Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
-
+        Managers.Game.DifficultySettingsInfo.ChallengeScaleCount = Managers.Data.DifficultySettingsDic[Managers.Game.DifficultySettingsInfo.StageId].ChallengeScale;
+        Managers.Event.TriggerEvent(EEventType.UIStoneCountRefresh);
         StartCoroutine(Update_CryingFace());
     }
 

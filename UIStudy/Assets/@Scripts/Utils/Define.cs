@@ -90,10 +90,10 @@ public static class Define
         OnFirstAccept,          // 로그인할떄 미션 리스트 체크
         OnMissionComplete,      // 미션 완료 체크
         OnUpdateMission,        // 진행중 업데이트
-        UIRefresh,
+        UIGoldRefresh,
         Evolution,
         Purchase,
-        SoundAdjust
+        UIStoneCountRefresh,
     }
 
     // 서버와 값 공유중, 함부로 수정 금지.

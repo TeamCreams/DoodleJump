@@ -75,6 +75,8 @@ public class StoneController : ObjectBase
                 Managers.Game.DifficultySettingsInfo.StoneCount++;
                 Managers.Game.DifficultySettingsInfo.ChallengeScale++;
                 Managers.Game.GetScore.Total += 5;
+                Managers.Game.DifficultySettingsInfo.ChallengeScaleCount--;
+                Managers.Event.TriggerEvent(EEventType.UIStoneCountRefresh);
             }
             Managers.Pool.Push(this.gameObject);
         }

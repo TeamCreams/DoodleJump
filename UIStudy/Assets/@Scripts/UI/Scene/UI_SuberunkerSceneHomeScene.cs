@@ -80,7 +80,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         OnEvent_SetLanguage(null, null);
-        Managers.Event.AddEvent(EEventType.UIRefresh, OnEvent_RefreshGold);
+        Managers.Event.AddEvent(EEventType.UIGoldRefresh, OnEvent_RefreshGold);
 
         ShowRanking();
 
@@ -89,7 +89,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     private void OnDestroy()
     {
         Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        Managers.Event.RemoveEvent(EEventType.UIRefresh, OnEvent_RefreshGold);
+        Managers.Event.RemoveEvent(EEventType.UIGoldRefresh, OnEvent_RefreshGold);
     }
 
     public void ShowMyScore()

@@ -193,7 +193,7 @@ public class MissionManager
                 _dicts[mission.MissionId].MissionStatus = mission.MissionStatus;
                 _dicts[mission.MissionId].Param1 = mission.Param1;
             }
-            Managers.Event.TriggerEvent(EEventType.UIRefresh);
+            Managers.Event.TriggerEvent(EEventType.UIGoldRefresh);
        },
        (errorCode) =>
        {                
