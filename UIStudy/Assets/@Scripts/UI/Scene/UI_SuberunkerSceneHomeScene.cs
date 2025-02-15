@@ -4,6 +4,7 @@ using UnityEngine;
 using static Define;
 using static UI_InputNicknameScene;
 using UnityEngine.EventSystems;
+using UniRx;
 
 public class UI_SuberunkerSceneHomeScene : UI_Scene
 {
@@ -47,7 +48,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     }
 
     private string _welcome = "환영합니다";
-
+    System.IDisposable _rechargeTimer;
 
     public override bool Init()
     {
@@ -66,11 +67,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
             Managers.Scene.LoadScene(EScene.ChooseCharacterScene);
         }, EUIEvent.Click);
 
-        GetButton((int)Buttons.Start_Button).gameObject.BindEvent((evt) =>
-        {
-            Managers.Scene.LoadScene(EScene.SuberunkerTimelineScene);
-        }, EUIEvent.Click);
-
+        GetButton((int)Buttons.Start_Button).gameObject.BindEvent(OnClick_StartGame, EUIEvent.Click);
         GetImage((int)Images.MyScore_Button).gameObject.BindEvent(OnClick_ShowMyScore, EUIEvent.Click);
         GetImage((int)Images.Ranking_Button).gameObject.BindEvent(OnClick_ShowRanking, EUIEvent.Click);
         GetButton((int)Buttons.Mission_Button).gameObject.BindEvent(OnClick_ShowMission, EUIEvent.Click);
@@ -135,6 +132,29 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     private void OnEvent_RefreshGold(Component sender, object param)
     {
         GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
+    }
+    private void OnClick_StartGame(PointerEventData eventData)
+    {
+        /*
+        if(Managers.Game.Energy < 1)
+        {
+            // 에너지 없다고 문구 띄우기
+            return;
+        }
+        Managers.Game.Energy--;
+        
+        //이걸 하는 함수를 따로 만들어야함.
+        _rechargeTimer = Observable.Interval(new System.TimeSpan(0, 0, 1))
+            .Subscribe(_ =>
+            {   
+                // 시간 변수인 Managers.Game.RechargeTimer ++
+                // 5분에 한 번씩 Managers.Game.Energy ++ 
+                // 10/10으로 충전이 전부 되어있으면 멈춤.
+                // PlayerPrefs에 저장
+                // HardCoding.Energy
+            }).AddTo(this.gameObject);
+            */
+        Managers.Scene.LoadScene(EScene.SuberunkerTimelineScene);
     }
     void OnEvent_SetLanguage(Component sender, object param)
     {

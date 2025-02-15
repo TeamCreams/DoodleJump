@@ -386,7 +386,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 60/ 60
+  m_text: 10/ 60
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d7565aa7f6fee224f9c70351bc9234e1, type: 2}
   m_sharedMaterial: {fileID: -4940798726619671411, guid: d7565aa7f6fee224f9c70351bc9234e1, type: 2}
@@ -6093,7 +6093,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 6290674027058837093}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.9140001
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

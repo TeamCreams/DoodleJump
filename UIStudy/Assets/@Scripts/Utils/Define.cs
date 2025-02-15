@@ -244,6 +244,7 @@ public static class Define
         public static readonly int MAX_FAIL_COUNT = 1;
 
         public static readonly string PersonlSetting = "personalSetting";
+        public static readonly string Energy = "Energy";
 
     }
 

@@ -115,6 +115,16 @@ public class GameManager
         }
     }
 
+    private int _energy;
+    public int Energy
+    {
+        get { return _energy; }
+        set
+        {
+            _energy = value;
+        }
+    }
+
     #endregion
 
     #region Action
@@ -261,10 +271,6 @@ public struct PersonalSetting
         return new PersonalSetting(float.Parse(parts[0]), float.Parse(parts[1]), bool.Parse(parts[2]), bool.Parse(parts[3]));
     }
 }
-
-
-
-
 
 [System.Serializable] //얘가 있어야 직렬화 가능
 public class MessageData
