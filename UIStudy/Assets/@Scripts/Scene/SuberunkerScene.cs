@@ -93,16 +93,21 @@ public class SuberunkerScene : BaseScene
             return;
         }
 
+        //var loadingPopup = Managers.UI.ShowPopupUI<UI_Loading>();
+        //loadingPopup.Show();
         Managers.Resource.Instantiate("UI_Loading", this.transform);
         Managers.Event.TriggerEvent(EEventType.StartLoading);
         Managers.Score.SetScore(
             this, 
-            onSuccess: () => {
-                    Managers.Event.TriggerEvent(EEventType.OnSettlementComplete); 
-                    Managers.Event.TriggerEvent(EEventType.OnUpdateMission);
-                },
+            onSuccess: () => 
+            {
+                Managers.Event.TriggerEvent(EEventType.OnSettlementComplete); 
+                Managers.Event.TriggerEvent(EEventType.OnUpdateMission);
+                Managers.Event.TriggerEvent(EEventType.StopLoading);
+                //_ui.HideUILoading();
+                //loadingPopup.Hide();
+            },
             onFailed: () => Event_OnPlayerDead(this, tryCount++));
-        Managers.Event.TriggerEvent(EEventType.StopLoading);
     }
     
     #endregion

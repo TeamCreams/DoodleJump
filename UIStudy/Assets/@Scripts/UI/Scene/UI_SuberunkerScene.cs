@@ -57,27 +57,27 @@ public class UI_SuberunkerScene : UI_Scene
     #region Events
     void Event_OnPlayerDead(Component sender, object param)
     {
-        int tryCount = (int)param;
-        if (tryCount == 2)
-        {
-            Managers.Event.TriggerEvent(EEventType.StopLoading);
-            Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
-            Invoke("ExitGame", 2.5f);
-            return;
-        }
+        //int tryCount = (int)param;
+        //if (tryCount == 2)
+        //{
+        //    Managers.Event.TriggerEvent(EEventType.StopLoading);
+        //    Managers.UI.ShowPopupUI<UI_ToastPopup>();
+        //    ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError);
+        //    Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
+        //    Invoke("ExitGame", 2.5f);
+        //    return;
+        //}
 
-        Managers.Resource.Instantiate("UI_Loading", this.transform);
-        Managers.Event.TriggerEvent(EEventType.StartLoading);
-        Managers.Score.SetScore(
-            this, 
-            onSuccess: () => {
-                    Managers.Event.TriggerEvent(EEventType.OnSettlementComplete); 
-                    Managers.Event.TriggerEvent(EEventType.OnUpdateMission);
-                },
-            onFailed: () => Event_OnPlayerDead(this, tryCount++));
-        Managers.Event.TriggerEvent(EEventType.StopLoading);
+        //Managers.Resource.Instantiate("UI_Loading", this.transform);
+        //Managers.Event.TriggerEvent(EEventType.StartLoading);
+        //Managers.Score.SetScore(
+        //    this, 
+        //    onSuccess: () => {
+        //            Managers.Event.TriggerEvent(EEventType.OnSettlementComplete); 
+        //            Managers.Event.TriggerEvent(EEventType.OnUpdateMission);
+        //        },
+        //    onFailed: () => Event_OnPlayerDead(this, tryCount++));
+        //Managers.Event.TriggerEvent(EEventType.StopLoading);
 
         // 게임 난이도 초기화
         // Managers.Game.DifficultySettingsInfo.StageId = 70001;

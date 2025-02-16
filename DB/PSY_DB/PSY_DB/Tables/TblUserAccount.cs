@@ -21,6 +21,8 @@ public partial class TblUserAccount
     public DateTime UpdateDate { get; set; }
     public DateTime? DeletedDate { get; set; }
 
+    //[Required]
+    //현재 컬럼상 DeletedDate말고는 모두 Required 처리를 해주는게 맞다.
     [SqlDefaultValue("0")]
     public int Gold { get; set; }
 
@@ -38,6 +40,15 @@ public partial class TblUserAccount
     [Comment("업데이트 스택")]
     [SqlDefaultValue("0")]
     public int Evolution { get; set; }
+
+    [Comment("마지막으로 에너지를 얻은 시간")]
+    [SqlDefaultValue("UTC_TIMESTAMP()")]
+    public DateTime LatelyEnergy { get; set; }
+
+    [Comment("마지막으로 에너지를 얻은 시간")]
+    [SqlDefaultValue("10")]
+    public int Energy { get; set; }
+
     [InverseProperty("TblUserAccountKeyNavigation")]
     public virtual ICollection<TblUserScore> TblUserScores { get; set; } = new List<TblUserScore>();
     [InverseProperty("TblUserAccountKeyNavigation")]

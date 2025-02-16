@@ -30,5 +30,8 @@ namespace GameApi.Dtos
         public string? EyesStyle { get; set; }
         // 업데이트 스택
         public int Evolution { get; set; }
+        // 에너지 관련
+        public DateTime LatelyEnergy { get; set; }
+        public int Energy { get; set; }
     }
 }

@@ -283,35 +283,51 @@ public class PlayerController : CreatureBase
         SuberunkerItemData itemData = Managers.Data.SuberunkerItemDic[item.Data.Id];
         List<EStat> options = new List<EStat>
         {
-            itemData.Option1,
-            itemData.Option2,
-            itemData.Option3,
-            itemData.Option4
+            itemData.Option1,       // MaxHp(per
+            itemData.Option2,       // MaxHp (Fl
+            itemData.Option3,       
+            itemData.Option4        // 
         };
+
+        // TblUser
+        // 1, "백수영"
+        // 2, "박서윤"
+
+        // TblItem
+        // 1, "검"
+        // 2, "방패"
+
+        // TblItemMapping
+        // 1, 1
+        // 2, 1
+        // 1, 2
+
+        // TblItemMapping 이테이블을 기준으로
+        //   User를 모두 검색해라
+
+        // "백수영"
+        // "박서윤"
+
 
 
         int id = Managers.Game.UserInfo.EvolutionId;
-        var groupInfo = (from option in options
-                        join sprite in Managers.Data.EvolutionDataDic
-                        on option equals sprite.Value.StatOption
-                        select new
-                        {
-                            Id = sprite.Value.Id,
-                            SpriteName = sprite.Value.ItemSprite,
-                            EStatOption = option
-                        })
-                        .Where(item => item.Id <= id)
-                        .OrderByDescending(item => item.Id)
-                        .Take(3)
-                        .ToList(); 
 
-        foreach (var group in groupInfo)
+        var query = Managers.Data.EvolutionDataDic
+                        .Where(data => data.Key <= id)
+                        .OrderByDescending(data => data.Key)
+                        .Take(3)
+                        .ToList();
+        query = query.Where(item => options.Contains(item.Value.StatOption)).ToList();
+
+
+        foreach (var group in query)
         {
-            switch (group.EStatOption)
+            switch (group.Value.StatOption)
             {
                 case EStat.MoveSpeed:
                     {
-                        var sprite = Managers.Resource.Load<Sprite>($"{group.SpriteName}.sprite");
+                        var sprite = Managers.Resource.Load<Sprite>($"{group.Value.ItemSprite}.sprite");
+                        Debug.Log($"Equip : {sprite.name},{group.Value.ItemSprite}");
                         if (sprite != null)
                         {
                             ShoseLeftSpriteRenderer.sprite = sprite;
@@ -321,7 +337,7 @@ public class PlayerController : CreatureBase
                     break;
                 case EStat.Luck:
                     {
-                        var sprite = Managers.Resource.Load<Sprite>($"{group.SpriteName}.sprite");
+                        var sprite = Managers.Resource.Load<Sprite>($"{group.Value.ItemSprite}.sprite");
                         if (sprite != null)
                         {
                             MaskSpriteRenderer.sprite = sprite;
@@ -509,6 +525,7 @@ public class PlayerController : CreatureBase
             EStat.MaxHp,
             EStat.Luck
         };
+
         foreach (var (option, statModifier) in options.Zip(Managers.Evolution.ModifierList, (optionIndex, StatModifierIndex) => (optionIndex, StatModifierIndex)))
         {
             this._stats.StatDic[option].AddStatModifier(statModifier);

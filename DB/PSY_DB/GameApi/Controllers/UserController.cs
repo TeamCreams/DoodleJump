@@ -146,7 +146,9 @@ namespace GameApi.Controllers
                         HairStyle = user.HairStyle,
                         EyesStyle = user.EyesStyle,
                         EyebrowStyle = user.EyebrowStyle,
-                        Evolution = user.Evolution 
+                        Evolution = user.Evolution,
+                        LatelyEnergy = user.LatelyEnergy,
+                        Energy = user.Energy
                     }).ToListAsync();
 
 
@@ -550,16 +552,16 @@ namespace GameApi.Controllers
             {
 
                 var select = await (from user in _context.TblUserAccounts
-                                    where (user.Id == requestDto.UserAccountId && user.DeletedDate == null)
-                                    select new
-                                    {
-                                        Nickname = user.Nickname,
-                                    }).ToListAsync();
+                                    where (user.Id == requestDto.UserAccountId &&
+                                        user.DeletedDate == null &&
+                                        user.Nickname == requestDto.Nickname)
+                                    select user
+                                    ).FirstOrDefaultAsync();
 
-                if (true == select.Any())
+                if (select != null)
                 {
                     throw new CommonException(EStatusCode.NameAlreadyExists,
-                        $"{requestDto.Nickname} : 사용할 수 없는 Nickname");
+                        $"계정이 이미 존재함.");
                 }
 
                 var userAccount = _context.TblUserAccounts.
@@ -661,7 +663,9 @@ namespace GameApi.Controllers
                         HairStyle = user.HairStyle,
                         EyesStyle = user.EyesStyle,
                         EyebrowStyle = user.EyebrowStyle,
-                        Evolution = user.Evolution
+                        Evolution = user.Evolution,
+                        LatelyEnergy = user.LatelyEnergy,
+                        Energy = user.Energy
                     }).ToListAsync();
 
                 if (select.Any() == false)
@@ -856,6 +860,7 @@ namespace GameApi.Controllers
 
                 var requestedMissionIds = requestDto.List.Select(req => req.MissionId).ToList();
                 var existingMissionIds = await _context.TblUserMissions
+                        .Where(mission => mission.UserAccountId == requestDto.UserAccountId)
                         .Where(mission => requestedMissionIds.Contains(mission.MissionId))
                         .Select(mission => mission.MissionId)
                         .ToListAsync();
@@ -883,7 +888,6 @@ namespace GameApi.Controllers
                         throw new CommonException(EStatusCode.ChangedRowsIsZero, "미션 추가에 실패했습니다.");
                     }
                 }
-
                 await transaction.CommitAsync();
 
                 rv.Data = new ResDtoInsertUserMissionList
@@ -952,9 +956,9 @@ namespace GameApi.Controllers
                 TblUserScore userScore = new TblUserScore
                 {
                     UserAccountId = requestDto.UserAccountId,
-                    PlayTime = -1,
-                    Scoreboard = -1,
-                    AccumulatedStone = -1,
+                    //PlayTime = -1,
+                    //Scoreboard = -1,
+                    //AccumulatedStone = -1,
                     Gold = requestDto.Gold,
                     UpdateDate = DateTime.Now
                 };
@@ -1233,5 +1237,86 @@ namespace GameApi.Controllers
             return rv;
         }
         #endregion
+        #region HeartBeat
+        [HttpGet("HeartBeat")]
+        public async Task<CommonResult<ResDtoHeartBeat>> HeartBeat([FromQuery] ReqDtoHeartBeat requestDto)
+        {
+            CommonResult<ResDtoHeartBeat> rv = new();
+            try
+            {
+                rv.Data = new();
+
+
+                rv.Data.DateTime = DateTime.UtcNow;
+            }
+            catch (CommonException ex)
+            {
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.IsSuccess = false;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.ToString();
+                rv.IsSuccess = false;
+                return rv;
+            }
+            return rv;
+        }
+
+        [HttpPost("UpdateEnergy")]
+        public async Task<CommonResult<ResDtoUpdateEnergy>> UpdateEnergy([FromBody] ReqDtoUpdateEnergy requestDto)
+        {
+            CommonResult<ResDtoUpdateEnergy> rv = new();
+            try
+            {
+                rv.Data = new();
+
+                var userAccount = await _context.TblUserAccounts
+                                    .FirstOrDefaultAsync(user => user.Id == requestDto.UserAccountId && user.DeletedDate == null);
+                if (userAccount == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
+                }
+
+                var diffTime = DateTime.UtcNow - userAccount.LatelyEnergy;
+
+                //diffTime.TotalSeconds
+
+                userAccount.LatelyEnergy = DateTime.UtcNow;
+                _context.TblUserAccounts.Update(userAccount);
+
+                //energy 수정 
+                rv.Data = new ResDtoUpdateEnergy
+                {
+                    
+                };
+
+                rv.IsSuccess = true;
+                rv.StatusCode = EStatusCode.OK;
+                rv.Message = "Success return Missions";
+
+            }
+            catch (CommonException ex)
+            {
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.IsSuccess = false;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.ToString();
+                rv.IsSuccess = false;
+                return rv;
+            }
+            return rv;
+        }
+        #endregion
+
     }
 }

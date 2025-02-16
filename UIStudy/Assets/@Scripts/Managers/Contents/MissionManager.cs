@@ -64,8 +64,11 @@ public class MissionManager
 
     public void SettleScore(Component sender, Action onSuccess = null, Action onFailed = null)
     {
+        Debug.Log($"{nameof(SettleScore)} Call");
+        Managers.Game.UserInfo.RecordScore = Math.Max(Managers.Game.UserInfo.RecordScore, Managers.Game.UserInfo.LatelyScore);
+
         // 1. _dicts 업데이트
-        foreach(var missionKeyValue in _dicts)
+        foreach (var missionKeyValue in _dicts)
         {
             int missionId = missionKeyValue.Key;
             ResDtoGetUserMissionListElement mission = missionKeyValue.Value;
@@ -76,14 +79,15 @@ public class MissionManager
             
             if(Managers.Mission.Dicts[missionId].MissionStatus != (int)EMissionStatus.Rewarded)
             {
+                Debug.Log("Changed Call");
                 float value = beforeParam1 / (float)Managers.Data.MissionDataDic[missionId].Param1;
                 if(value < 1.0f)
                 {
-                    Managers.Mission.Dicts[missionId].MissionStatus = (int)EMissionStatus.Complete;
+                    Managers.Mission.Dicts[missionId].MissionStatus = (int)EMissionStatus.Progress;
                 }
                 else
                 {
-                    Managers.Mission.Dicts[missionId].MissionStatus = (int)EMissionStatus.Progress;
+                    Managers.Mission.Dicts[missionId].MissionStatus = (int)EMissionStatus.Complete;
                 }
             }
             mission.MissionStatus = Managers.Mission.Dicts[missionId].MissionStatus;
@@ -194,6 +198,7 @@ public class MissionManager
                 _dicts[mission.MissionId].Param1 = mission.Param1;
             }
             Managers.Event.TriggerEvent(EEventType.UIGoldRefresh);
+            Managers.Event.TriggerEvent(EEventType.Mission);
        },
        (errorCode) =>
        {                
@@ -204,11 +209,11 @@ public class MissionManager
             //     "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
             // popup.AddOnClickAction(onFailed);
        });
-        Managers.Event.TriggerEvent(EEventType.Mission);
     }
 
     public void UpdateMissionList(Component sender, Action onSuccess = null, Action onFailed = null) // 이름 다시 수정
     {
+        Debug.Log($"{nameof(UpdateMissionList)} Call");
         if(_changedMissionList.Count < 1)
         {
             return;

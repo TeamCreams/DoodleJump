@@ -9,6 +9,7 @@ public class ScoreManager
 
     public void GetScore(Component sender, Action ProcessErrorFun = null, Action onSuccess = null, Action onFailed = null)
     {
+        Debug.Log($"{nameof(GetScore)} Call");
         Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
         {
             UserName = Managers.Game.UserInfo.UserId

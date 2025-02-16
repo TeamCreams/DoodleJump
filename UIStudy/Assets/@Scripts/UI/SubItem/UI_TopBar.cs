@@ -121,6 +121,8 @@ public class UI_TopBar : UI_Base
     {
         Managers.UI.ShowPopupUI<UI_PausePopup>();
     }
+
+    bool isSettleComplete = false;
     IEnumerator UpdateLife(float nextHp)
     {
         float toHp = (float)nextHp / Managers.Object.Player.Stats.StatDic[EStat.MaxHp].Value;
@@ -135,7 +137,7 @@ public class UI_TopBar : UI_Base
             yield return null;
         }
 
-        if (toHp <= 0)
+        if (toHp <= 0 && !isSettleComplete)
         {
             GetSlider((int)Sliders.UI_HpProgressBar).value = 0;
             _lifeTimer?.Dispose();
@@ -143,6 +145,7 @@ public class UI_TopBar : UI_Base
             Managers.Game.UserInfo.Gold += Managers.Game.Gold;
 
             Managers.Event.TriggerEvent(EEventType.OnPlayerDead, this, 0);
+            isSettleComplete = true;
         }
 
 

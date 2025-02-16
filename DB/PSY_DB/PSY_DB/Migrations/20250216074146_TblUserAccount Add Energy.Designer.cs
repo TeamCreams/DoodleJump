@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PSY_DB;
 
@@ -11,9 +12,11 @@ using PSY_DB;
 namespace PSY_DB.Migrations
 {
     [DbContext(typeof(PsyDbContext))]
-    partial class PsyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250216074146_TblUserAccount Add Energy")]
+    partial class TblUserAccountAddEnergy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,7 +78,7 @@ namespace PSY_DB.Migrations
                     b.Property<DateTime>("LatelyEnergy")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValueSql("UTC_TIMESTAMP()")
+                        .HasDefaultValueSql("now()")
                         .HasComment("마지막으로 에너지를 얻은 시간");
 
                     b.Property<string>("Nickname")
