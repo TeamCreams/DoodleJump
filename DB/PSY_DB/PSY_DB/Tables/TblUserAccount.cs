@@ -13,11 +13,23 @@ namespace PSY_DB.Tables;
 [Table("TblUserAccount")]
 public partial class TblUserAccount
 {
+    [Required]
     public int Id { get; set; }
+    [Required]
+    [Comment("계정 이름")]
+    [SqlDefaultValue("NewAccount")]
     public string? UserName { get; set; }
+    [Required]
+    [Comment("계정 비밀번호")]
+    [SqlDefaultValue("0000")]
     public string? Password { get; set; }
+    [Required]
+    [Comment("계정 닉네임")]
+    [SqlDefaultValue("Empty")]
     public string? Nickname { get; set; }
+    [Required]
     public DateTime RegisterDate { get; set; }
+    [Required]
     public DateTime UpdateDate { get; set; }
     public DateTime? DeletedDate { get; set; }
 
@@ -25,7 +37,6 @@ public partial class TblUserAccount
     //현재 컬럼상 DeletedDate말고는 모두 Required 처리를 해주는게 맞다.
     [SqlDefaultValue("0")]
     public int Gold { get; set; }
-
     [Comment("캐릭터 아이디")]
     [SqlDefaultValue("20001")]
     public int CharacterId { get; set; }
@@ -38,7 +49,7 @@ public partial class TblUserAccount
     [SqlDefaultValue("Annoyed")]
     public string? EyesStyle { get; set; }
     [Comment("업데이트 스택")]
-    [SqlDefaultValue("0")]
+    [SqlDefaultValue("140003")]
     public int Evolution { get; set; }
 
     [Comment("마지막으로 에너지를 얻은 시간")]

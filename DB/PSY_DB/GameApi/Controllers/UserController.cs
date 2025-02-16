@@ -99,6 +99,7 @@ namespace GameApi.Controllers
             return rv;
         }
 
+        //게임 시작/로그인 할 때 가장 먼저 사용할 것
         [HttpGet("GetUserAccount")]
         public async Task<CommonResult<ResDtoGetUserAccount>> GetUserAccount([FromQuery] ReqDtoGetUserAccount requestDto)
         {
@@ -115,10 +116,10 @@ namespace GameApi.Controllers
                     //where (user.UserName == requestDto.UserName && user.Password == requestDto.Password && user.DeletedDate == null)
                     select new ResDtoGetUserAccount
                     {
+                        UserAccountId = user.Id,
                         UserName = user.UserName,
                         Password = user.Password,
                         Nickname = user.Nickname,
-                        UserAccountId = user.Id,
                         RegisterDate = user.RegisterDate,
                         UpdateDate = user.UpdateDate,
                         HighScore = user.TblUserScores
@@ -126,7 +127,6 @@ namespace GameApi.Controllers
                                       .Select(s => s.Scoreboard)
                                       .FirstOrDefault(),
                         LatelyScore = user.TblUserScores
-                                        .Where(s => s.Scoreboard != -1) // -1이 아닌 점수만 ( -1은 Gold만 받았을 때 들어가는 점수)
                                         .OrderByDescending(s => s.UpdateDate) // 최신 점수 순으로 정렬
                                         .Select(s => s.Scoreboard) // History 선택
                                         .FirstOrDefault(), // 가장 최근 점수
@@ -135,12 +135,10 @@ namespace GameApi.Controllers
                                         .FirstOrDefault()
                                         .Gold : 0,
                         PlayTime = user.TblUserScores
-                                    .Where(s => s.PlayTime != -1)
                                     .OrderByDescending(s => s.UpdateDate) // 최근 시간 순으로 정렬
                                     .Select(s => s.PlayTime)
                                     .FirstOrDefault(),
                         AccumulatedStone = user.TblUserScores
-                                    .Where(s => s.AccumulatedStone != -1)
                                     .Sum(s => s.AccumulatedStone),
                         CharacterId = user.CharacterId,
                         HairStyle = user.HairStyle,
@@ -150,19 +148,6 @@ namespace GameApi.Controllers
                         LatelyEnergy = user.LatelyEnergy,
                         Energy = user.Energy
                     }).ToListAsync();
-
-
-
-                /*
-                 *  SELECT `t`.`UserName`, `t`.`RegisterDate`, `t`.`UpdateDate`, COALESCE((
-                          SELECT `t0`.`History`
-                          FROM `TblUserScore` AS `t0`
-                          WHERE `t`.`Id` = `t0`.`UserAccountId`
-                          ORDER BY `t0`.`History` DESC
-                          LIMIT 1), 0) AS `HighScore`
-                      FROM `TblUserAccount` AS `t`
-                      WHERE (`t`.`UserName` = @__requestDto_UserName_0) AND (`t`.`Password` = @__requestDto_Password_1)
-                 */
 
                 if (select.Any() == false)
                 {
@@ -267,7 +252,7 @@ namespace GameApi.Controllers
                                     Where
                                     (
                                         user => user.UserName.ToLower() == requestDto.UserName.ToLower() && 
-                                                user.Password == requestDto.Password &&
+                                                user.Password == requestDto.Password && //requestDto.Password 는 0000
                                                 user.DeletedDate == null
                                     ).FirstOrDefault();
 
@@ -369,10 +354,10 @@ namespace GameApi.Controllers
             return rv;
         }
 
-        [HttpGet("GetValidateUserAccountId")]
-        public async Task<CommonResult<ResDtoGetValidateUserAccountId>> GetValidateUserAccountId([FromQuery] ReqDtoGetValidateUserAccountId requestDto)
+        [HttpGet("GetValidateUserAccountUserName")]
+        public async Task<CommonResult<ResDtoGetValidateUserAccountUserName>> GetValidateUserAccountId([FromQuery] ReqDtoGetValidateUserAccountUserName requestDto)
         {
-            CommonResult<ResDtoGetValidateUserAccountId> rv = new();
+            CommonResult<ResDtoGetValidateUserAccountUserName> rv = new();
 
             //Thread.Sleep(3000);
 
@@ -386,7 +371,9 @@ namespace GameApi.Controllers
                             {
                                 UserName = user.UserName,
                             }).ToListAsync();
-              
+
+                rv.Data.UserName = requestDto.UserName;
+
                 if (true == select.Any())
                 {
                     throw new CommonException(EStatusCode.NameAlreadyExists,
@@ -395,10 +382,9 @@ namespace GameApi.Controllers
                 else
                 {
                     rv.StatusCode = EStatusCode.OK;
-                    rv.Message = "";
+                    rv.Message = "사용할 수 있는 아이디입니다.";
                     rv.IsSuccess = true;
-                    rv.Data = null;
-                }
+                    rv.Data = null;}
             }
             catch (CommonException ex)
             {
@@ -413,13 +399,14 @@ namespace GameApi.Controllers
                 rv.IsSuccess = false;
                 rv.StatusCode = EStatusCode.ServerException;
                 rv.Message = ex.Message;
-                rv.Data = ex.Data as ResDtoGetValidateUserAccountId;
+                rv.Data = ex.Data as ResDtoGetValidateUserAccountUserName;
 
                 return rv;
             }
             return rv;
         }
 
+        // XXX
         [HttpGet("GetValidateUserAccountNickname")]
         public async Task<CommonResult<ResDtoGetValidateUserAccountNickname>> 
             GetValidateUserAccountNickname([FromQuery] ReqDtoGetValidateUserAccountNickname requestDto)
@@ -430,15 +417,12 @@ namespace GameApi.Controllers
 
             try
             {
-                rv.Data = new();
-
                 var select = await (from user in _context.TblUserAccounts
                                     where (user.Nickname.ToLower() == requestDto.Nickname.ToLower() && user.DeletedDate == null)
                                     select new
                                     {
                                         Nickname = user.Nickname,
                                     }).ToListAsync();
-
                 if (true == select.Any())
                 {
                     throw new CommonException(EStatusCode.NameAlreadyExists,
@@ -561,7 +545,7 @@ namespace GameApi.Controllers
                 if (select != null)
                 {
                     throw new CommonException(EStatusCode.NameAlreadyExists,
-                        $"계정이 이미 존재함.");
+                        $"해당 닉네임을 사용하는 계정이 이미 존재함.");
                 }
 
                 var userAccount = _context.TblUserAccounts.
@@ -615,6 +599,7 @@ namespace GameApi.Controllers
             return rv;
         }
 
+        // XXX
         [HttpGet("GetOrAddUserAccount")]
         public async Task<CommonResult<ResDtoGetOrAddUserAccount>> GetOrAddUserAccount()
         {
@@ -633,9 +618,9 @@ namespace GameApi.Controllers
                     where (user.UserName.ToLower() == requestDto.UserName.ToLower() && user.DeletedDate == null)
                     select new ResDtoGetOrAddUserAccount
                     {
+                        UserAccountId = user.Id,
                         UserName = user.UserName,
                         Nickname = user.Nickname,
-                        UserAccountId = user.Id,
                         RegisterDate = user.RegisterDate,
                         UpdateDate = user.UpdateDate,
                         HighScore = user.TblUserScores
@@ -643,21 +628,21 @@ namespace GameApi.Controllers
                                       .Select(s => s.Scoreboard)
                                       .FirstOrDefault(),
                         LatelyScore = user.TblUserScores
-                                        .Where(s => s.Scoreboard != -1) // -1이 아닌 점수만 ( -1은 Gold만 받았을 때 들어가는 점수)
+                                        //.Where(s => s.Scoreboard != -1) // -1이 아닌 점수만 ( -1은 Gold만 받았을 때 들어가는 점수)
                                         .OrderByDescending(s => s.UpdateDate) // 최신 점수 순으로 정렬
-                                        .Select(s => s.Scoreboard) // History 선택
+                                        .Select(s => s.Scoreboard)
                                         .FirstOrDefault(), // 가장 최근 점수
                         Gold = user.TblUserScores.Any() ?
                                         user.TblUserScores.OrderByDescending(s => s.UpdateDate)
                                         .FirstOrDefault()
                                         .Gold : 0,
                         PlayTime = user.TblUserScores
-                                    .Where(s => s.PlayTime != -1)
-                                    .OrderByDescending(s => s.UpdateDate) // 최근 시간 순으로 정렬
+                                    //.Where(s => s.PlayTime != -1)
+                                    .OrderByDescending(s => s.UpdateDate)
                                     .Select(s => s.PlayTime) 
                                     .FirstOrDefault(),
                         AccumulatedStone = user.TblUserScores
-                                    .Where(s => s.AccumulatedStone != -1)
+                                    //.Where(s => s.AccumulatedStone != -1)
                                     .Sum(s => s.AccumulatedStone),
                         CharacterId = user.CharacterId,
                         HairStyle = user.HairStyle,
@@ -799,7 +784,8 @@ namespace GameApi.Controllers
                         $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
                 }
 
-                userAccount.Gold = requestDto.Gold;
+                // 아이템 값만큼 골드 뺏기
+                userAccount.Gold -= requestDto.Gold;
                 userAccount.UpdateDate = DateTime.Now;
 
                 _context.TblUserAccounts.Update(userAccount);
@@ -838,6 +824,7 @@ namespace GameApi.Controllers
             return rv;
         }
         #endregion
+
         #region Quest
         //퀘스트 수락
         [HttpPost("InsertUserMissionList")]
@@ -923,7 +910,6 @@ namespace GameApi.Controllers
             return rv;
         }
 
-
         //퀘스트 완료
         [HttpPost("CompleteUserMission")]
         public async Task<CommonResult<ResDtoCompleteUserMissionList>> CompleteUserMission([FromBody] ReqDtoCompleteUserMission requestDto)
@@ -932,42 +918,39 @@ namespace GameApi.Controllers
 
             try
             {
-                var userAccount = await _context.TblUserAccounts
-                                    .FirstOrDefaultAsync(user => user.Id == requestDto.UserAccountId && user.DeletedDate == null);
-
+                var userAccount = _context.TblUserAccounts
+                                     .Where(
+                                         user => user.Id == requestDto.UserAccountId &&
+                                                 user.DeletedDate == null
+                                     ).FirstOrDefault();
                 if (userAccount == null)
                 {
                     throw new CommonException(EStatusCode.NotFoundEntity,
                         $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
                 }
 
-                var userMission = await _context.TblUserMissions
-                                    .FirstOrDefaultAsync(mission => mission.MissionId == requestDto.MissionId && mission.UserAccountId == userAccount.Id);
-
+                var userMission = _context.TblUserMissions
+                                    .Where(
+                                         mission => mission.UserAccountId == userAccount.Id
+                                         && mission.MissionId == requestDto.MissionId
+                                     ).FirstOrDefault();
                 if (userMission == null)
                 {
                     throw new CommonException(EStatusCode.NotFoundEntity,
-                        $"미션을 완료하지 못했습니다. MissionId : {requestDto.MissionId} Param1 : {requestDto.Param1}");
+                        $"찾을 수 없는 미션. MissionId : {requestDto.MissionId} Param1 : {requestDto.Param1}");
                 }
 
+                // 골드 추가
+                userAccount.Gold += requestDto.Gold; 
+                userAccount.UpdateDate = DateTime.Now;
+                _context.TblUserAccounts.Update(userAccount);
+
+                // 미션 상태 : 보상 획득
                 userMission.Param1 = requestDto.Param1;
                 userMission.MissionStatus = EMissionStatus.Rewarded;
-
-                TblUserScore userScore = new TblUserScore
-                {
-                    UserAccountId = requestDto.UserAccountId,
-                    //PlayTime = -1,
-                    //Scoreboard = -1,
-                    //AccumulatedStone = -1,
-                    Gold = requestDto.Gold,
-                    UpdateDate = DateTime.Now
-                };
-
                 _context.TblUserMissions.Update(userMission);
-                _context.TblUserScores.Add(userScore);
 
                 var isSuccess = await _context.SaveChangesAsync();
-
                 if (isSuccess == 0)
                 {
                     throw new CommonException(EStatusCode.ChangedRowsIsZero,
@@ -1238,16 +1221,15 @@ namespace GameApi.Controllers
         }
         #endregion
         #region HeartBeat
-        [HttpGet("HeartBeat")]
-        public async Task<CommonResult<ResDtoHeartBeat>> HeartBeat([FromQuery] ReqDtoHeartBeat requestDto)
+        [HttpPost("HeartBeat")]
+        public async Task<CommonResult<ResDtoHeartBeat>> HeartBeat([FromBody] ReqDtoHeartBeat requestDto)
         {
             CommonResult<ResDtoHeartBeat> rv = new();
             try
             {
                 rv.Data = new();
 
-
-                rv.Data.DateTime = DateTime.UtcNow;
+                rv.Data.DateTime = DateTime.UtcNow; // 시간이 변하질 않음
             }
             catch (CommonException ex)
             {
@@ -1273,7 +1255,7 @@ namespace GameApi.Controllers
             try
             {
                 rv.Data = new();
-
+                
                 var userAccount = await _context.TblUserAccounts
                                     .FirstOrDefaultAsync(user => user.Id == requestDto.UserAccountId && user.DeletedDate == null);
                 if (userAccount == null)
@@ -1284,21 +1266,67 @@ namespace GameApi.Controllers
 
                 var diffTime = DateTime.UtcNow - userAccount.LatelyEnergy;
 
-                //diffTime.TotalSeconds
-
+                int count = (int)diffTime.TotalSeconds / 300;
+                
                 userAccount.LatelyEnergy = DateTime.UtcNow;
+                userAccount.Energy = userAccount.Energy + count;
                 _context.TblUserAccounts.Update(userAccount);
 
                 //energy 수정 
                 rv.Data = new ResDtoUpdateEnergy
-                {
-                    
+                {   
+                    Energy = userAccount.Energy,
                 };
 
                 rv.IsSuccess = true;
                 rv.StatusCode = EStatusCode.OK;
-                rv.Message = "Success return Missions";
+                rv.Message = "Success UpdateEnergy";
+            }
+            catch (CommonException ex)
+            {
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.IsSuccess = false;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.ToString();
+                rv.IsSuccess = false;
+                return rv;
+            }
+            return rv;
+        }
 
+        [HttpPost("GameStart")]
+        public async Task<CommonResult<ResDtoGameStart>> UpdateEnergy([FromBody] ReqDtoGameStart requestDto)
+        {
+            CommonResult<ResDtoGameStart> rv = new();
+            try
+            {
+                rv.Data = new();
+
+                var userAccount = await _context.TblUserAccounts
+                                    .FirstOrDefaultAsync(user => user.Id == requestDto.UserAccountId && user.DeletedDate == null);
+                if (userAccount == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
+                }
+
+                userAccount.Energy --;
+                _context.TblUserAccounts.Update(userAccount);
+
+                //energy 수정 
+                rv.Data = new ResDtoGameStart
+                {
+                    Energy = userAccount.Energy,
+                };
+
+                rv.IsSuccess = true;
+                rv.StatusCode = EStatusCode.OK;
+                rv.Message = "Success GameStart";
             }
             catch (CommonException ex)
             {
