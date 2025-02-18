@@ -66,6 +66,10 @@ namespace GameApi.Controllers
                     userAccount.UpdateDate = DateTime.Now;
                     userAccount.UserName = requestDto.UserName;
                     userAccount.Password = requestDto.Password;
+                    userAccount.Nickname = requestDto.NickName;
+                    userAccount.HairStyle = "Afro";
+                    userAccount.EyebrowStyle = "AnnoyedEyebrows";
+                    userAccount.EyesStyle = "Annoyed";
                     _context.TblUserAccounts.Add(userAccount);
                 }
                 
