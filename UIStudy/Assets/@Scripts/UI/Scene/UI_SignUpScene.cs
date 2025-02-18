@@ -149,6 +149,8 @@ public class UI_SignUpScene : UI_Scene
             _errCodeId = EErrorCode.ERR_ValidationId;
         }
 
+        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+
         Managers.WebContents.ReqGetValidateUserAccountUserName(new ReqDtoGetValidateUserAccountUserName()
         {
             UserName = GetInputField((int)InputFields.Id_InputField).text,
@@ -165,6 +167,7 @@ public class UI_SignUpScene : UI_Scene
            GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
            _errCodeId = EErrorCode.ERR_ValidationId;
        });
+        Managers.UI.ClosePopupUI(loadingPopup);
     }
 
     private EErrorCode CheckCorrectPassword(string password)
@@ -183,7 +186,7 @@ public class UI_SignUpScene : UI_Scene
     {
         GetText((int)Texts.Warning_Id_Text).text = "";
         string confirmPassword = GetInputField((int)InputFields.ConfirmPassword_InputField).text;
-        if (String.Equals(input, confirmPassword) != true || _errCodePassword != EErrorCode.ERR_OK)
+        if (Equals(input, confirmPassword) != true || _errCodePassword != EErrorCode.ERR_OK)
         {
             GetText((int)Texts.Warning_ConfirmPassword_Text).text = _confirmPasswordUnavailable;
             return EErrorCode.ERR_ConfirmPassword;

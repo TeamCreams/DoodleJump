@@ -16,8 +16,6 @@ public class UI_InputNicknameScene : UI_Scene
 
     private enum Buttons
     {
-        //Next_Button,
-        //Prev_Button
         Confirm_Button
     }
 
@@ -40,7 +38,6 @@ public class UI_InputNicknameScene : UI_Scene
         BindButtons(typeof(Buttons));
         BindTexts(typeof(Texts));
 
-        //GetButton((int)Buttons.Prev_Button).gameObject.BindEvent(OnClick_LoginPage, EUIEvent.Click);
         GetButton((int)Buttons.Confirm_Button).gameObject.BindEvent(OnClick_InspectName, EUIEvent.Click);
         GetText((int)Texts.Warning_Text).text = "";
 
@@ -53,10 +50,6 @@ public class UI_InputNicknameScene : UI_Scene
     private void OnDestroy()
     {
         Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-    }
-    private void OnClick_LoginPage(PointerEventData eventData)
-    {            
-        Managers.Scene.LoadScene(EScene.SignInScene);
     }
 
     private void OnClick_InspectName(PointerEventData eventData)
@@ -90,6 +83,7 @@ public class UI_InputNicknameScene : UI_Scene
     }
     private void InsertUser(Action onSuccess = null)
     {
+        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
         Managers.WebContents.ReqInsertUserAccount(new ReqDtoInsertUserAccount()
         {
             UserName = Managers.Game.UserInfo.UserName,
@@ -102,11 +96,14 @@ public class UI_InputNicknameScene : UI_Scene
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
             ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess);
             Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
-            
+            Managers.UI.ClosePopupUI(loadingPopup);
+
             onSuccess?.Invoke();
        },
        (errorCode) =>
-       {
+       {            
+            Managers.UI.ClosePopupUI(loadingPopup);
+
             Debug.Log("아이디 만들기 실패~");
             Managers.UI.ShowPopupUI<UI_ErrorPopup>();
             ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationFailed);

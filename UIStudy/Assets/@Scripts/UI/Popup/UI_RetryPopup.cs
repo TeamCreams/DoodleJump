@@ -66,31 +66,30 @@ public class UI_RetryPopup : UI_Popup
     private void OnClick_HomeButton(PointerEventData eventData)
     {
         // playerDead event 
-        // Managers.Resource.Instantiate("UI_Loading", this.transform);
-        // Managers.Event.TriggerEvent(EEventType.StartLoading);
+        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+
         Managers.Score.GetScore((this), ProcessErrorFun,
-            () =>
-                {
-                    //Managers.Event.TriggerEvent(EEventType.StopLoading);
-                    Managers.UI.ClosePopupUI(this);
-                    Time.timeScale = 1;
-                    Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
-                },
-            ()=>
+        () =>
             {
-                // Managers.Event.TriggerEvent(EEventType.StopLoading);
-                if(_failCount < HardCoding.MAX_FAIL_COUNT)
-                {
-                    Time.timeScale = 1;
-                    _failCount++;
-                    return;
-                }
-                Time.timeScale = 1;
-                _failCount = 0;
+            Managers.UI.ClosePopupUI(loadingPopup);
                 Managers.UI.ClosePopupUI(this);
+                Time.timeScale = 1;
                 Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+            },
+        ()=>
+        {
+            Managers.UI.ClosePopupUI(loadingPopup);
+            if(_failCount < HardCoding.MAX_FAIL_COUNT)
+            {
+                Time.timeScale = 1;
+                _failCount++;
+                return;
             }
-        );
+            Time.timeScale = 1;
+            _failCount = 0;
+            Managers.UI.ClosePopupUI(this);
+            Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+        });
     }
 
     public override void SetOrder(int sortOrder)
@@ -100,12 +99,12 @@ public class UI_RetryPopup : UI_Popup
 
     public void SetRecord()
     {        
-        // Managers.Resource.Instantiate("UI_Loading", this.transform);
-        // Managers.Event.TriggerEvent(EEventType.StartLoading);
+        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+
         Managers.Score.GetScore(this, ProcessErrorFun, null,
         ()=> // 실패했을경우 
         {
-            // Managers.Event.TriggerEvent(EEventType.StopLoading);
+            Managers.UI.ClosePopupUI(loadingPopup);
             if(_failCount < HardCoding.MAX_FAIL_COUNT)
             {
                 _failCount++;
@@ -113,8 +112,7 @@ public class UI_RetryPopup : UI_Popup
             }
             _failCount = 0;
             Managers.Scene.LoadScene(EScene.SignInScene);
-        }
-        );
+        });
         GetText((int)Texts.LifeRecordTime_Text).text = $"{_bestRecord} : {Managers.Game.UserInfo.RecordScore:N0}";
         GetText((int)Texts.LifeTime_Text).text = $"{_recentRecord} : {Managers.Game.UserInfo.LatelyScore:N0}";
 

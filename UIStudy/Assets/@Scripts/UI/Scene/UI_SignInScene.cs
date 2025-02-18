@@ -43,7 +43,7 @@ public class UI_SignInScene : UI_Scene
     private EErrorCode _errCodeId = EErrorCode.ERR_Nothing;
     private string _password = "";
     //private bool _isFailFirst = false; // for test
-
+    private EScene _scene = EScene.Unknown;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -93,6 +93,8 @@ public class UI_SignInScene : UI_Scene
         //1. 다른버튼 비활성화
         //2. 로딩 인디케이터
         {
+            var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
             ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkLoginSuccess);
             Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
@@ -100,32 +102,14 @@ public class UI_SignInScene : UI_Scene
             Managers.Score.GetScore((this), null,
             () => 
             {
-                if(string.IsNullOrEmpty(Managers.Game.UserInfo.UserNickname))
-                {
-                    Debug.Log("InputNicknameScene");
-                    Managers.Scene.LoadScene(EScene.InputNicknameScene);
-                    return;
-                }
-                Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+                _scene = EScene.SuberunkerSceneHomeScene;
             },
             () => 
             {
-/*
-                Debug.Log("is SignInScene");
-                if(_isFailFirst == true)
-                {                
-                    Debug.Log("is second");
-                    _isFailFirst = false;
-                    Managers.Scene.LoadScene(EScene.SignInScene);
-                    return;
-                }
-                Debug.Log("is first");
-                _isFailFirst = true;
-                Managers.Score.GetScore(this);
-*/
-                Managers.Scene.LoadScene(EScene.SignInScene);
-            }
-            );
+                _scene = EScene.SignInScene;
+            });
+            Managers.UI.ClosePopupUI(loadingPopup);
+            Managers.Scene.LoadScene(_scene);
         }
     }
 
@@ -144,6 +128,7 @@ public class UI_SignInScene : UI_Scene
         // 2. 아이디를 조회한다.
         //      - 있음 -> 로그인 가능
         //      - 없음 -> 불가.
+        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
 
         Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
         {
@@ -175,6 +160,7 @@ public class UI_SignInScene : UI_Scene
            _errCodeId = EErrorCode.ERR_ValidationId;
            GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
        });
+        Managers.UI.ClosePopupUI(loadingPopup);
     }
 
     private EErrorCode CheckCorrectPassword()

@@ -147,52 +147,6 @@ public class UI_TopBar : UI_Base
             Managers.Event.TriggerEvent(EEventType.OnPlayerDead, this, 0);
             isSettleComplete = true;
         }
-
-
-        //float currentHp = GetImage((int)Images.Hp).fillAmount;
-
-        ////event로 바꿔야함
-        //if (nextHp < currentHp)
-        //{
-        //    while (nextHp < currentHp)
-        //    {
-        //        currentHp -= 0.05f; 
-        //        if (currentHp < nextHp)
-        //        {
-        //            currentHp = nextHp;
-        //        }
-
-        //        GetImage((int)Images.Hp).fillAmount = currentHp;
-
-        //        yield return new WaitForSeconds(0.05f);
-        //    }
-
-        //    if (currentHp <= 0)
-        //    {
-        //        _lifeTimer?.Dispose();
-        //        Managers.Game.UserInfo.LatelyScore = _time;
-        //        Managers.Game.UserInfo.Gold += Managers.Game.Gold;
-        //        Managers.Resource.Instantiate("UI_Loading", this.transform);
-        //        Managers.Event.TriggerEvent(EEventType.StartLoading);
-        //        Managers.Score.SetScore(this, ProcessErrorFun);
-        //        Managers.Event.TriggerEvent(EEventType.StopLoading);
-        //    }
-        //}
-        //else
-        //{
-        //    while (currentHp < nextHp)
-        //    {
-        //        currentHp += 0.05f; 
-        //        if (nextHp < currentHp) 
-        //        {
-        //            currentHp = nextHp;
-        //        }
-
-        //        GetImage((int)Images.Hp).fillAmount = currentHp;
-
-        //        yield return new WaitForSeconds(0.05f);
-        //    }
-        //}
     }
 
     public void ProcessErrorFun()

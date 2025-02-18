@@ -22,14 +22,8 @@ public class UI_MainPanel : UI_Base
     List<ResDtoGetUserAccountListElement> _userList = null;
     private int _rank = 1; 
 
-    private string _minutesString = "분";
-    private string _secondsString = "초";
     private string _bestRecord = "최고 기록";
     private string _recentRecord = "최근 기록";
-    private int _recordMinutes;
-    private float _recordSeconds;
-    private int _minutes;
-    private float _seconds;
 
      public override bool Init()
     {
@@ -69,8 +63,8 @@ public class UI_MainPanel : UI_Base
     {
         Debug.Log("SetUserScoreList");
         AllPush();
-        Managers.Resource.Instantiate("UI_Loading", this.transform);
-        Managers.Event.TriggerEvent(EEventType.StartLoading);
+        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+
         Managers.WebContents.ReqGetUserAccountList(null,
        (response) =>
        {
@@ -80,11 +74,12 @@ public class UI_MainPanel : UI_Base
                 SpawnRankingItem(user, _rank);
                 _rank++;
             }
-            _rank = 1;
-            Managers.Event.TriggerEvent(EEventType.StopLoading);
+            _rank = 1;        
+            Managers.UI.ClosePopupUI(loadingPopup);
        },
        (errorCode) =>
-       {
+       {        Managers.UI.ClosePopupUI(loadingPopup);
+
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
             ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
             Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
@@ -94,14 +89,7 @@ public class UI_MainPanel : UI_Base
 
     private void SetMyScore(Component sender = null, object param = null)
     {
-        // _recordMinutes = Managers.Game.UserInfo.RecordScore / 60;
-        // _recordSeconds = Managers.Game.UserInfo.RecordScore % 60;
-        // GetText((int)Texts.Best_Text).text = $"{_bestRecord} : {_recordMinutes}{_minutesString} {_recordSeconds}{_secondsString}";
         GetText((int)Texts.Best_Text).text = $"{_bestRecord} : {Managers.Game.UserInfo.RecordScore:N0}";
-
-        // _minutes = Managers.Game.UserInfo.LatelyScore / 60;
-        // _seconds = Managers.Game.UserInfo.LatelyScore % 60;
-        // GetText((int)Texts.Current_Text).text = $"{_recentRecord} : {_minutes}{_minutesString} {_seconds}{_secondsString}";
         GetText((int)Texts.Current_Text).text = $"{_recentRecord} : {Managers.Game.UserInfo.LatelyScore:N0}";
     }
     private void SpawnRankingItem(ResDtoGetUserAccountListElement element, int rank)
@@ -121,10 +109,6 @@ public class UI_MainPanel : UI_Base
     {
         _bestRecord = Managers.Language.LocalizedString(91001);
         _recentRecord = Managers.Language.LocalizedString(91002);
-        // _minutesString = Managers.Language.LocalizedString(91004);
-        // _secondsString = Managers.Language.LocalizedString(91005);
-        // GetText((int)Texts.Best_Text).text = $"{_bestRecord} : {_recordMinutes}{_minutesString} {_recordSeconds}{_secondsString}";
-        // GetText((int)Texts.Current_Text).text = $"{_recentRecord} : {_minutes}{_minutesString} {_seconds}{_secondsString}";
         GetText((int)Texts.Best_Text).text = $"{_bestRecord} : {Managers.Game.UserInfo.RecordScore:N0}";
         GetText((int)Texts.Current_Text).text = $"{_recentRecord} : {Managers.Game.UserInfo.LatelyScore:N0}";
     }

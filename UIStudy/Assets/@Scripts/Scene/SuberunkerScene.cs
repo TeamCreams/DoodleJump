@@ -83,9 +83,12 @@ public class SuberunkerScene : BaseScene
     void Event_OnPlayerDead(Component sender, object param)
     {
         int tryCount = (int)param;
+        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+
         if (tryCount == 2)
         {
-            Managers.Event.TriggerEvent(EEventType.StopLoading);
+            Managers.UI.ClosePopupUI(loadingPopup);
+            
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
             ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError);
             Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
@@ -93,19 +96,13 @@ public class SuberunkerScene : BaseScene
             return;
         }
 
-        //var loadingPopup = Managers.UI.ShowPopupUI<UI_Loading>();
-        //loadingPopup.Show();
-        Managers.Resource.Instantiate("UI_Loading", this.transform);
-        Managers.Event.TriggerEvent(EEventType.StartLoading);
         Managers.Score.SetScore(
             this, 
             onSuccess: () => 
             {
                 Managers.Event.TriggerEvent(EEventType.OnSettlementComplete); 
                 Managers.Event.TriggerEvent(EEventType.OnUpdateMission);
-                Managers.Event.TriggerEvent(EEventType.StopLoading);
-                //_ui.HideUILoading();
-                //loadingPopup.Hide();
+                Managers.UI.ClosePopupUI(loadingPopup);
             },
             onFailed: () => Event_OnPlayerDead(this, tryCount++));
     }
