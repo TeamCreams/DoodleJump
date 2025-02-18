@@ -115,15 +115,7 @@ public class UI_RetryPopup : UI_Popup
             Managers.Scene.LoadScene(EScene.SignInScene);
         }
         );
-        // Managers.Event.TriggerEvent(EEventType.StopLoading);
-        // int recordMinutes = Managers.Game.UserInfo.RecordScore / 60;
-        // float recordSeconds = Managers.Game.UserInfo.RecordScore % 60;
-        // GetText((int)Texts.LifeRecordTime_Text).text = $"{_bestRecord} : {recordMinutes}{_minutes} {recordSeconds}{_seconds}";
         GetText((int)Texts.LifeRecordTime_Text).text = $"{_bestRecord} : {Managers.Game.UserInfo.RecordScore:N0}";
-
-        // int minutes = Managers.Game.UserInfo.LatelyScore / 60;
-        // float seconds = Managers.Game.UserInfo.LatelyScore % 60;
-        // GetText((int)Texts.LifeTime_Text).text = $"{_recentRecord} : {minutes}{_minutes} {seconds}{_seconds}";
         GetText((int)Texts.LifeTime_Text).text = $"{_recentRecord} : {Managers.Game.UserInfo.LatelyScore:N0}";
 
 

@@ -31,7 +31,7 @@ public class UI_ErrorButtonPopup : UI_Popup
 
         GetButton((int)Buttons.Close_Button).gameObject.BindEvent(OnEvent_ClickClose, EUIEvent.Click);
         GetButton((int)Buttons.Cancle_Button).gameObject.BindEvent(OnEvent_ClickClose, EUIEvent.Click);
-        //GetButton((int)Buttons.Ok_Button).gameObject.BindEvent(OnEvent_ClickOk, EUIEvent.Click);
+        GetButton((int)Buttons.Ok_Button).gameObject.BindEvent(OnEvent_ClickOk, EUIEvent.Click);
         
         Managers.Event.AddEvent(EEventType.ErrorButtonPopup, OnClick_ErrorButtonPopup);
 
@@ -54,7 +54,7 @@ public class UI_ErrorButtonPopup : UI_Popup
         GetText((int)Texts.Notice_Text).text = str;
     }
     
-    public void AddOnClickAction(Action action)
+    public void AddOnClickAction(Action action = null)
     {
         if(action != null)
         {

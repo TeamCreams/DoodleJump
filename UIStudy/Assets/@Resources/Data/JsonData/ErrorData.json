@@ -135,6 +135,14 @@
       "NoticeEn": null,
       "TitleKr": null,
       "NoticeKr": null
+    },
+    {
+      "Id": 150018,
+      "Type": 18,
+      "TitleEn": "Logout",
+      "NoticeEn": "Do you want to log out?",
+      "TitleKr": "로그아웃",
+      "NoticeKr": "로그아웃하시겠습니까?"
     }
   ]
 }

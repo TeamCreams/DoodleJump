@@ -170,7 +170,8 @@ public static class Define
         ERR_GoldInsufficient, 
         ERR_ValidationPassword, 
         ERR_ConfirmPassword, 
-        ERR_Nothing
+        ERR_Nothing,
+        Err_Logout
     }
 
     public enum EProductType
@@ -244,8 +245,7 @@ public static class Define
         public static readonly int MAX_FAIL_COUNT = 1;
 
         public static readonly string PersonlSetting = "personalSetting";
-        public static readonly string Energy = "Energy";
-
+        public static readonly string UserName = "UserName";
     }
 
 }

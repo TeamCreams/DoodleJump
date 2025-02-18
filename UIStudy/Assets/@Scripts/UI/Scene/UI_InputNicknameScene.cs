@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using GameApi.Dtos;
 using UnityEngine;
@@ -71,25 +72,47 @@ public class UI_InputNicknameScene : UI_Scene
 
         //if(eventData.pointerPressRaycast.gameObject != GetInputField((int)InputFields.Nickname_InputField))
         // inspection
-        Managers.WebContents.ReqInsertUserAccountNickname(new ReqDtoInsertUserAccountNickname()
+        Managers.WebContents.ReqGetValidateUserAccountUserNickName(new ReqDtoGetValidateUserAccountNickname()
         {
-            UserAccountId = Managers.Game.UserInfo.UserAccountId,
             Nickname = GetInputField((int)InputFields.Nickname_InputField).text
+        },(response) =>
+        {
+                Managers.Game.UserInfo.UserNickname = GetInputField((int)InputFields.Nickname_InputField).text;
+                InsertUser(() =>
+                    Managers.Scene.LoadScene(EScene.SignInScene));        
+        },(errorCode) =>
+        {
+                Managers.UI.ShowPopupUI<UI_ToastPopup>();
+                ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_ValidationNickname);
+                Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
+        });
+
+    }
+    private void InsertUser(Action onSuccess = null)
+    {
+        Managers.WebContents.ReqInsertUserAccount(new ReqDtoInsertUserAccount()
+        {
+            UserName = Managers.Game.UserInfo.UserName,
+            Password = Managers.Game.UserInfo.Password,
+            NickName = Managers.Game.UserInfo.UserNickname
         },
        (response) =>
        {
-            Managers.Game.UserInfo.UserNickname = GetInputField((int)InputFields.Nickname_InputField).text;
-            Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+            Debug.Log("아이디 만들기 성공");
+            Managers.UI.ShowPopupUI<UI_ToastPopup>();
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
+            
+            onSuccess?.Invoke();
        },
        (errorCode) =>
        {
-            Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_ValidationNickname);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
+            Debug.Log("아이디 만들기 실패~");
+            Managers.UI.ShowPopupUI<UI_ErrorPopup>();
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationFailed);
+            Managers.Event.TriggerEvent(EEventType.ErrorPopup, this, errorStruct);
        });
-        
     }
-
     private EErrorCode CheckCorrectNickname(string nickname)
     {
         if (string.IsNullOrEmpty(nickname))
@@ -108,6 +131,6 @@ public class UI_InputNicknameScene : UI_Scene
     {
         GetText((int)Texts.Nickname_Text).text = Managers.Language.LocalizedString(91014);
         GetText((int)Texts.Placeholder_Nickname_Text).text = Managers.Language.LocalizedString(91014);
-        //_nicknameUnavailable = Managers.Language.LocalizedString(91015);
+        _nicknameUnavailable = Managers.Language.LocalizedString(91015);
     }
 }

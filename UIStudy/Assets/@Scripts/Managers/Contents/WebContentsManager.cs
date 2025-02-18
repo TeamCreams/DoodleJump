@@ -12,7 +12,9 @@ public class WebRoute
 {
     private readonly static string BaseUrl = $"https://dev-single-api.snapism.net:8082/";
     public readonly static Func<ReqDtoGetUserAccount, string> GetUserAccount = (dto) => $"{BaseUrl}User/GetUserAccount?UserName={dto.UserName}";
-    public readonly static Func<ReqDtoGetValidateUserAccountId, string> GetValidateUserAccountId = (dto) => $"{BaseUrl}User/GetValidateUserAccountId?UserName={dto.UserName}";
+    public readonly static Func<ReqDtoGetValidateUserAccountUserName, string> GetValidateUserAccountUserName = (dto) => $"{BaseUrl}User/GetValidateUserAccountUserName?UserName={dto.UserName}";
+    public readonly static Func<ReqDtoGetValidateUserAccountNickname, string> GetValidateUserAccountNickname = (dto) => $"{BaseUrl}User/GetValidateUserAccountNickname?Nickname={dto.Nickname}";
+
     public readonly static string InsertUserAccount = $"{BaseUrl}User/InsertUser";
     public readonly static string InsertUserAccountScore = $"{BaseUrl}User/InsertUserAccountScore";
     public readonly static string InsertUserAccountNickname = $"{BaseUrl}User/InsertUserAccountNickname";
@@ -60,11 +62,34 @@ public class WebContentsManager
     }
 
 
-    public void ReqGetValidateUserAccountId(ReqDtoGetValidateUserAccountId requestDto, Action<ResDtoGetValidateUserAccountId> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void ReqGetValidateUserAccountUserName(ReqDtoGetValidateUserAccountUserName requestDto, Action<ResDtoGetValidateUserAccountUserName> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
-        Managers.Web.SendGetRequest(WebRoute.GetValidateUserAccountId(requestDto), (response) =>
+        Managers.Web.SendGetRequest(WebRoute.GetValidateUserAccountUserName(requestDto), (response) =>
         {
-            CommonResult<ResDtoGetValidateUserAccountId> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetValidateUserAccountId>>(response);
+            CommonResult<ResDtoGetValidateUserAccountUserName> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetValidateUserAccountUserName>>(response);
+
+            if (rv == null || false == rv.IsSuccess)
+            {
+                onFailed.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                if (rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
+    public void ReqGetValidateUserAccountUserNickName(ReqDtoGetValidateUserAccountNickname requestDto, Action<ResDtoGetValidateUserAccountNickname> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        Managers.Web.SendGetRequest(WebRoute.GetValidateUserAccountNickname(requestDto), (response) =>
+        {
+            CommonResult<ResDtoGetValidateUserAccountNickname> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetValidateUserAccountNickname>>(response);
 
             if (rv == null || false == rv.IsSuccess)
             {
@@ -176,7 +201,7 @@ public class WebContentsManager
                 }
                 else
                 {
-                    Managers.Game.UserInfo.UserId = rv.Data.UserName;
+                    Managers.Game.UserInfo.UserName = rv.Data.UserName;
                     Managers.Game.UserInfo.UserNickname = rv.Data.Nickname;
                     onSuccess.Invoke(rv.Data);
                 }

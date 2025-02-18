@@ -96,7 +96,7 @@ public class UI_SignInScene : UI_Scene
             Managers.UI.ShowPopupUI<UI_ToastPopup>();
             ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkLoginSuccess);
             Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
-            Managers.Game.UserInfo.UserId = GetInputField((int)InputFields.Id_InputField).text;
+            Managers.Game.UserInfo.UserName = GetInputField((int)InputFields.Id_InputField).text;
             Managers.Score.GetScore((this), null,
             () => 
             {
@@ -153,7 +153,20 @@ public class UI_SignInScene : UI_Scene
        {
             _errCodeId = EErrorCode.ERR_OK;
             _password = response.Password;
+            // 유저 정보 저장
             Managers.Game.UserInfo.UserNickname = response.Nickname;
+            Managers.Game.UserInfo.UserAccountId = response.UserAccountId;
+            //캐릭터 스타일 저장
+            Managers.Game.ChracterStyleInfo.CharacterId = response.CharacterId;
+            Managers.Game.ChracterStyleInfo.Hair = response.HairStyle;
+            Managers.Game.ChracterStyleInfo.Eyebrows = response.EyebrowStyle;
+            Managers.Game.ChracterStyleInfo.Eyes = response.EyesStyle;
+            Managers.Game.UserInfo.EvolutionId = response.Evolution;
+
+            // 아이디 저장
+            PlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);
+            PlayerPrefs.Save();
+
             GetInputField((int)InputFields.Password_InputField).enabled = true;
             GetText((int)Texts.Warning_Id_Text).text = "";
        },
@@ -184,7 +197,7 @@ public class UI_SignInScene : UI_Scene
     {
         GetText((int)Texts.Id_Text).text = Managers.Language.LocalizedString(91027);
         GetText((int)Texts.Placeholder_Id_Text).text = Managers.Language.LocalizedString(91027);
-        _idUnavailable = Managers.Language.LocalizedString(91024);
+        _idUnavailable = Managers.Language.LocalizedString(91045);
 
         GetText((int)Texts.Password_Text).text = Managers.Language.LocalizedString(91020);
         GetText((int)Texts.Placeholder_Password_Text).text = Managers.Language.LocalizedString(91020);

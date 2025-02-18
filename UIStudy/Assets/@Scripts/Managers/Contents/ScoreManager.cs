@@ -12,7 +12,7 @@ public class ScoreManager
         Debug.Log($"{nameof(GetScore)} Call");
         Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
         {
-            UserName = Managers.Game.UserInfo.UserId
+            UserName = Managers.Game.UserInfo.UserName
         },
        (response) =>
        {    

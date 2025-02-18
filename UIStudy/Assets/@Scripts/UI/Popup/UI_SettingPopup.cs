@@ -11,7 +11,8 @@ public class UI_SettingPopup : UI_Popup
         Music_Text,
         SoundFx_Text,
         Vibration_Text,
-        Language_Text
+        Language_Text,
+        Logout_Text
     }
 
     private enum Buttons
@@ -47,6 +48,7 @@ public class UI_SettingPopup : UI_Popup
         GetToggle((int)Toggles.Language_Kr).gameObject.BindEvent(OnClick_SetLanguage, EUIEvent.Click);
         GetSlider((int)Sliders.Music_Slider).gameObject.BindEvent(OnDrag_MusicSlider, EUIEvent.Drag);
         GetSlider((int)Sliders.SoundFx_Slider).gameObject.BindEvent(OnDrag_SoundFxSlider, EUIEvent.Drag);
+        GetText((int)Texts.Logout_Text).gameObject.BindEvent(OnClick_Logout, EUIEvent.Click);
         return true;
     }
     private void OnDestroy()
@@ -112,6 +114,14 @@ public class UI_SettingPopup : UI_Popup
         _personalSettingData.SoundFxVolume = GetSlider((int)Sliders.SoundFx_Slider).value;
         Managers.Sound.SoundFxValue = _personalSettingData.SoundFxVolume;
     }
+    private void OnClick_Logout(PointerEventData eventData)
+    {
+        // 창띄우기
+        UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+        ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.Err_Logout);
+        Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, errorStruct.Notice);
+        popup.AddOnClickAction();
+    }
 
     void OnEvent_SetLanguage(Component sender, object param)
     {
@@ -120,5 +130,6 @@ public class UI_SettingPopup : UI_Popup
         GetText((int)Texts.SoundFx_Text).text = Managers.Language.LocalizedString(91039);
         GetText((int)Texts.Vibration_Text).text = Managers.Language.LocalizedString(91040);
         GetText((int)Texts.Language_Text).text = Managers.Language.LocalizedString(91041);
+        GetText((int)Texts.Logout_Text).text = Managers.Language.LocalizedString(91046);
     }
 }

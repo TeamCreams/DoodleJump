@@ -209,6 +209,26 @@
       "Id": 91042,
       "KrText": "완료",
       "EnText": "Complete"
+    },
+    {
+      "Id": 91043,
+      "KrText": "수령",
+      "EnText": "Claim"
+    },
+    {
+      "Id": 91044,
+      "KrText": "떠나기",
+      "EnText": "Leave"
+    },
+    {
+      "Id": 91045,
+      "KrText": "없는 아이디입니다.",
+      "EnText": "Account not found."
+    },
+    {
+      "Id": 91046,
+      "KrText": "로그아웃",
+      "EnText": "LOGOUT"
     }
   ]
 }

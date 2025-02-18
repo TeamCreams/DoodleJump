@@ -205,7 +205,9 @@ public class ChracterStyleInfo
 }
 public class UserInfo // 서버로 전달될 데이터
 {
-    public string UserId { get; set; } = "Orange";
+    public int UserAccountId { get; set; } = 0;
+    public string UserName { get; set; } = "";
+    public string Password {get; set;} = "0000";
     public string UserNickname {get; set;}
     public int RecordScore {get; set;} = 0;
     public int LatelyScore {get; set;} = 0;
@@ -214,7 +216,6 @@ public class UserInfo // 서버로 전달될 데이터
     public int PlayTime {get; set;} = 0;
     public int ScoreBoard {get; set;} = 0;
     public int AccumulatedStone {get; set;} = 0;
-    public int UserAccountId { get; set; } = 0;
     public int EvolutionId {get; set;} = 140003;
 }
 public class SettingInfo

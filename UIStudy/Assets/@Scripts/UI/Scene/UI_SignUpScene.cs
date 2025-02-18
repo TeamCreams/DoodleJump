@@ -132,37 +132,10 @@ public class UI_SignUpScene : UI_Scene
             popup.AddOnClickAction(ProcessErrorFun);
             // 아이디 생성 안 된다고 말하고 가만히 있기/로그인창으로넘어가기 선택 팝업.
             return; 
-        }
-        
-        InsertUser(() =>
-           Managers.Scene.LoadScene(EScene.SignInScene));
+        }        
+        Managers.Scene.LoadScene(EScene.InputNicknameScene);
     }
     
-    private void InsertUser(Action onSuccess = null)
-    {
-        Managers.WebContents.ReqInsertUserAccount(new ReqDtoInsertUserAccount()
-        {
-            UserName = GetInputField((int)InputFields.Id_InputField).text,
-            Password = GetInputField((int)InputFields.Password_InputField).text
-        },
-       (response) =>
-       {
-            Debug.Log("아이디 만들기 성공");
-            Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
-
-            onSuccess?.Invoke();
-       },
-       (errorCode) =>
-       {
-            Debug.Log("아이디 만들기 실패~");
-            Managers.UI.ShowPopupUI<UI_ErrorPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationFailed);
-            Managers.Event.TriggerEvent(EEventType.ErrorPopup, this, errorStruct);
-       });
-    }
-
     private void CheckCorrectId(string id)
     {
         if (string.IsNullOrEmpty(id) || char.IsDigit(id[0]))
@@ -176,13 +149,14 @@ public class UI_SignUpScene : UI_Scene
             _errCodeId = EErrorCode.ERR_ValidationId;
         }
 
-        Managers.WebContents.ReqGetValidateUserAccountId(new ReqDtoGetValidateUserAccountId()
+        Managers.WebContents.ReqGetValidateUserAccountUserName(new ReqDtoGetValidateUserAccountUserName()
         {
             UserName = GetInputField((int)InputFields.Id_InputField).text,
         },
        (response) =>
        {
            GetText((int)Texts.Warning_Id_Text).text = "";
+           Managers.Game.UserInfo.UserName = id;
            _errCodeId = EErrorCode.ERR_OK;
             GetInputField((int)InputFields.Password_InputField).enabled = true;
        },
@@ -215,6 +189,7 @@ public class UI_SignUpScene : UI_Scene
             return EErrorCode.ERR_ConfirmPassword;
         }
         GetText((int)Texts.Warning_ConfirmPassword_Text).text = "";
+        Managers.Game.UserInfo.Password = input;
         return EErrorCode.ERR_OK;
     }
 

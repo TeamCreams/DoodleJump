@@ -16,3 +16,4 @@ Id,Type,TitleEn,NoticeEn,TitleKr,NoticeKr
 150015,ERR_ValidationPassword,,The password is not available.,,사용할 수 없는 비밀번호입니다.
 150016,ERR_ConfirmPassword,,The entered passwords do not match.,,입력하신 비밀번호가 같지 않습니다.
 150017,ERR_Nothing,,,,
+150018,ERR_Logout,Logout,Do you want to log out?,로그아웃,로그아웃하시겠습니까?

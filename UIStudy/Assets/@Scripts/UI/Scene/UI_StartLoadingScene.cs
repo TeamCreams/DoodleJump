@@ -43,49 +43,52 @@ public class UI_StartLoadingScene : UI_Scene
 
     public void OnEvent_LoadUserAccount()
     {
-        Managers.WebContents.ReqGetOrAddUserAccount(new ReqDtoGetOrAddUserAccount()
+        string serializedData = PlayerPrefs.GetString(HardCoding.UserName);
+        Managers.Game.UserInfo.UserName = serializedData;
+        Debug.Log($"UserName : {Managers.Game.UserInfo.UserName}");
+        if (string.IsNullOrEmpty(Managers.Game.UserInfo.UserName)) // 최초 로그인
         {
-            UserName = Managers.Game.UserInfo.UserId,
-        },
-       (response) =>
-       {
-            HandleSuccess(response, () => 
+            _scene = EScene.SignUpScene;
+            _isLoadSceneCondition = true;
+        }
+        else
+        {
+            Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
             {
-                _isLoadSceneCondition = true;
-                Managers.Game.UserInfo.UserAccountId = response.UserAccountId;
-                //캐릭터 스타일 
-                Managers.Game.ChracterStyleInfo.CharacterId = response.CharacterId;
-                Managers.Game.ChracterStyleInfo.Hair = response.HairStyle;
-                Managers.Game.ChracterStyleInfo.Eyebrows = response.EyebrowStyle;
-                Managers.Game.ChracterStyleInfo.Eyes = response.EyesStyle;
-                Managers.Game.UserInfo.EvolutionId = response.Evolution;
-                //
-                Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
-                Managers.Event.TriggerEvent(EEventType.OnFirstAccept);
+                UserName = Managers.Game.UserInfo.UserName,
+            },
+        (response) =>
+        {
+                HandleSuccess(response, () => 
+                {
+                    _isLoadSceneCondition = true;
+                    Managers.Game.UserInfo.UserNickname = response.Nickname;
+                    Managers.Game.UserInfo.UserAccountId = response.UserAccountId;
+                    //캐릭터 스타일 
+                    Managers.Game.ChracterStyleInfo.CharacterId = response.CharacterId;
+                    Managers.Game.ChracterStyleInfo.Hair = response.HairStyle;
+                    Managers.Game.ChracterStyleInfo.Eyebrows = response.EyebrowStyle;
+                    Managers.Game.ChracterStyleInfo.Eyes = response.EyesStyle;
+                    Managers.Game.UserInfo.EvolutionId = response.Evolution;
+                    //
+                    Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
+                    Managers.Event.TriggerEvent(EEventType.OnFirstAccept);
+                });
+        },
+        (errorCode) =>
+        {
+                Managers.UI.ShowPopupUI<UI_ToastPopup>();
+                ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
+                Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);          
+                Debug.Log($"[Error Code : {errorCode}] error message");
+                HandleFailure();
             });
-       },
-       (errorCode) =>
-       {
-            Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);          
-            Debug.Log($"[Error Code : {errorCode}] error message");
-            HandleFailure();
-        });
+        }
         StartCoroutine(LoadScene_Co());
     }
 
-    private void HandleSuccess(ResDtoGetOrAddUserAccount response, Action result = null)
+    private void HandleSuccess(ResDtoGetUserAccount response, Action result = null)
     {        
-        Debug.Log(Managers.Game.UserInfo.UserNickname);
-
-        if (string.IsNullOrEmpty(Managers.Game.UserInfo.UserNickname)) // 최초 로그인
-        {
-            _scene = EScene.InputNicknameScene;
-            result?.Invoke();
-            return;
-        }
-        
         Managers.Score.GetScore(this, ProcessErrorFun,
         () => 
         {
