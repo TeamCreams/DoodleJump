@@ -19,6 +19,7 @@ public class SuberunkerTimelineScene : BaseScene
         _playableDirector.Play();
         gameObject.GetOrAddComponent<SuberunkerTimelineAnimationEvents>().SetInfo(1);
 
+        Managers.Event.TriggerEvent(Define.EEventType.UpdateEnergy);
 
         return true;
     }

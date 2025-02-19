@@ -55,6 +55,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c865c708479334f2d9b5dabd47ec7215
+    m_Address: UI_LoadingPopup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f06fc6ac58430514cb1265820eb4ce40
     m_Address: EventSystem
     m_ReadOnly: 0

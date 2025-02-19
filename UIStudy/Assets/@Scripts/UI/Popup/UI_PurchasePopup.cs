@@ -63,9 +63,8 @@ public class UI_PurchasePopup : UI_Popup
         int remainingChange = Managers.Game.UserInfo.Gold - _item.Gold;
         if(0 <= remainingChange)
         {
-            Managers.Game.UserInfo.Gold -= _item.Gold;
             Managers.Game.UserInfo.EvolutionId = _item.Id;    
-            UpdateUserGold(remainingChange);
+            UpdateUserGold();
         }
         else
         {
@@ -75,12 +74,12 @@ public class UI_PurchasePopup : UI_Popup
         }
     }
 
-    private void UpdateUserGold(int remainingChange, Action onSuccess = null, Action onFailed = null)
+    private void UpdateUserGold(Action onSuccess = null, Action onFailed = null)
     {
         Managers.WebContents.ReqDtoUpdateUserGold(new ReqDtoUpdateUserGold()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
-            Gold = remainingChange
+            Gold = _item.Gold
         },
        (response) =>
        {

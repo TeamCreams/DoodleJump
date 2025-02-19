@@ -185,19 +185,19 @@ public class MissionManager
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
             MissionId = missionId,
             Param1 = _dicts[missionId].Param1,
-            Gold = Managers.Game.UserInfo.Gold + Managers.Data.MissionDataDic[missionId].Compensation
+            Gold = Managers.Data.MissionDataDic[missionId].Compensation
          },
        (response) =>
        {
             onSuccess?.Invoke();
             Debug.Log("CompleteUserMission is success");
-            Managers.Game.UserInfo.Gold += Managers.Data.MissionDataDic[missionId].Compensation;
+            Managers.Game.UserInfo.Gold = response.Gold;
             foreach (var mission in response.List)
             {
                 _dicts[mission.MissionId].MissionStatus = mission.MissionStatus;
                 _dicts[mission.MissionId].Param1 = mission.Param1;
             }
-            Managers.Event.TriggerEvent(EEventType.UIGoldRefresh);
+            Managers.Event.TriggerEvent(EEventType.UIRefresh);
             Managers.Event.TriggerEvent(EEventType.Mission);
        },
        (errorCode) =>

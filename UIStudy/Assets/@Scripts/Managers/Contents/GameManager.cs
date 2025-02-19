@@ -217,6 +217,8 @@ public class UserInfo // 서버로 전달될 데이터
     public int ScoreBoard {get; set;} = 0;
     public int AccumulatedStone {get; set;} = 0;
     public int EvolutionId {get; set;} = 140003;
+    public int Energy { get; set;} = 10;
+    public DateTime LatelyEnergy {get; set;}
 }
 public class SettingInfo
 {

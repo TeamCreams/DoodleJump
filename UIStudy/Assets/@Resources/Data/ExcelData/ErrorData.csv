@@ -1,19 +1,20 @@
 Id,Type,TitleEn,NoticeEn,TitleKr,NoticeKr
-150001,ERR_NetworkSettlementErrorResend,,The settlement could not be processed due to poor network conditions. Would you like to resend it?,,네트워크 상태가 좋지 않습니다. 다시 전송하시겠습니까?
-150002,ERR_NetworkSettlementError,,The settlement could not be processed due to poor network conditions.,,네트워크 상태가 좋지 않습니다.
+150001,ERR_NetworkSettlementErrorResend,,Settlement failed due to poor network conditions. Would you like to try again?,,네트워크 상태가 좋지 않습니다. 다시 전송하시겠습니까?
+150002,ERR_NetworkSettlementError,,Settlement failed due to poor network conditions.,,네트워크 상태가 좋지 않습니다.
 150003,ERR_NetworkIDError,,Please enter a valid ID.,,유효한 ID를 입력해 주세요.
 150004,ERR_NetworkLoginSuccess,,Login successful.,,로그인에 성공했습니다.
 150005,ERR_NetworkIDNotFound,,The ID does not exist.,,해당 ID는 존재하지 않습니다.
 150006,ERR_NetworkPasswordMismatch,,The password does not match.,,비밀번호가 일치하지 않습니다.
-150007,ERR_NetworkSaveError,,Failed to save...,,저장에 실패했습니다...
+150007,ERR_NetworkSaveError,,Failed to save. Please try again.,,저장에 실패했습니다...
 150008,ERR_AccountCreationFailed,Account creation has failed. ,Please try again.,계정 생성에 실패했습니다.,다시 시도해 주세요.
-150009,ERR_ValidationId,,The ID is not available.,,해당 ID는 사용할 수 없습니다.
+150009,ERR_ValidationId,,This ID is not available.,,해당 ID는 사용할 수 없습니다.
 150010,ERR_AccountPasswordRequirement,,Please enter a password within 20 characters.,,20자 이내의 비밀번호를 입력해 주세요.
 150011,ERR_AccountCreationSuccess,,Account creation successful.,,계정 생성에 성공했습니다.
 150012,ERR_AccountCreationCancellation,,Do you want to cancel account creation?,,계정 생성을 취소하시겠습니까?
 150013,ERR_ValidationNickname,,The nickname is not available.,,해당 닉네임은 사용할 수 없습니다.
 150014,ERR_GoldInsufficient,,You do not have enough Gold.,,골드가 부족합니다.
-150015,ERR_ValidationPassword,,The password is not available.,,사용할 수 없는 비밀번호입니다.
+150015,ERR_ValidationPassword,,The password is invalid.,,사용할 수 없는 비밀번호입니다.
 150016,ERR_ConfirmPassword,,The entered passwords do not match.,,입력하신 비밀번호가 같지 않습니다.
 150017,ERR_Nothing,,,,
 150018,ERR_Logout,Logout,Do you want to log out?,로그아웃,로그아웃하시겠습니까?
+150019,Err_EnergyInsufficient,,You do not have enough energy to play the game.,,에너지가 부족합니다.

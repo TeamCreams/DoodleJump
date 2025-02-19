@@ -30,9 +30,13 @@ public class WebRoute
     //public readonly static Func<ReqDtoCompleteUserMission, string> CompleteUserMission = (dto) => $"{BaseUrl}User/CompleteUserMission?UserAccountId={dto.UserAccountId}&MissionId={dto.MissionId}&Param1={dto.Param1}&Gold={dto.Gold}";
     public readonly static Func<ReqDtoGetUserMissionList, string> GetUserMissionList = (dto) => $"{BaseUrl}User/GetUserMissionList?UserAccountId={dto.UserAccountId}";
     public readonly static string InsertMissionCompensation = $"{BaseUrl}User/InsertMissionCompensation";
+    
     public readonly static string UpdateUserStyle = $"{BaseUrl}User/UpdateUserStyle";
     public readonly static string UpdateUserGold = $"{BaseUrl}User/UpdateUserGold";
 
+    public readonly static string HeartBeat = $"{BaseUrl}User/HeartBeat";
+    public readonly static string GameStart = $"{BaseUrl}User/GameStart";
+    public readonly static string UpdateEnergy = $"{BaseUrl}User/UpdateEnergy";
 }
 
 public class WebContentsManager
@@ -384,29 +388,79 @@ public class WebContentsManager
             }
         });
     }
-//     public void ReqDtoInsertMissionCompensation(ReqDtoInsertMissionCompensation requestDto, Action<ResDtoInsertMissionCompensation> onSuccess = null, Action<EStatusCode> onFailed = null)
-//     {
-//         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
+    public void ReqDtoHeartBeat(ReqDtoHeartBeat requestDto, Action<ResDtoHeartBeat> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
-//         Managers.Web.SendPostRequest(WebRoute.InsertMissionCompensation, body , (response) =>
-//         {
-//             CommonResult<ResDtoInsertMissionCompensation> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertMissionCompensation>>(response);
+        Managers.Web.SendPostRequest(WebRoute.HeartBeat, body , (response) =>
+        {
+            CommonResult<ResDtoHeartBeat> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoHeartBeat>>(response);
 
-//             if (rv == null || false == rv.IsSuccess)
-//             {
-//                 onFailed.Invoke(EStatusCode.ServerException);
-//             }
-//             else
-//             {
-//                 if (rv.StatusCode != EStatusCode.OK)
-//                 {
-//                     onFailed.Invoke(rv.StatusCode);
-//                 }
-//                 else
-//                 {                    
-//                     onSuccess.Invoke(rv.Data);
-//                 }
-//             }
-//         });
-//     }
+            if (rv == null || false == rv.IsSuccess)
+            {
+                onFailed.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                if (rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
+    public void ReqDtoGameStart(ReqDtoGameStart requestDto, Action<ResDtoGameStart> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
+
+        Managers.Web.SendPostRequest(WebRoute.GameStart, body , (response) =>
+        {
+            CommonResult<ResDtoGameStart> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGameStart>>(response);
+
+            if (rv == null || false == rv.IsSuccess)
+            {
+                onFailed.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                if (rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
+    public void ReqDtoUpdateEnergy(ReqDtoUpdateEnergy requestDto, Action<ResDtoUpdateEnergy> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
+
+        Managers.Web.SendPostRequest(WebRoute.UpdateEnergy, body , (response) =>
+        {
+            CommonResult<ResDtoUpdateEnergy> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoUpdateEnergy>>(response);
+
+            if (rv == null || false == rv.IsSuccess)
+            {
+                onFailed.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                if (rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
 }

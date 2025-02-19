@@ -4,7 +4,10 @@ using UnityEngine;
 using static Define;
 using static UI_InputNicknameScene;
 using UnityEngine.EventSystems;
+using GameApi.Dtos;
 using UniRx;
+using System;
+using System.Threading;
 
 public class UI_SuberunkerSceneHomeScene : UI_Scene
 {
@@ -19,6 +22,8 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     private enum Texts
     {
         TotalGold_Text,
+        Energy_Text,
+        EnergyTimer_Text,
         Shop_Text,
         Mission_Text,
         ChooseCharacter_Text,
@@ -41,14 +46,12 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         Ranking_Button
     }
 
-    private enum Toggles
-    {
-        Language_En,
-        Language_Kr
-    }
-
     private string _welcome = "환영합니다";
     System.IDisposable _rechargeTimer;
+    private int _displayTime = 0;
+    private int _calculateTime = 0;
+    private DateTime _serverTime = new DateTime();
+    private DateTime _startTime = new DateTime();
 
     public override bool Init()
     {
@@ -56,37 +59,41 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         {
             return false;
         }
+        // Bind
         BindObjects(typeof(GameObjects));
         BindTexts(typeof(Texts));
         BindButtons(typeof(Buttons));
         BindImages(typeof(Images));
-        //BindToggles(typeof(Toggles));
 
+        // Get
         GetButton((int)Buttons.ChooseCharacter_Button).gameObject.BindEvent((evt) =>
         {
             Managers.Scene.LoadScene(EScene.ChooseCharacterScene);
         }, EUIEvent.Click);
-
-        GetButton((int)Buttons.Start_Button).gameObject.BindEvent(OnClick_StartGame, EUIEvent.Click);
+        GetButton((int)Buttons.Start_Button).gameObject.BindEvent(OnClick_GameStart, EUIEvent.Click);
         GetImage((int)Images.MyScore_Button).gameObject.BindEvent(OnClick_ShowMyScore, EUIEvent.Click);
         GetImage((int)Images.Ranking_Button).gameObject.BindEvent(OnClick_ShowRanking, EUIEvent.Click);
         GetButton((int)Buttons.Mission_Button).gameObject.BindEvent(OnClick_ShowMission, EUIEvent.Click);
         GetButton((int)Buttons.Setting_Button).gameObject.BindEvent(OnClick_SettingButton, EUIEvent.Click);
-
         GetObject((int)GameObjects.UI_MissionPanel).SetActive(false);
-        GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
-        Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        OnEvent_SetLanguage(null, null);
-        Managers.Event.AddEvent(EEventType.UIGoldRefresh, OnEvent_RefreshGold);
 
+        // add mission
+        Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+        Managers.Event.AddEvent(EEventType.UIRefresh, OnEvent_Refresh);
+
+        // Default setting
+        _startTime = Managers.Game.UserInfo.LatelyEnergy;
+        OnEvent_SetLanguage(null, null);
+        OnEvent_Refresh(null, null);
         ShowRanking();
+        EnergyTimer();
 
         return true;
     }
     private void OnDestroy()
     {
         Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        Managers.Event.RemoveEvent(EEventType.UIGoldRefresh, OnEvent_RefreshGold);
+        Managers.Event.RemoveEvent(EEventType.UIRefresh, OnEvent_Refresh);
     }
 
     public void ShowMyScore()
@@ -129,33 +136,86 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         settingPopup.ActiveInfo();
     }
 
-    private void OnEvent_RefreshGold(Component sender, object param)
+    private void OnEvent_Refresh(Component sender, object param)
     {
+        GetText((int)Texts.Energy_Text).text = $"{Managers.Game.UserInfo.Energy} / 10";
         GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
     }
-    private void OnClick_StartGame(PointerEventData eventData)
+    private void OnClick_GameStart(PointerEventData eventData)
     {
-        /*
-        if(Managers.Game.Energy < 1)
+        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+
+        Managers.WebContents.ReqDtoGameStart(new ReqDtoGameStart()
         {
-            // 에너지 없다고 문구 띄우기
+            UserAccountId = Managers.Game.UserInfo.UserAccountId
+        },
+        (response) =>
+        {
+            Managers.UI.ClosePopupUI(loadingPopup);
+            Managers.Game.UserInfo.Energy = response.Energy;
+            Managers.Scene.LoadScene(EScene.SuberunkerTimelineScene);
+       },
+        (errorCode) =>
+        {
+            Managers.UI.ShowPopupUI<UI_ErrorPopup>();
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.Err_EnergyInsufficient);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct);
+        }
+        );
+    }
+    private void EnergyTimer()
+     {
+        // _serverTime.Hour
+        // _serverTime.Minute
+        // _serverTime.Second
+
+        // 5초마다 서버에서 시간을 받아옴.
+        // 300초가 되면 updateEnergy 요청
+
+        // 게임어플을 아예 꺼버렸을 때 laytelyTime을 저장할 방법은?
+        if(10 <= Managers.Game.UserInfo.Energy)
+        {
             return;
         }
-        Managers.Game.Energy--;
-        
-        //이걸 하는 함수를 따로 만들어야함.
-        _rechargeTimer = Observable.Interval(new System.TimeSpan(0, 0, 1))
+        StartCoroutine(CheckServerTime());
+
+        _calculateTime = Mathf.Abs((_serverTime - _startTime).Seconds);
+
+        _rechargeTimer = Observable.Interval(new TimeSpan(0, 0, 1))
             .Subscribe(_ =>
             {   
-                // 시간 변수인 Managers.Game.RechargeTimer ++
-                // 5분에 한 번씩 Managers.Game.Energy ++ 
-                // 10/10으로 충전이 전부 되어있으면 멈춤.
-                // PlayerPrefs에 저장
-                // HardCoding.Energy
-            }).AddTo(this.gameObject);
-            */
-        Managers.Scene.LoadScene(EScene.SuberunkerTimelineScene);
-    }
+                _calculateTime++;
+                _displayTime = 600 - _calculateTime;
+                if(300 <= _calculateTime)
+                {
+                    _startTime = _serverTime;
+                    _displayTime = 0;
+                    _calculateTime = 0;
+                    Managers.Event.TriggerEvent(EEventType.UpdateEnergy);
+                }
+                GetText((int)Texts.EnergyTimer_Text).text = string.Format($"{(_displayTime-300) / 60} : {(_displayTime-300) % 60}");
+            }).AddTo(this.gameObject);     
+     }
+
+     public IEnumerator CheckServerTime()
+     {
+        while(true)
+        {
+            Managers.WebContents.ReqDtoHeartBeat(new ReqDtoHeartBeat()
+            {},
+            (response) => 
+            {
+                _serverTime = response.DateTime;
+            },
+            (errorCode) => 
+            {
+                Managers.UI.ShowPopupUI<UI_ErrorPopup>();
+                ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError);
+                Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
+            });
+            yield return new WaitForSeconds(5);
+        }
+     }
     void OnEvent_SetLanguage(Component sender, object param)
     {
         GetText((int)Texts.Shop_Text).text = Managers.Language.LocalizedString(91006);

@@ -4,7 +4,7 @@
       "Id": 150001,
       "Type": 1,
       "TitleEn": null,
-      "NoticeEn": "The settlement could not be processed due to poor network conditions. Would you like to resend it?",
+      "NoticeEn": "Settlement failed due to poor network conditions. Would you like to try again?",
       "TitleKr": null,
       "NoticeKr": "네트워크 상태가 좋지 않습니다. 다시 전송하시겠습니까?"
     },
@@ -12,7 +12,7 @@
       "Id": 150002,
       "Type": 2,
       "TitleEn": null,
-      "NoticeEn": "The settlement could not be processed due to poor network conditions.",
+      "NoticeEn": "Settlement failed due to poor network conditions.",
       "TitleKr": null,
       "NoticeKr": "네트워크 상태가 좋지 않습니다."
     },
@@ -52,7 +52,7 @@
       "Id": 150007,
       "Type": 7,
       "TitleEn": null,
-      "NoticeEn": "Failed to save...",
+      "NoticeEn": "Failed to save. Please try again.",
       "TitleKr": null,
       "NoticeKr": "저장에 실패했습니다..."
     },
@@ -68,7 +68,7 @@
       "Id": 150009,
       "Type": 9,
       "TitleEn": null,
-      "NoticeEn": "The ID is not available.",
+      "NoticeEn": "This ID is not available.",
       "TitleKr": null,
       "NoticeKr": "해당 ID는 사용할 수 없습니다."
     },
@@ -116,7 +116,7 @@
       "Id": 150015,
       "Type": 15,
       "TitleEn": null,
-      "NoticeEn": "The password is not available.",
+      "NoticeEn": "The password is invalid.",
       "TitleKr": null,
       "NoticeKr": "사용할 수 없는 비밀번호입니다."
     },
@@ -143,6 +143,14 @@
       "NoticeEn": "Do you want to log out?",
       "TitleKr": "로그아웃",
       "NoticeKr": "로그아웃하시겠습니까?"
+    },
+    {
+      "Id": 150019,
+      "Type": 19,
+      "TitleEn": null,
+      "NoticeEn": "You do not have enough energy to play the game.",
+      "TitleKr": null,
+      "NoticeKr": "에너지가 부족합니다."
     }
   ]
 }

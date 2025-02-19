@@ -147,6 +147,8 @@ public class UI_SignInScene : UI_Scene
             Managers.Game.ChracterStyleInfo.Eyebrows = response.EyebrowStyle;
             Managers.Game.ChracterStyleInfo.Eyes = response.EyesStyle;
             Managers.Game.UserInfo.EvolutionId = response.Evolution;
+            Managers.Game.UserInfo.Energy = response.Energy;
+            Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
 
             // 아이디 저장
             PlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);

@@ -70,7 +70,9 @@ public class UI_StartLoadingScene : UI_Scene
                     Managers.Game.ChracterStyleInfo.Eyebrows = response.EyebrowStyle;
                     Managers.Game.ChracterStyleInfo.Eyes = response.EyesStyle;
                     Managers.Game.UserInfo.EvolutionId = response.Evolution;
-                    //
+                    Managers.Game.UserInfo.Energy = response.Energy;
+                    Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
+                    
                     Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
                     Managers.Event.TriggerEvent(EEventType.OnFirstAccept);
                 });

@@ -90,10 +90,11 @@ public static class Define
         OnFirstAccept,          // 로그인할떄 미션 리스트 체크
         OnMissionComplete,      // 미션 완료 체크
         OnUpdateMission,        // 진행중 업데이트
-        UIGoldRefresh,
+        UIRefresh,
         Evolution,
         Purchase,
         UIStoneCountRefresh,
+        UpdateEnergy
     }
 
     // 서버와 값 공유중, 함부로 수정 금지.
@@ -171,7 +172,8 @@ public static class Define
         ERR_ValidationPassword, 
         ERR_ConfirmPassword, 
         ERR_Nothing,
-        Err_Logout
+        Err_Logout,
+        Err_EnergyInsufficient
     }
 
     public enum EProductType
@@ -180,34 +182,11 @@ public static class Define
         Custom,
         None,
     }
-    public enum EErrorCode2
-    {
-        ERR_OK,
-        ERR_DuplicateNickname, // 중복된 닉네임입니다.
-        ERR_ValidationNickname, // 닉네임 사용 Validaiotn 에러
-        ERR_DuplicateId, // 중복된 Id입니다.
-        ERR_ValidationId, // Id 사용 Validaiotn 에러
-        ERR_ValidationPassword, // Password 사용 Validaiotn 에러
-        ERR_ConfirmPassword,
-        ERR_Nothing
-    }
-
 
     public enum ELanguage
     {
         Kr,
         En
-    }
-
-    public class Constants
-	{
-		public const int PLAYER_ID = 20001;
-	}
-
-    public enum EScoreType
-    {
-        LatelyScore,
-        RecordScore
     }
 
     public enum EMission

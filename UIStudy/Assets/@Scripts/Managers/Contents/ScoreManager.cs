@@ -52,7 +52,7 @@ public class ScoreManager
             Score = Managers.Game.UserInfo.LatelyScore,
             Time = Managers.Game.UserInfo.PlayTime,
             AccumulatedStone = Managers.Game.DifficultySettingsInfo.StoneCount,
-            Gold = Managers.Game.UserInfo.Gold,
+            Gold = Managers.Game.Gold, // 추가할 금액
         },
        (response) =>
        {
