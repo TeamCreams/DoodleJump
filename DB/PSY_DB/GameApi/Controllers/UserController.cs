@@ -1275,8 +1275,15 @@ namespace GameApi.Controllers
 
                 int count = (int)diffTime.TotalSeconds / 300;
                 
+                if (10 < userAccount.Energy + count)
+                {
+                    userAccount.Energy = 10;
+                }
+                else
+                {
+                    userAccount.Energy = userAccount.Energy + count;
+                }
                 userAccount.LatelyEnergy = DateTime.UtcNow;
-                userAccount.Energy = userAccount.Energy + count;
                 _context.TblUserAccounts.Update(userAccount);
 
                 var IsSuccess = await _context.SaveChangesAsync();
