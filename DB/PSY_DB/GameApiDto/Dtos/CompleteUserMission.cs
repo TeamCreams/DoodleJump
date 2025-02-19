@@ -21,5 +21,7 @@ namespace GameApi.Dtos
     public class ResDtoCompleteUserMissionList
     {
         public List<ResDtoCompleteUserMissionListElement> List { get; set; }
+        public int Gold { get; set; }
+
     }
 }

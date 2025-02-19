@@ -801,12 +801,14 @@ namespace GameApi.Controllers
                     throw new CommonException(EStatusCode.ChangedRowsIsZero,
                         $"UserAccountId : {requestDto.UserAccountId}");
                 }
-                else
+                rv.IsSuccess = true;
+                rv.StatusCode = EStatusCode.OK;
+                rv.Message = "Success UpdateGold";
+
+                rv.Data = new ResDtoUpdateUserGold
                 {
-                    rv.IsSuccess = true;
-                    rv.StatusCode = EStatusCode.OK;
-                    rv.Data = null;
-                }
+                    Gold = userAccount.Gold
+                };
             }
             catch (CommonException ex)
             {
@@ -970,7 +972,8 @@ namespace GameApi.Controllers
                             MissionId = mission.MissionId,
                             MissionStatus = (int)mission.MissionStatus,
                             Param1 = mission.Param1
-                        }).ToListAsync()
+                        }).ToListAsync(),
+                     Gold = userAccount.Gold
                 };
 
                 rv.IsSuccess = true;
@@ -1276,15 +1279,21 @@ namespace GameApi.Controllers
                 userAccount.Energy = userAccount.Energy + count;
                 _context.TblUserAccounts.Update(userAccount);
 
-                //energy 수정 
-                rv.Data = new ResDtoUpdateEnergy
-                {   
-                    Energy = userAccount.Energy,
-                };
-
+                var IsSuccess = await _context.SaveChangesAsync();
+                if (IsSuccess == 0)
+                {
+                    throw new CommonException(EStatusCode.ChangedRowsIsZero,
+                        $"UserAccountId : {requestDto.UserAccountId}");
+                }
                 rv.IsSuccess = true;
                 rv.StatusCode = EStatusCode.OK;
-                rv.Message = "Success UpdateEnergy";
+                rv.Message = "Success GameStart";
+
+                //energy 수정 
+                rv.Data = new ResDtoUpdateEnergy
+                {
+                    Energy = userAccount.Energy,
+                };
             }
             catch (CommonException ex)
             {
@@ -1319,18 +1328,29 @@ namespace GameApi.Controllers
                         $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
                 }
 
+                if (userAccount.Energy <= 0)
+                {
+                    throw new CommonException(EStatusCode.EnergyInsufficient, "에너지가 부족합니다.");
+                }
+
                 userAccount.Energy --;
+                userAccount.LatelyEnergy = DateTime.UtcNow;
                 _context.TblUserAccounts.Update(userAccount);
 
-                //energy 수정 
-                rv.Data = new ResDtoGameStart
+                var IsSuccess = await _context.SaveChangesAsync();
+                if (IsSuccess == 0)
                 {
-                    Energy = userAccount.Energy,
-                };
-
+                    throw new CommonException(EStatusCode.ChangedRowsIsZero,
+                        $"UserAccountId : {requestDto.UserAccountId}");
+                }
                 rv.IsSuccess = true;
                 rv.StatusCode = EStatusCode.OK;
                 rv.Message = "Success GameStart";
+
+                rv.Data = new ResDtoGameStart
+                {
+                    Energy = userAccount.Energy
+                };
             }
             catch (CommonException ex)
             {

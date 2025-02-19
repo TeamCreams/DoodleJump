@@ -12,6 +12,6 @@ namespace GameApi.Dtos
 
     public class ResDtoUpdateUserGold
     {
-
+        public int Gold { get; set; }
     }
 }
