@@ -1237,6 +1237,7 @@ namespace GameApi.Controllers
                 rv.Data = new();
 
                 rv.Data.DateTime = DateTime.UtcNow; // 시간이 변하질 않음
+                rv.IsSuccess = true;
             }
             catch (CommonException ex)
             {
@@ -1300,6 +1301,7 @@ namespace GameApi.Controllers
                 rv.Data = new ResDtoUpdateEnergy
                 {
                     Energy = userAccount.Energy,
+                    LatelyEnergy = userAccount.LatelyEnergy
                 };
             }
             catch (CommonException ex)
