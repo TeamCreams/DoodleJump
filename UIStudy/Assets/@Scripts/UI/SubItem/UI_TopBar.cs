@@ -142,7 +142,6 @@ public class UI_TopBar : UI_Base
             GetSlider((int)Sliders.UI_HpProgressBar).value = 0;
             _lifeTimer?.Dispose();
             Managers.Game.UserInfo.LatelyScore = Managers.Game.GetScore.Total;
-            Managers.Game.UserInfo.Gold += Managers.Game.Gold;
 
             Managers.Event.TriggerEvent(EEventType.OnPlayerDead, this, 0);
             isSettleComplete = true;
