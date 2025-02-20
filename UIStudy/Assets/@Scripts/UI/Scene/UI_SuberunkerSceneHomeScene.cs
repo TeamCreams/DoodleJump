@@ -52,7 +52,8 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     private int _calculateTime = 0;
     private DateTime _serverTime = new DateTime();
     private DateTime _startTime = new DateTime();
-
+    private bool _isRunningTimer = false;
+    private bool _isSettingComplete = false;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -83,10 +84,11 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
 
         // Default setting
         _startTime = Managers.Game.UserInfo.LatelyEnergy;
+        Debug.Log($"_startTime : {_startTime}");
         OnEvent_SetLanguage(null, null);
         OnEvent_Refresh(null, null);
         ShowRanking();
-        EnergyTimer();
+        StartCoroutine(CheckServerTime());
 
         return true;
     }
@@ -111,7 +113,6 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     private void OnClick_ShowMyScore(PointerEventData eventData)
     {
         Managers.Event.TriggerEvent(EEventType.GetMyScore);
-        //GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
         GetObject((int)GameObjects.MyScore).SetActive(true);
         GetObject((int)GameObjects.Ranking).SetActive(false);
     }
@@ -119,7 +120,6 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     private void OnClick_ShowRanking(PointerEventData eventData)
     {
         Managers.Event.TriggerEvent(EEventType.GetUserScoreList);
-        //GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
         GetObject((int)GameObjects.MyScore).SetActive(false);
         GetObject((int)GameObjects.Ranking).SetActive(true);
     }
@@ -153,6 +153,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         {
             Managers.UI.ClosePopupUI(loadingPopup);
             Managers.Game.UserInfo.Energy = response.Energy;
+            Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
             Managers.Scene.LoadScene(EScene.SuberunkerTimelineScene);
        },
         (errorCode) =>
@@ -164,7 +165,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         );
     }
     private void EnergyTimer()
-     {
+    {
         // _serverTime.Hour
         // _serverTime.Minute
         // _serverTime.Second
@@ -175,30 +176,27 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         // 게임어플을 아예 꺼버렸을 때 laytelyTime을 저장할 방법은?
         if(10 <= Managers.Game.UserInfo.Energy)
         {
+            _isRunningTimer = false;
+            _isSettingComplete = false;
+            StopCoroutine(Func());
             return;
         }
-        StartCoroutine(CheckServerTime());
 
-        _calculateTime = Mathf.Abs((_serverTime - _startTime).Seconds);
+        if(_isRunningTimer)
+        {
+            return;
+        }
+        _isRunningTimer = true;
+        // Debug.Log($"OP _startTime : {_startTime}");
+        // Debug.Log($"OP _serverTime : {_serverTime}");
+        // Debug.Log($"OP _calculateTime : {_calculateTime}");
+        _calculateTime = (int)(_serverTime - _startTime).TotalSeconds;
+        _isSettingComplete = true;
+        StartCoroutine(Func());
+    }
 
-        _rechargeTimer = Observable.Interval(new TimeSpan(0, 0, 1))
-            .Subscribe(_ =>
-            {   
-                _calculateTime++;
-                _displayTime = 600 - _calculateTime;
-                if(300 <= _calculateTime)
-                {
-                    _startTime = _serverTime;
-                    _displayTime = 0;
-                    _calculateTime = 0;
-                    Managers.Event.TriggerEvent(EEventType.UpdateEnergy);
-                }
-                GetText((int)Texts.EnergyTimer_Text).text = string.Format($"{(_displayTime-300) / 60} : {(_displayTime-300) % 60}");
-            }).AddTo(this.gameObject);     
-     }
-
-     public IEnumerator CheckServerTime()
-     {
+    public IEnumerator CheckServerTime()
+    {
         while(true)
         {
             Managers.WebContents.ReqDtoHeartBeat(new ReqDtoHeartBeat()
@@ -206,6 +204,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
             (response) => 
             {
                 _serverTime = response.DateTime;
+                EnergyTimer();
             },
             (errorCode) => 
             {
@@ -215,7 +214,26 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
             });
             yield return new WaitForSeconds(5);
         }
-     }
+    }
+
+    IEnumerator Func()
+    {
+        yield return new WaitWhile(() => _isSettingComplete == false);
+        _rechargeTimer = Observable.Interval(new TimeSpan(0, 0, 1))
+        .Subscribe(_ =>
+        {   
+            _calculateTime++;
+            _displayTime = 600 - _calculateTime;
+            if(300 <= _calculateTime)
+            {
+                _startTime = _serverTime;
+                _displayTime = 0;
+                _calculateTime = 0;
+                Managers.Event.TriggerEvent(EEventType.UpdateEnergy, this);
+            }
+            GetText((int)Texts.EnergyTimer_Text).text = string.Format($"{(_displayTime-300) / 60} : {(_displayTime-300) % 60}");
+        }).AddTo(this.gameObject);
+    }
     void OnEvent_SetLanguage(Component sender, object param)
     {
         GetText((int)Texts.Shop_Text).text = Managers.Language.LocalizedString(91006);

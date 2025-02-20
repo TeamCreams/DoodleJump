@@ -39,6 +39,8 @@ public class UI_SignInScene : UI_Scene
     private string _idUnavailable = "없는 아이디입니다.";
     private string _passwordUnavailable = "비밀번호가 일치하지 않습니다.";    
     private string _loginSuccess = "Login successful.";
+    private bool _isLoadSceneCondition = false;
+    private int _failCount = 0;
 
     private EErrorCode _errCodeId = EErrorCode.ERR_Nothing;
     private string _password = "";
@@ -109,13 +111,21 @@ public class UI_SignInScene : UI_Scene
                 _scene = EScene.SignInScene;
             });
             Managers.UI.ClosePopupUI(loadingPopup);
-            Managers.Scene.LoadScene(_scene);
+            //StartCoroutine(LoadScene_Co());
+            UpdateEnergy();
         }
     }
 
     private void OnClick_SignUp(PointerEventData eventData)
     {
-        Managers.Scene.LoadScene(EScene.SignUpScene);
+        _scene = EScene.SignUpScene;
+        Managers.Scene.LoadScene(_scene);
+    }
+
+    private IEnumerator LoadScene_Co()
+    {
+        yield return new WaitWhile(() => _isLoadSceneCondition == false);
+        Managers.Scene.LoadScene(_scene);
     }
 
     /// <summary>
@@ -156,6 +166,7 @@ public class UI_SignInScene : UI_Scene
 
             GetInputField((int)InputFields.Password_InputField).enabled = true;
             GetText((int)Texts.Warning_Id_Text).text = "";
+            _isLoadSceneCondition = true;
        },
        (errorCode) =>
        {
@@ -179,6 +190,45 @@ public class UI_SignInScene : UI_Scene
             GetText((int)Texts.Warning_Password_Text).text = "";
             return EErrorCode.ERR_OK;
         }
+    }
+
+    private void UpdateEnergy()
+    {
+        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+
+        Managers.WebContents.ReqDtoUpdateEnergy(new ReqDtoUpdateEnergy()
+        {
+            UserAccountId = Managers.Game.UserInfo.UserAccountId
+        },
+        (response) =>
+        {
+            Managers.UI.ClosePopupUI(loadingPopup);
+            Debug.Log("log in" + Managers.Game.UserInfo.LatelyEnergy);
+            Managers.Game.UserInfo.Energy = response.Energy;
+            Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
+            StartCoroutine(LoadScene_Co());
+        },
+        (errorCode) =>
+        {
+            Managers.UI.ShowPopupUI<UI_ErrorPopup>();
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct);
+            HandleFailure();
+        }
+        );
+    }
+
+    private void HandleFailure()
+    {
+        if (_failCount < HardCoding.MAX_FAIL_COUNT)
+        {                
+            _failCount++;
+            UpdateEnergy();
+            return;
+        }
+        _failCount = 0;
+        _scene = EScene.SignInScene;
+        Managers.Scene.LoadScene(_scene);
     }
 
     void OnEvent_SetLanguage(Component sender, object param)

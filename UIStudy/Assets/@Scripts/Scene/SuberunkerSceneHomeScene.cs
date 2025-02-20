@@ -26,14 +26,17 @@ public class SuberunkerSceneHomeScene : BaseScene
         Managers.Event.RemoveEvent(EEventType.UpdateEnergy, OnEvent_UpdateEnergy);
     }
 
-     private void OnEvent_UpdateEnergy(Component sender, object param)
-     {
+    public void OnEvent_UpdateEnergy(Component sender, object param)
+    {
+        Debug.Log("OnEvent_UpdateEnergy!!!"); 
+
         Managers.WebContents.ReqDtoUpdateEnergy(new ReqDtoUpdateEnergy()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId
         },
         (response) =>
         {
+            Debug.Log("OnEvent_UpdateEnergy" + Managers.Game.UserInfo.LatelyEnergy);
             Managers.Game.UserInfo.Energy = response.Energy;
             Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
             Managers.Event.TriggerEvent(EEventType.UIRefresh);
@@ -45,5 +48,5 @@ public class SuberunkerSceneHomeScene : BaseScene
             Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct);
         }
         );
-     }
+    }
 }

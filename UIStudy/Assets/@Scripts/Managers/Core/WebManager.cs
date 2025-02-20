@@ -35,9 +35,6 @@ public class WebManager
         Debug.Log(builder.ToString());
         _slave.SendPostRequest(url, body, callback);
     }
-
-
-
 }
 
 

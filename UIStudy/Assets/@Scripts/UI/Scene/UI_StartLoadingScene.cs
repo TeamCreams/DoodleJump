@@ -86,7 +86,33 @@ public class UI_StartLoadingScene : UI_Scene
                 HandleFailure();
             });
         }
-        StartCoroutine(LoadScene_Co());
+        StartCoroutine(UpdateEnergy_Co());
+    }
+    private IEnumerator UpdateEnergy_Co()
+    {
+        yield return new WaitWhile(() => _isLoadSceneCondition == false);
+        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+
+        Managers.WebContents.ReqDtoUpdateEnergy(new ReqDtoUpdateEnergy()
+        {
+            UserAccountId = Managers.Game.UserInfo.UserAccountId
+        },
+        (response) =>
+        {
+            Managers.UI.ClosePopupUI(loadingPopup);
+            Debug.Log("OnEvent_UpdateEnergy" + Managers.Game.UserInfo.LatelyEnergy);
+            Managers.Game.UserInfo.Energy = response.Energy;
+            Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
+            StartCoroutine(LoadScene_Co());
+        },
+        (errorCode) =>
+        {
+            Managers.UI.ShowPopupUI<UI_ErrorPopup>();
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError);
+            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct);
+            HandleFailure();
+        }
+        );
     }
 
     private void HandleSuccess(ResDtoGetUserAccount response, Action result = null)
