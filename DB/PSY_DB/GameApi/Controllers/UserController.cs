@@ -201,26 +201,40 @@ namespace GameApi.Controllers
             {
                 rv.Data = new();
 
-                var select = await (
-                            from user in _context.TblUserAccounts
-                            where (user.UserName.ToLower() == requestDto.UserName.ToLower() && user.DeletedDate == null) // 삭제 되기 전이 null값
-                            select new ResDtoGetUserAccountPassword
-                            {
-                                Password = user.Password
-                            }).ToListAsync(); //.FirstOrDefault();가 안됨
+                var select = await (from user in _context.TblUserAccounts
+                                    where (user.UserName.ToLower() == requestDto.UserName.ToLower() && user.DeletedDate == null) // 삭제 되기 전이 null값
+                                    select new ResDtoGetUserAccountPassword
+                                    {
+                                        Password = user.Password
+                                    }
+                    ).FirstOrDefaultAsync();
 
-
-                if (select.Any() == false)
+                if (select != null)
                 {
                     throw new CommonException(EStatusCode.NotFoundEntity,
-                        "아이디가 존재하지 않습니다."); // try문 밖으로 던짐
+                        "아이디가 존재하지 않습니다."); // try문 밖으로 던짐                }
                 }
-                var selectUser = select.First();
+
+                //var select = await (
+                //            from user in _context.TblUserAccounts
+                //            where (user.UserName.ToLower() == requestDto.UserName.ToLower() && user.DeletedDate == null) // 삭제 되기 전이 null값
+                //            select new ResDtoGetUserAccountPassword
+                //            {
+                //                Password = user.Password
+                //            }).ToListAsync(); //.FirstOrDefault();가 안됨
+
+
+                //if (select.Any() == false)
+                //{
+                //    throw new CommonException(EStatusCode.NotFoundEntity,
+                //        "아이디가 존재하지 않습니다."); // try문 밖으로 던짐
+                //}
+                //var selectUser = select.First();
 
                 rv.StatusCode = EStatusCode.OK;
                 rv.Message = "";
                 rv.IsSuccess = true;
-                rv.Data = selectUser;
+                rv.Data = select;
 
             }
             catch (CommonException ex)
@@ -469,27 +483,26 @@ namespace GameApi.Controllers
             //Thread.Sleep(3000);
             try
             {
-                var select = await (
-                            from user in _context.TblUserAccounts
-                            where (user.Id == requestDto.UserAccountId && user.DeletedDate == null)
-                            select user.Id
-                            ).ToListAsync();
+                var select = await (from user in _context.TblUserAccounts
+                                    where (user.Id == requestDto.UserAccountId &&
+                                        user.DeletedDate == null)
+                                    select user
+                                    ).FirstOrDefaultAsync();
 
-                if (select.Any() == false)
+                if (select != null)
                 {
                     throw new CommonException(EStatusCode.NotFoundEntity,
-                        $"UserId : {requestDto.UserAccountId}");
+                       $"UserId : {requestDto.UserAccountId}");
                 }
-
-                int userId = select.First();
+                int gold = select.Gold + requestDto.Gold;
 
                 TblUserScore userScore = new TblUserScore
                 {
-                    UserAccountId = userId,
+                    UserAccountId = select.Id,
                     Scoreboard = requestDto.Score,
                     PlayTime = requestDto.Time,
                     AccumulatedStone = requestDto.AccumulatedStone,
-                    Gold = requestDto.Gold,
+                    Gold = gold,
                     UpdateDate = DateTime.Now
                 };
 
