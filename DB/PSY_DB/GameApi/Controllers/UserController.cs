@@ -62,8 +62,8 @@ namespace GameApi.Controllers
                 if (select.Any() == false)
                 {
                     TblUserAccount userAccount = new();
-                    userAccount.RegisterDate = DateTime.Now;
-                    userAccount.UpdateDate = DateTime.Now;
+                    userAccount.RegisterDate = DateTime.UtcNow;
+                    userAccount.UpdateDate = DateTime.UtcNow;
                     userAccount.UserName = requestDto.UserName;
                     userAccount.Password = requestDto.Password;
                     userAccount.Nickname = requestDto.NickName;
@@ -134,10 +134,7 @@ namespace GameApi.Controllers
                                         .OrderByDescending(s => s.UpdateDate) // 최신 점수 순으로 정렬
                                         .Select(s => s.Scoreboard) // History 선택
                                         .FirstOrDefault(), // 가장 최근 점수
-                        Gold = user.TblUserScores.Any() ?
-                                        user.TblUserScores.OrderByDescending(s => s.UpdateDate)
-                                        .FirstOrDefault()
-                                        .Gold : 0,
+                        Gold = user.Gold,
                         PlayTime = user.TblUserScores
                                     .OrderByDescending(s => s.UpdateDate) // 최근 시간 순으로 정렬
                                     .Select(s => s.PlayTime)
@@ -206,10 +203,9 @@ namespace GameApi.Controllers
                                     select new ResDtoGetUserAccountPassword
                                     {
                                         Password = user.Password
-                                    }
-                    ).FirstOrDefaultAsync();
+                                    }).FirstOrDefaultAsync();
 
-                if (select != null)
+                if (select == null)
                 {
                     throw new CommonException(EStatusCode.NotFoundEntity,
                         "아이디가 존재하지 않습니다."); // try문 밖으로 던짐                }
@@ -480,7 +476,6 @@ namespace GameApi.Controllers
         {
             CommonResult<ResDtoInsertUserAccountScore> rv = new();
             
-            //Thread.Sleep(3000);
             try
             {
                 var select = await (from user in _context.TblUserAccounts
@@ -489,23 +484,23 @@ namespace GameApi.Controllers
                                     select user
                                     ).FirstOrDefaultAsync();
 
-                if (select != null)
+                if (select == null)
                 {
                     throw new CommonException(EStatusCode.NotFoundEntity,
                        $"UserId : {requestDto.UserAccountId}");
                 }
-                int gold = select.Gold + requestDto.Gold;
 
+                select.Gold += requestDto.Gold;
                 TblUserScore userScore = new TblUserScore
                 {
                     UserAccountId = select.Id,
                     Scoreboard = requestDto.Score,
                     PlayTime = requestDto.Time,
                     AccumulatedStone = requestDto.AccumulatedStone,
-                    Gold = gold,
-                    UpdateDate = DateTime.Now
+                    Gold = select.Gold,
+                    UpdateDate = DateTime.UtcNow
                 };
-
+                _context.TblUserAccounts.Update(select);
                 _context.TblUserScores.Add(userScore);
 
                 var IsSuccess = await _context.SaveChangesAsync();
@@ -675,8 +670,8 @@ namespace GameApi.Controllers
                     TblUserAccount userAccount = new()
                     {
                         UserName = requestDto.UserName,
-                        RegisterDate = DateTime.Now,
-                        UpdateDate = DateTime.Now
+                        RegisterDate = DateTime.UtcNow,
+                        UpdateDate = DateTime.UtcNow
                     };
                     _context.TblUserAccounts.Add(userAccount);
                 }
@@ -803,7 +798,7 @@ namespace GameApi.Controllers
 
                 // 아이템 값만큼 골드 뺏기
                 userAccount.Gold -= requestDto.Gold;
-                userAccount.UpdateDate = DateTime.Now;
+                userAccount.UpdateDate = DateTime.UtcNow;
 
                 _context.TblUserAccounts.Update(userAccount);
 
@@ -961,7 +956,7 @@ namespace GameApi.Controllers
 
                 // 골드 추가
                 userAccount.Gold += requestDto.Gold; 
-                userAccount.UpdateDate = DateTime.Now;
+                userAccount.UpdateDate = DateTime.UtcNow;
                 _context.TblUserAccounts.Update(userAccount);
 
                 // 미션 상태 : 보상 획득
@@ -1300,7 +1295,7 @@ namespace GameApi.Controllers
                 
                 if(prevEnergy != userAccount.Energy)
                 {
-                    userAccount.LatelyEnergy = DateTime.UtcNow;
+                    userAccount.LatelyEnergy = userAccount.LatelyEnergy.Add(diffTime);
                 }
 
                 _context.TblUserAccounts.Update(userAccount);
