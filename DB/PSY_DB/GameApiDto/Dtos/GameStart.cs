@@ -11,5 +11,6 @@ namespace GameApi.Dtos
     public class ResDtoGameStart
     {
         public int Energy { get; set; }
+        public DateTime LatelyEnergy { get; set; }
     }
 }

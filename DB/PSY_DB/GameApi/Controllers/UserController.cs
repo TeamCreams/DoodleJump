@@ -1275,8 +1275,8 @@ namespace GameApi.Controllers
                 var diffTime = DateTime.UtcNow - userAccount.LatelyEnergy;
 
                 int count = (int)diffTime.TotalSeconds / 300;
-                
-                if (10 < userAccount.Energy + count)
+                int prevEnergy = userAccount.Energy;
+                if (10 <= userAccount.Energy + count)
                 {
                     userAccount.Energy = 10;
                 }
@@ -1284,7 +1284,12 @@ namespace GameApi.Controllers
                 {
                     userAccount.Energy = userAccount.Energy + count;
                 }
-                userAccount.LatelyEnergy = DateTime.UtcNow;
+                
+                if(prevEnergy != userAccount.Energy)
+                {
+                    userAccount.LatelyEnergy = DateTime.UtcNow;
+                }
+
                 _context.TblUserAccounts.Update(userAccount);
 
                 var IsSuccess = await _context.SaveChangesAsync();
@@ -1342,8 +1347,12 @@ namespace GameApi.Controllers
                     throw new CommonException(EStatusCode.EnergyInsufficient, "에너지가 부족합니다.");
                 }
 
-                userAccount.Energy --;
-                userAccount.LatelyEnergy = DateTime.UtcNow;
+                if(10 <= userAccount.Energy)
+                {
+                    userAccount.LatelyEnergy = DateTime.UtcNow;
+                }
+                userAccount.Energy--;
+
                 _context.TblUserAccounts.Update(userAccount);
 
                 var IsSuccess = await _context.SaveChangesAsync();
@@ -1358,7 +1367,8 @@ namespace GameApi.Controllers
 
                 rv.Data = new ResDtoGameStart
                 {
-                    Energy = userAccount.Energy
+                    Energy = userAccount.Energy,
+                    LatelyEnergy = userAccount.LatelyEnergy
                 };
             }
             catch (CommonException ex)
