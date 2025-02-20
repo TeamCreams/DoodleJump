@@ -9,8 +9,8 @@ public class UI_RetryPopup : UI_Popup
 {
     private enum Texts
     {
-        LifeTime_Text,
-        LifeRecordTime_Text,
+        Score_Text,
+        RecordScore_Text,
         Gold_Text,
         Retry_Text,
         Home_Text
@@ -59,9 +59,10 @@ public class UI_RetryPopup : UI_Popup
     }
     private void OnClick_RetryButton(PointerEventData eventData)
     {        
-        Managers.Scene.LoadScene(EScene.SuberunkerScene);
         Managers.UI.ClosePopupUI(this);
         Time.timeScale = 1;
+        Managers.Game.Gold = 0;
+        Managers.Scene.LoadScene(EScene.SuberunkerScene);
     }
     private void OnClick_HomeButton(PointerEventData eventData)
     {
@@ -113,12 +114,11 @@ public class UI_RetryPopup : UI_Popup
             _failCount = 0;
             Managers.Scene.LoadScene(EScene.SignInScene);
         });
-        GetText((int)Texts.LifeRecordTime_Text).text = $"{_bestRecord} : {Managers.Game.UserInfo.RecordScore:N0}";
-        GetText((int)Texts.LifeTime_Text).text = $"{_recentRecord} : {Managers.Game.UserInfo.LatelyScore:N0}";
+        GetText((int)Texts.RecordScore_Text).text = $"{_bestRecord} : {Managers.Game.UserInfo.RecordScore:N0}";
+        GetText((int)Texts.Score_Text).text = $"{_recentRecord} : {Managers.Game.UserInfo.LatelyScore:N0}";
 
 
         GetText((int)Texts.Gold_Text).text = Managers.Game.Gold.ToString();
-        Managers.Game.Gold = 0;
     }
 
     public void ProcessErrorFun()

@@ -113,6 +113,7 @@
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SuberunkerScene.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Data/Property.cs" />
     <Compile Include="Assets/@Scripts/Controller/StoneController.cs" />
+    <Compile Include="Assets/@Scripts/Managers/QuitManager/QuitManager.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterAppearance.cs" />
     <Compile Include="Assets/@Scripts/Scene/TinyFarmScene.cs" />
     <Compile Include="Assets/@Scripts/Particle/Confetti_Particle.cs" />

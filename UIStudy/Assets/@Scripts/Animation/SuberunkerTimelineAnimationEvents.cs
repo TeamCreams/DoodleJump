@@ -21,7 +21,6 @@ public class SuberunkerTimelineAnimationEvents : ObjectBase
 
     public override void SetInfo(int templateId)
     {
-        Debug.Log("is SetttinggQ!!!!!!!");
         _characterController = GetComponentInChildren<CharacterController>();
         Debug.Assert(_characterController != null, "is nullllllllllllllllll");
         EyeSpriteRenderer = Util.FindChild<SpriteRenderer>(go: _characterController.gameObject, name: "Eyes", recursive: true);
