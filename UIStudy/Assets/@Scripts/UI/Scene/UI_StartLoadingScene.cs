@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using GameApi.Dtos;
 using UnityEngine;
@@ -49,7 +49,8 @@ public class UI_StartLoadingScene : UI_Scene
         if (string.IsNullOrEmpty(Managers.Game.UserInfo.UserName)) // 최초 로그인
         {
             _scene = EScene.SignUpScene;
-            _isLoadSceneCondition = true;
+            Managers.Scene.LoadScene(_scene);
+            //_isLoadSceneCondition = true;
         }
         else
         {
@@ -62,6 +63,7 @@ public class UI_StartLoadingScene : UI_Scene
                 HandleSuccess(response, () => 
                 {
                     _isLoadSceneCondition = true;
+                    Managers.Game.UserInfo.UserName = response.UserName;
                     Managers.Game.UserInfo.UserNickname = response.Nickname;
                     Managers.Game.UserInfo.UserAccountId = response.UserAccountId;
                     //캐릭터 스타일 
@@ -72,7 +74,11 @@ public class UI_StartLoadingScene : UI_Scene
                     Managers.Game.UserInfo.EvolutionId = response.Evolution;
                     Managers.Game.UserInfo.Energy = response.Energy;
                     Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
-                    
+
+                    // 아이디 저장
+                    PlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);
+                    PlayerPrefs.Save();
+
                     Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
                     Managers.Event.TriggerEvent(EEventType.OnFirstAccept);
                 });

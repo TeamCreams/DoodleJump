@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Rewrite;
+﻿using GameApi.Hubs;
+using Microsoft.AspNetCore.Rewrite;
 using PSY_DB;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<PsyDbContext>();
+builder.Services.AddSignalR();
+
 
 var app = builder.Build();
 
@@ -44,5 +47,8 @@ app.UseAuthorization();
 var option = new RewriteOptions();
 option.AddRedirect("^$", "swagger");
 app.UseRewriter(option);
+
+
+app.MapHub<ChatHub>("/Chat");
 
 app.Run();

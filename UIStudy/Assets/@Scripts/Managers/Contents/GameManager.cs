@@ -141,6 +141,7 @@ public class GameManager
         _settingInfo = new SettingInfo();
         _getScore = new GetScore();
     }
+
     private List<ItemData> items = new List<ItemData>()
         {
             new ItemData() { Icon = "Shoese1", Rare = 1, Parts = 1, Level = 1 },

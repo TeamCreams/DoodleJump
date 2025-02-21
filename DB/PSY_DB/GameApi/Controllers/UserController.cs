@@ -1244,7 +1244,7 @@ namespace GameApi.Controllers
             {
                 rv.Data = new();
 
-                rv.Data.DateTime = DateTime.UtcNow; // 시간이 변하질 않음
+                rv.Data.DateTime = DateTime.UtcNow; 
                 rv.IsSuccess = true;
             }
             catch (CommonException ex)

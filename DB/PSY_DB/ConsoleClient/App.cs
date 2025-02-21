@@ -16,7 +16,7 @@ namespace ConsoleClient
             var request = new HttpRequestMessage(HttpMethod.Post, "http://13.209.47.47/User/GetUserAccount");
             ReqDtoGetUserAccount requestDto = new ReqDtoGetUserAccount();
             requestDto.UserName = "test1";
-            requestDto.Password = "test1";
+            //requestDto.Password = "test1";
             string json = JsonConvert.SerializeObject(requestDto);
             var content = new StringContent(json, null, "application/json");
             request.Content = content;

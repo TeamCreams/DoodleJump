@@ -37,7 +37,7 @@ public class UI_SignInScene : UI_Scene
     }
 
     private string _idUnavailable = "없는 아이디입니다.";
-    private string _passwordUnavailable = "비밀번호가 일치하지 않습니다.";    
+    private string _passwordUnavailable = "비밀번호가 일치하지 않습니다.";
     private string _loginSuccess = "Login successful.";
     private bool _isLoadSceneCondition = false;
     private int _failCount = 0;
@@ -78,7 +78,7 @@ public class UI_SignInScene : UI_Scene
         //최종 로그인 하는 버튼.
         if (_errCodeId != EErrorCode.ERR_OK)
         {
-            Managers.UI.ShowPopupUI<UI_ToastPopup>();        
+            Managers.UI.ShowPopupUI<UI_ToastPopup>();
             ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkIDError);
             Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
             return;
@@ -102,11 +102,11 @@ public class UI_SignInScene : UI_Scene
             Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
             Managers.Game.UserInfo.UserName = GetInputField((int)InputFields.Id_InputField).text;
             Managers.Score.GetScore((this), null,
-            () => 
+            () =>
             {
                 _scene = EScene.SuberunkerSceneHomeScene;
             },
-            () => 
+            () =>
             {
                 _scene = EScene.SignInScene;
             });
@@ -146,27 +146,31 @@ public class UI_SignInScene : UI_Scene
         },
        (response) =>
        {
-            _errCodeId = EErrorCode.ERR_OK;
-            _password = response.Password;
-            // 유저 정보 저장
-            Managers.Game.UserInfo.UserNickname = response.Nickname;
-            Managers.Game.UserInfo.UserAccountId = response.UserAccountId;
-            //캐릭터 스타일 저장
-            Managers.Game.ChracterStyleInfo.CharacterId = response.CharacterId;
-            Managers.Game.ChracterStyleInfo.Hair = response.HairStyle;
-            Managers.Game.ChracterStyleInfo.Eyebrows = response.EyebrowStyle;
-            Managers.Game.ChracterStyleInfo.Eyes = response.EyesStyle;
-            Managers.Game.UserInfo.EvolutionId = response.Evolution;
-            Managers.Game.UserInfo.Energy = response.Energy;
-            Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
+           _errCodeId = EErrorCode.ERR_OK;
+           _password = response.Password;
+           // 유저 정보 저장
+           Managers.Game.UserInfo.UserName = response.UserName;
+           Managers.Game.UserInfo.UserNickname = response.Nickname;
+           Managers.Game.UserInfo.UserAccountId = response.UserAccountId;
+           //캐릭터 스타일 저장
+           Managers.Game.ChracterStyleInfo.CharacterId = response.CharacterId;
+           Managers.Game.ChracterStyleInfo.Hair = response.HairStyle;
+           Managers.Game.ChracterStyleInfo.Eyebrows = response.EyebrowStyle;
+           Managers.Game.ChracterStyleInfo.Eyes = response.EyesStyle;
+           Managers.Game.UserInfo.EvolutionId = response.Evolution;
+           Managers.Game.UserInfo.Energy = response.Energy;
+           Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
 
-            // 아이디 저장
-            PlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);
-            PlayerPrefs.Save();
+           Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
+           Managers.Event.TriggerEvent(EEventType.OnFirstAccept);
 
-            GetInputField((int)InputFields.Password_InputField).enabled = true;
-            GetText((int)Texts.Warning_Id_Text).text = "";
-            _isLoadSceneCondition = true;
+           // 아이디 저장
+           PlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);
+           PlayerPrefs.Save();
+
+           GetInputField((int)InputFields.Password_InputField).enabled = true;
+           GetText((int)Texts.Warning_Id_Text).text = "";
+           _isLoadSceneCondition = true;
        },
        (errorCode) =>
        {
@@ -221,7 +225,7 @@ public class UI_SignInScene : UI_Scene
     private void HandleFailure()
     {
         if (_failCount < HardCoding.MAX_FAIL_COUNT)
-        {                
+        {
             _failCount++;
             UpdateEnergy();
             return;

@@ -90,6 +90,7 @@ public static class Define
         OnFirstAccept,          // 로그인할떄 미션 리스트 체크
         OnMissionComplete,      // 미션 완료 체크
         OnUpdateMission,        // 진행중 업데이트
+        OnLogout,         // 로그아웃 시  
         UIRefresh,
         Evolution,
         Purchase,

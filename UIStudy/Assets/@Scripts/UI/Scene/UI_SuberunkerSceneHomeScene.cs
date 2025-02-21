@@ -54,6 +54,8 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     private DateTime _startTime = new DateTime();
     private bool _isRunningTimer = false;
     private bool _isSettingComplete = false;
+    private Coroutine _tickCo;
+
     public override bool Init()
     {
         if (base.Init() == false)
@@ -178,7 +180,12 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         {
             _isRunningTimer = false;
             _isSettingComplete = false;
-            StopCoroutine(Func());
+            if(_tickCo != null)
+            {
+                StopCoroutine(_tickCo);
+                _tickCo = null;
+                _rechargeTimer?.Dispose();
+            }
             return;
         }
 
@@ -192,7 +199,10 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         // Debug.Log($"OP _calculateTime : {_calculateTime}");
         _calculateTime = (int)(_serverTime - _startTime).TotalSeconds;
         _isSettingComplete = true;
-        StartCoroutine(Func());
+        if(_tickCo == null)
+        {
+            _tickCo = StartCoroutine(Func());
+        }
     }
 
     public IEnumerator CheckServerTime()
@@ -212,6 +222,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
                 ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError);
                 Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
             });
+
             yield return new WaitForSeconds(5);
         }
     }
@@ -219,20 +230,21 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     IEnumerator Func()
     {
         yield return new WaitWhile(() => _isSettingComplete == false);
+        _rechargeTimer?.Dispose();
         _rechargeTimer = Observable.Interval(new TimeSpan(0, 0, 1))
-        .Subscribe(_ =>
-        {   
-            _calculateTime++;
-            _displayTime = 600 - _calculateTime;
-            if(300 <= _calculateTime)
-            {
-                _startTime = _serverTime;
-                _displayTime = 0;
-                _calculateTime = 0;
-                Managers.Event.TriggerEvent(EEventType.UpdateEnergy, this);
-            }
-            GetText((int)Texts.EnergyTimer_Text).text = string.Format($"{(_displayTime-300) / 60} : {(_displayTime-300) % 60}");
-        }).AddTo(this.gameObject);
+            .Subscribe(_ =>
+            {   
+                _calculateTime++;
+                _displayTime = 600 - _calculateTime;
+                if(300 <= _calculateTime)
+                {
+                    _startTime = _serverTime;
+                    _displayTime = 0;
+                    _calculateTime = 0;
+                    Managers.Event.TriggerEvent(EEventType.UpdateEnergy, this);
+                }
+                GetText((int)Texts.EnergyTimer_Text).text = string.Format($"{(_displayTime-300) / 60} : {(_displayTime-300) % 60}");
+            }).AddTo(this.gameObject);
     }
     void OnEvent_SetLanguage(Component sender, object param)
     {

@@ -26,11 +26,13 @@ public class MissionManager
         Managers.Event.RemoveEvent(EEventType.OnFirstAccept, Event_OnFirstAccept);
         Managers.Event.RemoveEvent(EEventType.OnMissionComplete, Event_OnMissionComplete);
         Managers.Event.RemoveEvent(EEventType.OnUpdateMission, Event_OnUpdateMission);
+        Managers.Event.RemoveEvent(EEventType.OnLogout, Event_ClearMission);
 
         Managers.Event.AddEvent(EEventType.OnSettlementComplete, Event_OnSettlementComplete);
         Managers.Event.AddEvent(EEventType.OnFirstAccept, Event_OnFirstAccept);
         Managers.Event.AddEvent(EEventType.OnMissionComplete, Event_OnMissionComplete);
         Managers.Event.AddEvent(EEventType.OnUpdateMission, Event_OnUpdateMission);
+        Managers.Event.AddEvent(EEventType.OnLogout, Event_ClearMission);
     }
 
     #region OnEvents
@@ -58,10 +60,12 @@ public class MissionManager
         //UpdateMissionList(sender);
     }
 
+    void Event_ClearMission(Component sender, object param)
+    {
+        ClearMission();
+    }
+
     #endregion
-
-
-
     public void SettleScore(Component sender, Action onSuccess = null, Action onFailed = null)
     {
         Debug.Log($"{nameof(SettleScore)} Call");
@@ -269,5 +273,9 @@ public class MissionManager
             ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
             Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, null, errorStruct.Notice);
        });
+    }
+    public void ClearMission()
+    {
+        _dicts = new Dictionary<int, ResDtoGetUserMissionListElement>();
     }
 }

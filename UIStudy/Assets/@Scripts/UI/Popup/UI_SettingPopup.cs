@@ -120,9 +120,13 @@ public class UI_SettingPopup : UI_Popup
         UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
         ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.Err_Logout);
         Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, errorStruct.Notice);
-        popup.AddOnClickAction();
+        popup.AddOnClickAction(LogoutAndClearMission);
     }
-
+    private void LogoutAndClearMission()
+    {
+        Debug.Log($"LogoutAndClearMission");
+        Managers.Event.TriggerEvent(EEventType.OnLogout);
+    }
     void OnEvent_SetLanguage(Component sender, object param)
     {
         GetText((int)Texts.Setting_Text).text = Managers.Language.LocalizedString(91037);

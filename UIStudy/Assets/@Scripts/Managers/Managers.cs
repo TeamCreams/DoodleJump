@@ -20,6 +20,7 @@ public class Managers : MonoBehaviour
 	private MissionManager _mission = new MissionManager();
 	private ErrorManager _error = new ErrorManager();
 	private EvolutionManager _evolution = new EvolutionManager();
+	private SignalRManager _signalR = new SignalRManager();
 
     public static GameManager Game { get { return Instance?._game; } }
 	public static MessageManager Message { get { return Instance?._message; } }
@@ -31,6 +32,7 @@ public class Managers : MonoBehaviour
     public static MissionManager Mission { get { return Instance?._mission; } }
 	public static ErrorManager Error { get { return Instance?._error; } }
 	public static EvolutionManager Evolution { get { return Instance?._evolution; } }
+	public static SignalRManager SignalR { get { return Instance?._signalR; } }
 
     #endregion
 
@@ -69,7 +71,7 @@ public class Managers : MonoBehaviour
 			}
 
 			DontDestroyOnLoad(go);
-
+			
 			// 초기화
 			s_instance = go.GetComponent<Managers>();
 
@@ -78,8 +80,21 @@ public class Managers : MonoBehaviour
 			Managers.Sound.Init();
 			Managers.Web.Init();
 			Managers.Mission.Init();
-		}
+			Managers.SignalR.Init();
+
+			Managers.Event.RemoveEvent(Define.EEventType.OnLogout, OnEvent_Logout);
+			Managers.Event.AddEvent(Define.EEventType.OnLogout, OnEvent_Logout);
+        }
 	}
+
+	public static void OnEvent_Logout(Component sender, object param)
+    {
+        Managers.Event.Init();
+        Managers.Game.Init();
+        Managers.Sound.Init();
+        Managers.Web.Init();
+        Managers.Mission.Init();
+    }
 	
 	// public static void InitScene()
     // {
