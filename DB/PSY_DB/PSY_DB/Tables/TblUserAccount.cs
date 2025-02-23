@@ -64,4 +64,6 @@ public partial class TblUserAccount
     public virtual ICollection<TblUserScore> TblUserScores { get; set; } = new List<TblUserScore>();
     [InverseProperty("TblUserAccountKeyNavigation")]
     public virtual ICollection<TblUserMission> TblUserMissions { get; set; } = new List<TblUserMission>();
+    [InverseProperty("TblUserAccountKeyNavigation")]
+    public virtual ICollection<TblUserMessage> TblUserMessage { get; set; } = new List<TblUserMessage>();
 }
