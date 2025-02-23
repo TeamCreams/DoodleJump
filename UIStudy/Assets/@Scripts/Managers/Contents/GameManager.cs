@@ -275,6 +275,17 @@ public struct PersonalSetting
         return new PersonalSetting(float.Parse(parts[0]), float.Parse(parts[1]), bool.Parse(parts[2]), bool.Parse(parts[3]));
     }
 }
+public struct ChattingStruct
+{
+    public int CallerUserId;
+    public string Message;
+    
+    public ChattingStruct(string callerUserId, string message)
+    {
+        this.CallerUserId = Int32.Parse(callerUserId);
+        this.Message = message;
+    }
+}
 
 [System.Serializable] //얘가 있어야 직렬화 가능
 public class MessageData
