@@ -18,6 +18,7 @@ public static class Define
         ChooseCharacterScene,
         InputNicknameScene,
         SuberunkerScene,
+        SignalRTestScene // test
     }
 
 	public enum EUIEvent
@@ -95,7 +96,8 @@ public static class Define
         Evolution,
         Purchase,
         UIStoneCountRefresh,
-        UpdateEnergy
+        UpdateEnergy,
+        ReceiveMessage
     }
 
     // 서버와 값 공유중, 함부로 수정 금지.

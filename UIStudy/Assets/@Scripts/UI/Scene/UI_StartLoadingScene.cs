@@ -126,7 +126,7 @@ public class UI_StartLoadingScene : UI_Scene
         Managers.Score.GetScore(this, ProcessErrorFun,
         () => 
         {
-            _scene = EScene.SuberunkerSceneHomeScene;
+            _scene = EScene.SignalRTestScene;//EScene.SuberunkerSceneHomeScene;
             result?.Invoke(); 
         },
         () => 

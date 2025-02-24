@@ -80,7 +80,7 @@ public class Managers : MonoBehaviour
 			Managers.Sound.Init();
 			Managers.Web.Init();
 			Managers.Mission.Init();
-			Managers.SignalR.Init();
+			Managers.SignalR.InitAsync();
 
 			Managers.Event.RemoveEvent(Define.EEventType.OnLogout, OnEvent_Logout);
 			Managers.Event.AddEvent(Define.EEventType.OnLogout, OnEvent_Logout);
