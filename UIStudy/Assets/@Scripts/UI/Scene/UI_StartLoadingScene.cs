@@ -127,6 +127,7 @@ public class UI_StartLoadingScene : UI_Scene
         () => 
         {
             _scene = EScene.SignalRTestScene;//EScene.SuberunkerSceneHomeScene;
+            Managers.SignalR.LoginUser(Managers.Game.UserInfo.UserAccountId);
             result?.Invoke(); 
         },
         () => 

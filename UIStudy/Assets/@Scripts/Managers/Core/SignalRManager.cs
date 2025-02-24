@@ -26,7 +26,7 @@ public class SignalRManager
             .WithUrl(_serverUrl)  // 서버 URL 지정
             .WithAutomaticReconnect() // 자동 재연결
             .Build();
-        OnRecieveMessage();
+        OnReceiveMessage();
 
         try
         {
@@ -49,31 +49,36 @@ public class SignalRManager
         }
     }
     
-    public void OnRecieveMessage()
+    public void OnReceiveMessage()
     {
-        _connection.On<string, string>("ReceiveMessage", (user, message) =>
+        _connection.On<string, string>("ReceiveMessage", (userId, message) =>
         {
             //이벤트 호출 or ChatManager한테 보내주던지
-            Debug.Log($"SignalRManager : [{user}] {message}");
+            Debug.Log($"SignalRManager :  [ {userId} ]  {message}");
             //Managers.Event.TriggerEvent
-            //ChattingStruct chattingStruct = new ChattingStruct(user, message);
-            //Managers.Event.TriggerEvent(Define.EEventType.ReceiveMessage, null, chattingStruct);
+            ChattingStruct chattingStruct = new ChattingStruct(0, 0, "orange", message);
+            Managers.Event.TriggerEvent(Define.EEventType.ReceiveMessage, null, chattingStruct);
         });
     }
-
-    public async void SendMessageOneToOne(int callerUserId, int senderUserId, string message)
+    public void LoginUser(int userId)
+    {
+        userId = Managers.Game.UserInfo.UserAccountId;
+        _connection.InvokeAsync("LoginUser", userId);
+    }
+    public async void SendMessageOneToOne(int senderUserId, int receiverUserId, string message)
     {
         if (_connection.State == HubConnectionState.Connected)
         {
-            await _connection.InvokeAsync("SendMessageOneToOne", callerUserId.ToString(), senderUserId.ToString(), message);
+            await _connection.InvokeAsync("SendMessageOneToOne", senderUserId, receiverUserId, message);
         }
    }
 
-    public async void SendMessageAll(int userId, string message)
+    public async void SendMessageAll(int senderUserId, string message)
     {
         if (_connection.State == HubConnectionState.Connected)
         {
-            await _connection.InvokeAsync("SendMessage", userId.ToString(), message);
+            //await _connection.InvokeAsync("SendMessage", senderUserId.ToString(), message);
+            await _connection.InvokeAsync("SendMessageAll", senderUserId, message);
         }
     }
 }

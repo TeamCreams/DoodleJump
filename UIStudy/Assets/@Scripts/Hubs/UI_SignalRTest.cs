@@ -19,7 +19,6 @@ public class UI_SignalRTestScene : UI_Scene
         User_Text,
         Message_Text,
     }
-    private string _user = "";
     private string _message = "";
     public override bool Init()
     {
@@ -45,14 +44,7 @@ public class UI_SignalRTestScene : UI_Scene
     }
     private void OnClick_InputText(PointerEventData eventData)
     {
-        _message = "";
-    }
-    private void Display()
-    {
-        GetText((int)Texts.User_Text).text = _user;
-        GetText((int)Texts.Message_Text).text = _message;
-        Debug.Log($"[{_user}] {_message}");
-
+        //_message = "";
     }
 
 }

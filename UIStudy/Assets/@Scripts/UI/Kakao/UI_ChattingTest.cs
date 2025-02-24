@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_Chatting : UI_Base
+public class UI_ChattingTest : UI_Base
 {
     public enum Texts
     {

@@ -277,12 +277,16 @@ public struct PersonalSetting
 }
 public struct ChattingStruct
 {
-    public int CallerUserId;
+    public int SenderUserId;
+    public int ReceiverUserId;
+    public string SenderNickname;
     public string Message;
     
-    public ChattingStruct(string callerUserId, string message)
+    public ChattingStruct(int senderUserId, int receiverUserId, string SenderUserId, string message)
     {
-        this.CallerUserId = Int32.Parse(callerUserId);
+        this.SenderUserId = senderUserId;
+        this.ReceiverUserId = receiverUserId;
+        this.SenderNickname = SenderUserId;
         this.Message = message;
     }
 }

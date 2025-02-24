@@ -40,7 +40,7 @@ public class UI_ChattingRoomScene : UI_Scene
     private void SendBubble(string name, string text, bool input = false)
     {
         var bubble = Managers.Resource.Instantiate(name, _chattingBubbleRoot.transform);
-        bubble.GetOrAddComponent<UI_Chatting>().SetText(text);
+        bubble.GetOrAddComponent<UI_ChattingTest>().SetText(text);
 
 		//for (int i = 0; i < 5; i++)
 		//{

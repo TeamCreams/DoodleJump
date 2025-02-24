@@ -96,6 +96,7 @@
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Enums/PropertyId.cs" />
     <Compile Include="Assets/@Scripts/Managers/Contents/GameManager.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_ChooseCharacterScene.cs" />
+    <Compile Include="Assets/@Scripts/UI/Kakao/UI_ChattingTest.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/AttackingExample.cs" />
     <Compile Include="Assets/@Scripts/Utils/Extension.Contents.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SuberunkerSceneHomeScene.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Assets/@Scripts/VerticalColorChanger.cs" />
     <Compile Include="Assets/@Scripts/Managers/Contents/MessageManager.cs" />
     <Compile Include="Assets/@Scripts/Item/ItemBase.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_Chatting.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_MissionPanel.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Data/ItemParams.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/ItemSlot.cs" />
@@ -165,7 +167,6 @@
     <Compile Include="Assets/@Scripts/UI/Popup/UI_RetryPopup.cs" />
     <Compile Include="Assets/@Scripts/Controller/Stats/Stats.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/CharacterReferencesResolver.cs" />
-    <Compile Include="Assets/@Scripts/UI/Kakao/UI_Chatting.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/MeleeWeapon.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterBodySculptor.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/ItemCollection.cs" />

@@ -20,7 +20,7 @@ public class Managers : MonoBehaviour
 	private MissionManager _mission = new MissionManager();
 	private ErrorManager _error = new ErrorManager();
 	private EvolutionManager _evolution = new EvolutionManager();
-	private SignalRManager _signalR = new SignalRManager();
+	private ChattingManager _chatting = new ChattingManager();
 
     public static GameManager Game { get { return Instance?._game; } }
 	public static MessageManager Message { get { return Instance?._message; } }
@@ -32,7 +32,7 @@ public class Managers : MonoBehaviour
     public static MissionManager Mission { get { return Instance?._mission; } }
 	public static ErrorManager Error { get { return Instance?._error; } }
 	public static EvolutionManager Evolution { get { return Instance?._evolution; } }
-	public static SignalRManager SignalR { get { return Instance?._signalR; } }
+	public static ChattingManager Chatting {get {return Instance?._chatting;}}
 
     #endregion
 
@@ -46,6 +46,7 @@ public class Managers : MonoBehaviour
 	private EventManager _event = new EventManager();
 	private CameraManager _camera = new CameraManager();
 	private WebManager _web = new WebManager();
+	private SignalRManager _signalR = new SignalRManager();
 
 	public static PoolManager Pool { get { return Instance?._pool; } }
 	public static ResourceManager Resource { get { return Instance?._resource; } }
@@ -56,6 +57,8 @@ public class Managers : MonoBehaviour
 	public static EventManager Event { get {  return Instance?._event; } }
 	public static CameraManager Camera { get { return Instance?._camera; } }
 	public static WebManager Web { get { return Instance?._web; } }
+	public static SignalRManager SignalR { get { return Instance?._signalR; } }
+
 	#endregion
 
 

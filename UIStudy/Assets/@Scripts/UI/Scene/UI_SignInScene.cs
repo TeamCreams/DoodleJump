@@ -125,6 +125,7 @@ public class UI_SignInScene : UI_Scene
     private IEnumerator LoadScene_Co()
     {
         yield return new WaitWhile(() => _isLoadSceneCondition == false);
+        Managers.SignalR.LoginUser(Managers.Game.UserInfo.UserAccountId);
         Managers.Scene.LoadScene(_scene);
     }
 
