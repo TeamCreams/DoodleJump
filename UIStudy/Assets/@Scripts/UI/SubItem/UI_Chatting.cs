@@ -1,17 +1,13 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static Define;
 
 public class UI_Chatting : UI_Base
 {
     private enum GameObjects
     {
-        ChattingRoot,
-    }
-
-    private enum Texts
-    {
-        Nickname_Text,
-        Message_Text,
+        Content,
     }
     private enum Buttons
     {
@@ -21,8 +17,7 @@ public class UI_Chatting : UI_Base
     {
         Chatting_InputField
     }
-    private ChattingStruct _chattingStruct;
-    private Transform _chattingRoot;
+    private Transform _root;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -30,17 +25,45 @@ public class UI_Chatting : UI_Base
             return false;
         }
         BindObjects(typeof(GameObjects));
-        BindTexts(typeof(Texts));
         BindButtons(typeof(Buttons));
         BindInputFields(typeof(InputFields));
-        _chattingRoot = GetObject((int)GameObjects.ChattingRoot).transform;
+        _root = GetObject((int)GameObjects.Content).transform;
 
+        GetButton((int)Buttons.Send_Button).gameObject.BindEvent(OnClick_SendChatting, EUIEvent.Click);
+        Managers.Event.AddEvent(EEventType.ReceiveMessage, Event_ReceiveMessage);
         return true;
+    }
+    void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.ReceiveMessage, Event_ReceiveMessage);
     }
     private void OnClick_SendChatting(PointerEventData eventData)
     {
-        _chattingStruct = Managers.Chatting.GetChattingStruct();
-        GetText((int)Texts.Nickname_Text).text = _chattingStruct.SenderNickname;
-        GetText((int)Texts.Message_Text).text = _chattingStruct.Message;
+        string message = GetInputField((int)InputFields.Chatting_InputField).text;
+        if(!string.IsNullOrEmpty(message))
+        {
+            //Event_ReceiveMessage(null, null); // 얘는 됨
+            Managers.SignalR.SendMessageAll(Managers.Game.UserInfo.UserAccountId, message);
+            GetInputField((int)InputFields.Chatting_InputField).text = "";
+        }
     }
+
+    private void Event_ReceiveMessage(Component component, object param)
+    {
+        //Debug.Log("Event_ReceiveMessage");
+        ChattingStruct chattingStruct = Managers.Chatting.GetChattingStruct();
+        Debug.Log($"Event_ReceiveMessage : {chattingStruct.Message}");
+
+        var bubble = Managers.UI.MakeSubItem<UI_ChattingItem>(parent: _root);
+        if (bubble == null)
+        {
+            Debug.Log("Bubble이 생성되지 않음.");
+        }
+        else
+        {
+            Debug.Log("Bubble이 성공적으로 생성됨.");
+            bubble.SetInfo(chattingStruct);
+        }
+}
+
 }

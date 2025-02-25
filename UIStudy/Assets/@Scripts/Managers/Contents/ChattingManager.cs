@@ -6,25 +6,20 @@ using static Define;
 public class ChattingManager
 {
     private ChattingStruct _chattingStruct;
-    public void Init()
-	{
-        Managers.Event.RemoveEvent(EEventType.ReceiveMessage, Event_DisplaySendMessageAll);
-		Managers.Event.AddEvent(EEventType.ReceiveMessage, Event_DisplaySendMessageAll);
-	}
-
-    public void Event_DisplaySendMessageAll(Component sender, object param)
+    
+    public void Event_SendMessage(ChattingStruct chatting)
     {
-        if(param is ChattingStruct chatting)
-        {
-            _chattingStruct.SenderUserId = chatting.SenderUserId;
-            // 아이디로 유저닉네임 가져오기
-            _chattingStruct.SenderNickname = Managers.Game.UserInfo.UserNickname;
-            _chattingStruct.Message = chatting.Message;
-        }
+        _chattingStruct.IsPrivateMessage = chatting.IsPrivateMessage;
+        _chattingStruct.Message = chatting.Message;
+    }
+    public void Event_ReceiveMessage()
+    {
+        Debug.Log($"Event_ReceiveMessage");
+        var bubble = Managers.Resource.Instantiate("UI_ChattingItem"); //생성조차 안 됨
+        bubble.GetOrAddComponent<UI_ChattingItem>().SetInfo(_chattingStruct);
     }
     public ChattingStruct GetChattingStruct() // raedOnly가 안 됨
     {
         return _chattingStruct;
     }
-
 }

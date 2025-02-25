@@ -125,7 +125,7 @@ public class UI_SignInScene : UI_Scene
     private IEnumerator LoadScene_Co()
     {
         yield return new WaitWhile(() => _isLoadSceneCondition == false);
-        Managers.SignalR.LoginUser(Managers.Game.UserInfo.UserAccountId);
+        Debug.Log($"Managers.Game.UserInfo.UserAccountId : {Managers.Game.UserInfo.UserAccountId}");
         Managers.Scene.LoadScene(_scene);
     }
 
@@ -153,6 +153,8 @@ public class UI_SignInScene : UI_Scene
            Managers.Game.UserInfo.UserName = response.UserName;
            Managers.Game.UserInfo.UserNickname = response.Nickname;
            Managers.Game.UserInfo.UserAccountId = response.UserAccountId;
+        Managers.SignalR.LoginUser(Managers.Game.UserInfo.UserAccountId);
+
            //캐릭터 스타일 저장
            Managers.Game.ChracterStyleInfo.CharacterId = response.CharacterId;
            Managers.Game.ChracterStyleInfo.Hair = response.HairStyle;

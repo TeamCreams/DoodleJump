@@ -39,6 +39,7 @@ public class UI_SignalRTestScene : UI_Scene
     private void OnClick_Enter(PointerEventData eventData)
     {
         _message = GetInputField((int)InputFields.Message_InputField).text;
+        Debug.Log($"UserAccountId : {Managers.Game.UserInfo.UserAccountId}");
         Managers.SignalR.SendMessageAll(Managers.Game.UserInfo.UserAccountId, _message);
         GetInputField((int)InputFields.Message_InputField).text = "";
     }

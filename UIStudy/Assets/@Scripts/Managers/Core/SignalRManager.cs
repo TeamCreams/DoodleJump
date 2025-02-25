@@ -51,27 +51,28 @@ public class SignalRManager
     
     public void OnReceiveMessage()
     {
-        _connection.On<string, string>("ReceiveMessage", (userId, message) =>
+        _connection.On<string, string>("ReceiveMessage", (userNickname, message) =>
         {
             //이벤트 호출 or ChatManager한테 보내주던지
-            Debug.Log($"SignalRManager :  [ {userId} ]  {message}");
-            //Managers.Event.TriggerEvent
-            ChattingStruct chattingStruct = new ChattingStruct(0, 0, "orange", message);
-            Managers.Event.TriggerEvent(Define.EEventType.ReceiveMessage, null, chattingStruct);
+            Debug.Log($"SignalRManager :  [ {userNickname} ]  {message}");
+            Managers.Game.ChattingInfo.SenderNickname = userNickname;
+            Managers.Event.TriggerEvent(Define.EEventType.ReceiveMessage); // 여기가 문제인듯.
+            // 개인 메세지인지, 단체 메세지인지 구분 어떻게?
         });
     }
-    public void LoginUser(int userId)
+    public async void LoginUser(int userId)
     {
-        userId = Managers.Game.UserInfo.UserAccountId;
-        _connection.InvokeAsync("LoginUser", userId);
+        await _connection.InvokeAsync("LoginUser", userId);
     }
     public async void SendMessageOneToOne(int senderUserId, int receiverUserId, string message)
     {
         if (_connection.State == HubConnectionState.Connected)
         {
             await _connection.InvokeAsync("SendMessageOneToOne", senderUserId, receiverUserId, message);
+            ChattingStruct chattingStruct = new ChattingStruct(true, message);
+            Managers.Chatting.Event_SendMessage(chattingStruct);
         }
-   }
+    }
 
     public async void SendMessageAll(int senderUserId, string message)
     {
@@ -79,6 +80,8 @@ public class SignalRManager
         {
             //await _connection.InvokeAsync("SendMessage", senderUserId.ToString(), message);
             await _connection.InvokeAsync("SendMessageAll", senderUserId, message);
+            ChattingStruct chattingStruct = new ChattingStruct(false, message);
+            Managers.Chatting.Event_SendMessage(chattingStruct);
         }
     }
 }

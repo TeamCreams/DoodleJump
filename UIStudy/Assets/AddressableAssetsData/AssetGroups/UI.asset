@@ -39,6 +39,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 36730afbf5f9e44cf8b51c0b944632d5
+    m_Address: UI_ChattingItem
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3a9290a40e97541a9bbc15dfd5038349
     m_Address: UI_ToastPopup
     m_ReadOnly: 0
@@ -119,6 +125,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: eeddc4314c2294d13a4c321f6171ccf3
     m_Address: UI_SignInScene
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f1a48b17f1f334d8d854960f56ba0ff5
+    m_Address: UI_SuberunkerSceneHomeScene
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

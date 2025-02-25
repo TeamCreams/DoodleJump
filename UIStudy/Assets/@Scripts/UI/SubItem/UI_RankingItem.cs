@@ -1,5 +1,6 @@
 using GameApi.Dtos;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using static Define;
 
 public class UI_RankingItem : UI_Base
@@ -11,10 +12,12 @@ public class UI_RankingItem : UI_Base
         Nickname_Text,
         Score_Text
     }
-    private string _minutesString = "분";
-    private string _secondsString = "초";
-    private int _recordMinutes;
-    private float _recordSeconds;
+    // private string _minutesString = "분";
+    // private string _secondsString = "초";
+    // private int _recordMinutes;
+    // private float _recordSeconds;
+    private int _userAccountId;
+    private string _userNickname;
     private int _recordScore;
     public override bool Init()
     {
@@ -24,6 +27,7 @@ public class UI_RankingItem : UI_Base
         }
         BindTexts(typeof(Texts));
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+        GetText((int)Texts.Nickname_Text).gameObject.BindEvent(OnClick_Nickname, EUIEvent.Click);
         OnEvent_SetLanguage(null, null);
         return true;
     }
@@ -34,6 +38,8 @@ public class UI_RankingItem : UI_Base
 
     public void SetInfo(ResDtoGetUserAccountListElement element, int rank)
     {
+        _userAccountId = element.UserAccountId;
+        _userNickname = element.Nickname;
         GetText((int)Texts.Ranking_Text).text = rank.ToString();
         GetText((int)Texts.Nickname_Text).text = element.Nickname;
         _recordScore = element.HighScore;
@@ -42,6 +48,12 @@ public class UI_RankingItem : UI_Base
         //_recordMinutes = element.HighScore / 60;
         //_recordSeconds = element.HighScore % 60;
         //GetText((int)Texts.Score_Text).text = $"{_recordMinutes}m {_recordSeconds}s";
+    }
+
+    public void OnClick_Nickname(PointerEventData eventData)
+    {
+        // 쪽지 보내는 창 띄우기
+        //Managers.UI.ShowPopupUI<>();
     }
 
     void OnEvent_SetLanguage(Component sender, object param)

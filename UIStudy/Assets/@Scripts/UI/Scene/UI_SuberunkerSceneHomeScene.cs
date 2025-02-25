@@ -201,7 +201,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         _isSettingComplete = true;
         if(_tickCo == null)
         {
-            _tickCo = StartCoroutine(Func());
+            _tickCo = StartCoroutine(EnergyRechargeCoroutine());
         }
     }
 
@@ -227,7 +227,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         }
     }
 
-    IEnumerator Func()
+    IEnumerator EnergyRechargeCoroutine()
     {
         yield return new WaitWhile(() => _isSettingComplete == false);
         _rechargeTimer?.Dispose();

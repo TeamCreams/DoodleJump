@@ -97,7 +97,7 @@ public static class Define
         Purchase,
         UIStoneCountRefresh,
         UpdateEnergy,
-        ReceiveMessage
+        ReceiveMessage,
     }
 
     // 서버와 값 공유중, 함부로 수정 금지.

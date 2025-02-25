@@ -115,6 +115,16 @@ public class GameManager
         }
     }
 
+    private ChattingInfo _chattingInfo;
+    public ChattingInfo ChattingInfo
+    {
+        get { return _chattingInfo; }
+        set
+        {
+            _chattingInfo = value;
+        }
+    }
+
     private int _energy;
     public int Energy
     {
@@ -140,6 +150,7 @@ public class GameManager
         _userInfo = new UserInfo();
         _settingInfo = new SettingInfo();
         _getScore = new GetScore();
+        _chattingInfo = new ChattingInfo();
     }
 
     private List<ItemData> items = new List<ItemData>()
@@ -237,8 +248,6 @@ public class DifficultySettingsInfo // 다시시작할 때마다 초기화 필�
 public class GetScore
 {
     public int Total { get; set; } = 0;
-    public int TimeScore { get; set; } = 0;
-    public int StoneScore { get; set; } = 0;
 }
 public struct ErrorStruct
 {
@@ -277,18 +286,19 @@ public struct PersonalSetting
 }
 public struct ChattingStruct
 {
-    public int SenderUserId;
-    public int ReceiverUserId;
-    public string SenderNickname;
+    public bool IsPrivateMessage;
     public string Message;
     
-    public ChattingStruct(int senderUserId, int receiverUserId, string SenderUserId, string message)
+    public ChattingStruct(bool isPrivateMessage, string message)
     {
-        this.SenderUserId = senderUserId;
-        this.ReceiverUserId = receiverUserId;
-        this.SenderNickname = SenderUserId;
+        this.IsPrivateMessage = isPrivateMessage;
         this.Message = message;
     }
+}
+public class ChattingInfo
+{
+    public string SenderNickname { get; set; } = "";
+    public GameObject Root { get; set; }
 }
 
 [System.Serializable] //얘가 있어야 직렬화 가능

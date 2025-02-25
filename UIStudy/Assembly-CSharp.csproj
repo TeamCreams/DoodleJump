@@ -144,6 +144,7 @@
     <Compile Include="Assets/@Scripts/UI/Scene/TestScene.cs" />
     <Compile Include="Assets/@Scripts/Managers/Core/WebManager/WebManagerSlave.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SuberunkerScene.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_ChattingItem.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Data/Property.cs" />
     <Compile Include="Assets/@Scripts/Controller/StoneController.cs" />
     <Compile Include="Assets/@Scripts/Managers/QuitManager/QuitManager.cs" />

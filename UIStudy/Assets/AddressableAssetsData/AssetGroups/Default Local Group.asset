@@ -31,12 +31,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6f23ad5e56544594197b6194ad37b266
-    m_Address: UI_SuberunkerSceneHomeScene
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8301f267a30fa744ca3e7cecbf633acb
     m_Address: UI_TinyFarmScene
     m_ReadOnly: 0

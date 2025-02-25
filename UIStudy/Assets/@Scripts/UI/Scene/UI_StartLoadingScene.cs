@@ -65,7 +65,10 @@ public class UI_StartLoadingScene : UI_Scene
                     _isLoadSceneCondition = true;
                     Managers.Game.UserInfo.UserName = response.UserName;
                     Managers.Game.UserInfo.UserNickname = response.Nickname;
-                    Managers.Game.UserInfo.UserAccountId = response.UserAccountId;
+                    Managers.Game.UserInfo.UserAccountId  = response.UserAccountId;
+                    Debug.Log($"HandleSuccess Managers.Game.UserInfo.UserAccountId : {Managers.Game.UserInfo.UserAccountId}");
+                    Managers.SignalR.LoginUser(Managers.Game.UserInfo.UserAccountId);
+
                     //캐릭터 스타일 
                     Managers.Game.ChracterStyleInfo.CharacterId = response.CharacterId;
                     Managers.Game.ChracterStyleInfo.Hair = response.HairStyle;
@@ -126,8 +129,7 @@ public class UI_StartLoadingScene : UI_Scene
         Managers.Score.GetScore(this, ProcessErrorFun,
         () => 
         {
-            _scene = EScene.SignalRTestScene;//EScene.SuberunkerSceneHomeScene;
-            Managers.SignalR.LoginUser(Managers.Game.UserInfo.UserAccountId);
+            _scene = EScene.SuberunkerSceneHomeScene; //EScene.SignalRTestScene;//
             result?.Invoke(); 
         },
         () => 
