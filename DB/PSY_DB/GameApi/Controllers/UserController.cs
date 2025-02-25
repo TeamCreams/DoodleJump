@@ -273,7 +273,7 @@ namespace GameApi.Controllers
                 if (userAccount == null)
                 {
                     throw new CommonException(EStatusCode.NotFoundEntity,
-                        $"아이디 혹은 비밀번호가 맞지 않습니다. UserName : {requestDto.UserName} Password : {requestDto.Password}");
+                        $"아이디 혹은 비밀번호가 맞지 않습니다. UserAccountId : {requestDto.UserName} Password : {requestDto.Password}");
                 }
 
                 userAccount.Password = requestDto.UpdatePassword;
@@ -284,7 +284,7 @@ namespace GameApi.Controllers
                 if (IsSuccess == 0)
                 {
                     throw new CommonException(EStatusCode.ChangedRowsIsZero, 
-                        $"UserName : {requestDto.UserName},  UpdatePassword: {requestDto.UpdatePassword}");
+                        $"UserAccountId : {requestDto.UserName},  UpdatePassword: {requestDto.UpdatePassword}");
                 }
                 else
                 {
@@ -330,7 +330,7 @@ namespace GameApi.Controllers
                 if (userAccount == null)
                 {
                     throw new CommonException(EStatusCode.NotFoundEntity, 
-                        $"아이디 혹은 비밀번호가 맞지 않습니다. UserName : {requestDto.UserName} Password : {requestDto.Password}");
+                        $"아이디 혹은 비밀번호가 맞지 않습니다. UserAccountId : {requestDto.UserName} Password : {requestDto.Password}");
                 }
 
                 //userAccount.DeletedDate = DateTime.UtcNow;
@@ -341,7 +341,7 @@ namespace GameApi.Controllers
 
                 if (IsSuccess == 0)
                 {
-                    throw new CommonException(EStatusCode.ChangedRowsIsZero, $"UserName : {requestDto.UserName}");
+                    throw new CommonException(EStatusCode.ChangedRowsIsZero, $"UserAccountId : {requestDto.UserName}");
                 }
                 else
                 {
@@ -736,7 +736,7 @@ namespace GameApi.Controllers
                                 where (user.Nickname != null && user.DeletedDate == null)
                                 select new ResDtoGetUserAccountListElement
                                 {
-                                    UserName = user.UserName,
+                                    UserAccountId = user.Id,
                                     Nickname = user.Nickname,
                                     HighScore = user.TblUserScores
                                             .OrderByDescending(s => s.Scoreboard)
