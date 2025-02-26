@@ -135,6 +135,7 @@
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/ItemSlot.cs" />
     <Compile Include="Assets/@Scripts/Managers/Contents/ChattingManager.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/SoloState.cs" />
+    <Compile Include="Assets/@Scripts/UI/Popup/UI_UserInfoPopup.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SuberunkerTimelineScene.cs" />
     <Compile Include="Assets/@Scripts/UI/Popup/UI_PausePopup.cs" />
     <Compile Include="Assets/@Scripts/UI/Popup/UI_Popup.cs" />

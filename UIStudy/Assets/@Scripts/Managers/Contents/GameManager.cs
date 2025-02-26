@@ -214,6 +214,36 @@ public class ChracterStyleInfo
     public string Eyes { get; set; } = "Dizzy";
     public string Eyebrows { get; set; } = "DizzyEyebrows";
     public string Hair { get; set; } = "ZombieShabby";
+
+    public string TempEyes { get; set; } = "Dizzy";
+    public string TempEyebrows { get; set; } = "DizzyEyebrows";
+    public string TempHair { get; set; } = "ZombieShabby";
+
+    public bool CheckAppearance()
+    {
+        if (Eyes != TempEyes)
+        {
+            return true;
+        }
+
+        if (Eyebrows != TempEyebrows)
+        {
+            return true;
+        }
+
+        if (Hair != TempHair)
+        {            
+            return true;
+        }
+        return false;
+    }
+
+    public void UpdateValuesFromTemp()
+    {
+        Eyes = TempEyes;
+        Eyebrows = TempEyebrows;
+        Hair = TempHair;
+    }
 }
 public class UserInfo // 서버로 전달될 데이터
 {

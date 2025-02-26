@@ -23,6 +23,8 @@ public class UI_PurchasePopup : UI_Popup
         Gold_Text
     }
     private EvolutionData _item;
+    private EProductType _productType;
+    private int _gold = 0;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -39,17 +41,25 @@ public class UI_PurchasePopup : UI_Popup
     }
     public void SetInfo(int id, EProductType productType)
     {
-        switch(productType)
+        _productType = productType;
+        switch(_productType)
         {
-            case EProductType.Custom:
+            case EProductType.Custom:  
+            {
+                GetText((int)Texts.Gold_Text).text = HardCoding.ChangeStyleGold.ToString();
+                _gold = _item.Gold;
+            } 
             break;
             case EProductType.Evolution:
+            {
                 _item = Managers.Data.EvolutionDataDic[id];
+                GetText((int)Texts.Gold_Text).text = _item.Gold.ToString();
+                _gold = _item.Gold;
+            }
             break;
             default:
             break;
         }
-        GetText((int)Texts.Gold_Text).text = _item.Gold.ToString();
     }
 
     private void OnEvent_ClickClose(PointerEventData eventData)
@@ -60,10 +70,9 @@ public class UI_PurchasePopup : UI_Popup
     private void OnEvent_ClickOk(PointerEventData eventData)
     {
         // 서버랑 연결해서 돈 빼기 ->   UI_EvolutionItem에서 한 번에
-        int remainingChange = Managers.Game.UserInfo.Gold - _item.Gold;
+        int remainingChange = Managers.Game.UserInfo.Gold - _gold;
         if(0 <= remainingChange)
         {
-            Managers.Game.UserInfo.EvolutionId = _item.Id;    
             UpdateUserGold();
         }
         else
@@ -79,11 +88,26 @@ public class UI_PurchasePopup : UI_Popup
         Managers.WebContents.ReqDtoUpdateUserGold(new ReqDtoUpdateUserGold()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
-            Gold = _item.Gold
+            Gold = _gold
         },
        (response) =>
        {
             onSuccess?.Invoke();
+            switch(_productType)
+            {
+                case EProductType.Custom:  
+                {
+                    Managers.Event.TriggerEvent(EEventType.SetStyle_Player, this);
+                } 
+                break;
+                case EProductType.Evolution:
+                {
+                    Managers.Game.UserInfo.EvolutionId = _item.Id;    
+                }
+                break;
+                default:
+                break;
+            }
             Managers.UI.ClosePopupUI(this);
        },
        (errorCode) =>

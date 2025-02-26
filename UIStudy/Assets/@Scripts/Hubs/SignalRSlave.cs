@@ -41,6 +41,7 @@ public class SignalRSlave : MonoBehaviour
             isComplete = true;
             bubble.SetInfo(chattingStruct);
         }
+        Managers.Resource.Destroy(this.gameObject);
         return isComplete;
     }
 }

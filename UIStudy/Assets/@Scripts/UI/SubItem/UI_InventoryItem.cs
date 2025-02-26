@@ -20,8 +20,6 @@ public class UI_InventoryItem : UI_Base
         }
 
     }
-
-    
     private enum State
     {
         Hair = 10000,
@@ -72,19 +70,17 @@ public class UI_InventoryItem : UI_Base
         switch (Data.EquipType)
         {
             case EEquipType.Hair:
-                Managers.Game.ChracterStyleInfo.Hair = Data.SpriteName;
+                Managers.Game.ChracterStyleInfo.TempHair = Data.SpriteName;
                 break;
             case EEquipType.Eyebrows:
-                Managers.Game.ChracterStyleInfo.Eyebrows = Data.SpriteName;
+                Managers.Game.ChracterStyleInfo.TempEyebrows = Data.SpriteName;
                 break;
             case EEquipType.Eyes:
-                Managers.Game.ChracterStyleInfo.Eyes = Data.SpriteName;
+                Managers.Game.ChracterStyleInfo.TempEyes = Data.SpriteName;
                 break;
             case EEquipType.None:
                 //에러 팝업
                 break;
         }
-
-        Managers.Event.TriggerEvent(EEventType.SetStyle_Player, this);
     }
 }

@@ -60,6 +60,13 @@ public class UI_EvolutionPanel : UI_Base
     {
         int id = (int)param;
         UI_PurchasePopup purchase = Managers.UI.ShowPopupUI<UI_PurchasePopup>();
-        purchase.SetInfo(id, EProductType.Evolution);
+        if(id == 0)
+        {
+            purchase.SetInfo(id, EProductType.Custom);
+        }
+        else
+        {            
+            purchase.SetInfo(id, EProductType.Evolution);
+        }
     }
 }

@@ -53,7 +53,8 @@ public class UI_RankingItem : UI_Base
     public void OnClick_Nickname(PointerEventData eventData)
     {
         // 쪽지 보내는 창 띄우기
-        //Managers.UI.ShowPopupUI<>();
+        var popup = Managers.UI.ShowPopupUI<UI_UserInfoPopup>();
+        popup.SetInfo(_userAccountId, _userNickname);
     }
 
     void OnEvent_SetLanguage(Component sender, object param)
