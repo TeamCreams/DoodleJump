@@ -69,7 +69,7 @@ namespace GameApi.Hubs
             string receiverConnectionId = _connectionIds[receiverUserId];
 
             // 받아진 걸 확인 후 메세지가 보내졌다는 로그를 띄워야함.
-            await Clients.User(receiverConnectionId).SendAsync("ReceiveMessage", Context.ConnectionId, message);
+            await Clients.User(receiverConnectionId).SendAsync("ReceiveMessage", senderUser.Nickname, message, true);
         }
 
         public async Task SendMessageAll(int senderUserId, string message)
@@ -111,7 +111,7 @@ namespace GameApi.Hubs
                     throw new CommonException(EStatusCode.ChangedRowsIsZero,
                         $"UserAccountId : {senderUser.Id}의 메세지가 저장되지 않음.");
                 }
-                await Clients.All.SendAsync("ReceiveMessage", Context.ConnectionId, message);
+                await Clients.All.SendAsync("ReceiveMessage", senderUser.Nickname, message, false);
             }
             catch (Exception ex)
             {
