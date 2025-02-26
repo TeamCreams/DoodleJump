@@ -17,7 +17,6 @@ public class UI_ChattingItem : UI_Base
         }
         BindTexts(typeof(Texts));
 
-        //
         return true;
     }
     public void SetInfo(ChattingStruct chattingData)

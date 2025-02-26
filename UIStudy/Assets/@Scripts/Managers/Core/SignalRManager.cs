@@ -14,7 +14,8 @@ public class SignalRManager
 {
     private HubConnection _connection;
     private string _serverUrl = "https://dev-single-api.snapism.net:8082/Chat";
-
+    private GameObject _slave;
+    private SignalRSlave _signalRSlave;
     // 메세지를 받는 것
     // 메세지를 특정인물한테 보내는것 (친구 기능)
     // 메세지를 전체한테 보내는 것
@@ -32,6 +33,13 @@ public class SignalRManager
         {
             // 연결 시작
             await _connection.StartAsync();
+
+            if(_slave == null)
+            {
+                _slave = new GameObject("Slave");
+                _signalRSlave = _slave.GetOrAddComponent<SignalRSlave>();
+            }
+
             Debug.Log("SignalR 연결 성공!");
         }
         catch (Exception ex)
@@ -51,13 +59,13 @@ public class SignalRManager
     
     public void OnReceiveMessage()
     {
-        _connection.On<string, string>("ReceiveMessage", (userNickname, message) =>
+        _connection.On<string, string, bool>("ReceiveMessage", async (userNickname, message, isPrivateMessage) =>
         {
-            //이벤트 호출 or ChatManager한테 보내주던지
-            Debug.Log($"SignalRManager :  [ {userNickname} ]  {message}");
-            Managers.Game.ChattingInfo.SenderNickname = userNickname;
-            Managers.Event.TriggerEvent(Define.EEventType.ReceiveMessage); // 여기가 문제인듯.
-            // 개인 메세지인지, 단체 메세지인지 구분 어떻게?
+            // //이벤트 호출 or ChatManager한테 보내주던지
+            ChattingStruct chattingStruct = new ChattingStruct(isPrivateMessage, message);
+            Managers.Chatting.Event_SendMessage(chattingStruct);
+            Debug.Log($"SignalRManager :  [ {userNickname} ]  {message}, {isPrivateMessage}");
+            await _signalRSlave.HandleReceiveMessage(userNickname, message);
         });
     }
     public async void LoginUser(int userId)
@@ -69,8 +77,6 @@ public class SignalRManager
         if (_connection.State == HubConnectionState.Connected)
         {
             await _connection.InvokeAsync("SendMessageOneToOne", senderUserId, receiverUserId, message);
-            ChattingStruct chattingStruct = new ChattingStruct(true, message);
-            Managers.Chatting.Event_SendMessage(chattingStruct);
         }
     }
 
@@ -80,8 +86,6 @@ public class SignalRManager
         {
             //await _connection.InvokeAsync("SendMessage", senderUserId.ToString(), message);
             await _connection.InvokeAsync("SendMessageAll", senderUserId, message);
-            ChattingStruct chattingStruct = new ChattingStruct(false, message);
-            Managers.Chatting.Event_SendMessage(chattingStruct);
         }
     }
 }

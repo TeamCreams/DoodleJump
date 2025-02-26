@@ -237,6 +237,7 @@
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/LayerManager.cs" />
     <Compile Include="Assets/@Scripts/Managers/Contents/LanguageDataManager.cs" />
     <Compile Include="Assets/@Scripts/UI/Popup/UI_SettingPopup.cs" />
+    <Compile Include="Assets/@Scripts/Hubs/SignalRSlave.cs" />
     <Compile Include="Assets/@Scripts/Scene/BaseScene.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/RuntimeSetup.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_HeartRoot.cs" />

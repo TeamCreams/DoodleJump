@@ -7,7 +7,7 @@ public class UI_Chatting : UI_Base
 {
     private enum GameObjects
     {
-        Content,
+        ChattingRoot,
     }
     private enum Buttons
     {
@@ -27,8 +27,8 @@ public class UI_Chatting : UI_Base
         BindObjects(typeof(GameObjects));
         BindButtons(typeof(Buttons));
         BindInputFields(typeof(InputFields));
-        _root = GetObject((int)GameObjects.Content).transform;
-
+        _root = GetObject((int)GameObjects.ChattingRoot).transform;
+        Managers.Game.ChattingInfo.Root = _root;
         GetButton((int)Buttons.Send_Button).gameObject.BindEvent(OnClick_SendChatting, EUIEvent.Click);
         Managers.Event.AddEvent(EEventType.ReceiveMessage, Event_ReceiveMessage);
         return true;
@@ -64,6 +64,6 @@ public class UI_Chatting : UI_Base
             Debug.Log("Bubble이 성공적으로 생성됨.");
             bubble.SetInfo(chattingStruct);
         }
-}
+    }
 
 }

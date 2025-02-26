@@ -298,7 +298,7 @@ public struct ChattingStruct
 public class ChattingInfo
 {
     public string SenderNickname { get; set; } = "";
-    public GameObject Root { get; set; }
+    public Transform Root { get; set; }
 }
 
 [System.Serializable] //얘가 있어야 직렬화 가능
