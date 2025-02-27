@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Assets.HeroEditor.InventorySystem.Scripts.Data;
 using Data;
 using GameApi.Dtos;
@@ -97,8 +97,8 @@ public class UI_PurchasePopup : UI_Popup
             {
                 case EProductType.Custom:  
                 {
-                    Managers.Event.TriggerEvent(EEventType.SetStyle_Player, this);
-                } 
+                     Managers.Game.ChracterStyleInfo.UpdateValuesFromTemp();
+                }    
                 break;
                 case EProductType.Evolution:
                 {

@@ -33,11 +33,10 @@ public class UI_PlayerDesign : UI_Base
     }
     public void OnEvent_SetStyle(Component sender, object param)
     {
-        Managers.Game.ChracterStyleInfo.UpdateValuesFromTemp();
-        GetImage((int)Images.Hair).sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Hair}.sprite");
-        GetImage((int)Images.Eyebrows).sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyebrows}.sprite");
-        GetImage((int)Images.Eyes).sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.Eyes}.sprite");
-        SaveData();
+        GetImage((int)Images.Hair).sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.TempHair}.sprite");
+        GetImage((int)Images.Eyebrows).sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.TempEyebrows}.sprite");
+        GetImage((int)Images.Eyes).sprite = Managers.Resource.Load<Sprite>($"{Managers.Game.ChracterStyleInfo.TempEyes}.sprite");
+        //SaveData();
     }
     void SaveData(Action onSuccess = null, Action onFailed = null)
     {
@@ -57,10 +56,10 @@ public class UI_PlayerDesign : UI_Base
         },
         (errorCode) =>
         {
-                UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-                ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
-                Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, errorStruct.Notice);
-                popup.AddOnClickAction(onFailed);
+                //UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+                //ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
+                //Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, errorStruct.Notice);
+                //popup.AddOnClickAction(onFailed);
         });
     }
 }

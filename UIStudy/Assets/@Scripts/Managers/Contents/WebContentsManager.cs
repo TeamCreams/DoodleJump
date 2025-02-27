@@ -353,11 +353,14 @@ public class WebContentsManager
                 if (rv.StatusCode != EStatusCode.OK)
                 {
                     onFailed.Invoke(rv.StatusCode);
+                    UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+                    ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
+                    Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, null, errorStruct.Notice);
+                    popup.AddOnClickAction(null);
                 }
                 else
                 {
                     onSuccess.Invoke(rv.Data);
-                    Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
                 }
             }
         });

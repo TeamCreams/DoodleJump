@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using UnityEngine;
 
 public class SignalRSlave : MonoBehaviour
@@ -23,6 +23,7 @@ public class SignalRSlave : MonoBehaviour
     }
     private async Awaitable<bool> ReceiveMessageAsync()
     {
+        // 나는 메인스레드가 날 잡아줄때까지 기다릴거야.
         await Awaitable.MainThreadAsync();
         bool isComplete = false;
         //Debug.Log($"ReceiveMessageCo :  [ {_nickname} ]  {_message}"); // 안들어옴

@@ -82,5 +82,6 @@ public class UI_InventoryItem : UI_Base
                 //에러 팝업
                 break;
         }
+        Managers.Event.TriggerEvent(EEventType.SetStyle_Player);
     }
 }

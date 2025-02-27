@@ -71,7 +71,9 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         // Get
         GetButton((int)Buttons.ChooseCharacter_Button).gameObject.BindEvent((evt) =>
         {
+            Debug.Log("SSSS1");
             Managers.Scene.LoadScene(EScene.ChooseCharacterScene);
+            Debug.Log("SSSS2");
         }, EUIEvent.Click);
         GetButton((int)Buttons.Start_Button).gameObject.BindEvent(OnClick_GameStart, EUIEvent.Click);
         GetImage((int)Images.MyScore_Button).gameObject.BindEvent(OnClick_ShowMyScore, EUIEvent.Click);

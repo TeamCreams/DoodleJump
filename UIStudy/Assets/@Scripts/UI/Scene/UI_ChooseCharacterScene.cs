@@ -55,6 +55,7 @@ public class UI_ChooseCharacterScene : UI_Scene
 
     private void ChangeStyle()
     {
+        // _scene.ChangeStyle();
         // 스타일 변화 감지
         var result = Managers.Game.ChracterStyleInfo.CheckAppearance();
         if(result)
@@ -83,10 +84,10 @@ public class UI_ChooseCharacterScene : UI_Scene
         },
         (errorCode) =>
         {
-                UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-                ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
-                Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, errorStruct.Notice);
-                popup.AddOnClickAction(onFailed);
+                //UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+                //ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
+                //Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, errorStruct.Notice);
+                //popup.AddOnClickAction(onFailed);
         });
     }
 }

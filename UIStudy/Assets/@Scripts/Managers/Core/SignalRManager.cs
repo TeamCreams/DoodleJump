@@ -68,6 +68,8 @@ public class SignalRManager
             await _signalRSlave.HandleReceiveMessage(userNickname, message);
         });
     }
+
+
     public async void LoginUser(int userId)
     {
         await _connection.InvokeAsync("LoginUser", userId);
