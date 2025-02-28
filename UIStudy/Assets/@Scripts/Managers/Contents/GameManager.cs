@@ -215,12 +215,18 @@ public class ChracterStyleInfo
     public string Eyebrows { get; set; } = "DizzyEyebrows";
     public string Hair { get; set; } = "ZombieShabby";
 
+    public int TempCharacterId { get; set; } = 20001;
     public string TempEyes { get; set; } = "Dizzy";
     public string TempEyebrows { get; set; } = "DizzyEyebrows";
     public string TempHair { get; set; } = "ZombieShabby";
 
     public bool CheckAppearance()
     {
+        if (CharacterId != TempCharacterId)
+        {            
+            return true;
+        }
+
         if (Eyes != TempEyes)
         {
             return true;
@@ -240,10 +246,20 @@ public class ChracterStyleInfo
 
     public void UpdateValuesFromTemp()
     {
+        CharacterId = TempCharacterId;
         Eyes = TempEyes;
         Eyebrows = TempEyebrows;
         Hair = TempHair;
     }
+
+    public void ResetValuesFromTemp()
+    {
+        TempCharacterId = CharacterId;
+        TempEyes = Eyes;
+        TempEyebrows = Eyebrows;
+        TempHair = Hair;
+    }
+
 }
 public class UserInfo // 서버로 전달될 데이터
 {
@@ -325,10 +341,27 @@ public struct ChattingStruct
         this.Message = message;
     }
 }
+
 public class ChattingInfo
 {
     public string SenderNickname { get; set; } = "";
     public Transform Root { get; set; }
+}
+
+public struct PurchaseStruct
+{
+    public int Id;
+    public Define.EProductType ProductType;
+    public Action OnOkay;
+    public Action OnClose;
+    
+    public PurchaseStruct(int id, Define.EProductType productType, Action onOkay, Action onClose)
+    {
+        this.Id = id;
+        this.ProductType = productType;
+        this.OnOkay = onOkay;
+        this.OnClose = onClose;
+    }
 }
 
 [System.Serializable] //얘가 있어야 직렬화 가능

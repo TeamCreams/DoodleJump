@@ -30,6 +30,11 @@ public class UI_StartLoadingScene : UI_Scene
         return true;
     }
 
+    public void UpdateLogoImage(float percent)
+    {
+        GetImage((int)Images.Logo_Image).fillAmount = percent;
+    }
+
     private void OnPlayableDirectorStopped(PlayableDirector director)
     {
         StartCoroutine(LoadUserAccount_Co());

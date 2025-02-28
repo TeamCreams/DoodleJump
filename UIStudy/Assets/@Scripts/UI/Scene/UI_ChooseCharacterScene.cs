@@ -17,7 +17,8 @@ public class UI_ChooseCharacterScene : UI_Scene
         Home_Button,
         Evolution_Button
     }
-
+    private ChooseCharacterScene _scene;
+    private int _prevEvolutionId = 0;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -30,8 +31,13 @@ public class UI_ChooseCharacterScene : UI_Scene
         GetButton((int)Buttons.Custom_Button).gameObject.BindEvent(OnClick_CustomButton, EUIEvent.Click);
         GetButton((int)Buttons.Home_Button).gameObject.BindEvent(OnClick_HomeButton, EUIEvent.Click);
         GetButton((int)Buttons.Evolution_Button).gameObject.BindEvent(OnClick_EvolutionButton, EUIEvent.Click);
+        _prevEvolutionId = Managers.Game.UserInfo.EvolutionId;
 
         return true;
+    }
+    public void SetInfo(ChooseCharacterScene scene)
+    {
+        _scene = scene;
     }
 
     private void OnClick_CustomButton(PointerEventData eventData)
@@ -52,42 +58,31 @@ public class UI_ChooseCharacterScene : UI_Scene
         GetObject((int)GameObjects.UI_EvolutionPanel).SetActive(true);
         Managers.Event.TriggerEvent(EEventType.Evolution);
     }
-
     private void ChangeStyle()
     {
         // _scene.ChangeStyle();
         // 스타일 변화 감지
         var result = Managers.Game.ChracterStyleInfo.CheckAppearance();
-        if(result)
+        if (result)
         {
-            Managers.Event.TriggerEvent(EEventType.Purchase, this, 0);
+            PurchaseStruct purchaseStruct = new PurchaseStruct(0, EProductType.Custom, 
+                () => 
+                {
+                    Managers.Game.ChracterStyleInfo.UpdateValuesFromTemp();
+                    _scene.SaveData();
+                }, 
+                () => 
+                {
+                    Managers.Game.ChracterStyleInfo.ResetValuesFromTemp();
+                    Managers.Event.TriggerEvent(EEventType.SetStyle_Player);
+                    _scene.SaveData();
+                });
+            Managers.Event.TriggerEvent(EEventType.Purchase, this, purchaseStruct);
         }
-        else
+        // 스타일 변화도 없는데 진화구매를 하지 않았으면 저장할 필요도 없음
+        if(_prevEvolutionId != Managers.Game.UserInfo.EvolutionId)
         {
-            SaveData();
+            _scene.SaveData();
         }
-    }
-    void SaveData(Action onSuccess = null, Action onFailed = null)
-    {
-        Managers.WebContents.ReqDtoUpdateUserStyle(new ReqDtoUpdateUserStyle()
-        {
-            UserAccountId = Managers.Game.UserInfo.UserAccountId,
-            CharacterId = Managers.Game.ChracterStyleInfo.CharacterId,
-            HairStyle = Managers.Game.ChracterStyleInfo.Hair,
-            EyebrowStyle = Managers.Game.ChracterStyleInfo.Eyebrows,
-            EyesStyle = Managers.Game.ChracterStyleInfo.Eyes,
-            Evolution = Managers.Game.UserInfo.EvolutionId
-        },
-        (response) =>
-        {
-                onSuccess?.Invoke();
-        },
-        (errorCode) =>
-        {
-                //UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-                //ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
-                //Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, errorStruct.Notice);
-                //popup.AddOnClickAction(onFailed);
-        });
     }
 }

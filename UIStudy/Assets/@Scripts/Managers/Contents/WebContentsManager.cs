@@ -361,6 +361,7 @@ public class WebContentsManager
                 else
                 {
                     onSuccess.Invoke(rv.Data);
+                    Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
                 }
             }
         });

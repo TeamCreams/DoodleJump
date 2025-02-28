@@ -11,6 +11,36 @@ public static class SecurePlayerPrefs
     {
         return PlayerPrefs.GetString(key, defaultValue);
     }
+
+    public static void SetInt(string key, int value)
+    {
+        PlayerPrefs.SetInt(key, value);
+    }
+
+    public static int GetInt(string key, int defaultValue)
+    {
+        return PlayerPrefs.GetInt(key, defaultValue);
+    }
+
+    public static void SetFloat(string key, float value)
+    {
+        PlayerPrefs.SetFloat(key, value);
+    }
+
+    public static float GetFloat(string key, float defaultValue)
+    {
+        return PlayerPrefs.GetFloat(key, defaultValue);
+    }
+
+    private static void SecurePlayerPrefsCode(string value)
+    {
+        
+    }
+
+    private static void LoadPlayerPrefsCode(string value)
+    {
+
+    }
 }
 
 

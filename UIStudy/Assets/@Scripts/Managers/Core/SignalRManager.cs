@@ -14,8 +14,6 @@ public class SignalRManager
 {
     private HubConnection _connection;
     private string _serverUrl = "https://dev-single-api.snapism.net:8082/Chat";
-    private GameObject _slave;
-    private SignalRSlave _signalRSlave;
     // 메세지를 받는 것
     // 메세지를 특정인물한테 보내는것 (친구 기능)
     // 메세지를 전체한테 보내는 것
@@ -33,12 +31,6 @@ public class SignalRManager
         {
             // 연결 시작
             await _connection.StartAsync();
-
-            if(_slave == null)
-            {
-                _slave = new GameObject("Slave");
-                _signalRSlave = _slave.GetOrAddComponent<SignalRSlave>();
-            }
 
             Debug.Log("SignalR 연결 성공!");
         }
@@ -64,12 +56,10 @@ public class SignalRManager
             // //이벤트 호출 or ChatManager한테 보내주던지
             ChattingStruct chattingStruct = new ChattingStruct(isPrivateMessage, message);
             Managers.Chatting.Event_SendMessage(chattingStruct);
-            Debug.Log($"SignalRManager :  [ {userNickname} ]  {message}, {isPrivateMessage}");
-            await _signalRSlave.HandleReceiveMessage(userNickname, message);
+            //Debug.Log($"SignalRManager :  [ {userNickname} ]  {message}, {isPrivateMessage}");
+            await HandleReceiveMessage(userNickname, message);
         });
     }
-
-
     public async void LoginUser(int userId)
     {
         await _connection.InvokeAsync("LoginUser", userId);
@@ -81,13 +71,33 @@ public class SignalRManager
             await _connection.InvokeAsync("SendMessageOneToOne", senderUserId, receiverUserId, message);
         }
     }
-
     public async void SendMessageAll(int senderUserId, string message)
     {
         if (_connection.State == HubConnectionState.Connected)
         {
-            //await _connection.InvokeAsync("SendMessage", senderUserId.ToString(), message);
             await _connection.InvokeAsync("SendMessageAll", senderUserId, message);
+        }
+    }
+    public async Awaitable HandleReceiveMessage(string nickname, string message)
+    {
+        Debug.Log($"HandleReceiveMessage [ {nickname} ]  {message}");
+        Managers.Game.ChattingInfo.SenderNickname = nickname;
+        await ReceiveMessageAsync();
+    }
+    private async Awaitable ReceiveMessageAsync()
+    {
+        // 나는 메인스레드가 날 잡아줄때까지 기다릴거야.
+        await Awaitable.MainThreadAsync();
+
+        ChattingStruct chattingStruct = Managers.Chatting.GetChattingStruct();
+        var bubble = Managers.UI.MakeSubItem<UI_ChattingItem>(parent: Managers.Game.ChattingInfo.Root);
+        if (bubble == null)
+        {
+            Debug.Log("Bubble이 생성되지 않음");
+        }
+        else
+        {
+            bubble.SetInfo(chattingStruct);
         }
     }
 }

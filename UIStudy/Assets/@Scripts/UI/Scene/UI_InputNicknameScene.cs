@@ -25,7 +25,7 @@ public class UI_InputNicknameScene : UI_Scene
         Nickname_Text,
         Placeholder_Nickname_Text
     }
-
+    private InputNicknameScene _scene = null;
     private string _nicknameUnavailable = "사용할 수 없는 닉네임입니다.";
 
     public override bool Init()
@@ -52,9 +52,14 @@ public class UI_InputNicknameScene : UI_Scene
         Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
     }
 
+    public void SetInfo(InputNicknameScene scene)
+    {
+        _scene = scene;
+    }
+
     private void OnClick_InspectName(PointerEventData eventData)
     {
-        EErrorCode errCode = CheckCorrectNickname(GetInputField((int)InputFields.Nickname_InputField).text);
+        EErrorCode errCode = _scene.CheckCorrectNickname(GetInputField((int)InputFields.Nickname_InputField).text);
         if (errCode != EErrorCode.ERR_OK)
         {
             //Localization 세계화 번역작업
@@ -71,7 +76,7 @@ public class UI_InputNicknameScene : UI_Scene
         },(response) =>
         {
                 Managers.Game.UserInfo.UserNickname = GetInputField((int)InputFields.Nickname_InputField).text;
-                InsertUser(() =>
+                _scene.InsertUser(() =>
                     Managers.Scene.LoadScene(EScene.SignInScene));        
         },(errorCode) =>
         {
@@ -81,48 +86,6 @@ public class UI_InputNicknameScene : UI_Scene
         });
 
     }
-    private void InsertUser(Action onSuccess = null)
-    {
-        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
-        Managers.WebContents.ReqInsertUserAccount(new ReqDtoInsertUserAccount()
-        {
-            UserName = Managers.Game.UserInfo.UserName,
-            Password = Managers.Game.UserInfo.Password,
-            NickName = Managers.Game.UserInfo.UserNickname
-        },
-       (response) =>
-       {
-            Debug.Log("아이디 만들기 성공");
-            Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
-            Managers.UI.ClosePopupUI(loadingPopup);
-
-            onSuccess?.Invoke();
-       },
-       (errorCode) =>
-       {            
-            Managers.UI.ClosePopupUI(loadingPopup);
-
-            Debug.Log("아이디 만들기 실패~");
-            Managers.UI.ShowPopupUI<UI_ErrorPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationFailed);
-            Managers.Event.TriggerEvent(EEventType.ErrorPopup, this, errorStruct);
-       });
-    }
-    private EErrorCode CheckCorrectNickname(string nickname)
-    {
-        if (string.IsNullOrEmpty(nickname))
-        {
-            return EErrorCode.ERR_ValidationNickname;
-        }
-        if (20 <  nickname.Length)
-        {
-            return EErrorCode.ERR_ValidationNickname;
-        }
-        return EErrorCode.ERR_OK;
-    }
-
 
     void OnEvent_SetLanguage(Component sender, object param)
     {

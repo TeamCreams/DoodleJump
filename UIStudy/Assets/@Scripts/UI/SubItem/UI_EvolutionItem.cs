@@ -48,7 +48,8 @@ public class UI_EvolutionItem : UI_Base
         {
             return;
         }
-        Managers.Event.TriggerEvent(EEventType.Purchase, this, _itemId);
+        PurchaseStruct purchaseStruct = new PurchaseStruct(_itemId, EProductType.Evolution, null, null);
+        Managers.Event.TriggerEvent(EEventType.Purchase, this, purchaseStruct);
     }
     public void SetIcon(int id)
     {

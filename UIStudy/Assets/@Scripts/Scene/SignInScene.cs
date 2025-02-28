@@ -9,8 +9,9 @@ public class SignInScene  : BaseScene
             return false;
         }
 
-        Managers.UI.ShowSceneUI<UI_SignInScene>();
-
+        var ui = Managers.UI.ShowSceneUI<UI_SignInScene>();
+        ui.SetInfo(this);
         return true;
     }
+    
 }

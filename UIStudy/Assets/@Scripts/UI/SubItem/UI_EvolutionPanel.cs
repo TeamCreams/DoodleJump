@@ -21,15 +21,13 @@ public class UI_EvolutionPanel : UI_Base
         BindObjects(typeof(GameObjects));
         _evolutionRoot = GetObject((int)GameObjects.EvolutionRoot).transform;
         Managers.Event.AddEvent(EEventType.Evolution, SetInventoryItems);
-        Managers.Event.AddEvent(EEventType.Purchase, OnEvent_ShowPurchasePopup);
 
         return true;
     }
     private void OnDestroy()
     {
         Managers.Event.RemoveEvent(EEventType.Evolution, SetInventoryItems);
-        Managers.Event.RemoveEvent(EEventType.Purchase, OnEvent_ShowPurchasePopup);
-}
+    }
     private void SetInventoryItems(Component sender = null, object param = null)
     {
         AllPush();
@@ -55,18 +53,6 @@ public class UI_EvolutionPanel : UI_Base
         item.SetInfo(id);
         _itemList.Add(item.gameObject);
     }
-
-    public void OnEvent_ShowPurchasePopup(Component sender = null, object param = null)
-    {
-        int id = (int)param;
-        UI_PurchasePopup purchase = Managers.UI.ShowPopupUI<UI_PurchasePopup>();
-        if(id == 0)
-        {
-            purchase.SetInfo(id, EProductType.Custom);
-        }
-        else
-        {            
-            purchase.SetInfo(id, EProductType.Evolution);
-        }
-    }
+    
+    
 }

@@ -23,7 +23,7 @@ public class UI_PurchasePopup : UI_Popup
         Gold_Text
     }
     private EvolutionData _item;
-    private EProductType _productType;
+    private PurchaseStruct _purchaseStruct;
     private int _gold = 0;
     public override bool Init()
     {
@@ -39,20 +39,21 @@ public class UI_PurchasePopup : UI_Popup
         
         return true;
     }
-    public void SetInfo(int id, EProductType productType)
+    public void SetInfo(PurchaseStruct purchaseStruct)
     {
-        _productType = productType;
-        switch(_productType)
+        _purchaseStruct = purchaseStruct;
+
+        switch(_purchaseStruct.ProductType)
         {
             case EProductType.Custom:  
             {
                 GetText((int)Texts.Gold_Text).text = HardCoding.ChangeStyleGold.ToString();
-                _gold = _item.Gold;
+                _gold = HardCoding.ChangeStyleGold;
             } 
             break;
             case EProductType.Evolution:
             {
-                _item = Managers.Data.EvolutionDataDic[id];
+                _item = Managers.Data.EvolutionDataDic[_purchaseStruct.Id];
                 GetText((int)Texts.Gold_Text).text = _item.Gold.ToString();
                 _gold = _item.Gold;
             }
@@ -64,12 +65,12 @@ public class UI_PurchasePopup : UI_Popup
 
     private void OnEvent_ClickClose(PointerEventData eventData)
     {
+        _purchaseStruct.OnClose?.Invoke();
         Managers.UI.ClosePopupUI(this);
     }
 
     private void OnEvent_ClickOk(PointerEventData eventData)
     {
-        // 서버랑 연결해서 돈 빼기 ->   UI_EvolutionItem에서 한 번에
         int remainingChange = Managers.Game.UserInfo.Gold - _gold;
         if(0 <= remainingChange)
         {
@@ -85,6 +86,7 @@ public class UI_PurchasePopup : UI_Popup
 
     private void UpdateUserGold(Action onSuccess = null, Action onFailed = null)
     {
+        Debug.Log("UpdateUserGold");
         Managers.WebContents.ReqDtoUpdateUserGold(new ReqDtoUpdateUserGold()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
@@ -93,12 +95,10 @@ public class UI_PurchasePopup : UI_Popup
        (response) =>
        {
             onSuccess?.Invoke();
-            switch(_productType)
+            _purchaseStruct.OnOkay?.Invoke();
+            switch(_purchaseStruct.ProductType)
             {
                 case EProductType.Custom:  
-                {
-                     Managers.Game.ChracterStyleInfo.UpdateValuesFromTemp();
-                }    
                 break;
                 case EProductType.Evolution:
                 {

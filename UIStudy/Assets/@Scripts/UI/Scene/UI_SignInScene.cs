@@ -45,7 +45,8 @@ public class UI_SignInScene : UI_Scene
     private EErrorCode _errCodeId = EErrorCode.ERR_Nothing;
     private string _password = "";
     //private bool _isFailFirst = false; // for test
-    private EScene _scene = EScene.Unknown;
+    private SignInScene _scene;
+    private EScene _loadScene = EScene.Unknown;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -72,6 +73,10 @@ public class UI_SignInScene : UI_Scene
     private void OnDestroy()
     {
         Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+    }
+    public void SetInfo(SignInScene scene)
+    {   
+        _scene = scene;
     }
     private void OnClick_SignIn(PointerEventData eventData)
     {
@@ -104,11 +109,11 @@ public class UI_SignInScene : UI_Scene
             Managers.Score.GetScore((this), null,
             () =>
             {
-                _scene = EScene.SuberunkerSceneHomeScene;
+                _loadScene = EScene.SuberunkerSceneHomeScene;
             },
             () =>
             {
-                _scene = EScene.SignInScene;
+                _loadScene = EScene.SignInScene;
             });
             Managers.UI.ClosePopupUI(loadingPopup);
             //StartCoroutine(LoadScene_Co());
@@ -118,15 +123,15 @@ public class UI_SignInScene : UI_Scene
 
     private void OnClick_SignUp(PointerEventData eventData)
     {
-        _scene = EScene.SignUpScene;
-        Managers.Scene.LoadScene(_scene);
+        _loadScene = EScene.SignUpScene;
+        Managers.Scene.LoadScene(_loadScene);
     }
 
     private IEnumerator LoadScene_Co()
     {
         yield return new WaitWhile(() => _isLoadSceneCondition == false);
         Debug.Log($"Managers.Game.UserInfo.UserAccountId : {Managers.Game.UserInfo.UserAccountId}");
-        Managers.Scene.LoadScene(_scene);
+        Managers.Scene.LoadScene(_loadScene);
     }
 
     /// <summary>
@@ -153,7 +158,7 @@ public class UI_SignInScene : UI_Scene
            Managers.Game.UserInfo.UserName = response.UserName;
            Managers.Game.UserInfo.UserNickname = response.Nickname;
            Managers.Game.UserInfo.UserAccountId = response.UserAccountId;
-        Managers.SignalR.LoginUser(Managers.Game.UserInfo.UserAccountId);
+            Managers.SignalR.LoginUser(Managers.Game.UserInfo.UserAccountId);
 
            //캐릭터 스타일 저장
            Managers.Game.ChracterStyleInfo.CharacterId = response.CharacterId;
@@ -234,8 +239,8 @@ public class UI_SignInScene : UI_Scene
             return;
         }
         _failCount = 0;
-        _scene = EScene.SignInScene;
-        Managers.Scene.LoadScene(_scene);
+        _loadScene = EScene.SignInScene;
+        Managers.Scene.LoadScene(_loadScene);
     }
 
     void OnEvent_SetLanguage(Component sender, object param)
