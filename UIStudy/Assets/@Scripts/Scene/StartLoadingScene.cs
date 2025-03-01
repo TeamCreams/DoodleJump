@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections;
 using GameApi.Dtos;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 using static Define;
 
 public class StartLoadingScene : BaseScene
 {
+    /*
     public override bool Init()
     {
         if (base.Init() == false)
@@ -15,7 +17,7 @@ public class StartLoadingScene : BaseScene
         }
         return true;
     }
-/*
+*/
     private int _failCount = 0;
     private EScene _scene = EScene.InputNicknameScene;
     private bool _isPreLoadSuccess = false;
@@ -28,9 +30,14 @@ public class StartLoadingScene : BaseScene
         {
             return false;
         }
-        _ui = Managers.UI.ShowSceneUI<UI_StartLoadingScene>();
-        
+        //_ui = Managers.UI.ShowSceneUI<UI_StartLoadingScene>();
+        GameObject ui = GameObject.Find("UI_StartLoadingScene");
+        _ui = ui.GetOrAddComponent<UI_StartLoadingScene>();
+        _ui = ui.GetOrAddComponent<UI_StartLoadingScene>();
+
         _playableDirector = this.gameObject.GetOrAddComponent<PlayableDirector>();
+        _playableDirector.playableAsset = _ui.GetOrAddComponent<PlayableDirector>().playableAsset;
+         
         _playableDirector.stopped += OnPlayableDirectorStopped;
         StartLoadAssets("PreLoad");
         return true;
@@ -188,5 +195,5 @@ public class StartLoadingScene : BaseScene
             }
         });
     }
-    */
+    
 }

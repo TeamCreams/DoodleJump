@@ -11,11 +11,12 @@ public class UI_StartLoadingScene : UI_Scene
     {
         Logo_Image
     }
-    private int _failCount = 0;
-    private EScene _scene = EScene.InputNicknameScene;
-    private bool _isPreLoadSuccess = false;
-    private bool _isLoadSceneCondition = false;
-    private PlayableDirector _playableDirector = null;
+    
+    // private int _failCount = 0;
+    // private EScene _scene = EScene.InputNicknameScene;
+    // private bool _isPreLoadSuccess = false;
+    // private bool _isLoadSceneCondition = false;
+    // private PlayableDirector _playableDirector = null;
 
     public override bool Init()
     {
@@ -24,9 +25,9 @@ public class UI_StartLoadingScene : UI_Scene
             return false;
         }
         BindImages(typeof(Images));
-        _playableDirector = this.gameObject.GetOrAddComponent<PlayableDirector>();
-        _playableDirector.stopped += OnPlayableDirectorStopped;
-        StartLoadAssets("PreLoad");
+        // _playableDirector = this.gameObject.GetOrAddComponent<PlayableDirector>();
+        // _playableDirector.stopped += OnPlayableDirectorStopped;
+        // StartLoadAssets("PreLoad");
         return true;
     }
 
@@ -34,7 +35,7 @@ public class UI_StartLoadingScene : UI_Scene
     {
         GetImage((int)Images.Logo_Image).fillAmount = percent;
     }
-
+/*
     private void OnPlayableDirectorStopped(PlayableDirector director)
     {
         StartCoroutine(LoadUserAccount_Co());
@@ -187,4 +188,5 @@ public class UI_StartLoadingScene : UI_Scene
             }
         });
     }
+    */
 }
