@@ -229,6 +229,7 @@
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/ShopBase.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/InventoryBase.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/Monster.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_ButtonAnimator.cs" />
     <Compile Include="Assets/@Scripts/Managers/Core/UIManager.cs" />
     <Compile Include="Assets/@Scripts/Managers/Core/SoundManager.cs" />
     <Compile Include="Assets/HeroEditor/Common/SimpleColorPicker/Scripts/ColorPicker.cs" />

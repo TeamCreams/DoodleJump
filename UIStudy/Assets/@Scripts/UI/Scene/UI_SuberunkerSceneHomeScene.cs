@@ -130,12 +130,14 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
 
     private void OnClick_ShowMission(PointerEventData eventData)
     {
+        Managers.Event.TriggerEvent(EEventType.ExitPointer);
         GetObject((int)GameObjects.UI_MissionPanel).SetActive(true);
         Managers.Event.TriggerEvent(EEventType.Mission);
     }
 
     private void OnClick_SettingButton(PointerEventData eventData)
     {
+        Managers.Event.TriggerEvent(EEventType.ExitPointer);
         UI_SettingPopup settingPopup = Managers.UI.ShowPopupUI<UI_SettingPopup>();
         settingPopup.ActiveInfo();
     }
@@ -147,6 +149,8 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     }
     private void OnClick_GameStart(PointerEventData eventData)
     {
+        Managers.Event.TriggerEvent(EEventType.ExitPointer);
+
         var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
 
         Managers.WebContents.ReqDtoGameStart(new ReqDtoGameStart()

@@ -101,7 +101,7 @@ public class SuberunkerScene : BaseScene
             onSuccess: () => 
             {
                 Managers.Event.TriggerEvent(EEventType.OnSettlementComplete); 
-                Managers.Event.TriggerEvent(EEventType.OnUpdateMission);
+                //Managers.Event.TriggerEvent(EEventType.OnUpdateMission);
                 Managers.UI.ClosePopupUI(loadingPopup);
             },
             onFailed: () => Event_OnPlayerDead(this, tryCount++));

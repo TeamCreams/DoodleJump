@@ -57,7 +57,7 @@ public class SignalRManager
             ChattingStruct chattingStruct = new ChattingStruct(isPrivateMessage, message);
             Managers.Chatting.Event_SendMessage(chattingStruct);
             //Debug.Log($"SignalRManager :  [ {userNickname} ]  {message}, {isPrivateMessage}");
-            await HandleReceiveMessage(userNickname, message);
+            await ReceiveMessageAsync(userNickname);
         });
     }
     public async void LoginUser(int userId)
@@ -78,16 +78,17 @@ public class SignalRManager
             await _connection.InvokeAsync("SendMessageAll", senderUserId, message);
         }
     }
-    public async Awaitable HandleReceiveMessage(string nickname, string message)
-    {
-        Debug.Log($"HandleReceiveMessage [ {nickname} ]  {message}");
-        Managers.Game.ChattingInfo.SenderNickname = nickname;
-        await ReceiveMessageAsync();
-    }
-    private async Awaitable ReceiveMessageAsync()
+    // public async Awaitable HandleReceiveMessage(string nickname, string message)
+    // {
+    //     Debug.Log($"HandleReceiveMessage [ {nickname} ]  {message}");
+    //     Managers.Game.ChattingInfo.SenderNickname = nickname;
+    //     await ReceiveMessageAsync(userNickname);
+    // }
+    private async Awaitable ReceiveMessageAsync(string nickname)
     {
         // 나는 메인스레드가 날 잡아줄때까지 기다릴거야.
         await Awaitable.MainThreadAsync();
+        Managers.Game.ChattingInfo.SenderNickname = nickname;
 
         ChattingStruct chattingStruct = Managers.Chatting.GetChattingStruct();
         var bubble = Managers.UI.MakeSubItem<UI_ChattingItem>(parent: Managers.Game.ChattingInfo.Root);

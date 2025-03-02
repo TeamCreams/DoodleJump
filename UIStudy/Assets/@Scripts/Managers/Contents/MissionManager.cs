@@ -25,13 +25,13 @@ public class MissionManager
         Managers.Event.RemoveEvent(EEventType.OnSettlementComplete, Event_OnSettlementComplete);
         Managers.Event.RemoveEvent(EEventType.OnFirstAccept, Event_OnFirstAccept);
         Managers.Event.RemoveEvent(EEventType.OnMissionComplete, Event_OnMissionComplete);
-        Managers.Event.RemoveEvent(EEventType.OnUpdateMission, Event_OnUpdateMission);
+        //Managers.Event.RemoveEvent(EEventType.OnUpdateMission, Event_OnUpdateMission);
         Managers.Event.RemoveEvent(EEventType.OnLogout, Event_ClearMission);
 
         Managers.Event.AddEvent(EEventType.OnSettlementComplete, Event_OnSettlementComplete);
         Managers.Event.AddEvent(EEventType.OnFirstAccept, Event_OnFirstAccept);
         Managers.Event.AddEvent(EEventType.OnMissionComplete, Event_OnMissionComplete);
-        Managers.Event.AddEvent(EEventType.OnUpdateMission, Event_OnUpdateMission);
+        //Managers.Event.AddEvent(EEventType.OnUpdateMission, Event_OnUpdateMission);
         Managers.Event.AddEvent(EEventType.OnLogout, Event_ClearMission);
     }
 
@@ -55,10 +55,10 @@ public class MissionManager
         // 새로운 미션으로 refresh
     }
 
-    void Event_OnUpdateMission(Component sender, object param)
-    {
-        //UpdateMissionList(sender);
-    }
+    // void Event_OnUpdateMission(Component sender, object param)
+    // {
+    //     //UpdateMissionList(sender); // 원래 주석처리 중이었는데 왜인지 모르곘네
+    // }
 
     void Event_ClearMission(Component sender, object param)
     {
@@ -215,7 +215,7 @@ public class MissionManager
        });
     }
 
-    public void UpdateMissionList(Component sender, Action onSuccess = null, Action onFailed = null) // 이름 다시 수정
+    public void UpdateMissionList(Component sender, Action onSuccess = null, Action onFailed = null)
     {
         Debug.Log($"{nameof(UpdateMissionList)} Call");
         if(_changedMissionList.Count < 1)
