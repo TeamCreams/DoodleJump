@@ -42,18 +42,15 @@ public class UI_ChooseCharacterScene : UI_Scene
 
     private void OnClick_CustomButton(PointerEventData eventData)
     {
-        Debug.Log("OnClick_CustomButton!");
         GetObject((int)GameObjects.UI_ChooseCharacterPanel).SetActive(true);
         GetObject((int)GameObjects.UI_EvolutionPanel).SetActive(false);
     }
     private void OnClick_HomeButton(PointerEventData eventData)
     {
-        Debug.Log("OnClick_HomeButton!");
         ChangeStyle();
     }
     private void OnClick_EvolutionButton(PointerEventData eventData)
     {
-        Debug.Log("OnClick_EvolutionButton!");
         GetObject((int)GameObjects.UI_ChooseCharacterPanel).SetActive(false);
         GetObject((int)GameObjects.UI_EvolutionPanel).SetActive(true);
         Managers.Event.TriggerEvent(EEventType.Evolution);
@@ -78,11 +75,17 @@ public class UI_ChooseCharacterScene : UI_Scene
                     _scene.SaveData();
                 });
             Managers.Event.TriggerEvent(EEventType.Purchase, this, purchaseStruct);
+            return;
         }
         // 스타일 변화도 없는데 진화구매를 하지 않았으면 저장할 필요도 없음
         if(_prevEvolutionId != Managers.Game.UserInfo.EvolutionId)
         {
             _scene.SaveData();
+            return;
+        }
+        else
+        {
+            _scene.LoadHomeScene();
         }
     }
 }

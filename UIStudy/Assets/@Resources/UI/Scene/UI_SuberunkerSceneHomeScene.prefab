@@ -12886,7 +12886,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -13097,7 +13097,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -13928,6 +13928,7 @@ GameObject:
   - component: {fileID: 3312931920432878242}
   - component: {fileID: 7932867794022213753}
   - component: {fileID: 7133613551043084293}
+  - component: {fileID: 8274169978972320478}
   m_Layer: 5
   m_Name: Send_Button
   m_TagString: Untagged
@@ -14011,7 +14012,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -14036,6 +14037,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8274169978972320478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4381922094906176353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a07ed1bc8be3943c797033217913c70c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4463124475544651236
 GameObject:
   m_ObjectHideFlags: 0
@@ -14135,7 +14148,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -15434,6 +15447,7 @@ GameObject:
   - component: {fileID: 6680481671658946229}
   - component: {fileID: 2235695055106017756}
   - component: {fileID: 4846913247617836960}
+  - component: {fileID: 7136737522304016225}
   m_Layer: 5
   m_Name: Button_Add
   m_TagString: Untagged
@@ -15483,7 +15497,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -15528,6 +15542,18 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &7136737522304016225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6073540920018506537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a07ed1bc8be3943c797033217913c70c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6431180562967607014
 GameObject:
   m_ObjectHideFlags: 0
@@ -17060,6 +17086,7 @@ GameObject:
   - component: {fileID: 6987607769057074269}
   - component: {fileID: 1023148906053285661}
   - component: {fileID: 9132329309859413089}
+  - component: {fileID: 8794034100872688881}
   m_Layer: 5
   m_Name: Button_Add
   m_TagString: Untagged
@@ -17109,7 +17136,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -17154,6 +17181,18 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &8794034100872688881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8264250012547773772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a07ed1bc8be3943c797033217913c70c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8377020897055119751
 GameObject:
   m_ObjectHideFlags: 0
@@ -17619,7 +17658,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -18203,6 +18242,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 6909915143145842810}
     m_Modifications:
     - target: {fileID: 382148063261969890, guid: 2f06debaf1b2444e7b13b37545775621, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 382148063261969890, guid: 2f06debaf1b2444e7b13b37545775621, type: 3}
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 0}
@@ -18313,8 +18356,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 382148063261969892, guid: 2f06debaf1b2444e7b13b37545775621, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4841299470680310164}
   m_SourcePrefab: {fileID: 100100000, guid: 2f06debaf1b2444e7b13b37545775621, type: 3}
+--- !u!1 &5255060685522717274 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 382148063261969892, guid: 2f06debaf1b2444e7b13b37545775621, type: 3}
+  m_PrefabInstance: {fileID: 5593488854773827518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4841299470680310164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5255060685522717274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a07ed1bc8be3943c797033217913c70c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &5255060685522717277 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 382148063261969891, guid: 2f06debaf1b2444e7b13b37545775621, type: 3}

@@ -68,5 +68,10 @@ public class ChooseCharacterScene : BaseScene
                 onFailed?.Invoke();
         });
     }
+
+    public void LoadHomeScene()
+    {
+        Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+    }
 }
 

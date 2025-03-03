@@ -68,13 +68,8 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         BindButtons(typeof(Buttons));
         BindImages(typeof(Images));
 
-        // Get
-        GetButton((int)Buttons.ChooseCharacter_Button).gameObject.BindEvent((evt) =>
-        {
-            Debug.Log("SSSS1");
-            Managers.Scene.LoadScene(EScene.ChooseCharacterScene);
-            Debug.Log("SSSS2");
-        }, EUIEvent.Click);
+        // Bind Event
+        GetButton((int)Buttons.ChooseCharacter_Button).gameObject.BindEvent(OnClick_ShowChooseCharacterScene, EUIEvent.Click);
         GetButton((int)Buttons.Start_Button).gameObject.BindEvent(OnClick_GameStart, EUIEvent.Click);
         GetImage((int)Images.MyScore_Button).gameObject.BindEvent(OnClick_ShowMyScore, EUIEvent.Click);
         GetImage((int)Images.Ranking_Button).gameObject.BindEvent(OnClick_ShowRanking, EUIEvent.Click);
@@ -113,31 +108,31 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetObject((int)GameObjects.MyScore).SetActive(true);
         GetObject((int)GameObjects.Ranking).SetActive(false);
     }
-
+    private void OnClick_ShowChooseCharacterScene(PointerEventData eventData)
+    {
+        Managers.Game.ChracterStyleInfo.ResetValuesFromTemp();
+        Managers.Scene.LoadScene(EScene.ChooseCharacterScene);
+    }
     private void OnClick_ShowMyScore(PointerEventData eventData)
     {
-        Managers.Event.TriggerEvent(EEventType.GetMyScore);
         GetObject((int)GameObjects.MyScore).SetActive(true);
         GetObject((int)GameObjects.Ranking).SetActive(false);
     }
 
     private void OnClick_ShowRanking(PointerEventData eventData)
     {
-        Managers.Event.TriggerEvent(EEventType.GetUserScoreList);
         GetObject((int)GameObjects.MyScore).SetActive(false);
         GetObject((int)GameObjects.Ranking).SetActive(true);
     }
 
     private void OnClick_ShowMission(PointerEventData eventData)
     {
-        Managers.Event.TriggerEvent(EEventType.ExitPointer);
         GetObject((int)GameObjects.UI_MissionPanel).SetActive(true);
         Managers.Event.TriggerEvent(EEventType.Mission);
     }
 
     private void OnClick_SettingButton(PointerEventData eventData)
     {
-        Managers.Event.TriggerEvent(EEventType.ExitPointer);
         UI_SettingPopup settingPopup = Managers.UI.ShowPopupUI<UI_SettingPopup>();
         settingPopup.ActiveInfo();
     }
@@ -149,8 +144,6 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     }
     private void OnClick_GameStart(PointerEventData eventData)
     {
-        Managers.Event.TriggerEvent(EEventType.ExitPointer);
-
         var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
 
         Managers.WebContents.ReqDtoGameStart(new ReqDtoGameStart()
