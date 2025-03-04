@@ -229,6 +229,41 @@
       "Id": 91046,
       "KrText": "로그아웃",
       "EnText": "LOGOUT"
+    },
+    {
+      "Id": 91047,
+      "KrText": "커스텀 구매",
+      "EnText": "Custom Purchase"
+    },
+    {
+      "Id": 91048,
+      "KrText": "업그레이드",
+      "EnText": "Upgrade"
+    },
+    {
+      "Id": 91049,
+      "KrText": "구매하시겠습니까?",
+      "EnText": "Would you like to make a purchase?"
+    },
+    {
+      "Id": 91050,
+      "KrText": "업그레이드를 진행하시겠습니까?",
+      "EnText": "Would you like to proceed with the upgrade?"
+    },
+    {
+      "Id": 91051,
+      "KrText": "커스텀",
+      "EnText": "Custom"
+    },
+    {
+      "Id": 91052,
+      "KrText": "구매하기",
+      "EnText": "Agree to Buy"
+    },
+    {
+      "Id": 91053,
+      "KrText": "진화",
+      "EnText": "Evolution"
     }
   ]
 }

@@ -17,6 +17,13 @@ public class UI_ChooseCharacterScene : UI_Scene
         Home_Button,
         Evolution_Button
     }
+
+    private enum Texts
+    {
+        Custom_Text,
+        Home_Text,
+        Evolution_Text
+    }
     private ChooseCharacterScene _scene;
     private int _prevEvolutionId = 0;
     public override bool Init()
@@ -25,16 +32,28 @@ public class UI_ChooseCharacterScene : UI_Scene
         {
             return false;
         }
+        // Bind
         BindObjects(typeof(GameObjects));
         BindButtons(typeof(Buttons));
+        BindTexts(typeof(Texts));
 
+        // Get
         GetButton((int)Buttons.Custom_Button).gameObject.BindEvent(OnClick_CustomButton, EUIEvent.Click);
         GetButton((int)Buttons.Home_Button).gameObject.BindEvent(OnClick_HomeButton, EUIEvent.Click);
         GetButton((int)Buttons.Evolution_Button).gameObject.BindEvent(OnClick_EvolutionButton, EUIEvent.Click);
         _prevEvolutionId = Managers.Game.UserInfo.EvolutionId;
 
+        // add event
+        Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+
         return true;
     }
+
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
+    }
+    
     public void SetInfo(ChooseCharacterScene scene)
     {
         _scene = scene;
@@ -87,5 +106,12 @@ public class UI_ChooseCharacterScene : UI_Scene
         {
             _scene.LoadHomeScene();
         }
+    }
+
+    void OnEvent_SetLanguage(Component sender, object param)
+    {
+        GetText((int)Texts.Custom_Text).text = Managers.Language.LocalizedString(91051);
+        GetText((int)Texts.Home_Text).text = Managers.Language.LocalizedString(91017);
+        GetText((int)Texts.Evolution_Text).text = Managers.Language.LocalizedString(91053);
     }
 }

@@ -168,6 +168,7 @@
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/ScreenshotTransparent.cs" />
     <Compile Include="Assets/@Scripts/UI/Popup/UI_RetryPopup.cs" />
     <Compile Include="Assets/@Scripts/Controller/Stats/Stats.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_CharacterStyleItem.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/CharacterReferencesResolver.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/MeleeWeapon.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterBodySculptor.cs" />

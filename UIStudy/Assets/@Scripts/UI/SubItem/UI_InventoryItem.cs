@@ -9,17 +9,17 @@ using static Define;
 public class UI_InventoryItem : UI_Base
 {
     private Toggle _toggle = null;
-    private GameObject _myParent = null;
-    public GameObject MyParent
-    {
-        get =>_myParent;
+    // private GameObject _myParent = null;
+    // public GameObject MyParent
+    // {
+    //     get =>_myParent;
         
-        set
-        {
-            _myParent = value;
-        }
+    //     set
+    //     {
+    //         _myParent = value;
+    //     }
 
-    }
+    // }
     private enum State
     {
         Hair = 10000,

@@ -26,6 +26,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c5a7997492e44abc9c5f9d83d4ac1f9
+    m_Address: UI_CharacterStyleItem
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5f4842027b4893b429f7fbaceb4abbd9
     m_Address: explosion_sharp_flat_3x3
     m_ReadOnly: 0

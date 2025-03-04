@@ -9,7 +9,13 @@ using static Define;
 
 public class UI_PurchasePopup : UI_Popup
 {
-
+    private enum GameObjects
+    {
+        Noctice_ImageGroup,
+        HairItem,
+        EyesItem,
+        EyebrowsItem
+    }
     private enum Buttons
     {
         Close_Button,
@@ -20,24 +26,38 @@ public class UI_PurchasePopup : UI_Popup
     {
         Title_Text,
         Notice_Text,
-        Gold_Text
+        Gold_Text,
+        Ok_Text 
     }
     private EvolutionData _item;
     private PurchaseStruct _purchaseStruct;
     private int _gold = 0;
+
+    private int _title = 0; // 이거 언어랑 버전 별로 만들어서 수정해야 함
+    private int _notice = 0;
     public override bool Init()
     {
         if (base.Init() == false)
         {
             return false;
         }
+        //bind
+        BindObjects(typeof(GameObjects));
         BindButtons(typeof(Buttons));
         BindTexts(typeof(Texts));
 
+        //get
         GetButton((int)Buttons.Close_Button).gameObject.BindEvent(OnEvent_ClickClose, EUIEvent.Click);
         GetButton((int)Buttons.Ok_Button).gameObject.BindEvent(OnEvent_ClickOk, EUIEvent.Click);
-        
+        GetObject((int)GameObjects.Noctice_ImageGroup).SetActive(false);
+
+        //add Event
+        Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         return true;
+    }
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
     }
     public void SetInfo(PurchaseStruct purchaseStruct)
     {
@@ -47,12 +67,17 @@ public class UI_PurchasePopup : UI_Popup
         {
             case EProductType.Custom:  
             {
+                func();
+                _title = 91047;
+                _notice = 91049;
                 GetText((int)Texts.Gold_Text).text = HardCoding.ChangeStyleGold.ToString();
                 _gold = HardCoding.ChangeStyleGold;
             } 
             break;
             case EProductType.Evolution:
             {
+                _title = 91048;
+                _notice = 91050;
                 _item = Managers.Data.EvolutionDataDic[_purchaseStruct.Id];
                 GetText((int)Texts.Gold_Text).text = _item.Gold.ToString();
                 _gold = _item.Gold;
@@ -61,6 +86,7 @@ public class UI_PurchasePopup : UI_Popup
             default:
             break;
         }
+        OnEvent_SetLanguage(null, null);
     }
 
     private void OnEvent_ClickClose(PointerEventData eventData)
@@ -117,5 +143,38 @@ public class UI_PurchasePopup : UI_Popup
             Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, errorStruct.Notice);
             popup.AddOnClickAction(onFailed);
        });
+    }
+
+    private void func()
+    {
+        GetObject((int)GameObjects.Noctice_ImageGroup).SetActive(true);
+
+        if(Managers.Game.ChracterStyleInfo.Hair != Managers.Game.ChracterStyleInfo.TempHair)
+        {
+            SpawnItem(EEquipType.Hair);
+        }
+
+        if(Managers.Game.ChracterStyleInfo.Eyes != Managers.Game.ChracterStyleInfo.TempEyes)
+        {
+            SpawnItem(EEquipType.Eyes);
+        }
+
+        if(Managers.Game.ChracterStyleInfo.Eyebrows != Managers.Game.ChracterStyleInfo.TempEyebrows)
+        {
+            SpawnItem(EEquipType.Eyebrows);
+        }
+    }
+    private void SpawnItem(EEquipType style)
+    {
+        var item = Managers.UI.MakeSubItem<UI_CharacterStyleItem>(parent: GetObject((int)GameObjects.Noctice_ImageGroup).transform, pooling: true);
+        item.SetInfo(style);
+        //_itemList.Add(item.gameObject);
+    }
+
+    void OnEvent_SetLanguage(Component sender, object param)
+    {
+        GetText((int)Texts.Title_Text).text = Managers.Language.LocalizedString(_title);
+        GetText((int)Texts.Notice_Text).text = Managers.Language.LocalizedString(_notice);
+        GetText((int)Texts.Ok_Text).text = Managers.Language.LocalizedString(91052);
     }
 }
