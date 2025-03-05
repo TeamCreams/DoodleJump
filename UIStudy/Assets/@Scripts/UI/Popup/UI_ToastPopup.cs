@@ -2,8 +2,19 @@
 using UnityEngine;
 using static Define;
 
+//SYSTEM : 곧 점검이 시작됩니다. (INFO)
+//SYSTEM : 돈이 부족합니다. (WARNING)
+//SYSTEM : 네트워크가 불안정합니다. (ERROR)
+
 public class UI_ToastPopup : UI_Popup
 {
+    public enum Type
+    {
+        Info,
+        Warning,
+        Error,
+        Critical
+    }
 
     private enum Texts
     {

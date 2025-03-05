@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using GameApi.Dtos;
 using UnityEngine;
@@ -14,6 +14,12 @@ public class SuberunkerSceneHomeScene : BaseScene
             return false;
         }
         Managers.UI.ShowSceneUI<UI_SuberunkerSceneHomeScene>();
+
+        var inputObject = new GameObject("@Input_Scene");
+        var inputScene = inputObject.GetOrAddComponent<Input_SuberunkerSceneHomeScene>();
+
+        Managers.Input.KeyAction -= inputScene.OnKeyAction;
+        Managers.Input.KeyAction += inputScene.OnKeyAction;
 
         Managers.Sound.Stop(ESound.Bgm);
         Managers.Sound.Play(ESound.Bgm, "LobbyBGMSound", 0.2f);

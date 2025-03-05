@@ -12,9 +12,6 @@ public class UI_PurchasePopup : UI_Popup
     private enum GameObjects
     {
         Noctice_ImageGroup,
-        HairItem,
-        EyesItem,
-        EyebrowsItem
     }
     private enum Buttons
     {

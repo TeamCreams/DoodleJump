@@ -29,7 +29,9 @@ public static class Define
 		BeginDrag,
 		Drag,
 		EndDrag,
-	}
+		PointerEnter,
+		PointerExit,
+    }
 
 	public enum ESound
 	{

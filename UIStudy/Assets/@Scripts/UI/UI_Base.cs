@@ -36,12 +36,12 @@ public class UI_Base : InitBase
         for (int i = 0; i < names.Length; i++)
         {
             if (typeof(T) == typeof(GameObject))
-                objects[i] = Util.FindChild(gameObject, names[i], true);
+                objects[i] = Util.FindChild(gameObject, names[i].Trim(), true);
             else
-                objects[i] = Util.FindChild<T>(gameObject, names[i], true);
+                objects[i] = Util.FindChild<T>(gameObject, names[i].Trim(), true);
 
             if (objects[i] == null)
-                Debug.Log($"Failed to bind({names[i]})");
+                Debug.Log($"Failed to bind({names[i].Trim()})");
         }
     }
 
@@ -102,6 +102,16 @@ public class UI_Base : InitBase
                 evt.OnDragHandler += action;
                 break;
             case Define.EUIEvent.EndDrag:
+                evt.OnEndDragHandler -= action;
+                evt.OnEndDragHandler += action;
+                break;
+
+            case Define.EUIEvent.PointerEnter:
+                evt.OnEndDragHandler -= action;
+                evt.OnEndDragHandler += action;
+                break;
+
+            case Define.EUIEvent.PointerExit:
                 evt.OnEndDragHandler -= action;
                 evt.OnEndDragHandler += action;
                 break;

@@ -59,6 +59,7 @@ namespace GameApi.Hubs
                 MessageSentTime = DateTime.UtcNow,
                 ReceiverUserId = receiverUser.Id
             };
+
             _dbContext.TblUserMessages.Add(userMessage);
             var IsSuccess = await _dbContext.SaveChangesAsync();
             if (IsSuccess == 0)

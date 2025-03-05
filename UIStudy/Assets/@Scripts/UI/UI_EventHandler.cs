@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using System;
 
-public class UI_EventHandler : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class UI_EventHandler : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Action<PointerEventData> OnPointerDownHandler;
     public Action<PointerEventData> OnClickHandler;
@@ -10,8 +10,9 @@ public class UI_EventHandler : MonoBehaviour, IPointerUpHandler, IPointerDownHan
     public Action<PointerEventData> OnBeginDragHandler;
     public Action<PointerEventData> OnDragHandler;
     public Action<PointerEventData> OnEndDragHandler;
-
     public Action<PointerEventData> OnPointerUpHandler;
+    public Action<PointerEventData> OnPointerEnterHandler;
+    public Action<PointerEventData> OnPointerExitHandler;
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -56,6 +57,22 @@ public class UI_EventHandler : MonoBehaviour, IPointerUpHandler, IPointerDownHan
         if (OnEndDragHandler != null)
         {
             OnEndDragHandler.Invoke(eventData);
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (OnPointerEnterHandler != null)
+        {
+            OnPointerEnterHandler.Invoke(eventData);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (OnPointerExitHandler != null)
+        {
+            OnPointerExitHandler.Invoke(eventData);
         }
     }
 }

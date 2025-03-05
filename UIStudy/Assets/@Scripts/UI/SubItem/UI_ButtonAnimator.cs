@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -17,11 +17,11 @@ public class UI_ButtonAnimator : UI_Base
             return false;
         }
         _button = this.gameObject.GetOrAddComponent<Button>();
-        _button.onClick.AddListener(OnEvent_PoiterUp);
 
         _scale = this.gameObject.transform.localScale;
         _nextScale = new Vector3(_scale.x * 0.9f, _scale.y * 0.9f, _scale.z * 0.9f);
         this.gameObject.BindEvent(OnPointerDown_Button, EUIEvent.PointerDown);
+        this.gameObject.BindEvent(OnPointerExit_Button, EUIEvent.PointerExit);
         return true;
     }
     private void OnPointerDown_Button(PointerEventData eventData)
@@ -38,7 +38,7 @@ public class UI_ButtonAnimator : UI_Base
         }
     }
 
-    public void OnEvent_PoiterUp()
+    public void OnPointerExit_Button(PointerEventData eventData)
     {
         if(_coroutine != null)
         {

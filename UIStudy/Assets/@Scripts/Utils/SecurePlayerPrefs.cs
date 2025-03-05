@@ -1,46 +1,109 @@
-﻿using UnityEngine;
+﻿using System.Text;
+using System;
+using UnityEngine;
+
+//얼리억세서
+// 보통 사람들이 알지도못할떄 1월 부터
+//  -> 코딩공부룰 게을리
+//  => 지금부터는 AI를 잘쓰는사람이 일잘하는 사람이다.
 
 public static class SecurePlayerPrefs
 {
+    private static string _iv = "dfasdfdasgdsafeqgfdasvasd";
+    private static string _key = "asdfhskjfhkasdfuhsakfuhsakufdsakfdhfkasasdfads";
+
     public static void SetString(string key, string value)
     {
-        PlayerPrefs.SetString(key, value);
+        string newValue = Aes256Util.EncryptString(value, _key, _iv);
+        string newKey = Aes256Util.EncryptString(key, _key, _iv);
+
+        PlayerPrefs.SetString(newKey, newValue);
     }
 
     public static string GetString(string key, string defaultValue)
     {
-        return PlayerPrefs.GetString(key, defaultValue);
+        string newKey = Aes256Util.EncryptString(key, _key, _iv);
+        var value = PlayerPrefs.GetString(newKey, defaultValue);
+
+        if(value == defaultValue)
+        {
+            return defaultValue;
+        }
+
+        return Aes256Util.DecryptString(value, _key, _iv);
     }
 
     public static void SetInt(string key, int value)
     {
-        PlayerPrefs.SetInt(key, value);
+        string newValue = Aes256Util.EncryptString(value.ToString(), _key, _iv);
+        string newKey = Aes256Util.EncryptString(key, _key, _iv);
+
+        PlayerPrefs.SetString(newKey, newValue);
     }
 
     public static int GetInt(string key, int defaultValue)
     {
-        return PlayerPrefs.GetInt(key, defaultValue);
+        string newKey = Aes256Util.EncryptString(key, _key, _iv);
+        var value = PlayerPrefs.GetString(newKey, defaultValue.ToString());
+
+        if (value == defaultValue.ToString())
+        {
+            return defaultValue;
+        }
+        var returnValue = Aes256Util.DecryptString(value, _key, _iv);
+
+        return int.Parse(returnValue);
     }
 
     public static void SetFloat(string key, float value)
     {
-        PlayerPrefs.SetFloat(key, value);
+        string newValue = Aes256Util.EncryptString(value.ToString(), _key, _iv);
+        string newKey = Aes256Util.EncryptString(key, _key, _iv);
+
+        PlayerPrefs.SetString(newKey, newValue);
     }
 
     public static float GetFloat(string key, float defaultValue)
     {
-        return PlayerPrefs.GetFloat(key, defaultValue);
+        string newKey = Aes256Util.EncryptString(key, _key, _iv);
+        var value = PlayerPrefs.GetString(newKey, defaultValue.ToString());
+
+        if (value == defaultValue.ToString())
+        {
+            return defaultValue;
+        }
+        var returnValue = Aes256Util.DecryptString(value, _key, _iv);
+
+        return float.Parse(returnValue);
     }
 
-    private static void SecurePlayerPrefsCode(string value)
+    public static void Save()
     {
-        
+        PlayerPrefs.Save();
     }
 
-    private static void LoadPlayerPrefsCode(string value)
+    public static bool HasKey(string key)
     {
-
+        string newKey = Aes256Util.EncryptString(key, _key, _iv);
+        return PlayerPrefs.HasKey(newKey);
     }
+
+    public static void DeleteAll()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
+    public static void DeleteKey(string key)
+    {
+        if(HasKey(key))
+        {
+            string newKey = Aes256Util.EncryptString(key, _key, _iv);
+
+            PlayerPrefs.DeleteKey(newKey);
+        }
+    }
+
+
 }
 
 

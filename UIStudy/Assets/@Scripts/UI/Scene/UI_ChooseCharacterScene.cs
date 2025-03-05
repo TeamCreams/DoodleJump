@@ -46,6 +46,8 @@ public class UI_ChooseCharacterScene : UI_Scene
         // add event
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
 
+        _scene = Managers.Scene.CurrentScene as ChooseCharacterScene;
+
         return true;
     }
 

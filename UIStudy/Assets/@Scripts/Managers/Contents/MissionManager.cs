@@ -269,7 +269,8 @@ public class MissionManager
        },
        (errorCode) =>
        {
-            Managers.UI.ShowPopupUI<UI_ToastPopup>();
+            var toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
+           //toast.Show(Info, "어떤 내용", duration);
             ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
             Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, null, errorStruct.Notice);
        });
