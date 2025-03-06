@@ -36,11 +36,7 @@ public class UI_SignInScene : UI_Scene
         SignUp_Text
     }
 
-    private string _idUnavailable = "없는 아이디입니다.";
     private string _passwordUnavailable = "비밀번호가 일치하지 않습니다.";
-    private string _loginSuccess = "Login successful.";
-    private bool _isLoadSceneCondition = false;
-    private int _failCount = 0;
 
     private EErrorCode _errCodeId = EErrorCode.ERR_Nothing;
     private string _password = "";
@@ -61,22 +57,18 @@ public class UI_SignInScene : UI_Scene
         GetButton((int)Buttons.SignIn_Button).gameObject.BindEvent(OnClick_SignIn, EUIEvent.Click);
         GetButton((int)Buttons.SignUp_Button).gameObject.BindEvent(OnClick_SignUp, EUIEvent.Click);
 
-        GetInputField((int)InputFields.Password_InputField).enabled = false;
         GetInputField((int)InputFields.Password_InputField).gameObject.BindEvent(OnClick_CheckLogId, EUIEvent.Click);
         GetText((int)Texts.Warning_Id_Text).text = "";
         GetText((int)Texts.Warning_Password_Text).text = "";
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         OnEvent_SetLanguage(null, null);
 
+        _scene = Managers.Scene.CurrentScene as SignInScene;
         return true;
     }
     private void OnDestroy()
     {
         Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-    }
-    public void SetInfo(SignInScene scene)
-    {   
-        _scene = scene;
     }
     private void OnClick_SignIn(PointerEventData eventData)
     {
@@ -90,25 +82,17 @@ public class UI_SignInScene : UI_Scene
     private void OnClick_CheckLogId(PointerEventData eventData)
     {        
         string id = GetInputField((int)InputFields.Id_InputField).text;
-        _scene.CheckLogId(id, ()=>Action_LoginSuccess(), ()=>Action_LoginFailed());
+        StartCoroutine(_scene.CheckLogId_Co(id, (password) => 
+        {
+            _password = password;
+            Debug.Log($"_password : /{_password}/");
+        }));
     }
-
-    private void Action_LoginSuccess()
-    {
-        GetInputField((int)InputFields.Password_InputField).enabled = true;
-        GetText((int)Texts.Warning_Id_Text).text = "";
-    }
-
-    private void Action_LoginFailed()
-    {
-        GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
-    }
-
 
     public EErrorCode CheckCorrectPassword()
     {
         string password = GetInputField((int)InputFields.Password_InputField).text;
-
+        Debug.Log($"password : /{password}/,  _password : /{_password}/");
         if (Equals(_password, password) != true)
         {
             GetText((int)Texts.Warning_Password_Text).text = _passwordUnavailable;
@@ -290,7 +274,6 @@ public class UI_SignInScene : UI_Scene
     {
         GetText((int)Texts.Id_Text).text = Managers.Language.LocalizedString(91027);
         GetText((int)Texts.Placeholder_Id_Text).text = Managers.Language.LocalizedString(91027);
-        _idUnavailable = Managers.Language.LocalizedString(91045);
 
         GetText((int)Texts.Password_Text).text = Managers.Language.LocalizedString(91020);
         GetText((int)Texts.Placeholder_Password_Text).text = Managers.Language.LocalizedString(91020);
@@ -298,7 +281,5 @@ public class UI_SignInScene : UI_Scene
 
         GetText((int)Texts.SignUp_Text).text = Managers.Language.LocalizedString(91025);
         GetText((int)Texts.SignIn_Text).text = Managers.Language.LocalizedString(91026);
-
-        _loginSuccess = Managers.Language.LocalizedString(91031);
     }
 }

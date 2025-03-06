@@ -45,11 +45,6 @@ public class UI_SignUpScene : UI_Scene
     private string _passwordUnavailable = "20자 이내의 비밀번호를 입력해주세요.";
     private string _confirmPasswordUnavailable = "비밀번호가 일치하지 않습니다.";
     private string _enterValidId = "유효한 아이디를 입력하세요.";
-  
-    private string _createAccountSuccess = "계정 만들기 성공.";
-    private string _createAccountFailed = "계정 만들기 실패.";
-    private string _doYouWantCancle = "계정 생성을 취소하시겠습니까?";
-
 
     private EErrorCode _errCodeId = EErrorCode.ERR_Nothing;
     private EErrorCode _errCodePassword = EErrorCode.ERR_ValidationPassword;
@@ -128,8 +123,7 @@ public class UI_SignUpScene : UI_Scene
         {
             UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
             ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationCancellation);
-            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, errorStruct.Notice);
-            popup.AddOnClickAction(ProcessErrorFun);
+            popup.SetInfo(errorStruct.Notice);
             // 아이디 생성 안 된다고 말하고 가만히 있기/로그인창으로넘어가기 선택 팝업.
             return; 
         }        
@@ -143,7 +137,7 @@ public class UI_SignUpScene : UI_Scene
             GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
             _errCodeId =  EErrorCode.ERR_ValidationId;
         }
-        if (16 <  id.Length)
+        if (16 < id.Length)
         {
             GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
             _errCodeId = EErrorCode.ERR_ValidationId;
@@ -196,10 +190,6 @@ public class UI_SignUpScene : UI_Scene
         return EErrorCode.ERR_OK;
     }
 
-    public void ProcessErrorFun()
-    {
-    }
-
     void OnEvent_SetLanguage(Component sender, object param)
     {
         GetText((int)Texts.Id_Text).text = Managers.Language.LocalizedString(91027);
@@ -216,8 +206,5 @@ public class UI_SignUpScene : UI_Scene
         
         GetText((int)Texts.SignIn_Text).text = Managers.Language.LocalizedString(91026);
         _enterValidId = Managers.Language.LocalizedString(91032);
-        // _doYouWantCancle = Managers.Language.LocalizedString(91033);
-        // _createAccountSuccess = Managers.Language.LocalizedString(91034);
-        // _createAccountFailed = Managers.Language.LocalizedString(91035);
     }
 }

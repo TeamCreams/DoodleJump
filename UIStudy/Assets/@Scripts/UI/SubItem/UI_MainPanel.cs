@@ -78,11 +78,12 @@ public class UI_MainPanel : UI_Base
             Managers.UI.ClosePopupUI(loadingPopup);
        },
        (errorCode) =>
-       {        Managers.UI.ClosePopupUI(loadingPopup);
+       {
+            Managers.UI.ClosePopupUI(loadingPopup);
 
-            Managers.UI.ShowPopupUI<UI_ToastPopup>();
+            UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
             ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
+            toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
             StartCoroutine(LoadScene_Co());
        });
     }

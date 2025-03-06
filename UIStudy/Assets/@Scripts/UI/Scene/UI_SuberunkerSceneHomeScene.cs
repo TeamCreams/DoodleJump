@@ -159,9 +159,9 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
        },
         (errorCode) =>
         {
-            Managers.UI.ShowPopupUI<UI_ErrorPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.Err_EnergyInsufficient);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct);
+            UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_EnergyInsufficient);
+            toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
         }
         );
     }
@@ -217,9 +217,9 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
             },
             (errorCode) => 
             {
-                Managers.UI.ShowPopupUI<UI_ErrorPopup>();
+                UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
                 ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError);
-                Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
+                toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
             });
 
             yield return new WaitForSeconds(5);

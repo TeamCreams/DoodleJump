@@ -32,9 +32,9 @@ public class InputNicknameScene : BaseScene
        (response) =>
        {
             Debug.Log("아이디 만들기 성공");
-            Managers.UI.ShowPopupUI<UI_ToastPopup>();
+            UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
             ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
+            toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
             Managers.UI.ClosePopupUI(loadingPopup);
 
             onSuccess?.Invoke();
@@ -44,9 +44,9 @@ public class InputNicknameScene : BaseScene
             Managers.UI.ClosePopupUI(loadingPopup);
 
             Debug.Log("아이디 만들기 실패~");
-            Managers.UI.ShowPopupUI<UI_ErrorPopup>();
+            UI_ErrorPopup popup = Managers.UI.ShowPopupUI<UI_ErrorPopup>();
             ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationFailed);
-            Managers.Event.TriggerEvent(EEventType.ErrorPopup, this, errorStruct);
+            popup.SetInfo(errorStruct);
        });
     }
     public EErrorCode CheckCorrectNickname(string nickname)

@@ -264,6 +264,16 @@
       "Id": 91053,
       "KrText": "진화",
       "EnText": "Evolution"
+    },
+    {
+      "Id": 91054,
+      "KrText": "네",
+      "EnText": "Yes"
+    },
+    {
+      "Id": 91055,
+      "KrText": "아니요",
+      "EnText": "No"
     }
   ]
 }

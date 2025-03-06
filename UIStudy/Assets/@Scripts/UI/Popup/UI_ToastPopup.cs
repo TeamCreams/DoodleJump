@@ -15,38 +15,62 @@ public class UI_ToastPopup : UI_Popup
         Error,
         Critical
     }
-
+    private enum Images
+    {
+        Background_Image,
+    }
     private enum Texts
     {
-        Notice_Text
+        Notice_Text,
     }
-
+    private string _notice;
+    private Type _type;
+    private float _time;
     public override bool Init()
     {
         if (base.Init() == false)
         {
             return false;
         }
+        BindImages(typeof(Images));
         BindTexts(typeof(Texts));
-        Managers.Event.AddEvent(EEventType.ToastPopupNotice, OnEvent_Notice);
 
         return true;
     }
-
-    private void OnDestroy()
+    public void SetInfo(string notice, Type type = Type.Info, float time = 2f)
     {
-        Managers.Event.RemoveEvent(EEventType.ToastPopupNotice, OnEvent_Notice);
-    }
-    void OnEvent_Notice(Component sender, object param)
-    {
-        string str = param as string;
-        StartCoroutine(ToastPopup_Co(str));
+        _notice = notice;
+        _type = type;
+        _time = time;
+        SetBackgroundColor();
+        StartCoroutine(ToastPopup_Co());
     }
 
-    public IEnumerator ToastPopup_Co(string notice)
+    private void SetBackgroundColor()
     {
-        GetText((int)Texts.Notice_Text).text = notice;
-        yield return new WaitForSeconds(2);
+        string name = "";
+        switch(_type)
+        {
+            case Type.Info:
+                name = "ToastMessage_Topbar_Info";
+            break;
+            case Type.Warning:
+                name = "ToastMessage_Topbar_Info";
+            break;
+            case Type.Error:
+                name = "ToastMessage_Topbar_Error";
+            break;
+            case Type.Critical:
+                name = "ToastMessage_Topbar_Error";
+            break;
+        }
+        GetImage((int)Images.Background_Image).sprite = Managers.Resource.Load<Sprite>($"{name}.sprite");
+    }
+
+    private IEnumerator ToastPopup_Co()
+    {
+        GetText((int)Texts.Notice_Text).text = _notice;
+        yield return new WaitForSeconds(_time);
         Managers.UI.ClosePopupUI(this);
     }
 }

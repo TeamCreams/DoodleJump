@@ -58,10 +58,10 @@ public class StartLoadingScene : BaseScene
     {
         string serializedData = PlayerPrefs.GetString(HardCoding.UserName);
         Managers.Game.UserInfo.UserName = serializedData;
-        Debug.Log($"UserName : {Managers.Game.UserInfo.UserName}");
+        //Debug.Log($"UserName : {Managers.Game.UserInfo.UserName}");
         if (string.IsNullOrEmpty(Managers.Game.UserInfo.UserName)) // 최초 로그인
         {
-            _scene = EScene.SignUpScene;
+            _scene = EScene.SignInScene;
             Managers.Scene.LoadScene(_scene);
             //_isLoadSceneCondition = true;
         }
@@ -73,40 +73,41 @@ public class StartLoadingScene : BaseScene
             },
         (response) =>
         {
-                HandleSuccess(response, () => 
-                {
-                    _isLoadSceneCondition = true;
-                    Managers.Game.UserInfo.UserName = response.UserName;
-                    Managers.Game.UserInfo.UserNickname = response.Nickname;
-                    Managers.Game.UserInfo.UserAccountId  = response.UserAccountId;
-                    Debug.Log($"HandleSuccess Managers.Game.UserInfo.UserAccountId : {Managers.Game.UserInfo.UserAccountId}");
-                    Managers.SignalR.LoginUser(Managers.Game.UserInfo.UserAccountId);
+            HandleSuccess(response, () => 
+            {
+                _isLoadSceneCondition = true;
+                Managers.Game.UserInfo.UserName = response.UserName;
+                Managers.Game.UserInfo.UserNickname = response.Nickname;
+                Managers.Game.UserInfo.UserAccountId  = response.UserAccountId;
+                Debug.Log($"HandleSuccess Managers.Game.UserInfo.UserAccountId : {Managers.Game.UserInfo.UserAccountId}");
+                Managers.SignalR.LoginUser(Managers.Game.UserInfo.UserAccountId);
 
-                    //캐릭터 스타일 
-                    Managers.Game.ChracterStyleInfo.CharacterId = response.CharacterId;
-                    Managers.Game.ChracterStyleInfo.Hair = response.HairStyle;
-                    Managers.Game.ChracterStyleInfo.Eyebrows = response.EyebrowStyle;
-                    Managers.Game.ChracterStyleInfo.Eyes = response.EyesStyle;
-                    Managers.Game.UserInfo.EvolutionId = response.Evolution;
-                    Managers.Game.UserInfo.Energy = response.Energy;
-                    Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
+                //캐릭터 스타일 
+                Managers.Game.ChracterStyleInfo.CharacterId = response.CharacterId;
+                Managers.Game.ChracterStyleInfo.Hair = response.HairStyle;
+                Managers.Game.ChracterStyleInfo.Eyebrows = response.EyebrowStyle;
+                Managers.Game.ChracterStyleInfo.Eyes = response.EyesStyle;
+                Managers.Game.UserInfo.EvolutionId = response.Evolution;
+                Managers.Game.UserInfo.Energy = response.Energy;
+                Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
 
-                    // 아이디 저장
-                    PlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);
-                    PlayerPrefs.Save();
+                // 아이디 저장
+                PlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);
+                PlayerPrefs.Save();
 
-                    Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
-                    Managers.Event.TriggerEvent(EEventType.OnFirstAccept);
-                });
+                Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
+                Managers.Event.TriggerEvent(EEventType.OnFirstAccept);
+            });
         },
         (errorCode) =>
         {
-                Managers.UI.ShowPopupUI<UI_ToastPopup>();
-                ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
-                Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);          
-                Debug.Log($"[Error Code : {errorCode}] error message");
-                HandleFailure();
-            });
+            UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
+            toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
+    
+            Debug.Log($"[Error Code : {errorCode}] error message");
+            HandleFailure();
+        });
         }
         StartCoroutine(UpdateEnergy_Co());
     }
@@ -129,9 +130,9 @@ public class StartLoadingScene : BaseScene
         },
         (errorCode) =>
         {
-            Managers.UI.ShowPopupUI<UI_ErrorPopup>();
+            UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
             ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct);
+            toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
             HandleFailure();
         }
         );
@@ -142,7 +143,7 @@ public class StartLoadingScene : BaseScene
         Managers.Score.GetScore(this, ProcessErrorFun,
         () => 
         {
-            _scene = EScene.SuberunkerSceneHomeScene; //EScene.SignalRTestScene;//
+            _scene = EScene.SuberunkerSceneHomeScene;
             result?.Invoke(); 
         },
         () => 

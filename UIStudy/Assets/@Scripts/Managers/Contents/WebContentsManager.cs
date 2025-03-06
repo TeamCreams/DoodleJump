@@ -355,8 +355,7 @@ public class WebContentsManager
                     onFailed.Invoke(rv.StatusCode);
                     UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
                     ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
-                    Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, null, errorStruct.Notice);
-                    popup.AddOnClickAction(null);
+                    popup.SetInfo(errorStruct.Notice);
                 }
                 else
                 {

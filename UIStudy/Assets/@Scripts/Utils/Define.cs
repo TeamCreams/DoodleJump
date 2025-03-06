@@ -80,9 +80,9 @@ public static class Define
         StopStoneShower,
         SetLanguage,
         SignIn,
-        ErrorPopup,
-        ErrorButtonPopup,
-        ToastPopupNotice,
+        //ErrorPopup,
+        //ErrorButtonPopup,
+        //ToastPopupNotice,
         GetUserScoreList,
         GetMyScore,
         StartLoading,
@@ -177,8 +177,8 @@ public static class Define
         ERR_ValidationPassword, 
         ERR_ConfirmPassword, 
         ERR_Nothing,
-        Err_Logout,
-        Err_EnergyInsufficient
+        ERR_Logout,
+        ERR_EnergyInsufficient
     }
 
     public enum EProductType

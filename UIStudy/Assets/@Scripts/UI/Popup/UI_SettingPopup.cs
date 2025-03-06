@@ -118,13 +118,14 @@ public class UI_SettingPopup : UI_Popup
     {
         // 창띄우기
         UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-        ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.Err_Logout);
-        Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, this, errorStruct.Notice);
-        popup.AddOnClickAction(LogoutAndClearMission);
+        ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_Logout);
+        popup.SetInfo(errorStruct.Notice, LogoutAndClearMission);
     }
     private void LogoutAndClearMission()
     {
         Debug.Log($"LogoutAndClearMission");
+        PlayerPrefs.SetString(HardCoding.UserName, null);
+        PlayerPrefs.Save();
         Managers.Event.TriggerEvent(EEventType.OnLogout);
     }
     void OnEvent_SetLanguage(Component sender, object param)

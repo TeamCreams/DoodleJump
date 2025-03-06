@@ -171,11 +171,9 @@ public class MissionManager
 
            Debug.Log($"AcceptMission is Error {errorCode.ToString()}");
 
-           UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
             ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
-            Managers.Event.TriggerEvent(EEventType.ErrorButtonPopup, sender, errorStruct.Notice);
-           popup.AddOnClickAction(onFailed);
-
+            popup.SetInfo(errorStruct.Notice, onFailed, EScene.SuberunkerSceneHomeScene);
        });
     }
 
@@ -272,7 +270,7 @@ public class MissionManager
             var toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
            //toast.Show(Info, "어떤 내용", duration);
             ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
-            Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, null, errorStruct.Notice);
+            toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
        });
     }
     public void ClearMission()

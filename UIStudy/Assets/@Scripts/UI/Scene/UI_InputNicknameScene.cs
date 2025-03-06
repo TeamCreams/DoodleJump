@@ -68,23 +68,20 @@ public class UI_InputNicknameScene : UI_Scene
             return;
         }
 
-        //if(eventData.pointerPressRaycast.gameObject != GetInputField((int)InputFields.Nickname_InputField))
-        // inspection
         Managers.WebContents.ReqGetValidateUserAccountUserNickName(new ReqDtoGetValidateUserAccountNickname()
         {
             Nickname = GetInputField((int)InputFields.Nickname_InputField).text
         },(response) =>
         {
-                Managers.Game.UserInfo.UserNickname = GetInputField((int)InputFields.Nickname_InputField).text;
-                _scene.InsertUser(() =>
-                    Managers.Scene.LoadScene(EScene.SignInScene));        
+            Managers.Game.UserInfo.UserNickname = GetInputField((int)InputFields.Nickname_InputField).text;
+            _scene.InsertUser(() =>
+                Managers.Scene.LoadScene(EScene.SignInScene));        
         },(errorCode) =>
-        {
-                Managers.UI.ShowPopupUI<UI_ToastPopup>();
-                ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_ValidationNickname);
-                Managers.Event.TriggerEvent(EEventType.ToastPopupNotice, this, errorStruct.Notice);
+        {       
+            UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_ValidationNickname);
+            toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
         });
-
     }
 
     void OnEvent_SetLanguage(Component sender, object param)
