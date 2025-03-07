@@ -33,7 +33,6 @@ public class StartLoadingScene : BaseScene
         //_ui = Managers.UI.ShowSceneUI<UI_StartLoadingScene>();
         GameObject ui = GameObject.Find("UI_StartLoadingScene");
         _ui = ui.GetOrAddComponent<UI_StartLoadingScene>();
-        _ui = ui.GetOrAddComponent<UI_StartLoadingScene>();
 
         _playableDirector = this.gameObject.GetOrAddComponent<PlayableDirector>();
         _playableDirector.playableAsset = _ui.GetOrAddComponent<PlayableDirector>().playableAsset;

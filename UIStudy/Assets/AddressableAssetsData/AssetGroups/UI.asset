@@ -123,8 +123,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cc2030149bced4cefa35fd2198023310
+    m_Address: ToastMessage_Topbar_Info
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: da17864b9d3568e4dbee623ad7a9328b
     m_Address: UI_Joystick
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e544a06ddd05f42fd879ce1fbe06593c
+    m_Address: ToastMessage_Topbar_Error
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

@@ -15,7 +15,6 @@ public class InputNicknameScene : BaseScene
         }
 
         var ui = Managers.UI.ShowSceneUI<UI_InputNicknameScene>();
-        ui.SetInfo(this);
         return true;
     }
 

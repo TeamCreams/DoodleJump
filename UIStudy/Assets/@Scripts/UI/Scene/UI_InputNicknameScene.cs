@@ -44,17 +44,14 @@ public class UI_InputNicknameScene : UI_Scene
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         OnEvent_SetLanguage(null, null);
 
+        _scene = Managers.Scene.CurrentScene as InputNicknameScene;
+
         return true;
     }
 
     private void OnDestroy()
     {
         Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-    }
-
-    public void SetInfo(InputNicknameScene scene)
-    {
-        _scene = scene;
     }
 
     private void OnClick_InspectName(PointerEventData eventData)

@@ -7,14 +7,12 @@ using System;
 
 public class SignInScene  : BaseScene
 {
-    private string _passwordUnavailable = "비밀번호가 일치하지 않습니다.";
     private bool _isLoadSceneCondition = false;
     private bool _isLoadScoreCondition = false;
     private bool _isLoadEnergyCondition = false;
     
     private int _failCount = 0;
 
-    private SignInScene _scene;
     private EScene _loadScene = EScene.Unknown;
     private UI_SignInScene _ui;
     private string _id;
