@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using static Define;
 
@@ -37,15 +38,15 @@ public class UI_ToastPopup : UI_Popup
 
         return true;
     }
-    public void SetInfo(string notice, Type type = Type.Info, float time = 2f)
+    
+    public void SetInfo(string notice, Type type = Type.Info, float time = 2f, Action action = null)
     {
         _notice = notice;
         _type = type;
         _time = time;
         SetBackgroundColor();
-        StartCoroutine(ToastPopup_Co());
+        StartCoroutine(ToastPopup_Co(action));
     }
-
     private void SetBackgroundColor()
     {
         string name = "";
@@ -67,10 +68,11 @@ public class UI_ToastPopup : UI_Popup
         GetImage((int)Images.Background_Image).sprite = Managers.Resource.Load<Sprite>($"{name}.sprite");
     }
 
-    private IEnumerator ToastPopup_Co()
+    private IEnumerator ToastPopup_Co(Action action = null)
     {
         GetText((int)Texts.Notice_Text).text = _notice;
         yield return new WaitForSeconds(_time);
         Managers.UI.ClosePopupUI(this);
+        action?.Invoke();
     }
 }

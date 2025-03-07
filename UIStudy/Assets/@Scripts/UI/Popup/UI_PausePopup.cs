@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using GameApi.Dtos;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using static Define;
 
@@ -45,7 +48,27 @@ public class UI_PausePopup : UI_Popup
     {
         Time.timeScale = 1;
         Managers.UI.ClosePopupUI(this);
-        Managers.Scene.LoadScene(EScene.SuberunkerScene);
+        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+        Managers.WebContents.ReqDtoGameStart(new ReqDtoGameStart()
+        {
+            UserAccountId = Managers.Game.UserInfo.UserAccountId
+        },
+        (response) =>
+        {
+            Managers.UI.ClosePopupUI(loadingPopup);
+            Managers.Game.UserInfo.Energy = response.Energy;
+            Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
+            Managers.Scene.LoadScene(EScene.SuberunkerScene);
+       },
+        (errorCode) =>
+        {
+            Managers.UI.ClosePopupUI(loadingPopup);
+            UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_EnergyInsufficient);
+            float time = 1;
+            toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error, time, ()=>Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene));
+        }
+        );
     }
     private void OnClick_ContinueButton(PointerEventData eventData)
     {

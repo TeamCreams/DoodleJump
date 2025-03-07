@@ -83,18 +83,20 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
 
         // Default setting
         _startTime = Managers.Game.UserInfo.LatelyEnergy;
-        Debug.Log($"_startTime : {_startTime}");
+        //Debug.Log($"_startTime : {_startTime}");
         OnEvent_SetLanguage(null, null);
         OnEvent_Refresh(null, null);
         ShowRanking();
-        StartCoroutine(CheckServerTime());
-
+        //StartCoroutine(CheckServerTime());
+        Managers.SignalR.OnChangedHeartBeat -= CheckServerTime; // 구독 해제
+        Managers.SignalR.OnChangedHeartBeat += CheckServerTime; // 이벤트 구독
         return true;
     }
     private void OnDestroy()
     {
         Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         Managers.Event.RemoveEvent(EEventType.UIRefresh, OnEvent_Refresh);
+        Managers.SignalR.OnChangedHeartBeat -= CheckServerTime; // 구독 해제
     }
 
     public void ShowMyScore()
@@ -160,6 +162,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
        },
         (errorCode) =>
         {
+            Managers.UI.ClosePopupUI(loadingPopup);
             UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
             ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_EnergyInsufficient);
             toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
@@ -225,6 +228,13 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
 
             yield return new WaitForSeconds(5);
         }
+    }
+    public void CheckServerTime(DateTime newHeartBeat)
+    {
+        //안들어옴
+        Debug.Log("CheckServerTime");
+        _serverTime = newHeartBeat; // 5초마다 웹소켓에서 전해준 값으로 서버시간 업데이트. 
+        EnergyTimer();
     }
 
     IEnumerator EnergyRechargeCoroutine()

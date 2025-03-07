@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using GameApi.Dtos;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -54,7 +55,28 @@ public class UI_RetryPopup : UI_Popup
         Managers.UI.ClosePopupUI(this);
         Time.timeScale = 1;
         Managers.Game.Gold = 0;
-        Managers.Scene.LoadScene(EScene.SuberunkerScene);
+
+        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+        Managers.WebContents.ReqDtoGameStart(new ReqDtoGameStart()
+        {
+            UserAccountId = Managers.Game.UserInfo.UserAccountId
+        },
+        (response) =>
+        {
+            Managers.UI.ClosePopupUI(loadingPopup);
+            Managers.Game.UserInfo.Energy = response.Energy;
+            Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
+            Managers.Scene.LoadScene(EScene.SuberunkerScene);
+       },
+        (errorCode) =>
+        {
+            Managers.UI.ClosePopupUI(loadingPopup);
+            UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
+            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_EnergyInsufficient);
+            float time = 1;
+            toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error, time, ()=>Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene));
+        }
+        );
     }
     private void OnClick_HomeButton(PointerEventData eventData)
     {

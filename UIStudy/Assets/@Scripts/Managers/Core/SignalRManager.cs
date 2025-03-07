@@ -13,6 +13,8 @@ using UnityEditor.MemoryProfiler;
 public class SignalRManager
 {
     private HubConnection _connection;
+    public Action<DateTime> OnChangedHeartBeat;
+    
     private string _serverUrl = "https://dev-single-api.snapism.net:8082/Chat";
     // 메세지를 받는 것
     // 메세지를 특정인물한테 보내는것 (친구 기능)
@@ -26,6 +28,7 @@ public class SignalRManager
             .WithAutomaticReconnect() // 자동 재연결
             .Build();
         OnReceiveMessage();
+        OnReceiveHeartBeat();
 
         try
         {
@@ -100,5 +103,13 @@ public class SignalRManager
         {
             bubble.SetInfo(chattingStruct);
         }
+    }
+    public void OnReceiveHeartBeat()
+    {
+        _connection.On<DateTime>("ReceiveHeartBeat", (heartBeatData) =>
+        {
+            Debug.Log($"OnReceiveHeartBeat {heartBeatData.Second} "); //안됨
+            OnChangedHeartBeat?.Invoke(heartBeatData);
+        });
     }
 }
