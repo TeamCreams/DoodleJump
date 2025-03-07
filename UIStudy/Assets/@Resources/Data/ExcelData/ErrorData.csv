@@ -18,3 +18,4 @@ Id,Type,TitleEn,NoticeEn,TitleKr,NoticeKr
 150017,ERR_Nothing,,,,
 150018,ERR_Logout,Logout,Do you want to log out?,로그아웃,로그아웃하시겠습니까?
 150019,ERR_EnergyInsufficient,,You do not have enough energy to play the game.,,에너지가 부족합니다.
+150020,ERR_InvalidCredentials,,The username or password does not match.,,아이디 또는 비밀번호가 일치하지 않습니다.

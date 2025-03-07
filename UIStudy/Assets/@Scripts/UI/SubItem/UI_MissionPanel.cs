@@ -2,9 +2,10 @@
 using GameApi.Dtos;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using static Define;
 
-public class UI_MissionPanel : UI_Base
+public class UI_MissionPanel : UI_Popup
 {
     private enum GameObjects
     {
@@ -14,6 +15,11 @@ public class UI_MissionPanel : UI_Base
     {
         Cancle_Button,
     }
+    private enum Texts
+    {
+        Mission_Text
+    }
+        
     private Transform _missionRoot = null;
     private List<GameObject> _itemList = new List<GameObject>();
     private Dictionary<int, int> _missionDic = new Dictionary<int, int>();
@@ -23,19 +29,28 @@ public class UI_MissionPanel : UI_Base
         {
             return false;
         }
+        //Bind
         BindObjects(typeof(GameObjects));
         BindButtons(typeof(Buttons));
-        GetButton((int)Buttons.Cancle_Button).gameObject.BindEvent((evt) =>
-        {
-            this.gameObject.SetActive(false);
-        }, EUIEvent.Click);
+        BindTexts(typeof(Texts));
+        
+        //Get
+        GetButton((int)Buttons.Cancle_Button).gameObject.BindEvent(OnClick_ClosePopup, EUIEvent.Click);
         _missionRoot = GetObject((int)GameObjects.MissionRoot).transform;
+
+        // Add Event
+        Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         Managers.Event.AddEvent(EEventType.Mission, SetMissionList);
         return true;
     }
     private void OnDestroy()
     {
+        Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         Managers.Event.RemoveEvent(EEventType.Mission, SetMissionList);
+    }
+    private void OnClick_ClosePopup(PointerEventData eventData)
+    {
+        Managers.UI.ClosePopupUI(this);
     }
     private void AllPush()
     {
@@ -96,5 +111,9 @@ public class UI_MissionPanel : UI_Base
         var item = Managers.UI.MakeSubItem<UI_MissionItem>(parent: _missionRoot, pooling: true);
         item.SetInfo(missionId);
         _itemList.Add(item.gameObject);
+    }
+    void OnEvent_SetLanguage(Component sender, object param)
+    {
+        GetText((int)Texts.Mission_Text).text = Managers.Language.LocalizedString(91007);
     }
 }

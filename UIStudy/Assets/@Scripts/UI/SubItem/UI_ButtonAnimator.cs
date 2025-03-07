@@ -9,23 +9,25 @@ public class UI_ButtonAnimator : UI_Base
     private Vector3 _scale;
     private Vector3 _nextScale;
     private Coroutine _coroutine = null;
-    private Button _button;
+    //private Button _button;
     public override bool Init()
     {
         if (base.Init() == false)
         {
             return false;
         }
-        _button = this.gameObject.GetOrAddComponent<Button>();
+        //_button = this.gameObject.GetOrAddComponent<Button>();
 
         _scale = this.gameObject.transform.localScale;
         _nextScale = new Vector3(_scale.x * 0.9f, _scale.y * 0.9f, _scale.z * 0.9f);
         this.gameObject.BindEvent(OnPointerDown_Button, EUIEvent.PointerDown);
+        this.gameObject.BindEvent(OnPointerUp_Button, EUIEvent.PointerUp);
         this.gameObject.BindEvent(OnPointerExit_Button, EUIEvent.PointerExit);
         return true;
     }
     private void OnPointerDown_Button(PointerEventData eventData)
     {
+        Debug.Log("OnPointerDown_Button");
         if(_coroutine != null)
         {
             StopCoroutine(_coroutine);
@@ -37,7 +39,16 @@ public class UI_ButtonAnimator : UI_Base
             _coroutine = StartCoroutine(ChangedScale(_scale, _nextScale));
         }
     }
+    public void OnPointerUp_Button(PointerEventData eventData)
+    {
+        if(_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+            _coroutine = null;
+        }
 
+        this.gameObject.transform.localScale = _scale;
+    }
     public void OnPointerExit_Button(PointerEventData eventData)
     {
         if(_coroutine != null)

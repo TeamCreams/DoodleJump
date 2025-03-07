@@ -151,6 +151,14 @@
       "NoticeEn": "You do not have enough energy to play the game.",
       "TitleKr": null,
       "NoticeKr": "에너지가 부족합니다."
+    },
+    {
+      "Id": 150020,
+      "Type": 20,
+      "TitleEn": null,
+      "NoticeEn": "The username or password does not match.",
+      "TitleKr": null,
+      "NoticeKr": "아이디 또는 비밀번호가 일치하지 않습니다."
     }
   ]
 }

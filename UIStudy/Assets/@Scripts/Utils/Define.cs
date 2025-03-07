@@ -178,7 +178,8 @@ public static class Define
         ERR_ConfirmPassword, 
         ERR_Nothing,
         ERR_Logout,
-        ERR_EnergyInsufficient
+        ERR_EnergyInsufficient,
+        ERR_InvalidCredentials,
     }
 
     public enum EProductType

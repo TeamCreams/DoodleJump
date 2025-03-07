@@ -85,6 +85,10 @@ public class UI_Base : InitBase
 
         switch (type)
         {
+            case Define.EUIEvent.PointerUp:
+                evt.OnPointerUpHandler -= action;
+                evt.OnPointerUpHandler += action;
+                break;
             case Define.EUIEvent.PointerDown:
                 evt.OnPointerDownHandler -= action;
                 evt.OnPointerDownHandler += action;

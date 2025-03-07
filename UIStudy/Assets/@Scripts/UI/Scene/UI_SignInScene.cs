@@ -36,13 +36,13 @@ public class UI_SignInScene : UI_Scene
         SignUp_Text
     }
 
-    private string _passwordUnavailable = "비밀번호가 일치하지 않습니다.";
+    // private string _passwordUnavailable = "비밀번호가 일치하지 않습니다.";
 
-    private EErrorCode _errCodeId = EErrorCode.ERR_Nothing;
-    private string _password = "";
+    // private EErrorCode _errCodeId = EErrorCode.ERR_Nothing;
+    // private string _password = "";
     //private bool _isFailFirst = false; // for test
     private SignInScene _scene;
-    private EScene _loadScene = EScene.Unknown;
+    // private EScene _loadScene = EScene.Unknown;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -57,7 +57,7 @@ public class UI_SignInScene : UI_Scene
         GetButton((int)Buttons.SignIn_Button).gameObject.BindEvent(OnClick_SignIn, EUIEvent.Click);
         GetButton((int)Buttons.SignUp_Button).gameObject.BindEvent(OnClick_SignUp, EUIEvent.Click);
 
-        GetInputField((int)InputFields.Password_InputField).gameObject.BindEvent(OnClick_CheckLogId, EUIEvent.Click);
+        //GetInputField((int)InputFields.Password_InputField).gameObject.BindEvent(OnClick_CheckLogId, EUIEvent.Click);
         GetText((int)Texts.Warning_Id_Text).text = "";
         GetText((int)Texts.Warning_Password_Text).text = "";
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
@@ -73,37 +73,38 @@ public class UI_SignInScene : UI_Scene
     private void OnClick_SignIn(PointerEventData eventData)
     {
         string id = GetInputField((int)InputFields.Id_InputField).text;
-        _scene.SignIn(id);
+        string password = GetInputField((int)InputFields.Password_InputField).text;
+        _scene.SignIn(id, password);
     }
     private void OnClick_SignUp(PointerEventData eventData)
     {   
         _scene.LoadSignUp();
     }
-    private void OnClick_CheckLogId(PointerEventData eventData)
-    {        
-        string id = GetInputField((int)InputFields.Id_InputField).text;
-        StartCoroutine(_scene.CheckLogId_Co(id, (password) => 
-        {
-            _password = password;
-            Debug.Log($"_password : /{_password}/");
-        }));
-    }
-
-    public EErrorCode CheckCorrectPassword()
-    {
-        string password = GetInputField((int)InputFields.Password_InputField).text;
-        Debug.Log($"password : /{password}/,  _password : /{_password}/");
-        if (Equals(_password, password) != true)
-        {
-            GetText((int)Texts.Warning_Password_Text).text = _passwordUnavailable;
-            return EErrorCode.ERR_ValidationPassword;
-        }
-        else
-        {
-            GetText((int)Texts.Warning_Password_Text).text = "";
-            return EErrorCode.ERR_OK;
-        }
-    }
+    // private void OnClick_CheckLogId(PointerEventData eventData)
+    // {        
+    //     string id = GetInputField((int)InputFields.Id_InputField).text;
+    //     StartCoroutine(_scene.CheckLogId_Co(id, (password) => 
+    //     {
+    //         _password = password;
+    //         Debug.Log($"_password : /{_password}/");
+    //     }));
+    // }
+    // // 비밀번호를 받아놨다가 -> 로그인할 때 내가 입력한 비번이 맞는 지 확인.
+    // public EErrorCode CheckCorrectPassword()
+    // {
+    //     string password = GetInputField((int)InputFields.Password_InputField).text;
+    //     Debug.Log($"password : /{password}/,  _password : /{_password}/");
+    //     if (Equals(_password, password) != true)
+    //     {
+    //         GetText((int)Texts.Warning_Password_Text).text = _passwordUnavailable;
+    //         return EErrorCode.ERR_ValidationPassword;
+    //     }
+    //     else
+    //     {
+    //         GetText((int)Texts.Warning_Password_Text).text = "";
+    //         return EErrorCode.ERR_OK;
+    //     }
+    // }
 
     // private void OnClick_SignIn(PointerEventData eventData)
     // {
@@ -277,7 +278,7 @@ public class UI_SignInScene : UI_Scene
 
         GetText((int)Texts.Password_Text).text = Managers.Language.LocalizedString(91020);
         GetText((int)Texts.Placeholder_Password_Text).text = Managers.Language.LocalizedString(91020);
-        _passwordUnavailable = Managers.Language.LocalizedString(91023);
+        //_passwordUnavailable = Managers.Language.LocalizedString(91023);
 
         GetText((int)Texts.SignUp_Text).text = Managers.Language.LocalizedString(91025);
         GetText((int)Texts.SignIn_Text).text = Managers.Language.LocalizedString(91026);

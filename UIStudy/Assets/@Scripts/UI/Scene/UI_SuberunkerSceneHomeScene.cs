@@ -16,7 +16,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     {
         Ranking,
         MyScore,
-        UI_MissionPanel
+        //UI_MissionPanel
     }
 
     private enum Texts
@@ -75,7 +75,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetImage((int)Images.Ranking_Button).gameObject.BindEvent(OnClick_ShowRanking, EUIEvent.Click);
         GetButton((int)Buttons.Mission_Button).gameObject.BindEvent(OnClick_ShowMission, EUIEvent.Click);
         GetButton((int)Buttons.Setting_Button).gameObject.BindEvent(OnClick_SettingButton, EUIEvent.Click);
-        GetObject((int)GameObjects.UI_MissionPanel).SetActive(false);
+        //GetObject((int)GameObjects.UI_MissionPanel).SetActive(false);
 
         // add mission
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
@@ -127,7 +127,8 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
 
     private void OnClick_ShowMission(PointerEventData eventData)
     {
-        GetObject((int)GameObjects.UI_MissionPanel).SetActive(true);
+        Managers.UI.ShowPopupUI<UI_MissionPanel>();
+        //GetObject((int)GameObjects.UI_MissionPanel).SetActive(true);
         Managers.Event.TriggerEvent(EEventType.Mission);
     }
 
