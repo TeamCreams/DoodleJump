@@ -1,8 +1,14 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using GameApi.Controllers;
+using GameApi.Dtos;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json.Linq;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using PSY_DB;
 using PSY_DB.Tables;
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using WebApi.Models.Dto;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -13,12 +19,16 @@ namespace GameApi.Hubs
     public class ChatHub : Hub
     {
         private readonly PsyDbContext _dbContext;
+        // -> static을 붙임으로 모든 클라이언트가 같은 dictionary를 참조하게 됨
+        // -> ConcurrentDictionary 여러 스레드에서 수정해도 안전함
+        // -> dictionary를 안 쓰면 한 계정에서 로그아웃하면 heartBeat가 다른 계정들에도 안 보내짐.
+        private static ConcurrentDictionary<int, string> _connectionIds = new ConcurrentDictionary<int, string>();
+        private static ConcurrentDictionary<string, CancellationTokenSource> _heartbeatTokens = new ConcurrentDictionary<string, CancellationTokenSource>();
+
         public ChatHub(PsyDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        // -> static을 붙임으로 모든 클라이언트가 같은 dictionary를 참조하게 됨
-        private static Dictionary<int, string> _connectionIds = new Dictionary<int, string>();
 
         public async Task SendMessage(string user, string message)
         {
@@ -131,29 +141,68 @@ namespace GameApi.Hubs
 
         public async void LoginUser(int userAccountId)
         {
-            if (_connectionIds.ContainsKey(userAccountId))
-            {
-                _connectionIds[userAccountId] = Context.ConnectionId;
-            }
-            else
-            {
-                _connectionIds.Add(userAccountId, Context.ConnectionId);
-            }
+            _connectionIds.TryAdd(userAccountId, Context.ConnectionId);
         }
 
         public override async Task OnConnectedAsync()
         {
             await Clients.All.SendAsync("UserConnected", Context.ConnectionId);
+            await SendHeartBeat(); // HeartBeat 시작
             await base.OnConnectedAsync();
         }
 
         public override async Task OnDisconnectedAsync(Exception exception)
         {
             await Clients.All.SendAsync("UserDisconnected", Context.ConnectionId);
-            // dictionary에서 지울 userAccountId 찾은 후 해당 value 지우기.
+
+            // 연결 해제 시 HeartBeat 중지
+            if (_heartbeatTokens.TryRemove(Context.ConnectionId, out var cts))
+            {
+                cts.Cancel();
+                cts.Dispose();
+            }
+
             var removeKey = _connectionIds.FirstOrDefault(id => id.Value == Context.ConnectionId).Key;
-            _connectionIds.Remove(removeKey);
+            _connectionIds.TryRemove(removeKey, out string message);
             await base.OnDisconnectedAsync(exception);
+        }
+        public async Task SendHeartBeat()
+        {
+            var cts = new CancellationTokenSource();
+            _heartbeatTokens.TryAdd(Context.ConnectionId, cts);
+
+            _ = Task.Run(async () =>
+            {
+                while (!cts.Token.IsCancellationRequested)
+                {
+                    var serverTime = DateTime.UtcNow;
+                    await Clients.Client(Context.ConnectionId).SendAsync("ReceiveHeartBeat", serverTime);
+
+                    await Task.Delay(5000, cts.Token); // 5초마다
+                }
+            });
+        }
+
+        public async Task SendHeartBeat1(int senderUserId)
+        {
+            // 보내는 계정 찾기
+            var senderUser = await _dbContext.TblUserAccounts
+                                    .FirstOrDefaultAsync(user => user.Id == senderUserId && user.DeletedDate == null);
+            if (senderUser == null)
+            {
+                throw new CommonException(EStatusCode.NotFoundEntity,
+                    $"{senderUserId} : 찾을 수 없는 UserAccountId");
+            }
+
+            // 네트워크에 연결 되어있지 않으면 throw
+            if (!_connectionIds.TryGetValue(senderUserId, out var connectionIds) || !connectionIds.Contains(Context.ConnectionId))
+            {
+                throw new CommonException(EStatusCode.NotConnectionUser,
+                        $"{Context.ConnectionId} : 연결 되어있지 않은 UserAccountId");
+            }
+            var serverTime = DateTime.UtcNow;
+            await Clients.Client(Context.ConnectionId).SendAsync("ReceiveHeartBeat", serverTime);
+            // await Clients.Client(Context.ConnectionId).SendAsync("ReceiveMessage", senderUser.Nickname, serverTime.ToString(), true);
         }
     }
 }
