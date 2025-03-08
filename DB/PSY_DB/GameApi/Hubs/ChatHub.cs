@@ -168,19 +168,15 @@ namespace GameApi.Hubs
         }
         public async Task SendHeartBeat()
         {
-            var cts = new CancellationTokenSource();
-            _heartbeatTokens.TryAdd(Context.ConnectionId, cts);
+            var serverTime = DateTime.UtcNow;
+            await Clients.Client(Context.ConnectionId).SendAsync("ReceiveHeartBeat", serverTime);
+        }
 
-            _ = Task.Run(async () =>
-            {
-                while (!cts.Token.IsCancellationRequested)
-                {
-                    var serverTime = DateTime.UtcNow;
-                    await Clients.Client(Context.ConnectionId).SendAsync("ReceiveHeartBeat", serverTime);
-
-                    await Task.Delay(5000, cts.Token); // 5초마다
-                }
-            });
+        public async Task ReceiveHearBeatFromClient()
+        {
+            await Task.Delay(5000);
+            var serverTime = DateTime.UtcNow;
+            await Clients.Client(Context.ConnectionId).SendAsync("ReceiveHeartBeat", serverTime);
         }
 
         public async Task SendHeartBeat1(int senderUserId)
