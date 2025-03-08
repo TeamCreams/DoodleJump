@@ -13,7 +13,7 @@ namespace SignalRClient
         public void Run()
         {
             var hubConnection = new HubConnectionBuilder()
-                .WithUrl($"https://dev-single-api.snapism.net:8082/Chat")
+                .WithUrl($"https://localhost:51472/Chat")
                 .Build();
 
 
@@ -23,6 +23,11 @@ namespace SignalRClient
                 hubConnection.On<string, string>("ReceiveMessage", async (user, message) =>
                 {
                     Console.WriteLine($"{user} : {message}");
+                });
+
+                hubConnection.On<DateTime>("ReceiveHeartBeat", async (dateTime) =>
+                {
+                    Console.WriteLine($"{dateTime}");
                 });
 
             });
