@@ -5,9 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PSY_DB;
 using PSY_DB.Tables;
+using random_alphanumeric_strings;
 using System.Linq;
 using System.Reflection;
 using System.Security;
+using System.Security.Cryptography;
 using System.Text.Json.Serialization;
 using WebApi.Models.Dto;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -70,6 +72,7 @@ namespace GameApi.Controllers
                     userAccount.HairStyle = "Afro";
                     userAccount.EyebrowStyle = "AnnoyedEyebrows";
                     userAccount.EyesStyle = "Annoyed";
+                    userAccount.SecureKey = SecureKey.method3(50);
                     _context.TblUserAccounts.Add(userAccount);
                 }
                 
@@ -147,7 +150,8 @@ namespace GameApi.Controllers
                         EyebrowStyle = user.EyebrowStyle,
                         Evolution = user.Evolution,
                         LatelyEnergy = user.LatelyEnergy,
-                        Energy = user.Energy
+                        Energy = user.Energy,
+                        SecureKey = user.SecureKey,
                     }).ToListAsync();
 
                 if (select.Any() == false)
@@ -156,11 +160,11 @@ namespace GameApi.Controllers
                         "아이디 혹은 비밀번호가 맞지 않습니다."); // try문 밖으로 던짐
                 }
                 var selectUser = select.First();
-                
-                if (selectUser.LatelyScore == -1)
-                {
-                    selectUser.LatelyScore = 0; // -1일 경우 0으로 설정
-                }
+
+                //if (selectUser.LatelyScore == -1)
+                //{
+                //    selectUser.LatelyScore = 0; // -1일 경우 0으로 설정
+                //}
 
                 rv.StatusCode = EStatusCode.OK;
                 rv.Message = "";
@@ -275,7 +279,7 @@ namespace GameApi.Controllers
                     throw new CommonException(EStatusCode.NotFoundEntity,
                         $"아이디 혹은 비밀번호가 맞지 않습니다. UserAccountId : {requestDto.UserName} Password : {requestDto.Password}");
                 }
-
+                
                 userAccount.Password = requestDto.UpdatePassword;
                 _context.TblUserAccounts.Update(userAccount);
 
@@ -662,7 +666,8 @@ namespace GameApi.Controllers
                         EyebrowStyle = user.EyebrowStyle,
                         Evolution = user.Evolution,
                         LatelyEnergy = user.LatelyEnergy,
-                        Energy = user.Energy
+                        Energy = user.Energy,
+                        SecureKey = user.SecureKey,
                     }).ToListAsync();
 
                 if (select.Any() == false)
@@ -679,10 +684,10 @@ namespace GameApi.Controllers
                 {
                     var selectUser = select.First();
 
-                    if (selectUser.LatelyScore == -1)
-                    {
-                        selectUser.LatelyScore = 0; // -1일 경우 0으로 설정
-                    }
+                    //if (selectUser.LatelyScore == -1)
+                    //{
+                    //    selectUser.LatelyScore = 0; // -1일 경우 0으로 설정
+                    //}
 
                     rv.StatusCode = EStatusCode.OK;
                     rv.Message = $"{requestDto.UserName} 계정 정보";

@@ -60,6 +60,10 @@ public partial class TblUserAccount
     [SqlDefaultValue("10")]
     public int Energy { get; set; }
 
+    [Comment("보안 키")]
+    [Required]
+    public string? SecureKey { get; set; }
+
     [InverseProperty("TblUserAccountKeyNavigation")]
     public virtual ICollection<TblUserScore> TblUserScores { get; set; } = new List<TblUserScore>();
     [InverseProperty("TblUserAccountKeyNavigation")]

@@ -31,5 +31,6 @@
         // 에너지 관련
         public DateTime LatelyEnergy { get; set; }
         public int Energy { get; set; }
+        public string? SecureKey { get; set; }
     }
 }

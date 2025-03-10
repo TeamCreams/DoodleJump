@@ -7,7 +7,6 @@ namespace GameApi.Dtos
     public class ReqDtoGetOrAddUserAccount
     {
         public string? UserName { get; set; }
-
     }
 
     public class ResDtoGetOrAddUserAccount
@@ -33,5 +32,6 @@ namespace GameApi.Dtos
         // 에너지 관련
         public DateTime LatelyEnergy { get; set; }
         public int Energy { get; set; }
+        public string? SecureKey { get; set; }
     }
 }
