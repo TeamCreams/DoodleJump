@@ -4,6 +4,7 @@ using GameApi.Dtos;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
+using WebApi.Models.Dto;
 using static Define;
 
 public class StartLoadingScene : BaseScene
@@ -22,6 +23,7 @@ public class StartLoadingScene : BaseScene
     private EScene _scene = EScene.InputNicknameScene;
     private bool _isPreLoadSuccess = false;
     private bool _isLoadSceneCondition = false;
+
     private PlayableDirector _playableDirector = null;
     private UI_StartLoadingScene _ui = null;
     public override bool Init()
@@ -59,67 +61,60 @@ public class StartLoadingScene : BaseScene
         // 로그인이 이미 되어있는지 확인하려면 계정이 맞는 지 플레이어프리펩스에서 가져옴.
         // 플레이어프리펩스를 열려면 키가 필요.
         // 키는 로그인을 해야 얻을 수 있음.
-        string serializedData = SecurePlayerPrefs.GetString(HardCoding.UserName, "hsidj"); // default value가 정해져 있지 않으면 안 됨.
-        Debug.Log($"serializedData : {serializedData}");
+        string serializedData = SecurePlayerPrefs.GetString(HardCoding.UserName, "sdfsd"); // default value가 정해져 있지 않으면 안 됨.
         Managers.Game.UserInfo.UserName = serializedData;
-        if (string.IsNullOrEmpty(Managers.Game.UserInfo.UserName)) // 최초 로그인
+        if (string.IsNullOrEmpty(Managers.Game.UserInfo.UserName)) 
         {
             _scene = EScene.SignInScene;
             Managers.Scene.LoadScene(_scene);
-            //_isLoadSceneCondition = true;
         }
-        else
-        {
-            Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
-            {
-                UserName = Managers.Game.UserInfo.UserName,
-            },
-            (response) =>
-            {
-                HandleSuccess(response, () => 
-                {
-                    _isLoadSceneCondition = true;
-                    Managers.Game.UserInfo.UserName = response.UserName;
-                    Managers.Game.UserInfo.UserNickname = response.Nickname;
-                    Managers.Game.UserInfo.UserAccountId  = response.UserAccountId;
-                    Debug.Log($"HandleSuccess Managers.Game.UserInfo.UserAccountId : {Managers.Game.UserInfo.UserAccountId}");
-                    Managers.SignalR.LoginUser(Managers.Game.UserInfo.UserAccountId);
-
-                    //캐릭터 스타일 
-                    Managers.Game.ChracterStyleInfo.CharacterId = response.CharacterId;
-                    Managers.Game.ChracterStyleInfo.Hair = response.HairStyle;
-                    Managers.Game.ChracterStyleInfo.Eyebrows = response.EyebrowStyle;
-                    Managers.Game.ChracterStyleInfo.Eyes = response.EyesStyle;
-                    Managers.Game.UserInfo.EvolutionId = response.Evolution;
-                    Managers.Game.UserInfo.Energy = response.Energy;
-                    Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
-                
-                    // 보안 키 저장
-                    SecurePlayerPrefs.SetKey(response.SecureKey);
-                    
-                    // 아이디 저장
-                    SecurePlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);
-                    SecurePlayerPrefs.Save();
-
-                    Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
-                    Managers.Event.TriggerEvent(EEventType.OnFirstAccept);
-                });
-            },
-            (errorCode) =>
-            {
-                UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
-                ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
-                toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
-        
-                Debug.Log($"[Error Code : {errorCode}] error message");
-                HandleFailure();
-            });
-        }
-        StartCoroutine(UpdateEnergy_Co());
+        Debug.Log($"serializedData : {Managers.Game.UserInfo.UserName}");
+        TryLoadUserAccount();
     }
-    private void CheckID()
+    private void TryLoadUserAccount()
     {
-        // 해당 닉네임이 있는지 비교하는 dto 필요.
+        Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
+        {
+            UserName = Managers.Game.UserInfo.UserName,
+        },
+        (response) =>
+        {
+            HandleSuccess(response, () => 
+            {
+                _isLoadSceneCondition = true;
+                Managers.Game.UserInfo.UserName = response.UserName;
+                Managers.Game.UserInfo.UserNickname = response.Nickname;
+                Managers.Game.UserInfo.UserAccountId  = response.UserAccountId;
+                Debug.Log($"HandleSuccess Managers.Game.UserInfo.UserAccountId : {Managers.Game.UserInfo.UserAccountId}");
+                Managers.SignalR.LoginUser(Managers.Game.UserInfo.UserAccountId);
+
+                //캐릭터 스타일 
+                Managers.Game.ChracterStyleInfo.CharacterId = response.CharacterId;
+                Managers.Game.ChracterStyleInfo.Hair = response.HairStyle;
+                Managers.Game.ChracterStyleInfo.Eyebrows = response.EyebrowStyle;
+                Managers.Game.ChracterStyleInfo.Eyes = response.EyesStyle;
+                Managers.Game.UserInfo.EvolutionId = response.Evolution;
+                Managers.Game.UserInfo.Energy = response.Energy;
+                Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
+            
+                // 보안 키 저장
+                SecurePlayerPrefs.SetKey(response.SecureKey);
+                
+                // 아이디 저장
+                SecurePlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);
+                SecurePlayerPrefs.Save();
+
+                Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
+                Managers.Event.TriggerEvent(EEventType.OnFirstAccept);
+            });
+        },
+        (errorCode) =>
+        {
+            _scene = EScene.SignInScene;
+            Managers.Scene.LoadScene(_scene);
+            return;
+        });
+        StartCoroutine(UpdateEnergy_Co());
     }
     private IEnumerator UpdateEnergy_Co()
     {

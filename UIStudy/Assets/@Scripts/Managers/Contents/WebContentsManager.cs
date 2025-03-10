@@ -78,9 +78,17 @@ public class WebContentsManager
             }
             else
             {
-                if (rv.StatusCode != EStatusCode.OK)
+                Debug.Log("ReqGetValidateUserAccountUserName");
+
+                if(rv.StatusCode == EStatusCode.NameAlreadyExists) // 안들어와짐
                 {
                     onFailed.Invoke(rv.StatusCode);
+                    //Debug.Log("ReqGetValidateUserAccountUserName");
+                }
+                if (rv.StatusCode != EStatusCode.OK) // 안들어와짐
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                    Managers.Scene.LoadScene(EScene.SignInScene);
                 }
                 else
                 {
