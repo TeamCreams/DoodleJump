@@ -14,8 +14,9 @@ public class SignalRManager
 {
     private HubConnection _connection;
     public Action<DateTime> OnChangedHeartBeat;
-    
+
     private string _serverUrl = "https://dev-single-api.snapism.net:8082/Chat";
+    //private string _serverUrl = "https://localhost:54528/Chat";
     // 메세지를 받는 것
     // 메세지를 특정인물한테 보내는것 (친구 기능)
     // 메세지를 전체한테 보내는 것
@@ -106,9 +107,10 @@ public class SignalRManager
     }
     public void OnReceiveHeartBeat()
     {
-        _connection.On<DateTime>("ReceiveHeartBeat", (heartBeatData) =>
+        _connection.On<DateTime>("ReceiveHeartBeat", async (heartBeatData) =>
         {
-            Debug.Log($"OnReceiveHeartBeat {heartBeatData.Second} "); //안됨
+            //Debug.Log($"ReceiveHeartBeat {heartBeatData}");
+            await _connection.InvokeAsync("ReceiveHearBeatFromClient");
             OnChangedHeartBeat?.Invoke(heartBeatData);
         });
     }

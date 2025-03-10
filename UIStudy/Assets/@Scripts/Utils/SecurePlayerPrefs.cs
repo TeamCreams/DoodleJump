@@ -11,7 +11,10 @@ public static class SecurePlayerPrefs
 {
     private static string _iv = "dfasdfdasgdsafeqgfdasvasd";
     private static string _key = "asdfhskjfhkasdfuhsakfuhsakufdsakfdhfkasasdfads";
-
+    public static void SetKey(string value)
+    {
+        _key = value;
+    }
     public static void SetString(string key, string value)
     {
         string newValue = Aes256Util.EncryptString(value, _key, _iv);

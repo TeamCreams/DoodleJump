@@ -123,9 +123,8 @@ public class UI_SettingPopup : UI_Popup
     }
     private void LogoutAndClearMission()
     {
-        Debug.Log($"LogoutAndClearMission");
-        PlayerPrefs.SetString(HardCoding.UserName, null);
-        PlayerPrefs.Save();
+        SecurePlayerPrefs.SetString(HardCoding.UserName, null);
+        SecurePlayerPrefs.Save();
         Managers.Event.TriggerEvent(EEventType.OnLogout);
     }
     void OnEvent_SetLanguage(Component sender, object param)

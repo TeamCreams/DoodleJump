@@ -8,6 +8,7 @@ using GameApi.Dtos;
 using UniRx;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 public class UI_SuberunkerSceneHomeScene : UI_Scene
 {
@@ -16,7 +17,6 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     {
         Ranking,
         MyScore,
-        //UI_MissionPanel
     }
 
     private enum Texts
@@ -75,7 +75,6 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetImage((int)Images.Ranking_Button).gameObject.BindEvent(OnClick_ShowRanking, EUIEvent.Click);
         GetButton((int)Buttons.Mission_Button).gameObject.BindEvent(OnClick_ShowMission, EUIEvent.Click);
         GetButton((int)Buttons.Setting_Button).gameObject.BindEvent(OnClick_SettingButton, EUIEvent.Click);
-        //GetObject((int)GameObjects.UI_MissionPanel).SetActive(false);
 
         // add mission
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
@@ -83,11 +82,10 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
 
         // Default setting
         _startTime = Managers.Game.UserInfo.LatelyEnergy;
-        //Debug.Log($"_startTime : {_startTime}");
         OnEvent_SetLanguage(null, null);
         OnEvent_Refresh(null, null);
         ShowRanking();
-        //StartCoroutine(CheckServerTime());
+        
         Managers.SignalR.OnChangedHeartBeat -= CheckServerTime; // 구독 해제
         Managers.SignalR.OnChangedHeartBeat += CheckServerTime; // 이벤트 구독
         return true;
@@ -169,12 +167,8 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         }
         );
     }
-    private void EnergyTimer()
+    private async Task EnergyTimer()
     {
-        // _serverTime.Hour
-        // _serverTime.Minute
-        // _serverTime.Second
-
         // 5초마다 서버에서 시간을 받아옴.
         // 300초가 되면 updateEnergy 요청
 
@@ -197,47 +191,29 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
             return;
         }
         _isRunningTimer = true;
-        // Debug.Log($"OP _startTime : {_startTime}");
-        // Debug.Log($"OP _serverTime : {_serverTime}");
-        // Debug.Log($"OP _calculateTime : {_calculateTime}");
         _calculateTime = (int)(_serverTime - _startTime).TotalSeconds;
+        // Debug.Log($"OPOPOPO _startTime : {_startTime}");
+        // Debug.Log($"OPOPOPO _serverTime : {_serverTime}");
+        // Debug.Log($"OPOPOPO _calculateTime : {_calculateTime}");
         _isSettingComplete = true;
+        await EnergyRechargeCoroutineAwaitable();
+    }
+    public void CheckServerTime(DateTime newHeartBeat)
+    {
+        _serverTime = newHeartBeat; // 5초마다 웹소켓에서 전해준 값으로 서버시간 업데이트. 
+        EnergyTimer().ConfigureAwait(false); // 비동기로 실행. 끝나고 메인스레드로 돌아가지 않음.
+    }
+    private async Awaitable EnergyRechargeCoroutineAwaitable()
+    {
+        await Awaitable.MainThreadAsync();
+        // 코루틴은 메인스레드에서 진행 됨.
+        // 서버시간을 받으면서 백그라운드 스레드로 진행되기 때문에 메인스레드로 전환이 필요.
         if(_tickCo == null)
         {
             _tickCo = StartCoroutine(EnergyRechargeCoroutine());
         }
     }
-
-    public IEnumerator CheckServerTime()
-    {
-        while(true)
-        {
-            Managers.WebContents.ReqDtoHeartBeat(new ReqDtoHeartBeat()
-            {},
-            (response) => 
-            {
-                _serverTime = response.DateTime;
-                EnergyTimer();
-            },
-            (errorCode) => 
-            {
-                UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
-                ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError);
-                toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
-            });
-
-            yield return new WaitForSeconds(5);
-        }
-    }
-    public void CheckServerTime(DateTime newHeartBeat)
-    {
-        //안들어옴
-        Debug.Log("CheckServerTime");
-        _serverTime = newHeartBeat; // 5초마다 웹소켓에서 전해준 값으로 서버시간 업데이트. 
-        EnergyTimer();
-    }
-
-    IEnumerator EnergyRechargeCoroutine()
+    private IEnumerator EnergyRechargeCoroutine()
     {
         yield return new WaitWhile(() => _isSettingComplete == false);
         _rechargeTimer?.Dispose();

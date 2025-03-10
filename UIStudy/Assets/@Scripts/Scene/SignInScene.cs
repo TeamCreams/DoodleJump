@@ -64,12 +64,15 @@ public class SignInScene  : BaseScene
             Managers.Game.UserInfo.Energy = response.Energy;
             Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
 
+            // 보안 키 저장
+            SecurePlayerPrefs.SetKey(response.SecureKey);
+
             Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
             Managers.Event.TriggerEvent(EEventType.OnFirstAccept);
 
             // 아이디 저장
-            PlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);
-            PlayerPrefs.Save();
+            SecurePlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);
+            SecurePlayerPrefs.Save();
 
             _isLoadScoreCondition = true;
         },
