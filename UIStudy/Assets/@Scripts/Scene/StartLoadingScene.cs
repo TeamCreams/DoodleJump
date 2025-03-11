@@ -61,21 +61,51 @@ public class StartLoadingScene : BaseScene
         // 로그인이 이미 되어있는지 확인하려면 계정이 맞는 지 플레이어프리펩스에서 가져옴.
         // 플레이어프리펩스를 열려면 키가 필요.
         // 키는 로그인을 해야 얻을 수 있음.
-        string serializedData = SecurePlayerPrefs.GetString(HardCoding.UserName, "sdfsd"); // default value가 정해져 있지 않으면 안 됨.
-        Managers.Game.UserInfo.UserName = serializedData;
+
+        // 아이디로 먼저 로그인하고 로그인하면서 받아온 유저정보비번이랑 비교
+        string usernameData = SecurePlayerPrefs.GetString(HardCoding.UserName, "tjdbssy137"); // default value가 정해져 있지 않으면 안 됨.
+        string passwordData = SecurePlayerPrefs.GetString(HardCoding.Password, "akfxlwm86"); 
+        Managers.Game.UserInfo.UserName = usernameData;
+        Managers.Game.UserInfo.Password = passwordData;
+
         if (string.IsNullOrEmpty(Managers.Game.UserInfo.UserName)) 
         {
             _scene = EScene.SignInScene;
             Managers.Scene.LoadScene(_scene);
         }
-        Debug.Log($"serializedData : {Managers.Game.UserInfo.UserName}");
+        Debug.Log($"UserName : {Managers.Game.UserInfo.UserName}");
+        Debug.Log($"Password : {Managers.Game.UserInfo.Password}");
+
         TryLoadUserAccount();
     }
     private void TryLoadUserAccount()
     {
+        // 웹게시가 안돼서 임시로
+        string password = "";
+        Managers.WebContents.ReqGetUserAccountPassword(new ReqDtoGetUserAccountPassword()
+        {
+            UserName = Managers.Game.UserInfo.UserName,
+        },
+        (response) =>
+        {
+            password = response.Password;
+        },
+        (errorCode) =>
+        {
+
+        });
+        if(password != Managers.Game.UserInfo.Password)
+        {
+             _scene = EScene.SignInScene;
+            Managers.Scene.LoadScene(_scene);
+            return;
+        }
+        // 나중에 삭제 구간
+
         Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
         {
             UserName = Managers.Game.UserInfo.UserName,
+            //Password = Managers.Game.UserInfo.Password
         },
         (response) =>
         {
@@ -102,6 +132,7 @@ public class StartLoadingScene : BaseScene
                 
                 // 아이디 저장
                 SecurePlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);
+                SecurePlayerPrefs.SetString(HardCoding.Password, Managers.Game.UserInfo.Password);
                 SecurePlayerPrefs.Save();
 
                 Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);

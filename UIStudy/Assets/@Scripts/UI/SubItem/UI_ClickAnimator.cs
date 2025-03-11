@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static Define;
 
-public class UI_ButtonAnimator : UI_Base
+public class UI_ClickAnimator : UI_Base
 {
     private Vector3 _scale;
     private Vector3 _nextScale;

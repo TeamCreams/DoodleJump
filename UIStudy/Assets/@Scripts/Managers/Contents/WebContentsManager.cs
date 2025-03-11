@@ -14,6 +14,7 @@ public class WebRoute
     public readonly static Func<ReqDtoGetUserAccount, string> GetUserAccount = (dto) => $"{BaseUrl}User/GetUserAccount?UserName={dto.UserName}";
     public readonly static Func<ReqDtoGetValidateUserAccountUserName, string> GetValidateUserAccountUserName = (dto) => $"{BaseUrl}User/GetValidateUserAccountUserName?UserName={dto.UserName}";
     public readonly static Func<ReqDtoGetValidateUserAccountNickname, string> GetValidateUserAccountNickname = (dto) => $"{BaseUrl}User/GetValidateUserAccountNickname?Nickname={dto.Nickname}";
+    public readonly static Func<ReqDtoGetUserAccountPassword, string> GetUserAccountPassword = (dto) => $"{BaseUrl}User/GetUserAccountPassword?UserName={dto.UserName}";
 
     public readonly static string InsertUserAccount = $"{BaseUrl}User/InsertUser";
     public readonly static string InsertUserAccountScore = $"{BaseUrl}User/InsertUserAccountScore";
@@ -177,6 +178,30 @@ public class WebContentsManager
         Managers.Web.SendPostRequest(WebRoute.InsertUserAccountNickname, body , (response) =>
         {
             CommonResult<ResDtoInsertUserAccountNickname> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertUserAccountNickname>>(response);
+
+            if (rv == null || false == rv.IsSuccess)
+            {
+                onFailed.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                if (rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
+    //GetUserAccountPassword
+    public void ReqGetUserAccountPassword(ReqDtoGetUserAccountPassword requestDto, Action<ResDtoGetUserAccountPassword> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        Managers.Web.SendGetRequest(WebRoute.GetUserAccountPassword(requestDto), (response) =>
+        {
+            CommonResult<ResDtoGetUserAccountPassword> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetUserAccountPassword>>(response);
 
             if (rv == null || false == rv.IsSuccess)
             {

@@ -72,6 +72,7 @@ public class SignInScene  : BaseScene
 
             // 아이디 저장
             SecurePlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);
+            SecurePlayerPrefs.SetString(HardCoding.Password, Managers.Game.UserInfo.Password);
             SecurePlayerPrefs.Save();
 
             _isLoadScoreCondition = true;
