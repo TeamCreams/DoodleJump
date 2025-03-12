@@ -51,6 +51,8 @@ public partial class TblUserAccount
     [Comment("업데이트 스택")]
     [SqlDefaultValue("140003")]
     public int Evolution { get; set; }
+    [Comment("EvolutionSet Level")]
+    public int EvolutionSetLevel { get; set; }
 
     [Comment("마지막으로 에너지를 얻은 시간")]
     [SqlDefaultValue("UTC_TIMESTAMP()")]
@@ -63,7 +65,7 @@ public partial class TblUserAccount
     [Comment("보안 키")]
     [Required]
     public string? SecureKey { get; set; }
-
+    
     [InverseProperty("TblUserAccountKeyNavigation")]
     public virtual ICollection<TblUserScore> TblUserScores { get; set; } = new List<TblUserScore>();
     [InverseProperty("TblUserAccountKeyNavigation")]
