@@ -19,6 +19,7 @@ public partial class TblUserScore
     public int Scoreboard { get; set; }
     public int Gold { get; set; }
     public int AccumulatedStone { get; set; }
+    public int StageLevel { get; set; }
 
     public DateTime RegisterDate { get; set; }
     public DateTime UpdateDate { get; set; }

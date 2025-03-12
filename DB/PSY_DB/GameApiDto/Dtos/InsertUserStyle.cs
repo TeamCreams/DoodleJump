@@ -14,6 +14,7 @@ namespace GameApi.Dtos
         public string? EyesStyle { get; set; }
         // 업데이트 스택
         public int Evolution { get; set; }
+        public int EvolutionSetLevel { get; set; }
     }
 
     public class ResDtoUpdateUserStyle

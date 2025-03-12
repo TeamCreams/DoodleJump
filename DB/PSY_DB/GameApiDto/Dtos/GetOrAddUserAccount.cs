@@ -23,6 +23,7 @@ namespace GameApi.Dtos
         public int PlayTime { get; set; }
         public int CharacterId { get; set; }
         public int AccumulatedStone { get; set; }
+        public int StageLevel { get; set; }
         // 디자인
         public string? HairStyle { get; set; }
         public string? EyebrowStyle { get; set; }

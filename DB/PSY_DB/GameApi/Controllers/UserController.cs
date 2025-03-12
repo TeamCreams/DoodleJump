@@ -146,6 +146,8 @@ namespace GameApi.Controllers
                                     .FirstOrDefault(),
                         AccumulatedStone = user.TblUserScores
                                     .Sum(s => s.AccumulatedStone),
+                        StageLevel = user.TblUserScores
+                                    .Max(s => s.StageLevel),
                         CharacterId = user.CharacterId,
                         HairStyle = user.HairStyle,
                         EyesStyle = user.EyesStyle,
@@ -504,6 +506,7 @@ namespace GameApi.Controllers
                     Scoreboard = requestDto.Score,
                     PlayTime = requestDto.Time,
                     AccumulatedStone = requestDto.AccumulatedStone,
+                    StageLevel = requestDto.StageLevel,
                     Gold = select.Gold,
                     UpdateDate = DateTime.UtcNow
                 };
@@ -663,6 +666,8 @@ namespace GameApi.Controllers
                         AccumulatedStone = user.TblUserScores
                                     //.Where(s => s.AccumulatedStone != -1)
                                     .Sum(s => s.AccumulatedStone),
+                        StageLevel = user.TblUserScores
+                                    .Max(s => s.StageLevel),
                         CharacterId = user.CharacterId,
                         HairStyle = user.HairStyle,
                         EyesStyle = user.EyesStyle,
@@ -1207,6 +1212,7 @@ namespace GameApi.Controllers
                 userAccount.EyesStyle = requestDto.EyesStyle;
                 userAccount.EyebrowStyle = requestDto.EyebrowStyle;
                 userAccount.Evolution = requestDto.Evolution;
+                userAccount.EvolutionSetLevel = requestDto.EvolutionSetLevel;
 
                 _context.TblUserAccounts.Update(userAccount);
 
