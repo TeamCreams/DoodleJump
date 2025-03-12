@@ -11,7 +11,6 @@ using System.Collections;
 
 public class UI_SignInScene : UI_Scene
 {
-
     private enum InputFields
     {
         Id_InputField,
@@ -49,7 +48,6 @@ public class UI_SignInScene : UI_Scene
         {
             return false;
         }
-
         BindInputFields(typeof(InputFields));
         BindButtons(typeof(Buttons));
         BindTexts(typeof(Texts));
@@ -58,10 +56,10 @@ public class UI_SignInScene : UI_Scene
         GetButton((int)Buttons.SignUp_Button).gameObject.BindEvent(OnClick_SignUp, EUIEvent.Click);
 
         //GetInputField((int)InputFields.Password_InputField).gameObject.BindEvent(OnClick_CheckLogId, EUIEvent.Click);
-        GetText((int)Texts.Warning_Id_Text).text = "";
-        GetText((int)Texts.Warning_Password_Text).text = "";
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         OnEvent_SetLanguage(null, null);
+        GetText((int)Texts.Warning_Id_Text).text = null;
+        GetText((int)Texts.Warning_Password_Text).text = null;
 
         _scene = Managers.Scene.CurrentScene as SignInScene;
         return true;
@@ -72,9 +70,9 @@ public class UI_SignInScene : UI_Scene
     }
     private void OnClick_SignIn(PointerEventData eventData)
     {
-        string id = GetInputField((int)InputFields.Id_InputField).text;
-        string password = GetInputField((int)InputFields.Password_InputField).text;
-        _scene.SignIn(id, password);
+        Managers.Game.UserInfo.UserName = GetInputField((int)InputFields.Id_InputField).text;
+        Managers.Game.UserInfo.Password = GetInputField((int)InputFields.Password_InputField).text;
+        _scene.SignIn();
     }
     private void OnClick_SignUp(PointerEventData eventData)
     {   
@@ -273,6 +271,8 @@ public class UI_SignInScene : UI_Scene
 
     void OnEvent_SetLanguage(Component sender, object param)
     {
+        Debug.Log("OnEvent_SetLanguage");
+
         GetText((int)Texts.Id_Text).text = Managers.Language.LocalizedString(91027);
         GetText((int)Texts.Placeholder_Id_Text).text = Managers.Language.LocalizedString(91027);
 

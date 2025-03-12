@@ -38,11 +38,12 @@ public class UI_InputNicknameScene : UI_Scene
         BindButtons(typeof(Buttons));
         BindTexts(typeof(Texts));
 
-        GetButton((int)Buttons.Confirm_Button).gameObject.BindEvent(OnClick_InspectName, EUIEvent.Click);
-        GetText((int)Texts.Warning_Text).text = "";
 
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         OnEvent_SetLanguage(null, null);
+        GetText((int)Texts.Warning_Text).text = null;
+
+        GetButton((int)Buttons.Confirm_Button).gameObject.BindEvent(OnClick_InspectName, EUIEvent.Click);
 
         _scene = Managers.Scene.CurrentScene as InputNicknameScene;
 

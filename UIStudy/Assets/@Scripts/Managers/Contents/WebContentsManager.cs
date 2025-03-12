@@ -10,8 +10,9 @@ using WebApi.Models.Dto;
 using static Define;
 public class WebRoute
 {
-    private readonly static string BaseUrl = $"https://dev-single-api.snapism.net:8082/";
-    public readonly static Func<ReqDtoGetUserAccount, string> GetUserAccount = (dto) => $"{BaseUrl}User/GetUserAccount?UserName={dto.UserName}";
+    private readonly static string BaseUrl = $"https://dd37927.store/";
+    public readonly static Func<ReqDtoGetUserAccount, string> GetUserAccount = (dto) => $"{BaseUrl}User/GetUserAccount?UserName={dto.UserName}&Password={dto.Password}";
+                                                                            //https://dd37927.store/User/GetUserAccount?UserName=test3&Password=12345678
     public readonly static Func<ReqDtoGetValidateUserAccountUserName, string> GetValidateUserAccountUserName = (dto) => $"{BaseUrl}User/GetValidateUserAccountUserName?UserName={dto.UserName}";
     public readonly static Func<ReqDtoGetValidateUserAccountNickname, string> GetValidateUserAccountNickname = (dto) => $"{BaseUrl}User/GetValidateUserAccountNickname?Nickname={dto.Nickname}";
     public readonly static Func<ReqDtoGetUserAccountPassword, string> GetUserAccountPassword = (dto) => $"{BaseUrl}User/GetUserAccountPassword?UserName={dto.UserName}";
@@ -19,7 +20,7 @@ public class WebRoute
     public readonly static string InsertUserAccount = $"{BaseUrl}User/InsertUser";
     public readonly static string InsertUserAccountScore = $"{BaseUrl}User/InsertUserAccountScore";
     public readonly static string InsertUserAccountNickname = $"{BaseUrl}User/InsertUserAccountNickname";
-    //public readonly static Func<ReqInsertUserAccountScore, string> InsertUserAccountScore = (dto) => $"{BaseUrl}User/InsertUserAccountScore?UserName={dto.UserName}&Score{dto.Score}";
+    //public readonly static Func<ReqInsertUserAccountScore, string> InsertUserAccountScore = (dto) => $"{BaseUrl}User/InsertUserAccountScore?UserName={dto.UserName}&Score={dto.Score}";
     public readonly static Func<ReqDtoGetOrAddUserAccount, string> GetOrAddUserAccount = (dto) => $"{BaseUrl}User/GetOrAddUserAccount?UserName={dto.UserName}";
     public readonly static Func<ReqDtoGetUserAccountList, string> GetUserAccountList = (dto) => $"{BaseUrl}User/GetUserAccountList"; //얘는 param값이 없음
 

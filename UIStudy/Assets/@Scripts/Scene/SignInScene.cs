@@ -8,7 +8,6 @@ using System;
 public class SignInScene  : BaseScene
 {
     private bool _isLoadSceneCondition = false;
-    private bool _isLoadScoreCondition = false;
     private bool _isLoadEnergyCondition = false;
     
     private int _failCount = 0;
@@ -26,7 +25,7 @@ public class SignInScene  : BaseScene
         _ui = Managers.UI.ShowSceneUI<UI_SignInScene>();
         return true;
     }
-    public void SignIn(string id, string password)
+    public void SignIn()
     {
         
         // EErrorCode error = _ui.CheckCorrectPassword();
@@ -34,22 +33,16 @@ public class SignInScene  : BaseScene
         // {
         //     return;
         // }
-
+        
         var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
         Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
         {
-            UserName = id,
+            
+            UserName = Managers.Game.UserInfo.UserName,
+            Password = Managers.Game.UserInfo.Password
         },
         (response) =>
         {
-            if(password != response.Password)
-            {
-                Managers.UI.ClosePopupUI(loadingPopup);
-                UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
-                ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_InvalidCredentials);
-                toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
-                return;
-            }
             Managers.Game.UserInfo.UserName = response.UserName;
             Managers.Game.UserInfo.UserNickname = response.Nickname;
             Managers.Game.UserInfo.UserAccountId = response.UserAccountId;
@@ -64,6 +57,13 @@ public class SignInScene  : BaseScene
             Managers.Game.UserInfo.Energy = response.Energy;
             Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
 
+            //게임 진행 정보
+            Managers.Game.UserInfo.RecordScore = response.HighScore;
+            Managers.Game.UserInfo.LatelyScore = response.LatelyScore;
+            Managers.Game.UserInfo.Gold = response.Gold;
+            Managers.Game.UserInfo.PlayTime = response.PlayTime;
+            Managers.Game.UserInfo.AccumulatedStone = response.AccumulatedStone;
+
             // 보안 키 저장
             SecurePlayerPrefs.SetKey(response.SecureKey);
 
@@ -75,7 +75,7 @@ public class SignInScene  : BaseScene
             SecurePlayerPrefs.SetString(HardCoding.Password, Managers.Game.UserInfo.Password);
             SecurePlayerPrefs.Save();
 
-            _isLoadScoreCondition = true;
+            _isLoadEnergyCondition = true;
         },
         (errorCode) =>
         {
@@ -87,7 +87,7 @@ public class SignInScene  : BaseScene
         //1. 다른버튼 비활성화
         //2. 로딩 인디케이터
         {
-            StartCoroutine(LoadScore_Co());
+            //StartCoroutine(LoadScore_Co());
             StartCoroutine(UpdateEnergy());
 
             Managers.UI.ClosePopupUI(loadingPopup);
@@ -106,20 +106,20 @@ public class SignInScene  : BaseScene
         Managers.Scene.LoadScene(_loadScene);
     }
 
-    private IEnumerator LoadScore_Co()
-    {
-        yield return new WaitWhile(() => _isLoadScoreCondition == false);
-        Managers.Score.GetScore((this), null,
-        () =>
-        {
-            _loadScene = EScene.SuberunkerSceneHomeScene;
-            _isLoadEnergyCondition = true;
-        },
-        () =>
-        {
-            _loadScene = EScene.SignInScene;
-        });
-    }
+    // private IEnumerator LoadScore_Co()
+    // {
+    //     yield return new WaitWhile(() => _isLoadScoreCondition == false);
+    //     Managers.Score.GetScore((this), null,
+    //     () =>
+    //     {
+    //         _loadScene = EScene.SuberunkerSceneHomeScene;
+    //         _isLoadEnergyCondition = true;
+    //     },
+    //     () =>
+    //     {
+    //         _loadScene = EScene.SignInScene;
+    //     });
+    // }
 
     // public IEnumerator CheckLogId_Co(string id, Action<string> callback)
     // {

@@ -70,11 +70,12 @@ public class UI_SignUpScene : UI_Scene
         GetInputField((int)InputFields.Password_InputField).enabled = false;
         GetInputField((int)InputFields.ConfirmPassword_InputField).enabled = false;
 
-        GetText((int)Texts.Warning_Id_Text).text = "";
-        GetText((int)Texts.Warning_Password_Text).text = "";
-        GetText((int)Texts.Warning_ConfirmPassword_Text).text = "";
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         OnEvent_SetLanguage(null, null);
+
+        GetText((int)Texts.Warning_Id_Text).text = null;
+        GetText((int)Texts.Warning_Password_Text).text = null;
+        GetText((int)Texts.Warning_ConfirmPassword_Text).text = null;
 
         return true;
     }
