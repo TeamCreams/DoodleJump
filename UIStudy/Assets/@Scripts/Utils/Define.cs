@@ -210,7 +210,8 @@ public static class Define
         // TODO : 삭제필요.
         AchieveScoreInGame, 
         Style,
-        RecordScore
+        RecordScore,
+        Evolution,
     }
 
     public enum EItemType

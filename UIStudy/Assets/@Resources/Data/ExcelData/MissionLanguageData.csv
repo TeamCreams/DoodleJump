@@ -58,15 +58,64 @@ Id,KrTitle,KrExplanation,EnTitle,EnExplanation
 160057,45레벨을 준비하며...,돌 3000개 피하기,Preparing for Level 45...,Avoid 3000 Stones
 160058,46레벨을 준비하며...,최고 기록 100000 달성,Preparing for Level 46...,Highest Score 100000 Achieved
 160059,46레벨을 준비하며...,누적 플레이 시간 100시간,Preparing for Level 46...,Total Play Time 100 Hours
-160060,캐릭터를 꾸며보자!,캐릭터 스타일 1번 변경하기.,Let's decorate the character!,Change character style 1 time.
-160061,캐릭터를 꾸며보자!,코스튬 구매 1번 하기.,Let's decorate the character!,Purchase a costume 1 time.
-160062,캐릭터를 꾸며보자!,머리 종류 3가지 모으기.,Let's decorate the character!,Collect 3 types of hairstyles.
-160063,캐릭터를 꾸며보자!,눈 모양 3가지 모으기.,Let's decorate the character!,Collect 3 types of eye shapes.
-160064,캐릭터를 꾸며보자!,눈썹 모양 3가지 모으기.,Let's decorate the character!,Collect 3 types of eyebrow shapes.
-160065,캐릭터를 꾸며보자!,캐릭터 1번 변경하기.,Let's decorate the character!,Change character 1 time.
-160066,캐릭터를 꾸며보자!,머리 종류 5가지 모으기.,Let's decorate the character!,Collect 5 types of hairstyles.
-160067,캐릭터를 꾸며보자!,눈 모양 5가지 모으기.,Let's decorate the character!,Collect 5 types of eye shapes.
-160068,캐릭터를 꾸며보자!,눈썹 모양 5가지 모으기.,Let's decorate the character!,Collect 5 types of eyebrow shapes.
-160069,캐릭터를 꾸며보자!,머리 종류 10가지 모으기.,Let's decorate the character!,Collect 10 types of hairstyles.
-160070,캐릭터를 꾸며보자!,눈 모양 10가지 모으기.,Let's decorate the character!,Collect 10 types of eye shapes.
-160071,캐릭터를 꾸며보자!,눈썹 모양 10가지 모으기.,Let's decorate the character!,Collect 10 types of eyebrow shapes.
+160060,캐릭터를 꾸며보자!,캐릭터 스타일 1번 변경하기.,Let's decorate the character!,Change Character Style 1.
+160061,더 나은 내가..,진화 세트 1레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 1.
+160062,더 나은 내가..,진화 세트 2레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 2.
+160063,더 나은 내가..,진화 세트 3레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 3.
+160064,더 나은 내가..,진화 세트 4레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 4.
+160065,더 나은 내가..,진화 세트 5레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 5.
+160066,캐릭터를 꾸며보자!,캐릭터 스타일 1번 변경하기.,Let's decorate the character!,Change Character Style 1.
+160067,더 나은 내가..,진화 세트 6레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 6.
+160068,더 나은 내가..,진화 세트 7레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 7.
+160069,더 나은 내가..,진화 세트 8레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 8.
+160070,더 나은 내가..,진화 세트 9레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 9.
+160071,더 나은 내가..,진화 세트 10레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 10.
+160072,캐릭터를 꾸며보자!,캐릭터 스타일 1번 변경하기.,Let's decorate the character!,Change Character Style 1.
+160073,더 나은 내가..,진화 세트 11레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 11.
+160074,더 나은 내가..,진화 세트 12레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 12.
+160075,더 나은 내가..,진화 세트 13레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 13.
+160076,더 나은 내가..,진화 세트 14레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 14.
+160077,더 나은 내가..,진화 세트 15레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 15.
+160078,캐릭터를 꾸며보자!,캐릭터 스타일 1번 변경하기.,Let's decorate the character!,Change Character Style 1.
+160079,더 나은 내가..,진화 세트 16레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 16.
+160080,더 나은 내가..,진화 세트 17레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 17.
+160081,더 나은 내가..,진화 세트 18레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 18.
+160082,더 나은 내가..,진화 세트 19레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 19.
+160083,더 나은 내가..,진화 세트 20레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 20.
+160084,캐릭터를 꾸며보자!,캐릭터 스타일 1번 변경하기.,Let's decorate the character!,Change Character Style 1.
+160085,더 나은 내가..,진화 세트 21레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 21.
+160086,더 나은 내가..,진화 세트 22레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 22.
+160087,더 나은 내가..,진화 세트 23레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 23.
+160088,더 나은 내가..,진화 세트 24레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 24.
+160089,더 나은 내가..,진화 세트 25레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 25.
+160090,캐릭터를 꾸며보자!,캐릭터 스타일 1번 변경하기.,Let's decorate the character!,Change Character Style 1.
+160091,더 나은 내가..,진화 세트 26레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 26.
+160092,더 나은 내가..,진화 세트 27레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 27.
+160093,더 나은 내가..,진화 세트 28레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 28.
+160094,더 나은 내가..,진화 세트 29레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 29.
+160095,더 나은 내가..,진화 세트 30레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 30.
+160096,캐릭터를 꾸며보자!,캐릭터 스타일 1번 변경하기.,Let's decorate the character!,Change Character Style 1.
+160097,더 나은 내가..,진화 세트 31레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 31.
+160098,더 나은 내가..,진화 세트 32레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 32.
+160099,더 나은 내가..,진화 세트 33레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 33.
+160100,더 나은 내가..,진화 세트 34레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 34.
+160101,더 나은 내가..,진화 세트 35레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 35.
+160102,캐릭터를 꾸며보자!,캐릭터 스타일 1번 변경하기.,Let's decorate the character!,Change Character Style 1.
+160103,더 나은 내가..,진화 세트 36레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 36.
+160104,더 나은 내가..,진화 세트 37레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 37.
+160105,더 나은 내가..,진화 세트 38레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 38.
+160106,더 나은 내가..,진화 세트 39레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 39.
+160107,더 나은 내가..,진화 세트 40레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 40.
+160108,캐릭터를 꾸며보자!,캐릭터 스타일 1번 변경하기.,Let's decorate the character!,Change Character Style 1.
+160109,더 나은 내가..,진화 세트 41레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 41.
+160110,더 나은 내가..,진화 세트 42레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 42.
+160111,더 나은 내가..,진화 세트 43레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 43.
+160112,더 나은 내가..,진화 세트 44레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 44.
+160113,더 나은 내가..,진화 세트 45레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 45.
+160114,캐릭터를 꾸며보자!,캐릭터 스타일 1번 변경하기.,Let's decorate the character!,Change Character Style 1.
+160115,더 나은 내가..,진화 세트 46레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 46.
+160116,더 나은 내가..,진화 세트 47레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 47.
+160117,더 나은 내가..,진화 세트 48레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 48.
+160118,더 나은 내가..,진화 세트 49레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 49.
+160119,더 나은 내가..,진화 세트 50레벨 달성하기.,Upgrading to Awesome Me!,Achieve Evolution Set Level 50.
+160120,캐릭터를 꾸며보자!,캐릭터 스타일 1번 변경하기.,Let's decorate the character!,Change Character Style 1.

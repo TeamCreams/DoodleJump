@@ -15,15 +15,21 @@ public static partial class Extension
             case EMissionType.Time:
                 return Managers.Game.UserInfo.PlayTime;
             case EMissionType.SurviveToLevel:
-                return Managers.Game.DifficultySettingsInfo.StageLevel;
+                return Managers.Game.UserInfo.StageLevel; // 이거 서버에 추가하기. 게임 score에 추가하기.
             case EMissionType.AvoidRocksCount:
                 return Managers.Game.UserInfo.AccumulatedStone;
-            case EMissionType.AchieveScoreInGame:
-                return 0;
+            // case EMissionType.AchieveScoreInGame:
+            //     return 0;
             case EMissionType.Style:
-                return 0;
+                {
+                    int value = Managers.Game.ChracterStyleInfo.IsChangedStyle; // 0 = false, 1 = true
+                    Managers.Game.ChracterStyleInfo.IsChangedStyle = 0;
+                    return value;
+                }
             case EMissionType.RecordScore:
                 return Managers.Game.UserInfo.RecordScore;
+            case EMissionType.Evolution:
+                return Managers.Game.UserInfo.EvolutionSetLevel;
         }
         return 1;
     }

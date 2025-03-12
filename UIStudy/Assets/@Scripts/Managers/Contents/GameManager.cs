@@ -220,6 +220,8 @@ public class ChracterStyleInfo
     public string TempEyebrows { get; set; } = "DizzyEyebrows";
     public string TempHair { get; set; } = "ZombieShabby";
 
+    public int IsChangedStyle {get; set;} = 0;
+
     public bool CheckAppearance()
     {
         if (CharacterId != TempCharacterId)
@@ -274,7 +276,9 @@ public class UserInfo // 서버로 전달될 데이터
     public int PlayTime {get; set;} = 0;
     public int ScoreBoard {get; set;} = 0;
     public int AccumulatedStone {get; set;} = 0;
+    public int StageLevel {get; set;} = 0;
     public int EvolutionId {get; set;} = 140003;
+    public int EvolutionSetLevel {get; set;} = 0;
     public int Energy { get; set;} = 10;
     public DateTime LatelyEnergy {get; set;}
 }

@@ -122,6 +122,9 @@ public class UI_PurchasePopup : UI_Popup
             switch(_purchaseStruct.ProductType)
             {
                 case EProductType.Custom:  
+                {
+                    Managers.Game.ChracterStyleInfo.IsChangedStyle = 1;
+                }
                 break;
                 case EProductType.Evolution:
                 {

@@ -56,7 +56,8 @@ public class ChooseCharacterScene : BaseScene
             HairStyle = Managers.Game.ChracterStyleInfo.Hair,
             EyebrowStyle = Managers.Game.ChracterStyleInfo.Eyebrows,
             EyesStyle = Managers.Game.ChracterStyleInfo.Eyes,
-            Evolution = Managers.Game.UserInfo.EvolutionId
+            Evolution = Managers.Game.UserInfo.EvolutionId,
+            EvolutionSetLevel = Managers.Game.UserInfo.EvolutionSetLevel
         },
         (response) =>
         {

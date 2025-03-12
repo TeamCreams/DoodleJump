@@ -54,6 +54,9 @@ public class SignInScene  : BaseScene
             Managers.Game.ChracterStyleInfo.Eyebrows = response.EyebrowStyle;
             Managers.Game.ChracterStyleInfo.Eyes = response.EyesStyle;
             Managers.Game.UserInfo.EvolutionId = response.Evolution;
+            Managers.Game.UserInfo.EvolutionSetLevel = response.EvolutionSetLevel;
+
+            // Energy
             Managers.Game.UserInfo.Energy = response.Energy;
             Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
 
@@ -63,7 +66,8 @@ public class SignInScene  : BaseScene
             Managers.Game.UserInfo.Gold = response.Gold;
             Managers.Game.UserInfo.PlayTime = response.PlayTime;
             Managers.Game.UserInfo.AccumulatedStone = response.AccumulatedStone;
-
+            Managers.Game.UserInfo.StageLevel = response.StageLevel;
+            
             // 보안 키 저장
             SecurePlayerPrefs.SetKey(response.SecureKey);
 

@@ -902,7 +902,7 @@
       "Id": 110060,
       "Type": 1,
       "LanguageId": 160060,
-      "Compensation": 50,
+      "Compensation": 100,
       "Level": 0,
       "MissionType": 4,
       "Param1": 1,
@@ -917,9 +917,9 @@
       "Id": 110061,
       "Type": 1,
       "LanguageId": 160061,
-      "Compensation": 50,
+      "Compensation": 100,
       "Level": 0,
-      "MissionType": 4,
+      "MissionType": 6,
       "Param1": 1,
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
@@ -932,10 +932,10 @@
       "Id": 110062,
       "Type": 1,
       "LanguageId": 160062,
-      "Compensation": 50,
+      "Compensation": 200,
       "Level": 0,
-      "MissionType": 4,
-      "Param1": 3,
+      "MissionType": 6,
+      "Param1": 2,
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
@@ -947,9 +947,9 @@
       "Id": 110063,
       "Type": 1,
       "LanguageId": 160063,
-      "Compensation": 50,
+      "Compensation": 300,
       "Level": 0,
-      "MissionType": 4,
+      "MissionType": 6,
       "Param1": 3,
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
@@ -962,10 +962,10 @@
       "Id": 110064,
       "Type": 1,
       "LanguageId": 160064,
-      "Compensation": 50,
+      "Compensation": 400,
       "Level": 0,
-      "MissionType": 4,
-      "Param1": 3,
+      "MissionType": 6,
+      "Param1": 4,
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
@@ -977,10 +977,10 @@
       "Id": 110065,
       "Type": 1,
       "LanguageId": 160065,
-      "Compensation": 50,
+      "Compensation": 500,
       "Level": 0,
-      "MissionType": 4,
-      "Param1": 1,
+      "MissionType": 6,
+      "Param1": 5,
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
@@ -992,10 +992,10 @@
       "Id": 110066,
       "Type": 1,
       "LanguageId": 160066,
-      "Compensation": 50,
+      "Compensation": 100,
       "Level": 0,
       "MissionType": 4,
-      "Param1": 5,
+      "Param1": 1,
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
@@ -1007,10 +1007,10 @@
       "Id": 110067,
       "Type": 1,
       "LanguageId": 160067,
-      "Compensation": 50,
+      "Compensation": 600,
       "Level": 0,
-      "MissionType": 4,
-      "Param1": 5,
+      "MissionType": 6,
+      "Param1": 6,
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
@@ -1022,10 +1022,10 @@
       "Id": 110068,
       "Type": 1,
       "LanguageId": 160068,
-      "Compensation": 50,
+      "Compensation": 700,
       "Level": 0,
-      "MissionType": 4,
-      "Param1": 5,
+      "MissionType": 6,
+      "Param1": 7,
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
@@ -1037,10 +1037,10 @@
       "Id": 110069,
       "Type": 1,
       "LanguageId": 160069,
-      "Compensation": 50,
+      "Compensation": 800,
       "Level": 0,
-      "MissionType": 4,
-      "Param1": 10,
+      "MissionType": 6,
+      "Param1": 8,
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
@@ -1052,10 +1052,10 @@
       "Id": 110070,
       "Type": 1,
       "LanguageId": 160070,
-      "Compensation": 50,
+      "Compensation": 900,
       "Level": 0,
-      "MissionType": 4,
-      "Param1": 10,
+      "MissionType": 6,
+      "Param1": 9,
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
@@ -1067,15 +1067,750 @@
       "Id": 110071,
       "Type": 1,
       "LanguageId": 160071,
-      "Compensation": 50,
+      "Compensation": 1000,
       "Level": 0,
-      "MissionType": 4,
+      "MissionType": 6,
       "Param1": 10,
       "Param2": null,
       "StartDate": "0001-01-01T00:00:00",
       "FinishDate": "0001-01-01T00:00:00",
       "PrevMissionId": [
         110070
+      ]
+    },
+    {
+      "Id": 110072,
+      "Type": 1,
+      "LanguageId": 160072,
+      "Compensation": 100,
+      "Level": 0,
+      "MissionType": 4,
+      "Param1": 1,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110071
+      ]
+    },
+    {
+      "Id": 110073,
+      "Type": 1,
+      "LanguageId": 160073,
+      "Compensation": 1100,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 11,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110072
+      ]
+    },
+    {
+      "Id": 110074,
+      "Type": 1,
+      "LanguageId": 160074,
+      "Compensation": 1200,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 12,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110073
+      ]
+    },
+    {
+      "Id": 110075,
+      "Type": 1,
+      "LanguageId": 160075,
+      "Compensation": 1300,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 13,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110074
+      ]
+    },
+    {
+      "Id": 110076,
+      "Type": 1,
+      "LanguageId": 160076,
+      "Compensation": 1400,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 14,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110075
+      ]
+    },
+    {
+      "Id": 110077,
+      "Type": 1,
+      "LanguageId": 160077,
+      "Compensation": 1500,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 15,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110076
+      ]
+    },
+    {
+      "Id": 110078,
+      "Type": 1,
+      "LanguageId": 160078,
+      "Compensation": 100,
+      "Level": 0,
+      "MissionType": 4,
+      "Param1": 1,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110077
+      ]
+    },
+    {
+      "Id": 110079,
+      "Type": 1,
+      "LanguageId": 160079,
+      "Compensation": 1600,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 16,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110078
+      ]
+    },
+    {
+      "Id": 110080,
+      "Type": 1,
+      "LanguageId": 160080,
+      "Compensation": 1700,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 17,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110079
+      ]
+    },
+    {
+      "Id": 110081,
+      "Type": 1,
+      "LanguageId": 160081,
+      "Compensation": 1800,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 18,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110080
+      ]
+    },
+    {
+      "Id": 110082,
+      "Type": 1,
+      "LanguageId": 160082,
+      "Compensation": 1900,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 19,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110081
+      ]
+    },
+    {
+      "Id": 110083,
+      "Type": 1,
+      "LanguageId": 160083,
+      "Compensation": 2000,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 20,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110082
+      ]
+    },
+    {
+      "Id": 110084,
+      "Type": 1,
+      "LanguageId": 160084,
+      "Compensation": 100,
+      "Level": 0,
+      "MissionType": 4,
+      "Param1": 1,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110083
+      ]
+    },
+    {
+      "Id": 110085,
+      "Type": 1,
+      "LanguageId": 160085,
+      "Compensation": 2100,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 21,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110084
+      ]
+    },
+    {
+      "Id": 110086,
+      "Type": 1,
+      "LanguageId": 160086,
+      "Compensation": 2200,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 22,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110085
+      ]
+    },
+    {
+      "Id": 110087,
+      "Type": 1,
+      "LanguageId": 160087,
+      "Compensation": 2300,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 23,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110086
+      ]
+    },
+    {
+      "Id": 110088,
+      "Type": 1,
+      "LanguageId": 160088,
+      "Compensation": 2400,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 24,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110087
+      ]
+    },
+    {
+      "Id": 110089,
+      "Type": 1,
+      "LanguageId": 160089,
+      "Compensation": 2500,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 25,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110088
+      ]
+    },
+    {
+      "Id": 110090,
+      "Type": 1,
+      "LanguageId": 160090,
+      "Compensation": 100,
+      "Level": 0,
+      "MissionType": 4,
+      "Param1": 1,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110089
+      ]
+    },
+    {
+      "Id": 110091,
+      "Type": 1,
+      "LanguageId": 160091,
+      "Compensation": 2600,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 26,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110090
+      ]
+    },
+    {
+      "Id": 110092,
+      "Type": 1,
+      "LanguageId": 160092,
+      "Compensation": 2700,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 27,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110091
+      ]
+    },
+    {
+      "Id": 110093,
+      "Type": 1,
+      "LanguageId": 160093,
+      "Compensation": 2800,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 28,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110092
+      ]
+    },
+    {
+      "Id": 110094,
+      "Type": 1,
+      "LanguageId": 160094,
+      "Compensation": 2900,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 29,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110093
+      ]
+    },
+    {
+      "Id": 110095,
+      "Type": 1,
+      "LanguageId": 160095,
+      "Compensation": 3000,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 30,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110094
+      ]
+    },
+    {
+      "Id": 110096,
+      "Type": 1,
+      "LanguageId": 160096,
+      "Compensation": 100,
+      "Level": 0,
+      "MissionType": 4,
+      "Param1": 1,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110095
+      ]
+    },
+    {
+      "Id": 110097,
+      "Type": 1,
+      "LanguageId": 160097,
+      "Compensation": 3100,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 31,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110096
+      ]
+    },
+    {
+      "Id": 110098,
+      "Type": 1,
+      "LanguageId": 160098,
+      "Compensation": 3200,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 32,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110097
+      ]
+    },
+    {
+      "Id": 110099,
+      "Type": 1,
+      "LanguageId": 160099,
+      "Compensation": 3300,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 33,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110098
+      ]
+    },
+    {
+      "Id": 110100,
+      "Type": 1,
+      "LanguageId": 160100,
+      "Compensation": 3400,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 34,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110099
+      ]
+    },
+    {
+      "Id": 110101,
+      "Type": 1,
+      "LanguageId": 160101,
+      "Compensation": 3500,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 35,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110100
+      ]
+    },
+    {
+      "Id": 110102,
+      "Type": 1,
+      "LanguageId": 160102,
+      "Compensation": 100,
+      "Level": 0,
+      "MissionType": 4,
+      "Param1": 1,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110101
+      ]
+    },
+    {
+      "Id": 110103,
+      "Type": 1,
+      "LanguageId": 160103,
+      "Compensation": 3600,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 36,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110102
+      ]
+    },
+    {
+      "Id": 110104,
+      "Type": 1,
+      "LanguageId": 160104,
+      "Compensation": 3700,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 37,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110103
+      ]
+    },
+    {
+      "Id": 110105,
+      "Type": 1,
+      "LanguageId": 160105,
+      "Compensation": 3800,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 38,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110104
+      ]
+    },
+    {
+      "Id": 110106,
+      "Type": 1,
+      "LanguageId": 160106,
+      "Compensation": 3900,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 39,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110105
+      ]
+    },
+    {
+      "Id": 110107,
+      "Type": 1,
+      "LanguageId": 160107,
+      "Compensation": 4000,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 40,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110106
+      ]
+    },
+    {
+      "Id": 110108,
+      "Type": 1,
+      "LanguageId": 160108,
+      "Compensation": 100,
+      "Level": 0,
+      "MissionType": 4,
+      "Param1": 1,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110107
+      ]
+    },
+    {
+      "Id": 110109,
+      "Type": 1,
+      "LanguageId": 160109,
+      "Compensation": 4100,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 41,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110108
+      ]
+    },
+    {
+      "Id": 110110,
+      "Type": 1,
+      "LanguageId": 160110,
+      "Compensation": 4200,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 42,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110109
+      ]
+    },
+    {
+      "Id": 110111,
+      "Type": 1,
+      "LanguageId": 160111,
+      "Compensation": 4300,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 43,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110110
+      ]
+    },
+    {
+      "Id": 110112,
+      "Type": 1,
+      "LanguageId": 160112,
+      "Compensation": 4400,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 44,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110111
+      ]
+    },
+    {
+      "Id": 110113,
+      "Type": 1,
+      "LanguageId": 160113,
+      "Compensation": 4500,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 45,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110112
+      ]
+    },
+    {
+      "Id": 110114,
+      "Type": 1,
+      "LanguageId": 160114,
+      "Compensation": 100,
+      "Level": 0,
+      "MissionType": 4,
+      "Param1": 1,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110113
+      ]
+    },
+    {
+      "Id": 110115,
+      "Type": 1,
+      "LanguageId": 160115,
+      "Compensation": 4600,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 46,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110114
+      ]
+    },
+    {
+      "Id": 110116,
+      "Type": 1,
+      "LanguageId": 160116,
+      "Compensation": 4700,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 47,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110115
+      ]
+    },
+    {
+      "Id": 110117,
+      "Type": 1,
+      "LanguageId": 160117,
+      "Compensation": 4800,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 48,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110116
+      ]
+    },
+    {
+      "Id": 110118,
+      "Type": 1,
+      "LanguageId": 160118,
+      "Compensation": 4900,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 49,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110117
+      ]
+    },
+    {
+      "Id": 110119,
+      "Type": 1,
+      "LanguageId": 160119,
+      "Compensation": 5000,
+      "Level": 0,
+      "MissionType": 6,
+      "Param1": 50,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110118
+      ]
+    },
+    {
+      "Id": 110120,
+      "Type": 1,
+      "LanguageId": 160120,
+      "Compensation": 100,
+      "Level": 0,
+      "MissionType": 4,
+      "Param1": 1,
+      "Param2": null,
+      "StartDate": "0001-01-01T00:00:00",
+      "FinishDate": "0001-01-01T00:00:00",
+      "PrevMissionId": [
+        110119
       ]
     }
   ]

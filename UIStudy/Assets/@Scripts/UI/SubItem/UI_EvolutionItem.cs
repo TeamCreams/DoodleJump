@@ -19,7 +19,7 @@ public class UI_EvolutionItem : UI_Base
     }
     private Toggle _toggle = null;
     private int _itemId = 0;
-
+    private bool _isLast = false;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -42,13 +42,22 @@ public class UI_EvolutionItem : UI_Base
             return;
         }
         // 서버연결    
-        
-        Debug.Log($"Item Id : {_itemId}");
+        // Debug.Log($"Item Id : {_itemId}");
         if(Managers.Data.EvolutionDataDic[_itemId].PrevEvolutionId != Managers.Game.UserInfo.EvolutionId)
         {
             return;
         }
-        PurchaseStruct purchaseStruct = new PurchaseStruct(_itemId, EProductType.Evolution, null, null);
+
+        PurchaseStruct purchaseStruct;
+        if(!_isLast)
+        {
+            purchaseStruct = new PurchaseStruct(_itemId, EProductType.Evolution, null, null);
+        }
+        else
+        {
+            purchaseStruct = new PurchaseStruct(_itemId, EProductType.Evolution, () => EvolutionSetLevel(), null);
+        }
+
         Managers.Event.TriggerEvent(EEventType.Purchase, this, purchaseStruct);
     }
     public void SetIcon(int id)
@@ -65,10 +74,17 @@ public class UI_EvolutionItem : UI_Base
                 str = $"{evolutionData.ItemSprite}Icon.sprite";
             break;
             case EStat.Luck:
-                str = $"{evolutionData.ItemSprite}Icon.sprite";
+                {
+                    str = $"{evolutionData.ItemSprite}Icon.sprite";
+                    _isLast = true;
+                }
             break;
         }
         var sprite = Managers.Resource.Load<Sprite>(str);
         GetImage((int)Images.Icon).sprite = sprite;
+    }
+    public void EvolutionSetLevel()
+    {
+        Managers.Game.UserInfo.EvolutionSetLevel ++;
     }
 }

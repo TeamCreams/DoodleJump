@@ -24,6 +24,7 @@ public class ScoreManager
                 Managers.Game.UserInfo.Gold = response.Gold;
                 Managers.Game.UserInfo.PlayTime = response.PlayTime;
                 Managers.Game.UserInfo.AccumulatedStone = response.AccumulatedStone;
+                Managers.Game.DifficultySettingsInfo.StageLevel = response.StageLevel;
                 Debug.Log("is success");
                 onSuccess?.Invoke();
             }
@@ -50,27 +51,13 @@ public class ScoreManager
             Score = Managers.Game.UserInfo.LatelyScore,
             Time = Managers.Game.UserInfo.PlayTime,
             AccumulatedStone = Managers.Game.DifficultySettingsInfo.StoneCount,
+            StageLevel = Managers.Game.DifficultySettingsInfo.StageLevel,
             Gold = Managers.Game.Gold, // 추가할 금액
         },
        (response) =>
        {
             Managers.UI.ShowPopupUI<UI_RetryPopup>();
             onSuccess?.Invoke();
-            /*
-            if(response != null)
-            {
-                Managers.UI.ShowPopupUI<UI_RetryPopup>();
-                onSuccess?.Invoke();
-            }
-            else
-            {   
-                UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-                Managers.Event.TriggerEvent(Define.EEventType.ErrorButtonPopup, sender, 
-                    "The settlement could not be processed due to poor network conditions. Would you like to resend it?");
-                popup.AddOnClickAction(ProcessErrorFun);
-                onFailed?.Invoke();
-            }
-            */
        },
        (errorCode) =>
        {

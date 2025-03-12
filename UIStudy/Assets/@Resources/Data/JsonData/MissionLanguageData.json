@@ -418,84 +418,427 @@
       "KrTitle": "캐릭터를 꾸며보자!",
       "KrExplanation": "캐릭터 스타일 1번 변경하기.",
       "EnTitle": "Let's decorate the character!",
-      "EnExplanation": "Change character style 1 time."
+      "EnExplanation": "Change Character Style 1."
     },
     {
       "Id": 160061,
-      "KrTitle": "캐릭터를 꾸며보자!",
-      "KrExplanation": "코스튬 구매 1번 하기.",
-      "EnTitle": "Let's decorate the character!",
-      "EnExplanation": "Purchase a costume 1 time."
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 1레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 1."
     },
     {
       "Id": 160062,
-      "KrTitle": "캐릭터를 꾸며보자!",
-      "KrExplanation": "머리 종류 3가지 모으기.",
-      "EnTitle": "Let's decorate the character!",
-      "EnExplanation": "Collect 3 types of hairstyles."
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 2레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 2."
     },
     {
       "Id": 160063,
-      "KrTitle": "캐릭터를 꾸며보자!",
-      "KrExplanation": "눈 모양 3가지 모으기.",
-      "EnTitle": "Let's decorate the character!",
-      "EnExplanation": "Collect 3 types of eye shapes."
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 3레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 3."
     },
     {
       "Id": 160064,
-      "KrTitle": "캐릭터를 꾸며보자!",
-      "KrExplanation": "눈썹 모양 3가지 모으기.",
-      "EnTitle": "Let's decorate the character!",
-      "EnExplanation": "Collect 3 types of eyebrow shapes."
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 4레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 4."
     },
     {
       "Id": 160065,
-      "KrTitle": "캐릭터를 꾸며보자!",
-      "KrExplanation": "캐릭터 1번 변경하기.",
-      "EnTitle": "Let's decorate the character!",
-      "EnExplanation": "Change character 1 time."
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 5레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 5."
     },
     {
       "Id": 160066,
       "KrTitle": "캐릭터를 꾸며보자!",
-      "KrExplanation": "머리 종류 5가지 모으기.",
+      "KrExplanation": "캐릭터 스타일 1번 변경하기.",
       "EnTitle": "Let's decorate the character!",
-      "EnExplanation": "Collect 5 types of hairstyles."
+      "EnExplanation": "Change Character Style 1."
     },
     {
       "Id": 160067,
-      "KrTitle": "캐릭터를 꾸며보자!",
-      "KrExplanation": "눈 모양 5가지 모으기.",
-      "EnTitle": "Let's decorate the character!",
-      "EnExplanation": "Collect 5 types of eye shapes."
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 6레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 6."
     },
     {
       "Id": 160068,
-      "KrTitle": "캐릭터를 꾸며보자!",
-      "KrExplanation": "눈썹 모양 5가지 모으기.",
-      "EnTitle": "Let's decorate the character!",
-      "EnExplanation": "Collect 5 types of eyebrow shapes."
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 7레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 7."
     },
     {
       "Id": 160069,
-      "KrTitle": "캐릭터를 꾸며보자!",
-      "KrExplanation": "머리 종류 10가지 모으기.",
-      "EnTitle": "Let's decorate the character!",
-      "EnExplanation": "Collect 10 types of hairstyles."
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 8레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 8."
     },
     {
       "Id": 160070,
-      "KrTitle": "캐릭터를 꾸며보자!",
-      "KrExplanation": "눈 모양 10가지 모으기.",
-      "EnTitle": "Let's decorate the character!",
-      "EnExplanation": "Collect 10 types of eye shapes."
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 9레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 9."
     },
     {
       "Id": 160071,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 10레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 10."
+    },
+    {
+      "Id": 160072,
       "KrTitle": "캐릭터를 꾸며보자!",
-      "KrExplanation": "눈썹 모양 10가지 모으기.",
+      "KrExplanation": "캐릭터 스타일 1번 변경하기.",
       "EnTitle": "Let's decorate the character!",
-      "EnExplanation": "Collect 10 types of eyebrow shapes."
+      "EnExplanation": "Change Character Style 1."
+    },
+    {
+      "Id": 160073,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 11레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 11."
+    },
+    {
+      "Id": 160074,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 12레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 12."
+    },
+    {
+      "Id": 160075,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 13레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 13."
+    },
+    {
+      "Id": 160076,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 14레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 14."
+    },
+    {
+      "Id": 160077,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 15레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 15."
+    },
+    {
+      "Id": 160078,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "캐릭터 스타일 1번 변경하기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Change Character Style 1."
+    },
+    {
+      "Id": 160079,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 16레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 16."
+    },
+    {
+      "Id": 160080,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 17레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 17."
+    },
+    {
+      "Id": 160081,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 18레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 18."
+    },
+    {
+      "Id": 160082,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 19레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 19."
+    },
+    {
+      "Id": 160083,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 20레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 20."
+    },
+    {
+      "Id": 160084,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "캐릭터 스타일 1번 변경하기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Change Character Style 1."
+    },
+    {
+      "Id": 160085,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 21레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 21."
+    },
+    {
+      "Id": 160086,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 22레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 22."
+    },
+    {
+      "Id": 160087,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 23레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 23."
+    },
+    {
+      "Id": 160088,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 24레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 24."
+    },
+    {
+      "Id": 160089,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 25레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 25."
+    },
+    {
+      "Id": 160090,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "캐릭터 스타일 1번 변경하기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Change Character Style 1."
+    },
+    {
+      "Id": 160091,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 26레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 26."
+    },
+    {
+      "Id": 160092,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 27레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 27."
+    },
+    {
+      "Id": 160093,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 28레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 28."
+    },
+    {
+      "Id": 160094,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 29레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 29."
+    },
+    {
+      "Id": 160095,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 30레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 30."
+    },
+    {
+      "Id": 160096,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "캐릭터 스타일 1번 변경하기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Change Character Style 1."
+    },
+    {
+      "Id": 160097,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 31레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 31."
+    },
+    {
+      "Id": 160098,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 32레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 32."
+    },
+    {
+      "Id": 160099,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 33레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 33."
+    },
+    {
+      "Id": 160100,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 34레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 34."
+    },
+    {
+      "Id": 160101,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 35레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 35."
+    },
+    {
+      "Id": 160102,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "캐릭터 스타일 1번 변경하기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Change Character Style 1."
+    },
+    {
+      "Id": 160103,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 36레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 36."
+    },
+    {
+      "Id": 160104,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 37레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 37."
+    },
+    {
+      "Id": 160105,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 38레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 38."
+    },
+    {
+      "Id": 160106,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 39레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 39."
+    },
+    {
+      "Id": 160107,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 40레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 40."
+    },
+    {
+      "Id": 160108,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "캐릭터 스타일 1번 변경하기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Change Character Style 1."
+    },
+    {
+      "Id": 160109,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 41레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 41."
+    },
+    {
+      "Id": 160110,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 42레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 42."
+    },
+    {
+      "Id": 160111,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 43레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 43."
+    },
+    {
+      "Id": 160112,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 44레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 44."
+    },
+    {
+      "Id": 160113,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 45레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 45."
+    },
+    {
+      "Id": 160114,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "캐릭터 스타일 1번 변경하기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Change Character Style 1."
+    },
+    {
+      "Id": 160115,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 46레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 46."
+    },
+    {
+      "Id": 160116,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 47레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 47."
+    },
+    {
+      "Id": 160117,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 48레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 48."
+    },
+    {
+      "Id": 160118,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 49레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 49."
+    },
+    {
+      "Id": 160119,
+      "KrTitle": "더 나은 내가..",
+      "KrExplanation": "진화 세트 50레벨 달성하기.",
+      "EnTitle": "Upgrading to Awesome Me!",
+      "EnExplanation": "Achieve Evolution Set Level 50."
+    },
+    {
+      "Id": 160120,
+      "KrTitle": "캐릭터를 꾸며보자!",
+      "KrExplanation": "캐릭터 스타일 1번 변경하기.",
+      "EnTitle": "Let's decorate the character!",
+      "EnExplanation": "Change Character Style 1."
     }
   ]
 }
