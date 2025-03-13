@@ -72,6 +72,8 @@ namespace GameApi.Controllers
                     userAccount.HairStyle = "Afro";
                     userAccount.EyebrowStyle = "AnnoyedEyebrows";
                     userAccount.EyesStyle = "Annoyed";
+                    //A882ED72-8990-44CD-9939-CFF94B38572B
+                    //Guid.NewGuid().ToString()
                     userAccount.SecureKey = SecureKey.method3(50);
                     _context.TblUserAccounts.Add(userAccount);
                 }

@@ -53,8 +53,8 @@ public class StartLoadingScene : BaseScene
         // 키는 로그인을 해야 얻을 수 있음.
 
         // 아이디로 먼저 로그인하고 로그인하면서 받아온 유저정보비번이랑 비교
-        string usernameData = SecurePlayerPrefs.GetString(HardCoding.UserName, "tjdbssy137"); // default value가 정해져 있지 않으면 안 됨.
-        string passwordData = SecurePlayerPrefs.GetString(HardCoding.Password, "akfxlwm86"); 
+        string usernameData = SecurePlayerPrefs.GetString(HardCoding.UserName, ""); // default value가 정해져 있지 않으면 안 됨.
+        string passwordData = SecurePlayerPrefs.GetString(HardCoding.Password, ""); 
         Managers.Game.UserInfo.UserName = usernameData;
         Managers.Game.UserInfo.Password = passwordData;
 

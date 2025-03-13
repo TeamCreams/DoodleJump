@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using static Define;
 using GameApi.Dtos;
@@ -12,7 +12,7 @@ public class SignInScene  : BaseScene
     
     private int _failCount = 0;
 
-    private EScene _loadScene = EScene.Unknown;
+    private EScene _loadScene = EScene.SuberunkerSceneHomeScene;
     private UI_SignInScene _ui;
     // private string _id;
     public override bool Init()

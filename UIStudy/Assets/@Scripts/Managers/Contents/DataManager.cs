@@ -13,7 +13,12 @@ public interface ILoader<Key, Value>
 }
 public class DataManager
 {
-	public Dictionary<int, Data.TestData> TestDic { get; private set; } = new Dictionary<int, Data.TestData>();
+    #region About IAP
+    public Dictionary<string, Data.IapProductData> IapDic { get; private set; } = new Dictionary<string, Data.IapProductData>();
+    #endregion
+
+
+    public Dictionary<int, Data.TestData> TestDic { get; private set; } = new Dictionary<int, Data.TestData>();
     public Dictionary<int, Data.TinyFarmData> TinyFarmDic { get; private set; } = new Dictionary<int, Data.TinyFarmData>();
     public Dictionary<int, Data.EnemyData> EnemyDic { get; private set; } = new Dictionary<int, Data.EnemyData>();
     public Dictionary<int, Data.PlayerData> PlayerDic { get; private set; } = new Dictionary<int, Data.PlayerData>();
@@ -33,7 +38,10 @@ public class DataManager
 
     public void Init()
 	{
-		TestDic = LoadJson<Data.TestDataLoader, int, Data.TestData>("TestData").MakeDict();
+        #region About IAP
+        IapDic = LoadJson<Data.IapProductDataLoader, string, IapProductData>("IapProductData").MakeDict();
+        #endregion
+        TestDic = LoadJson<Data.TestDataLoader, int, Data.TestData>("TestData").MakeDict();
         TinyFarmDic = LoadJson<Data.TinyFarmDataLoader, int, Data.TinyFarmData>("TinyFarmEvent").MakeDict();
         EnemyDic = LoadJson<Data.EnemyDataLoader, int, Data.EnemyData>("EnemyData").MakeDict();
         PlayerDic = LoadJson<Data.PlayerDataLoader, int, Data.PlayerData>("PlayerData").MakeDict();

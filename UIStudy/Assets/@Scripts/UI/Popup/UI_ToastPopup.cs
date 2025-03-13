@@ -75,4 +75,12 @@ public class UI_ToastPopup : UI_Popup
         Managers.UI.ClosePopupUI(this);
         action?.Invoke();
     }
+
+
+    public static void ShowError(ErrorStruct errorStruct, float time = 2f, Action action = null)
+    {
+        UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
+        toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
+    }
+
 }

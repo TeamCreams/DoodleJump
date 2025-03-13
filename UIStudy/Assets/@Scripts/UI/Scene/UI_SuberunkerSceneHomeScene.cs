@@ -167,7 +167,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         }
         );
     }
-    private async Task EnergyTimer()
+    private void EnergyTimer()
     {
         // 5초마다 서버에서 시간을 받아옴.
         // 300초가 되면 updateEnergy 요청
@@ -196,16 +196,15 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         // Debug.Log($"OPOPOPO _serverTime : {_serverTime}");
         // Debug.Log($"OPOPOPO _calculateTime : {_calculateTime}");
         _isSettingComplete = true;
-        await EnergyRechargeCoroutineAwaitable();
+        EnergyRecharge();
     }
     public void CheckServerTime(DateTime newHeartBeat)
     {
         _serverTime = newHeartBeat; // 5초마다 웹소켓에서 전해준 값으로 서버시간 업데이트. 
-        EnergyTimer().ConfigureAwait(false); // 비동기로 실행. 끝나고 메인스레드로 돌아가지 않음.
+        EnergyTimer(); //.ConfigureAwait(false); // 비동기로 실행. 끝나고 메인스레드로 돌아가지 않음.
     }
-    private async Awaitable EnergyRechargeCoroutineAwaitable()
+    private void EnergyRecharge()
     {
-        await Awaitable.MainThreadAsync();
         // 코루틴은 메인스레드에서 진행 됨.
         // 서버시간을 받으면서 백그라운드 스레드로 진행되기 때문에 메인스레드로 전환이 필요.
         if(_tickCo == null)

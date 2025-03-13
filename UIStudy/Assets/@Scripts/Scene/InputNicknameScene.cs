@@ -1,7 +1,8 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using GameApi.Dtos;
+using UniRx;
 using UnityEngine;
 using static Define;
 
@@ -21,7 +22,9 @@ public class InputNicknameScene : BaseScene
 
     public void InsertUser(Action onSuccess = null)
     {
-        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+        ReactiveProperty<bool> loadingComplete = UI_LoadingPopup.Show();
+
+        //var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
         Managers.WebContents.ReqInsertUserAccount(new ReqDtoInsertUserAccount()
         {
             UserName = Managers.Game.UserInfo.UserName,
@@ -31,16 +34,19 @@ public class InputNicknameScene : BaseScene
        (response) =>
        {
             Debug.Log("아이디 만들기 성공");
-            UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess);
-            toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
-            Managers.UI.ClosePopupUI(loadingPopup);
+            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess));
+           //UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
+           //ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess);
+           //toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
+
+           loadingComplete.Value = true;
+           //Managers.UI.ClosePopupUI(loadingPopup);
 
             onSuccess?.Invoke();
        },
        (errorCode) =>
-       {            
-            Managers.UI.ClosePopupUI(loadingPopup);
+       {
+           loadingComplete.Value = true;
 
             Debug.Log("아이디 만들기 실패~");
             UI_ErrorPopup popup = Managers.UI.ShowPopupUI<UI_ErrorPopup>();

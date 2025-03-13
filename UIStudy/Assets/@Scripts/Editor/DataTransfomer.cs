@@ -11,15 +11,18 @@ using UnityEngine;
 using Data;
 using System.Linq;
 using System.Collections;
+using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 
 public class DataTransfomer : EditorWindow
 {
 
 	[MenuItem("Tools/ParseExcel %#K")]
 	public static void ParseExcelDatas()
-
-	{
-		ParseExcelDataToJson<TinyFarmDataLoader, TinyFarmData>("TinyFarmEvent");
+    {
+        #region About IAP
+        ParseExcelDataToJson<IapProductDataLoader, IapProductData>("IapProductData");
+        #endregion
+        ParseExcelDataToJson<TinyFarmDataLoader, TinyFarmData>("TinyFarmEvent");
         ParseExcelDataToJson<EnemyDataLoader, EnemyData>("EnemyData");
         ParseExcelDataToJson<PlayerDataLoader, PlayerData>("PlayerData");
         ParseExcelDataToJson<CharacterItemSpriteDataLoader, CharacterItemSpriteData>("CharacterItemSpriteData");
@@ -65,6 +68,8 @@ public class DataTransfomer : EditorWindow
 			}
 		}
 
+
+
 		for (int l = 1; l < lines.Length; l++)
 		{
 			string[] row = lines[l].Replace("\r", "").Split(',');
@@ -73,13 +78,22 @@ public class DataTransfomer : EditorWindow
 			if (string.IsNullOrEmpty(row[0]))
 				continue;
 
+
 			LoaderData loaderData = new LoaderData();
 
 			System.Reflection.FieldInfo[] fields = typeof(LoaderData).GetFields();
 
-			//public int Id;
-			//public string Name;
-			for (int f = 0; f < fields.Length; f++)
+            if (filename.Contains("Iap"))
+            {
+				Debug.Log($"_______ {string.Join("|", fields.Select(f => f.Name))}");
+                //Debug.Log($"##### {row[f]}");
+                //Debug.Log($"#### {value}");
+                //Debug.Log($"### {field.FieldType.Name}");
+            }
+
+            //public int Id;
+            //public string Name;
+            for (int f = 0; f < fields.Length; f++)
 			{
 				FieldInfo field = loaderData.GetType().GetField(fields[f].Name);
 				Type type = field.FieldType;
@@ -93,7 +107,9 @@ public class DataTransfomer : EditorWindow
 				{
 					// float, string, int 
 					object value = ConvertValue(row[f], field.FieldType);
-					field.SetValue(loaderData, value);
+
+
+                    field.SetValue(loaderData, value);
 				}
 			}
 

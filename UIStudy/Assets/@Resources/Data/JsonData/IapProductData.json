@@ -1,0 +1,40 @@
+{
+  "iaps": [
+    {
+      "ProductId": "cash_1000",
+      "ProductName": "1000 캐시",
+      "Price": 1.99,
+      "Currency": 1,
+      "ItemType": 0,
+      "Amount": 1000,
+      "IsConsumable": true
+    },
+    {
+      "ProductId": "cash_5000",
+      "ProductName": "5000 캐시",
+      "Price": 4.99,
+      "Currency": 1,
+      "ItemType": 0,
+      "Amount": 5000,
+      "IsConsumable": true
+    },
+    {
+      "ProductId": "cash_10000",
+      "ProductName": "10000 캐시",
+      "Price": 9.99,
+      "Currency": 1,
+      "ItemType": 0,
+      "Amount": 10000,
+      "IsConsumable": true
+    },
+    {
+      "ProductId": "premium_pass",
+      "ProductName": "프리미엄 패스",
+      "Price": 14.99,
+      "Currency": 1,
+      "ItemType": 1,
+      "Amount": 1,
+      "IsConsumable": false
+    }
+  ]
+}

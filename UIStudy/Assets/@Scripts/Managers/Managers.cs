@@ -21,6 +21,7 @@ public class Managers : MonoBehaviour
 	private ErrorManager _error = new ErrorManager();
 	private EvolutionManager _evolution = new EvolutionManager();
 	private ChattingManager _chatting = new ChattingManager();
+	private IAPManager _iap = new IAPManager();
 
     public static GameManager Game { get { return Instance?._game; } }
 	public static MessageManager Message { get { return Instance?._message; } }
@@ -33,6 +34,7 @@ public class Managers : MonoBehaviour
 	public static ErrorManager Error { get { return Instance?._error; } }
 	public static EvolutionManager Evolution { get { return Instance?._evolution; } }
 	public static ChattingManager Chatting {get {return Instance?._chatting;}}
+	public static IAPManager IAP { get { return Instance?._iap; } }
 
     #endregion
 

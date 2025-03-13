@@ -1,0 +1,5 @@
+ProductId,ProductName,Price,Currency,ItemType,Amount,IsConsumable
+cash_1000,1000 캐시,1.99,USD,Cash,1000,True
+cash_5000,5000 캐시,4.99,USD,Cash,5000,True
+cash_10000,10000 캐시,9.99,USD,Cash,10000,True
+premium_pass,프리미엄 패스,14.99,USD,Subscription,1,False
