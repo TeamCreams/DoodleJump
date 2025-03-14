@@ -122,9 +122,7 @@ public class UI_SignUpScene : UI_Scene
         }
         if (errCode != EErrorCode.ERR_OK || _errCodeId != EErrorCode.ERR_OK)
         {
-            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationCancellation);
-            popup.SetInfo(errorStruct.Notice);
+            UI_ErrorButtonPopup.ShowErrorButton(Managers.Error.GetError(EErrorCode.ERR_AccountCreationCancellation));
             // 아이디 생성 안 된다고 말하고 가만히 있기/로그인창으로넘어가기 선택 팝업.
             return; 
         }        
@@ -144,7 +142,7 @@ public class UI_SignUpScene : UI_Scene
             _errCodeId = EErrorCode.ERR_ValidationId;
         }
 
-        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+        var loadingComplete = UI_LoadingPopup.Show();
 
         Managers.WebContents.ReqGetValidateUserAccountUserName(new ReqDtoGetValidateUserAccountUserName()
         {
@@ -162,7 +160,7 @@ public class UI_SignUpScene : UI_Scene
            GetText((int)Texts.Warning_Id_Text).text = _idUnavailable;
            _errCodeId = EErrorCode.ERR_ValidationId;
        });
-        Managers.UI.ClosePopupUI(loadingPopup);
+        loadingComplete.Value = true;
     }
 
     private EErrorCode CheckCorrectPassword(string password)

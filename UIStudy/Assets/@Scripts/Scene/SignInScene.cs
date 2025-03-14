@@ -34,7 +34,7 @@ public class SignInScene  : BaseScene
         //     return;
         // }
         
-        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+        var loadingComplete = UI_LoadingPopup.Show();
         Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
         {
             
@@ -69,7 +69,7 @@ public class SignInScene  : BaseScene
             Managers.Game.UserInfo.StageLevel = response.StageLevel;
             
             // 보안 키 저장
-            SecurePlayerPrefs.SetKey(response.SecureKey);
+            //SecurePlayerPrefs.SetKey(response.SecureKey);
 
             Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
             Managers.Event.TriggerEvent(EEventType.OnFirstAccept);
@@ -83,9 +83,7 @@ public class SignInScene  : BaseScene
         },
         (errorCode) =>
         {
-            UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_InvalidCredentials);
-            toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
+            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_InvalidCredentials));
         });
 
         //1. 다른버튼 비활성화
@@ -94,7 +92,7 @@ public class SignInScene  : BaseScene
             //StartCoroutine(LoadScore_Co());
             StartCoroutine(UpdateEnergy());
 
-            Managers.UI.ClosePopupUI(loadingPopup);
+            loadingComplete.Value = true;
         }
     }
 
@@ -203,7 +201,7 @@ public class SignInScene  : BaseScene
     {
         yield return new WaitWhile(() => _isLoadEnergyCondition == false);
 
-        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+        var loadingComplete = UI_LoadingPopup.Show();
 
         Managers.WebContents.ReqDtoUpdateEnergy(new ReqDtoUpdateEnergy()
         {
@@ -211,7 +209,7 @@ public class SignInScene  : BaseScene
         },
         (response) =>
         {
-            Managers.UI.ClosePopupUI(loadingPopup);
+            loadingComplete.Value = true;
             Debug.Log("log in" + Managers.Game.UserInfo.LatelyEnergy);
             Managers.Game.UserInfo.Energy = response.Energy;
             Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
@@ -220,9 +218,7 @@ public class SignInScene  : BaseScene
         },
         (errorCode) =>
         {
-            UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError);
-            toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
+            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError));
             HandleFailure();
         }
         );

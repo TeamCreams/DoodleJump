@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System;
 using UnityEngine;
+using Unity.VisualScripting;
 
 //얼리억세서
 // 보통 사람들이 알지도못할떄 1월 부터
@@ -10,11 +11,8 @@ using UnityEngine;
 public static class SecurePlayerPrefs
 {
     private static string _iv = "dfasdfdasgdsafeqgfdasvasd";
-    private static string _key = "asdfhskjfhkasdfuhsakfuhsakufdsakfdhfkasasdfads";
-    public static void SetKey(string value)
-    {
-        _key = value;
-    }
+    private static string _key => MacAddress.Get();
+    
     public static void SetString(string key, string value)
     {
         string newValue = Aes256Util.EncryptString(value, _key, _iv);
@@ -105,7 +103,6 @@ public static class SecurePlayerPrefs
             PlayerPrefs.DeleteKey(newKey);
         }
     }
-
 
 }
 

@@ -40,4 +40,9 @@ public class UI_ErrorPopup : UI_Popup
     {
         Managers.UI.ClosePopupUI(this);
     }
+    public static void ShowError(ErrorStruct data)
+    {
+        UI_ErrorPopup errorPopup = Managers.UI.ShowPopupUI<UI_ErrorPopup>();
+        errorPopup.SetInfo(data);
+    }
 }

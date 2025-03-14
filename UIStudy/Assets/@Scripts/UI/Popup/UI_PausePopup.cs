@@ -48,25 +48,23 @@ public class UI_PausePopup : UI_Popup
     {
         Time.timeScale = 1;
         Managers.UI.ClosePopupUI(this);
-        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+        var loadingComplete = UI_LoadingPopup.Show();
         Managers.WebContents.ReqDtoGameStart(new ReqDtoGameStart()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId
         },
         (response) =>
         {
-            Managers.UI.ClosePopupUI(loadingPopup);
+            loadingComplete.Value = true;
             Managers.Game.UserInfo.Energy = response.Energy;
             Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
             Managers.Scene.LoadScene(EScene.SuberunkerScene);
        },
         (errorCode) =>
         {
-            Managers.UI.ClosePopupUI(loadingPopup);
-            UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_EnergyInsufficient);
+            loadingComplete.Value = true;
             float time = 1;
-            toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error, time, ()=>Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene));
+            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError), time, ()=>Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene));
         }
         );
     }

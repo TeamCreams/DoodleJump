@@ -101,9 +101,7 @@ public class UI_PurchasePopup : UI_Popup
         }
         else
         {
-            UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_GoldInsufficient);
-            toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
+            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_GoldInsufficient));
         }
     }
 
@@ -137,10 +135,11 @@ public class UI_PurchasePopup : UI_Popup
             Managers.UI.ClosePopupUI(this);
        },
        (errorCode) =>
-       {
-            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
-            popup.SetInfo(errorStruct.Notice, onFailed, EScene.SuberunkerSceneHomeScene);
+        {
+            // UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+            // ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
+            // popup.SetInfo(errorStruct.Notice, onFailed, EScene.SuberunkerSceneHomeScene);
+            UI_ErrorButtonPopup.ShowErrorButton(Managers.Error.GetError(Define.EErrorCode.ERR_NetworkSettlementErrorResend), onFailed, EScene.SuberunkerSceneHomeScene);
        });
     }
 

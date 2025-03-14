@@ -387,9 +387,7 @@ public class WebContentsManager
                 if (rv.StatusCode != EStatusCode.OK)
                 {
                     onFailed.Invoke(rv.StatusCode);
-                    UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-                    ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend);
-                    popup.SetInfo(errorStruct.Notice);
+                    UI_ErrorButtonPopup.ShowErrorButton(Managers.Error.GetError(Define.EErrorCode.ERR_NetworkSettlementErrorResend));
                 }
                 else
                 {

@@ -36,9 +36,7 @@ public class ScoreManager
        },
        (errorCode) =>
        {
-            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(Define.EErrorCode.ERR_NetworkSettlementErrorResend);
-            popup.SetInfo(errorStruct.Notice, ProcessErrorFun);
+            UI_ErrorButtonPopup.ShowErrorButton(Managers.Error.GetError(Define.EErrorCode.ERR_NetworkSettlementErrorResend), ProcessErrorFun);
             onFailed?.Invoke();
        });
     }
@@ -61,9 +59,7 @@ public class ScoreManager
        },
        (errorCode) =>
        {
-            UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(Define.EErrorCode.ERR_NetworkSettlementErrorResend);
-            popup.SetInfo(errorStruct.Notice);
+            UI_ErrorButtonPopup.ShowErrorButton(Managers.Error.GetError(Define.EErrorCode.ERR_NetworkSettlementErrorResend));
        });
     }
 }

@@ -49,9 +49,7 @@ public class InputNicknameScene : BaseScene
            loadingComplete.Value = true;
 
             Debug.Log("아이디 만들기 실패~");
-            UI_ErrorPopup popup = Managers.UI.ShowPopupUI<UI_ErrorPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationFailed);
-            popup.SetInfo(errorStruct);
+            UI_ErrorPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_AccountCreationFailed));
        });
     }
     public EErrorCode CheckCorrectNickname(string nickname)

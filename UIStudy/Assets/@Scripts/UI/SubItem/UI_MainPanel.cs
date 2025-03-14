@@ -63,7 +63,7 @@ public class UI_MainPanel : UI_Base
     {
         Debug.Log("SetUserScoreList");
         AllPush();
-        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+        var loadingComplete = UI_LoadingPopup.Show();
 
         Managers.WebContents.ReqGetUserAccountList(null,
        (response) =>
@@ -75,15 +75,13 @@ public class UI_MainPanel : UI_Base
                 _rank++;
             }
             _rank = 1;        
-            Managers.UI.ClosePopupUI(loadingPopup);
+            loadingComplete.Value = true;
        },
        (errorCode) =>
        {
-            Managers.UI.ClosePopupUI(loadingPopup);
+            loadingComplete.Value = true;
 
-            UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError);
-            toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
+            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementError));
             StartCoroutine(LoadScene_Co());
        });
     }

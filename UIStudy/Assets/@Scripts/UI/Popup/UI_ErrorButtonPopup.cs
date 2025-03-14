@@ -44,9 +44,9 @@ public class UI_ErrorButtonPopup : UI_Popup
     {
         Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
     }
-    public void SetInfo(string notice, Action action = null, EScene scene = EScene.SignInScene)
+    private void SetInfo(ErrorStruct data, Action action = null, EScene scene = EScene.SignInScene)
     {
-        _notice = notice;
+        _notice = data.Notice;
         _scene = scene;
         GetText((int)Texts.Notice_Text).text = _notice;
         if(action != null)
@@ -71,5 +71,10 @@ public class UI_ErrorButtonPopup : UI_Popup
     {
         GetText((int)Texts.Cancle_Text).text = Managers.Language.LocalizedString(91053);
         GetText((int)Texts.Ok_Text).text = Managers.Language.LocalizedString(91054);
+    }
+    public static void ShowErrorButton(ErrorStruct data, Action action = null, EScene scene = EScene.SignInScene)
+    {
+        UI_ErrorButtonPopup errorPopup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
+        errorPopup.SetInfo(data, action, scene);
     }
 }

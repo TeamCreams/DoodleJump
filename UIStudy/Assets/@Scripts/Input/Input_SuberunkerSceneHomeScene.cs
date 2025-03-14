@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
+using System.Net.NetworkInformation;
+
 using static Define;
 
 public class Input_SuberunkerSceneHomeScene : MonoBehaviour //BaseScene
@@ -19,27 +21,25 @@ public class Input_SuberunkerSceneHomeScene : MonoBehaviour //BaseScene
         }
 
 
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            loadingComplete = UI_LoadingPopup.Show();
-        }
+        // if (Input.GetKeyDown(KeyCode.D))
+        // {
+        //     loadingComplete = UI_LoadingPopup.Show();
+        // }
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (loadingComplete != null && loadingComplete.HasValue)
-            {
-                loadingComplete.Value = true;
-            }
-        }
-
-
+        // if (Input.GetKeyDown(KeyCode.F))
+        // {
+        //     if (loadingComplete != null && loadingComplete.HasValue)
+        //     {
+        //         loadingComplete.Value = true;
+        //     }
+        // }
+        
         // if (Input.GetKeyDown(KeyCode.S))
         // {           
-        //     var test = SecurePlayerPrefs.GetString("MyValue", "test");
-        //     var toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
-        //     //toast.Show(UI_ToastPopup.Type.Debug, test);
-        //     toast.SetInfo(test);
+        //     //var test = SecurePlayerPrefs.GetString("MyValue", "test");
+        //     UI_ToastPopup.ShowCritical(Managers.Error.GetError(EErrorCode.ERR_NetworkSettlementErrorResend));
         // }
 
     }
+
 }

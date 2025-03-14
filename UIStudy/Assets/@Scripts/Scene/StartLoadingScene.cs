@@ -53,7 +53,7 @@ public class StartLoadingScene : BaseScene
         // 키는 로그인을 해야 얻을 수 있음.
 
         // 아이디로 먼저 로그인하고 로그인하면서 받아온 유저정보비번이랑 비교
-        string usernameData = SecurePlayerPrefs.GetString(HardCoding.UserName, ""); // default value가 정해져 있지 않으면 안 됨.
+        string usernameData = SecurePlayerPrefs.GetString(HardCoding.UserName, "");
         string passwordData = SecurePlayerPrefs.GetString(HardCoding.Password, ""); 
         Managers.Game.UserInfo.UserName = usernameData;
         Managers.Game.UserInfo.Password = passwordData;
@@ -63,8 +63,8 @@ public class StartLoadingScene : BaseScene
             _scene = EScene.SignInScene;
             Managers.Scene.LoadScene(_scene);
         }
-        Debug.Log($"UserName : {Managers.Game.UserInfo.UserName}");
-        Debug.Log($"Password : {Managers.Game.UserInfo.Password}");
+        // Debug.Log($"UserName : {Managers.Game.UserInfo.UserName}");
+        // Debug.Log($"Password : {Managers.Game.UserInfo.Password}");
 
         TryLoadUserAccount();
     }
@@ -106,7 +106,7 @@ public class StartLoadingScene : BaseScene
             Managers.Game.UserInfo.StageLevel = response.StageLevel;
 
             // 보안 키 저장
-            SecurePlayerPrefs.SetKey(response.SecureKey);
+            //SecurePlayerPrefs.SetKey(response.SecureKey);
             
             // 아이디 저장
             SecurePlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);
@@ -127,7 +127,7 @@ public class StartLoadingScene : BaseScene
     private IEnumerator UpdateEnergy_Co()
     {
         yield return new WaitWhile(() => _isLoadSceneCondition == false);
-        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
+        var loadingComplete = UI_LoadingPopup.Show();
 
         Managers.WebContents.ReqDtoUpdateEnergy(new ReqDtoUpdateEnergy()
         {
@@ -135,7 +135,7 @@ public class StartLoadingScene : BaseScene
         },
         (response) =>
         {
-            Managers.UI.ClosePopupUI(loadingPopup);
+            loadingComplete.Value = true;
             Debug.Log("OnEvent_UpdateEnergy" + Managers.Game.UserInfo.LatelyEnergy);
             Managers.Game.UserInfo.Energy = response.Energy;
             Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
@@ -144,9 +144,7 @@ public class StartLoadingScene : BaseScene
         },
         (errorCode) =>
         {
-            UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError);
-            toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
+            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError));
             HandleFailure();
         }
         );

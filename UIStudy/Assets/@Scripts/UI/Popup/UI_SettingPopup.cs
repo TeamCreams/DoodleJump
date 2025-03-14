@@ -117,13 +117,15 @@ public class UI_SettingPopup : UI_Popup
     private void OnClick_Logout(PointerEventData eventData)
     {
         // 창띄우기
-        UI_ErrorButtonPopup popup = Managers.UI.ShowPopupUI<UI_ErrorButtonPopup>();
-        ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_Logout);
-        popup.SetInfo(errorStruct.Notice, LogoutAndClearMission);
+        UI_ErrorButtonPopup.ShowErrorButton(Managers.Error.GetError(EErrorCode.ERR_Logout), LogoutAndClearMission);
+        // ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_Logout);
+        // popup.SetInfo(errorStruct.Notice, LogoutAndClearMission);
+
     }
     private void LogoutAndClearMission()
     {
-        SecurePlayerPrefs.SetString(HardCoding.UserName, null);
+        SecurePlayerPrefs.SetString(HardCoding.UserName, "UserName");
+        SecurePlayerPrefs.SetString(HardCoding.Password, "Password");
         SecurePlayerPrefs.Save();
         Managers.Event.TriggerEvent(EEventType.OnLogout);
     }

@@ -145,25 +145,22 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     }
     private void OnClick_GameStart(PointerEventData eventData)
     {
-        var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
-
+        var loadingComplete = UI_LoadingPopup.Show();
         Managers.WebContents.ReqDtoGameStart(new ReqDtoGameStart()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId
         },
         (response) =>
         {
-            Managers.UI.ClosePopupUI(loadingPopup);
+            loadingComplete.Value = true;
             Managers.Game.UserInfo.Energy = response.Energy;
             Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
             Managers.Scene.LoadScene(EScene.SuberunkerTimelineScene);
        },
         (errorCode) =>
         {
-            Managers.UI.ClosePopupUI(loadingPopup);
-            UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
-            ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_EnergyInsufficient);
-            toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
+            loadingComplete.Value = true;
+            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_EnergyInsufficient));
         }
         );
     }
