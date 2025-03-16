@@ -21,9 +21,20 @@ public class Input_SuberunkerSceneHomeScene : MonoBehaviour //BaseScene
         }
 
 
+        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.X))
+        {
+            //Managers.IAP.Buy("CASH_1000");
+            UI_ToastPopup.Show("create", UI_ToastPopup.Type.Debug, 10);
+        }
         if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.C))
         {
-            Managers.IAP.Buy("CASH_1000");
+            //Managers.IAP.Buy("CASH_1000");
+            UI_ToastPopup.Show("create", UI_ToastPopup.Type.Error);
+        }
+        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.V))
+        {
+            //Managers.IAP.Buy("CASH_1000");
+            UI_ToastPopup.Show("create", UI_ToastPopup.Type.Critical);
         }
 
 

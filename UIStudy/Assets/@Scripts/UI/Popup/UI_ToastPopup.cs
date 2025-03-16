@@ -1,6 +1,8 @@
 ﻿using Data;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using static Define;
 
@@ -26,9 +28,10 @@ public class UI_ToastPopup : UI_Popup
     {
         Notice_Text,
     }
-    private string _notice;
+    //private string _notice;
     private Type _type;
     private float _time;
+    public float Time => _time;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -43,11 +46,11 @@ public class UI_ToastPopup : UI_Popup
 
     private void SetInfo(string notice, Type type = Type.Info, float time = 2f, Action onCompleteCallback = null)
     {
-        _notice = notice;
+        GetText((int)Texts.Notice_Text).text = notice;
         _type = type;
         _time = time;
         SetBackgroundColor();
-        StartCoroutine(ToastPopup_Co(onCompleteCallback));
+        StartCoroutine(Managers.UI.ToastPopup_Co(this, onCompleteCallback));
     }
     private void SetBackgroundColor()
     {
@@ -75,14 +78,6 @@ public class UI_ToastPopup : UI_Popup
                 break;
         }
         GetImage((int)Images.Background_Image).color = color;
-    }
-
-    private IEnumerator ToastPopup_Co(Action onCompleteCallback = null)
-    {
-        GetText((int)Texts.Notice_Text).text = _notice;
-        yield return new WaitForSeconds(_time);
-        Managers.UI.ClosePopupUI(this);
-        onCompleteCallback?.Invoke();
     }
 
     public static void ShowInfo(NoticeInfo noticeInfo, float time = 2f, Action onCompleteCallback = null)
@@ -150,7 +145,7 @@ public class UI_ToastPopup : UI_Popup
             message = $"[DEBUG] {message}";
         }
 #endif
-        UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
+        UI_ToastPopup toast = Managers.UI.ShowToastPopupUI<UI_ToastPopup>();
         toast.SetInfo(message, type, time, onCompleteCallback);
     }
 
@@ -161,5 +156,10 @@ public class UI_ToastPopup : UI_Popup
         public static readonly Color WarningColor = new Color(255f / 255f, 186f / 255f, 28f / 255f, 1f);        // Yellow
         public static readonly Color ErrorColor = new Color(159f / 255f, 159f / 255f, 159f / 255f, 1f);         // Gray
         public static readonly Color CriticalColor = new Color(255f / 255f, 177f / 255f, 177f / 255f, 1f);      // Red
+    }
+    
+    public override void SetOrder(int sortOrder)
+    {
+        this.GetComponent<Canvas>().sortingOrder = sortOrder;
     }
 }
