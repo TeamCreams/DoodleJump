@@ -65,6 +65,36 @@ namespace GameApi.Controllers
             return rv;
         }
 
+        [HttpGet("GetCashProductList")]
+        public async Task<CommonResult<ResDtoGetCashProductList>> GetCashProductList([FromQuery] ReqDtoGetCashProductList request)
+        {
+            CommonResult<ResDtoGetCashProductList> rv = new();
+
+            try
+            {
+                rv.Data = await _service.GetCashProductList(request);
+
+                rv.IsSuccess = true;
+                rv.StatusCode = EStatusCode.OK;
+                rv.Message = "Success";
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = null;
+            }
+
+            return rv;
+        }
 
         [HttpPost("DeleteCashProduct")]
         public async Task<CommonResult<ResDtoDeleteCashProduct>> DeleteCashProduct([FromBody] ReqDtoDeleteCashProduct request)

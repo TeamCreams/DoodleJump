@@ -1,4 +1,5 @@
 ﻿using GameApi.Dtos;
+using GameApiDto.Dtos;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
@@ -39,6 +40,15 @@ public class WebRoute
     public readonly static string HeartBeat = $"{BaseUrl}User/HeartBeat";
     public readonly static string GameStart = $"{BaseUrl}User/GameStart";
     public readonly static string UpdateEnergy = $"{BaseUrl}User/UpdateEnergy";
+
+
+
+    //==================================================
+    //     캐시 관련
+    //==================================================
+    public readonly static string PurchaseCashProduct = $"{BaseUrl}Cash/PurchaseCashProduct";
+    public readonly static Func<ReqDtoGetCashProductList, string> GetCashProductList = (dto) => $"{BaseUrl}Cash/GetCashProductList";
+
 }
 
 public class WebContentsManager
@@ -66,8 +76,6 @@ public class WebContentsManager
             }
         });
     }
-
-
     public void ReqGetValidateUserAccountUserName(ReqDtoGetValidateUserAccountUserName requestDto, Action<ResDtoGetValidateUserAccountUserName> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         Managers.Web.SendGetRequest(WebRoute.GetValidateUserAccountUserName(requestDto), (response) =>
@@ -269,9 +277,6 @@ public class WebContentsManager
             }
         });
     }
-
-
-
     public void ReqInsertUserMission(ReqDtoInsertUserMissionList requestDto, Action<ResDtoInsertUserMissionList> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
@@ -369,7 +374,6 @@ public class WebContentsManager
             }
         });
     }
-
     public void ReqDtoUpdateUserStyle(ReqDtoUpdateUserStyle requestDto, Action<ResDtoUpdateUserStyle> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
@@ -397,7 +401,6 @@ public class WebContentsManager
             }
         });
     }
-
     public void ReqDtoUpdateUserGold(ReqDtoUpdateUserGold requestDto, Action<ResDtoUpdateUserGold> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
@@ -480,6 +483,54 @@ public class WebContentsManager
         Managers.Web.SendPostRequest(WebRoute.UpdateEnergy, body , (response) =>
         {
             CommonResult<ResDtoUpdateEnergy> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoUpdateEnergy>>(response);
+
+            if (rv == null || false == rv.IsSuccess)
+            {
+                onFailed.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                if (rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
+    public void PurchaseCashProduct(ReqDtoPurchaseCashProduct requestDto, Action<ResDtoPurchaseCashProduct> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
+
+        Managers.Web.SendPostRequest(WebRoute.PurchaseCashProduct, body, (response) =>
+        {
+            CommonResult<ResDtoPurchaseCashProduct> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoPurchaseCashProduct>>(response);
+
+            if (rv == null || false == rv.IsSuccess)
+            {
+                onFailed.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                if (rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
+    public void GetCashProductList(ReqDtoGetCashProductList requestDto, Action<ResDtoGetCashProductList> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        Managers.Web.SendGetRequest(WebRoute.GetCashProductList(requestDto), (response) =>
+        {
+            CommonResult<ResDtoGetCashProductList> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetCashProductList>>(response);
 
             if (rv == null || false == rv.IsSuccess)
             {

@@ -89,6 +89,7 @@
     <Analyzer Include="C:\Program Files\UnityEditor\6000.0.24f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\ForEachAsync.cs" />
     <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\Catch.cs" />
     <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\StartWith.cs" />
     <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\ToList.cs" />
@@ -111,10 +112,10 @@
     <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\Triggers\ObservableInitializePotentialDragTrigger.cs" />
     <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\Triggers\ObservableCancelTrigger.cs" />
     <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\ContinueWith.cs" />
-    <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\Triggers\ObservableDeselectTrigger.cs" />
     <Compile Include="Assets\Plugins\UniRx\Scripts\Subjects\BehaviorSubject.cs" />
     <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\Empty.cs" />
     <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\Operators\DelayFrameSubscription.cs" />
+    <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\Triggers\ObservableDeselectTrigger.cs" />
     <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\UnityUIComponentExtensions.cs" />
     <Compile Include="Assets\Plugins\UniRx\Scripts\Tasks\TaskObservableExtensions.cs" />
     <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\PairWise.cs" />
@@ -315,7 +316,6 @@
     <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\Throw.cs" />
     <Compile Include="Assets\Plugins\UniRx\Scripts\System\Unit.cs" />
     <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\Triggers\ObservableCanvasGroupChangedTrigger.cs" />
-    <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\ForEachAsync.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\UniRx\Scripts\UniRx.asmdef" />

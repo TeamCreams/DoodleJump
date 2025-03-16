@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
@@ -31,7 +31,7 @@ public class UI_ErrorPopup : UI_Popup
 
         return true;
     }
-    public void SetInfo(ErrorStruct data)
+    public void SetInfo(NoticeInfo data)
     {
         GetText((int)Texts.ErrorTitle_Text).text = data.Title;
         GetText((int)Texts.Notice_Text).text = data.Notice;
@@ -40,7 +40,7 @@ public class UI_ErrorPopup : UI_Popup
     {
         Managers.UI.ClosePopupUI(this);
     }
-    public static void ShowError(ErrorStruct data)
+    public static void ShowError(NoticeInfo data)
     {
         UI_ErrorPopup errorPopup = Managers.UI.ShowPopupUI<UI_ErrorPopup>();
         errorPopup.SetInfo(data);

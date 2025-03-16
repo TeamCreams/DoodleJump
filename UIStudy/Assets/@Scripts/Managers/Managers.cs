@@ -87,7 +87,13 @@ public class Managers : MonoBehaviour
 			Managers.Mission.Init();
 			Managers.SignalR.InitAsync();
 
-			Managers.Event.RemoveEvent(Define.EEventType.OnLogout, OnEvent_Logout);
+
+
+			//LATE INIT
+			Managers.IAP.LateInit();
+
+
+            Managers.Event.RemoveEvent(Define.EEventType.OnLogout, OnEvent_Logout);
 			Managers.Event.AddEvent(Define.EEventType.OnLogout, OnEvent_Logout);
         }
 	}

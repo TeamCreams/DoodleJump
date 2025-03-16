@@ -99,5 +99,28 @@ namespace GameApi.Services
 
             return rv;
         }
+
+        public async Task<ResDtoGetCashProductList> GetCashProductList(ReqDtoGetCashProductList request)
+        {
+            ResDtoGetCashProductList rv = new();
+
+            rv.List = await _context.TblCashProducts
+                .Where(cp => cp.DeletedDate == null)
+                .OrderByDescending(cp => cp.RegisterDate)
+                .Select(cp => new ResDtoGetCashProductListItem()
+                {
+                    Id = cp.Id,
+                    ProductId = cp.ProductId,
+                    ProductName = cp.ProductName,
+                    Amount = cp.Amount,
+                    Currency = (ResDtoGetCashProductListItem.ECurrencyType)cp.Currency,
+                    IsConsumable = cp.IsConsumable,
+                    ItemType = (ResDtoGetCashProductListItem.EItemType)cp.ItemType,
+                    Price = cp.Price
+                })
+                .ToListAsync();
+
+            return rv;
+        }
     }
 }

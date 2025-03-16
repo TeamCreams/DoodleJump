@@ -21,6 +21,12 @@ public class Input_SuberunkerSceneHomeScene : MonoBehaviour //BaseScene
         }
 
 
+        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.C))
+        {
+            Managers.IAP.Buy("CASH_1000");
+        }
+
+
         // if (Input.GetKeyDown(KeyCode.D))
         // {
         //     loadingComplete = UI_LoadingPopup.Show();

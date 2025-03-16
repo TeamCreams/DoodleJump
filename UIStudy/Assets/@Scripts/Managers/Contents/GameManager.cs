@@ -299,14 +299,28 @@ public class GetScore
 {
     public int Total { get; set; } = 0;
 }
-public struct ErrorStruct
+
+public class NoticeInfo
 {
+    public enum EType
+    {
+        Unknown,
+        Debug,
+        Info,
+        Warning,
+        Error,
+        Critical
+    }
+
     public string Title;
     public string Notice;
-    public ErrorStruct(string title, string notice)
+    public EType Type;
+
+    public NoticeInfo(string title, string notice, EType type = EType.Unknown)
     {
         this.Title = title;
         this.Notice = notice;
+        this.Type = type;
     }
 }
 

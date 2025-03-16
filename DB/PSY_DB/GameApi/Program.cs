@@ -1,4 +1,5 @@
 ﻿using GameApi.Hubs;
+using GameApi.Services;
 using Microsoft.AspNetCore.Rewrite;
 using PSY_DB;
 
@@ -21,6 +22,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<PsyDbContext>();
+builder.Services.AddScoped<CashService>();
 builder.Services.AddSignalR();
 
 
