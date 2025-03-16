@@ -72,4 +72,6 @@ public partial class TblUserAccount
     public virtual ICollection<TblUserMission> TblUserMissions { get; set; } = new List<TblUserMission>();
     [InverseProperty("TblUserAccountKeyNavigation")]
     public virtual ICollection<TblUserMessage> TblUserMessage { get; set; } = new List<TblUserMessage>();
+    [InverseProperty("TblUserAccountKeyNavigation")]
+    public virtual ICollection<TblUserCashProduct> TblUserCashProduct { get; set; } = new List<TblUserCashProduct>();
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PSY_DB;
 
@@ -11,9 +12,11 @@ using PSY_DB;
 namespace PSY_DB.Migrations
 {
     [DbContext(typeof(PsyDbContext))]
-    partial class PsyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250316053725_add CashProduct")]
+    partial class addCashProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,9 +64,7 @@ namespace PSY_DB.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("RegisterDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)")
-                        .HasDefaultValueSql("UTC_TIMESTAMP()");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -192,14 +193,10 @@ namespace PSY_DB.Migrations
                         .HasComment("TblCashProduct PK");
 
                     b.Property<DateTime>("RegisterDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)")
-                        .HasDefaultValueSql("UTC_TIMESTAMP()");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("UpdateDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)")
-                        .HasDefaultValueSql("UTC_TIMESTAMP()");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("UserAccountId")
                         .HasColumnType("int")

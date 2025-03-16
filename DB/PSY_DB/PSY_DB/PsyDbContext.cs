@@ -12,6 +12,8 @@ public class PsyDbContext : DbContext
     public DbSet<TblUserScore> TblUserScores { get; set; }
     public DbSet<TblUserMission> TblUserMissions { get; set; }
     public DbSet<TblUserMessage> TblUserMessages { get; set; }
+    public DbSet<TblCashProduct> TblCashProducts { get; set; }
+    public DbSet<TblUserCashProduct> TblUserCashProducts { get; set; }
 
     static readonly ILoggerFactory _logger = LoggerFactory.Create(builder => { builder.AddConsole(); });
     public static string ConnectionString = "server=121.190.138.117; port=3306; database=PSY_DB_0002; user=yena94; password=dldPsk123!;";
