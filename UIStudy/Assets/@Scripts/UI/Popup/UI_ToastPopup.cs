@@ -31,7 +31,8 @@ public class UI_ToastPopup : UI_Popup
     //private string _notice;
     private Type _type;
     private float _time;
-    public float Time => _time;
+    private static int _order = 1000;
+    public static Queue<UI_ToastPopup> _queue = new();
     public override bool Init()
     {
         if (base.Init() == false)
@@ -50,7 +51,7 @@ public class UI_ToastPopup : UI_Popup
         _type = type;
         _time = time;
         SetBackgroundColor();
-        StartCoroutine(Managers.UI.ToastPopup_Co(this, onCompleteCallback));
+        StartCoroutine(ToastPopup_Co(onCompleteCallback));
     }
     private void SetBackgroundColor()
     {
@@ -82,22 +83,22 @@ public class UI_ToastPopup : UI_Popup
 
     public static void ShowInfo(NoticeInfo noticeInfo, float time = 2f, Action onCompleteCallback = null)
     {
-        UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
+        UI_ToastPopup toast = ShowToastPopupUI();
         toast.SetInfo(noticeInfo.Notice, UI_ToastPopup.Type.Info, time, onCompleteCallback);
     }
     public static void ShowWarning(NoticeInfo noticeInfo, float time = 2f, Action onCompleteCallback = null)
     {
-        UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
+        UI_ToastPopup toast = ShowToastPopupUI();
         toast.SetInfo(noticeInfo.Notice, UI_ToastPopup.Type.Warning, time, onCompleteCallback);
     }
     public static void ShowError(NoticeInfo noticeInfo, float time = 2f, Action onCompleteCallback = null)
     {
-        UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
+        UI_ToastPopup toast = ShowToastPopupUI();
         toast.SetInfo(noticeInfo.Notice, UI_ToastPopup.Type.Error, time, onCompleteCallback);
     }
     public static void ShowCritical(NoticeInfo noticeInfo, float time = 2f, Action onCompleteCallback = null)
     {
-        UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
+        UI_ToastPopup toast = ShowToastPopupUI();
         toast.SetInfo(noticeInfo.Notice, UI_ToastPopup.Type.Critical, time, onCompleteCallback);
     }
     public static void Show(NoticeInfo noticeInfo, float time = 2f, Action onCompleteCallback = null)
@@ -145,7 +146,7 @@ public class UI_ToastPopup : UI_Popup
             message = $"[DEBUG] {message}";
         }
 #endif
-        UI_ToastPopup toast = Managers.UI.ShowToastPopupUI<UI_ToastPopup>();
+        UI_ToastPopup toast = ShowToastPopupUI();
         toast.SetInfo(message, type, time, onCompleteCallback);
     }
 
@@ -157,7 +158,53 @@ public class UI_ToastPopup : UI_Popup
         public static readonly Color ErrorColor = new Color(159f / 255f, 159f / 255f, 159f / 255f, 1f);         // Gray
         public static readonly Color CriticalColor = new Color(255f / 255f, 177f / 255f, 177f / 255f, 1f);      // Red
     }
-    
+    public static UI_ToastPopup ShowToastPopupUI()
+    {
+        var go = Managers.Resource.Instantiate("UI_ToastPopup", Managers.UI.Root.transform);
+        if (go == null)
+        {
+            Debug.Log($"resource not found UI_ToastPopup]");
+        }
+        var rv = go.GetComponent<UI_ToastPopup>();
+        rv.SetOrder(_order--);
+        _queue.Enqueue(rv);
+        return rv;
+    }
+    public void CloseToastPopupUI()
+    {
+        if (_queue.Count == 0)
+        {
+            return;
+        }
+
+        var peek = _queue.Peek();
+        if (peek != this)
+        {
+            Debug.Log("삭제할 수 없습니다.");
+            return;
+        }
+        _queue.Dequeue();
+        if (_queue.Count == 0)
+        {
+            _order = 1000;
+        }
+        GameObject.Destroy(this.gameObject);
+    }
+    public IEnumerator ToastPopup_Co(Action onCompleteCallback = null)
+    {
+        while (0 < _queue.Count)
+        {
+            var toast = _queue.Peek(); 
+            
+            if (toast != null && toast == this)
+            {
+                yield return new WaitForSeconds(_time);
+                CloseToastPopupUI();
+                onCompleteCallback?.Invoke();
+            }
+            yield return new WaitUntil(() => _queue.Count == 0 || _queue.Peek() == this);
+        }
+    }
     public override void SetOrder(int sortOrder)
     {
         this.GetComponent<Canvas>().sortingOrder = sortOrder;

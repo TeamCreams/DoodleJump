@@ -24,7 +24,7 @@ public class Input_SuberunkerSceneHomeScene : MonoBehaviour //BaseScene
         if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.X))
         {
             //Managers.IAP.Buy("CASH_1000");
-            UI_ToastPopup.Show("create", UI_ToastPopup.Type.Debug, 10);
+            UI_ToastPopup.Show("create", UI_ToastPopup.Type.Debug);
         }
         if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.C))
         {
