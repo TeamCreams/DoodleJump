@@ -80,7 +80,7 @@ public class MissionManager
 
             int beforeParam1 = mission.Param1;
             mission.Param1 = type.GetMissionValueByType();
-            
+            Debug.Log($"mission.Param1 {mission.Param1}");
             if(Managers.Mission.Dicts[missionId].MissionStatus != (int)EMissionStatus.Rewarded)
             {
                 Debug.Log("Changed Call");

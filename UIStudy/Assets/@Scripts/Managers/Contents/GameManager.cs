@@ -298,6 +298,7 @@ public class DifficultySettingsInfo // 다시시작할 때마다 초기화 필�
 public class GetScore
 {
     public int Total { get; set; } = 0;
+    public int LatelyPlayTime {get; set;} = 0;
 }
 
 public class NoticeInfo

@@ -102,6 +102,7 @@ public class StartLoadingScene : BaseScene
             Managers.Game.UserInfo.LatelyScore = response.LatelyScore;
             Managers.Game.UserInfo.Gold = response.Gold;
             Managers.Game.UserInfo.PlayTime = response.PlayTime;
+            Debug.Log($"Managers.Game.UserInfo.PlayTime {Managers.Game.UserInfo.PlayTime}");
             Managers.Game.UserInfo.AccumulatedStone = response.AccumulatedStone;
             Managers.Game.UserInfo.StageLevel = response.StageLevel;
 
