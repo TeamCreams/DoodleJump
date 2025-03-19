@@ -143,9 +143,7 @@ namespace GameApi.Controllers
                                         .FirstOrDefault(), // 가장 최근 점수
                         Gold = user.Gold,
                         PlayTime = user.TblUserScores
-                                    .OrderByDescending(s => s.RegisterDate) // 최근 시간 순으로 정렬
-                                    .Select(s => s.PlayTime)
-                                    .FirstOrDefault(),
+                                    .Sum(s => s.AccumulatedStone),
                         AccumulatedStone = user.TblUserScores
                                     .Sum(s => s.AccumulatedStone),
                         StageLevel = user.TblUserScores
@@ -660,10 +658,7 @@ namespace GameApi.Controllers
                                         .FirstOrDefault()
                                         .Gold : 0,
                         PlayTime = user.TblUserScores
-                                    //.Where(s => s.PlayTime != -1)
-                                    .OrderByDescending(s => s.RegisterDate)
-                                    .Select(s => s.PlayTime) 
-                                    .FirstOrDefault(),
+                                        .Sum(s => s.PlayTime),
                         AccumulatedStone = user.TblUserScores
                                     //.Where(s => s.AccumulatedStone != -1)
                                     .Sum(s => s.AccumulatedStone),
