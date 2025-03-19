@@ -238,6 +238,7 @@
     <Compile Include="Assets/@Scripts/Managers/Core/UIManager.cs" />
     <Compile Include="Assets/@Scripts/Managers/Core/SoundManager.cs" />
     <Compile Include="Assets/HeroEditor/Common/SimpleColorPicker/Scripts/ColorPicker.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_LoadingPageTimeline.cs" />
     <Compile Include="Assets/@Scripts/Input/Input_SuberunkerScene.cs" />
     <Compile Include="Assets/@Scripts/Utils/Extension.cs" />
     <Compile Include="Assets/@Scripts/Utils/Util.cs" />

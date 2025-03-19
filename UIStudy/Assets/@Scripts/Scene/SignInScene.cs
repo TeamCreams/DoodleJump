@@ -105,7 +105,7 @@ public class SignInScene  : BaseScene
     private IEnumerator LoadScene_Co()
     {
         yield return new WaitWhile(() => _isLoadSceneCondition == false);
-        Managers.Scene.LoadScene(_loadScene);
+        Managers.Scene.LoadSceneWithProgress(_loadScene, "PreLoad");
     }
 
     // private IEnumerator LoadScore_Co()

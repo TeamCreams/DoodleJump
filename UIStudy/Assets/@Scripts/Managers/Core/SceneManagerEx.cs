@@ -14,6 +14,13 @@ public class SceneManagerEx
         //Managers.InitScene();
     }
 
+	public void LoadSceneWithProgress(Define.EScene type, string label = "")
+	{
+		Managers.Clear();
+		var ui = Managers.UI.ShowUIBase<UI_LoadingPageTimeline>();
+		ui.LoadScene(type, label);
+    }
+
 	private string GetSceneName(Define.EScene type)
 	{
 		string name = System.Enum.GetName(typeof(Define.EScene), type);

@@ -155,7 +155,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
             loadingComplete.Value = true;
             Managers.Game.UserInfo.Energy = response.Energy;
             Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
-            Managers.Scene.LoadScene(EScene.SuberunkerTimelineScene);
+            Managers.Scene.LoadSceneWithProgress(EScene.SuberunkerTimelineScene);
        },
         (errorCode) =>
         {
