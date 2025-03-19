@@ -12,6 +12,7 @@ namespace GameApi.Dtos
         public int AccumulatedStone { get; set; }
         public int StageLevel { get; set; }
         public int Gold { get; set; }
+        public DateTime RegisterDate { get; set; }
     }
 
     public class ResDtoInsertUserAccountScore

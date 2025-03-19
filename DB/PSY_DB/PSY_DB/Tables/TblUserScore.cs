@@ -22,8 +22,6 @@ public partial class TblUserScore
     public int StageLevel { get; set; }
 
     public DateTime RegisterDate { get; set; }
-    public DateTime UpdateDate { get; set; }
-    public DateTime? DeletedDate { get; set; }
 
 
     [ForeignKey("UserAccountId")]

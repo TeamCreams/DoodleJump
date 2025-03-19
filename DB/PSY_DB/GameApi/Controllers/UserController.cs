@@ -64,17 +64,17 @@ namespace GameApi.Controllers
                 if (select.Any() == false)
                 {
                     TblUserAccount userAccount = new();
-                    userAccount.RegisterDate = DateTime.UtcNow;
-                    userAccount.UpdateDate = DateTime.UtcNow;
+
                     userAccount.UserName = requestDto.UserName;
                     userAccount.Password = requestDto.Password;
                     userAccount.Nickname = requestDto.NickName;
                     userAccount.HairStyle = "Afro";
                     userAccount.EyebrowStyle = "AnnoyedEyebrows";
                     userAccount.EyesStyle = "Annoyed";
-                    //A882ED72-8990-44CD-9939-CFF94B38572B
-                    //Guid.NewGuid().ToString()
-                    userAccount.SecureKey = SecureKey.method3(50);
+                    userAccount.RegisterDate = DateTime.UtcNow;
+                    userAccount.UpdateDate = DateTime.UtcNow;
+                    //userAccount.Energy = 10;
+                    userAccount.LatelyEnergy = DateTime.UtcNow;
                     _context.TblUserAccounts.Add(userAccount);
                 }
                 
@@ -138,12 +138,12 @@ namespace GameApi.Controllers
                                       .Select(s => s.Scoreboard)
                                       .FirstOrDefault(),
                         LatelyScore = user.TblUserScores
-                                        .OrderByDescending(s => s.UpdateDate) // 최신 점수 순으로 정렬
+                                        .OrderByDescending(s => s.RegisterDate) // 최신 점수 순으로 정렬
                                         .Select(s => s.Scoreboard) // History 선택
                                         .FirstOrDefault(), // 가장 최근 점수
                         Gold = user.Gold,
                         PlayTime = user.TblUserScores
-                                    .OrderByDescending(s => s.UpdateDate) // 최근 시간 순으로 정렬
+                                    .OrderByDescending(s => s.RegisterDate) // 최근 시간 순으로 정렬
                                     .Select(s => s.PlayTime)
                                     .FirstOrDefault(),
                         AccumulatedStone = user.TblUserScores
@@ -157,8 +157,7 @@ namespace GameApi.Controllers
                         Evolution = user.Evolution,
                         EvolutionSetLevel = user.EvolutionSetLevel,
                         LatelyEnergy = user.LatelyEnergy,
-                        Energy = user.Energy,
-                        SecureKey = user.SecureKey,
+                        Energy = user.Energy
                     }).ToListAsync();
 
                 if (select.Any() == false)
@@ -510,7 +509,7 @@ namespace GameApi.Controllers
                     AccumulatedStone = requestDto.AccumulatedStone,
                     StageLevel = requestDto.StageLevel,
                     Gold = select.Gold,
-                    UpdateDate = DateTime.UtcNow
+                    RegisterDate = DateTime.UtcNow
                 };
                 _context.TblUserAccounts.Update(select);
                 _context.TblUserScores.Add(userScore);
@@ -653,16 +652,16 @@ namespace GameApi.Controllers
                                       .FirstOrDefault(),
                         LatelyScore = user.TblUserScores
                                         //.Where(s => s.Scoreboard != -1) // -1이 아닌 점수만 ( -1은 Gold만 받았을 때 들어가는 점수)
-                                        .OrderByDescending(s => s.UpdateDate) // 최신 점수 순으로 정렬
+                                        .OrderByDescending(s => s.RegisterDate) // 최신 점수 순으로 정렬
                                         .Select(s => s.Scoreboard)
                                         .FirstOrDefault(), // 가장 최근 점수
                         Gold = user.TblUserScores.Any() ?
-                                        user.TblUserScores.OrderByDescending(s => s.UpdateDate)
+                                        user.TblUserScores.OrderByDescending(s => s.RegisterDate)
                                         .FirstOrDefault()
                                         .Gold : 0,
                         PlayTime = user.TblUserScores
                                     //.Where(s => s.PlayTime != -1)
-                                    .OrderByDescending(s => s.UpdateDate)
+                                    .OrderByDescending(s => s.RegisterDate)
                                     .Select(s => s.PlayTime) 
                                     .FirstOrDefault(),
                         AccumulatedStone = user.TblUserScores
@@ -677,8 +676,7 @@ namespace GameApi.Controllers
                         Evolution = user.Evolution,
                         EvolutionSetLevel = user.EvolutionSetLevel,
                         LatelyEnergy = user.LatelyEnergy,
-                        Energy = user.Energy,
-                        SecureKey = user.SecureKey,
+                        Energy = user.Energy
                     }).ToListAsync();
 
                 if (select.Any() == false)

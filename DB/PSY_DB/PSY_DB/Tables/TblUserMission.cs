@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -21,15 +22,17 @@ public enum EMissionStatus
 public partial class TblUserMission
 {
     public int Id { get; set; }
+    [Required]
     [Comment("TblUserAccount FK")]
     public int UserAccountId { get; set; }
-
+    [Required]
     public int MissionId { get; set; }
 
     public EMissionStatus MissionStatus { get; set; }
 
     public int Param1 { get; set; }
-
+    public DateTime RegisterDate { get; set; }
+    public DateTime UpdateDate { get; set; }
     [ForeignKey("UserAccountId")]
     public virtual TblUserAccount? TblUserAccountKeyNavigation { get; set; }
 }

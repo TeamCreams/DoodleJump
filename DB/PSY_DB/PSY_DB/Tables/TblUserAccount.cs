@@ -27,11 +27,6 @@ public partial class TblUserAccount
     [Comment("계정 닉네임")]
     [SqlDefaultValue("Empty")]
     public string? Nickname { get; set; }
-    [Required]
-    public DateTime RegisterDate { get; set; }
-    [Required]
-    public DateTime UpdateDate { get; set; }
-    public DateTime? DeletedDate { get; set; }
 
     //[Required]
     //현재 컬럼상 DeletedDate말고는 모두 Required 처리를 해주는게 맞다.
@@ -53,19 +48,21 @@ public partial class TblUserAccount
     public int Evolution { get; set; }
     [Comment("EvolutionSet Level")]
     public int EvolutionSetLevel { get; set; }
-
+    [Required]
     [Comment("마지막으로 에너지를 얻은 시간")]
     [SqlDefaultValue("UTC_TIMESTAMP()")]
     public DateTime LatelyEnergy { get; set; }
-
+    [Required]
     [Comment("마지막으로 에너지를 얻은 시간")]
     [SqlDefaultValue("10")]
     public int Energy { get; set; }
 
-    [Comment("보안 키")]
     [Required]
-    public string? SecureKey { get; set; }
-    
+    public DateTime RegisterDate { get; set; }
+    [Required]
+    public DateTime UpdateDate { get; set; }
+    public DateTime? DeletedDate { get; set; }
+
     [InverseProperty("TblUserAccountKeyNavigation")]
     public virtual ICollection<TblUserScore> TblUserScores { get; set; } = new List<TblUserScore>();
     [InverseProperty("TblUserAccountKeyNavigation")]

@@ -8,6 +8,7 @@ namespace GameApi.Dtos
     {
         public int UserAccountId { get; set; }
         public int MissionId { get; set; }
+        public DateTime RegisterDate { get; set; }
     }
 
     public class ReqDtoInsertUserMissionList
