@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
+using DG.Tweening;
 using static Define;
 
 //SYSTEM : 곧 점검이 시작됩니다. (INFO)
@@ -33,6 +34,7 @@ public class UI_ToastPopup : UI_Popup
     private float _time;
     private static int _order = 1000;
     public static Queue<UI_ToastPopup> _queue = new();
+    Sequence _showSeq;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -41,6 +43,13 @@ public class UI_ToastPopup : UI_Popup
         }
         BindImages(typeof(Images));
         BindTexts(typeof(Texts));
+
+        Vector3 originalScale = this.transform.localScale;
+        float scaleSpeed = 0.1f;
+        _showSeq = DOTween.Sequence()
+            .Append(GetImage((int)Images.Background_Image).transform.DOScale(new Vector3(originalScale.x + 0.5f, originalScale.y + 0.5f, originalScale.z + 0.5f), scaleSpeed).SetEase(Ease.Linear))
+            .Append(GetImage((int)Images.Background_Image).transform.DOScale(originalScale, scaleSpeed).SetEase(Ease.Linear));
+
 
         return true;
     }
@@ -192,12 +201,14 @@ public class UI_ToastPopup : UI_Popup
     }
     public IEnumerator ToastPopup_Co(Action onCompleteCallback = null)
     {
+        this.Hide();
         while (0 < _queue.Count)
         {
             var toast = _queue.Peek(); 
             
             if (toast != null && toast == this)
             {
+                Show();
                 yield return new WaitForSeconds(_time);
                 CloseToastPopupUI();
                 onCompleteCallback?.Invoke();
@@ -208,5 +219,20 @@ public class UI_ToastPopup : UI_Popup
     public override void SetOrder(int sortOrder)
     {
         this.GetComponent<Canvas>().sortingOrder = sortOrder;
+    }
+
+    Canvas _rootCanvas = null;
+    public void Show()
+    {
+        _rootCanvas = this.GetComponent<Canvas>();
+        _rootCanvas.enabled = true;
+
+        _showSeq.PlayForward();
+    }
+
+    public void Hide()
+    {
+        _rootCanvas = this.GetComponent<Canvas>();
+        _rootCanvas.enabled = false;
     }
 }

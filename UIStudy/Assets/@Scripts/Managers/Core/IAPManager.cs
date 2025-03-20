@@ -50,6 +50,7 @@ public class IAPManager : IDetailedStoreListener
             }
         }
 
+        Debug.Log("Developer User");
         StandardPurchasingModule.Instance().useFakeStoreUIMode = FakeStoreUIMode.Default;
 
         UnityPurchasing.Initialize(this, builder);

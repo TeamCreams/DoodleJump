@@ -23,18 +23,23 @@ public class Input_SuberunkerSceneHomeScene : MonoBehaviour //BaseScene
 
         if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.X))
         {
-            //Managers.IAP.Buy("CASH_1000");
             UI_ToastPopup.Show("create", UI_ToastPopup.Type.Debug);
         }
         if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.C))
         {
-            //Managers.IAP.Buy("CASH_1000");
             UI_ToastPopup.Show("create", UI_ToastPopup.Type.Error);
         }
         if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.V))
         {
-            //Managers.IAP.Buy("CASH_1000");
             UI_ToastPopup.Show("create", UI_ToastPopup.Type.Critical);
+        }
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.D))
+        {
+            Managers.IAP.Buy("CASH_1000");
+        }
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.W))
+        {
+            Systems.GoogleLoginWebView.ShowUrl();
         }
 
 
@@ -50,7 +55,7 @@ public class Input_SuberunkerSceneHomeScene : MonoBehaviour //BaseScene
         //         loadingComplete.Value = true;
         //     }
         // }
-        
+
         // if (Input.GetKeyDown(KeyCode.S))
         // {           
         //     //var test = SecurePlayerPrefs.GetString("MyValue", "test");

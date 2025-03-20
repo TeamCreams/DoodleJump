@@ -13,12 +13,14 @@ public class Systems : MonoBehaviour
 
 	#region Contents
 	private UserSystem _user = new UserSystem();
+	private GoogleLoginWebViewSystem _googleLoginWebView = new GoogleLoginWebViewSystem();
 
-	public static UserSystem User { get { return Instance?._user; } }
-	#endregion
+    public static UserSystem User { get { return Instance?._user; } }
+    public static GoogleLoginWebViewSystem GoogleLoginWebView { get { return Instance?._googleLoginWebView; } }
+    #endregion
 
 
-	public static void Init()
+    public static void Init()
 	{
 		if (s_instance == null)
 		{
