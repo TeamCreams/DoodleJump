@@ -18,7 +18,8 @@ public static class Define
         ChooseCharacterScene,
         InputNicknameScene,
         SuberunkerScene,
-        SignalRTestScene // test
+        SignalRTestScene, // test
+        LoadingPageTimelineScene
     }
 
 	public enum EUIEvent
@@ -100,6 +101,7 @@ public static class Define
         UIStoneCountRefresh,
         UpdateEnergy,
         ReceiveMessage,
+        LoadScene,
     }
 
     // 서버와 값 공유중, 함부로 수정 금지.

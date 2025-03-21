@@ -22,7 +22,7 @@ MonoBehaviour:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 074e9ba77b76a4d468a04f64d4755235
-    m_Address: UI_LoadingPageTimeline
+    m_Address: UI_LoadingPageTimelineScene
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

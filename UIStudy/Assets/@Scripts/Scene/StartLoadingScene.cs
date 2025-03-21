@@ -199,7 +199,7 @@ public class StartLoadingScene : BaseScene
     {
         Managers.Resource.LoadAllAsync<UnityEngine.Object>(label, (key, count, totalCount) =>
         {
-            _ui.UpdateLogoImage((float)count / totalCount);
+            _ui.UpdateLogoImage(count / totalCount);
             if (count == totalCount)
             {
                 Managers.Data.Init();

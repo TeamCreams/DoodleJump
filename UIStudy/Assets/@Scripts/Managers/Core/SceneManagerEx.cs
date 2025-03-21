@@ -6,7 +6,11 @@ using UnityEngine.SceneManagement;
 public class SceneManagerEx
 {
 	public BaseScene CurrentScene { get { return GameObject.FindObjectOfType<BaseScene>(); } }
+	private Define.EScene _nextScene;
+	public Define.EScene NextScene => _nextScene;
 
+	private string _label = "";
+	public string Label => _label;
 	public void LoadScene(Define.EScene type)
 	{
 		Managers.Clear();
@@ -17,8 +21,9 @@ public class SceneManagerEx
 	public void LoadSceneWithProgress(Define.EScene type, string label = "")
 	{
 		Managers.Clear();
-		var ui = Managers.UI.ShowUIBase<UI_LoadingPageTimeline>();
-		ui.LoadScene(type, label);
+		_nextScene = type;
+		_label = label;
+		SceneManager.LoadScene(GetSceneName(Define.EScene.LoadingPageTimelineScene));
     }
 
 	private string GetSceneName(Define.EScene type)
