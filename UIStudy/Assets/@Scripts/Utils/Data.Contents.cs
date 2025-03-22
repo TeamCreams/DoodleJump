@@ -500,4 +500,27 @@ namespace Data
             return dict;
         }
     }
+
+
+    public class CashItemData
+    {
+        public int Id;
+        public int Gold;
+        public int Price;
+        public string GoldSprite;
+    }
+    [Serializable]
+    public class CashItemDataLoader : ILoader<int, CashItemData>
+    {
+        public List<CashItemData> cashItemDatas = new List<CashItemData>();
+
+        public Dictionary<int, CashItemData> MakeDict()
+        {
+            Dictionary<int, CashItemData> dict = new Dictionary<int, CashItemData>();
+            foreach (CashItemData cashItemData in cashItemDatas)
+                dict.Add(cashItemData.Id, cashItemData);
+
+            return dict;
+        }
+    }
 }

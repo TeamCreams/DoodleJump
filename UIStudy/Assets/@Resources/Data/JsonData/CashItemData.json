@@ -1,0 +1,34 @@
+{
+  "cashItemDatas": [
+    {
+      "Id": 230001,
+      "Gold": 1000,
+      "Price": 1500,
+      "GoldSprite": "Icon_ShopIcon_Gold0"
+    },
+    {
+      "Id": 230002,
+      "Gold": 3000,
+      "Price": 4500,
+      "GoldSprite": "Icon_ShopIcon_Gold1"
+    },
+    {
+      "Id": 230003,
+      "Gold": 12000,
+      "Price": 18000,
+      "GoldSprite": "Icon_ShopIcon_Gold2"
+    },
+    {
+      "Id": 230004,
+      "Gold": 20000,
+      "Price": 29900,
+      "GoldSprite": "Icon_ShopIcon_Gold3"
+    },
+    {
+      "Id": 230005,
+      "Gold": 50000,
+      "Price": 70000,
+      "GoldSprite": "Icon_ShopIcon_Gold4"
+    }
+  ]
+}

@@ -38,7 +38,8 @@ public class DataTransfomer : EditorWindow
         ParseExcelDataToJson<ErrorDataLoader, ErrorData>("ErrorData");
         ParseExcelDataToJson<MissionLanguageDataLoader, MissionLanguageData>("MissionLanguageData");
 		ParseExcelDataToJson<GameSoundDataLoader, GameSoundData>("GameSoundData");
-        
+        ParseExcelDataToJson<CashItemDataLoader, CashItemData>("CashItemData");
+
 		Debug.Log("Complete");
 	}
 

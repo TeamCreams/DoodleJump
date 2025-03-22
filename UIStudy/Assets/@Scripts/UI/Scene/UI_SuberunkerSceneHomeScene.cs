@@ -75,7 +75,8 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetImage((int)Images.Ranking_Button).gameObject.BindEvent(OnClick_ShowRanking, EUIEvent.Click);
         GetButton((int)Buttons.Mission_Button).gameObject.BindEvent(OnClick_ShowMission, EUIEvent.Click);
         GetButton((int)Buttons.Setting_Button).gameObject.BindEvent(OnClick_SettingButton, EUIEvent.Click);
-
+        GetButton((int)Buttons.Shop_Button).gameObject.BindEvent(OnClick_ShowShop, EUIEvent.Click);
+        
         // add mission
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         Managers.Event.AddEvent(EEventType.UIRefresh, OnEvent_Refresh);
@@ -132,6 +133,12 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         Managers.Event.TriggerEvent(EEventType.Mission);
     }
 
+    private void OnClick_ShowShop(PointerEventData eventData)
+    {
+        Managers.UI.ShowPopupUI<UI_CashShopPanel>();
+        Managers.Event.TriggerEvent(EEventType.EnterShop);
+    }
+    
     private void OnClick_SettingButton(PointerEventData eventData)
     {
         UI_SettingPopup settingPopup = Managers.UI.ShowPopupUI<UI_SettingPopup>();

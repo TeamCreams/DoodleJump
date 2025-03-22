@@ -111,6 +111,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d36c9aff4a27d44528339a5651a44df3
+    m_Address: CashItemData
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e1a8751486f7e4db9be17477858b13b4
     m_Address: EvolutionData
     m_ReadOnly: 0

@@ -21,14 +21,44 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2340e003a4a6745a8929491f3b365cea
+    m_Address: Icon_ShopIcon_Gold1.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4b40b7e9b987d764fb6c2cf114a2edc9
     m_Address: Sprite_Loading.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 61725b696bb9b4c73bb7f577825b65b2
+    m_Address: Icon_ShopIcon_Gold4.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6ac2abb7d4f0aeb44bc7b05e7b78f40a
     m_Address: stone_small rock.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8222ee04859dd4fe5b07c16b5439f249
+    m_Address: Icon_ShopIcon_Gold3.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 82813c074e2854877b1382f0e987511b
+    m_Address: Icon_ShopIcon_Gold0.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 928516686caa643f5b6615dc945cff34
+    m_Address: Icon_ShopIcon_Gold2.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

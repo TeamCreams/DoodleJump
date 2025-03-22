@@ -51,6 +51,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4edb935c1f2de4fed97659a2dd53bd34
+    m_Address: UI_Merchandise
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 556bff4fc16964492863f34639e63146
     m_Address: UI_SettingPopup
     m_ReadOnly: 0
@@ -125,6 +131,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c3f8b9a62295d42f49c9e58de3b98e9f
     m_Address: UI_PurchasePopup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cce1474872b27449ab840f23a2eee1ac
+    m_Address: UI_CashShopPanel
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
