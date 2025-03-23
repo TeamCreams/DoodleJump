@@ -47,14 +47,14 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     }
 
     private string _welcome = "환영합니다";
-    System.IDisposable _rechargeTimer;
-    private int _displayTime = 0;
-    private int _calculateTime = 0;
-    private DateTime _serverTime = new DateTime();
-    private DateTime _startTime = new DateTime();
-    private bool _isRunningTimer = false;
-    private bool _isSettingComplete = false;
-    private Coroutine _tickCo;
+    // System.IDisposable _rechargeTimer;
+    // private int _displayTime = 0;
+    // private int _calculateTime = 0;
+    // private DateTime _serverTime = new DateTime();
+    // private DateTime _startTime = new DateTime();
+    // private bool _isRunningTimer = false;
+    // private bool _isSettingComplete = false;
+    // private Coroutine _tickCo;
 
     public override bool Init()
     {
@@ -74,28 +74,28 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         GetImage((int)Images.MyScore_Button).gameObject.BindEvent(OnClick_ShowMyScore, EUIEvent.Click);
         GetImage((int)Images.Ranking_Button).gameObject.BindEvent(OnClick_ShowRanking, EUIEvent.Click);
         GetButton((int)Buttons.Mission_Button).gameObject.BindEvent(OnClick_ShowMission, EUIEvent.Click);
-        GetButton((int)Buttons.Setting_Button).gameObject.BindEvent(OnClick_SettingButton, EUIEvent.Click);
+        //GetButton((int)Buttons.Setting_Button).gameObject.BindEvent(OnClick_SettingButton, EUIEvent.Click);
         GetButton((int)Buttons.Shop_Button).gameObject.BindEvent(OnClick_ShowShop, EUIEvent.Click);
         
         // add mission
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        Managers.Event.AddEvent(EEventType.UIRefresh, OnEvent_Refresh);
+        //Managers.Event.AddEvent(EEventType.UIRefresh, OnEvent_Refresh);
 
         // Default setting
-        _startTime = Managers.Game.UserInfo.LatelyEnergy;
+        //_startTime = Managers.Game.UserInfo.LatelyEnergy;
         OnEvent_SetLanguage(null, null);
-        OnEvent_Refresh(null, null);
+        //OnEvent_Refresh(null, null);
         ShowRanking();
         
-        Managers.SignalR.OnChangedHeartBeat -= CheckServerTime; // 구독 해제
-        Managers.SignalR.OnChangedHeartBeat += CheckServerTime; // 이벤트 구독
+        //Managers.SignalR.OnChangedHeartBeat -= CheckServerTime; // 구독 해제
+        //Managers.SignalR.OnChangedHeartBeat += CheckServerTime; // 이벤트 구독
         return true;
     }
     private void OnDestroy()
     {
         Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
-        Managers.Event.RemoveEvent(EEventType.UIRefresh, OnEvent_Refresh);
-        Managers.SignalR.OnChangedHeartBeat -= CheckServerTime; // 구독 해제
+        //Managers.Event.RemoveEvent(EEventType.UIRefresh, OnEvent_Refresh);
+        //Managers.SignalR.OnChangedHeartBeat -= CheckServerTime; // 구독 해제
     }
 
     public void ShowMyScore()
@@ -162,6 +162,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
             loadingComplete.Value = true;
             Managers.Game.UserInfo.Energy = response.Energy;
             Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
+            Managers.Event.TriggerEvent(EEventType.UIRefresh);
             Managers.Scene.LoadSceneWithProgress(EScene.SuberunkerTimelineScene);
        },
         (errorCode) =>
@@ -171,70 +172,70 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         }
         );
     }
-    private void EnergyTimer()
-    {
-        // 5초마다 서버에서 시간을 받아옴.
-        // 300초가 되면 updateEnergy 요청
+    // private void EnergyTimer()
+    // {
+    //     // 5초마다 서버에서 시간을 받아옴.
+    //     // 300초가 되면 updateEnergy 요청
 
-        // 게임어플을 아예 꺼버렸을 때 laytelyTime을 저장할 방법은?
-        if(10 <= Managers.Game.UserInfo.Energy)
-        {
-            _isRunningTimer = false;
-            _isSettingComplete = false;
-            if(_tickCo != null)
-            {
-                StopCoroutine(_tickCo);
-                _tickCo = null;
-                _rechargeTimer?.Dispose();
-            }
-            return;
-        }
+    //     // 게임어플을 아예 꺼버렸을 때 laytelyTime을 저장할 방법은?
+    //     if(10 <= Managers.Game.UserInfo.Energy)
+    //     {
+    //         _isRunningTimer = false;
+    //         _isSettingComplete = false;
+    //         if(_tickCo != null)
+    //         {
+    //             StopCoroutine(_tickCo);
+    //             _tickCo = null;
+    //             _rechargeTimer?.Dispose();
+    //         }
+    //         return;
+    //     }
 
-        if(_isRunningTimer)
-        {
-            return;
-        }
-        _isRunningTimer = true;
-        _calculateTime = (int)(_serverTime - _startTime).TotalSeconds;
-        // Debug.Log($"OPOPOPO _startTime : {_startTime}");
-        // Debug.Log($"OPOPOPO _serverTime : {_serverTime}");
-        // Debug.Log($"OPOPOPO _calculateTime : {_calculateTime}");
-        _isSettingComplete = true;
-        EnergyRecharge();
-    }
-    public void CheckServerTime(DateTime newHeartBeat)
-    {
-        _serverTime = newHeartBeat; // 5초마다 웹소켓에서 전해준 값으로 서버시간 업데이트. 
-        EnergyTimer(); //.ConfigureAwait(false); // 비동기로 실행. 끝나고 메인스레드로 돌아가지 않음.
-    }
-    private void EnergyRecharge()
-    {
-        // 코루틴은 메인스레드에서 진행 됨.
-        // 서버시간을 받으면서 백그라운드 스레드로 진행되기 때문에 메인스레드로 전환이 필요.
-        if(_tickCo == null)
-        {
-            _tickCo = StartCoroutine(EnergyRechargeCoroutine());
-        }
-    }
-    private IEnumerator EnergyRechargeCoroutine()
-    {
-        yield return new WaitWhile(() => _isSettingComplete == false);
-        _rechargeTimer?.Dispose();
-        _rechargeTimer = Observable.Interval(new TimeSpan(0, 0, 1))
-            .Subscribe(_ =>
-            {   
-                _calculateTime++;
-                _displayTime = 600 - _calculateTime;
-                if(300 <= _calculateTime)
-                {
-                    _startTime = _serverTime;
-                    _displayTime = 0;
-                    _calculateTime = 0;
-                    Managers.Event.TriggerEvent(EEventType.UpdateEnergy, this);
-                }
-                GetText((int)Texts.EnergyTimer_Text).text = string.Format($"{(_displayTime-300) / 60} : {(_displayTime-300) % 60}");
-            }).AddTo(this.gameObject);
-    }
+    //     if(_isRunningTimer)
+    //     {
+    //         return;
+    //     }
+    //     _isRunningTimer = true;
+    //     _calculateTime = (int)(_serverTime - _startTime).TotalSeconds;
+    //     // Debug.Log($"OPOPOPO _startTime : {_startTime}");
+    //     // Debug.Log($"OPOPOPO _serverTime : {_serverTime}");
+    //     // Debug.Log($"OPOPOPO _calculateTime : {_calculateTime}");
+    //     _isSettingComplete = true;
+    //     EnergyRecharge();
+    // }
+    // public void CheckServerTime(DateTime newHeartBeat)
+    // {
+    //     _serverTime = newHeartBeat; // 5초마다 웹소켓에서 전해준 값으로 서버시간 업데이트. 
+    //     EnergyTimer(); //.ConfigureAwait(false); // 비동기로 실행. 끝나고 메인스레드로 돌아가지 않음.
+    // }
+    // private void EnergyRecharge()
+    // {
+    //     // 코루틴은 메인스레드에서 진행 됨.
+    //     // 서버시간을 받으면서 백그라운드 스레드로 진행되기 때문에 메인스레드로 전환이 필요.
+    //     if(_tickCo == null)
+    //     {
+    //         _tickCo = StartCoroutine(EnergyRechargeCoroutine());
+    //     }
+    // }
+    // private IEnumerator EnergyRechargeCoroutine()
+    // {
+    //     yield return new WaitWhile(() => _isSettingComplete == false);
+    //     _rechargeTimer?.Dispose();
+    //     _rechargeTimer = Observable.Interval(new TimeSpan(0, 0, 1))
+    //         .Subscribe(_ =>
+    //         {   
+    //             _calculateTime++;
+    //             _displayTime = 600 - _calculateTime;
+    //             if(300 <= _calculateTime)
+    //             {
+    //                 _startTime = _serverTime;
+    //                 _displayTime = 0;
+    //                 _calculateTime = 0;
+    //                 Managers.Event.TriggerEvent(EEventType.UpdateEnergy, this);
+    //             }
+    //             GetText((int)Texts.EnergyTimer_Text).text = string.Format($"{(_displayTime-300) / 60} : {(_displayTime-300) % 60}");
+    //         }).AddTo(this.gameObject);
+    // }
     void OnEvent_SetLanguage(Component sender, object param)
     {
         GetText((int)Texts.Shop_Text).text = Managers.Language.LocalizedString(91006);

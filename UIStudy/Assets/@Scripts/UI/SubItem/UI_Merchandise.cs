@@ -30,7 +30,7 @@ public class UI_Merchandise : UI_Base
         this.gameObject.BindEvent(OnBeginDrag, EUIEvent.BeginDrag);
         this.gameObject.BindEvent(OnDrag, EUIEvent.Drag);
         this.gameObject.BindEvent(OnEndDrag, EUIEvent.EndDrag);
-
+        
         return true;
     }
 
@@ -49,6 +49,7 @@ public class UI_Merchandise : UI_Base
         Managers.IAP.Buy("CASH_1000");
     }
 
+    //이거 아래 안 됨.
     private void OnBeginDrag(PointerEventData eventData)
 	{
         _parentScrollRect.OnBeginDrag(eventData); // 부모한테 이벤트 전달

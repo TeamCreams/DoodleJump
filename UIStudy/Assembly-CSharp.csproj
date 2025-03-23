@@ -203,6 +203,7 @@
     <Compile Include="Assets/@Scripts/UI/Scene/UI_InputNicknameScene.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/AnimationManager.cs" />
     <Compile Include="Assets/@Scripts/Utils/SecurePlayerPrefs.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_HomeTopBar.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Firearms/FirearmFire.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Enums/ElementId.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/AnchorManager.cs" />
