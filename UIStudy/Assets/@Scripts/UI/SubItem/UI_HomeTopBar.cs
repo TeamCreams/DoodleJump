@@ -65,6 +65,8 @@ public class UI_HomeTopBar : UI_Base
     private void OnClick_EnergyAddButton(PointerEventData eventData)
     {
         // 판넬 추가
+        var ui = Managers.UI.ShowPopupUI<UI_EnergyShopPanel>();
+        ui.SetInfo();
     }
     private void OnClick_GoldAddButton(PointerEventData eventData)
     {

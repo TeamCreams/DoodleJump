@@ -119,6 +119,7 @@
     <Compile Include="Assets/@Scripts/UI/Popup/UI_UserInfoPopup.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SuberunkerTimelineScene.cs" />
     <Compile Include="Assets/@Scripts/UI/Popup/UI_PausePopup.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_EnergyShopPanel.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SuberunkerScene.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_ChattingItem.cs" />
     <Compile Include="Assets/@Scripts/Controller/StoneController.cs" />
