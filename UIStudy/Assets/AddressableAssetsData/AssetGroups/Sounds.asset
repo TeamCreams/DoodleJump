@@ -13,24 +13,10 @@ MonoBehaviour:
   m_Name: Sounds
   m_EditorClassIdentifier: 
   m_GroupName: Sounds
-  m_Data:
-    m_SerializedData: []
   m_GUID: 898701819018447699d124c2301c0c79
   m_SerializeEntries:
-  - m_GUID: 3716e04c8ded0874f96a2aa2037b1ac0
-    m_Address: AddLifeSound
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 54f8f5b8a01562941a950f6ddb493aab
-    m_Address: AttackedSound
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bfae9f6956daa8c43a63902b65c0a967
-    m_Address: LuckSkillSound
+  - m_GUID: 1c9be622dd11466fb52a8e4c6e8aad41
+    m_Address: SelectSound
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
@@ -41,14 +27,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1c9be622dd11466fb52a8e4c6e8aad41
-    m_Address: SelectSound
+  - m_GUID: 3716e04c8ded0874f96a2aa2037b1ac0
+    m_Address: AddLifeSound
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ef165b67f93355d4698438e7f900a240
-    m_Address: GetItemSound
+  - m_GUID: 3be7f5043afa143b29e8d41312e33bb8
+    m_Address: BoringSound
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 54f8f5b8a01562941a950f6ddb493aab
+    m_Address: AttackedSound
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
@@ -59,8 +51,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3be7f5043afa143b29e8d41312e33bb8
-    m_Address: BoringSound
+  - m_GUID: 6f6202b9e9fad4490a88b629d9d774ed
+    m_Address: CoinSound
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bfae9f6956daa8c43a63902b65c0a967
+    m_Address: LuckSkillSound
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ef165b67f93355d4698438e7f900a240
+    m_Address: GetItemSound
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

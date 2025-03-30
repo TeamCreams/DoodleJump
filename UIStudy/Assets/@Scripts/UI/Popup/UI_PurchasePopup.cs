@@ -64,7 +64,7 @@ public class UI_PurchasePopup : UI_Popup
         {
             case EProductType.Custom:  
             {
-                func();
+                UpdateCharacterStyle();
                 _title = 91047;
                 _notice = 91049;
                 GetText((int)Texts.Gold_Text).text = HardCoding.ChangeStyleGold.ToString();
@@ -94,10 +94,13 @@ public class UI_PurchasePopup : UI_Popup
 
     private void OnEvent_ClickOk(PointerEventData eventData)
     {
+        Managers.Game.RemainingChange = 0;
         int remainingChange = Managers.Game.UserInfo.Gold - _gold;
         if(0 <= remainingChange)
         {
+            Managers.Game.RemainingChange = remainingChange;
             UpdateUserGold();
+            // call event
         }
         else
         {
@@ -107,7 +110,6 @@ public class UI_PurchasePopup : UI_Popup
 
     private void UpdateUserGold(Action onSuccess = null, Action onFailed = null)
     {
-        Debug.Log("UpdateUserGold");
         Managers.WebContents.ReqDtoUpdateUserGold(new ReqDtoUpdateUserGold()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
@@ -117,6 +119,7 @@ public class UI_PurchasePopup : UI_Popup
        {
             onSuccess?.Invoke();
             _purchaseStruct.OnOkay?.Invoke();
+            Managers.Event.TriggerEvent(EEventType.UpdateGold);
             switch(_purchaseStruct.ProductType)
             {
                 case EProductType.Custom:  
@@ -143,7 +146,7 @@ public class UI_PurchasePopup : UI_Popup
        });
     }
 
-    private void func()
+    private void UpdateCharacterStyle()
     {
         GetObject((int)GameObjects.Noctice_ImageGroup).SetActive(true);
 

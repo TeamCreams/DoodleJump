@@ -125,13 +125,13 @@ public class GameManager
         }
     }
 
-    private int _energy;
-    public int Energy
+    private int _remainingChange;
+    public int RemainingChange
     {
-        get { return _energy; }
+        get { return _remainingChange; }
         set
         {
-            _energy = value;
+            _remainingChange = value;
         }
     }
 
@@ -280,6 +280,7 @@ public class UserInfo // 서버로 전달될 데이터
     public int EvolutionId {get; set;} = 140003;
     public int EvolutionSetLevel {get; set;} = 0;
     public int Energy { get; set;} = 10;
+    public int PurchaseEnergyCountToday { get; set; } = 0;
     public DateTime LatelyEnergy {get; set;}
 }
 public class SettingInfo

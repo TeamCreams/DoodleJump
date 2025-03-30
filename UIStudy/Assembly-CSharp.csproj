@@ -59,7 +59,7 @@
     <UnityVersion>6000.0.24f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="/Users/seoyoon/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.1.0/Analyzers/Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="/Users/seoyoon/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.1.1/Analyzers/Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="/Volumes/imation i9/GitHubData/DoodleJump/UIStudy/Assets/Packages/Microsoft.Extensions.Logging.Abstractions.8.0.3/analyzers/dotnet/roslyn4.0/cs/es/Microsoft.Extensions.Logging.Generators.resources.dll" />
     <Analyzer Include="/Volumes/imation i9/GitHubData/DoodleJump/UIStudy/Assets/Packages/Microsoft.Extensions.Logging.Abstractions.8.0.3/analyzers/dotnet/roslyn4.0/cs/ru/Microsoft.Extensions.Logging.Generators.resources.dll" />
     <Analyzer Include="/Volumes/imation i9/GitHubData/DoodleJump/UIStudy/Assets/Packages/Microsoft.Extensions.Logging.Abstractions.8.0.3/analyzers/dotnet/roslyn4.0/cs/zh-Hant/Microsoft.Extensions.Logging.Generators.resources.dll" />
@@ -185,6 +185,7 @@
     <Compile Include="Assets/@Scripts/Managers/Core/InputManagerEx.cs" />
     <Compile Include="Assets/@Scripts/Utils/Define.cs" />
     <Compile Include="Assets/@Scripts/UI/TinyFarm/UI_TinyFarmMissionSlot.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_GoldUsageEffect.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_InventorySlot.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SignInScene.cs" />
     <Compile Include="Assets/@Scripts/UI/Popup/UI_ErrorPopup.cs" />

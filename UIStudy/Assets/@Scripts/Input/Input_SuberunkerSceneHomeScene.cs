@@ -31,7 +31,7 @@ public class Input_SuberunkerSceneHomeScene : MonoBehaviour //BaseScene
         }
         if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.V))
         {
-            UI_ToastPopup.Show("create", UI_ToastPopup.Type.Critical);
+            
         }
         if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.D))
         {

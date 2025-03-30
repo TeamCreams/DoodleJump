@@ -59,6 +59,7 @@ public class SignInScene  : BaseScene
             // Energy
             Managers.Game.UserInfo.Energy = response.Energy;
             Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
+            Managers.Game.UserInfo.PurchaseEnergyCountToday = response.PurchaseEnergyCountToday;
 
             //게임 진행 정보
             Managers.Game.UserInfo.RecordScore = response.HighScore;

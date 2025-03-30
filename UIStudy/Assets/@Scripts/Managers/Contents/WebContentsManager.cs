@@ -40,6 +40,7 @@ public class WebRoute
     public readonly static string HeartBeat = $"{BaseUrl}User/HeartBeat";
     public readonly static string GameStart = $"{BaseUrl}User/GameStart";
     public readonly static string UpdateEnergy = $"{BaseUrl}User/UpdateEnergy";
+    public readonly static Func<ReqDtoInsertEnergy, string> InsertEnergy = (dto) => $"{BaseUrl}User/InsertEnergy?UserAccountId={dto.UserAccountId}&Energy={dto.Energy}";
 
 
 
@@ -539,6 +540,29 @@ public class WebContentsManager
             else
             {
                 if (rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
+    public void ReqDtoInsertEnergy(ReqDtoInsertEnergy requestDto, Action<ResDtoInsertEnergy> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        Managers.Web.SendGetRequest(WebRoute.InsertEnergy(requestDto), (response) =>
+        {
+            CommonResult<ResDtoInsertEnergy> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertEnergy>>(response);
+            
+            if(rv == null || false == rv.IsSuccess)
+            {
+                onFailed.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                if(rv.StatusCode != EStatusCode.OK)
                 {
                     onFailed.Invoke(rv.StatusCode);
                 }

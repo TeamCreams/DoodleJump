@@ -42,7 +42,8 @@ public class UI_EnergyShopPanel : UI_Popup
 
     public void SetInfo()
     {
-        _gold = HardCoding.ChangeStyleGold; // 임시 가격
+        int purchaseMultiplier = Managers.Game.UserInfo.PurchaseEnergyCountToday + 1;
+        _gold = purchaseMultiplier * HardCoding.ChangeStyleGold; // 임시 가격
     }
     private void OnClick_ClosePopup(PointerEventData eventData)
     {
@@ -54,6 +55,7 @@ public class UI_EnergyShopPanel : UI_Popup
         int remainingChange = Managers.Game.UserInfo.Gold - _gold;
         if(0 <= remainingChange)
         {
+            Managers.Game.RemainingChange = remainingChange;
             UpdateUserGold();
         }
         else
@@ -75,7 +77,33 @@ public class UI_EnergyShopPanel : UI_Popup
             onSuccess?.Invoke();
             
             // 에너지 추가
-            UI_ToastPopup.Show("Energy", UI_ToastPopup.Type.Debug, 1);
+            //UI_ToastPopup.Show("Energy", UI_ToastPopup.Type.Debug, 1);
+            
+            Managers.Event.TriggerEvent(EEventType.UpdateGold);
+            UpdateEnergy();
+            //Managers.UI.ClosePopupUI(this);
+       },
+       (errorCode) =>
+        {
+            UI_ErrorButtonPopup.ShowErrorButton(Managers.Error.GetError(Define.EErrorCode.ERR_NetworkSettlementErrorResend), onFailed, EScene.SuberunkerSceneHomeScene);
+       });
+    }
+
+    private void UpdateEnergy(Action onSuccess = null, Action onFailed = null)
+    {
+        Debug.Log("UpdateEnergy");
+        Managers.WebContents.ReqDtoInsertEnergy(new ReqDtoInsertEnergy()
+        {
+            UserAccountId = Managers.Game.UserInfo.UserAccountId,
+            Energy = 10 // 구정값인지 아닌지는 수정 알아서
+        },
+       (response) =>
+       {
+            onSuccess?.Invoke();
+            
+            Managers.Game.UserInfo.Energy = response.Energy;
+            Managers.Game.UserInfo.PurchaseEnergyCountToday = response.PurchaseEnergyCountToday;
+            Managers.Event.TriggerEvent(EEventType.UIRefresh);
             Managers.UI.ClosePopupUI(this);
        },
        (errorCode) =>

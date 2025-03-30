@@ -8,7 +8,6 @@ using static Define;
 
 public class UI_HomeTopBar : UI_Base
 {
-
     private enum Texts
     {
         TotalGold_Text,
@@ -49,7 +48,6 @@ public class UI_HomeTopBar : UI_Base
         Managers.Event.AddEvent(EEventType.UIRefresh, OnEvent_Refresh);
 
         _startTime = Managers.Game.UserInfo.LatelyEnergy;
-
         OnEvent_Refresh(null, null);
 
         Managers.SignalR.OnChangedHeartBeat -= CheckServerTime; // 구독 해제
@@ -80,6 +78,7 @@ public class UI_HomeTopBar : UI_Base
     }
     private void OnEvent_Refresh(Component sender, object param)
     {
+        Debug.Log("OnEvent_Refresh");
         GetText((int)Texts.Energy_Text).text = $"{Managers.Game.UserInfo.Energy} / 10";
         GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
     }

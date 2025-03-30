@@ -102,7 +102,8 @@ public static class Define
         UpdateEnergy,
         ReceiveMessage,
         LoadScene,
-        EnterShop
+        EnterShop,
+        UpdateGold
     }
 
     // 서버와 값 공유중, 함부로 수정 금지.

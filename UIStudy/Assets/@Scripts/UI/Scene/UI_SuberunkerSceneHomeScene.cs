@@ -145,11 +145,11 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         settingPopup.ActiveInfo();
     }
 
-    private void OnEvent_Refresh(Component sender, object param)
-    {
-        GetText((int)Texts.Energy_Text).text = $"{Managers.Game.UserInfo.Energy} / 10";
-        GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
-    }
+    // private void OnEvent_Refresh(Component sender, object param)
+    // {
+    //     GetText((int)Texts.Energy_Text).text = $"{Managers.Game.UserInfo.Energy} / 10";
+    //     GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
+    // }
     private void OnClick_GameStart(PointerEventData eventData)
     {
         var loadingComplete = UI_LoadingPopup.Show();
