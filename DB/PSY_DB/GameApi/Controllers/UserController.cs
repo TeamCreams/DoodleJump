@@ -155,7 +155,11 @@ namespace GameApi.Controllers
                         Evolution = user.Evolution,
                         EvolutionSetLevel = user.EvolutionSetLevel,
                         LatelyEnergy = user.LatelyEnergy,
-                        Energy = user.Energy
+                        Energy = user.Energy,
+                        PurchaseEnergyCountToday = (user.FirstPurchaseEnergyTime == DateTime.MinValue ||
+                                     user.FirstPurchaseEnergyTime.AddHours(24) <= DateTime.UtcNow)
+                                     ? 0
+                                     : user.PurchaseEnergyCountToday
                     }).ToListAsync();
 
                 if (select.Any() == false)
@@ -671,7 +675,11 @@ namespace GameApi.Controllers
                         Evolution = user.Evolution,
                         EvolutionSetLevel = user.EvolutionSetLevel,
                         LatelyEnergy = user.LatelyEnergy,
-                        Energy = user.Energy
+                        Energy = user.Energy,
+                        PurchaseEnergyCountToday = (user.FirstPurchaseEnergyTime == DateTime.MinValue ||
+                                     user.FirstPurchaseEnergyTime.AddHours(24) <= DateTime.UtcNow)
+                                     ? 0
+                                     : user.PurchaseEnergyCountToday
                     }).ToListAsync();
 
                 if (select.Any() == false)
@@ -1405,8 +1413,8 @@ namespace GameApi.Controllers
             return rv;
         }
 
-        [HttpPost("InsertEnergy")]
-        public async Task<CommonResult<ResDtoInsertEnergy>> InsertEnergy([FromBody] ReqDtoInsertEnergy requestDto)
+        [HttpGet("InsertEnergy")]
+        public async Task<CommonResult<ResDtoInsertEnergy>> InsertEnergy([FromQuery] ReqDtoInsertEnergy requestDto)
         {
             // 이미 구매했으면 가격을 조금 더 받도록 수정하는 기능이 있었으면 좋겠는데.
             // 그럼 첫구매 시간을 저장해둬야할듯.
@@ -1424,7 +1432,7 @@ namespace GameApi.Controllers
                 }
 
                 userAccount.Energy += requestDto.Energy;
-                if (userAccount.FirstPurchaseEnergyTime == null
+                if (userAccount.FirstPurchaseEnergyTime == DateTime.MinValue
                     || userAccount.FirstPurchaseEnergyTime.AddHours(24) <= DateTime.UtcNow) // 24시간이 지났으면 리셋
                 {
                     userAccount.FirstPurchaseEnergyTime = DateTime.UtcNow;
@@ -1451,7 +1459,7 @@ namespace GameApi.Controllers
                 rv.Data = new ResDtoInsertEnergy
                 {
                     Energy = userAccount.Energy,
-                    PurchaseMultiplier = userAccount.PurchaseEnergyCountToday // 구매한 횟수에 따른 추가 금액 반환
+                    PurchaseEnergyCountToday = userAccount.PurchaseEnergyCountToday // 구매한 횟수에 따른 추가 금액 반환
                 };
             }
             catch (CommonException ex)

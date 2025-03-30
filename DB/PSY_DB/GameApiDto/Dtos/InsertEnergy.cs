@@ -13,7 +13,7 @@ namespace GameApi.Dtos
     public class ResDtoInsertEnergy
     {
         public int Energy { get; set; }
-        public int PurchaseMultiplier { get; set; }
+        public int PurchaseEnergyCountToday { get; set; }
         
     }
 }

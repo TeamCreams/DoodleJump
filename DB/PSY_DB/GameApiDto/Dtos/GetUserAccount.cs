@@ -31,6 +31,8 @@
         // 에너지 관련
         public DateTime LatelyEnergy { get; set; }
         public int Energy { get; set; }
+        public int PurchaseEnergyCountToday { get; set; }
+
         public DateTime RegisterDate { get; set; }
         public DateTime UpdateDate { get; set; }
         public DateTime? DeletedDate { get; set; }
