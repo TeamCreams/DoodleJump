@@ -1364,7 +1364,7 @@ namespace GameApi.Controllers
                     throw new CommonException(EStatusCode.EnergyInsufficient, "에너지가 부족합니다.");
                 }
 
-                if(10 <= userAccount.Energy)
+                if(userAccount.Energy <= 10)//이게 맞나? (10 <= userAccount.Energy) 원래 이랬음 
                 {
                     userAccount.LatelyEnergy = DateTime.UtcNow;
                 }
@@ -1386,6 +1386,72 @@ namespace GameApi.Controllers
                 {
                     Energy = userAccount.Energy,
                     LatelyEnergy = userAccount.LatelyEnergy
+                };
+            }
+            catch (CommonException ex)
+            {
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.IsSuccess = false;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.ToString();
+                rv.IsSuccess = false;
+                return rv;
+            }
+            return rv;
+        }
+
+        [HttpPost("InsertEnergy")]
+        public async Task<CommonResult<ResDtoInsertEnergy>> InsertEnergy([FromBody] ReqDtoInsertEnergy requestDto)
+        {
+            // 이미 구매했으면 가격을 조금 더 받도록 수정하는 기능이 있었으면 좋겠는데.
+            // 그럼 첫구매 시간을 저장해둬야할듯.
+            CommonResult<ResDtoInsertEnergy> rv = new();
+            try
+            {
+                rv.Data = new();
+
+                var userAccount = await _context.TblUserAccounts
+                                    .FirstOrDefaultAsync(user => user.Id == requestDto.UserAccountId && user.DeletedDate == null);
+                if (userAccount == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
+                }
+
+                userAccount.Energy += requestDto.Energy;
+                if (userAccount.FirstPurchaseEnergyTime == null
+                    || userAccount.FirstPurchaseEnergyTime.AddHours(24) <= DateTime.UtcNow) // 24시간이 지났으면 리셋
+                {
+                    userAccount.FirstPurchaseEnergyTime = DateTime.UtcNow;
+                    userAccount.PurchaseEnergyCountToday = 0;
+                }
+                else 
+                {
+                    userAccount.PurchaseEnergyCountToday ++;
+                }
+
+                _context.TblUserAccounts.Update(userAccount);
+
+                var IsSuccess = await _context.SaveChangesAsync();
+                if (IsSuccess == 0)
+                {
+                    throw new CommonException(EStatusCode.ChangedRowsIsZero,
+                        $"UserAccountId : {requestDto.UserAccountId}");
+                }
+                rv.IsSuccess = true;
+                rv.StatusCode = EStatusCode.OK;
+                rv.Message = "Success GameStart";
+
+                //energy 수정 
+                rv.Data = new ResDtoInsertEnergy
+                {
+                    Energy = userAccount.Energy,
+                    PurchaseMultiplier = userAccount.PurchaseEnergyCountToday // 구매한 횟수에 따른 추가 금액 반환
                 };
             }
             catch (CommonException ex)

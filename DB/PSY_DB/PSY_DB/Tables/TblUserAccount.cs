@@ -53,9 +53,13 @@ public partial class TblUserAccount
     [SqlDefaultValue("UTC_TIMESTAMP()")]
     public DateTime LatelyEnergy { get; set; }
     [Required]
-    [Comment("마지막으로 에너지를 얻은 시간")]
     [SqlDefaultValue("10")]
     public int Energy { get; set; }
+    [Comment("하루 중 에너지를 처음으로 구매한 시간")]
+    public DateTime FirstPurchaseEnergyTime { get; set; }
+    [Comment("에너지를 구매한 횟수")]
+    [SqlDefaultValue("0")]
+    public int PurchaseEnergyCountToday { get; set; }
 
     [Required]
     public DateTime RegisterDate { get; set; }
