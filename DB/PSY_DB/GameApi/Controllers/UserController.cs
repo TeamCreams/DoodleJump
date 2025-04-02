@@ -159,7 +159,8 @@ namespace GameApi.Controllers
                         PurchaseEnergyCountToday = (user.FirstPurchaseEnergyTime == DateTime.MinValue ||
                                      user.FirstPurchaseEnergyTime.AddHours(24) <= DateTime.UtcNow)
                                      ? 0
-                                     : user.PurchaseEnergyCountToday
+                                     : user.PurchaseEnergyCountToday,
+                        FirstPurchaseEnergyTime = user.FirstPurchaseEnergyTime
                     }).ToListAsync();
 
                 if (select.Any() == false)
@@ -679,7 +680,8 @@ namespace GameApi.Controllers
                         PurchaseEnergyCountToday = (user.FirstPurchaseEnergyTime == DateTime.MinValue ||
                                      user.FirstPurchaseEnergyTime.AddHours(24) <= DateTime.UtcNow)
                                      ? 0
-                                     : user.PurchaseEnergyCountToday
+                                     : user.PurchaseEnergyCountToday,
+                        FirstPurchaseEnergyTime = user.FirstPurchaseEnergyTime
                     }).ToListAsync();
 
                 if (select.Any() == false)
@@ -1459,7 +1461,8 @@ namespace GameApi.Controllers
                 rv.Data = new ResDtoInsertEnergy
                 {
                     Energy = userAccount.Energy,
-                    PurchaseEnergyCountToday = userAccount.PurchaseEnergyCountToday // 구매한 횟수에 따른 추가 금액 반환
+                    PurchaseEnergyCountToday = userAccount.PurchaseEnergyCountToday, // 구매한 횟수에 따른 추가 금액 반환
+                    FirstPurchaseEnergyTime = userAccount.FirstPurchaseEnergyTime
                 };
             }
             catch (CommonException ex)

@@ -32,6 +32,7 @@
         public DateTime LatelyEnergy { get; set; }
         public int Energy { get; set; }
         public int PurchaseEnergyCountToday { get; set; }
+        public DateTime FirstPurchaseEnergyTime { get; set; }
 
         public DateTime RegisterDate { get; set; }
         public DateTime UpdateDate { get; set; }

@@ -14,6 +14,7 @@ namespace GameApi.Dtos
     {
         public int Energy { get; set; }
         public int PurchaseEnergyCountToday { get; set; }
-        
+        public DateTime FirstPurchaseEnergyTime { get; set; }
+
     }
 }
