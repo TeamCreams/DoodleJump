@@ -160,7 +160,7 @@ namespace GameApi.Controllers
                                      user.FirstPurchaseEnergyTime.AddHours(24) <= DateTime.UtcNow)
                                      ? 0
                                      : user.PurchaseEnergyCountToday,
-                        FirstPurchaseEnergyTime = user.FirstPurchaseEnergyTime
+                        LastRewardClaimTime = user.LastRewardClaimTime
                     }).ToListAsync();
 
                 if (select.Any() == false)
@@ -681,7 +681,7 @@ namespace GameApi.Controllers
                                      user.FirstPurchaseEnergyTime.AddHours(24) <= DateTime.UtcNow)
                                      ? 0
                                      : user.PurchaseEnergyCountToday,
-                        FirstPurchaseEnergyTime = user.FirstPurchaseEnergyTime
+                        LastRewardClaimTime = user.LastRewardClaimTime
                     }).ToListAsync();
 
                 if (select.Any() == false)
@@ -852,6 +852,66 @@ namespace GameApi.Controllers
                 rv.Message = ex.Message;
                 rv.Data = null;
 
+                return rv;
+            }
+            return rv;
+        }
+        #endregion
+        #region Reward
+        [HttpPost("UpdateRewardClaim")]
+        public async Task<CommonResult<ResDtoUpdateRewardClaim>> UpdateRewardClaim([FromBody] ReqDtoUpdateRewardClaim requestDto)
+        {
+            CommonResult<ResDtoUpdateRewardClaim> rv = new();
+            try
+            {
+                rv.Data = new();
+
+                var userAccount = await _context.TblUserAccounts
+                                    .FirstOrDefaultAsync(user => user.Id == requestDto.UserAccountId && user.DeletedDate == null);
+                if (userAccount == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        $"{requestDto.UserAccountId} : 찾을 수 없는 UserAccountId");
+                }
+
+                if (userAccount.LastRewardClaimTime == DateTime.MinValue
+                    || userAccount.LastRewardClaimTime.AddHours(24) <= DateTime.UtcNow) // 24시간이 지났으면 리셋
+                {
+                    userAccount.LastRewardClaimTime = DateTime.UtcNow;
+                    userAccount.Gold += requestDto.Gold;
+                }
+                
+                _context.TblUserAccounts.Update(userAccount);
+
+                var IsSuccess = await _context.SaveChangesAsync();
+                if (IsSuccess == 0)
+                {
+                    throw new CommonException(EStatusCode.ChangedRowsIsZero,
+                        $"UserAccountId : {requestDto.UserAccountId}");
+                }
+                rv.IsSuccess = true;
+                rv.StatusCode = EStatusCode.OK;
+                rv.Message = "Success UpdateRewardClaim";
+
+                //energy 수정 
+                rv.Data = new ResDtoUpdateRewardClaim
+                {
+                    Gold = userAccount.Gold,
+                    LastRewardClaimTime = userAccount.LastRewardClaimTime
+                };
+            }
+            catch (CommonException ex)
+            {
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.IsSuccess = false;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.ToString();
+                rv.IsSuccess = false;
                 return rv;
             }
             return rv;
@@ -1195,7 +1255,7 @@ namespace GameApi.Controllers
         #region Style
         [HttpPost("UpdateUserStyle")]
         public async Task<CommonResult<ResDtoUpdateUserStyle>>
-            InsertUserStyle([FromBody] ReqDtoUpdateUserStyle requestDto)
+            UpdateUserStyle([FromBody] ReqDtoUpdateUserStyle requestDto)
         {
             CommonResult<ResDtoUpdateUserStyle> rv = new();
 
@@ -1354,7 +1414,7 @@ namespace GameApi.Controllers
         }
 
         [HttpPost("GameStart")]
-        public async Task<CommonResult<ResDtoGameStart>> UpdateEnergy([FromBody] ReqDtoGameStart requestDto)
+        public async Task<CommonResult<ResDtoGameStart>> GameStart([FromBody] ReqDtoGameStart requestDto)
         {
             CommonResult<ResDtoGameStart> rv = new();
             try
@@ -1461,8 +1521,7 @@ namespace GameApi.Controllers
                 rv.Data = new ResDtoInsertEnergy
                 {
                     Energy = userAccount.Energy,
-                    PurchaseEnergyCountToday = userAccount.PurchaseEnergyCountToday, // 구매한 횟수에 따른 추가 금액 반환
-                    FirstPurchaseEnergyTime = userAccount.FirstPurchaseEnergyTime
+                    PurchaseEnergyCountToday = userAccount.PurchaseEnergyCountToday // 구매한 횟수에 따른 추가 금액 반환
                 };
             }
             catch (CommonException ex)

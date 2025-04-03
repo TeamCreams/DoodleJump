@@ -61,7 +61,10 @@ public partial class TblUserAccount
     [SqlDefaultValue("0")]
     public int PurchaseEnergyCountToday { get; set; }
 
-    [Required]
+    [Comment("접속 보상 시간")]
+    public DateTime LastRewardClaimTime { get; set; }
+
+[Required]
     public DateTime RegisterDate { get; set; }
     [Required]
     public DateTime UpdateDate { get; set; }
