@@ -135,7 +135,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
 
     private void OnClick_ShowShop(PointerEventData eventData)
     {
-        Managers.UI.ShowPopupUI<UI_CashShopPanel>();
+        Managers.UI.ShowPopupUI<UI_ShopPanel>();
         Managers.Event.TriggerEvent(EEventType.EnterShop);
     }
     

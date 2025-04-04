@@ -97,7 +97,10 @@ public class StartLoadingScene : BaseScene
             Managers.Game.UserInfo.Energy = response.Energy;
             Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
             Managers.Game.UserInfo.PurchaseEnergyCountToday = response.PurchaseEnergyCountToday;
-
+            
+            // 일일 보상
+            Managers.Game.UserInfo.LastRewardClaimTime = response.LastRewardClaimTime;
+            
             //게임 진행 정보
             Managers.Game.UserInfo.RecordScore = response.HighScore;
             Managers.Game.UserInfo.LatelyScore = response.LatelyScore;

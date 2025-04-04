@@ -221,13 +221,14 @@
     <Compile Include="Assets/@Scripts/Managers/Contents/GameManager.cs" />
     <Compile Include="Assets/@Scripts/Utils/Extension.Contents.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/StateHandler.cs" />
-    <Compile Include="Assets/@Scripts/UI/SubItem/UI_CashShopPanel.cs" />
     <Compile Include="Assets/@Scripts/UI/Popup/UI_ToastPopup.cs" />
     <Compile Include="Assets/HeroEditor/Common/SimpleColorPicker/Scripts/PaletteGradient.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/LayerManager.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_PurchasePopupBase.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/AnimationEvents.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_Joystick.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_MissionItem.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_LoginReward.cs" />
     <Compile Include="Assets/@Scripts/UI/Popup/UI_LoadingPopup.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/SpriteSheetCapture.cs" />
     <Compile Include="Assets/@Scripts/Input/Input_SuberunkerSceneHomeScene.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="Assets/@Scripts/Scene/LoadingPageTimelineScene.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Data/Item.cs" />
     <Compile Include="Assets/@Scripts/Scene/SignInScene.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_ShopPanel.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/BowExample.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_PlayerDesign.cs" />
     <Compile Include="Assets/@Scripts/UI/Popup/UI_RetryPopup.cs" />

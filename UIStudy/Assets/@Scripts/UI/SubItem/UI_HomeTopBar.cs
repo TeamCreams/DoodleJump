@@ -68,7 +68,7 @@ public class UI_HomeTopBar : UI_Base
     }
     private void OnClick_GoldAddButton(PointerEventData eventData)
     {
-        Managers.UI.ShowPopupUI<UI_CashShopPanel>();
+        Managers.UI.ShowPopupUI<UI_ShopPanel>();
         Managers.Event.TriggerEvent(EEventType.EnterShop);
     }
     private void OnClick_SettingButton(PointerEventData eventData)

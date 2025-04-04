@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using static Define;
 
-public class UI_EnergyShopPanel : UI_Popup
+public class UI_EnergyShopPanel : UI_PurchasePopupBase
 {
     private enum Images
     {
@@ -13,10 +13,12 @@ public class UI_EnergyShopPanel : UI_Popup
     }
     private enum Texts
     {
-        Shop_Text
+        Title_Text,
+        Gold_Text,
+        UpdateTime_Text
     }
+    private DateTime _serverTime = new DateTime();
 
-    private int _gold = 0;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -25,68 +27,50 @@ public class UI_EnergyShopPanel : UI_Popup
         }
         //Bind
         BindImages(typeof(Images));
-        BindTexts(typeof(Texts));
+        //BindTexts(typeof(Texts));
         //Get
-        GetImage((int)Images.Close_Button).gameObject.BindEvent(OnClick_ClosePopup, EUIEvent.Click);
-        GetImage((int)Images.Ok_Button).gameObject.BindEvent(OnEvent_ClickOk, EUIEvent.Click);
+        //GetImage((int)Images.Close_Button).gameObject.BindEvent(OnClick_ClosePopup, EUIEvent.Click);
+        //GetImage((int)Images.Ok_Button).gameObject.BindEvent(OnEvent_ClickOk, EUIEvent.Click);
 
         //Event
         //Managers.Event.AddEvent(EEventType.EnterShop, SetMerchandiseItems);
-        
+        Managers.SignalR.OnChangedHeartBeat -= CheckServerTime; // 구독 해제
+        Managers.SignalR.OnChangedHeartBeat += CheckServerTime; // 이벤트 구독
         return true;
     }
-    void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         //Managers.Event.RemoveEvent(EEventType.EnterShop, SetMerchandiseItems);
+        Managers.SignalR.OnChangedHeartBeat -= CheckServerTime; // 구독 해제
     }  
 
     public void SetInfo()
     {
         int purchaseMultiplier = Managers.Game.UserInfo.PurchaseEnergyCountToday + 1;
         _gold = purchaseMultiplier * HardCoding.ChangeStyleGold; // 임시 가격
-    }
-    private void OnClick_ClosePopup(PointerEventData eventData)
-    {
-        Managers.UI.ClosePopupUI(this);
+        GetText((int)BaseTexts.Gold_Text).text = _gold.ToString();
     }
 
-    private void OnEvent_ClickOk(PointerEventData eventData)
+    protected override void OnEvent_ClickOk(PointerEventData eventData)
     {
         int remainingChange = Managers.Game.UserInfo.Gold - _gold;
         if(0 <= remainingChange)
         {
             Managers.Game.RemainingChange = remainingChange;
-            UpdateUserGold();
+            UpdateUserGold(() => {
+                UpdateEnergy();
+            });
         }
         else
         {
-            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_GoldInsufficient));
+            ShowGoldInsufficientError();
         }
     }
 
-    private void UpdateUserGold(Action onSuccess = null, Action onFailed = null)
+    protected override void AfterPurchaseProcess()
     {
-        Debug.Log("UpdateUserGold");
-        Managers.WebContents.ReqDtoUpdateUserGold(new ReqDtoUpdateUserGold()
-        {
-            UserAccountId = Managers.Game.UserInfo.UserAccountId,
-            Gold = _gold
-        },
-       (response) =>
-       {
-            onSuccess?.Invoke();
-            
-            // 에너지 추가
-            //UI_ToastPopup.Show("Energy", UI_ToastPopup.Type.Debug, 1);
-            
-            Managers.Event.TriggerEvent(EEventType.UpdateGold);
-            UpdateEnergy();
-            //Managers.UI.ClosePopupUI(this);
-       },
-       (errorCode) =>
-        {
-            UI_ErrorButtonPopup.ShowErrorButton(Managers.Error.GetError(Define.EErrorCode.ERR_NetworkSettlementErrorResend), onFailed, EScene.SuberunkerSceneHomeScene);
-       });
+        // 에너지 추가는 UpdateEnergy에서 처리하므로 여기서는 아무것도 하지 않음
     }
 
     private void UpdateEnergy(Action onSuccess = null, Action onFailed = null)
@@ -95,7 +79,7 @@ public class UI_EnergyShopPanel : UI_Popup
         Managers.WebContents.ReqDtoInsertEnergy(new ReqDtoInsertEnergy()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
-            Energy = 10 // 구정값인지 아닌지는 수정 알아서
+            Energy = 10 // 고정값인지 아닌지는 수정 알아서
         },
        (response) =>
        {
@@ -103,12 +87,18 @@ public class UI_EnergyShopPanel : UI_Popup
             
             Managers.Game.UserInfo.Energy = response.Energy;
             Managers.Game.UserInfo.PurchaseEnergyCountToday = response.PurchaseEnergyCountToday;
+            
             Managers.Event.TriggerEvent(EEventType.UIRefresh);
-            Managers.UI.ClosePopupUI(this);
+            //Managers.UI.ClosePopupUI(this); // UpdateUserGold에서 닫음
        },
        (errorCode) =>
         {
             UI_ErrorButtonPopup.ShowErrorButton(Managers.Error.GetError(Define.EErrorCode.ERR_NetworkSettlementErrorResend), onFailed, EScene.SuberunkerSceneHomeScene);
        });
+    }
+
+    public void CheckServerTime(DateTime newHeartBeat)
+    {
+        _serverTime = newHeartBeat; // 5초마다 웹소켓에서 전해준 값으로 서버시간 업데이트. 
     }
 }

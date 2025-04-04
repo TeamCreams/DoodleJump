@@ -42,7 +42,7 @@ public class WebRoute
     public readonly static string UpdateEnergy = $"{BaseUrl}User/UpdateEnergy";
     public readonly static Func<ReqDtoInsertEnergy, string> InsertEnergy = (dto) => $"{BaseUrl}User/InsertEnergy?UserAccountId={dto.UserAccountId}&Energy={dto.Energy}";
 
-
+    public readonly static string UpdateRewardClaim = $"{BaseUrl}User/UpdateRewardClaim";
 
     //==================================================
     //     캐시 관련
@@ -555,6 +555,31 @@ public class WebContentsManager
         Managers.Web.SendGetRequest(WebRoute.InsertEnergy(requestDto), (response) =>
         {
             CommonResult<ResDtoInsertEnergy> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertEnergy>>(response);
+            
+            if(rv == null || false == rv.IsSuccess)
+            {
+                onFailed.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                if(rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
+    public void UpdateRewardClaim(ReqDtoUpdateRewardClaim requestDto, Action<ResDtoUpdateRewardClaim> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
+
+        Managers.Web.SendPostRequest(WebRoute.UpdateRewardClaim, body, (response) =>
+        {
+            CommonResult<ResDtoUpdateRewardClaim> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoUpdateRewardClaim>>(response);
             
             if(rv == null || false == rv.IsSuccess)
             {
