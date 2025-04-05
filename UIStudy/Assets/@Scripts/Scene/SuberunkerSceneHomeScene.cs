@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using GameApi.Dtos;
+﻿using GameApi.Dtos;
 using UnityEngine;
 using static Define;
 
 public class SuberunkerSceneHomeScene : BaseScene
 {
-    
+    private System.Random _random = new System.Random();
+
     public override bool Init()
     {
         if (base.Init() == false)
@@ -30,6 +29,29 @@ public class SuberunkerSceneHomeScene : BaseScene
     void OnDestroy()
     {
         Managers.Event.RemoveEvent(EEventType.UpdateEnergy, OnEvent_UpdateEnergy);
+    }
+
+    public int GetRandomReward()
+    {
+        double totalPercent = 0;
+        foreach (var reward in Managers.Data.LoginRewardDataDic.Values)
+        {
+            totalPercent += reward.Percent;
+        }
+
+        double roll = _random.NextDouble() * totalPercent;
+        double cumulative = 0;
+
+        foreach (var reward in Managers.Data.LoginRewardDataDic.Values)
+        {
+            cumulative += reward.Percent;
+            if (roll <= cumulative)
+            {
+                return Managers.Data.LoginRewardDataDic[reward.Id].Reward;
+            }
+        }
+
+        return Managers.Data.LoginRewardDataDic[0].Reward;
     }
 
     public void OnEvent_UpdateEnergy(Component sender, object param)

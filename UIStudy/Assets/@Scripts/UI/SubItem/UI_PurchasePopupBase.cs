@@ -7,7 +7,7 @@ using static Define;
 
 public abstract class UI_PurchasePopupBase : UI_Popup
 {
-    protected enum BaseButtons
+    protected enum BaseImages
     {
         Close_Button,
         Ok_Button
@@ -29,12 +29,12 @@ public abstract class UI_PurchasePopupBase : UI_Popup
         }
 
         // bind 공통 UI
-        BindButtons(typeof(BaseButtons));
+        BindImages(typeof(BaseImages));
         BindTexts(typeof(BaseTexts));
 
         // event
-        GetButton((int)BaseButtons.Close_Button).gameObject.BindEvent(OnClick_ClosePopup, EUIEvent.Click);
-        GetButton((int)BaseButtons.Ok_Button).gameObject.BindEvent(OnEvent_ClickOk, EUIEvent.Click);
+        GetImage((int)BaseImages.Close_Button).gameObject.BindEvent(OnClick_ClosePopup, EUIEvent.Click);
+        GetImage((int)BaseImages.Ok_Button).gameObject.BindEvent(OnEvent_ClickOk, EUIEvent.Click);
 
         return true;
     }
@@ -59,7 +59,7 @@ public abstract class UI_PurchasePopupBase : UI_Popup
        (response) =>
        {
             onSuccess?.Invoke();
-            Managers.Event.TriggerEvent(EEventType.UpdateGold);
+            Managers.Event.TriggerEvent(EEventType.PayGold);
             AfterPurchaseProcess();
             Managers.UI.ClosePopupUI(this);
        },

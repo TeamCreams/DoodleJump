@@ -31,7 +31,8 @@ public class Input_SuberunkerSceneHomeScene : MonoBehaviour //BaseScene
         }
         if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.V))
         {
-            
+            int reward = Scene.GetRandomReward();
+            Debug.Log($"reward : {reward}");
         }
         if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.D))
         {

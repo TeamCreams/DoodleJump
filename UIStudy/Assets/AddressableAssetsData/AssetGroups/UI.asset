@@ -141,6 +141,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bfc0a6999b57d4a5d8c16412328fba9f
+    m_Address: UI_RewardAcquiredPopup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c3f8b9a62295d42f49c9e58de3b98e9f
     m_Address: UI_PurchasePopup
     m_ReadOnly: 0

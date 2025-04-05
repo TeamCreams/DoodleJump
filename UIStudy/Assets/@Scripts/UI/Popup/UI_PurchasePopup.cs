@@ -13,7 +13,7 @@ public class UI_PurchasePopup : UI_PurchasePopupBase
     {
         Noctice_ImageGroup,
     }
-    private enum Buttons
+    private enum Images
     {
         Close_Button,
         Ok_Button
@@ -88,11 +88,11 @@ public class UI_PurchasePopup : UI_PurchasePopupBase
 
     protected override void OnEvent_ClickOk(PointerEventData eventData)
     {
-        Managers.Game.RemainingChange = 0;
+        Managers.Game.GoldTochange = 0;
         int remainingChange = Managers.Game.UserInfo.Gold - _gold;
         if(0 <= remainingChange)
         {
-            Managers.Game.RemainingChange = remainingChange;
+            Managers.Game.GoldTochange = remainingChange;
             UpdateUserGold(() => {
                 _purchaseStruct.OnOkay?.Invoke();
             });

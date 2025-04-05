@@ -21,6 +21,8 @@ public class UI_LoginReward : UI_Base
     private ScrollRect _parentScrollRect = null;
     private DateTime _nextRewardTime;
     private TimeSpan _chargeTime;
+    private SuberunkerSceneHomeScene _scene;
+
     public override bool Init()
     {
         if (base.Init() == false)
@@ -38,6 +40,7 @@ public class UI_LoginReward : UI_Base
         Managers.SignalR.OnChangedHeartBeat -= CheckServerTime; // 구독 해제
         Managers.SignalR.OnChangedHeartBeat += CheckServerTime; // 이벤트 구독
 
+        _scene = Managers.Scene.CurrentScene as SuberunkerSceneHomeScene;
         return true;
     }
 
@@ -56,24 +59,9 @@ public class UI_LoginReward : UI_Base
         {
             return;
         }
-        var loadingComplete = UI_LoadingPopup.Show();
-        Managers.WebContents.UpdateRewardClaim(new ReqDtoUpdateRewardClaim()
-        {
-            UserAccountId = Managers.Game.UserInfo.UserAccountId,
-            Gold = 200 // 임시 가격
-        },
-        (response) =>
-        {
-            loadingComplete.Value = true;
-            Managers.Game.UserInfo.Gold = response.Gold;
-            Managers.Game.UserInfo.LastRewardClaimTime = response.LastRewardClaimTime;
-            Managers.Event.TriggerEvent(EEventType.UpdateGold);
-        },
-       (errorCode) =>
-        {   
-            loadingComplete.Value = true;
-            UI_ErrorButtonPopup.ShowErrorButton(Managers.Error.GetError(Define.EErrorCode.ERR_NetworkSettlementErrorResend));
-        });
+        int gold = _scene.GetRandomReward();
+        UI_RewardAcquiredPopup popup = Managers.UI.ShowPopupUI<UI_RewardAcquiredPopup>();
+        popup.SetInfo(gold);
     }
     public void CheckServerTime(DateTime newHeartBeat)
     {

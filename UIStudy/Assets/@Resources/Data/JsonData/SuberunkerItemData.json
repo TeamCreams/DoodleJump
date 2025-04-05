@@ -3,7 +3,7 @@
     {
       "Id": 30001,
       "Name": "Swift Boots",
-      "Chance": 0.6,
+      "Chance": 20.0,
       "Option1": 1,
       "Option1ModifierType": 1,
       "Option1Param": 40.0,
@@ -17,13 +17,13 @@
       "Option4ModifierType": 0,
       "Option4Param": 0.0,
       "AddHp": 0.0,
-      "Duration": 3.0,
+      "Duration": 5.0,
       "Gold": 10
     },
     {
       "Id": 30002,
       "Name": "Luck Charm",
-      "Chance": 0.6,
+      "Chance": 20.0,
       "Option1": 2,
       "Option1ModifierType": 1,
       "Option1Param": 20.0,
@@ -37,13 +37,13 @@
       "Option4ModifierType": 0,
       "Option4Param": 0.0,
       "AddHp": 0.0,
-      "Duration": 3.0,
+      "Duration": 5.0,
       "Gold": 10
     },
     {
       "Id": 30003,
       "Name": "Life Ring",
-      "Chance": 0.6,
+      "Chance": 20.0,
       "Option1": 0,
       "Option1ModifierType": 0,
       "Option1Param": 0.0,
@@ -63,7 +63,7 @@
     {
       "Id": 30004,
       "Name": "Speed Cloak",
-      "Chance": 0.85,
+      "Chance": 10.0,
       "Option1": 1,
       "Option1ModifierType": 1,
       "Option1Param": 60.0,
@@ -77,13 +77,13 @@
       "Option4ModifierType": 0,
       "Option4Param": 0.0,
       "AddHp": 0.0,
-      "Duration": 5.0,
+      "Duration": 6.0,
       "Gold": 30
     },
     {
       "Id": 30005,
       "Name": "Fortune Blade",
-      "Chance": 0.85,
+      "Chance": 5.0,
       "Option1": 2,
       "Option1ModifierType": 1,
       "Option1Param": 30.0,
@@ -97,13 +97,13 @@
       "Option4ModifierType": 0,
       "Option4Param": 0.0,
       "AddHp": 20.0,
-      "Duration": 5.0,
+      "Duration": 6.0,
       "Gold": 30
     },
     {
       "Id": 30006,
       "Name": "Vital Amulet",
-      "Chance": 0.6,
+      "Chance": 15.0,
       "Option1": 0,
       "Option1ModifierType": 0,
       "Option1Param": 0.0,
@@ -123,7 +123,7 @@
     {
       "Id": 30007,
       "Name": "Lucky Coin",
-      "Chance": 0.85,
+      "Chance": 5.0,
       "Option1": 2,
       "Option1ModifierType": 1,
       "Option1Param": 30.0,
@@ -143,7 +143,7 @@
     {
       "Id": 30008,
       "Name": "Speed Potion",
-      "Chance": 0.6,
+      "Chance": 3.0,
       "Option1": 1,
       "Option1ModifierType": 0,
       "Option1Param": 50.0,
@@ -157,7 +157,7 @@
       "Option4ModifierType": 0,
       "Option4Param": 0.0,
       "AddHp": 0.0,
-      "Duration": 3.0,
+      "Duration": 8.0,
       "Gold": 10
     },
     {

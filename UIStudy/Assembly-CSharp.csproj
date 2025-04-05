@@ -332,6 +332,7 @@
     <Compile Include="Assets/HeroEditor/Common/Scripts/ExampleScripts/PlayingAnimations.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_SignUpScene.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Firearms/Shell.cs" />
+    <Compile Include="Assets/@Scripts/UI/Popup/UI_RewardAcquiredPopup.cs" />
     <Compile Include="Assets/@Scripts/Managers/Core/SceneManagerEx.cs" />
   </ItemGroup>
   <ItemGroup>

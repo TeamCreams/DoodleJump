@@ -1,0 +1,94 @@
+{
+  "loginRewardDatas": [
+    {
+      "Id": 240001,
+      "Reward": 200,
+      "Percent": 30.0
+    },
+    {
+      "Id": 240002,
+      "Reward": 250,
+      "Percent": 25.0
+    },
+    {
+      "Id": 240003,
+      "Reward": 300,
+      "Percent": 20.0
+    },
+    {
+      "Id": 240004,
+      "Reward": 350,
+      "Percent": 6.0
+    },
+    {
+      "Id": 240005,
+      "Reward": 400,
+      "Percent": 5.0
+    },
+    {
+      "Id": 240006,
+      "Reward": 450,
+      "Percent": 4.0
+    },
+    {
+      "Id": 240007,
+      "Reward": 500,
+      "Percent": 3.0
+    },
+    {
+      "Id": 240008,
+      "Reward": 550,
+      "Percent": 2.5
+    },
+    {
+      "Id": 240009,
+      "Reward": 600,
+      "Percent": 1.5
+    },
+    {
+      "Id": 240010,
+      "Reward": 650,
+      "Percent": 1.0
+    },
+    {
+      "Id": 240011,
+      "Reward": 700,
+      "Percent": 0.5
+    },
+    {
+      "Id": 240012,
+      "Reward": 750,
+      "Percent": 0.3
+    },
+    {
+      "Id": 240013,
+      "Reward": 800,
+      "Percent": 0.2
+    },
+    {
+      "Id": 240014,
+      "Reward": 850,
+      "Percent": 0.15
+    },
+    {
+      "Id": 240015,
+      "Reward": 900,
+      "Percent": 0.1
+    },
+    {
+      "Id": 240016,
+      "Reward": 950,
+      "Percent": 0.07
+    },
+    {
+      "Id": 240017,
+      "Reward": 1000,
+      "Percent": 0.05
+    },
+    {
+      "Id": 240018,
+      "Reward": 2000,
+      "Percent": 0.001
+    }
+  ]
+}

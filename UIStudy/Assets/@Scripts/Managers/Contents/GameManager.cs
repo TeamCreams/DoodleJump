@@ -126,7 +126,7 @@ public class GameManager
     }
 
     private int _remainingChange;
-    public int RemainingChange
+    public int GoldTochange
     {
         get { return _remainingChange; }
         set

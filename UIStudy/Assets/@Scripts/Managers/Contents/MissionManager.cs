@@ -191,12 +191,13 @@ public class MissionManager
        {
             onSuccess?.Invoke();
             Debug.Log("CompleteUserMission is success");
-            Managers.Game.UserInfo.Gold = response.Gold;
+            Managers.Game.GoldTochange = response.Gold;
             foreach (var mission in response.List)
             {
                 _dicts[mission.MissionId].MissionStatus = mission.MissionStatus;
                 _dicts[mission.MissionId].Param1 = mission.Param1;
             }
+            Managers.Event.TriggerEvent(EEventType.AddGold);
             Managers.Event.TriggerEvent(EEventType.UIRefresh);
             Managers.Event.TriggerEvent(EEventType.Mission);
        },

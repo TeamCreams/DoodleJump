@@ -501,7 +501,6 @@ namespace Data
         }
     }
 
-
     public class CashItemData
     {
         public int Id;
@@ -519,6 +518,27 @@ namespace Data
             Dictionary<int, CashItemData> dict = new Dictionary<int, CashItemData>();
             foreach (CashItemData cashItemData in cashItemDatas)
                 dict.Add(cashItemData.Id, cashItemData);
+
+            return dict;
+        }
+    }
+
+    public class LoginRewardData
+    {
+        public int Id;
+        public int Reward;
+        public float Percent;
+    }
+    [Serializable]
+    public class LoginRewardDataLoader : ILoader<int, LoginRewardData>
+    {
+        public List<LoginRewardData> loginRewardDatas = new List<LoginRewardData>();
+
+        public Dictionary<int, LoginRewardData> MakeDict()
+        {
+            Dictionary<int, LoginRewardData> dict = new Dictionary<int, LoginRewardData>();
+            foreach (LoginRewardData loginRewardData in loginRewardDatas)
+                dict.Add(loginRewardData.Id, loginRewardData);
 
             return dict;
         }

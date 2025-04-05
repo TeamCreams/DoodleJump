@@ -17,7 +17,6 @@ public class UI_EnergyShopPanel : UI_PurchasePopupBase
         Gold_Text,
         UpdateTime_Text
     }
-    private DateTime _serverTime = new DateTime();
 
     public override bool Init()
     {
@@ -34,15 +33,12 @@ public class UI_EnergyShopPanel : UI_PurchasePopupBase
 
         //Event
         //Managers.Event.AddEvent(EEventType.EnterShop, SetMerchandiseItems);
-        Managers.SignalR.OnChangedHeartBeat -= CheckServerTime; // 구독 해제
-        Managers.SignalR.OnChangedHeartBeat += CheckServerTime; // 이벤트 구독
         return true;
     }
     protected override void OnDestroy()
     {
         base.OnDestroy();
         //Managers.Event.RemoveEvent(EEventType.EnterShop, SetMerchandiseItems);
-        Managers.SignalR.OnChangedHeartBeat -= CheckServerTime; // 구독 해제
     }  
 
     public void SetInfo()
@@ -57,7 +53,7 @@ public class UI_EnergyShopPanel : UI_PurchasePopupBase
         int remainingChange = Managers.Game.UserInfo.Gold - _gold;
         if(0 <= remainingChange)
         {
-            Managers.Game.RemainingChange = remainingChange;
+            Managers.Game.GoldTochange = remainingChange;
             UpdateUserGold(() => {
                 UpdateEnergy();
             });
@@ -95,10 +91,5 @@ public class UI_EnergyShopPanel : UI_PurchasePopupBase
         {
             UI_ErrorButtonPopup.ShowErrorButton(Managers.Error.GetError(Define.EErrorCode.ERR_NetworkSettlementErrorResend), onFailed, EScene.SuberunkerSceneHomeScene);
        });
-    }
-
-    public void CheckServerTime(DateTime newHeartBeat)
-    {
-        _serverTime = newHeartBeat; // 5초마다 웹소켓에서 전해준 값으로 서버시간 업데이트. 
     }
 }

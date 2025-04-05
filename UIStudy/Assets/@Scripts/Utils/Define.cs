@@ -103,7 +103,8 @@ public static class Define
         ReceiveMessage,
         LoadScene,
         EnterShop,
-        UpdateGold
+        PayGold,
+        AddGold
     }
 
     // 서버와 값 공유중, 함부로 수정 금지.
