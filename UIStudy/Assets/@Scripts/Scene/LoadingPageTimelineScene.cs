@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -82,12 +82,13 @@ public class LoadingPageTimelineScene : BaseScene
             {
                 progress = 1;
                 _ui.UpdateProgress(progress);
+                _loading.allowSceneActivation = true;
                 break;
             }
             yield return null;
         }
         _loadTotalCount++;
         _ui.UpdateTotalProgress(_loadTotalCount, _totalCount);
-        _ui.PlayableDirector.stopped += _ui.OnPlayableDirectorStopped;
+        //_ui.PlayableDirector.stopped += _ui.OnPlayableDirectorStopped;
     }
 }

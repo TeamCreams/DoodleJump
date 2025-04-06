@@ -7,6 +7,23 @@
       "dependencies": {},
       "hash": "36d3260fdca03bf6feb105c67022d1fd7629dd2f"
     },
+    "com.google.external-dependency-manager": {
+      "version": "https://github.com/googlesamples/unity-jar-resolver.git?path=upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "8cf54b63e37dceaf1630135f9abddf08167500a1"
+    },
+    "com.google.signin": {
+      "version": "https://github.com/Thaina/google-signin-unity.git#newmigration",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.2.1",
+        "com.google.external-dependency-manager": "1.2.175"
+      },
+      "hash": "19bc0bb1d25dfd88a698bb60aca69d8b03c3a50c"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,

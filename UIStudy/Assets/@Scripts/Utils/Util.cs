@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Net;
 using UnityEngine;
-
 
 public static class Util
 {
@@ -84,4 +84,32 @@ public static class Util
 	{
 		return (T)Enum.Parse(typeof(T), value, true);
 	}
+}
+
+
+
+public static class QueryStringParser
+{
+    public static Dictionary<string, string> ParseQueryString(string query)
+    {
+        var dict = new Dictionary<string, string>();
+        if (string.IsNullOrEmpty(query))
+            return dict;
+
+        // 맨 앞의 '?' 제거
+        if (query.StartsWith("?"))
+            query = query.Substring(1);
+
+        var pairs = query.Split('&', StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (var pair in pairs)
+        {
+            var kvp = pair.Split('=', 2);
+            var key = WebUtility.UrlDecode(kvp[0]);
+            var value = kvp.Length > 1 ? WebUtility.UrlDecode(kvp[1]) : "";
+            dict[key] = value;
+        }
+
+        return dict;
+    }
 }

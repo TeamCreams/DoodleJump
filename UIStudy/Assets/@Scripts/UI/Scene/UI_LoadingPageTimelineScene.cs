@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -66,7 +66,7 @@ public class UI_LoadingPageTimelineScene : UI_Scene
 
     public void OnPlayableDirectorStopped(PlayableDirector director)
     {
-        _currentScene.Loading.allowSceneActivation = true;
+        //_currentScene.Loading.allowSceneActivation = true;
     }
 
     private void StartLoadAssets(string label)

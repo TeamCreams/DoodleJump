@@ -1,10 +1,13 @@
 ﻿using Data;
+using Firebase.Auth;
+using Google;
 using Gpm.WebView;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.XR;
@@ -28,46 +31,54 @@ public class GoogleLoginWebViewSystem
             {
             "USER_ CUSTOM_SCHEME"
             });
+
+        
     }
 
-    private void OnOpenCallback(GpmWebViewError error)
+    public void SignIn()
     {
-        if (error == null)
+        GoogleSignIn.Configuration = new GoogleSignInConfiguration
         {
-            Debug.Log("[OnOpenCallback] succeeded.");
-        }
-        else
-        {
-            Debug.Log(string.Format("[OnOpenCallback] failed. error:{0}", error));
-        }
-    }
+            RequestIdToken = true,
+            // Copy this value from the google-service.json file.
+            // oauth_client with type == 3
+            WebClientId = "550559090082-5fchrj8tj3arltl2ktv615hla7f3veat.apps.googleusercontent.com"
+        };
 
-    private void OnCloseCallback(GpmWebViewError error)
-    {
-        if (error == null)
-        {
-            Debug.Log("[OnCloseCallback] succeeded.");
-        }
-        else
-        {
-            Debug.Log(string.Format("[OnCloseCallback] failed. error:{0}", error));
-        }
-    }
+        Task<GoogleSignInUser> signIn = GoogleSignIn.DefaultInstance.SignIn();
 
-    private void OnSchemeEvent(string data, GpmWebViewError error)
-    {
-        if (error == null)
-        {
-            Debug.Log("[OnSchemeEvent] succeeded.");
-
-            if (data.Equals("USER_ CUSTOM_SCHEME") == true || data.Contains("CUSTOM_SCHEME") == true)
+        TaskCompletionSource<FirebaseUser> signInCompleted = new TaskCompletionSource<FirebaseUser>();
+        signIn.ContinueWith(task => {
+            if (task.IsCanceled)
             {
-                Debug.Log(string.Format("scheme:{0}", data));
+                signInCompleted.SetCanceled();
             }
-        }
-        else
-        {
-            Debug.Log(string.Format("[OnSchemeEvent] failed. error:{0}", error));
-        }
+            else if (task.IsFaulted)
+            {
+                signInCompleted.SetException(task.Exception);
+            }
+            else
+            {
+
+                Credential credential = Firebase.Auth.GoogleAuthProvider.GetCredential(((Task<GoogleSignInUser>)task).Result.IdToken, null);
+                FirebaseAuth.DefaultInstance.SignInWithCredentialAsync(credential).ContinueWith(async authTask => {
+                    if (authTask.IsCanceled)
+                    {
+                        signInCompleted.SetCanceled();
+                    }
+                    else if (authTask.IsFaulted)
+                    {
+                        signInCompleted.SetException(authTask.Exception);
+                    }
+                    else
+                    {
+                        signInCompleted.SetResult(((Task<FirebaseUser>)authTask).Result);
+
+                        var token = await ((Task<FirebaseUser>)authTask).Result.TokenAsync(false);
+
+                    }
+                });
+            }
+        });
     }
 }
