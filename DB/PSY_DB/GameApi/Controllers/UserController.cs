@@ -1363,16 +1363,12 @@ namespace GameApi.Controllers
 
                 int count = (int)diffTime.TotalSeconds / 300;
                 int prevEnergy = userAccount.Energy;
-                if (10 <= userAccount.Energy + count)
-                {
-                    userAccount.Energy = 10;
-                }
-                else
+                if (userAccount.Energy + count <= 10) // 기본 최대 값은 10.
                 {
                     userAccount.Energy = userAccount.Energy + count;
                 }
-                
-                if(prevEnergy != userAccount.Energy)
+
+                if (prevEnergy != userAccount.Energy)
                 {
                     userAccount.LatelyEnergy = userAccount.LatelyEnergy.Add(diffTime);
                 }
