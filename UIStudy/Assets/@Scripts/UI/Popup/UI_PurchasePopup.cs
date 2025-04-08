@@ -40,7 +40,7 @@ public class UI_PurchasePopup : UI_PurchasePopupBase
         //bind
         BindObjects(typeof(GameObjects));
         //BindButtons(typeof(Buttons));
-        //BindTexts(typeof(Texts));
+        BindTexts(typeof(Texts));
 
         //get
         //GetButton((int)Buttons.Close_Button).gameObject.BindEvent(OnEvent_ClickClose, EUIEvent.Click);
@@ -67,7 +67,7 @@ public class UI_PurchasePopup : UI_PurchasePopupBase
                 UpdateCharacterStyle();
                 _title = 91047;
                 _notice = 91049;
-                GetText((int)BaseTexts.Gold_Text).text = HardCoding.ChangeStyleGold.ToString();
+                GetText((int)Texts.Gold_Text).text = HardCoding.ChangeStyleGold.ToString();
                 _gold = HardCoding.ChangeStyleGold;
             } 
             break;
@@ -76,7 +76,7 @@ public class UI_PurchasePopup : UI_PurchasePopupBase
                 _title = 91048;
                 _notice = 91050;
                 _item = Managers.Data.EvolutionDataDic[_purchaseStruct.Id];
-                GetText((int)BaseTexts.Gold_Text).text = _item.Gold.ToString();
+                GetText((int)Texts.Gold_Text).text = _item.Gold.ToString();
                 _gold = _item.Gold;
             }
             break;
@@ -84,6 +84,12 @@ public class UI_PurchasePopup : UI_PurchasePopupBase
             break;
         }
         OnEvent_SetLanguage(null, null);
+    }
+
+    protected override void OnClick_ClosePopup(PointerEventData eventData)
+    {
+        base.OnClick_ClosePopup(eventData);
+        _purchaseStruct.OnClose?.Invoke();
     }
 
     protected override void OnEvent_ClickOk(PointerEventData eventData)
@@ -150,8 +156,8 @@ public class UI_PurchasePopup : UI_PurchasePopupBase
 
     void OnEvent_SetLanguage(Component sender, object param)
     {
-        GetText((int)BaseTexts.Title_Text).text = Managers.Language.LocalizedString(_title);
+        GetText((int)Texts.Title_Text).text = Managers.Language.LocalizedString(_title);
         GetText((int)Texts.Notice_Text).text = Managers.Language.LocalizedString(_notice);
-        GetText((int)BaseTexts.Gold_Text).text = Managers.Language.LocalizedString(91052);
+        GetText((int)Texts.Ok_Text).text = Managers.Language.LocalizedString(91052);
     }
 }

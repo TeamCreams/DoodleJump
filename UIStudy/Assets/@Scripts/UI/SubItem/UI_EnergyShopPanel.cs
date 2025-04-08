@@ -25,8 +25,8 @@ public class UI_EnergyShopPanel : UI_PurchasePopupBase
             return false;
         }
         //Bind
-        BindImages(typeof(Images));
-        //BindTexts(typeof(Texts));
+        //BindImages(typeof(Images));
+        BindTexts(typeof(Texts));
         //Get
         //GetImage((int)Images.Close_Button).gameObject.BindEvent(OnClick_ClosePopup, EUIEvent.Click);
         //GetImage((int)Images.Ok_Button).gameObject.BindEvent(OnEvent_ClickOk, EUIEvent.Click);
@@ -45,7 +45,7 @@ public class UI_EnergyShopPanel : UI_PurchasePopupBase
     {
         int purchaseMultiplier = Managers.Game.UserInfo.PurchaseEnergyCountToday + 1;
         _gold = purchaseMultiplier * HardCoding.ChangeStyleGold; // 임시 가격
-        GetText((int)BaseTexts.Gold_Text).text = _gold.ToString();
+        GetText((int)Texts.Gold_Text).text = _gold.ToString();
     }
 
     protected override void OnEvent_ClickOk(PointerEventData eventData)

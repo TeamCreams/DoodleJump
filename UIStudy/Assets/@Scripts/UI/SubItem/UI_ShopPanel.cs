@@ -52,14 +52,15 @@ public class UI_ShopPanel : UI_Popup
     private void SetMerchandiseItems(Component sender = null, object param = null)
     {
         AllPush();
-        
+
+        var loginReward = Managers.UI.MakeSubItem<UI_LoginReward>(parent: _contentRoot);
+        loginReward.SetInfo();
+
         var list = Managers.Data.CashItemDataDic;
         foreach (var item in list)
         { 
             SpawnItem(item.Value.Id);
         }
-        var loginReward = Managers.UI.MakeSubItem<UI_LoginReward>(parent: _contentRoot);
-        loginReward.SetInfo();
     }
 
     private void AllPush()

@@ -41,6 +41,9 @@ public class UI_LoginReward : UI_Base
         Managers.SignalR.OnChangedHeartBeat += CheckServerTime; // 이벤트 구독
 
         _scene = Managers.Scene.CurrentScene as SuberunkerSceneHomeScene;
+
+        // hierarchy 순서 변경
+        this.transform.SetAsFirstSibling();
         return true;
     }
 

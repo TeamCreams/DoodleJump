@@ -30,7 +30,7 @@ public abstract class UI_PurchasePopupBase : UI_Popup
 
         // bind 공통 UI
         BindImages(typeof(BaseImages));
-        BindTexts(typeof(BaseTexts));
+        //BindTexts(typeof(BaseTexts));
 
         // event
         GetImage((int)BaseImages.Close_Button).gameObject.BindEvent(OnClick_ClosePopup, EUIEvent.Click);
@@ -74,5 +74,7 @@ public abstract class UI_PurchasePopupBase : UI_Popup
     protected virtual void ShowGoldInsufficientError()
     {
         UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_GoldInsufficient));
+        Managers.UI.ShowPopupUI<UI_ShopPanel>();
+        Managers.Event.TriggerEvent(EEventType.EnterShop);
     }
 }

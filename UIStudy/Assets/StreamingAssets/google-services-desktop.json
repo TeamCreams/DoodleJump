@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "550559090082",
+    "project_id": "suberunker-cba54",
+    "storage_bucket": "suberunker-cba54.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550559090082:android:2ff88a5a03b408fec39efb",
+        "android_client_info": {
+          "package_name": "com.creams.suberunker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzYHLmyRNElHLw0u_YkWg7alQJIsiuOfA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
