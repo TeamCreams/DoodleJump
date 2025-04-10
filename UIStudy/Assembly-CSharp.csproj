@@ -287,6 +287,7 @@
     <Compile Include="Assets/@Scripts/Controller/PlayerController.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/CaptureOptions.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterExtensions.cs" />
+    <Compile Include="Assets/@Scripts/Controller/StoneShardController.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Firearms/Firearm.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/ShopBase.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/Monster.cs" />
@@ -322,8 +323,8 @@
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Enums/ItemTag.cs" />
     <Compile Include="Assets/@Scripts/Managers/Contents/MissionManager.cs" />
     <Compile Include="Assets/@Scripts/Managers/Core/EventManager.cs" />
-    <Compile Include="Assets/@Scripts/UI/SubItem/UI_ChooseStats.cs" />
     <Compile Include="Assets/@Scripts/UI/Popup/UI_PurchasePopupBase.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_ChooseStats.cs" />
     <Compile Include="Assets/@Scripts/Hubs/UI_SignalRTest.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Enums/ItemRarity.cs" />
     <Compile Include="Assets/@Scripts/UI/Kakao/TextController.cs" />

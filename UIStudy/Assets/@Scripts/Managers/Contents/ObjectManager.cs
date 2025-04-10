@@ -70,6 +70,13 @@ public class ObjectManager
 
             return item;
         }
+        else if (typeof(T) == typeof(StoneShardController))
+        {
+            GameObject go = Managers.Resource.Instantiate("Entity", pooling: true);
+            StoneShardController stone = go.GetOrAddComponent<StoneShardController>();
+            stone.Teleport(pos);
+            return go;
+        }
         // else if (typeof(T) == typeof(Confetti_Particle))
         // {
         //     GameObject item = Managers.Resource.Instantiate("Confetti_Particle", pooling: true);
