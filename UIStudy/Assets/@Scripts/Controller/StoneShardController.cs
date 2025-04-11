@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using Data;
 using UnityEngine;
 using static Define;
@@ -31,8 +31,9 @@ public class StoneShardController : ObjectBase
         _data = data;
 
         // rigidbody 수정
-        _rigidbody.linearVelocity = direction; // 한 방향으로 날아가기만 하면 돼서 fixed Update에 쓸 필요 없음
-        _rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        _rigidbody.AddForce(direction, ForceMode.VelocityChange);
+        //_rigidbody.linearVelocity = direction; // 한 방향으로 날아가기만 하면 돼서 fixed Update에 쓸 필요 없음
+        //_rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         _rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
 
         // 사이즈 조절
@@ -44,7 +45,7 @@ public class StoneShardController : ObjectBase
     private IEnumerator CallingPool()
     {
         yield return new WaitForSeconds(_lifeTime);
-        Managers.Pool.Push(this.gameObject);
+        Managers.Resource.Destroy(this.gameObject);
     }
 
     private void Attack(Collider collision)
@@ -66,7 +67,7 @@ public class StoneShardController : ObjectBase
             {
                 Managers.Event.TriggerEvent(EEventType.Attacked_Player, this, _data.Damage);
             }
-            Managers.Pool.Push(this.gameObject);
+            Managers.Resource.Destroy(this.gameObject);
         }
     }
     public void Teleport(Vector3 pos)

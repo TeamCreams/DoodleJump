@@ -39,46 +39,47 @@ public class GoogleLoginWebViewSystem
     {
         GoogleSignIn.Configuration = new GoogleSignInConfiguration
         {
+            RequestEmail = true,
+            RequestProfile = true,
             RequestIdToken = true,
-            // Copy this value from the google-service.json file.
-            // oauth_client with type == 3
-            WebClientId = "550559090082-5fchrj8tj3arltl2ktv615hla7f3veat.apps.googleusercontent.com"
+            RequestAuthCode = true,
+            WebClientId = "550559090082-5fchrj8tj3arltl2ktv615hla7f3veat.apps.googleusercontent.com",
+#if UNITY_EDITOR || UNITY_STANDALONE
+            ClientSecret = "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"
+#endif
         };
 
-        Task<GoogleSignInUser> signIn = GoogleSignIn.DefaultInstance.SignIn();
+        GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished, TaskScheduler.FromCurrentSynchronizationContext());
+    }
 
-        TaskCompletionSource<FirebaseUser> signInCompleted = new TaskCompletionSource<FirebaseUser>();
-        signIn.ContinueWith(task => {
-            if (task.IsCanceled)
+
+    internal void OnAuthenticationFinished(Task<GoogleSignInUser> task)
+    {
+        if (task.IsFaulted)
+        {
+            using (IEnumerator<System.Exception> enumerator =
+                    task.Exception.InnerExceptions.GetEnumerator())
             {
-                signInCompleted.SetCanceled();
+                if (enumerator.MoveNext())
+                {
+                    GoogleSignIn.SignInException error =
+                            (GoogleSignIn.SignInException)enumerator.Current;
+                    Debug.Log("Got Error: " + error.Status + " " + error.Message);
+                }
+                else
+                {
+                    Debug.Log("Got Unexpected Exception?!?" + task.Exception);
+                }
             }
-            else if (task.IsFaulted)
-            {
-                signInCompleted.SetException(task.Exception);
-            }
-            else
-            {
-
-                Credential credential = Firebase.Auth.GoogleAuthProvider.GetCredential(((Task<GoogleSignInUser>)task).Result.IdToken, null);
-                FirebaseAuth.DefaultInstance.SignInWithCredentialAsync(credential).ContinueWith(async authTask => {
-                    if (authTask.IsCanceled)
-                    {
-                        signInCompleted.SetCanceled();
-                    }
-                    else if (authTask.IsFaulted)
-                    {
-                        signInCompleted.SetException(authTask.Exception);
-                    }
-                    else
-                    {
-                        signInCompleted.SetResult(((Task<FirebaseUser>)authTask).Result);
-
-                        var token = await ((Task<FirebaseUser>)authTask).Result.TokenAsync(false);
-
-                    }
-                });
-            }
-        });
+        }
+        else if (task.IsCanceled)
+        {
+            Debug.Log("Canceled");
+        }
+        else
+        {
+            Debug.Log("Welcome: " + task.Result.DisplayName + "!");
+            Debug.Log("Welcome: " + task.Result.UserId + "!");
+        }
     }
 }

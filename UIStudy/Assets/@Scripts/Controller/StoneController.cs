@@ -80,16 +80,17 @@ public class StoneController : ObjectBase
             // 스톤샤워가 아닐 경우에만 돌 개수 체크
             if (_isNotStoneShower == true)
             {
-                // Managers.Game.DifficultySettingsInfo.StoneCount++;
-                // Managers.Game.DifficultySettingsInfo.ChallengeScale++;
-                // Managers.Game.GetScore.Total += 5;
-                // Managers.Game.DifficultySettingsInfo.ChallengeScaleCount--;
-                // Managers.Event.TriggerEvent(EEventType.UIStoneCountRefresh);
+                Managers.Game.DifficultySettingsInfo.StoneCount++;
+                Managers.Game.DifficultySettingsInfo.ChallengeScale++;
+                Managers.Game.GetScore.Total += 5;
+                Managers.Game.DifficultySettingsInfo.ChallengeScaleCount--;
+                Managers.Event.TriggerEvent(EEventType.UIStoneCountRefresh);
 
                 // 랜덤한 확률로 실행
                 SpawnStoneShards(); // 이게 실행되는 동안 돌이 계속 땅과 닿아있어서 push가 안되고 점수가 계속 올라감
             }
             Managers.Pool.Push(this.gameObject);
+            //Managers.Resource.Destroy(this.gameObject);
         }
     }
 
