@@ -2,7 +2,6 @@
 using static Define;
 using UnityEngine;
 using GameApi.Dtos;
-using UnityEditor.SearchService;
 
 public class ChooseCharacterScene : BaseScene
 {

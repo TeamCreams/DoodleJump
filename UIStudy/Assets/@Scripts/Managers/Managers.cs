@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Managers : MonoBehaviour

@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System;
 using WebApi.Models.Dto;
-using UnityEditor.PackageManager;
 
 public class UI_SignUpScene : UI_Scene
 {
