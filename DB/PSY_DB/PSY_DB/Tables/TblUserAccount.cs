@@ -15,11 +15,9 @@ public partial class TblUserAccount
 {
     [Required]
     public int Id { get; set; }
-    [Required]
     [Comment("계정 이름")]
     [SqlDefaultValue("NewAccount")]
     public string? UserName { get; set; }
-    [Required]
     [Comment("계정 비밀번호")]
     [SqlDefaultValue("0000")]
     public string? Password { get; set; }
@@ -27,6 +25,10 @@ public partial class TblUserAccount
     [Comment("계정 닉네임")]
     [SqlDefaultValue("Empty")]
     public string? Nickname { get; set; }
+    [Comment("구글 계정")]
+    [SqlDefaultValue("GoogleAccount")]
+    public string? GoogleAccount { get; set; }
+
 
     //[Required]
     //현재 컬럼상 DeletedDate말고는 모두 Required 처리를 해주는게 맞다.

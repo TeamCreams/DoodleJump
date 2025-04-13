@@ -131,6 +131,7 @@ namespace GameApi.Controllers
                         UserName = user.UserName,
                         Password = user.Password,
                         Nickname = user.Nickname,
+                        GoogleAccount = user.GoogleAccount,
                         RegisterDate = user.RegisterDate,
                         UpdateDate = user.UpdateDate,
                         HighScore = user.TblUserScores
@@ -483,6 +484,64 @@ namespace GameApi.Controllers
             return rv;
         }
 
+        [HttpPost("AddGoogleAccount")]
+        public async Task<CommonResult<ResDtoAddGoogleAccount>>
+            InsertUserAccountScore([FromBody] ReqDtoAddGoogleAccount requestDto)
+        {
+            CommonResult<ResDtoAddGoogleAccount> rv = new();
+
+            try
+            {
+                var select = await (from user in _context.TblUserAccounts
+                                    where (user.Id == requestDto.UserAccountId &&
+                                        user.DeletedDate == null)
+                                    select user
+                                    ).FirstOrDefaultAsync();
+
+                if (select == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                       $"UserId : {requestDto.UserAccountId}");
+                }
+
+                select.GoogleAccount = requestDto.GoogleAccount;
+
+                _context.TblUserAccounts.Update(select);
+                
+                var IsSuccess = await _context.SaveChangesAsync();
+
+                if (IsSuccess == 0)
+                {
+                    throw new CommonException(EStatusCode.ChangedRowsIsZero,
+                        $"UserId : {requestDto.UserAccountId}");
+                }
+                else
+                {
+                    rv.IsSuccess = true;
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Data = null;
+                }
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = null;
+
+                return rv;
+            }
+            return rv;
+        }
+
         [HttpPost("InsertUserAccountScore")]
         public async Task<CommonResult<ResDtoInsertUserAccountScore>>
             InsertUserAccountScore([FromBody] ReqDtoInsertUserAccountScore requestDto)
@@ -647,6 +706,7 @@ namespace GameApi.Controllers
                         UserAccountId = user.Id,
                         UserName = user.UserName,
                         Nickname = user.Nickname,
+                        GoogleAccount = user.GoogleAccount,
                         RegisterDate = user.RegisterDate,
                         UpdateDate = user.UpdateDate,
                         HighScore = user.TblUserScores
