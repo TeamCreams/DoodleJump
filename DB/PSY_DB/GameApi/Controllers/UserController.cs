@@ -68,6 +68,7 @@ namespace GameApi.Controllers
                     userAccount.UserName = requestDto.UserName;
                     userAccount.Password = requestDto.Password;
                     userAccount.Nickname = requestDto.NickName;
+                    userAccount.GoogleAccount = requestDto.GoogleAccount;
                     userAccount.HairStyle = "Afro";
                     userAccount.EyebrowStyle = "AnnoyedEyebrows";
                     userAccount.EyesStyle = "Annoyed";

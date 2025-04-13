@@ -26,8 +26,8 @@ public partial class TblUserAccount
     [SqlDefaultValue("Empty")]
     public string? Nickname { get; set; }
     [Comment("구글 계정")]
-    [SqlDefaultValue("GoogleAccount")]
-    public string? GoogleAccount { get; set; }
+    [SqlDefaultValue("0000")]
+    public int GoogleAccount { get; set; }
 
 
     //[Required]

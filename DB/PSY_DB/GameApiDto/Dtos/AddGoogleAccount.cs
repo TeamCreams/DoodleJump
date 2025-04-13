@@ -7,7 +7,7 @@ namespace GameApi.Dtos
     public class ReqDtoAddGoogleAccount
     {
         public int UserAccountId { get; set; }
-        public string? GoogleAccount { get; set; }
+        public int GoogleAccount { get; set; }
     }
     public class ResDtoAddGoogleAccount
     {

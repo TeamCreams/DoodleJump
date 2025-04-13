@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PSY_DB;
 
@@ -11,9 +12,11 @@ using PSY_DB;
 namespace PSY_DB.Migrations
 {
     [DbContext(typeof(PsyDbContext))]
-    partial class PsyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250413134141_Remove GoogleLoginAccount")]
+    partial class RemoveGoogleLoginAccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,12 +126,6 @@ namespace PSY_DB.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValueSql("0");
-
-                    b.Property<int>("GoogleAccount")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValueSql("0000")
-                        .HasComment("구글 계정");
 
                     b.Property<string>("HairStyle")
                         .ValueGeneratedOnAdd()
