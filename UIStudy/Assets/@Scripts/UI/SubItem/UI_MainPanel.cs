@@ -65,7 +65,7 @@ public class UI_MainPanel : UI_Base
         AllPush();
         var loadingComplete = UI_LoadingPopup.Show();
 
-        Managers.WebContents.ReqGetUserAccountList(null,
+        Managers.WebContents.GetUserAccountList(null,
        (response) =>
        {
             _userList = response.List;

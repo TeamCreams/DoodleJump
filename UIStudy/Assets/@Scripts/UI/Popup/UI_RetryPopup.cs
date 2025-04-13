@@ -57,7 +57,7 @@ public class UI_RetryPopup : UI_Popup
         Managers.Game.Gold = 0;
 
         var loadingComplete = UI_LoadingPopup.Show();
-        Managers.WebContents.ReqDtoGameStart(new ReqDtoGameStart()
+        Managers.WebContents.GameStart(new ReqDtoGameStart()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId
         },

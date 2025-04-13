@@ -25,11 +25,12 @@ public class InputNicknameScene : BaseScene
         ReactiveProperty<bool> loadingComplete = UI_LoadingPopup.Show();
 
         //var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
-        Managers.WebContents.ReqInsertUserAccount(new ReqDtoInsertUserAccount()
+        Managers.WebContents.InsertUserAccount(new ReqDtoInsertUserAccount()
         {
             UserName = Managers.Game.UserInfo.UserName,
             Password = Managers.Game.UserInfo.Password,
-            NickName = Managers.Game.UserInfo.UserNickname
+            NickName = Managers.Game.UserInfo.UserNickname,
+            //GoogleAccount = Managers.Game.UserInfo.GoogleAccount,
         },
        (response) =>
        {

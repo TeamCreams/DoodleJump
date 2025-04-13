@@ -48,7 +48,7 @@ public class ChooseCharacterScene : BaseScene
 
     public void SaveData(Action onSuccess = null, Action onFailed = null)
     {
-        Managers.WebContents.ReqDtoUpdateUserStyle(new ReqDtoUpdateUserStyle()
+        Managers.WebContents.UpdateUserStyle(new ReqDtoUpdateUserStyle()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
             CharacterId = Managers.Game.ChracterStyleInfo.CharacterId,

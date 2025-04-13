@@ -35,9 +35,8 @@ public class SignInScene  : BaseScene
         // }
         
         var loadingComplete = UI_LoadingPopup.Show();
-        Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
+        Managers.WebContents.GetUserAccount(new ReqDtoGetUserAccount()
         {
-            
             UserName = Managers.Game.UserInfo.UserName,
             Password = Managers.Game.UserInfo.Password
         },
@@ -207,7 +206,7 @@ public class SignInScene  : BaseScene
 
         var loadingComplete = UI_LoadingPopup.Show();
 
-        Managers.WebContents.ReqDtoUpdateEnergy(new ReqDtoUpdateEnergy()
+        Managers.WebContents.UpdateEnergy(new ReqDtoUpdateEnergy()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId
         },

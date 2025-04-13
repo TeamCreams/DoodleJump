@@ -72,7 +72,7 @@ public class UI_EnergyShopPanel : UI_PurchasePopupBase
     private void UpdateEnergy(Action onSuccess = null, Action onFailed = null)
     {
         Debug.Log("UpdateEnergy");
-        Managers.WebContents.ReqDtoInsertEnergy(new ReqDtoInsertEnergy()
+        Managers.WebContents.InsertEnergy(new ReqDtoInsertEnergy()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
             Energy = 10 // 고정값인지 아닌지는 수정 알아서

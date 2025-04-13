@@ -17,10 +17,11 @@ public class UI_SignInScene : UI_Scene
         Password_InputField,
     }
 
-    private enum Buttons
+    private enum Images
     {
         SignUp_Button,
-        SignIn_Button
+        SignIn_Button,
+        GoogleSignin_Button
     }
 
     private enum Texts
@@ -49,11 +50,12 @@ public class UI_SignInScene : UI_Scene
             return false;
         }
         BindInputFields(typeof(InputFields));
-        BindButtons(typeof(Buttons));
+        BindImages(typeof(Images));
         BindTexts(typeof(Texts));
 
-        GetButton((int)Buttons.SignIn_Button).gameObject.BindEvent(OnClick_SignIn, EUIEvent.Click);
-        GetButton((int)Buttons.SignUp_Button).gameObject.BindEvent(OnClick_SignUp, EUIEvent.Click);
+        GetImage((int)Images.SignIn_Button).gameObject.BindEvent(OnClick_SignIn, EUIEvent.Click);
+        GetImage((int)Images.SignUp_Button).gameObject.BindEvent(OnClick_SignUp, EUIEvent.Click);
+        GetImage((int)Images.GoogleSignin_Button).gameObject.BindEvent(OnClick_GoogleLogin, EUIEvent.Click);
 
         //GetInputField((int)InputFields.Password_InputField).gameObject.BindEvent(OnClick_CheckLogId, EUIEvent.Click);
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
@@ -77,6 +79,10 @@ public class UI_SignInScene : UI_Scene
     private void OnClick_SignUp(PointerEventData eventData)
     {   
         _scene.LoadSignUp();
+    }
+    private void OnClick_GoogleLogin(PointerEventData eventData)
+    {
+        Systems.GoogleLoginWebView.SignIn();
     }
     // private void OnClick_CheckLogId(PointerEventData eventData)
     // {        

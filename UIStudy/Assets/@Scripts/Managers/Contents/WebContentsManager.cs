@@ -21,6 +21,8 @@ public class WebRoute
     public readonly static string InsertUserAccount = $"{BaseUrl}User/InsertUser";
     public readonly static string InsertUserAccountScore = $"{BaseUrl}User/InsertUserAccountScore";
     public readonly static string InsertUserAccountNickname = $"{BaseUrl}User/InsertUserAccountNickname";
+    public readonly static string AddGoogleAccount = $"{BaseUrl}User/AddGoogleAccount";
+
     //public readonly static Func<ReqInsertUserAccountScore, string> InsertUserAccountScore = (dto) => $"{BaseUrl}User/InsertUserAccountScore?UserName={dto.UserName}&Score={dto.Score}";
     public readonly static Func<ReqDtoGetOrAddUserAccount, string> GetOrAddUserAccount = (dto) => $"{BaseUrl}User/GetOrAddUserAccount?UserName={dto.UserName}";
     public readonly static Func<ReqDtoGetUserAccountList, string> GetUserAccountList = (dto) => $"{BaseUrl}User/GetUserAccountList"; //얘는 param값이 없음
@@ -54,7 +56,7 @@ public class WebRoute
 
 public class WebContentsManager
 {
-    public void ReqGetUserAccount(ReqDtoGetUserAccount requestDto, Action<ResDtoGetUserAccount> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void GetUserAccount(ReqDtoGetUserAccount requestDto, Action<ResDtoGetUserAccount> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         Managers.Web.SendGetRequest(WebRoute.GetUserAccount(requestDto), (response) =>
         {
@@ -77,7 +79,7 @@ public class WebContentsManager
             }
         });
     }
-    public void ReqGetValidateUserAccountUserName(ReqDtoGetValidateUserAccountUserName requestDto, Action<ResDtoGetValidateUserAccountUserName> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void GetValidateUserAccountUserName(ReqDtoGetValidateUserAccountUserName requestDto, Action<ResDtoGetValidateUserAccountUserName> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         Managers.Web.SendGetRequest(WebRoute.GetValidateUserAccountUserName(requestDto), (response) =>
         {
@@ -108,7 +110,7 @@ public class WebContentsManager
             }
         });
     }
-    public void ReqGetValidateUserAccountUserNickName(ReqDtoGetValidateUserAccountNickname requestDto, Action<ResDtoGetValidateUserAccountNickname> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void GetValidateUserAccountUserNickName(ReqDtoGetValidateUserAccountNickname requestDto, Action<ResDtoGetValidateUserAccountNickname> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         Managers.Web.SendGetRequest(WebRoute.GetValidateUserAccountNickname(requestDto), (response) =>
         {
@@ -131,7 +133,7 @@ public class WebContentsManager
             }
         });
     }
-    public void ReqInsertUserAccount(ReqDtoInsertUserAccount requestDto, Action<ResDtoInsertUserAccount> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void InsertUserAccount(ReqDtoInsertUserAccount requestDto, Action<ResDtoInsertUserAccount> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
@@ -156,7 +158,7 @@ public class WebContentsManager
             }
         });
     }
-    public void ReqInsertUserAccountScore(ReqDtoInsertUserAccountScore requestDto, Action<ResDtoInsertUserAccountScore> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void InsertUserAccountScore(ReqDtoInsertUserAccountScore requestDto, Action<ResDtoInsertUserAccountScore> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
@@ -181,7 +183,7 @@ public class WebContentsManager
             }
         });
     }
-    public void ReqInsertUserAccountNickname(ReqDtoInsertUserAccountNickname requestDto, Action<ResDtoInsertUserAccountNickname> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void InsertUserAccountNickname(ReqDtoInsertUserAccountNickname requestDto, Action<ResDtoInsertUserAccountNickname> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
@@ -207,7 +209,7 @@ public class WebContentsManager
         });
     }
     //GetUserAccountPassword
-    public void ReqGetUserAccountPassword(ReqDtoGetUserAccountPassword requestDto, Action<ResDtoGetUserAccountPassword> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void GetUserAccountPassword(ReqDtoGetUserAccountPassword requestDto, Action<ResDtoGetUserAccountPassword> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         Managers.Web.SendGetRequest(WebRoute.GetUserAccountPassword(requestDto), (response) =>
         {
@@ -230,7 +232,7 @@ public class WebContentsManager
             }
         });
     }
-    public void ReqGetOrAddUserAccount(ReqDtoGetOrAddUserAccount requestDto, Action<ResDtoGetOrAddUserAccount> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void GetOrAddUserAccount(ReqDtoGetOrAddUserAccount requestDto, Action<ResDtoGetOrAddUserAccount> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         Managers.Web.SendGetRequest(WebRoute.GetOrAddUserAccount(requestDto), (response) =>
         {
@@ -255,7 +257,7 @@ public class WebContentsManager
             }
         });
     }
-    public void ReqGetUserAccountList(ReqDtoGetUserAccountList requestDto, Action<ResDtoGetUserAccountList> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void GetUserAccountList(ReqDtoGetUserAccountList requestDto, Action<ResDtoGetUserAccountList> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         Managers.Web.SendGetRequest(WebRoute.GetUserAccountList(requestDto), (response) =>
         {
@@ -278,7 +280,7 @@ public class WebContentsManager
             }
         });
     }
-    public void ReqInsertUserMission(ReqDtoInsertUserMissionList requestDto, Action<ResDtoInsertUserMissionList> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void InsertUserMission(ReqDtoInsertUserMissionList requestDto, Action<ResDtoInsertUserMissionList> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
         Managers.Web.SendPostRequest(WebRoute.InsertUserMissionList, body , (response) =>
@@ -350,7 +352,7 @@ public class WebContentsManager
             }
         });
     }
-    public void ReqDtoGetUserMissionList(ReqDtoGetUserMissionList requestDto, Action<ResDtoGetUserMissionList> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void GetUserMissionList(ReqDtoGetUserMissionList requestDto, Action<ResDtoGetUserMissionList> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
         Managers.Web.SendGetRequest(WebRoute.GetUserMissionList(requestDto), (response) =>
@@ -375,7 +377,7 @@ public class WebContentsManager
             }
         });
     }
-    public void ReqDtoUpdateUserStyle(ReqDtoUpdateUserStyle requestDto, Action<ResDtoUpdateUserStyle> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void UpdateUserStyle(ReqDtoUpdateUserStyle requestDto, Action<ResDtoUpdateUserStyle> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
@@ -402,7 +404,7 @@ public class WebContentsManager
             }
         });
     }
-    public void ReqDtoUpdateUserGold(ReqDtoUpdateUserGold requestDto, Action<ResDtoUpdateUserGold> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void UpdateUserGold(ReqDtoUpdateUserGold requestDto, Action<ResDtoUpdateUserGold> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
@@ -427,7 +429,7 @@ public class WebContentsManager
             }
         });
     }
-    public void ReqDtoHeartBeat(ReqDtoHeartBeat requestDto, Action<ResDtoHeartBeat> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void HeartBeat(ReqDtoHeartBeat requestDto, Action<ResDtoHeartBeat> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
@@ -452,7 +454,7 @@ public class WebContentsManager
             }
         });
     }
-    public void ReqDtoGameStart(ReqDtoGameStart requestDto, Action<ResDtoGameStart> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void GameStart(ReqDtoGameStart requestDto, Action<ResDtoGameStart> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
@@ -477,7 +479,7 @@ public class WebContentsManager
             }
         });
     }
-    public void ReqDtoUpdateEnergy(ReqDtoUpdateEnergy requestDto, Action<ResDtoUpdateEnergy> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void UpdateEnergy(ReqDtoUpdateEnergy requestDto, Action<ResDtoUpdateEnergy> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
@@ -550,7 +552,7 @@ public class WebContentsManager
             }
         });
     }
-    public void ReqDtoInsertEnergy(ReqDtoInsertEnergy requestDto, Action<ResDtoInsertEnergy> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void InsertEnergy(ReqDtoInsertEnergy requestDto, Action<ResDtoInsertEnergy> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         Managers.Web.SendGetRequest(WebRoute.InsertEnergy(requestDto), (response) =>
         {
@@ -580,6 +582,31 @@ public class WebContentsManager
         Managers.Web.SendPostRequest(WebRoute.UpdateRewardClaim, body, (response) =>
         {
             CommonResult<ResDtoUpdateRewardClaim> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoUpdateRewardClaim>>(response);
+            
+            if(rv == null || false == rv.IsSuccess)
+            {
+                onFailed.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                if(rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
+    public void AddGoogleAccount(ReqDtoAddGoogleAccount requestDto, Action<ResDtoAddGoogleAccount> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
+
+        Managers.Web.SendPostRequest(WebRoute.AddGoogleAccount, body, (response) =>
+        {
+            CommonResult<ResDtoAddGoogleAccount> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoAddGoogleAccount>>(response);
             
             if(rv == null || false == rv.IsSuccess)
             {

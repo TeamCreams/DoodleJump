@@ -126,7 +126,7 @@ public class MissionManager
             list.Add(element);
         }
     
-        Managers.WebContents.ReqInsertUserMission(new ReqDtoInsertUserMissionList()
+        Managers.WebContents.InsertUserMission(new ReqDtoInsertUserMissionList()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
             List = list
@@ -244,7 +244,7 @@ public class MissionManager
 
     public void ProcessUserMissionList()
     {
-        Managers.WebContents.ReqDtoGetUserMissionList(new ReqDtoGetUserMissionList()
+        Managers.WebContents.GetUserMissionList(new ReqDtoGetUserMissionList()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId
         },

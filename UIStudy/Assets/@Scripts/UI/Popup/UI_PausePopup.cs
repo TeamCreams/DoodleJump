@@ -49,7 +49,7 @@ public class UI_PausePopup : UI_Popup
         Time.timeScale = 1;
         Managers.UI.ClosePopupUI(this);
         var loadingComplete = UI_LoadingPopup.Show();
-        Managers.WebContents.ReqDtoGameStart(new ReqDtoGameStart()
+        Managers.WebContents.GameStart(new ReqDtoGameStart()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId
         },

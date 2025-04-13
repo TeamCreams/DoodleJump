@@ -51,7 +51,7 @@ public abstract class UI_PurchasePopupBase : UI_Popup
 
     protected virtual void UpdateUserGold(Action onSuccess = null, Action onFailed = null)
     {
-        Managers.WebContents.ReqDtoUpdateUserGold(new ReqDtoUpdateUserGold()
+        Managers.WebContents.UpdateUserGold(new ReqDtoUpdateUserGold()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
             Gold = _gold

@@ -58,7 +58,7 @@ public class SuberunkerSceneHomeScene : BaseScene
     {
         Debug.Log("OnEvent_UpdateEnergy!!!"); 
 
-        Managers.WebContents.ReqDtoUpdateEnergy(new ReqDtoUpdateEnergy()
+        Managers.WebContents.UpdateEnergy(new ReqDtoUpdateEnergy()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId
         },

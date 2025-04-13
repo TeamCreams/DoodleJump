@@ -10,7 +10,7 @@ public class ScoreManager
     public void GetScore(Component sender, Action ProcessErrorFun = null, Action onSuccess = null, Action onFailed = null)
     {
         Debug.Log($"{nameof(GetScore)} Call");
-        Managers.WebContents.ReqGetUserAccount(new ReqDtoGetUserAccount()
+        Managers.WebContents.GetUserAccount(new ReqDtoGetUserAccount()
         {
             UserName = Managers.Game.UserInfo.UserName,
             Password = Managers.Game.UserInfo.Password
@@ -43,7 +43,7 @@ public class ScoreManager
     
     public void SetScore(Component sender, Action onSuccess = null, Action onFailed = null)
     {
-        Managers.WebContents.ReqInsertUserAccountScore(new ReqDtoInsertUserAccountScore()
+        Managers.WebContents.InsertUserAccountScore(new ReqDtoInsertUserAccountScore()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
             Score = Managers.Game.UserInfo.LatelyScore,

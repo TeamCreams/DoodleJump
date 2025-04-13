@@ -153,7 +153,7 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
     private void OnClick_GameStart(PointerEventData eventData)
     {
         var loadingComplete = UI_LoadingPopup.Show();
-        Managers.WebContents.ReqDtoGameStart(new ReqDtoGameStart()
+        Managers.WebContents.GameStart(new ReqDtoGameStart()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId
         },

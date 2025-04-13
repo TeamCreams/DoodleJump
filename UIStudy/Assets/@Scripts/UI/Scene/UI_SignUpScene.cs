@@ -20,10 +20,11 @@ public class UI_SignUpScene : UI_Scene
         ConfirmPassword_InputField,  
     }
 
-    private enum Buttons
+    private enum Images
     {
         DuplicateIdCheck_Button,
-        SignIn_Button
+        SignIn_Button,
+        GoogleSignup_Button
     }
 
     private enum Texts
@@ -56,11 +57,12 @@ public class UI_SignUpScene : UI_Scene
         }
 
         BindInputFields(typeof(InputFields));
-        BindButtons(typeof(Buttons));
+        BindImages(typeof(Images));
         BindTexts(typeof(Texts));
 
-        GetButton((int)Buttons.DuplicateIdCheck_Button).gameObject.BindEvent(OnClick_DuplicateIdCheck, EUIEvent.Click);
-        GetButton((int)Buttons.SignIn_Button).gameObject.BindEvent(OnClick_SignIn, EUIEvent.Click);
+        GetImage((int)Images.DuplicateIdCheck_Button).gameObject.BindEvent(OnClick_DuplicateIdCheck, EUIEvent.Click);
+        GetImage((int)Images.SignIn_Button).gameObject.BindEvent(OnClick_SignIn, EUIEvent.Click);
+        GetImage((int)Images.GoogleSignup_Button).gameObject.BindEvent(OnClick_GoogleSignup, EUIEvent.Click);
 
         GetInputField((int)InputFields.Id_InputField).gameObject.BindEvent(OnClick_InputId, EUIEvent.Click);
         GetInputField((int)InputFields.Password_InputField).gameObject.BindEvent(OnClick_IsCheckCorrectId, EUIEvent.Click);
@@ -110,6 +112,11 @@ public class UI_SignUpScene : UI_Scene
         _errCodePassword = CheckCorrectPassword(GetInputField((int)InputFields.Password_InputField).text);
     }
 
+    private void OnClick_GoogleSignup(PointerEventData eventData)
+    {
+        Systems.GoogleLoginWebView.SignIn();
+    }
+
     private void OnClick_SignIn(PointerEventData eventData)
     {
         EErrorCode errCode = CheckConfirmPassword(GetInputField((int)InputFields.Password_InputField).text);
@@ -143,7 +150,7 @@ public class UI_SignUpScene : UI_Scene
 
         var loadingComplete = UI_LoadingPopup.Show();
 
-        Managers.WebContents.ReqGetValidateUserAccountUserName(new ReqDtoGetValidateUserAccountUserName()
+        Managers.WebContents.GetValidateUserAccountUserName(new ReqDtoGetValidateUserAccountUserName()
         {
             UserName = GetInputField((int)InputFields.Id_InputField).text,
         },

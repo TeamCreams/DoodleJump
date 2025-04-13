@@ -268,7 +268,8 @@ public class UserInfo // 서버로 전달될 데이터
     public int UserAccountId { get; set; } = 0;
     public string UserName { get; set; } = "";
     public string Password {get; set;} = "0000";
-    public string UserNickname {get; set;}
+    public string UserNickname {get; set;} = "";
+    public string GoogleAccount {get; set;} = "0000";
     public int RecordScore {get; set;} = 0;
     public int LatelyScore {get; set;} = 0;
     public int Gold {get; set;} = 0;
