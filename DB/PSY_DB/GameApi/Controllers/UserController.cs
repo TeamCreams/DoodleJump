@@ -68,7 +68,6 @@ namespace GameApi.Controllers
                     userAccount.UserName = requestDto.UserName;
                     userAccount.Password = requestDto.Password;
                     userAccount.Nickname = requestDto.NickName;
-                    userAccount.GoogleAccount = requestDto.GoogleAccount;
                     userAccount.HairStyle = "Afro";
                     userAccount.EyebrowStyle = "AnnoyedEyebrows";
                     userAccount.EyesStyle = "Annoyed";
@@ -122,10 +121,18 @@ namespace GameApi.Controllers
 
                 var select = await (
                     from user in _context.TblUserAccounts.Include(user => user.TblUserScores)
-                    where (user.UserName.ToLower() == requestDto.UserName.ToLower() &&
-                            user.Password == requestDto.Password && 
-                            user.DeletedDate == null)
-                    //where (user.UserName == requestDto.UserName && user.Password == requestDto.Password && user.DeletedDate == null)
+                    where (
+                          // 구글 로그인 케이스
+                          (requestDto.GoogleAccount != null &&
+                           user.GoogleAccount != null &&
+                           user.GoogleAccount == requestDto.GoogleAccount)
+                          ||
+                          // 일반 로그인 케이스
+                          (requestDto.UserName != null &&
+                           requestDto.Password != null &&
+                           user.UserName.ToLower() == requestDto.UserName.ToLower() &&
+                           user.Password == requestDto.Password)
+                        ) && user.DeletedDate == null
                     select new ResDtoGetUserAccount
                     {
                         UserAccountId = user.Id,
@@ -485,36 +492,43 @@ namespace GameApi.Controllers
             return rv;
         }
 
-        [HttpPost("AddGoogleAccount")]
-        public async Task<CommonResult<ResDtoAddGoogleAccount>>
-            InsertUserAccountScore([FromBody] ReqDtoAddGoogleAccount requestDto)
+        [HttpPost("InsertGoogleAccount")]
+        public async Task<CommonResult<ResDtoInsertGoogleAccount>>
+            InsertGoogleAccount([FromBody] ReqDtoInsertGoogleAccount requestDto)
         {
-            CommonResult<ResDtoAddGoogleAccount> rv = new();
+            CommonResult<ResDtoInsertGoogleAccount> rv = new();
 
             try
             {
-                var select = await (from user in _context.TblUserAccounts
-                                    where (user.Id == requestDto.UserAccountId &&
-                                        user.DeletedDate == null)
-                                    select user
-                                    ).FirstOrDefaultAsync();
+                var select = await (
+                            from user in _context.TblUserAccounts
+                            where (user.GoogleAccount != requestDto.GoogleAccount && user.DeletedDate == null)
+                            select new
+                            {
+                                UserName = user.UserName
+                            }).ToListAsync();
 
-                if (select == null)
+                if (select.Any() == false)
                 {
-                    throw new CommonException(EStatusCode.NotFoundEntity,
-                       $"UserId : {requestDto.UserAccountId}");
+                    TblUserAccount userAccount = new();
+
+                    userAccount.GoogleAccount = requestDto.GoogleAccount;
+                    userAccount.Nickname = requestDto.NickName;
+                    userAccount.HairStyle = "Afro";
+                    userAccount.EyebrowStyle = "AnnoyedEyebrows";
+                    userAccount.EyesStyle = "Annoyed";
+                    userAccount.RegisterDate = DateTime.UtcNow;
+                    userAccount.UpdateDate = DateTime.UtcNow;
+                    userAccount.LatelyEnergy = DateTime.UtcNow;
+                    _context.TblUserAccounts.Add(userAccount);
                 }
 
-                select.GoogleAccount = requestDto.GoogleAccount;
-
-                _context.TblUserAccounts.Update(select);
-                
                 var IsSuccess = await _context.SaveChangesAsync();
 
                 if (IsSuccess == 0)
                 {
                     throw new CommonException(EStatusCode.ChangedRowsIsZero,
-                        $"UserId : {requestDto.UserAccountId}");
+                        $"UserId : {requestDto.GoogleAccount}");
                 }
                 else
                 {
@@ -542,6 +556,67 @@ namespace GameApi.Controllers
             }
             return rv;
         }
+
+        [HttpPost("BindUserAccountToGoogle")]
+        public async Task<CommonResult<ResDtoBindUserAccountToGoogle>>
+            BindUserAccountToGoogle([FromBody] ReqDtoBindUserAccountToGoogle requestDto)
+        {
+            CommonResult<ResDtoBindUserAccountToGoogle> rv = new();
+
+            try
+            {
+                var userAccount = _context.TblUserAccounts.
+                                    Where
+                                    (
+                                        user => user.Id == requestDto.UserAccountId &&
+                                                user.GoogleAccount != requestDto.GoogleAccount &&
+                                                user.DeletedDate == null
+                                    ).FirstOrDefault();
+
+                if(userAccount == null)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        $"UserId : {requestDto.UserAccountId} or Already used Google account : {requestDto.GoogleAccount}");
+                }
+
+                userAccount.GoogleAccount = requestDto.GoogleAccount;
+
+                _context.TblUserAccounts.Update(userAccount);
+                
+                var IsSuccess = await _context.SaveChangesAsync();
+
+                if (IsSuccess == 0)
+                {
+                    throw new CommonException(EStatusCode.ChangedRowsIsZero,
+                        $"UserId : {requestDto.GoogleAccount}");
+                }
+                else
+                {
+                    rv.IsSuccess = true;
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Data = null;
+                }
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = null;
+
+                return rv;
+            }
+            return rv;
+        }
+
 
         [HttpPost("InsertUserAccountScore")]
         public async Task<CommonResult<ResDtoInsertUserAccountScore>>
@@ -611,6 +686,7 @@ namespace GameApi.Controllers
             return rv;
         }
 
+        // XXX
         [HttpPost("InsertUserAccountNickname")]
         public async Task<CommonResult<ResDtoInsertUserAccountNickname>>
             InsertUserAccountNickname([FromBody] ReqDtoInsertUserAccountNickname requestDto)

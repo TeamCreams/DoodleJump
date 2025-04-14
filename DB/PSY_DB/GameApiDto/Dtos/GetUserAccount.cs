@@ -5,15 +5,16 @@
     {
         public string? UserName { get; set; }
         public string? Password { get; set; }
+        public string? GoogleAccount { get; set; }
     }
 
     public class ResDtoGetUserAccount
     {
+        public int UserAccountId { get; set; }
         public string? UserName { get; set; }
         public string? Password { get; set; }
         public string? Nickname { get; set; }
-        public int UserAccountId { get; set; }
-        public int GoogleAccount { get; set; }
+        public string? GoogleAccount { get; set; }
 
         public int HighScore { get; set; }
         public int LatelyScore { get; set; }

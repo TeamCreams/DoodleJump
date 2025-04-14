@@ -4,12 +4,14 @@ using System.Text;
 
 namespace GameApi.Dtos
 {
-    public class ReqDtoAddGoogleAccount
+    public class ReqDtoBindUserAccountToGoogle
     {
         public int UserAccountId { get; set; }
-        public int GoogleAccount { get; set; }
+
+        public string? GoogleAccount { get; set; }
     }
-    public class ResDtoAddGoogleAccount
+
+    public class ResDtoBindUserAccountToGoogle
     {
     }
 }

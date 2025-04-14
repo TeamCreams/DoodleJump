@@ -19,7 +19,8 @@
         RequestError,
         ChangedRowsIsZero, // 변경된 DB 줄 수 0
         EnergyInsufficient,
-        NotConnectionUser
+        NotConnectionUser,
+        GoogleAccountAlreadyExists
     }
 
 
