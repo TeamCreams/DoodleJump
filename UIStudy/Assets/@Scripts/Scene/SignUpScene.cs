@@ -26,10 +26,10 @@ public class SignUpScene : BaseScene
     {
         var loadingComplete = UI_LoadingPopup.Show();
 
-        Managers.WebContents.AddGoogleAccount(new ReqDtoAddGoogleAccount()
+        Managers.WebContents.InsertGoogleAccount(new ReqDtoInsertGoogleAccount()
         {
-            UserAccountId = Managers.Game.UserInfo.UserAccountId,
-            //GoogleAccount = Managers.Game.UserInfo.GoogleAccount
+            GoogleAccount = Managers.Game.UserInfo.GoogleAccount,
+            NickName = Managers.Game.UserInfo.UserNickname
         },
        (response) =>
        {

@@ -21,7 +21,7 @@ public class WebRoute
     public readonly static string InsertUserAccount = $"{BaseUrl}User/InsertUser";
     public readonly static string InsertUserAccountScore = $"{BaseUrl}User/InsertUserAccountScore";
     public readonly static string InsertUserAccountNickname = $"{BaseUrl}User/InsertUserAccountNickname";
-    public readonly static string AddGoogleAccount = $"{BaseUrl}User/AddGoogleAccount";
+    public readonly static string InsertGoogleAccount = $"{BaseUrl}User/InsertGoogleAccount";
 
     //public readonly static Func<ReqInsertUserAccountScore, string> InsertUserAccountScore = (dto) => $"{BaseUrl}User/InsertUserAccountScore?UserName={dto.UserName}&Score={dto.Score}";
     public readonly static Func<ReqDtoGetOrAddUserAccount, string> GetOrAddUserAccount = (dto) => $"{BaseUrl}User/GetOrAddUserAccount?UserName={dto.UserName}";
@@ -183,31 +183,31 @@ public class WebContentsManager
             }
         });
     }
-    public void InsertUserAccountNickname(ReqDtoInsertUserAccountNickname requestDto, Action<ResDtoInsertUserAccountNickname> onSuccess = null, Action<EStatusCode> onFailed = null)
-    {
-        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
+    // public void InsertUserAccountNickname(ReqDtoInsertUserAccountNickname requestDto, Action<ResDtoInsertUserAccountNickname> onSuccess = null, Action<EStatusCode> onFailed = null)
+    // {
+    //     string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
-        Managers.Web.SendPostRequest(WebRoute.InsertUserAccountNickname, body , (response) =>
-        {
-            CommonResult<ResDtoInsertUserAccountNickname> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertUserAccountNickname>>(response);
+    //     Managers.Web.SendPostRequest(WebRoute.InsertUserAccountNickname, body , (response) =>
+    //     {
+    //         CommonResult<ResDtoInsertUserAccountNickname> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertUserAccountNickname>>(response);
 
-            if (rv == null || false == rv.IsSuccess)
-            {
-                onFailed.Invoke(EStatusCode.ServerException);
-            }
-            else
-            {
-                if (rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
-            }
-        });
-    }
+    //         if (rv == null || false == rv.IsSuccess)
+    //         {
+    //             onFailed.Invoke(EStatusCode.ServerException);
+    //         }
+    //         else
+    //         {
+    //             if (rv.StatusCode != EStatusCode.OK)
+    //             {
+    //                 onFailed.Invoke(rv.StatusCode);
+    //             }
+    //             else
+    //             {
+    //                 onSuccess.Invoke(rv.Data);
+    //             }
+    //         }
+    //     });
+    // }
     //GetUserAccountPassword
     public void GetUserAccountPassword(ReqDtoGetUserAccountPassword requestDto, Action<ResDtoGetUserAccountPassword> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
@@ -600,13 +600,13 @@ public class WebContentsManager
             }
         });
     }
-    public void AddGoogleAccount(ReqDtoAddGoogleAccount requestDto, Action<ResDtoAddGoogleAccount> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void InsertGoogleAccount(ReqDtoInsertGoogleAccount requestDto, Action<ResDtoInsertGoogleAccount> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
-        Managers.Web.SendPostRequest(WebRoute.AddGoogleAccount, body, (response) =>
+        Managers.Web.SendPostRequest(WebRoute.InsertGoogleAccount, body, (response) =>
         {
-            CommonResult<ResDtoAddGoogleAccount> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoAddGoogleAccount>>(response);
+            CommonResult<ResDtoInsertGoogleAccount> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertGoogleAccount>>(response);
             
             if(rv == null || false == rv.IsSuccess)
             {
