@@ -390,10 +390,10 @@ namespace GameApi.Controllers
             return rv;
         }
 
-        [HttpGet("GetValidateUserAccountUserName")]
-        public async Task<CommonResult<ResDtoGetValidateUserAccountUserName>> GetValidateUserAccountId([FromQuery] ReqDtoGetValidateUserAccountUserName requestDto)
+        [HttpPost("CheckUserAccountUserNameExists")]
+        public async Task<CommonResult<ResDtoUserAccountUserName>> CheckUserAccountUserNameExists([FromBody] ReqDtoUserAccountUserName requestDto)
         {
-            CommonResult<ResDtoGetValidateUserAccountUserName> rv = new();
+            CommonResult<ResDtoUserAccountUserName> rv = new();
 
             //Thread.Sleep(3000);
 
@@ -408,8 +408,6 @@ namespace GameApi.Controllers
                                 UserName = user.UserName,
                             }).ToListAsync();
 
-                rv.Data.UserName = requestDto.UserName;
-
                 if (true == select.Any())
                 {
                     throw new CommonException(EStatusCode.NameAlreadyExists,
@@ -420,7 +418,7 @@ namespace GameApi.Controllers
                     rv.StatusCode = EStatusCode.OK;
                     rv.Message = "사용할 수 있는 아이디입니다.";
                     rv.IsSuccess = true;
-                    rv.Data = null;}
+                }
             }
             catch (CommonException ex)
             {
@@ -435,7 +433,7 @@ namespace GameApi.Controllers
                 rv.IsSuccess = false;
                 rv.StatusCode = EStatusCode.ServerException;
                 rv.Message = ex.Message;
-                rv.Data = ex.Data as ResDtoGetValidateUserAccountUserName;
+                rv.Data = ex.Data as ResDtoUserAccountUserName;
 
                 return rv;
             }
@@ -443,11 +441,11 @@ namespace GameApi.Controllers
         }
 
         // XXX
-        [HttpGet("GetValidateUserAccountNickname")]
-        public async Task<CommonResult<ResDtoGetValidateUserAccountNickname>> 
-            GetValidateUserAccountNickname([FromQuery] ReqDtoGetValidateUserAccountNickname requestDto)
+        [HttpPost("CheckUserAccountNicknameExists")]
+        public async Task<CommonResult<ResDtoUserAccountNickname>>
+            CheckUserAccountNicknameExists([FromBody] ReqDtoUserAccountNickname requestDto)
         {
-            CommonResult<ResDtoGetValidateUserAccountNickname> rv = new();
+            CommonResult<ResDtoUserAccountNickname> rv = new();
 
             //Thread.Sleep(3000);
 
@@ -469,7 +467,6 @@ namespace GameApi.Controllers
                     rv.StatusCode = EStatusCode.OK;
                     rv.Message = "";
                     rv.IsSuccess = true;
-                    rv.Data = null;
                 }
             }
             catch (CommonException ex)
@@ -485,7 +482,54 @@ namespace GameApi.Controllers
                 rv.IsSuccess = false;
                 rv.StatusCode = EStatusCode.ServerException;
                 rv.Message = ex.Message;
-                rv.Data = ex.Data as ResDtoGetValidateUserAccountNickname;
+                rv.Data = ex.Data as ResDtoUserAccountNickname;
+
+                return rv;
+            }
+            return rv;
+        }
+
+        [HttpPost("CheckGoogleAccountExists")]
+        public async Task<CommonResult<ResDtoGoogleAccount>>
+            CheckGoogleAccountExists([FromBody] ReqDtoGoogleAccount requestDto)
+        {
+            CommonResult<ResDtoGoogleAccount> rv = new();
+
+            try
+            {
+                var select = await (from user in _context.TblUserAccounts
+                                    where (user.GoogleAccount == requestDto.GoogleAccount && user.DeletedDate == null)
+                                    select new
+                                    {
+                                        GoogleAccount = user.GoogleAccount,
+                                    }).ToListAsync();
+
+                if (true == select.Any())
+                {
+                    throw new CommonException(EStatusCode.GoogleAccountAlreadyExists,
+                        "사용할 수 없는 GoogleAccount.");
+                }
+                else
+                {
+                    rv.StatusCode = EStatusCode.OK;
+                    rv.Message = "";
+                    rv.IsSuccess = true;
+                }
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = ex.Data as ResDtoGoogleAccount;
 
                 return rv;
             }

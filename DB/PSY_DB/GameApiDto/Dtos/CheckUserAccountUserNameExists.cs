@@ -4,12 +4,11 @@ using System.Text;
 
 namespace GameApi.Dtos
 {
-    public class ReqDtoGetValidateUserAccountUserName
+    public class ReqDtoUserAccountUserName
     {
         public string? UserName { get; set; }
     }
-    public class ResDtoGetValidateUserAccountUserName
+    public class ResDtoUserAccountUserName
     {
-        public string? UserName { get; set; }
     }
 }
