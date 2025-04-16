@@ -74,7 +74,8 @@ public class StartLoadingScene : BaseScene
         Managers.WebContents.GetUserAccount(new ReqDtoGetUserAccount()
         {
             UserName = Managers.Game.UserInfo.UserName,
-            Password = Managers.Game.UserInfo.Password
+            Password = Managers.Game.UserInfo.Password,
+            GoogleAccount = Managers.Game.UserInfo.GoogleAccount
         },
         (response) =>
         {
@@ -82,6 +83,7 @@ public class StartLoadingScene : BaseScene
             Managers.Game.UserInfo.UserName = response.UserName;
             Managers.Game.UserInfo.UserNickname = response.Nickname;
             Managers.Game.UserInfo.UserAccountId  = response.UserAccountId;
+            Managers.Game.UserInfo.GoogleAccount = response.GoogleAccount;
             //Debug.Log($"HandleSuccess Managers.Game.UserInfo.UserAccountId : {Managers.Game.UserInfo.UserAccountId}");
             Managers.SignalR.LoginUser(Managers.Game.UserInfo.UserAccountId);
 

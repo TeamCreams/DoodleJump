@@ -240,6 +240,7 @@ public static class Define
         public static readonly string PersonlSetting = "personalSetting";
         public static readonly string UserName = "UserName";        
         public static readonly string Password = "Password";
+        public static readonly string GoogleAccount = "GoogleAccount";
 
         public static readonly int ChangeStyleGold = 500;
     }

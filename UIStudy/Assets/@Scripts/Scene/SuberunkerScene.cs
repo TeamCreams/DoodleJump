@@ -35,7 +35,9 @@ public class SuberunkerScene : BaseScene
         Managers.Input.KeyAction += inputScene.OnKeyAction;
 
         _joyStick = Managers.UI.ShowUIBase<UI_Joystick>();
-        Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("Entity"), 80);
+        Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("Stone"), 80);
+        Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("StoneShard"), 50);
+
         Player = Managers.Object.Spawn<PlayerController>(HardCoding.PlayerStartPos).GetComponent<PlayerController>();
         Managers.Object.Spawn<Teleport>(Vector2.zero);
 

@@ -17,9 +17,9 @@ public class StoneController : ObjectBase
             _isNotStoneShower = value;
         }
     }
-    protected Rigidbody _rigidbody; // protected로 변경
-    protected SpriteRenderer _rockImage; // protected로 변경
-    protected RaycastHit _hitInfo; // protected로 변경
+    private Rigidbody _rigidbody; // protected로 변경
+    private SpriteRenderer _rockImage; // protected로 변경
+    private RaycastHit _hitInfo; // protected로 변경
 
     private float _editSpeed = 0;
     private EnemyData _data;
@@ -62,13 +62,7 @@ public class StoneController : ObjectBase
     public void SetInfo(EnemyData data)
     {
         Data = data;
-        _rockImage.sprite = Managers.Resource.Load<Sprite>($"{Managers.Data.EnemyDic[Data.Id].SpriteName}.sprite");
-        SetLocalScale();
-    }
-
-    private void SetLocalScale()
-    {
-        transform.localScale = Vector3.one * 5;
+        _rockImage.sprite = Managers.Resource.Load<Sprite>($"{Data.SpriteName}.sprite");
     }
 
     #region Actor Interface

@@ -81,6 +81,7 @@ public class GoogleLoginWebViewSystem
             Debug.Log("Welcome: " + task.Result.DisplayName + "!");
             Debug.Log("Welcome: " + task.Result.UserId + "!");
             Managers.Game.UserInfo.GoogleAccount = task.Result.UserId;
+            
             Managers.Event.TriggerEvent(Define.EEventType.GoogleSignup);
         }
     }

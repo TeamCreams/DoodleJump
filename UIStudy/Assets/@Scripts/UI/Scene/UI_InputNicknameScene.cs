@@ -66,7 +66,7 @@ public class UI_InputNicknameScene : UI_Scene
             return;
         }
 
-        Managers.WebContents.GetValidateUserAccountUserNickName(new ReqDtoGetValidateUserAccountNickname()
+        Managers.WebContents.CheckUserAccountNicknameExists(new ReqDtoUserAccountNickname()
         {
             Nickname = GetInputField((int)InputFields.Nickname_InputField).text
         },(response) =>

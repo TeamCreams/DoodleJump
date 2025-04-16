@@ -39,6 +39,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3fb2281ea6c0a4af4bd952c8b674af54
+    m_Address: StoneShard
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 52702ba0367e84914b3b500ba0d025a2
     m_Address: SuberunkerTimeline
     m_ReadOnly: 0
@@ -112,7 +118,7 @@ MonoBehaviour:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e533f7e9e23f458448333b0b2c9205c1
-    m_Address: Entity
+    m_Address: Stone
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

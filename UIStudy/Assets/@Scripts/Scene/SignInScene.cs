@@ -27,24 +27,19 @@ public class SignInScene  : BaseScene
     }
     public void SignIn()
     {
-        
-        // EErrorCode error = _ui.CheckCorrectPassword();
-        // if (error != EErrorCode.ERR_OK)
-        // {
-        //     return;
-        // }
-        
         var loadingComplete = UI_LoadingPopup.Show();
         Managers.WebContents.GetUserAccount(new ReqDtoGetUserAccount()
         {
             UserName = Managers.Game.UserInfo.UserName,
-            Password = Managers.Game.UserInfo.Password
+            Password = Managers.Game.UserInfo.Password,
+            GoogleAccount = Managers.Game.UserInfo.GoogleAccount
         },
         (response) =>
         {
             Managers.Game.UserInfo.UserName = response.UserName;
             Managers.Game.UserInfo.UserNickname = response.Nickname;
             Managers.Game.UserInfo.UserAccountId = response.UserAccountId;
+            Managers.Game.UserInfo.GoogleAccount = response.GoogleAccount;
             Managers.SignalR.LoginUser(Managers.Game.UserInfo.UserAccountId);
 
             //캐릭터 스타일 저장

@@ -14,14 +14,18 @@ public class WebRoute
     private readonly static string BaseUrl = $"https://dd37927.store/";
     public readonly static Func<ReqDtoGetUserAccount, string> GetUserAccount = (dto) => $"{BaseUrl}User/GetUserAccount?UserName={dto.UserName}&Password={dto.Password}";
                                                                             //https://dd37927.store/User/GetUserAccount?UserName=test3&Password=12345678
-    public readonly static Func<ReqDtoGetValidateUserAccountUserName, string> GetValidateUserAccountUserName = (dto) => $"{BaseUrl}User/GetValidateUserAccountUserName?UserName={dto.UserName}";
-    public readonly static Func<ReqDtoGetValidateUserAccountNickname, string> GetValidateUserAccountNickname = (dto) => $"{BaseUrl}User/GetValidateUserAccountNickname?Nickname={dto.Nickname}";
+
+    public readonly static string CheckUserAccountUserNameExists = $"{BaseUrl}User/CheckUserAccountUserNameExists";
+    public readonly static string CheckUserAccountNicknameExists = $"{BaseUrl}User/CheckUserAccountNicknameExists";
+    public readonly static string CheckGoogleAccountExists = $"{BaseUrl}User/CheckGoogleAccountExists";
+    
     public readonly static Func<ReqDtoGetUserAccountPassword, string> GetUserAccountPassword = (dto) => $"{BaseUrl}User/GetUserAccountPassword?UserName={dto.UserName}";
 
     public readonly static string InsertUserAccount = $"{BaseUrl}User/InsertUser";
     public readonly static string InsertUserAccountScore = $"{BaseUrl}User/InsertUserAccountScore";
     public readonly static string InsertUserAccountNickname = $"{BaseUrl}User/InsertUserAccountNickname";
     public readonly static string InsertGoogleAccount = $"{BaseUrl}User/InsertGoogleAccount";
+    public readonly static string BindUserAccountToGoogle = $"{BaseUrl}User/BindUserAccountToGoogle";
 
     //public readonly static Func<ReqInsertUserAccountScore, string> InsertUserAccountScore = (dto) => $"{BaseUrl}User/InsertUserAccountScore?UserName={dto.UserName}&Score={dto.Score}";
     public readonly static Func<ReqDtoGetOrAddUserAccount, string> GetOrAddUserAccount = (dto) => $"{BaseUrl}User/GetOrAddUserAccount?UserName={dto.UserName}";
@@ -79,11 +83,13 @@ public class WebContentsManager
             }
         });
     }
-    public void GetValidateUserAccountUserName(ReqDtoGetValidateUserAccountUserName requestDto, Action<ResDtoGetValidateUserAccountUserName> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void CheckUserAccountUserNameExists(ReqDtoUserAccountUserName requestDto, Action<ResDtoUserAccountUserName> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
-        Managers.Web.SendGetRequest(WebRoute.GetValidateUserAccountUserName(requestDto), (response) =>
+        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
+
+        Managers.Web.SendPostRequest(WebRoute.CheckUserAccountUserNameExists, body , (response) =>
         {
-            CommonResult<ResDtoGetValidateUserAccountUserName> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetValidateUserAccountUserName>>(response);
+            CommonResult<ResDtoUserAccountUserName> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoUserAccountUserName>>(response);
 
             if (rv == null || false == rv.IsSuccess)
             {
@@ -110,11 +116,38 @@ public class WebContentsManager
             }
         });
     }
-    public void GetValidateUserAccountUserNickName(ReqDtoGetValidateUserAccountNickname requestDto, Action<ResDtoGetValidateUserAccountNickname> onSuccess = null, Action<EStatusCode> onFailed = null)
+    public void CheckUserAccountNicknameExists(ReqDtoUserAccountNickname requestDto, Action<ResDtoUserAccountNickname> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
-        Managers.Web.SendGetRequest(WebRoute.GetValidateUserAccountNickname(requestDto), (response) =>
+        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
+
+        Managers.Web.SendPostRequest(WebRoute.CheckUserAccountNicknameExists, body , (response) =>
         {
-            CommonResult<ResDtoGetValidateUserAccountNickname> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetValidateUserAccountNickname>>(response);
+            CommonResult<ResDtoUserAccountNickname> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoUserAccountNickname>>(response);
+
+            if (rv == null || false == rv.IsSuccess)
+            {
+                onFailed.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                if (rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
+    public void CheckGoogleAccountExists(ReqDtoGoogleAccount requestDto, Action<ResDtoGoogleAccount> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
+
+        Managers.Web.SendPostRequest(WebRoute.CheckGoogleAccountExists, body , (response) =>
+        {
+            CommonResult<ResDtoGoogleAccount> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGoogleAccount>>(response);
 
             if (rv == null || false == rv.IsSuccess)
             {
@@ -607,6 +640,32 @@ public class WebContentsManager
         Managers.Web.SendPostRequest(WebRoute.InsertGoogleAccount, body, (response) =>
         {
             CommonResult<ResDtoInsertGoogleAccount> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertGoogleAccount>>(response);
+            
+            if(rv == null || false == rv.IsSuccess)
+            {
+                onFailed.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                if(rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess.Invoke(rv.Data);
+                }
+            }
+        });
+    }
+
+    public void BindUserAccountToGoogle(ReqDtoBindUserAccountToGoogle requestDto, Action<ResDtoBindUserAccountToGoogle> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
+
+        Managers.Web.SendPostRequest(WebRoute.BindUserAccountToGoogle, body, (response) =>
+        {
+            CommonResult<ResDtoBindUserAccountToGoogle> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoBindUserAccountToGoogle>>(response);
             
             if(rv == null || false == rv.IsSuccess)
             {

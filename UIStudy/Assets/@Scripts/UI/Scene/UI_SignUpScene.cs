@@ -150,7 +150,7 @@ public class UI_SignUpScene : UI_Scene
 
         var loadingComplete = UI_LoadingPopup.Show();
 
-        Managers.WebContents.GetValidateUserAccountUserName(new ReqDtoGetValidateUserAccountUserName()
+        Managers.WebContents.CheckUserAccountUserNameExists(new ReqDtoUserAccountUserName()
         {
             UserName = GetInputField((int)InputFields.Id_InputField).text,
         },

@@ -22,26 +22,59 @@ public class InputNicknameScene : BaseScene
 
     public void InsertUser(Action onSuccess = null)
     {
+        if(string.IsNullOrEmpty(Managers.Game.UserInfo.GoogleAccount))
+        {
+            WithUserAccount(onSuccess);
+        }
+        else
+        {
+            WithGoogleAccount(onSuccess);
+        }
+    }
+
+    public void WithUserAccount(Action onSuccess = null)
+    {
         ReactiveProperty<bool> loadingComplete = UI_LoadingPopup.Show();
 
-        //var loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingPopup>();
         Managers.WebContents.InsertUserAccount(new ReqDtoInsertUserAccount()
         {
             UserName = Managers.Game.UserInfo.UserName,
             Password = Managers.Game.UserInfo.Password,
-            NickName = Managers.Game.UserInfo.UserNickname,
-            //GoogleAccount = Managers.Game.UserInfo.GoogleAccount,
+            NickName = Managers.Game.UserInfo.UserNickname
         },
        (response) =>
        {
             Debug.Log("아이디 만들기 성공");
             UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess));
-           //UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
-           //ErrorStruct errorStruct = Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess);
-           //toast.SetInfo(errorStruct.Notice, UI_ToastPopup.Type.Error);
 
+            loadingComplete.Value = true;
+
+            onSuccess?.Invoke();
+       },
+       (errorCode) =>
+       {
            loadingComplete.Value = true;
-           //Managers.UI.ClosePopupUI(loadingPopup);
+
+            Debug.Log("아이디 만들기 실패~");
+            UI_ErrorPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_AccountCreationFailed));
+       });
+    }
+
+    public void WithGoogleAccount(Action onSuccess = null)
+    {
+        ReactiveProperty<bool> loadingComplete = UI_LoadingPopup.Show();
+
+        Managers.WebContents.InsertGoogleAccount(new ReqDtoInsertGoogleAccount()
+        {
+            GoogleAccount = Managers.Game.UserInfo.GoogleAccount,
+            NickName = Managers.Game.UserInfo.UserNickname
+        },
+       (response) =>
+       {
+            Debug.Log("아이디 만들기 성공");
+            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess));
+
+            loadingComplete.Value = true;
 
             onSuccess?.Invoke();
        },

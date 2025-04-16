@@ -8,6 +8,7 @@ public class StoneShardController : ObjectBase
     private float _lifeTime = 2f;
     private EnemyData _data;
     private Rigidbody _rigidbody;
+    private SpriteRenderer _rockImage;
 
     public override bool Init()
     {
@@ -29,15 +30,13 @@ public class StoneShardController : ObjectBase
     public void SetInfo(EnemyData data, Vector3 direction)
     {
         _data = data;
+        _rockImage.sprite = Managers.Resource.Load<Sprite>($"{_data.SpriteName}.sprite");
 
         // rigidbody 수정
         _rigidbody.AddForce(direction, ForceMode.VelocityChange);
         //_rigidbody.linearVelocity = direction; // 한 방향으로 날아가기만 하면 돼서 fixed Update에 쓸 필요 없음
         //_rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         _rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
-
-        // 사이즈 조절
-        transform.localScale = Vector3.one * 4;
 
         StartCoroutine(CallingPool());
     }

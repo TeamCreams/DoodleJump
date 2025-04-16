@@ -34,7 +34,7 @@ public class ObjectManager
     {
         if (typeof(T) == typeof(StoneController))
         {
-            GameObject go = Managers.Resource.Instantiate("Entity", pooling: true);
+            GameObject go = Managers.Resource.Instantiate("Stone", pooling: true);
             int rand = UnityEngine.Random.Range(60001, 60001 + Managers.Data.EnemyDic.Count);
             StoneController stone = go.GetOrAddComponent<StoneController>();
             stone.SetInfo(Managers.Data.EnemyDic[rand]);
@@ -72,7 +72,7 @@ public class ObjectManager
         }
         else if (typeof(T) == typeof(StoneShardController))
         {
-            GameObject go = Managers.Resource.Instantiate("Entity", pooling: true);
+            GameObject go = Managers.Resource.Instantiate("StoneShard", pooling: true);
             StoneShardController stone = go.GetOrAddComponent<StoneShardController>();
             stone.Teleport(pos);
             return go;
