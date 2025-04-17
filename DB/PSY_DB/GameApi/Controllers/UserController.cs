@@ -1544,9 +1544,23 @@ namespace GameApi.Controllers
 
                 int count = (int)diffTime.TotalSeconds / 300;
                 int prevEnergy = userAccount.Energy;
-                if (userAccount.Energy + count <= 10) // 기본 최대 값은 10.
+                int maxEnergy = 10; // 기본 최대 에너지 값
+
+                // 에너지가 이미 10 이상인 경우 (유료 구매 등으로)
+                if (maxEnergy <= userAccount.Energy)
                 {
-                    userAccount.Energy = userAccount.Energy + count;
+                    // 유료 구매로 10을 초과한 경우는 충전하지 않음
+                    // 에너지가 이미 최대치이므로 변경 없음
+                }
+                // 현재 에너지 + 충전될 에너지가 10을 초과하는 경우
+                else if (maxEnergy <= userAccount.Energy + count)
+                {
+                    userAccount.Energy = maxEnergy; // 최대값으로 설정
+                }
+                // 충전 후에도 최대값 미만인 경우
+                else
+                {
+                    userAccount.Energy += count; // 충전된 에너지 추가
                 }
 
                 if (prevEnergy != userAccount.Energy)
@@ -1671,16 +1685,22 @@ namespace GameApi.Controllers
                 }
 
                 userAccount.Energy += requestDto.Energy;
-                if (userAccount.FirstPurchaseEnergyTime == DateTime.MinValue
-                    || userAccount.FirstPurchaseEnergyTime.AddHours(24) <= DateTime.UtcNow) // 24시간이 지났으면 리셋
+
+                // 현재 UTC 시간
+                DateTime nowUtc = DateTime.UtcNow;
+
+                // 오늘 자정 (UTC 00:00) 계산
+                DateTime todayUtcMidnight = new DateTime(nowUtc.Year, nowUtc.Month, nowUtc.Day, 0, 0, 0, DateTimeKind.Utc);
+
+                // FirstPurchaseEnergyTime이 없거나 오늘 UTC 자정 이전이면 초기화
+                if (userAccount.FirstPurchaseEnergyTime == DateTime.MinValue ||
+                    userAccount.FirstPurchaseEnergyTime < todayUtcMidnight)
                 {
-                    userAccount.FirstPurchaseEnergyTime = DateTime.UtcNow;
+                    userAccount.FirstPurchaseEnergyTime = nowUtc;
                     userAccount.PurchaseEnergyCountToday = 0;
                 }
-                else 
-                {
-                    userAccount.PurchaseEnergyCountToday ++;
-                }
+
+                userAccount.PurchaseEnergyCountToday++;
 
                 _context.TblUserAccounts.Update(userAccount);
 
