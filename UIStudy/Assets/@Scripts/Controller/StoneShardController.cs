@@ -5,7 +5,7 @@ using static Define;
 
 public class StoneShardController : ObjectBase
 {
-    private float _lifeTime = 2f;
+    private float _lifeTime = 0.8f;
     private EnemyData _data;
     private Rigidbody _rigidbody;
     private SpriteRenderer _rockImage;
@@ -16,7 +16,8 @@ public class StoneShardController : ObjectBase
         {
             return false;
         }
-        
+        _rockImage = this.gameObject.GetOrAddComponent<SpriteRenderer>();
+
         _rigidbody = this.gameObject.GetOrAddComponent<Rigidbody>();
 
         _rigidbody.useGravity = false;

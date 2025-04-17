@@ -39,7 +39,7 @@ public class UI_RewardAcquiredPopup : UI_Popup
         float scaleSpeed = 0.1f;
         _showSeq = DOTween.Sequence()
             .Append(GetObject((int)GameObjects.Group_Object).transform.DOScale(new Vector3(originalScale.x + 0.5f, originalScale.y + 0.5f, originalScale.z + 0.5f), scaleSpeed).SetEase(Ease.Linear))
-            .Append(GetImage((int)GameObjects.Group_Object).transform.DOScale(originalScale, scaleSpeed).SetEase(Ease.Linear));
+            .Append(GetObject((int)GameObjects.Group_Object).transform.DOScale(originalScale, scaleSpeed).SetEase(Ease.Linear)); //여기가 실행 안됨.
 
         return true;
     }

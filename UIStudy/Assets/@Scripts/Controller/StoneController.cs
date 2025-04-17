@@ -136,10 +136,10 @@ public class StoneController : ObjectBase
 
             GameObject shard = Managers.Object.Spawn<StoneShardController>(transform.position, true);
 
-            float speed = 30f;
+            float speed = 40f;
             Vector3 velocity = direction * speed;
 
-            StoneShardController shardScript = shard.GetComponent<StoneShardController>();
+            StoneShardController shardScript = shard.GetOrAddComponent<StoneShardController>();
             shardScript.SetInfo(Data, velocity);
         }
     }
