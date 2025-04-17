@@ -11,7 +11,6 @@ public class SignUpScene : BaseScene
     private int _failCount = 0;
 
     private EScene _loadScene = EScene.SuberunkerSceneHomeScene;
-    
     public override bool Init()
     {
         if (base.Init() == false)
@@ -21,17 +20,22 @@ public class SignUpScene : BaseScene
 
         Managers.UI.ShowSceneUI<UI_SignUpScene>();
         Managers.Event.AddEvent(EEventType.GoogleSignup,Event_GoogleAccountSignup);
+        
+        Systems.GoogleLoginWebView.OnGetGoogleAccount -= SignIn1; // 구독 해제
+        Systems.GoogleLoginWebView.OnGetGoogleAccount += SignIn1; // 이벤트 구독
 
         return true;
     }
 
     void OnDestroy()
     {
+        Systems.GoogleLoginWebView.OnGetGoogleAccount -= SignIn1; // 구독 해제
         Managers.Event.RemoveEvent(EEventType.GoogleSignup,Event_GoogleAccountSignup);
     }
 
     void Event_GoogleAccountSignup(Component sender, object param)
     {
+        Debug.Log("Event_GoogleAccountSignup");
         Managers.WebContents.CheckGoogleAccountExists(new ReqDtoGoogleAccount()
         {
             GoogleAccount = Managers.Game.UserInfo.GoogleAccount
@@ -40,6 +44,26 @@ public class SignUpScene : BaseScene
             Managers.Scene.LoadScene(EScene.InputNicknameScene);       
         },(errorCode) =>
         {       
+            SignIn();
+            // 바로 로그인 시켜주기
+        });
+    }
+
+    public void SignIn1(string googleAccount)
+    {
+        Debug.Log("Event_GoogleAccountSignup");
+        Managers.WebContents.CheckGoogleAccountExists(new ReqDtoGoogleAccount()
+        {
+            GoogleAccount = googleAccount
+        },(response) =>
+        {
+            Managers.Game.UserInfo.GoogleAccount = googleAccount;
+            Managers.Scene.LoadScene(EScene.InputNicknameScene);       
+        },(errorCode) =>
+        {       
+            // 이미 있으면
+            Managers.Game.UserInfo.GoogleAccount = googleAccount;
+            SignIn();
             // 바로 로그인 시켜주기
         });
     }

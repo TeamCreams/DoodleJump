@@ -16,6 +16,8 @@ using static Gpm.WebView.GpmWebViewCallback;
 
 public class GoogleLoginWebViewSystem
 {
+    public Action<string> OnGetGoogleAccount;
+
     public void ShowUrl()
     {
         Debug.Log("SSS");
@@ -52,7 +54,7 @@ public class GoogleLoginWebViewSystem
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
-
+//async Awaitable
     internal void OnAuthenticationFinished(Task<GoogleSignInUser> task)
     {
         if (task.IsFaulted)
@@ -80,9 +82,13 @@ public class GoogleLoginWebViewSystem
         {
             Debug.Log("Welcome: " + task.Result.DisplayName + "!");
             Debug.Log("Welcome: " + task.Result.UserId + "!");
-            Managers.Game.UserInfo.GoogleAccount = task.Result.UserId;
-            
-            Managers.Event.TriggerEvent(Define.EEventType.GoogleSignup);
+            //Managers.Game.UserInfo.GoogleAccount = task.Result.UserId;
+            //await Awaitable.MainThreadAsync();
+            OnGetGoogleAccount.Invoke(task.Result.UserId);
+
+            //Managers.Event.TriggerEvent(Define.EEventType.GoogleSignup);
+            //Managers.Scene.LoadScene(EScene.InputNicknameScene); // 얘는 됨
+
         }
     }
 }
