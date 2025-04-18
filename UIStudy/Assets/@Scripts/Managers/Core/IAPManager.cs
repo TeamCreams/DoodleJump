@@ -112,7 +112,7 @@ public class IAPManager : IDetailedStoreListener
         }
 
         Debug.Log(errorMessage);
-        UI_ToastPopup.Show(errorMessage, UI_ToastPopup.Type.Error);
+        //UI_ToastPopup.Show(errorMessage, UI_ToastPopup.Type.Error);
     }
 
     public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
