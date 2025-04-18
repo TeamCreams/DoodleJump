@@ -84,6 +84,12 @@ public class GoogleLoginWebViewSystem
             Debug.Log("Welcome: " + task.Result.UserId + "!");
             //Managers.Game.UserInfo.GoogleAccount = task.Result.UserId;
             //await Awaitable.MainThreadAsync();
+
+            if(OnGetGoogleAccount == null)
+            {
+                Debug.Log("null");
+            }
+
             OnGetGoogleAccount.Invoke(task.Result.UserId);
 
             //Managers.Event.TriggerEvent(Define.EEventType.GoogleSignup);

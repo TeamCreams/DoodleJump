@@ -75,6 +75,8 @@ public class Managers : MonoBehaviour
 			}
 
 			DontDestroyOnLoad(go);
+
+			Systems.Init();
 			
 			// 초기화
 			s_instance = go.GetComponent<Managers>();

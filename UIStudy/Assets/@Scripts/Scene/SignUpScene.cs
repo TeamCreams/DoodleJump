@@ -1,13 +1,14 @@
 using System.Collections;
 using GameApi.Dtos;
 using UnityEngine;
+using WebApi.Models.Dto;
 using static Define;
 
 public class SignUpScene : BaseScene
 {
     private bool _isLoadSceneCondition = false;
     private bool _isLoadEnergyCondition = false;
-    
+
     private int _failCount = 0;
 
     private EScene _loadScene = EScene.SuberunkerSceneHomeScene;
@@ -19,10 +20,11 @@ public class SignUpScene : BaseScene
         }
 
         Managers.UI.ShowSceneUI<UI_SignUpScene>();
-        Managers.Event.AddEvent(EEventType.GoogleSignup,Event_GoogleAccountSignup);
-        
+        Managers.Event.AddEvent(EEventType.GoogleSignup, Event_GoogleAccountSignup);
+
         Systems.GoogleLoginWebView.OnGetGoogleAccount -= SignIn1; // 구독 해제
         Systems.GoogleLoginWebView.OnGetGoogleAccount += SignIn1; // 이벤트 구독
+
 
         return true;
     }
@@ -30,7 +32,7 @@ public class SignUpScene : BaseScene
     void OnDestroy()
     {
         Systems.GoogleLoginWebView.OnGetGoogleAccount -= SignIn1; // 구독 해제
-        Managers.Event.RemoveEvent(EEventType.GoogleSignup,Event_GoogleAccountSignup);
+        Managers.Event.RemoveEvent(EEventType.GoogleSignup, Event_GoogleAccountSignup);
     }
 
     void Event_GoogleAccountSignup(Component sender, object param)
@@ -39,11 +41,11 @@ public class SignUpScene : BaseScene
         Managers.WebContents.CheckGoogleAccountExists(new ReqDtoGoogleAccount()
         {
             GoogleAccount = Managers.Game.UserInfo.GoogleAccount
-        },(response) =>
+        }, (response) =>
         {
-            Managers.Scene.LoadScene(EScene.InputNicknameScene);       
-        },(errorCode) =>
-        {       
+            Managers.Scene.LoadScene(EScene.InputNicknameScene);
+        }, (errorCode) =>
+        {
             SignIn();
             // 바로 로그인 시켜주기
         });
@@ -55,16 +57,20 @@ public class SignUpScene : BaseScene
         Managers.WebContents.CheckGoogleAccountExists(new ReqDtoGoogleAccount()
         {
             GoogleAccount = googleAccount
-        },(response) =>
+        }, (response) =>
         {
             Managers.Game.UserInfo.GoogleAccount = googleAccount;
-            Managers.Scene.LoadScene(EScene.InputNicknameScene);       
-        },(errorCode) =>
-        {       
-            // 이미 있으면
-            Managers.Game.UserInfo.GoogleAccount = googleAccount;
-            SignIn();
-            // 바로 로그인 시켜주기
+            Managers.Scene.LoadScene(EScene.InputNicknameScene);
+        }, (errorCode) =>
+        {
+            if (errorCode == EStatusCode.GoogleAccountAlreadyExists)
+            {
+                // 이미 있으면
+                Managers.Game.UserInfo.GoogleAccount = googleAccount;
+                SignIn();
+                // 바로 로그인 시켜주기
+            }
+            //error popup
         });
     }
     private IEnumerator LoadScene_Co()
@@ -101,10 +107,10 @@ public class SignUpScene : BaseScene
             Managers.Game.UserInfo.Energy = response.Energy;
             Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
             Managers.Game.UserInfo.PurchaseEnergyCountToday = response.PurchaseEnergyCountToday;
-            
+
             // 일일 보상
             Managers.Game.UserInfo.LastRewardClaimTime = response.LastRewardClaimTime;
-            
+
             //게임 진행 정보
             Managers.Game.UserInfo.RecordScore = response.HighScore;
             Managers.Game.UserInfo.LatelyScore = response.LatelyScore;
@@ -112,7 +118,7 @@ public class SignUpScene : BaseScene
             Managers.Game.UserInfo.PlayTime = response.PlayTime;
             Managers.Game.UserInfo.AccumulatedStone = response.AccumulatedStone;
             Managers.Game.UserInfo.StageLevel = response.StageLevel;
-            
+
             // 보안 키 저장
             //SecurePlayerPrefs.SetKey(response.SecureKey);
 
@@ -123,7 +129,7 @@ public class SignUpScene : BaseScene
             SecurePlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);
             SecurePlayerPrefs.SetString(HardCoding.Password, Managers.Game.UserInfo.Password);
             SecurePlayerPrefs.SetString(HardCoding.GoogleAccount, Managers.Game.UserInfo.GoogleAccount);
-            
+
             SecurePlayerPrefs.Save();
 
             _isLoadEnergyCondition = true;
