@@ -55,16 +55,15 @@ public class StartLoadingScene : BaseScene
         // 아이디로 먼저 로그인하고 로그인하면서 받아온 유저정보비번이랑 비교
         string usernameData = SecurePlayerPrefs.GetString(HardCoding.UserName, "");
         string passwordData = SecurePlayerPrefs.GetString(HardCoding.Password, ""); 
+        string googleAccountData = SecurePlayerPrefs.GetString(HardCoding.GoogleAccount, ""); 
         Managers.Game.UserInfo.UserName = usernameData;
         Managers.Game.UserInfo.Password = passwordData;
-
-        if (string.IsNullOrEmpty(Managers.Game.UserInfo.UserName)) 
+        Managers.Game.UserInfo.GoogleAccount = googleAccountData;
+        if (string.IsNullOrEmpty(Managers.Game.UserInfo.UserName) || string.IsNullOrEmpty(Managers.Game.UserInfo.GoogleAccount)) 
         {
             _scene = EScene.SignInScene;
             Managers.Scene.LoadScene(_scene);
         }
-        // Debug.Log($"UserName : {Managers.Game.UserInfo.UserName}");
-        // Debug.Log($"Password : {Managers.Game.UserInfo.Password}");
 
         TryLoadUserAccount();
     }
@@ -118,6 +117,7 @@ public class StartLoadingScene : BaseScene
             // 아이디 저장
             SecurePlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);
             SecurePlayerPrefs.SetString(HardCoding.Password, Managers.Game.UserInfo.Password);
+            SecurePlayerPrefs.SetString(HardCoding.GoogleAccount, Managers.Game.UserInfo.GoogleAccount);
             SecurePlayerPrefs.Save();
 
             Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);

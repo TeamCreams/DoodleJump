@@ -81,8 +81,6 @@ public static class Define
         StopStoneShower,
         SetLanguage,
         SignIn,
-        GoogleSignup,
-        GoogleSignin,
         //ErrorPopup,
         //ErrorButtonPopup,
         //ToastPopupNotice,

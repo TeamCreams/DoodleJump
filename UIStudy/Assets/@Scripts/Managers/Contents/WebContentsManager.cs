@@ -12,7 +12,7 @@ using static Define;
 public class WebRoute
 {
     private readonly static string BaseUrl = $"https://dd37927.store/";
-    public readonly static Func<ReqDtoGetUserAccount, string> GetUserAccount = (dto) => $"{BaseUrl}User/GetUserAccount?UserName={dto.UserName}&Password={dto.Password}";
+    public readonly static Func<ReqDtoGetUserAccount, string> GetUserAccount = (dto) => $"{BaseUrl}User/GetUserAccount?UserName={dto.UserName}&Password={dto.Password}&GoogleAccount={dto.GoogleAccount}";
                                                                             //https://dd37927.store/User/GetUserAccount?UserName=test3&Password=12345678
 
     public readonly static string CheckUserAccountUserNameExists = $"{BaseUrl}User/CheckUserAccountUserNameExists";
@@ -66,19 +66,24 @@ public class WebContentsManager
         {
             CommonResult<ResDtoGetUserAccount> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetUserAccount>>(response);
             
-            if(rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                Debug.LogError("GetUserAccount: 응답 파싱 실패 (null)");
+                onFailed?.Invoke(EStatusCode.ServerException);
             }
             else
             {
-                if(rv.StatusCode != EStatusCode.OK)
+                Debug.Log($"응답 상태: IsSuccess={rv.IsSuccess}, StatusCode={rv.StatusCode}, Data={rv.Data != null}");
+                
+                if (rv.IsSuccess && rv.StatusCode == EStatusCode.OK && rv.Data != null)
                 {
-                    onFailed.Invoke(rv.StatusCode);
+                    Debug.Log("성공 콜백 호출");
+                    onSuccess?.Invoke(rv.Data);
                 }
                 else
                 {
-                    onSuccess.Invoke(rv.Data);
+                    Debug.LogError($"실패 콜백 호출: {rv.StatusCode}");
+                    onFailed?.Invoke(rv.StatusCode);
                 }
             }
         });
@@ -91,29 +96,50 @@ public class WebContentsManager
         {
             CommonResult<ResDtoUserAccountUserName> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoUserAccountUserName>>(response);
 
-            if (rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
             }
-            else
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
             {
-                Debug.Log("ReqGetValidateUserAccountUserName");
-
                 if(rv.StatusCode == EStatusCode.NameAlreadyExists) // 안들어와짐
                 {
                     onFailed.Invoke(rv.StatusCode);
-                    //Debug.Log("ReqGetValidateUserAccountUserName");
                 }
                 if (rv.StatusCode != EStatusCode.OK) // 안들어와짐
                 {
                     onFailed.Invoke(rv.StatusCode);
                     Managers.Scene.LoadScene(EScene.SignInScene);
                 }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
             }
+            else
+            {
+                onSuccess?.Invoke(rv.Data);
+            }
+
+            // if (rv == null || false == rv.IsSuccess)
+            // {
+            //     onFailed.Invoke(EStatusCode.ServerException);
+            // }
+            // else
+            // {
+            //     Debug.Log("ReqGetValidateUserAccountUserName");
+
+            //     if(rv.StatusCode == EStatusCode.NameAlreadyExists) // 안들어와짐
+            //     {
+            //         onFailed.Invoke(rv.StatusCode);
+            //         //Debug.Log("ReqGetValidateUserAccountUserName");
+            //     }
+            //     if (rv.StatusCode != EStatusCode.OK) // 안들어와짐
+            //     {
+            //         onFailed.Invoke(rv.StatusCode);
+            //         Managers.Scene.LoadScene(EScene.SignInScene);
+            //     }
+            //     else
+            //     {
+            //         onSuccess.Invoke(rv.Data);
+            //     }
+            // }
         });
     }
     public void CheckUserAccountNicknameExists(ReqDtoUserAccountNickname requestDto, Action<ResDtoUserAccountNickname> onSuccess = null, Action<EStatusCode> onFailed = null)
@@ -124,20 +150,18 @@ public class WebContentsManager
         {
             CommonResult<ResDtoUserAccountNickname> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoUserAccountNickname>>(response);
 
-            if (rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if (rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -145,24 +169,23 @@ public class WebContentsManager
     {
         string body = JsonConvert.SerializeObject(requestDto, Formatting.Indented);
 
-        Managers.Web.SendPostRequest(WebRoute.CheckGoogleAccountExists, body , (response) =>
+        Managers.Web.SendPostRequest(WebRoute.CheckGoogleAccountExists, body, (response) =>
         {
             CommonResult<ResDtoGoogleAccount> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGoogleAccount>>(response);
 
-            if (rv == null || false == rv.IsSuccess)
+            //if (rv == null || false == rv.IsSuccess) // false면 무조건 serverException이 되어서 여태 StatusCode를 사용할 수 없었음.
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if (rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -174,20 +197,18 @@ public class WebContentsManager
         {
             CommonResult<ResDtoInsertUserAccount> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertUserAccount>>(response);
 
-            if (rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if (rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -199,20 +220,18 @@ public class WebContentsManager
         {
             CommonResult<ResDtoInsertUserAccountScore> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertUserAccountScore>>(response); 
 
-            if (rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if (rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -248,23 +267,22 @@ public class WebContentsManager
         {
             CommonResult<ResDtoGetUserAccountPassword> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetUserAccountPassword>>(response);
 
-            if (rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if (rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
+    // XXX
     public void GetOrAddUserAccount(ReqDtoGetOrAddUserAccount requestDto, Action<ResDtoGetOrAddUserAccount> onSuccess = null, Action<EStatusCode> onFailed = null)
     {
         Managers.Web.SendGetRequest(WebRoute.GetOrAddUserAccount(requestDto), (response) =>
@@ -296,20 +314,18 @@ public class WebContentsManager
         {
             CommonResult<ResDtoGetUserAccountList> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetUserAccountList>>(response);
             
-            if(rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if(rv.StatusCode != EStatusCode.OK)
-                {                    
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -322,18 +338,16 @@ public class WebContentsManager
 
             if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.UnknownError);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if (rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -344,20 +358,18 @@ public class WebContentsManager
         {
             CommonResult<ResDtoCompleteUserMissionList> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoCompleteUserMissionList>>(response);
 
-            if (rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if (rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -368,20 +380,18 @@ public class WebContentsManager
         {
             CommonResult<ResDtoUpdateUserMissionList> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoUpdateUserMissionList>>(response);
 
-            if (rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if (rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -392,21 +402,18 @@ public class WebContentsManager
         {
             CommonResult<ResDtoGetUserMissionList> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetUserMissionList>>(response);
             
-            if(rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if(rv.StatusCode != EStatusCode.OK)
-                {           
-                    // 여기로 들어와 짐
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -447,18 +454,16 @@ public class WebContentsManager
 
             if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.UnknownError);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if (rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -470,20 +475,18 @@ public class WebContentsManager
         {
             CommonResult<ResDtoHeartBeat> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoHeartBeat>>(response);
 
-            if (rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if (rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -495,20 +498,18 @@ public class WebContentsManager
         {
             CommonResult<ResDtoGameStart> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGameStart>>(response);
 
-            if (rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if (rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -520,20 +521,18 @@ public class WebContentsManager
         {
             CommonResult<ResDtoUpdateEnergy> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoUpdateEnergy>>(response);
 
-            if (rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if (rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -545,20 +544,18 @@ public class WebContentsManager
         {
             CommonResult<ResDtoPurchaseCashProduct> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoPurchaseCashProduct>>(response);
 
-            if (rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if (rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -568,20 +565,18 @@ public class WebContentsManager
         {
             CommonResult<ResDtoGetCashProductList> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetCashProductList>>(response);
 
-            if (rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if (rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -591,20 +586,18 @@ public class WebContentsManager
         {
             CommonResult<ResDtoInsertEnergy> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertEnergy>>(response);
             
-            if(rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if(rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -616,20 +609,18 @@ public class WebContentsManager
         {
             CommonResult<ResDtoUpdateRewardClaim> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoUpdateRewardClaim>>(response);
             
-            if(rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if(rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -641,20 +632,18 @@ public class WebContentsManager
         {
             CommonResult<ResDtoInsertGoogleAccount> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoInsertGoogleAccount>>(response);
             
-            if(rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if(rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }
@@ -667,20 +656,18 @@ public class WebContentsManager
         {
             CommonResult<ResDtoBindUserAccountToGoogle> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoBindUserAccountToGoogle>>(response);
             
-            if(rv == null || false == rv.IsSuccess)
+            if (rv == null)
             {
-                onFailed.Invoke(EStatusCode.ServerException);
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            {
+                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
+                onFailed?.Invoke(rv.StatusCode);
             }
             else
             {
-                if(rv.StatusCode != EStatusCode.OK)
-                {
-                    onFailed.Invoke(rv.StatusCode);
-                }
-                else
-                {
-                    onSuccess.Invoke(rv.Data);
-                }
+                onSuccess?.Invoke(rv.Data);
             }
         });
     }

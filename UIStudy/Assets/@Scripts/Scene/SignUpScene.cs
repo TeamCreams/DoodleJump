@@ -20,38 +20,19 @@ public class SignUpScene : BaseScene
         }
 
         Managers.UI.ShowSceneUI<UI_SignUpScene>();
-        Managers.Event.AddEvent(EEventType.GoogleSignup, Event_GoogleAccountSignup);
 
-        Systems.GoogleLoginWebView.OnGetGoogleAccount -= SignIn1; // 구독 해제
-        Systems.GoogleLoginWebView.OnGetGoogleAccount += SignIn1; // 이벤트 구독
-
+        Systems.GoogleLoginWebView.OnGetGoogleAccount -= GoogleAccountSignup; // 구독 해제
+        Systems.GoogleLoginWebView.OnGetGoogleAccount += GoogleAccountSignup; // 이벤트 구독
 
         return true;
     }
 
     void OnDestroy()
     {
-        Systems.GoogleLoginWebView.OnGetGoogleAccount -= SignIn1; // 구독 해제
-        Managers.Event.RemoveEvent(EEventType.GoogleSignup, Event_GoogleAccountSignup);
+        Systems.GoogleLoginWebView.OnGetGoogleAccount -= GoogleAccountSignup; // 구독 해제
     }
 
-    void Event_GoogleAccountSignup(Component sender, object param)
-    {
-        Debug.Log("Event_GoogleAccountSignup");
-        Managers.WebContents.CheckGoogleAccountExists(new ReqDtoGoogleAccount()
-        {
-            GoogleAccount = Managers.Game.UserInfo.GoogleAccount
-        }, (response) =>
-        {
-            Managers.Scene.LoadScene(EScene.InputNicknameScene);
-        }, (errorCode) =>
-        {
-            SignIn();
-            // 바로 로그인 시켜주기
-        });
-    }
-
-    public void SignIn1(string googleAccount)
+    public void GoogleAccountSignup(string googleAccount)
     {
         Debug.Log("Event_GoogleAccountSignup");
         Managers.WebContents.CheckGoogleAccountExists(new ReqDtoGoogleAccount()
@@ -65,7 +46,9 @@ public class SignUpScene : BaseScene
         {
             if (errorCode == EStatusCode.GoogleAccountAlreadyExists)
             {
-                // 이미 있으면
+                 // 이미 있으면
+                Debug.Log($"errorCode : {errorCode}");
+                // 여길 안 들어옴.
                 Managers.Game.UserInfo.GoogleAccount = googleAccount;
                 SignIn();
                 // 바로 로그인 시켜주기
@@ -80,6 +63,8 @@ public class SignUpScene : BaseScene
     }
     public void SignIn()
     {
+        Debug.Log($"SignIn");
+
         var loadingComplete = UI_LoadingPopup.Show();
         Managers.WebContents.GetUserAccount(new ReqDtoGetUserAccount()
         {
@@ -129,7 +114,6 @@ public class SignUpScene : BaseScene
             SecurePlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);
             SecurePlayerPrefs.SetString(HardCoding.Password, Managers.Game.UserInfo.Password);
             SecurePlayerPrefs.SetString(HardCoding.GoogleAccount, Managers.Game.UserInfo.GoogleAccount);
-
             SecurePlayerPrefs.Save();
 
             _isLoadEnergyCondition = true;

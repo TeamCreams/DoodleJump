@@ -82,7 +82,15 @@ public class UI_SignInScene : UI_Scene
     }
     private void OnClick_GoogleLogin(PointerEventData eventData)
     {
-        Systems.GoogleLoginWebView.SignIn();
+        Debug.Log($"GoogleAccount : {Managers.Game.UserInfo.GoogleAccount}");
+        if(Managers.Game.UserInfo.GoogleAccount == HardCoding.GoogleAccount || string.IsNullOrEmpty(Managers.Game.UserInfo.GoogleAccount))
+        {
+            Systems.GoogleLoginWebView.SignIn();
+        }
+        else
+        {
+            _scene.GoogleAccountSignin(Managers.Game.UserInfo.GoogleAccount);
+        }
     }
     // private void OnClick_CheckLogId(PointerEventData eventData)
     // {        

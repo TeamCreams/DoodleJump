@@ -126,6 +126,7 @@ public class UI_SettingPopup : UI_Popup
     {
         SecurePlayerPrefs.SetString(HardCoding.UserName, "UserName");
         SecurePlayerPrefs.SetString(HardCoding.Password, "Password");
+        SecurePlayerPrefs.SetString(HardCoding.GoogleAccount, "GoogleAccount");
         SecurePlayerPrefs.Save();
         Managers.Event.TriggerEvent(EEventType.OnLogout);
     }

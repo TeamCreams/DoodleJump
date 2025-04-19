@@ -39,4 +39,6 @@ public static partial class Extension
         return list.Select((value, index) => new { Key = index, Value = value })
                    .ToDictionary(x => x.Key, x => x.Value);
     }
+
+    
 }

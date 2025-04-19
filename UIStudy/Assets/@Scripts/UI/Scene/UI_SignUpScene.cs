@@ -48,6 +48,7 @@ public class UI_SignUpScene : UI_Scene
 
     private EErrorCode _errCodeId = EErrorCode.ERR_Nothing;
     private EErrorCode _errCodePassword = EErrorCode.ERR_ValidationPassword;
+    private SignUpScene _scene;
 
     public override bool Init()
     {
@@ -77,6 +78,8 @@ public class UI_SignUpScene : UI_Scene
         GetText((int)Texts.Warning_Id_Text).text = null;
         GetText((int)Texts.Warning_Password_Text).text = null;
         GetText((int)Texts.Warning_ConfirmPassword_Text).text = null;
+
+        _scene = Managers.Scene.CurrentScene as SignUpScene;
 
         return true;
     }
@@ -114,7 +117,14 @@ public class UI_SignUpScene : UI_Scene
 
     private void OnClick_GoogleSignup(PointerEventData eventData)
     {
-        Systems.GoogleLoginWebView.SignIn();
+        if(Managers.Game.UserInfo.GoogleAccount == HardCoding.GoogleAccount || string.IsNullOrEmpty(Managers.Game.UserInfo.GoogleAccount))
+        {
+            Systems.GoogleLoginWebView.SignIn();
+        }
+        else
+        {
+            _scene.GoogleAccountSignup(Managers.Game.UserInfo.GoogleAccount);
+        }
     }
 
     private void OnClick_SignIn(PointerEventData eventData)

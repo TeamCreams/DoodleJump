@@ -22,7 +22,8 @@ public class InputNicknameScene : BaseScene
 
     public void InsertUser(Action onSuccess = null)
     {
-        if(string.IsNullOrEmpty(Managers.Game.UserInfo.GoogleAccount))
+        Debug.Log($"GoogleAccount : {Managers.Game.UserInfo.GoogleAccount}");
+        if(Managers.Game.UserInfo.GoogleAccount == HardCoding.GoogleAccount)
         {
             WithUserAccount(onSuccess);
         }
