@@ -21,6 +21,7 @@ public class Managers : MonoBehaviour
 	private EvolutionManager _evolution = new EvolutionManager();
 	private ChattingManager _chatting = new ChattingManager();
 	private IAPManager _iap = new IAPManager();
+	private LoginManager _login = new LoginManager();
 
     public static GameManager Game { get { return Instance?._game; } }
 	public static MessageManager Message { get { return Instance?._message; } }
@@ -34,6 +35,7 @@ public class Managers : MonoBehaviour
 	public static EvolutionManager Evolution { get { return Instance?._evolution; } }
 	public static ChattingManager Chatting {get {return Instance?._chatting;}}
 	public static IAPManager IAP { get { return Instance?._iap; } }
+	public static LoginManager Login {get {return Instance?._login; }}
 
     #endregion
 
@@ -86,6 +88,7 @@ public class Managers : MonoBehaviour
 			Managers.Sound.Init();
 			Managers.Web.Init();
 			Managers.Mission.Init();
+			Managers.Login.Init();
 			Managers.SignalR.InitAsync();
 
 
@@ -106,6 +109,7 @@ public class Managers : MonoBehaviour
         Managers.Sound.Init();
         Managers.Web.Init();
         Managers.Mission.Init();
+		Managers.Login.Init();
     }
 	
 	// public static void InitScene()

@@ -72,9 +72,9 @@ public class UI_SignInScene : UI_Scene
     }
     private void OnClick_SignIn(PointerEventData eventData)
     {
-        Managers.Game.UserInfo.UserName = GetInputField((int)InputFields.Id_InputField).text;
-        Managers.Game.UserInfo.Password = GetInputField((int)InputFields.Password_InputField).text;
-        _scene.SignIn();
+        string userName = GetInputField((int)InputFields.Id_InputField).text;
+        string password = GetInputField((int)InputFields.Password_InputField).text;
+        Managers.Login.SignIn(userName, password);
     }
     private void OnClick_SignUp(PointerEventData eventData)
     {   

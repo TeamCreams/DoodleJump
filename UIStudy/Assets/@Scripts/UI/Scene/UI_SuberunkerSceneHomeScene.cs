@@ -139,11 +139,6 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
         Managers.Event.TriggerEvent(EEventType.EnterShop);
     }
     
-    private void OnClick_SettingButton(PointerEventData eventData)
-    {
-        UI_SettingPopup settingPopup = Managers.UI.ShowPopupUI<UI_SettingPopup>();
-        settingPopup.ActiveInfo();
-    }
 
     // private void OnEvent_Refresh(Component sender, object param)
     // {

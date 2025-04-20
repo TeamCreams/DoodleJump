@@ -19,3 +19,5 @@ Id,Type,TitleEn,NoticeEn,TitleKr,NoticeKr
 150018,ERR_Logout,Logout,Do you want to log out?,로그아웃,로그아웃하시겠습니까?
 150019,ERR_EnergyInsufficient,,You do not have enough energy to play the game.,,에너지가 부족합니다.
 150020,ERR_InvalidCredentials,,The username or password does not match.,,아이디 또는 비밀번호가 일치하지 않습니다.
+150021,ERR_GoogleAccountAlreadyExists,,This Google account is already registered. ,,가입이 되어있는 Google 계정입니다.
+150022,ERR_GoogleAccountMergeConfirm,,Would you like to merge your existing account with this Google account?,,기존 계정과 Google 계정을 합병하시겠습니까?

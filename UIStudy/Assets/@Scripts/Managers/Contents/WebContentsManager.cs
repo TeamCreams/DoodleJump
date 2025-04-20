@@ -12,8 +12,9 @@ using static Define;
 public class WebRoute
 {
     private readonly static string BaseUrl = $"https://dd37927.store/";
-    public readonly static Func<ReqDtoGetUserAccount, string> GetUserAccount = (dto) => $"{BaseUrl}User/GetUserAccount?UserName={dto.UserName}&Password={dto.Password}&GoogleAccount={dto.GoogleAccount}";
+    public readonly static Func<ReqDtoGetUserAccount, string> GetUserAccount = (dto) => $"{BaseUrl}User/GetUserAccount?UserName={dto.UserName}&Password={dto.Password}";
                                                                             //https://dd37927.store/User/GetUserAccount?UserName=test3&Password=12345678
+    public readonly static Func<ReqDtoGetUserAccountByGoogle, string> GetUserAccountByGoogle = (dto) => $"{BaseUrl}User/GetUserAccountByGoogle?GoogleAccount={dto.GoogleAccount}";
 
     public readonly static string CheckUserAccountUserNameExists = $"{BaseUrl}User/CheckUserAccountUserNameExists";
     public readonly static string CheckUserAccountNicknameExists = $"{BaseUrl}User/CheckUserAccountNicknameExists";
@@ -65,6 +66,34 @@ public class WebContentsManager
         Managers.Web.SendGetRequest(WebRoute.GetUserAccount(requestDto), (response) =>
         {
             CommonResult<ResDtoGetUserAccount> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetUserAccount>>(response);
+            
+            if (rv == null)
+            {
+                Debug.LogError("GetUserAccount: 응답 파싱 실패 (null)");
+                onFailed?.Invoke(EStatusCode.ServerException);
+            }
+            else
+            {
+                Debug.Log($"응답 상태: IsSuccess={rv.IsSuccess}, StatusCode={rv.StatusCode}, Data={rv.Data != null}");
+                
+                if (rv.IsSuccess && rv.StatusCode == EStatusCode.OK && rv.Data != null)
+                {
+                    Debug.Log("성공 콜백 호출");
+                    onSuccess?.Invoke(rv.Data);
+                }
+                else
+                {
+                    Debug.LogError($"실패 콜백 호출: {rv.StatusCode}");
+                    onFailed?.Invoke(rv.StatusCode);
+                }
+            }
+        });
+    }
+    public void GetUserAccountByGoogle(ReqDtoGetUserAccountByGoogle requestDto, Action<ResDtoGetUserAccountByGoogle> onSuccess = null, Action<EStatusCode> onFailed = null)
+    {
+        Managers.Web.SendGetRequest(WebRoute.GetUserAccountByGoogle(requestDto), (response) =>
+        {
+            CommonResult<ResDtoGetUserAccountByGoogle> rv = JsonConvert.DeserializeObject<CommonResult<ResDtoGetUserAccountByGoogle>>(response);
             
             if (rv == null)
             {

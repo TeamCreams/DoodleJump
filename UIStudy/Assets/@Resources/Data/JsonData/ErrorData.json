@@ -159,6 +159,22 @@
       "NoticeEn": "The username or password does not match.",
       "TitleKr": null,
       "NoticeKr": "아이디 또는 비밀번호가 일치하지 않습니다."
+    },
+    {
+      "Id": 150021,
+      "Type": 21,
+      "TitleEn": null,
+      "NoticeEn": "This Google account is already registered. ",
+      "TitleKr": null,
+      "NoticeKr": "가입이 되어있는 Google 계정입니다."
+    },
+    {
+      "Id": 150022,
+      "Type": 22,
+      "TitleEn": null,
+      "NoticeEn": "Would you like to merge your existing account with this Google account?",
+      "TitleKr": null,
+      "NoticeKr": "기존 계정과 Google 계정을 합병하시겠습니까?"
     }
   ]
 }

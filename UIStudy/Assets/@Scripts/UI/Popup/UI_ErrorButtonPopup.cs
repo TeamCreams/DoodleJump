@@ -49,12 +49,23 @@ public class UI_ErrorButtonPopup : UI_Popup
         _notice = data.Notice;
         _scene = scene;
         GetText((int)Texts.Notice_Text).text = _notice;
+                
         if(action != null)
         {
-            GetButton((int)Buttons.Ok_Button).gameObject.BindEvent((evt) => action?.Invoke(), EUIEvent.Click);
-            //return;
-        }        
-        //GetButton((int)Buttons.Ok_Button).gameObject.BindEvent(OnEvent_ClickClose, EUIEvent.Click);
+            // 기존 이벤트를 제거하고 새로 바인딩
+            GetButton((int)Buttons.Ok_Button).gameObject.ClearEvent(OnEvent_ClickClose, EUIEvent.Click);
+
+            GetButton((int)Buttons.Ok_Button).gameObject.BindEvent((evt) => 
+            {
+                action.Invoke();
+                Managers.UI.ClosePopupUI(this);
+            }, EUIEvent.Click);
+        }
+        else
+        {
+            // 기본 OnEvent_ClickOk 실행
+            GetButton((int)Buttons.Ok_Button).gameObject.BindEvent(OnEvent_ClickOk, EUIEvent.Click);
+        }
     }
 
     private void OnEvent_ClickClose(PointerEventData eventData)

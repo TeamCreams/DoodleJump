@@ -185,6 +185,8 @@ public static class Define
         ERR_Logout,
         ERR_EnergyInsufficient,
         ERR_InvalidCredentials,
+        ERR_GoogleAccountAlreadyExists,
+        ERR_GoogleAccountMergeConfirm,
     }
 
     public enum EProductType

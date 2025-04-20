@@ -12,7 +12,8 @@ public class UI_SettingPopup : UI_Popup
         SoundFx_Text,
         Vibration_Text,
         Language_Text,
-        Logout_Text
+        Logout_Text,
+        Google_Text,
     }
 
     private enum Buttons
@@ -29,6 +30,8 @@ public class UI_SettingPopup : UI_Popup
         Language_En,
         Language_Kr
     }
+    private BaseScene _scene;
+
     private PersonalSetting _personalSettingData = new PersonalSetting();
     public override bool Init()
     {
@@ -49,6 +52,7 @@ public class UI_SettingPopup : UI_Popup
         GetSlider((int)Sliders.Music_Slider).gameObject.BindEvent(OnDrag_MusicSlider, EUIEvent.Drag);
         GetSlider((int)Sliders.SoundFx_Slider).gameObject.BindEvent(OnDrag_SoundFxSlider, EUIEvent.Drag);
         GetText((int)Texts.Logout_Text).gameObject.BindEvent(OnClick_Logout, EUIEvent.Click);
+        GetText((int)Texts.Google_Text).gameObject.BindEvent(OnClick_Google, EUIEvent.Click);
         return true;
     }
     private void OnDestroy()
@@ -84,6 +88,7 @@ public class UI_SettingPopup : UI_Popup
         PlayerPrefs.Save();
 
         _personalSettingData.IsOnVibration = Managers.Game.SettingInfo.VibrationIsOn;
+        Systems.GoogleLoginWebView.OnGetGoogleAccount -= GoogleAccountSignin; // 구독 해제
         Managers.UI.ClosePopupUI(this);
     }
 
@@ -122,13 +127,24 @@ public class UI_SettingPopup : UI_Popup
         // popup.SetInfo(errorStruct.Notice, LogoutAndClearMission);
 
     }
+
+    private void OnClick_Google(PointerEventData eventData)
+    {
+        UI_ErrorButtonPopup.ShowErrorButton(Managers.Error.GetError(EErrorCode.ERR_GoogleAccountMergeConfirm),// 메세지를 바꿔야함.         
+        () => {
+            Systems.GoogleLoginWebView.OnGetGoogleAccount -= GoogleAccountSignin; // 구독 해제
+            Systems.GoogleLoginWebView.OnGetGoogleAccount += GoogleAccountSignin; // 이벤트 구독
+            Systems.GoogleLoginWebView.SignIn();
+        });
+    }
+
+    public void GoogleAccountSignin(string googleAccount)
+    {
+        Managers.Login.ProcessGoogleAccount(googleAccount, true);
+    }
     private void LogoutAndClearMission()
     {
-        SecurePlayerPrefs.SetString(HardCoding.UserName, "UserName");
-        SecurePlayerPrefs.SetString(HardCoding.Password, "Password");
-        SecurePlayerPrefs.SetString(HardCoding.GoogleAccount, "GoogleAccount");
-        SecurePlayerPrefs.Save();
-        Managers.Event.TriggerEvent(EEventType.OnLogout);
+        Managers.Login.LogoutAndClearMission();
     }
     void OnEvent_SetLanguage(Component sender, object param)
     {

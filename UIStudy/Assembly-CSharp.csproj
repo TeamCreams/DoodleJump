@@ -131,6 +131,7 @@
     <Compile Include="Assets/@Scripts/UI/Scene/UI_Scene.cs" />
     <Compile Include="Assets/@Scripts/Managers/Contents/WebContentsManager.cs" />
     <Compile Include="Assets/@Scripts/UI/UI_EventHandler.cs" />
+    <Compile Include="Assets/@Scripts/Managers/Contents/LoginManager.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterSerializer.cs" />
     <Compile Include="Assets/@Scripts/Managers/Core/CameraManager.cs" />
     <Compile Include="Assets/@Scripts/Managers/Managers.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="Assets/HeroEditor/Common/SimpleColorPicker/Scripts/ColorSlider.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/CharacterState.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Data/LocalizedValue.cs" />
+    <Compile Include="Assets/@Scripts/Managers/Contents/LoginManager/LoginSlave.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Firearms/FirearmReload.cs" />
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_TopBar.cs" />
     <Compile Include="Assets/@Scripts/UI/Scene/UI_StartLoadingScene.cs" />

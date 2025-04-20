@@ -109,15 +109,46 @@ public class UI_Base : InitBase
                 evt.OnEndDragHandler -= action;
                 evt.OnEndDragHandler += action;
                 break;
-
             case Define.EUIEvent.PointerEnter:
                 evt.OnEndDragHandler -= action;
                 evt.OnEndDragHandler += action;
                 break;
-
             case Define.EUIEvent.PointerExit:
                 evt.OnEndDragHandler -= action;
                 evt.OnEndDragHandler += action;
+                break;
+        }
+    }
+
+    public static void ClearEvent(GameObject go, Action<PointerEventData> action = null, Define.EUIEvent type = Define.EUIEvent.Click)
+    {
+        UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
+
+        switch (type)
+        {
+            case Define.EUIEvent.PointerUp:
+                evt.OnPointerUpHandler = null;
+                break;
+            case Define.EUIEvent.PointerDown:
+                evt.OnPointerDownHandler = null;
+                break;
+            case Define.EUIEvent.Click:
+                evt.OnClickHandler = null;
+                break;
+            case Define.EUIEvent.BeginDrag:
+                evt.OnBeginDragHandler = null;
+                break;
+            case Define.EUIEvent.Drag:
+                evt.OnDragHandler = null;
+                break;
+            case Define.EUIEvent.EndDrag:
+                evt.OnEndDragHandler = null;
+                break;
+            case Define.EUIEvent.PointerEnter:
+                evt.OnEndDragHandler = null;
+                break;
+            case Define.EUIEvent.PointerExit:
+                evt.OnEndDragHandler = null;
                 break;
         }
     }
