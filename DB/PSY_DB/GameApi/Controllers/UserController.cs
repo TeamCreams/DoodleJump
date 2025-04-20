@@ -122,15 +122,8 @@ namespace GameApi.Controllers
                 var select = await (
                     from user in _context.TblUserAccounts.Include(user => user.TblUserScores)
                     where (
-                          // 구글 로그인 케이스
-                          (requestDto.GoogleAccount != null &&
-                           user.GoogleAccount != null &&
-                           user.GoogleAccount == requestDto.GoogleAccount)
-                          ||
                           // 일반 로그인 케이스
-                          (requestDto.UserName != null &&
-                           requestDto.Password != null &&
-                           user.UserName.ToLower() == requestDto.UserName.ToLower() &&
+                          (user.UserName.ToLower() == requestDto.UserName.ToLower() &&
                            user.Password == requestDto.Password)
                         ) && user.DeletedDate == null
                     select new ResDtoGetUserAccount
@@ -142,21 +135,22 @@ namespace GameApi.Controllers
                         GoogleAccount = user.GoogleAccount,
                         RegisterDate = user.RegisterDate,
                         UpdateDate = user.UpdateDate,
-                        HighScore = user.TblUserScores
-                                      .OrderByDescending(s => s.Scoreboard)
-                                      .Select(s => s.Scoreboard)
-                                      .FirstOrDefault(),
-                        LatelyScore = user.TblUserScores
+                        HighScore = user.TblUserScores.Any() 
+                                        ? user.TblUserScores
+                                        .OrderByDescending(s => s.Scoreboard)
+                                        .Select(s => s.Scoreboard)
+                                        .FirstOrDefault() : 0,
+                        LatelyScore = user.TblUserScores.Any() 
+                                        ? user.TblUserScores
                                         .OrderByDescending(s => s.RegisterDate) // 최신 점수 순으로 정렬
                                         .Select(s => s.Scoreboard) // History 선택
-                                        .FirstOrDefault(), // 가장 최근 점수
+                                        .FirstOrDefault() : 0, // 가장 최근 점수
                         Gold = user.Gold,
-                        PlayTime = user.TblUserScores
-                                    .Sum(s => s.AccumulatedStone),
-                        AccumulatedStone = user.TblUserScores
-                                    .Sum(s => s.AccumulatedStone),
-                        StageLevel = user.TblUserScores
-                                    .Max(s => s.StageLevel),
+                        PlayTime = user.TblUserScores.Any() ? 
+                                    user.TblUserScores.Sum(s => s.PlayTime) : 0,
+                        AccumulatedStone = user.TblUserScores.Any() ? user.TblUserScores
+                                    .Sum(s => s.AccumulatedStone) : 0,
+                        StageLevel = user.TblUserScores.Any() ? user.TblUserScores.Max(s => s.StageLevel) : 0,
                         CharacterId = user.CharacterId,
                         HairStyle = user.HairStyle,
                         EyesStyle = user.EyesStyle,
@@ -202,8 +196,96 @@ namespace GameApi.Controllers
                 rv.IsSuccess = false;
                 rv.StatusCode = EStatusCode.ServerException;
                 rv.Message = ex.Message;
-                rv.Data = ex.Data as ResDtoGetUserAccount;
+                rv.Data = null;
+                return rv;
+            }
+            return rv;
+        }
 
+        //게임 시작/로그인 할 때 가장 먼저 사용할 것
+        // 115716037461179178251
+        [HttpGet("GetUserAccountByGoogle")]
+        public async Task<CommonResult<ResDtoGetUserAccountByGoogle>> GetUserAccountByGoogle([FromQuery] ReqDtoGetUserAccountByGoogle requestDto)
+        {
+            CommonResult<ResDtoGetUserAccountByGoogle> rv = new();
+
+            //Thread.Sleep(3000);
+            try
+            {
+                rv.Data = new();
+
+                var select = await (
+                    from user in _context.TblUserAccounts.Include(user => user.TblUserScores)
+                    where (
+                          // 구글 로그인 케이스
+                          (user.GoogleAccount == requestDto.GoogleAccount)
+                        ) && user.DeletedDate == null
+                    select new ResDtoGetUserAccountByGoogle
+                    {
+                        UserAccountId = user.Id,
+                        UserName = user.UserName,
+                        Password = user.Password,
+                        Nickname = user.Nickname,
+                        GoogleAccount = user.GoogleAccount,
+                        RegisterDate = user.RegisterDate,
+                        UpdateDate = user.UpdateDate,
+                        HighScore = user.TblUserScores.Any()
+                                        ? user.TblUserScores
+                                        .OrderByDescending(s => s.Scoreboard)
+                                        .Select(s => s.Scoreboard)
+                                        .FirstOrDefault() : 0,
+                        LatelyScore = user.TblUserScores.Any()
+                                        ? user.TblUserScores
+                                        .OrderByDescending(s => s.RegisterDate) // 최신 점수 순으로 정렬
+                                        .Select(s => s.Scoreboard) // History 선택
+                                        .FirstOrDefault() : 0, // 가장 최근 점수
+                        Gold = user.Gold,
+                        PlayTime = user.TblUserScores.Any() ?
+                                    user.TblUserScores.Sum(s => s.PlayTime) : 0,
+                        AccumulatedStone = user.TblUserScores.Any() ? user.TblUserScores
+                                    .Sum(s => s.AccumulatedStone) : 0,
+                        StageLevel = user.TblUserScores.Any() ? user.TblUserScores.Max(s => s.StageLevel) : 0,
+                        CharacterId = user.CharacterId,
+                        HairStyle = user.HairStyle,
+                        EyesStyle = user.EyesStyle,
+                        EyebrowStyle = user.EyebrowStyle,
+                        Evolution = user.Evolution,
+                        EvolutionSetLevel = user.EvolutionSetLevel,
+                        LatelyEnergy = user.LatelyEnergy,
+                        Energy = user.Energy,
+                        PurchaseEnergyCountToday = (user.FirstPurchaseEnergyTime == DateTime.MinValue ||
+                                     user.FirstPurchaseEnergyTime.AddHours(24) <= DateTime.UtcNow)
+                                     ? 0
+                                     : user.PurchaseEnergyCountToday,
+                        LastRewardClaimTime = user.LastRewardClaimTime
+                    }).ToListAsync();
+
+                if (select.Any() == false)
+                {
+                    throw new CommonException(EStatusCode.NotFoundEntity,
+                        "google Account가 맞지 않습니다."); // try문 밖으로 던짐
+                }
+                var selectUser = select.First();
+
+                rv.StatusCode = EStatusCode.OK;
+                rv.Message = "";
+                rv.IsSuccess = true;
+                rv.Data = selectUser;
+            }
+            catch (CommonException ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = (EStatusCode)ex.StatusCode;
+                rv.Message = ex.Message;
+                rv.Data = null;
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                rv.IsSuccess = false;
+                rv.StatusCode = EStatusCode.ServerException;
+                rv.Message = ex.Message;
+                rv.Data = null;
                 return rv;
             }
             return rv;
@@ -490,8 +572,7 @@ namespace GameApi.Controllers
         }
 
         [HttpPost("CheckGoogleAccountExists")]
-        public async Task<CommonResult<ResDtoGoogleAccount>>
-            CheckGoogleAccountExists([FromBody] ReqDtoGoogleAccount requestDto)
+        public async Task<CommonResult<ResDtoGoogleAccount>> CheckGoogleAccountExists([FromBody] ReqDtoGoogleAccount requestDto)
         {
             CommonResult<ResDtoGoogleAccount> rv = new();
 
@@ -504,10 +585,11 @@ namespace GameApi.Controllers
                                         GoogleAccount = user.GoogleAccount,
                                     }).ToListAsync();
 
-                if (true == select.Any())
+                if (select.Any())
                 {
-                    throw new CommonException(EStatusCode.GoogleAccountAlreadyExists,
-                        "사용할 수 없는 GoogleAccount.");
+                    rv.StatusCode = EStatusCode.GoogleAccountAlreadyExists;
+                    rv.Message = "사용할 수 없는 GoogleAccount.";
+                    rv.IsSuccess = false;
                 }
                 else
                 {
@@ -515,6 +597,7 @@ namespace GameApi.Controllers
                     rv.Message = "";
                     rv.IsSuccess = true;
                 }
+                return rv;
             }
             catch (CommonException ex)
             {
@@ -529,11 +612,9 @@ namespace GameApi.Controllers
                 rv.IsSuccess = false;
                 rv.StatusCode = EStatusCode.ServerException;
                 rv.Message = ex.Message;
-                rv.Data = ex.Data as ResDtoGoogleAccount;
-
+                rv.Data = null; // ex.Data는 ResDtoGoogleAccount로 변환할 수 없음
                 return rv;
             }
-            return rv;
         }
 
         [HttpPost("InsertGoogleAccount")]
@@ -546,10 +627,10 @@ namespace GameApi.Controllers
             {
                 var select = await (
                             from user in _context.TblUserAccounts
-                            where (user.GoogleAccount != requestDto.GoogleAccount && user.DeletedDate == null)
+                            where (user.GoogleAccount == requestDto.GoogleAccount && user.DeletedDate == null)
                             select new
                             {
-                                UserName = user.UserName
+                                GoogleAccount = user.GoogleAccount
                             }).ToListAsync();
 
                 if (select.Any() == false)
@@ -572,7 +653,7 @@ namespace GameApi.Controllers
                 if (IsSuccess == 0)
                 {
                     throw new CommonException(EStatusCode.ChangedRowsIsZero,
-                        $"UserId : {requestDto.GoogleAccount}");
+                        $"GoogleAccount : {requestDto.GoogleAccount}");
                 }
                 else
                 {

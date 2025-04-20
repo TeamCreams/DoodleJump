@@ -1,13 +1,15 @@
-﻿namespace GameApi.Dtos
-{
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-    public class ReqDtoGetUserAccount
+namespace GameApi.Dtos
+{
+    public class ReqDtoGetUserAccountByGoogle
     {
-        public string? UserName { get; set; }
-        public string? Password { get; set; }
+        public string? GoogleAccount { get; set; }
     }
 
-    public class ResDtoGetUserAccount
+    public class ResDtoGetUserAccountByGoogle
     {
         public int UserAccountId { get; set; }
         public string? UserName { get; set; }
@@ -17,7 +19,7 @@
 
         public int HighScore { get; set; }
         public int LatelyScore { get; set; }
-        public int Gold {  get; set; }
+        public int Gold { get; set; }
         public int PlayTime { get; set; }
         public int CharacterId { get; set; }
         public int AccumulatedStone { get; set; }
