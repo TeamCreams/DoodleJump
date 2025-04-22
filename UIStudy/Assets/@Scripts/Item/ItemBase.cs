@@ -78,7 +78,7 @@ public class ItemBase : ObjectBase
         _animator.SetTrigger("isDisappear");
         float duration = _animator.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(duration);
-        Managers.Pool.Push(this.gameObject);
+        Managers.Resource.Destroy(this.gameObject);// Managers.Pool.Push(this.gameObject);
     }
 
     private void OnTriggerEnterPlayer(Collider collision)
@@ -89,7 +89,7 @@ public class ItemBase : ObjectBase
 
             Managers.Event.TriggerEvent(EEventType.TakeItem, this);
         
-            Managers.Pool.Push(this.gameObject);
+            Managers.Resource.Destroy(this.gameObject);//Managers.Pool.Push(this.gameObject);
         }
     }
 }

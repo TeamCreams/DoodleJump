@@ -83,8 +83,8 @@ public class StoneController : ObjectBase
                 // 랜덤한 확률로 실행
                 SpawnStoneShards(); // 이게 실행되는 동안 돌이 계속 땅과 닿아있어서 push가 안되고 점수가 계속 올라감
             }
-            Managers.Pool.Push(this.gameObject);
-            //Managers.Resource.Destroy(this.gameObject);
+            //Managers.Pool.Push(this.gameObject);
+            Managers.Resource.Destroy(this.gameObject);
         }
     }
 
@@ -106,7 +106,7 @@ public class StoneController : ObjectBase
             {
                 Managers.Event.TriggerEvent(EEventType.Attacked_Player, this, Data.Damage);
             }
-            Managers.Pool.Push(this.gameObject);
+            Managers.Resource.Destroy(this.gameObject);//Managers.Pool.Push(this.gameObject);
         }
     }
 

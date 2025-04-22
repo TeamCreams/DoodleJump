@@ -76,17 +76,5 @@ public class SuberunkerSceneHomeScene : BaseScene
         }
         );
     }
-
-    public void Func(string googleAccount)
-    {
-        // 새 계정 만들건지
-        // 이미 사용되고 있는 구글 계정임. -> 안됨.
-        // 새로운 계정임. -> 새로 만듦
-        
-        // 합병할 건지.
-        // 이미 사용되고 있는 계정임. -> 안됨.
-        // 새로운 계정임. -> 합병
-        
-    }
     
 }

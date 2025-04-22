@@ -92,30 +92,27 @@ public class ObjectManager
     private int RandomItem()
     {
         _itemList.Clear();
-
         // 전체 확률 합산
         float totalChance = 0f;
         foreach (var item in Managers.Data.SuberunkerItemDic.Values)
         {
             totalChance += item.Chance;
         }
-
         // 0부터 totalChance 사이에서 랜덤 값 선택
         float roll = UnityEngine.Random.Range(0f, totalChance);
         float cumulative = 0f;
 
         foreach (var item in Managers.Data.SuberunkerItemDic.Values)
         {
-        cumulative += item.Chance;
-        if (roll <= cumulative)
-        {
-            return item.Id;
+            cumulative += item.Chance;
+            if (roll <= cumulative)
+            {
+                return item.Id;
+            }
         }
-    }
-
-    // fallback: 마지막 아이템
-    return Managers.Data.SuberunkerItemDic.Values.Last().Id;
-}
+        // fallback: 마지막 아이템
+        return Managers.Data.SuberunkerItemDic.Values.Last().Id;
+    }   
 
     // private int RandomItem()
     // {

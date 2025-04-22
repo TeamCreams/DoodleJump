@@ -136,15 +136,18 @@ public class LoginManager
             
             Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
             Managers.Event.TriggerEvent(EEventType.OnFirstAccept);
+            
+            loadingComplete.Value = true;
 
             // 에너지 업데이트 요청 실행
             _slave.StartUpdateEnergy();
+            
         },
         // 실패 콜백
         (errorCode) =>
         {
             loadingComplete.Value = true;
-            Debug.LogError($"구글 계정 로그인 실패: {errorCode}");
+            Debug.Log($"구글 계정 로그인 실패: {errorCode}");
             UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError));
         });
     }
@@ -204,6 +207,8 @@ public class LoginManager
             Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
             Managers.Event.TriggerEvent(EEventType.OnFirstAccept);
 
+            loadingComplete.Value = true;
+
             // 에너지 업데이트 요청 실행
             _slave.StartUpdateEnergy();
         },
@@ -211,7 +216,7 @@ public class LoginManager
         (errorCode) =>
         {
             loadingComplete.Value = true;
-            Debug.LogError($"일반 계정 로그인 실패: {errorCode}");
+            Debug.Log($"일반 계정 로그인 실패: {errorCode}");
             UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_InvalidCredentials));
         });
     }
