@@ -9,6 +9,8 @@ using static Define;
 public class StoneController : ObjectBase
 {
     private bool _isNotStoneShower = true;
+    private System.Random _random = new System.Random();
+
     public bool IsNotStoneShower
     {
         get => _isNotStoneShower;
@@ -81,7 +83,10 @@ public class StoneController : ObjectBase
                 Managers.Event.TriggerEvent(EEventType.UIStoneCountRefresh);
 
                 // 랜덤한 확률로 실행
-                SpawnStoneShards(); // 이게 실행되는 동안 돌이 계속 땅과 닿아있어서 push가 안되고 점수가 계속 올라감
+                if(GetRandomStoneShardSuccess())
+                {
+                    SpawnStoneShards(); // 이게 실행되는 동안 돌이 계속 땅과 닿아있어서 push가 안되고 점수가 계속 올라감 -> fixed
+                }
             }
             //Managers.Pool.Push(this.gameObject);
             Managers.Resource.Destroy(this.gameObject);
@@ -142,6 +147,19 @@ public class StoneController : ObjectBase
             StoneShardController shardScript = shard.GetOrAddComponent<StoneShardController>();
             shardScript.SetInfo(Data, velocity);
         }
+    }
+
+    private bool GetRandomStoneShardSuccess()
+    {
+        int currentLevel = Managers.Game.DifficultySettingsInfo.StageLevel;
+        var levelData = Managers.Data.DifficultySettingsDic[currentLevel];
+        
+        float stoneShardPercent = levelData.StoneShardPercent;
+
+        float randomValue = (float)(_random.NextDouble() * 100);
+
+        // 랜덤 값이 확률 이하이면 성공
+        return randomValue <= stoneShardPercent;
     }
 
     #endregion
