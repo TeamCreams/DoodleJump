@@ -41,8 +41,7 @@ public class UI_EvolutionItem : UI_Base
         {
             return;
         }
-        // 서버연결    
-        // Debug.Log($"Item Id : {_itemId}");
+        
         if(Managers.Data.EvolutionDataDic[_itemId].PrevEvolutionId != Managers.Game.UserInfo.EvolutionId)
         {
             return;
@@ -82,6 +81,20 @@ public class UI_EvolutionItem : UI_Base
         }
         var sprite = Managers.Resource.Load<Sprite>(str);
         GetImage((int)Images.Icon).sprite = sprite;
+    CheckAndSelectIfPurchasable();
+    }
+    
+    private void CheckAndSelectIfPurchasable()
+    {
+        // 이전 진화 ID가 현재 유저의 진화 ID와 일치하면 구매 가능한 아이템
+        if(Managers.Data.EvolutionDataDic[_itemId].PrevEvolutionId == Managers.Game.UserInfo.EvolutionId)
+        {
+            // 토글을 활성화하여 자동 선택
+            if(_toggle != null)
+            {
+                _toggle.isOn = true;
+            }
+        }
     }
     public void EvolutionSetLevel()
     {

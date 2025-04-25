@@ -82,6 +82,7 @@ public class Spawner : InitBase
             {
                 Managers.Game.DifficultySettingsInfo.StageId++;
                 Managers.Game.DifficultySettingsInfo.StageLevel++; // 함수 호출 순서 때문에 여기서 부름
+                Debug.Log($"GenerateStone StageLevel :  {Managers.Game.DifficultySettingsInfo.StageLevel}");
                 Managers.Event.TriggerEvent(EEventType.LevelStageUp);
             }
             _stoneGenerateTime = UnityEngine.Random.Range(Managers.Data.DifficultySettingsDic[_id].StoneGenerateStartTime, Managers.Data.DifficultySettingsDic[_id].StoneGenerateFinishTime);
@@ -131,7 +132,7 @@ public class Spawner : InitBase
         //3. 레벨업 팝업
         //Managers.Object.Spawn<Confetti_Particle>(HardCoding.ConfetiParticlePos);
         Managers.UI.ShowPopupUI<UI_LevelUpPopup>();
-        
+
         //4. 돌 이벤트 관련 세팅
         if (_generateStoneShower != null)
         {

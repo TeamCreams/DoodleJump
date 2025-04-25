@@ -315,5 +315,6 @@ public class LoginManager
         SecurePlayerPrefs.SetString(HardCoding.GoogleAccount, "GoogleAccount");
         SecurePlayerPrefs.Save();
         Managers.Event.TriggerEvent(EEventType.OnLogout);
+        Managers.Scene.LoadScene(EScene.SignInScene);
     }
 }

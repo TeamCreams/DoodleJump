@@ -207,8 +207,17 @@ public class PlayerController : CreatureBase
     private void OnEvent_DamagedHp(Component sender, object param)
     {
         float damage = (float)param;
-        // 2. 함수 호출
-        this.DamagedHp(damage);
+
+        // 2. 함수 호출 
+        if(sender is StoneController)
+        {
+            // sender가 StoneController면 실행
+            this.DamagedHp(damage);
+        }
+        else
+        {
+            this.DamagedHp(damage, true);
+        }
     }
 
     //아이템 획득 이벤트
@@ -230,7 +239,7 @@ public class PlayerController : CreatureBase
     #endregion
 
     #region Actor Interface
-    public void DamagedHp(float damage)
+    public void DamagedHp(float damage, bool isStoneShard = false)
     {
         this._stats.Hp -= damage;
         Debug.Log($"HP : {this._stats.Hp}");
@@ -242,9 +251,12 @@ public class PlayerController : CreatureBase
         }
         Managers.Sound.Play(ESound.Effect, "AttackedSound", 0.7f);
 
-        Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
-        Managers.Game.DifficultySettingsInfo.ChallengeScaleCount = Managers.Data.DifficultySettingsDic[Managers.Game.DifficultySettingsInfo.StageId].ChallengeScale;
-        Managers.Event.TriggerEvent(EEventType.UIStoneCountRefresh);
+        if(isStoneShard == false)
+        {
+            Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
+            Managers.Game.DifficultySettingsInfo.ChallengeScaleCount = Managers.Data.DifficultySettingsDic[Managers.Game.DifficultySettingsInfo.StageId].ChallengeScale;
+            Managers.Event.TriggerEvent(EEventType.UIStoneCountRefresh);
+        }
         StartCoroutine(Update_CryingFace());
     }
 

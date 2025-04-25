@@ -69,6 +69,8 @@ public class UI_Player : UI_Base
     private void OnEvent_CancelThoughtBubble(Component sender, object param)
     {
         StopAllCoroutines();
+        _content.text = "";
+        _thoughtBubble.SetActive(false);
     }
 
     private void ThoughtBubble(EBehavior eBehavior)

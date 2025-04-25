@@ -19,7 +19,7 @@
       "StoneGenerateFinishTime": 0.9,
       "StoneShowerPeriodStartTime": 1000.0,
       "StoneShowerPeriodFinishTime": 1001.0,
-      "StoneShardPercent": 0.3,
+      "StoneShardPercent": 20.0,
       "Benefit": 35
     },
     {
@@ -30,7 +30,7 @@
       "StoneGenerateFinishTime": 0.9,
       "StoneShowerPeriodStartTime": 17.0,
       "StoneShowerPeriodFinishTime": 30.0,
-      "StoneShardPercent": 0.7,
+      "StoneShardPercent": 20.5,
       "Benefit": 40
     },
     {
@@ -41,7 +41,7 @@
       "StoneGenerateFinishTime": 0.9,
       "StoneShowerPeriodStartTime": 16.6,
       "StoneShowerPeriodFinishTime": 29.1,
-      "StoneShardPercent": 1.3,
+      "StoneShardPercent": 21.0,
       "Benefit": 45
     },
     {
@@ -52,7 +52,7 @@
       "StoneGenerateFinishTime": 0.9,
       "StoneShowerPeriodStartTime": 16.2,
       "StoneShowerPeriodFinishTime": 28.3,
-      "StoneShardPercent": 2.0,
+      "StoneShardPercent": 21.6,
       "Benefit": 50
     },
     {
@@ -63,7 +63,7 @@
       "StoneGenerateFinishTime": 0.8,
       "StoneShowerPeriodStartTime": 15.8,
       "StoneShowerPeriodFinishTime": 27.4,
-      "StoneShardPercent": 2.9,
+      "StoneShardPercent": 22.2,
       "Benefit": 55
     },
     {
@@ -74,7 +74,7 @@
       "StoneGenerateFinishTime": 0.8,
       "StoneShowerPeriodStartTime": 15.4,
       "StoneShowerPeriodFinishTime": 26.5,
-      "StoneShardPercent": 3.8,
+      "StoneShardPercent": 22.8,
       "Benefit": 60
     },
     {
@@ -85,7 +85,7 @@
       "StoneGenerateFinishTime": 0.8,
       "StoneShowerPeriodStartTime": 15.0,
       "StoneShowerPeriodFinishTime": 25.7,
-      "StoneShardPercent": 4.7,
+      "StoneShardPercent": 23.4,
       "Benefit": 65
     },
     {
@@ -96,7 +96,7 @@
       "StoneGenerateFinishTime": 0.8,
       "StoneShowerPeriodStartTime": 14.5,
       "StoneShowerPeriodFinishTime": 24.8,
-      "StoneShardPercent": 5.8,
+      "StoneShardPercent": 24.1,
       "Benefit": 70
     },
     {
@@ -107,7 +107,7 @@
       "StoneGenerateFinishTime": 0.8,
       "StoneShowerPeriodStartTime": 14.1,
       "StoneShowerPeriodFinishTime": 24.0,
-      "StoneShardPercent": 6.9,
+      "StoneShardPercent": 24.7,
       "Benefit": 75
     },
     {
@@ -118,7 +118,7 @@
       "StoneGenerateFinishTime": 0.7,
       "StoneShowerPeriodStartTime": 13.7,
       "StoneShowerPeriodFinishTime": 23.1,
-      "StoneShardPercent": 8.1,
+      "StoneShardPercent": 25.3,
       "Benefit": 80
     },
     {
@@ -129,7 +129,7 @@
       "StoneGenerateFinishTime": 0.7,
       "StoneShowerPeriodStartTime": 13.4,
       "StoneShowerPeriodFinishTime": 22.2,
-      "StoneShardPercent": 9.3,
+      "StoneShardPercent": 26.0,
       "Benefit": 85
     },
     {
@@ -140,7 +140,7 @@
       "StoneGenerateFinishTime": 0.7,
       "StoneShowerPeriodStartTime": 12.9,
       "StoneShowerPeriodFinishTime": 21.4,
-      "StoneShardPercent": 10.6,
+      "StoneShardPercent": 26.7,
       "Benefit": 90
     },
     {
@@ -151,7 +151,7 @@
       "StoneGenerateFinishTime": 0.7,
       "StoneShowerPeriodStartTime": 12.5,
       "StoneShowerPeriodFinishTime": 20.5,
-      "StoneShardPercent": 12.0,
+      "StoneShardPercent": 27.3,
       "Benefit": 95
     },
     {
@@ -162,7 +162,7 @@
       "StoneGenerateFinishTime": 0.7,
       "StoneShowerPeriodStartTime": 12.1,
       "StoneShowerPeriodFinishTime": 19.6,
-      "StoneShardPercent": 13.4,
+      "StoneShardPercent": 28.0,
       "Benefit": 100
     },
     {
@@ -173,7 +173,7 @@
       "StoneGenerateFinishTime": 0.6,
       "StoneShowerPeriodStartTime": 11.7,
       "StoneShowerPeriodFinishTime": 18.8,
-      "StoneShardPercent": 14.8,
+      "StoneShardPercent": 28.7,
       "Benefit": 105
     },
     {
@@ -184,7 +184,7 @@
       "StoneGenerateFinishTime": 0.6,
       "StoneShowerPeriodStartTime": 11.3,
       "StoneShowerPeriodFinishTime": 17.9,
-      "StoneShardPercent": 16.3,
+      "StoneShardPercent": 29.4,
       "Benefit": 110
     },
     {
@@ -195,7 +195,7 @@
       "StoneGenerateFinishTime": 0.6,
       "StoneShowerPeriodStartTime": 10.9,
       "StoneShowerPeriodFinishTime": 17.0,
-      "StoneShardPercent": 17.9,
+      "StoneShardPercent": 30.1,
       "Benefit": 115
     },
     {
@@ -206,7 +206,7 @@
       "StoneGenerateFinishTime": 0.6,
       "StoneShowerPeriodStartTime": 10.5,
       "StoneShowerPeriodFinishTime": 16.2,
-      "StoneShardPercent": 19.5,
+      "StoneShardPercent": 30.8,
       "Benefit": 120
     },
     {
@@ -217,7 +217,7 @@
       "StoneGenerateFinishTime": 0.6,
       "StoneShowerPeriodStartTime": 10.0,
       "StoneShowerPeriodFinishTime": 15.2,
-      "StoneShardPercent": 21.1,
+      "StoneShardPercent": 31.5,
       "Benefit": 125
     },
     {
@@ -228,7 +228,7 @@
       "StoneGenerateFinishTime": 0.5,
       "StoneShowerPeriodStartTime": 9.6,
       "StoneShowerPeriodFinishTime": 14.4,
-      "StoneShardPercent": 22.8,
+      "StoneShardPercent": 32.2,
       "Benefit": 130
     },
     {
@@ -239,7 +239,7 @@
       "StoneGenerateFinishTime": 0.5,
       "StoneShowerPeriodStartTime": 9.2,
       "StoneShowerPeriodFinishTime": 13.5,
-      "StoneShardPercent": 24.6,
+      "StoneShardPercent": 32.9,
       "Benefit": 135
     },
     {
@@ -250,7 +250,7 @@
       "StoneGenerateFinishTime": 0.5,
       "StoneShowerPeriodStartTime": 8.8,
       "StoneShowerPeriodFinishTime": 12.6,
-      "StoneShardPercent": 26.3,
+      "StoneShardPercent": 33.6,
       "Benefit": 140
     },
     {
@@ -261,7 +261,7 @@
       "StoneGenerateFinishTime": 0.5,
       "StoneShowerPeriodStartTime": 8.4,
       "StoneShowerPeriodFinishTime": 11.8,
-      "StoneShardPercent": 28.1,
+      "StoneShardPercent": 34.3,
       "Benefit": 145
     },
     {
@@ -272,7 +272,7 @@
       "StoneGenerateFinishTime": 0.5,
       "StoneShowerPeriodStartTime": 8.0,
       "StoneShowerPeriodFinishTime": 11.0,
-      "StoneShardPercent": 30.0,
+      "StoneShardPercent": 35.0,
       "Benefit": 150
     }
   ]

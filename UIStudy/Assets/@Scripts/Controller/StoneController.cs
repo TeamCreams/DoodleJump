@@ -22,7 +22,7 @@ public class StoneController : ObjectBase
     private Rigidbody _rigidbody; // protected로 변경
     private SpriteRenderer _rockImage; // protected로 변경
     private RaycastHit _hitInfo; // protected로 변경
-
+    private DifficultySettingsData _levelData = new DifficultySettingsData();
     private float _editSpeed = 0;
     private EnemyData _data;
     public EnemyData Data
@@ -47,8 +47,13 @@ public class StoneController : ObjectBase
 
         OnTriggerEnter_Event -= Attack;
         OnTriggerEnter_Event += Attack;
-
+        Managers.Event.AddEvent(EEventType.LevelStageUp, OnEvent_LevelStageUp);
         return true;
+    }
+
+    private void OnDestroy()
+    {
+        Managers.Event.RemoveEvent(EEventType.LevelStageUp, OnEvent_LevelStageUp);
     }
 
     private void FixedUpdate()
@@ -85,7 +90,7 @@ public class StoneController : ObjectBase
                 // 랜덤한 확률로 실행
                 if(GetRandomStoneShardSuccess())
                 {
-                    SpawnStoneShards(); // 이게 실행되는 동안 돌이 계속 땅과 닿아있어서 push가 안되고 점수가 계속 올라감 -> fixed
+                    SpawnStoneShards(); // 이게 실행되는 동안 돌이 계속 땅과 닿아있어서 push가 안되고 점수가 계속 올라감
                 }
             }
             //Managers.Pool.Push(this.gameObject);
@@ -149,17 +154,18 @@ public class StoneController : ObjectBase
         }
     }
 
+    private void OnEvent_LevelStageUp(Component sender, object param)
+    {
+        int currentLevel = Managers.Game.DifficultySettingsInfo.StageId;
+        
+        _levelData = Managers.Data.DifficultySettingsDic[currentLevel];
+    }
+
     private bool GetRandomStoneShardSuccess()
     {
-        int currentLevel = Managers.Game.DifficultySettingsInfo.StageLevel;
-        var levelData = Managers.Data.DifficultySettingsDic[currentLevel];
-        
-        float stoneShardPercent = levelData.StoneShardPercent;
+        float stoneShardPercent = _levelData.StoneShardPercent;
 
-        float randomValue = (float)(_random.NextDouble() * 100);
-
-        // 랜덤 값이 확률 이하이면 성공
-        return randomValue <= stoneShardPercent;
+        return _random.Next(100) < stoneShardPercent;
     }
 
     #endregion

@@ -30,6 +30,7 @@ public class UI_LevelUpPopup : UI_Popup
         OnEvent_SetLanguage(null, null);
 
         GetText((int)Texts.Level_Text).text = Managers.Game.DifficultySettingsInfo.StageLevel.ToString();
+
         GetImage((int)Images.Close).gameObject.BindEvent((evt) =>
         {
             Managers.UI.ClosePopupUI(this);

@@ -69,7 +69,7 @@ public class WebContentsManager
             
             if (rv == null)
             {
-                Debug.LogError("GetUserAccount: 응답 파싱 실패 (null)");
+                Debug.Log("GetUserAccount: 응답 파싱 실패 (null)");
                 onFailed?.Invoke(EStatusCode.ServerException);
             }
             else
@@ -83,7 +83,7 @@ public class WebContentsManager
                 }
                 else
                 {
-                    Debug.LogError($"실패 콜백 호출: {rv.StatusCode}");
+                    Debug.Log($"실패 콜백 호출: {rv.StatusCode}");
                     onFailed?.Invoke(rv.StatusCode);
                 }
             }
@@ -97,7 +97,7 @@ public class WebContentsManager
             
             if (rv == null)
             {
-                Debug.LogError("GetUserAccount: 응답 파싱 실패 (null)");
+                Debug.Log("GetUserAccount: 응답 파싱 실패 (null)");
                 onFailed?.Invoke(EStatusCode.ServerException);
             }
             else
@@ -111,7 +111,7 @@ public class WebContentsManager
                 }
                 else
                 {
-                    Debug.LogError($"실패 콜백 호출: {rv.StatusCode}");
+                    Debug.Log($"실패 콜백 호출: {rv.StatusCode}");
                     onFailed?.Invoke(rv.StatusCode);
                 }
             }
