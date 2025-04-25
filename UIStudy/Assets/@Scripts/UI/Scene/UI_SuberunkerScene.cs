@@ -7,28 +7,13 @@ using static Define;
 
 public class UI_SuberunkerScene : UI_Scene
 {
-
-    enum GameObjects
-    {
-    
-    }
-
-    enum Texts
-    { 
-    
-    }
-
-    enum Buttons
-    {
-    
-    }
-
     public override bool Init()
     {
         if (base.Init() == false)
         {
             return false;
         }
+        Managers.UI.ShowUIBase<UI_TopBar>();
         return true;
     }
 
@@ -36,9 +21,5 @@ public class UI_SuberunkerScene : UI_Scene
     #endregion
     
     #region Interface
-    private void ExitGame()
-    {
-        Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
-    }
     #endregion
 }

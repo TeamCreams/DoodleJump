@@ -13,38 +13,38 @@ public class Input_SuberunkerSceneHomeScene : MonoBehaviour //BaseScene
     ReactiveProperty<bool> loadingComplete = null;
     public void OnKeyAction()
     {
-        // 치트키 1
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            Debug.Log("hihihihihihihiihi");
-            SecurePlayerPrefs.SetString("MyValue", "MyValue1");
-        }
+        // // 치트키 1
+        // if(Input.GetKeyDown(KeyCode.A))
+        // {
+        //     Debug.Log("hihihihihihihiihi");
+        //     SecurePlayerPrefs.SetString("MyValue", "MyValue1");
+        // }
 
 
-        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.X))
-        {
-            UI_ToastPopup.Show("create", UI_ToastPopup.Type.Debug);
-        }
-        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.C))
-        {
-            UI_ToastPopup.Show("create", UI_ToastPopup.Type.Error);
-        }
-        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.V))
-        {
+        // if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.X))
+        // {
+        //     UI_ToastPopup.Show("create", UI_ToastPopup.Type.Debug);
+        // }
+        // if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.C))
+        // {
+        //     UI_ToastPopup.Show("create", UI_ToastPopup.Type.Error);
+        // }
+        // if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.V))
+        // {
 
-            int reward = Scene.GetRandomReward();
-            UI_RewardAcquiredPopup popup = Managers.UI.ShowPopupUI<UI_RewardAcquiredPopup>();
-            popup.SetInfo(reward);
+        //     int reward = Scene.GetRandomReward();
+        //     UI_RewardAcquiredPopup popup = Managers.UI.ShowPopupUI<UI_RewardAcquiredPopup>();
+        //     popup.SetInfo(reward);
 
-        }
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.D))
-        {
-            Managers.IAP.Buy("CASH_1000");
-        }
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.W))
-        {
-            Systems.GoogleLoginWebView.ShowUrl();
-        }
+        // }
+        // if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.D))
+        // {
+        //     Managers.IAP.Buy("CASH_1000");
+        // }
+        // if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.W))
+        // {
+        //     Systems.GoogleLoginWebView.ShowUrl();
+        // }
 
 
         // if (Input.GetKeyDown(KeyCode.D))

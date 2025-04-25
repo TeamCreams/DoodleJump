@@ -8,19 +8,19 @@ public class Input_SuberunkerScene : MonoBehaviour //BaseScene
 
     public void OnKeyAction()
     {
-        if(Input.GetKeyDown(KeyCode.C))
-        {
-            Managers.Camera.Shake(1.0f, 0.2f);
-        }
+        // if(Input.GetKeyDown(KeyCode.C))
+        // {
+        //     Managers.Camera.Shake(1.0f, 0.2f);
+        // }
 
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            Managers.Event.TriggerEvent(Define.EEventType.LevelStageUp);
-        }
+        // if(Input.GetKeyDown(KeyCode.K))
+        // {
+        //     Managers.Event.TriggerEvent(Define.EEventType.LevelStageUp);
+        // }
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            Debug.Log($"{Scene.Player.ToString()}");
-        }
+        // if (Input.GetKeyDown(KeyCode.A))
+        // {
+        //     Debug.Log($"{Scene.Player.ToString()}");
+        // }
     }
 }

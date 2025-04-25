@@ -1634,6 +1634,7 @@ GameObject:
   - component: {fileID: 8933346372410428221}
   - component: {fileID: 7837307915137950610}
   - component: {fileID: 5913428693622473932}
+  - component: {fileID: 2198591764103466447}
   m_Layer: 5
   m_Name: Pause_Button
   m_TagString: Untagged
@@ -1718,7 +1719,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1743,6 +1744,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2198591764103466447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8301841934884950633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a07ed1bc8be3943c797033217913c70c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8471262238934940249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1872,6 +1885,7 @@ GameObject:
   - component: {fileID: 5572356404152726882}
   - component: {fileID: 7210639945989668004}
   - component: {fileID: 3256077270711097252}
+  - component: {fileID: 2643413601363202267}
   m_Layer: 5
   m_Name: Frame
   m_TagString: Untagged
@@ -1936,6 +1950,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2643413601363202267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8571963446009268309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &8900239272813564212
 GameObject:
   m_ObjectHideFlags: 0
