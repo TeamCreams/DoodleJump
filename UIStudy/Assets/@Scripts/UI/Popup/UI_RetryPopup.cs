@@ -80,7 +80,7 @@ public class UI_RetryPopup : UI_Popup
     {
         // playerDead event 
         var loadingComplete = UI_LoadingPopup.Show();
-        Managers.Score.GetScore((this), ProcessErrorFun,
+        Managers.Score.GetScore((this),
         () =>
             {
                 loadingComplete.Value = true;
@@ -95,6 +95,7 @@ public class UI_RetryPopup : UI_Popup
             {
                 Time.timeScale = 1;
                 _failCount++;
+                Managers.Score.GetScore(this);
                 return;
             }
             Time.timeScale = 1;
@@ -113,17 +114,18 @@ public class UI_RetryPopup : UI_Popup
     {        
         var loadingComplete = UI_LoadingPopup.Show();
 
-        Managers.Score.GetScore(this, ProcessErrorFun, null,
+        Managers.Score.GetScore(this, null,
         ()=> // 실패했을경우 
         {
             loadingComplete.Value = true;
             if(_failCount < HardCoding.MAX_FAIL_COUNT)
             {
                 _failCount++;
+                Managers.Score.GetScore(this);
                 return;
             }
             _failCount = 0;
-            Managers.Scene.LoadScene(EScene.SignInScene);
+            Managers.Scene.LoadScene(EScene.StartLoadingScene);
         });
         GetText((int)Texts.RecordScore_Text).text = $"{_bestRecord} : {Managers.Game.UserInfo.RecordScore:N0}";
         GetText((int)Texts.Score_Text).text = $"{_recentRecord} : {Managers.Game.UserInfo.LatelyScore:N0}";

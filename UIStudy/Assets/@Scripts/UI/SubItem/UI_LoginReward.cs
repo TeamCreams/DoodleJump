@@ -73,7 +73,7 @@ public class UI_LoginReward : UI_Base
         _chargeTime = _nextRewardTime - newHeartBeat;
         if (0 < _chargeTime.TotalSeconds)
         {
-            GetText((int)Texts.RewardResetTimer_Text).text = $"{_chargeTime.Hours} : {_chargeTime.Minutes}";
+            GetText((int)Texts.RewardResetTimer_Text).text = $"{_chargeTime.Hours} h {_chargeTime.Minutes} m";
         }
         else
         {

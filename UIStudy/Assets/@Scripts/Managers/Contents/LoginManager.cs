@@ -148,7 +148,8 @@ public class LoginManager
         {
             loadingComplete.Value = true;
             Debug.Log($"구글 계정 로그인 실패: {errorCode}");
-            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError));
+            Managers.Scene.LoadScene(EScene.SignInScene);
+            //UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError));
         });
     }
 
@@ -217,7 +218,8 @@ public class LoginManager
         {
             loadingComplete.Value = true;
             Debug.Log($"일반 계정 로그인 실패: {errorCode}");
-            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_InvalidCredentials));
+            Managers.Scene.LoadScene(EScene.SignInScene);
+            //UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_InvalidCredentials));
         });
     }
 
@@ -262,16 +264,21 @@ public class LoginManager
         Managers.Game.UserInfo.UserName = usernameData;
         Managers.Game.UserInfo.Password = passwordData;
         Managers.Game.UserInfo.GoogleAccount = googleAccountData;
+
+        Debug.Log("1--1 usernameData : " + usernameData);
+        Debug.Log("1--1 passwordData : " + passwordData);
+        Debug.Log("1--1 googleAccountData : " + googleAccountData);
         
         // 로그인 정보가 전혀 없는 경우
-        if (string.IsNullOrEmpty(usernameData) && string.IsNullOrEmpty(passwordData) && string.IsNullOrEmpty(googleAccountData)) 
+        if (string.IsNullOrEmpty(usernameData) && string.IsNullOrEmpty(passwordData) && string.IsNullOrEmpty(googleAccountData)
+        || (usernameData == HardCoding.UserName && passwordData == HardCoding.Password) && (googleAccountData == "0" || googleAccountData == HardCoding.GoogleAccount)) 
         {
             Managers.Scene.LoadScene(EScene.SignInScene);
             return;
         }
 
-        // 로그인 방식 결정
-        if (!string.IsNullOrEmpty(googleAccountData))
+        // 로그인 방식 결정 - 조건문 수정
+        if (!string.IsNullOrEmpty(googleAccountData) && googleAccountData != "0" && googleAccountData != HardCoding.GoogleAccount)
         {
             // 구글 계정 정보가 있으면 구글 계정으로 로그인
             SignInWithGoogle();
@@ -291,6 +298,12 @@ public class LoginManager
     // 사용자 정보 저장
     public void SaveUserAccountInfo()
     {
+        Debug.Log("1--1 usernameData : " + Managers.Game.UserInfo.UserName);
+
+        Debug.Log("1--1 passwordData : " + Managers.Game.UserInfo.Password);
+
+        Debug.Log("1--1 googleAccountData : " + Managers.Game.UserInfo.GoogleAccount);
+
         if (!string.IsNullOrEmpty(Managers.Game.UserInfo.UserName))
         {
             SecurePlayerPrefs.SetString(HardCoding.UserName, Managers.Game.UserInfo.UserName);
@@ -310,9 +323,9 @@ public class LoginManager
     }
     public void LogoutAndClearMission()
     {
-        SecurePlayerPrefs.SetString(HardCoding.UserName, "UserName");
-        SecurePlayerPrefs.SetString(HardCoding.Password, "Password");
-        SecurePlayerPrefs.SetString(HardCoding.GoogleAccount, "GoogleAccount");
+        SecurePlayerPrefs.SetString(HardCoding.UserName, HardCoding.UserName);
+        SecurePlayerPrefs.SetString(HardCoding.Password, HardCoding.Password);
+        SecurePlayerPrefs.SetString(HardCoding.GoogleAccount, HardCoding.GoogleAccount);
         SecurePlayerPrefs.Save();
         Managers.Event.TriggerEvent(EEventType.OnLogout);
         Managers.Scene.LoadScene(EScene.SignInScene);

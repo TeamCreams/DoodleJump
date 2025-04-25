@@ -253,14 +253,19 @@ public class WebContentsManager
             {
                 onFailed?.Invoke(EStatusCode.ServerException);
             }
-            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            else 
             {
-                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
-                onFailed?.Invoke(rv.StatusCode);
-            }
-            else
-            {
-                onSuccess?.Invoke(rv.Data);
+                // 상태 로그 추가
+                Debug.Log($"[InsertUserAccountScore] IsSuccess: {rv.IsSuccess}, StatusCode: {rv.StatusCode}");
+                
+                if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed?.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess?.Invoke(rv.Data);
+                }
             }
         });
     }
@@ -435,14 +440,19 @@ public class WebContentsManager
             {
                 onFailed?.Invoke(EStatusCode.ServerException);
             }
-            else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+            else 
             {
-                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
-                onFailed?.Invoke(rv.StatusCode);
-            }
-            else
-            {
-                onSuccess?.Invoke(rv.Data);
+                // 상태 로그 추가
+                Debug.Log($"[GetUserMissionList] IsSuccess: {rv.IsSuccess}, StatusCode: {rv.StatusCode}");
+                
+                if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
+                {
+                    onFailed?.Invoke(rv.StatusCode);
+                }
+                else
+                {
+                    onSuccess?.Invoke(rv.Data);
+                }
             }
         });
     }
