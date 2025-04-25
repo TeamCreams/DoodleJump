@@ -136,15 +136,16 @@ namespace GameApi.Controllers
                         RegisterDate = user.RegisterDate,
                         UpdateDate = user.UpdateDate,
                         HighScore = user.TblUserScores.Any() 
-                                        ? user.TblUserScores
-                                        .OrderByDescending(s => s.Scoreboard)
-                                        .Select(s => s.Scoreboard)
-                                        .FirstOrDefault() : 0,
-                        LatelyScore = user.TblUserScores.Any() 
-                                        ? user.TblUserScores
-                                        .OrderByDescending(s => s.RegisterDate) // 최신 점수 순으로 정렬
-                                        .Select(s => s.Scoreboard) // History 선택
-                                        .FirstOrDefault() : 0, // 가장 최근 점수
+                                            ? user.TblUserScores
+                                            .OrderByDescending(s => s.Scoreboard)
+                                            .Select(s => s.Scoreboard)
+                                            .FirstOrDefault() : 0,
+                        LatelyScore = user.TblUserScores.Any()
+                                            ? user.TblUserScores
+                                            .Where(s => 0 < s.Scoreboard)  // 0보다 큰 점수만 필터링
+                                            .OrderByDescending(s => s.RegisterDate) // 최신 점수 순으로 정렬
+                                            .Select(s => s.Scoreboard)
+                                            .FirstOrDefault() : 0, // 0이 아닌 가장 최근 점수, 없으면 0 반환
                         Gold = user.Gold,
                         PlayTime = user.TblUserScores.Any() ? 
                                     user.TblUserScores.Sum(s => s.PlayTime) : 0,
@@ -235,10 +236,11 @@ namespace GameApi.Controllers
                                         .Select(s => s.Scoreboard)
                                         .FirstOrDefault() : 0,
                         LatelyScore = user.TblUserScores.Any()
-                                        ? user.TblUserScores
-                                        .OrderByDescending(s => s.RegisterDate) // 최신 점수 순으로 정렬
-                                        .Select(s => s.Scoreboard) // History 선택
-                                        .FirstOrDefault() : 0, // 가장 최근 점수
+                                            ? user.TblUserScores
+                                            .Where(s => 0 < s.Scoreboard)  // 0보다 큰 점수만 필터링
+                                            .OrderByDescending(s => s.RegisterDate) // 최신 점수 순으로 정렬
+                                            .Select(s => s.Scoreboard)
+                                            .FirstOrDefault() : 0, // 0이 아닌 가장 최근 점수, 없으면 0 반환
                         Gold = user.Gold,
                         PlayTime = user.TblUserScores.Any() ?
                                     user.TblUserScores.Sum(s => s.PlayTime) : 0,
