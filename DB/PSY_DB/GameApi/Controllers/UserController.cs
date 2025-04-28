@@ -204,7 +204,6 @@ namespace GameApi.Controllers
         }
 
         //게임 시작/로그인 할 때 가장 먼저 사용할 것
-        // 115716037461179178251
         [HttpGet("GetUserAccountByGoogle")]
         public async Task<CommonResult<ResDtoGetUserAccountByGoogle>> GetUserAccountByGoogle([FromQuery] ReqDtoGetUserAccountByGoogle requestDto)
         {
@@ -524,7 +523,6 @@ namespace GameApi.Controllers
             return rv;
         }
 
-        // XXX
         [HttpPost("CheckUserAccountNicknameExists")]
         public async Task<CommonResult<ResDtoUserAccountNickname>>
             CheckUserAccountNicknameExists([FromBody] ReqDtoUserAccountNickname requestDto)
@@ -627,6 +625,7 @@ namespace GameApi.Controllers
 
             try
             {
+                // 기존에 동일한 구글 계정이 있는지 확인
                 var select = await (
                             from user in _context.TblUserAccounts
                             where (user.GoogleAccount == requestDto.GoogleAccount && user.DeletedDate == null)
@@ -635,6 +634,7 @@ namespace GameApi.Controllers
                                 GoogleAccount = user.GoogleAccount
                             }).ToListAsync();
 
+                // 기존 계정이 없으면 새로운 사용자 등록
                 if (select.Any() == false)
                 {
                     TblUserAccount userAccount = new();
@@ -1629,7 +1629,7 @@ namespace GameApi.Controllers
                 int prevEnergy = userAccount.Energy;
                 int maxEnergy = 10; // 기본 최대 에너지 값
 
-                // 에너지가 이미 10 이상인 경우 (유료 구매 등으로)
+                // 에너지가 이미 10 이상인 경우
                 if (maxEnergy <= userAccount.Energy)
                 {
                     // 유료 구매로 10을 초과한 경우는 충전하지 않음
