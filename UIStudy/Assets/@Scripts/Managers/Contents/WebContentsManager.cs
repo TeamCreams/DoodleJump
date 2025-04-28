@@ -131,14 +131,13 @@ public class WebContentsManager
             }
             else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
             {
-                if(rv.StatusCode == EStatusCode.NameAlreadyExists) // 안들어와짐
+                if(rv.StatusCode == EStatusCode.NameAlreadyExists) 
                 {
                     onFailed.Invoke(rv.StatusCode);
                 }
-                if (rv.StatusCode != EStatusCode.OK) // 안들어와짐
+                if (rv.StatusCode != EStatusCode.OK) 
                 {
                     onFailed.Invoke(rv.StatusCode);
-                    Managers.Scene.LoadScene(EScene.SignInScene);
                 }
             }
             else
@@ -185,8 +184,14 @@ public class WebContentsManager
             }
             else if (!rv.IsSuccess || rv.StatusCode != EStatusCode.OK)
             {
-                // IsSuccess가 false이거나 StatusCode가 OK가 아닌 경우 서버에서 보낸 StatusCode를 그대로 사용
-                onFailed?.Invoke(rv.StatusCode);
+                if(rv.StatusCode == EStatusCode.NameAlreadyExists)
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
+                if (rv.StatusCode != EStatusCode.OK) 
+                {
+                    onFailed.Invoke(rv.StatusCode);
+                }
             }
             else
             {

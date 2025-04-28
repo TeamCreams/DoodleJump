@@ -117,7 +117,7 @@ public class UI_ToastPopup : UI_Popup
             return;
 #endif
 
-        UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
+        UI_ToastPopup toast = ShowToastPopupUI();
 
         switch (noticeInfo.Type)
         {

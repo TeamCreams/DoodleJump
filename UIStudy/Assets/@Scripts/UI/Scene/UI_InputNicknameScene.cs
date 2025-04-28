@@ -76,8 +76,6 @@ public class UI_InputNicknameScene : UI_Scene
                 Managers.Scene.LoadScene(EScene.SignInScene));        
         },(errorCode) =>
         {       
-            UI_ToastPopup toast = Managers.UI.ShowPopupUI<UI_ToastPopup>();
-
             UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_ValidationNickname));
         });
     }
