@@ -228,9 +228,9 @@ public static class Define
         Mask
     }
 
-	public class HardCoding
-	{
-		public static readonly Vector2 PlayerStartPos = new Vector2(0, -120);
+    public class HardCoding
+    {
+        public static readonly Vector2 PlayerStartPos = new Vector2(0, -120);
         public static readonly Vector3 PlayerTeleportPos_Left = new Vector3(-70, -120, 0);
         public static readonly Vector3 PlayerTeleportPos_Right = new Vector3(70, -120, 0);
         public static readonly Vector3 ConfetiParticlePos = new Vector3(0, 0, -100);
@@ -238,11 +238,12 @@ public static class Define
         public static readonly int MAX_FAIL_COUNT = 1;
 
         public static readonly string PersonlSetting = "personalSetting";
-        public static readonly string UserName = "UserName";        
+        public static readonly string UserName = "UserName";
         public static readonly string Password = "Password";
         public static readonly string GoogleAccount = "GoogleAccount";
 
         public static readonly int ChangeStyleGold = 500;
+        public static readonly int ContinueGameGold = 500;
     }
 
 }

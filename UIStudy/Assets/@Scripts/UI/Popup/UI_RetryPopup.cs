@@ -139,7 +139,6 @@ public class UI_RetryPopup : UI_Popup
         GetText((int)Texts.RecordScore_Text).text = $"{_bestRecord} : {Managers.Game.UserInfo.RecordScore:N0}";
         GetText((int)Texts.Score_Text).text = $"{_recentRecord} : {Managers.Game.UserInfo.LatelyScore:N0}";
 
-
         GetText((int)Texts.Gold_Text).text = Managers.Game.Gold.ToString();
     }
 

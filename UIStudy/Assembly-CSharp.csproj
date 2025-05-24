@@ -322,6 +322,7 @@
     <Compile Include="Assets/@Scripts/UI/SubItem/UI_ChooseCharacterPanel.cs" />
     <Compile Include="Assets/@Scripts/Controller/CreatureBase.cs" />
     <Compile Include="Assets/@Scripts/UI/WorldSpace/UI_Player.cs" />
+    <Compile Include="Assets/@Scripts/UI/Popup/UI_ContinuePopup.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Enums/ItemTag.cs" />
     <Compile Include="Assets/@Scripts/Managers/Contents/MissionManager.cs" />
     <Compile Include="Assets/@Scripts/Managers/Core/EventManager.cs" />
