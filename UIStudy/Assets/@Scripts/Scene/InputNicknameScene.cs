@@ -15,25 +15,24 @@ public class InputNicknameScene : BaseScene
             return false;
         }
 
-        var ui = Managers.UI.ShowSceneUI<UI_InputNicknameScene>();
+        Managers.UI.ShowSceneUI<UI_InputNicknameScene>();
         return true;
     }
-
 
     public void InsertUser(Action onSuccess = null)
     {
         Debug.Log($"GoogleAccount : {Managers.Game.UserInfo.GoogleAccount}");
         if(Managers.Game.UserInfo.GoogleAccount == HardCoding.GoogleAccount)
         {
-            WithUserAccount(onSuccess);
+            WithUserAccount();
         }
         else
         {
-            WithGoogleAccount(onSuccess);
+            WithGoogleAccount();
         }
     }
 
-    public void WithUserAccount(Action onSuccess = null)
+    public void WithUserAccount()//Action onSuccess = null
     {
         ReactiveProperty<bool> loadingComplete = UI_LoadingPopup.Show();
 
@@ -46,11 +45,12 @@ public class InputNicknameScene : BaseScene
        (response) =>
        {
             Debug.Log("아이디 만들기 성공");
-            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess));
 
             loadingComplete.Value = true;
+            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess), 2f,
+            () => Managers.Scene.LoadScene(EScene.SignInScene));
 
-            onSuccess?.Invoke();
+            //onSuccess?.Invoke();
        },
        (errorCode) =>
        {
@@ -61,7 +61,7 @@ public class InputNicknameScene : BaseScene
        });
     }
 
-    public void WithGoogleAccount(Action onSuccess = null)
+    public void WithGoogleAccount()//Action onSuccess = null
     {
         ReactiveProperty<bool> loadingComplete = UI_LoadingPopup.Show();
 
@@ -73,11 +73,11 @@ public class InputNicknameScene : BaseScene
        (response) =>
        {
             Debug.Log("아이디 만들기 성공");
-            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess));
-
             loadingComplete.Value = true;
 
-            onSuccess?.Invoke();
+            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_AccountCreationSuccess), 2f,
+            () => Managers.Scene.LoadScene(EScene.SignInScene));
+            //onSuccess?.Invoke();
        },
        (errorCode) =>
        {

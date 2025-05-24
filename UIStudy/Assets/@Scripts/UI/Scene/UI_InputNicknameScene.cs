@@ -72,8 +72,8 @@ public class UI_InputNicknameScene : UI_Scene
         },(response) =>
         {
             Managers.Game.UserInfo.UserNickname = GetInputField((int)InputFields.Nickname_InputField).text;
-            _scene.InsertUser(() =>
-                Managers.Scene.LoadScene(EScene.SignInScene));        
+            _scene.InsertUser();
+            //_scene.InsertUser(() => Managers.Scene.LoadScene(EScene.SignInScene));           
         },(errorCode) =>
         {       
             UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_ValidationNickname));

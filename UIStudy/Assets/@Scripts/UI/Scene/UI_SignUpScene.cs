@@ -138,8 +138,7 @@ public class UI_SignUpScene : UI_Scene
         }
         if (errCode != EErrorCode.ERR_OK || _errCodeId != EErrorCode.ERR_OK)
         {
-            UI_ErrorButtonPopup.ShowErrorButton(Managers.Error.GetError(EErrorCode.ERR_AccountCreationCancellation));
-            // 아이디 생성 안 된다고 말하고 가만히 있기/로그인창으로넘어가기 선택 팝업.
+            UI_ErrorButtonPopup.ShowErrorButton(Managers.Error.GetError(EErrorCode.ERR_AccountCreationCancellation)); // 아이디 생성 안 된다고 말하고 가만히 있기/로그인창으로넘어가기 선택 팝업.
             return; 
         }        
         Managers.Scene.LoadScene(EScene.InputNicknameScene);

@@ -50,6 +50,7 @@ public class LoginManager
                 // 새 계정 생성 처리 - 구글 계정이 신규이므로 가입 가능
                 Debug.Log($"새 구글 계정으로 가입 가능: {googleAccount}");
                 Managers.Game.UserInfo.GoogleAccount = googleAccount;
+                // UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_ValidationNickname));
                 Managers.Scene.LoadScene(EScene.InputNicknameScene);
             }
         }, 
@@ -148,8 +149,8 @@ public class LoginManager
         {
             loadingComplete.Value = true;
             Debug.Log($"구글 계정 로그인 실패: {errorCode}");
-            Managers.Scene.LoadScene(EScene.SignInScene);
-            //UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError));
+            //Managers.Scene.LoadScene(EScene.SignInScene);
+            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_NetworkSaveError), 2f, () => Managers.Scene.LoadScene(EScene.SignInScene));
         });
     }
 
@@ -218,8 +219,8 @@ public class LoginManager
         {
             loadingComplete.Value = true;
             Debug.Log($"일반 계정 로그인 실패: {errorCode}");
-            Managers.Scene.LoadScene(EScene.SignInScene);
-            //UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_InvalidCredentials));
+            //Managers.Scene.LoadScene(EScene.SignInScene);
+            UI_ToastPopup.ShowError(Managers.Error.GetError(EErrorCode.ERR_InvalidCredentials), 2f, () => Managers.Scene.LoadScene(EScene.SignInScene));
         });
     }
 

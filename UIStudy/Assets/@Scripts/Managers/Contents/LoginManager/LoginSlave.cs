@@ -33,9 +33,10 @@ public class LoginSlave : MonoBehaviour
             Debug.Log("에너지 업데이트 성공: " + Managers.Game.UserInfo.LatelyEnergy);
             Managers.Game.UserInfo.Energy = response.Energy;
             Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
-            
+
             // 로그인 완료 후 씬 로드
-            Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+            //Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene);
+            UI_ToastPopup.ShowInfo(Managers.Error.GetError(EErrorCode.ERR_NetworkLoginSuccess), 2f, () => Managers.Scene.LoadScene(EScene.SuberunkerSceneHomeScene));
         },
         (errorCode) =>
         {

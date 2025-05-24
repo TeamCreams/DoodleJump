@@ -110,6 +110,7 @@ public class UI_ToastPopup : UI_Popup
         UI_ToastPopup toast = ShowToastPopupUI();
         toast.SetInfo(noticeInfo.Notice, UI_ToastPopup.Type.Critical, time, onCompleteCallback);
     }
+    
     public static void Show(NoticeInfo noticeInfo, float time = 2f, Action onCompleteCallback = null)
     {
 #if !UNITY_EDITOR
