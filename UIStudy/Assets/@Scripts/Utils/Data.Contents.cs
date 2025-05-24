@@ -410,10 +410,11 @@ namespace Data
     public class EvolutionData
     {
         public int Id;
-        public List<float >Stats = new();
+        public List<float> Stats = new();
         public int Gold;
         public EStat StatOption;
         public string ItemSprite;
+        public int BuyCount;
         public int PrevEvolutionId;
     }
 

@@ -59,7 +59,7 @@
     <UnityVersion>6000.0.24f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="/Users/seoyoon/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.1.1/Analyzers/Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="/Users/seoyoon/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.1.2/Analyzers/Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="/Volumes/imation i9/GitHubData/DoodleJump/UIStudy/Assets/Packages/Microsoft.Extensions.Logging.Abstractions.8.0.3/analyzers/dotnet/roslyn4.0/cs/es/Microsoft.Extensions.Logging.Generators.resources.dll" />
     <Analyzer Include="/Volumes/imation i9/GitHubData/DoodleJump/UIStudy/Assets/Packages/Microsoft.Extensions.Logging.Abstractions.8.0.3/analyzers/dotnet/roslyn4.0/cs/ru/Microsoft.Extensions.Logging.Generators.resources.dll" />
     <Analyzer Include="/Volumes/imation i9/GitHubData/DoodleJump/UIStudy/Assets/Packages/Microsoft.Extensions.Logging.Abstractions.8.0.3/analyzers/dotnet/roslyn4.0/cs/zh-Hant/Microsoft.Extensions.Logging.Generators.resources.dll" />

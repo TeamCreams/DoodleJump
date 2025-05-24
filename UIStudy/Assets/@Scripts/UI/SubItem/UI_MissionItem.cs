@@ -72,14 +72,35 @@ public class UI_MissionItem : UI_Base
     {
         //_animator.SetTrigger("NewMission");
         //Debug.Log($"missionId : {missionId}");
-        _missionId = missionId;
-        float param1 = Managers.Mission.Dicts[_missionId].Param1;
+        _missionId = missionId;        
         MissionData missionData = Managers.Data.MissionDataDic[_missionId];
+        EMission type = missionData.Type;
         SetLanguage(missionData);
+        
+        float param1 = Managers.Mission.Dicts[_missionId].Param1;
         float value = param1 / (float)missionData.Param1;
+        switch (type)
+        {
+            case EMission.Level:
+                {
+                    param1 = Managers.Mission.Dicts[_missionId].Param1;
+                    value = param1 / (float)missionData.Param1;
+                }
+            break;
+            case EMission.Shop:
+                {
+                    param1 = Managers.Data.EvolutionDataDic[Managers.Game.UserInfo.EvolutionId].BuyCount;
+                    float remain = param1 % 3;
+                    value = 0 < param1 && remain == 0 ? 1 : remain / (float)missionData.Param1;
+                    param1 = remain;
+                }
+            break;
+        }
+
         if(value < 1.0f)
         {
             GetText((int)Texts.ProgressPercent).text = $"{param1}/{missionData.Param1}";
+            Debug.Log($"missionData : {missionData.Id}");
             GetSlider((int)Sliders.Progress).value = value;
             SetActiveProgressState();
         }
