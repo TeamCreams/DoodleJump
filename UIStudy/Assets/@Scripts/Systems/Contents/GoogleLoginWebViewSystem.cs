@@ -39,7 +39,7 @@ public class GoogleLoginWebViewSystem
 
     public void SignIn()
     {
-        GoogleSignIn.Configuration = new GoogleSignInConfiguration
+        GoogleSignInConfiguration config  = new GoogleSignInConfiguration
         {
             RequestEmail = true,
             RequestProfile = true,
@@ -50,6 +50,12 @@ public class GoogleLoginWebViewSystem
             ClientSecret = "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"
 #endif
         };
+
+        if (GoogleSignIn.Configuration == null)
+        {
+            GoogleSignIn.Configuration = config;
+            Debug.Log("GoogleSignIn.Configuration 설정됨."); // 설정이 실제로 이루어졌는지 확인용 로그
+        }
 
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished, TaskScheduler.FromCurrentSynchronizationContext());
     }

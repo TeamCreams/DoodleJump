@@ -20,13 +20,13 @@ public class UI_ContinuePopup : UI_PurchasePopupBase
     {
         Close_Button,
         Continue_Button,
-        Ads_Button
+        Ads_Button,
+        Circle_Image
     }
 
     private string _bestRecord = "최고 기록";
     private string _recentRecord = "최근 기록";
-
-
+    private Coroutine timerCoroutine;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -45,7 +45,7 @@ public class UI_ContinuePopup : UI_PurchasePopupBase
         GetText((int)Texts.Score_Text).text = $"{_recentRecord} : {Managers.Game.UserInfo.LatelyScore:N0}";
 
         Time.timeScale = 0f;
-
+        FilledImageTimer();
         _gold = HardCoding.ContinueGameGold;
         return true;
     }
@@ -54,7 +54,8 @@ public class UI_ContinuePopup : UI_PurchasePopupBase
         Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
     }
     protected override void OnClick_ClosePopup(PointerEventData eventData)
-    {        
+    {      
+        Managers.Event.TriggerEvent(EEventType.OnPlayerDead, this, 0);  
         Managers.UI.ClosePopupUI(this);
         Time.timeScale = 1;
     }
@@ -79,6 +80,34 @@ public class UI_ContinuePopup : UI_PurchasePopupBase
     private void OnClick_ClickAds(PointerEventData eventData)
     {        
         // Advertisement
+    }
+
+    private void FilledImageTimer()
+    {
+        if (timerCoroutine != null)
+        {
+            StopCoroutine(timerCoroutine);
+        }
+        timerCoroutine = StartCoroutine(Timer());
+    }
+
+    IEnumerator Timer()
+    {
+        float fromFillAmount = 1f;
+        float toFillAmount = 0f;
+        float totalDuration = 3f;
+        float currentDuration = totalDuration; // 현재 남은 시간 (totalDuration에서 시작)
+
+        GetImage((int)Images.Circle_Image).fillAmount = fromFillAmount;
+
+        while (0f < currentDuration)
+        {
+            GetImage((int)Images.Circle_Image).fillAmount = Mathf.Lerp(fromFillAmount, toFillAmount, 1f - currentDuration / totalDuration);
+            currentDuration -= UnityEngine.Time.deltaTime;
+            yield return null;
+        }
+
+        GetImage((int)Images.Circle_Image).fillAmount = toFillAmount; // 0으로 설정
     }
 
     protected override void AfterPurchaseProcess()

@@ -143,7 +143,14 @@ public class UI_TopBar : UI_Base
             _lifeTimer?.Dispose();
             Managers.Game.UserInfo.LatelyScore = Managers.Game.GetScore.Total;
             Managers.Game.GetScore.LatelyPlayTime = _time;
-            Managers.Event.TriggerEvent(EEventType.OnPlayerDead, this, 0);
+            if (2 <= Managers.Game.UserInfo.StageLevel)
+            {
+                Managers.UI.ShowPopupUI<UI_ContinuePopup>();
+            }
+            else
+            {
+                Managers.Event.TriggerEvent(EEventType.OnPlayerDead, this, 0);
+            }
             isSettleComplete = true;
         }
     }
