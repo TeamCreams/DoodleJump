@@ -143,9 +143,9 @@ public class UI_TopBar : UI_Base
             _lifeTimer?.Dispose();
             Managers.Game.UserInfo.LatelyScore = Managers.Game.GetScore.Total;
             Managers.Game.GetScore.LatelyPlayTime = _time;
-            if (2 <= Managers.Game.UserInfo.StageLevel)
+            if (1 < Managers.Game.UserInfo.StageLevel)
             {
-                Managers.UI.ShowPopupUI<UI_ContinuePopup>();
+                Managers.UI.ShowPopupUI<UI_ContinuePopup>().SetInfo();
             }
             else
             {

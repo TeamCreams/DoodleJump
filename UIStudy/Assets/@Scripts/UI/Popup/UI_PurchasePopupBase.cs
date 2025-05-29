@@ -29,15 +29,22 @@ public abstract class UI_PurchasePopupBase : UI_Popup
         }
 
         // bind 공통 UI
-        BindImages(typeof(BaseImages));
-        //BindTexts(typeof(BaseTexts));
+        // BindImages(typeof(BaseImages));
+        // //BindTexts(typeof(BaseTexts));
 
-        // event
-        GetImage((int)BaseImages.Close_Button).gameObject.BindEvent(OnClick_ClosePopup, EUIEvent.Click);
-        GetImage((int)BaseImages.Ok_Button).gameObject.BindEvent(OnEvent_ClickOk, EUIEvent.Click);
+        // // event
+        // GetImage((int)BaseImages.Close_Button).gameObject.BindEvent(OnClick_ClosePopup, EUIEvent.Click);
+        // GetImage((int)BaseImages.Ok_Button).gameObject.BindEvent(OnClick_ClickOk, EUIEvent.Click);
 
         return true;
     }
+    protected void BindCommonEvents()
+    {
+        // 자식 클래스에서 이미지 바인딩 후 호출하도록 함
+        GetImage((int)BaseImages.Close_Button).gameObject.BindEvent(OnClick_ClosePopup, EUIEvent.Click);
+        GetImage((int)BaseImages.Ok_Button).gameObject.BindEvent(OnClick_ClickOk, EUIEvent.Click);
+    }
+
     protected virtual void OnDestroy()
     {
         // 이벤트 제거 (필요한 경우)
@@ -47,7 +54,7 @@ public abstract class UI_PurchasePopupBase : UI_Popup
     {
         Managers.UI.ClosePopupUI(this);
     }
-    protected abstract void OnEvent_ClickOk(PointerEventData eventData);
+    protected abstract void OnClick_ClickOk(PointerEventData eventData);
 
     protected virtual void UpdateUserGold(Action onSuccess = null, Action onFailed = null)
     {

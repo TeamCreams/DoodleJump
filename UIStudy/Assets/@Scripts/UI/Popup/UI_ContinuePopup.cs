@@ -12,14 +12,14 @@ public class UI_ContinuePopup : UI_PurchasePopupBase
         Score_Text,
         RecordScore_Text,
         Close_Text,
-        Continue_Text,
+        Ok_Text,
         Ads_Text
     }
 
     private enum Images
     {
         Close_Button,
-        Continue_Button,
+        Ok_Button,
         Ads_Button,
         Circle_Image
     }
@@ -35,37 +35,38 @@ public class UI_ContinuePopup : UI_PurchasePopupBase
         }
         BindTexts(typeof(Texts));
         BindImages(typeof(Images));
+        BindCommonEvents();
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
 
         OnEvent_SetLanguage(null, null);
-        GetImage((int)Images.Close_Button).gameObject.BindEvent(OnClick_ClosePopup, EUIEvent.Click);
-        GetImage((int)Images.Continue_Button).gameObject.BindEvent(OnEvent_ClickOk, EUIEvent.Click);
-
-        GetText((int)Texts.RecordScore_Text).text = $"{_bestRecord} : {Managers.Game.UserInfo.RecordScore:N0}";
-        GetText((int)Texts.Score_Text).text = $"{_recentRecord} : {Managers.Game.UserInfo.LatelyScore:N0}";
 
         Time.timeScale = 0f;
-        FilledImageTimer();
-        _gold = HardCoding.ContinueGameGold;
         return true;
     }
     protected override void OnDestroy()
     {
         Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
     }
+    public void SetInfo()
+    {
+        Time.timeScale = 0;
+        GetText((int)Texts.RecordScore_Text).text = $"{_bestRecord} : {Managers.Game.GetScore.LatelyPlayTime:N0}";
+        GetText((int)Texts.Score_Text).text = $"{_recentRecord} : {Managers.Game.UserInfo.LatelyScore:N0}";
+        FilledImageTimer();
+    }
     protected override void OnClick_ClosePopup(PointerEventData eventData)
-    {      
-        Managers.Event.TriggerEvent(EEventType.OnPlayerDead, this, 0);  
+    {
         Managers.UI.ClosePopupUI(this);
         Time.timeScale = 1;
+        Managers.Event.TriggerEvent(EEventType.OnPlayerDead, this, 0);
     }
-    protected override void OnEvent_ClickOk(PointerEventData eventData)
+    protected override void OnClick_ClickOk(PointerEventData eventData)
     {
         var loadingComplete = UI_LoadingPopup.Show();
-
+        StopCoroutine(timerCoroutine);
         //돈 소모
         Managers.Game.GoldTochange = 0;
-        int remainingChange = Managers.Game.UserInfo.Gold - _gold;
+        int remainingChange = Managers.Game.UserInfo.Gold - 1;//HardCoding.ContinueGameGold;
         if(0 <= remainingChange)
         {
             Managers.Game.GoldTochange = remainingChange;
@@ -98,30 +99,35 @@ public class UI_ContinuePopup : UI_PurchasePopupBase
         float totalDuration = 3f;
         float currentDuration = totalDuration; // 현재 남은 시간 (totalDuration에서 시작)
 
+        Debug.Log($"GetImage((int)Images.Circle_Image).fillAmount : {GetImage((int)Images.Circle_Image).fillAmount}");
         GetImage((int)Images.Circle_Image).fillAmount = fromFillAmount;
 
         while (0f < currentDuration)
         {
             GetImage((int)Images.Circle_Image).fillAmount = Mathf.Lerp(fromFillAmount, toFillAmount, 1f - currentDuration / totalDuration);
-            currentDuration -= UnityEngine.Time.deltaTime;
+            currentDuration -= UnityEngine.Time.unscaledDeltaTime;
             yield return null;
         }
 
         GetImage((int)Images.Circle_Image).fillAmount = toFillAmount; // 0으로 설정
+        Managers.Event.TriggerEvent(EEventType.OnPlayerDead, this, 0);
+        Managers.UI.ClosePopupUI(this);
     }
 
     protected override void AfterPurchaseProcess()
     {
         Time.timeScale = 1;
-        Managers.Scene.LoadScene(EScene.SuberunkerScene);
+        float maxHp = Managers.Object.Player.Stats.StatDic[EStat.MaxHp].Value;
+        Managers.Event.TriggerEvent(Define.EEventType.ChangePlayerLife, this, maxHp);
+        //Managers.Scene.LoadScene(EScene.SuberunkerScene);
     }
 
     void OnEvent_SetLanguage(Component sender, object param)
     {
         _bestRecord = Managers.Language.LocalizedString(91001);
-        _recentRecord = Managers.Language.LocalizedString(91002);
+        _recentRecord = Managers.Language.LocalizedString(91002);//지금 기록
         GetText((int)Texts.Close_Text).text = Managers.Language.LocalizedString(91017);
-        GetText((int)Texts.Continue_Text).text = Managers.Language.LocalizedString(91017);
+        GetText((int)Texts.Ok_Text).text = Managers.Language.LocalizedString(91052);
         GetText((int)Texts.Ads_Text).text = Managers.Language.LocalizedString(91018);
     }
 

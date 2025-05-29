@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 33084253610613503}
   - component: {fileID: 7724819932450977145}
   m_Layer: 5
-  m_Name: AD_Button
+  m_Name: Ads_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -932,7 +932,7 @@ GameObject:
   - component: {fileID: 7035772506933448990}
   - component: {fileID: 4911279692680253544}
   m_Layer: 5
-  m_Name: AD_Text
+  m_Name: Ads_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

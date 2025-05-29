@@ -25,8 +25,9 @@ public class UI_EnergyShopPanel : UI_PurchasePopupBase
             return false;
         }
         //Bind
-        //BindImages(typeof(Images));
         BindTexts(typeof(Texts));
+        BindImages(typeof(Images));
+        BindCommonEvents();
         //Get
         //GetImage((int)Images.Close_Button).gameObject.BindEvent(OnClick_ClosePopup, EUIEvent.Click);
         //GetImage((int)Images.Ok_Button).gameObject.BindEvent(OnEvent_ClickOk, EUIEvent.Click);
@@ -48,7 +49,7 @@ public class UI_EnergyShopPanel : UI_PurchasePopupBase
         GetText((int)Texts.Gold_Text).text = _gold.ToString();
     }
 
-    protected override void OnEvent_ClickOk(PointerEventData eventData)
+    protected override void OnClick_ClickOk(PointerEventData eventData)
     {
         int remainingChange = Managers.Game.UserInfo.Gold - _gold;
         if(0 <= remainingChange)

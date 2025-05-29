@@ -18,9 +18,9 @@ public class Input_SuberunkerScene : MonoBehaviour //BaseScene
         //     Managers.Event.TriggerEvent(Define.EEventType.LevelStageUp);
         // }
 
-        // if (Input.GetKeyDown(KeyCode.A))
-        // {
-        //     Debug.Log($"{Scene.Player.ToString()}");
-        // }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Managers.UI.ShowPopupUI<UI_ContinuePopup>().SetInfo();
+        }
     }
 }

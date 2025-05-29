@@ -41,6 +41,8 @@ public class UI_PurchasePopup : UI_PurchasePopupBase
         BindObjects(typeof(GameObjects));
         //BindButtons(typeof(Buttons));
         BindTexts(typeof(Texts));
+        BindImages(typeof(Images));
+        BindCommonEvents();
 
         //get
         //GetButton((int)Buttons.Close_Button).gameObject.BindEvent(OnEvent_ClickClose, EUIEvent.Click);
@@ -92,7 +94,7 @@ public class UI_PurchasePopup : UI_PurchasePopupBase
         _purchaseStruct.OnClose?.Invoke();
     }
 
-    protected override void OnEvent_ClickOk(PointerEventData eventData)
+    protected override void OnClick_ClickOk(PointerEventData eventData)
     {
         Managers.Game.GoldTochange = 0;
         int remainingChange = Managers.Game.UserInfo.Gold - _gold;
