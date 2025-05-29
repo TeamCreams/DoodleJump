@@ -27,12 +27,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1ceded50cf71449dbb2aadccc534ce74
-    m_Address: UI_ErrorPopup
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 212b4947a67aa4d0b9f816a9a6a2b215
     m_Address: UI_StartLoadingScene
     m_ReadOnly: 0
