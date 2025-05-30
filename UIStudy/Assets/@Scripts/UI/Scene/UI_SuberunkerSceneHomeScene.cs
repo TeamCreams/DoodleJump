@@ -157,6 +157,15 @@ public class UI_SuberunkerSceneHomeScene : UI_Scene
             loadingComplete.Value = true;
             Managers.Game.UserInfo.Energy = response.Energy;
             Managers.Game.UserInfo.LatelyEnergy = response.LatelyEnergy;
+
+            // 게임 난이도 초기화
+            Managers.Game.DifficultySettingsInfo.StageId = 70001;
+            Managers.Game.DifficultySettingsInfo.StageLevel = 1; // 이 값을 미션 달성에 사용할 때가 있기 떄문에. 그런데 게임을 새로 시작하면 미션 진행도도 초기화가 되기 때문에 이걸 따로 저장해놔야함.
+            Managers.Game.DifficultySettingsInfo.AddSpeed = 0;
+            Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
+            // 한 게임당 누적 돌 개수 초기화
+            Managers.Game.DifficultySettingsInfo.StoneCount = 0;
+            
             Managers.Event.TriggerEvent(EEventType.UIRefresh);
             Managers.Scene.LoadSceneWithProgress(EScene.SuberunkerTimelineScene);
        },

@@ -28,7 +28,6 @@ public class SuberunkerScene : BaseScene
 
         Managers.UI.ShowSceneUI<UI_SuberunkerScene>();
 
-
         // 게임 난이도 초기화
         Managers.Game.DifficultySettingsInfo.StageId = 70001;
         Managers.Game.DifficultySettingsInfo.StageLevel = 1; // 이 값을 미션 달성에 사용할 때가 있기 떄문에. 그런데 게임을 새로 시작하면 미션 진행도도 초기화가 되기 때문에 이걸 따로 저장해놔야함.
@@ -98,11 +97,12 @@ public class SuberunkerScene : BaseScene
 
         Managers.Score.SetScore(
             this, 
-            onSuccess: () => 
+            onSuccess: () =>
             {
-                Managers.Event.TriggerEvent(EEventType.OnSettlementComplete); 
+                Managers.Event.TriggerEvent(EEventType.OnSettlementComplete);
                 //Managers.Event.TriggerEvent(EEventType.OnUpdateMission);
                 loadingComplete.Value = true;
+                Managers.UI.ShowPopupUI<UI_RetryPopup>();
             },
             onFailed: () => Event_OnPlayerDead(this, tryCount++));
     }

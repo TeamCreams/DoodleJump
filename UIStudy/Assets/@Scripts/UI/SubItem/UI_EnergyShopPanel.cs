@@ -67,6 +67,7 @@ public class UI_EnergyShopPanel : UI_PurchasePopupBase
 
     protected override void AfterPurchaseProcess()
     {
+        Managers.UI.ClosePopupUI(this);
         // 에너지 추가는 UpdateEnergy에서 처리하므로 여기서는 아무것도 하지 않음
     }
 

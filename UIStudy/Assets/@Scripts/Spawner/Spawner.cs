@@ -81,7 +81,7 @@ public class Spawner : InitBase
             if (Managers.Data.DifficultySettingsDic[_id].ChallengeScale <= Managers.Game.DifficultySettingsInfo.ChallengeScale)
             {
                 Managers.Game.DifficultySettingsInfo.StageId++;
-                Managers.Game.DifficultySettingsInfo.StageLevel++; // 함수 호출 순서 때문에 여기서 부름
+                Managers.Game.DifficultySettingsInfo.StageLevel = Managers.Data.DifficultySettingsDic[Managers.Game.DifficultySettingsInfo.StageId].Level; // 함수 호출 순서 때문에 여기서 부름
                 Debug.Log($"GenerateStone StageLevel :  {Managers.Game.DifficultySettingsInfo.StageLevel}");
                 Managers.Event.TriggerEvent(EEventType.LevelStageUp);
             }

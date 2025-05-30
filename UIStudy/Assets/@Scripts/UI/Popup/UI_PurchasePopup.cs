@@ -113,21 +113,23 @@ public class UI_PurchasePopup : UI_PurchasePopupBase
 
     protected override void AfterPurchaseProcess()
     {
-        switch(_purchaseStruct.ProductType)
+        switch (_purchaseStruct.ProductType)
         {
-            case EProductType.Custom:  
-            {
-                Managers.Game.ChracterStyleInfo.IsChangedStyle = 1;
-            }
-            break;
+            case EProductType.Custom:
+                {
+                    Managers.Game.ChracterStyleInfo.IsChangedStyle = 1;
+                }
+                break;
             case EProductType.Evolution:
-            {
-                Managers.Game.UserInfo.EvolutionId = _item.Id;    
-            }
-            break;
+                {
+                    Managers.Game.UserInfo.EvolutionId = _item.Id;
+                }
+                break;
             default:
-            break;
+                break;
         }
+        
+        Managers.UI.ClosePopupUI(this);
     }
 
     private void UpdateCharacterStyle()

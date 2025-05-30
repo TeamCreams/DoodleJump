@@ -13,13 +13,6 @@ public class ScoreManager
         string passwordData = SecurePlayerPrefs.GetString(Define.HardCoding.Password, Define.HardCoding.Password); 
         string googleAccountData = SecurePlayerPrefs.GetString(Define.HardCoding.GoogleAccount, Define.HardCoding.GoogleAccount); 
 
-        Debug.Log("1--1 usernameData : " + usernameData);
-
-        Debug.Log("1--1 passwordData : " + passwordData);
-
-        Debug.Log("1--1 googleAccountData : " + googleAccountData);
-
-
         // 로그인 방식 결정
         if (!string.IsNullOrEmpty(googleAccountData) && 
             googleAccountData != Define.HardCoding.GoogleAccount && 
@@ -105,7 +98,14 @@ public class ScoreManager
         },
        (response) =>
         {
-            Managers.UI.ShowPopupUI<UI_RetryPopup>();
+            // 게임 난이도 초기화
+            Managers.Game.DifficultySettingsInfo.StageId = 70001;
+            Managers.Game.DifficultySettingsInfo.StageLevel = 1; // 이 값을 미션 달성에 사용할 때가 있기 떄문에. 그런데 게임을 새로 시작하면 미션 진행도도 초기화가 되기 때문에 이걸 따로 저장해놔야함.
+            Managers.Game.DifficultySettingsInfo.AddSpeed = 0;
+            Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
+            // 한 게임당 누적 돌 개수 초기화
+            Managers.Game.DifficultySettingsInfo.StoneCount = 0;
+            
             onSuccess?.Invoke();
         },
         (errorCode) =>

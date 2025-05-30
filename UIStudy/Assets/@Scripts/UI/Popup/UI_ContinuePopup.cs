@@ -26,7 +26,7 @@ public class UI_ContinuePopup : UI_PurchasePopupBase
 
     private string _bestRecord = "최고 기록";
     private string _recentRecord = "최근 기록";
-    private Coroutine timerCoroutine;
+    private Coroutine _timerCoroutine;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -56,17 +56,21 @@ public class UI_ContinuePopup : UI_PurchasePopupBase
     }
     protected override void OnClick_ClosePopup(PointerEventData eventData)
     {
-        Managers.UI.ClosePopupUI(this);
         Time.timeScale = 1;
+        Managers.UI.ClosePopupUI(this);
         Managers.Event.TriggerEvent(EEventType.OnPlayerDead, this, 0);
     }
     protected override void OnClick_ClickOk(PointerEventData eventData)
     {
-        var loadingComplete = UI_LoadingPopup.Show();
-        StopCoroutine(timerCoroutine);
+        if (_timerCoroutine != null)
+        {
+            StopCoroutine(_timerCoroutine);
+            _timerCoroutine = null;
+        }
         //돈 소모
         Managers.Game.GoldTochange = 0;
-        int remainingChange = Managers.Game.UserInfo.Gold - 1;//HardCoding.ContinueGameGold;
+        _gold = 1;//HardCoding.ContinueGameGold;
+        int remainingChange = Managers.Game.UserInfo.Gold - _gold;
         if(0 <= remainingChange)
         {
             Managers.Game.GoldTochange = remainingChange;
@@ -79,17 +83,27 @@ public class UI_ContinuePopup : UI_PurchasePopupBase
     }
 
     private void OnClick_ClickAds(PointerEventData eventData)
-    {        
+    {
         // Advertisement
+        if (_timerCoroutine != null)
+        {
+            StopCoroutine(_timerCoroutine);
+            _timerCoroutine = null;
+        }
+
+        AfterPurchaseProcess();
+        Managers.UI.ClosePopupUI(this);
+        Time.timeScale = 1;
     }
 
     private void FilledImageTimer()
     {
-        if (timerCoroutine != null)
+        if (_timerCoroutine != null)
         {
-            StopCoroutine(timerCoroutine);
+            StopCoroutine(_timerCoroutine);
+            _timerCoroutine = null;
         }
-        timerCoroutine = StartCoroutine(Timer());
+        _timerCoroutine = StartCoroutine(Timer());
     }
 
     IEnumerator Timer()
@@ -99,7 +113,6 @@ public class UI_ContinuePopup : UI_PurchasePopupBase
         float totalDuration = 3f;
         float currentDuration = totalDuration; // 현재 남은 시간 (totalDuration에서 시작)
 
-        Debug.Log($"GetImage((int)Images.Circle_Image).fillAmount : {GetImage((int)Images.Circle_Image).fillAmount}");
         GetImage((int)Images.Circle_Image).fillAmount = fromFillAmount;
 
         while (0f < currentDuration)
@@ -108,17 +121,20 @@ public class UI_ContinuePopup : UI_PurchasePopupBase
             currentDuration -= UnityEngine.Time.unscaledDeltaTime;
             yield return null;
         }
-
-        GetImage((int)Images.Circle_Image).fillAmount = toFillAmount; // 0으로 설정
-        Managers.Event.TriggerEvent(EEventType.OnPlayerDead, this, 0);
-        Managers.UI.ClosePopupUI(this);
+        if (currentDuration <= 0f)
+        {
+            GetImage((int)Images.Circle_Image).fillAmount = toFillAmount; // 0으로 설정
+            Managers.UI.ClosePopupUI(this);
+            Managers.Event.TriggerEvent(EEventType.OnPlayerDead, this, 0);               
+        }
     }
 
     protected override void AfterPurchaseProcess()
     {
-        Time.timeScale = 1;
+        Managers.UI.ClosePopupUI(this);
         float maxHp = Managers.Object.Player.Stats.StatDic[EStat.MaxHp].Value;
         Managers.Event.TriggerEvent(Define.EEventType.ChangePlayerLife, this, maxHp);
+        Managers.UI.ShowPopupUI<UI_RevivalPrepPopup>().BeginCountdown();
         //Managers.Scene.LoadScene(EScene.SuberunkerScene);
     }
 

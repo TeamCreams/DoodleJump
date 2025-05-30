@@ -58,6 +58,7 @@ public abstract class UI_PurchasePopupBase : UI_Popup
 
     protected virtual void UpdateUserGold(Action onSuccess = null, Action onFailed = null)
     {
+        var loadingComplete = UI_LoadingPopup.Show();
         Managers.WebContents.UpdateUserGold(new ReqDtoUpdateUserGold()
         {
             UserAccountId = Managers.Game.UserInfo.UserAccountId,
@@ -65,13 +66,14 @@ public abstract class UI_PurchasePopupBase : UI_Popup
         },
        (response) =>
        {
+            loadingComplete.Value = true;
             onSuccess?.Invoke();
             Managers.Event.TriggerEvent(EEventType.PayGold);
             AfterPurchaseProcess();
-            Managers.UI.ClosePopupUI(this);
        },
        (errorCode) =>
         {
+            loadingComplete.Value = true;
             UI_ErrorButtonPopup.ShowErrorButton(Managers.Error.GetError(Define.EErrorCode.ERR_NetworkSettlementErrorResend), onFailed, EScene.SuberunkerSceneHomeScene);
        });
     }

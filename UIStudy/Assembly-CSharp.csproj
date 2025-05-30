@@ -234,6 +234,7 @@
     <Compile Include="Assets/@Scripts/UI/Popup/UI_LoadingPopup.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/EditorScripts/SpriteSheetCapture.cs" />
     <Compile Include="Assets/@Scripts/Input/Input_SuberunkerSceneHomeScene.cs" />
+    <Compile Include="Assets/@Scripts/UI/Popup/UI_RevivalPrepPopup.cs" />
     <Compile Include="Assets/Layer Lab/GUI Pro-CasualGame/Extensions/UIParticle/UIParticleSystem.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/CharacterScripts/Firearms/Enums/HoldType.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/Common/StandaloneFilePicker.cs" />

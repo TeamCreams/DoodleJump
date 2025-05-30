@@ -44,6 +44,9 @@ public class UI_TopBar : UI_Base
     private string _secondsString = "초";
     private int _minutes;
     private float _seconds;
+    // 추가: 부활 처리 중인지 확인하는 플래그
+    private bool _isRevivalInProgress = false;
+    
     public override bool Init()
     {
         if (base.Init() == false)
@@ -66,6 +69,10 @@ public class UI_TopBar : UI_Base
         Managers.Event.AddEvent(EEventType.GetGold, OnEvent_GetGold);
         Managers.Event.AddEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         Managers.Event.AddEvent(EEventType.UIStoneCountRefresh, OnEvent_ChallengeScaleCount);
+        // 추가: 플레이어 부활 이벤트 추가
+        Managers.Event.AddEvent(EEventType.OnPlayerRevive, OnEvent_PlayerRevive);
+        Managers.Event.AddEvent(EEventType.OnPlayerDead, OnEvent_PlayerDead);
+        
         OnEvent_SetLanguage(null, null);
         
         string str = Managers.Game.DifficultySettingsInfo.StageLevel.ToString();
@@ -92,8 +99,35 @@ public class UI_TopBar : UI_Base
         Managers.Event.RemoveEvent(EEventType.GetGold, OnEvent_GetGold);
         Managers.Event.RemoveEvent(EEventType.SetLanguage, OnEvent_SetLanguage);
         Managers.Event.RemoveEvent(EEventType.UIStoneCountRefresh, OnEvent_ChallengeScaleCount);
+        // 추가: 이벤트 제거
+        Managers.Event.RemoveEvent(EEventType.OnPlayerRevive, OnEvent_PlayerRevive);
+        Managers.Event.RemoveEvent(EEventType.OnPlayerDead, OnEvent_PlayerDead);
     }
    
+    // 추가: 플레이어 부활 이벤트 처리
+    void OnEvent_PlayerRevive(Component sender, object param)
+    {
+        // 부활 처리 중 플래그 설정
+        _isRevivalInProgress = true;
+        isSettleComplete = false;
+        
+        // 타이머는 계속 실행 중이므로 다시 시작할 필요 없음
+        // 기존 상태(시간, 점수, 레벨 등)를 유지
+    }
+    
+    void OnEvent_PlayerDead(Component sender, object param)
+    {
+        if (_isRevivalInProgress)
+        {
+            _isRevivalInProgress = false;
+            return;
+        }
+        
+        // 타이머 중지 및 리소스 정리
+        _lifeTimer?.Dispose();
+        _lifeTimer = null;
+    }
+    
     void OnEvent_LevelUpTextChange(Component sender, object param)
     {
         //Debug.Log("OnEvent_LevelUpTextChange");
@@ -104,9 +138,15 @@ public class UI_TopBar : UI_Base
 	{
         float life = (float)param;
         Debug.Log($"Life : {life}");
-        StartCoroutine(UpdateLife(life));
         
-        //UpdateLifeImage(life);        
+        if (life > 0 && GetSlider((int)Sliders.UI_HpProgressBar).value <= 0)
+        {
+            _isRevivalInProgress = true;
+            isSettleComplete = false;
+        }
+        
+        // 체력 업데이트 애니메이션 실행
+        StartCoroutine(UpdateLife(life));
     }
 
     void OnEvent_GetGold(Component sender, object param)
@@ -137,12 +177,24 @@ public class UI_TopBar : UI_Base
             yield return null;
         }
 
-        if (toHp <= 0 && !isSettleComplete)
+        // 최종 체력값 설정
+        GetSlider((int)Sliders.UI_HpProgressBar).value = toHp;
+
+        // 사망 처리: 체력이 0 이하이고, 아직 처리되지 않았으며, 부활 처리 중이 아닐 때
+        if (toHp <= 0 && !isSettleComplete && !_isRevivalInProgress)
         {
-            GetSlider((int)Sliders.UI_HpProgressBar).value = 0;
-            _lifeTimer?.Dispose();
+            // 타이머 중지
+            if (_lifeTimer != null)
+            {
+                _lifeTimer.Dispose();
+                _lifeTimer = null;
+            }
+            
+            // 최근 점수와 플레이 시간 저장
             Managers.Game.UserInfo.LatelyScore = Managers.Game.GetScore.Total;
             Managers.Game.GetScore.LatelyPlayTime = _time;
+            
+            // 레벨에 따라 계속하기 팝업 또는 사망 이벤트 발생
             if (1 < Managers.Game.UserInfo.StageLevel)
             {
                 Managers.UI.ShowPopupUI<UI_ContinuePopup>().SetInfo();
