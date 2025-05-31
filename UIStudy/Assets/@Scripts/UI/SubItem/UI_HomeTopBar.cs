@@ -81,6 +81,10 @@ public class UI_HomeTopBar : UI_Base
         Debug.Log("OnEvent_Refresh");
         GetText((int)Texts.Energy_Text).text = $"{Managers.Game.UserInfo.Energy} / 10";
         GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
+        if (10 <= Managers.Game.UserInfo.Energy)
+        {
+            GetText((int)Texts.EnergyTimer_Text).text = "05:00";        
+        }
     }
     private void EnergyTimer()
     {

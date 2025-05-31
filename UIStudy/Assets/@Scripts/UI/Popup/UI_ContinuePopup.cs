@@ -50,7 +50,7 @@ public class UI_ContinuePopup : UI_PurchasePopupBase
     public void SetInfo()
     {
         Time.timeScale = 0;
-        GetText((int)Texts.RecordScore_Text).text = $"{_bestRecord} : {Managers.Game.GetScore.LatelyPlayTime:N0}";
+        GetText((int)Texts.RecordScore_Text).text = $"{_bestRecord} : {Managers.Game.UserInfo.RecordScore:N0}";
         GetText((int)Texts.Score_Text).text = $"{_recentRecord} : {Managers.Game.UserInfo.LatelyScore:N0}";
         FilledImageTimer();
     }

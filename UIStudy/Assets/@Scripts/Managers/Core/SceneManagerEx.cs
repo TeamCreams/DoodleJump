@@ -11,18 +11,27 @@ public class SceneManagerEx
 
 	private string _label = "";
 	public string Label => _label;
+	private List<string> _labels = new List<string>();
+	public IReadOnlyList<string> Labels => _labels;
 	public void LoadScene(Define.EScene type)
 	{
 		Managers.Clear();
 		SceneManager.LoadScene(GetSceneName(type));
-        //Managers.InitScene();
-    }
+		//Managers.InitScene();
+	}
 
 	public void LoadSceneWithProgress(Define.EScene type, string label = "")
 	{
 		Managers.Clear();
 		_nextScene = type;
 		_label = label;
+		SceneManager.LoadScene(GetSceneName(Define.EScene.LoadingPageTimelineScene));
+    }
+	public void LoadSceneWithProgress(Define.EScene type, List<string> labels)
+	{
+		Managers.Clear();
+		_nextScene = type;
+		_labels = labels;
 		SceneManager.LoadScene(GetSceneName(Define.EScene.LoadingPageTimelineScene));
     }
 

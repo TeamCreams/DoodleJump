@@ -67,17 +67,21 @@ public class UI_LoadingPageTimelineScene : UI_Scene
     public void OnPlayableDirectorStopped(PlayableDirector director)
     {
         //_currentScene.Loading.allowSceneActivation = true;
+        if (_currentScene != null && _currentScene.Loading != null)
+        {
+            _currentScene.Loading.allowSceneActivation = true;
+        }
     }
 
     private void StartLoadAssets(string label)
     {
-         //Debug.Log("YAAAAA In StartLoadAssets");
+        //Debug.Log("YAAAAA In StartLoadAssets");
 
         if (!string.IsNullOrEmpty(label))
         {
             // label이 있는 경우 에셋 로드
-            _loadTotalCount ++;
-            _totalCount ++;
+            _loadTotalCount++;
+            _totalCount++;
             Managers.Resource.LoadAllAsync<UnityEngine.Object>(label, (key, count, totalCount) =>
             {
                 //Debug.Log("YAAAAA In LoadAllAsync");
@@ -109,7 +113,7 @@ public class UI_LoadingPageTimelineScene : UI_Scene
             float progress = _loading.progress;
             UpdateProgress(progress);
             //UpdateTotalProgress();
-            if(0.9f <= progress)
+            if (0.9f <= progress)
             {
                 progress = 1;
                 UpdateProgress(progress);
@@ -128,8 +132,8 @@ public class UI_LoadingPageTimelineScene : UI_Scene
     }
     public void UpdateTotalProgress(int cnt, int cnt2)
     {
-        float progress = (float)cnt / cnt2 * 100; 
-        GetText((int)Texts.TotalProgressPercent).text = $"{progress}/{100}"; 
-        GetSlider((int)Sliders.TotalProgress).value = progress / 100; 
+        float progress = (float)cnt / cnt2 * 100;
+        GetText((int)Texts.TotalProgressPercent).text = $"{progress}/{100}";
+        GetSlider((int)Sliders.TotalProgress).value = progress / 100;
     }
 }
