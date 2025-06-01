@@ -20,26 +20,11 @@ public class GoogleLoginWebViewSystem
 
     public void ShowUrl()
     {
-        Debug.Log("SSS");
-        GpmWebView.ShowUrl(
-            "https://www.google.com",
-            new GpmWebViewRequest.Configuration()
-            {
-                style = GpmWebViewStyle.POPUP,
-                
-            },
-            null,
-            new List<string>()
-            {
-            "USER_ CUSTOM_SCHEME"
-            });
-
-        
     }
 
-    public void SignIn()
+    public GoogleLoginWebViewSystem()
     {
-        GoogleSignInConfiguration config  = new GoogleSignInConfiguration
+        GoogleSignIn.Configuration = new GoogleSignInConfiguration
         {
             RequestEmail = true,
             RequestProfile = true,
@@ -50,12 +35,10 @@ public class GoogleLoginWebViewSystem
             ClientSecret = "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"
 #endif
         };
+    }
 
-        if (GoogleSignIn.Configuration == null)
-        {
-            GoogleSignIn.Configuration = config;
-            Debug.Log("GoogleSignIn.Configuration 설정됨."); // 설정이 실제로 이루어졌는지 확인용 로그
-        }
+    public void SignIn()
+    {
 
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished, TaskScheduler.FromCurrentSynchronizationContext());
     }
