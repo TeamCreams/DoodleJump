@@ -132,8 +132,7 @@ public class UI_ContinuePopup : UI_PurchasePopupBase
     protected override void AfterPurchaseProcess()
     {
         Managers.UI.ClosePopupUI(this);
-        float maxHp = Managers.Object.Player.Stats.StatDic[EStat.MaxHp].Value;
-        Managers.Event.TriggerEvent(Define.EEventType.ChangePlayerLife, this, maxHp);
+        Managers.Event.TriggerEvent(EEventType.OnPlayerRevive);
         Managers.UI.ShowPopupUI<UI_RevivalPrepPopup>().BeginCountdown();
         //Managers.Scene.LoadScene(EScene.SuberunkerScene);
     }

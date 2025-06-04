@@ -78,6 +78,7 @@ public class PlayerController : CreatureBase
 
         Managers.Event.AddEvent(EEventType.Attacked_Player, OnEvent_DamagedHp);
         Managers.Event.AddEvent(EEventType.TakeItem, OnEvent_TakeItem);
+        Managers.Event.AddEvent(EEventType.OnPlayerRevive, OnEvent_Resurrect);
 
         return true;
     }
@@ -86,6 +87,7 @@ public class PlayerController : CreatureBase
     {
         Managers.Event.RemoveEvent(EEventType.Attacked_Player, OnEvent_DamagedHp);
         Managers.Event.RemoveEvent(EEventType.TakeItem, OnEvent_TakeItem);
+        Managers.Event.RemoveEvent(EEventType.OnPlayerRevive, OnEvent_Resurrect);
     }
 
     void Update()
@@ -239,6 +241,13 @@ public class PlayerController : CreatureBase
     #endregion
 
     #region Actor Interface
+    public void OnEvent_Resurrect(Component sender, object param)
+    {
+        float maxHp = Managers.Object.Player.Stats.StatDic[EStat.MaxHp].Value;
+        this._stats.Hp = maxHp;
+        Debug.Log($"HP : {this._stats.Hp}");
+    }
+
     public void DamagedHp(float damage, bool isStoneShard = false)
     {
         this._stats.Hp -= damage;
@@ -251,7 +260,7 @@ public class PlayerController : CreatureBase
         }
         Managers.Sound.Play(ESound.Effect, "AttackedSound", 0.7f);
 
-        if(isStoneShard == false)
+        if (isStoneShard == false)
         {
             Managers.Game.DifficultySettingsInfo.ChallengeScale = 0;
             Managers.Game.DifficultySettingsInfo.ChallengeScaleCount = Managers.Data.DifficultySettingsDic[Managers.Game.DifficultySettingsInfo.StageId].ChallengeScale;
