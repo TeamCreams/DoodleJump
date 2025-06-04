@@ -33,7 +33,10 @@ public class StoneShardController : ObjectBase
         _data = data;
         _rockImage.sprite = Managers.Resource.Load<Sprite>($"{_data.SpriteName}.sprite");
 
-        // rigidbody 수정
+        // rigidbody 초기화 및 수정
+        // 6부터 linearVelocity와 angularVelocity로 명확히 구분
+        _rigidbody.linearVelocity = Vector3.zero;
+        _rigidbody.angularVelocity = Vector3.zero;
         _rigidbody.AddForce(direction, ForceMode.VelocityChange);
         //_rigidbody.linearVelocity = direction; // 한 방향으로 날아가기만 하면 돼서 fixed Update에 쓸 필요 없음
         //_rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;

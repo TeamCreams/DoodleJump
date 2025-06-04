@@ -19,9 +19,9 @@ public class StoneController : ObjectBase
             _isNotStoneShower = value;
         }
     }
-    private Rigidbody _rigidbody; // protected로 변경
-    private SpriteRenderer _rockImage; // protected로 변경
-    private RaycastHit _hitInfo; // protected로 변경
+    private Rigidbody _rigidbody;
+    private SpriteRenderer _rockImage;
+    private RaycastHit _hitInfo;
     private DifficultySettingsData _levelData = new DifficultySettingsData();
     private float _editSpeed = 0;
     private EnemyData _data;
@@ -136,10 +136,9 @@ public class StoneController : ObjectBase
     private void SpawnStoneShards()
     {
         float angle = Random.Range(9f, 80f);
+        float radian = angle * Mathf.Deg2Rad;
         for (int i = 0; i < 2; i++)
         {
-            float radian = angle * Mathf.Deg2Rad;
-
             // X축 방향: 왼쪽 / 오른쪽
             float xDir = (i == 0) ? 1 : -1;
             Vector3 direction = new Vector3(xDir * Mathf.Cos(radian), Mathf.Sin(radian), 0f).normalized;
