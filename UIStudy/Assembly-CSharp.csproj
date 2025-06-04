@@ -213,6 +213,7 @@
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Enums/ElementId.cs" />
     <Compile Include="Assets/HeroEditor/FantasyHeroes/TestRoom/Scripts/AnchorManager.cs" />
     <Compile Include="Assets/@Scripts/Managers/Contents/ErrorManager.cs" />
+    <Compile Include="Assets/@Scripts/UI/SubItem/UI_CharacterStyleItemText.cs" />
     <Compile Include="Assets/HeroEditor/InventorySystem/Scripts/Elements/InventoryItem.cs" />
     <Compile Include="Assets/@Scripts/Scene/InputNicknameScene.cs" />
     <Compile Include="Assets/HeroEditor/Common/Scripts/Common/StateHandler.cs" />

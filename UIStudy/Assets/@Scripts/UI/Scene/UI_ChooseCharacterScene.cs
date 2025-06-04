@@ -99,7 +99,7 @@ public class UI_ChooseCharacterScene : UI_Scene
             return;
         }
         // 스타일 변화도 없는데 진화구매를 하지 않았으면 저장할 필요도 없음
-        if(_prevEvolutionId != Managers.Game.UserInfo.EvolutionId)
+        if (_prevEvolutionId != Managers.Game.UserInfo.EvolutionId)
         {
             _scene.SaveData();
             return;

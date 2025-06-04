@@ -68,7 +68,7 @@ public class UI_ChooseStats : UI_Base
 
     public void DisplayInfo()
     {
-        Managers.Game.ChracterStyleInfo.CharacterId = _playerDataId;
+        Managers.Game.ChracterStyleInfo.TempCharacterId = _playerDataId;
         GetText((int)Texts.Stat_Text).text = $"{Managers.Data.PlayerDic[_playerDataId].Name}";
         GetText((int)Texts.Speed_Text).text = $"{_defaultSpeed} : {Managers.Data.PlayerDic[_playerDataId].Speed}";
         GetText((int)Texts.Life_Text).text = $"{_defaultHp} : {Managers.Data.PlayerDic[_playerDataId].Hp}";

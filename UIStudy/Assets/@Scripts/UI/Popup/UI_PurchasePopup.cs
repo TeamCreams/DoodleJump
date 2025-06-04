@@ -116,17 +116,17 @@ public class UI_PurchasePopup : UI_PurchasePopupBase
         switch (_purchaseStruct.ProductType)
         {
             case EProductType.Custom:
-                {
-                    Managers.Game.ChracterStyleInfo.IsChangedStyle = 1;
-                }
-                break;
+            {
+                Managers.Game.ChracterStyleInfo.IsChangedStyle = 1;
+            }
+            break;
             case EProductType.Evolution:
-                {
-                    Managers.Game.UserInfo.EvolutionId = _item.Id;
-                }
-                break;
+            {
+                Managers.Game.UserInfo.EvolutionId = _item.Id;
+            }
+            break;
             default:
-                break;
+            break;
         }
         
         Managers.UI.ClosePopupUI(this);
@@ -136,19 +136,25 @@ public class UI_PurchasePopup : UI_PurchasePopupBase
     {
         GetObject((int)GameObjects.Noctice_ImageGroup).SetActive(true);
 
-        if(Managers.Game.ChracterStyleInfo.Hair != Managers.Game.ChracterStyleInfo.TempHair)
+        if (Managers.Game.ChracterStyleInfo.Hair != Managers.Game.ChracterStyleInfo.TempHair)
         {
             SpawnItem(EEquipType.Hair);
         }
 
-        if(Managers.Game.ChracterStyleInfo.Eyes != Managers.Game.ChracterStyleInfo.TempEyes)
+        if (Managers.Game.ChracterStyleInfo.Eyes != Managers.Game.ChracterStyleInfo.TempEyes)
         {
             SpawnItem(EEquipType.Eyes);
         }
 
-        if(Managers.Game.ChracterStyleInfo.Eyebrows != Managers.Game.ChracterStyleInfo.TempEyebrows)
+        if (Managers.Game.ChracterStyleInfo.Eyebrows != Managers.Game.ChracterStyleInfo.TempEyebrows)
         {
             SpawnItem(EEquipType.Eyebrows);
+        }
+
+        if (Managers.Game.ChracterStyleInfo.CharacterId != Managers.Game.ChracterStyleInfo.TempCharacterId)
+        {
+            var item = Managers.UI.MakeSubItem<UI_CharacterStyleItemText>(parent: GetObject((int)GameObjects.Noctice_ImageGroup).transform, pooling: true);
+            item.SetInfo(Managers.Game.ChracterStyleInfo.CharacterId, Managers.Game.ChracterStyleInfo.TempCharacterId);
         }
     }
     private void SpawnItem(EEquipType style)
