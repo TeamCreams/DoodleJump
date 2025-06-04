@@ -83,7 +83,20 @@ public class UI_HomeTopBar : UI_Base
         GetText((int)Texts.TotalGold_Text).text = Managers.Game.UserInfo.Gold.ToString();
         if (10 <= Managers.Game.UserInfo.Energy)
         {
-            GetText((int)Texts.EnergyTimer_Text).text = "05:00";        
+            GetText((int)Texts.EnergyTimer_Text).text = "05:00";
+            StopEnergyTimer();        
+        }
+    }
+    private void StopEnergyTimer()
+    {
+        _isRunningTimer = false;
+        _isSettingComplete = false;
+        
+        if(_tickCo != null)
+        {
+            StopCoroutine(_tickCo);
+            _tickCo = null;
+            _rechargeTimer?.Dispose();
         }
     }
     private void EnergyTimer()
@@ -92,20 +105,13 @@ public class UI_HomeTopBar : UI_Base
         // 300초가 되면 updateEnergy 요청
 
         // 게임어플을 아예 꺼버렸을 때 laytelyTime을 저장할 방법은?
-        if(10 <= Managers.Game.UserInfo.Energy)
+        if (10 <= Managers.Game.UserInfo.Energy)
         {
-            _isRunningTimer = false;
-            _isSettingComplete = false;
-            if(_tickCo != null)
-            {
-                StopCoroutine(_tickCo);
-                _tickCo = null;
-                _rechargeTimer?.Dispose();
-            }
+            StopEnergyTimer();
             return;
         }
 
-        if(_isRunningTimer)
+        if (_isRunningTimer)
         {
             return;
         }
