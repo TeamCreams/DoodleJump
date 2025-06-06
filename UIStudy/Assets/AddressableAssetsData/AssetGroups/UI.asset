@@ -99,12 +99,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 892c82030fd1f4dab929491bb30579fc
-    m_Address: UI_EnergyShopPanel
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8d4c381db00b2441dbbe7b2d0f9723ff
     m_Address: UI_ContinuePopup
     m_ReadOnly: 0
@@ -191,6 +185,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f1a48b17f1f334d8d854960f56ba0ff5
     m_Address: UI_SuberunkerSceneHomeScene
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe5f546dd73dd49e7b489f186a3e44c9
+    m_Address: UI_EnergyShopPanel
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
