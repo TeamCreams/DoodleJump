@@ -21,7 +21,7 @@ public class UI_HomeTopBar : UI_Base
         EnergyAdd_Button,
         GoldAdd_Button
     }
- 
+    private const int ENERGY_RECHARGE_SECONDS = 300; // 5분
     System.IDisposable _rechargeTimer;
     private int _displayTime = 0;
     private int _calculateTime = 0;
@@ -134,23 +134,32 @@ public class UI_HomeTopBar : UI_Base
             _tickCo = StartCoroutine(EnergyRechargeCoroutine());
         }
     }
+    
     private IEnumerator EnergyRechargeCoroutine()
     {
         yield return new WaitWhile(() => _isSettingComplete == false);
         _rechargeTimer?.Dispose();
         _rechargeTimer = Observable.Interval(new TimeSpan(0, 0, 1))
             .Subscribe(_ =>
-            {   
+            {
                 _calculateTime++;
-                _displayTime = 600 - _calculateTime;
-                if(300 <= _calculateTime)
+
+                //에너지 충전 완료 체크
+                if(ENERGY_RECHARGE_SECONDS <= _calculateTime)
                 {
                     _startTime = _serverTime;
-                    _displayTime = 0;
                     _calculateTime = 0;
                     Managers.Event.TriggerEvent(EEventType.UpdateEnergy, this);
                 }
-                GetText((int)Texts.EnergyTimer_Text).text = string.Format($"{(_displayTime-300) / 60} : {(_displayTime-300) % 60}");
+
+                //남은 시간 계산
+                int remainingSeconds = ENERGY_RECHARGE_SECONDS - (_calculateTime % ENERGY_RECHARGE_SECONDS);
+                remainingSeconds = Mathf.Max(0, remainingSeconds); // 0 미만 방지
+
+                int minutes = Mathf.Clamp(remainingSeconds / 60, 0, 5);
+                int seconds = Mathf.Clamp(remainingSeconds % 60, 0, 59);
+
+                GetText((int)Texts.EnergyTimer_Text).text = $"{minutes:D1}:{seconds:D2}";
             }).AddTo(this.gameObject);
     }
 }
